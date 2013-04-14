@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width"/>
+
+    <title>Welcome to Foundation | Blog</title>
+
+    <!-- Included CSS Files (Uncompressed) -->
+    <!--
+    <link rel="stylesheet" href="stylesheets/foundation.css">
+    -->
+
+    <!-- Included CSS Files (Compressed) -->
+
+    <link rel="stylesheet" href="stylesheets/foundation.min.css">
+    <link rel="stylesheet" href="stylesheets/app.css">
+    <link rel="stylesheet" href="stylesheets/general_enclosed_foundicons.css">
+    <script src="javascripts/jquery.js"></script>
+    <script src="javascripts/modernizr.foundation.js"></script>
+    <!-- Included JS Files (Compressed) -->
+    <script src="javascripts/foundation.min.js"></script>
+    <!-- load the jQuery and require.js libraries -->
+    <!-- OF COURSE YOU NEED TO ADAPT NEXT LINE TO YOUR tiny_mce.js PATH -->
+
+    <!-- Initialize JS Plugins -->
+    <script src="javascripts/app.js"></script>
+    <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
+    <!--<script src="javascripts/angular/angular.js"></script> -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+    <script type="text/javascript" src="javascripts/angular/angular-resource.js"></script>
+    <script type="text/javascript" src="javascripts/external/socketmodule.js"></script>
+    <script src="javascripts/app/blog.js"></script>
+    <script type="text/javascript" src="javascripts/external/resources/blogService.js"></script>
+    <script type="text/javascript" src="javascripts/external/resources/userService.js"></script>
+    <script type="text/javascript" src="javascripts/external/services/BlogService.js"></script>
+    <script type="text/javascript" src="javascripts/external/services/updateService.js"></script>
+    <script type="text/javascript" src="javascripts/external/filters/byTag.js"></script>
+    <script type="text/javascript" src="javascripts/external/GlobalCtrls/TitleCtrl.js"></script>
+    <script type="text/javascript" src="javascripts/external/GlobalCtrls/BlogListCtrl.js"></script>
+    <script type="text/javascript" src="javascripts/external/resources/twitterService.js"></script>
+    <script type="text/javascript" src="javascripts/external/directives/loader.js"></script>
+    <script type="text/javascript" src="javascripts/external/scope.onready.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="javascripts/external/angular-http-auth.js"></script>
+    <script type="text/javascript" src="javascripts/external/directives/login.js"></script>
+    <script src="underscore.js"></script>
+</head>
+<a href="https://github.com/ray-garner/Blogular"><img style="position: absolute; top: 0; right: 0; border: 0;"
+                                                      src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"
+                                                      alt="Fork me on GitHub"></a>
+
+<body ng-app="blogApp">
+
+<!-- Nav Bar -->
+<div class="row border-main gradient-main">
+
+
+    <div class="eight columns ">
+        <div ng-controller="TitleCtrl">
+            <h1 ng-bind="title">
+                <small><span ng-bind="subtitle">{{subtitle}} </span></small>
+            </h1>
+
+        </div>
+
+
+    </div>
+    <div class="four columns">
+        <div ng-controller="UserInfoCtrl">
+            <p>{{username}}</p>
+            <a href="#" ng-click="logout()" if-authed="show" class="button">logout</a>
+            <a href="#" if-authed="hide" class="button" data-reveal-id="myModal">Register</a>
+            <a href="#" if-authed="hide" class="button" data-reveal-id="loginModal">Login</a>
+        </div>
+    </div>
+</div>
+<div class="row border-main gradient-main">
+    <ul class="nav-bar">
+        <li><a href="#/">Blog</a></li>
+        <li><a href="#/about">About Me</a></li>
+        <li><a href="#/projects">Projects</a></li>
+        <li><a href="#/shoutouts">Shoutouts</a></li>
+    </ul>
+
+</div>
+<div class="row border-main gradient-main">
+    <!-- Main  Content -->
+    <ng-view>
+
+    </ng-view>
+    <!-- End  Content -->
+
+
+    <!-- Sidebar -->
+    <div class="row">
+        <div ng-controller="blogViewCtrl">
+            <aside class="three columns" ng-hide="show.state">
+
+                <h5>Categories</h5>
+                <ul class="side-nav">
+                    <li ng-repeat="cattag in categories"><a href="#/listByTag/{{cattag.name}}">{{cattag.name}}({{cattag.count}})</a>
+                    </li>
+
+                </ul>
+
+                <div class="panel" ng-controller="TwitterCtrl">
+                    <h5>Featured</h5>
+
+                    <div ng-repeat="tweet in twitterResult.results">
+                        <img src="{{tweet.profile_image_url}}" alt="{{tweet.from_user}}"/>
+                        <p>{{tweet.text}}</p>
+                    </div>
+                    <a href="#">Read More &rarr;</a>
+                </div>
+
+            </aside>
+        </div>
+    </div>
+    <!-- End Sidebar -->
+</div>
+
+<footer class="row border-main border-footer">
+    <!--
+    <div class="four columns right-separator footer-child">
+        <ul>
+            <li>Category1</li>
+            <li>Category1</li>
+            <li>Category1</li>
+            <li>Category1</li>
+        </ul>
+        <p> This is the footer content</p>
+    </div>
+    <div class="four columns right-separator footer-child">
+        <p>This is the footer contentK</p>
+    </div>
+    <div class="four columns footer-child">
+        <p> This is the footer content</p>
+    </div>
+          -->
+</footer>
+<!--
+<div row>
+    <div class="six columns border-footer">
+        Powerd by AngularJS and Dunami
+    </div>
+    <div class="six columns border-footer">
+        Copyright Dunami
+    </div>
+
+</div>
+    -->
+<!-- End Footer -->
+
+<!-- Included JS Files (Uncompressed) -->
+<!--
+
+<script src="javascripts/jquery.js"></script>
+
+<script src="javascripts/jquery.foundation.mediaQueryToggle.js"></script>
+
+<script src="javascripts/jquery.foundation.forms.js"></script>
+
+<script src="javascripts/jquery.event.move.js"></script>
+
+<script src="javascripts/jquery.event.swipe.js"></script>
+
+<script src="javascripts/jquery.foundation.reveal.js"></script>
+
+<script src="javascripts/jquery.foundation.orbit.js"></script>
+
+<script src="javascripts/jquery.foundation.navigation.js"></script>
+
+<script src="javascripts/jquery.foundation.buttons.js"></script>
+
+<script src="javascripts/jquery.foundation.tabs.js"></script>
+
+<script src="javascripts/jquery.foundation.tooltips.js"></script>
+
+<script src="javascripts/jquery.foundation.accordion.js"></script>
+
+<script src="javascripts/jquery.placeholder.js"></script>
+
+<script src="javascripts/jquery.foundation.alerts.js"></script>
+
+<script src="javascripts/jquery.foundation.topbar.js"></script>
+
+<script src="javascripts/jquery.foundation.joyride.js"></script>
+
+<script src="javascripts/jquery.foundation.clearing.js"></script>
+
+<script src="javascripts/jquery.foundation.magellan.js"></script>
+
+-->
+
+
+<div id="login-inner" ng-controller="LoginController">
+    <div reveal-modal="login" id="loginModal" class="reveal-modal [expand, xlarge, large, medium, small]">
+        <p><b>{{error}}</b></p>
+        <p><b>{{message}}</b></p>
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>Username</th>
+                <td><input type="text" class="login-inp" ng-model="form.username"/></td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td><input type="password" class="login-inp" ng-model="form.password"/></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><a class="button" ng-click="submitAuth()">Login</a></td>
+                <td><a class="close-reveal-modal button">Cancel</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div ng-controller="RegisterCtrl">
+    <div reveal-modal="register" id="myModal" class="reveal-modal [expand, xlarge, large, medium, small]">
+        <p><b>{{message}}</b></p>
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>Username</th>
+                <td><input type="text" class="login-inp" ng-model="form.username"/></td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td><input type="password" class="login-inp" ng-model="form.password"/></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><a class="button" ng-click="submitRegi()">Register</a></td>
+                <td><a class="close-reveal-modal button">Cancel</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

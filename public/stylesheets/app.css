@@ -1,0 +1,57 @@
+/* Artfully masterminded by ZURB  */
+
+/* -------------------------------------------------- 
+   Table of Contents
+-----------------------------------------------------
+:: Shared Styles
+:: Page Name 1
+:: Page Name 2
+*/
+
+
+/* -----------------------------------------
+   Shared Styles
+----------------------------------------- */
+#tagTest {
+    width: 300px;
+    height: 300px;
+    border: 2px solid #000000;
+}
+.comment{
+    border-top: 1px solid #000000;
+}
+.backgroundTitleImage{
+    width: 300px;
+    height: 300px;
+
+}
+.border-main{
+    border-right: 1px solid #000000;
+    border-left: 1px solid #000000;
+}
+.border-footer{
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+}
+.footer-child{
+    height: 200px;
+}
+
+.right-separator{
+    border-right: 1px solid #0000ff;
+}
+.gradient-main{
+
+}
+/* -----------------------------------------
+   Page Name 1
+----------------------------------------- */
+
+
+
+
+/* -----------------------------------------
+   Page Name 2
+----------------------------------------- */
+
+
