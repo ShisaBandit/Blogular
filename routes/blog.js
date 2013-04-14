@@ -7,9 +7,20 @@ var Update = models.Update;
  */
 
 exports.allBlogs = function(req, res){
-        Blog.find().lean().exec(function (err, posts) {
+        var skip = req.params.skip,
+            limit = req.params.limit;
+        Blog.find({},{},{skip:0,limit:3}).lean().exec(function (err, posts) {
             return res.end(JSON.stringify(posts));
         });
+};
+
+exports.getPaginatedBlogs = function(req, res){
+    var skip = req.params.skip,
+        limit = req.params.limit;
+    console.log(skip,limit);
+    Blog.find({},{},{skip:skip,limit:limit}).lean().exec(function (err, posts) {
+        return res.end(JSON.stringify(posts));
+    });
 };
 
 exports.getABlog = function(req,res){

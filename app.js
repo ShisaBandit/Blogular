@@ -89,7 +89,9 @@ app.get('/blog', blogRoutes.allBlogs);
 
 app.get('/blog/:id', blogRoutes.getABlog);
 
-app.get('/blogLastUpdate/:id',blogRoutes.getLastBlogUpdateDate());
+app.get('/blog/:skip/:limit',blogRoutes.getPaginatedBlogs);
+
+app.get('/blogLastUpdate/:id',blogRoutes.getLastBlogUpdateDate);
 
 app.post('/blog', passport.ensureAuthenticated, blogRoutes.createBlog);
 //edit

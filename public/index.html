@@ -24,78 +24,90 @@
 
     <!-- Included CSS Files (Compressed) -->
 
-    <link rel="stylesheet" href="stylesheets/foundation.min.css">
-    <link rel="stylesheet" href="stylesheets/app.css">
-    <link rel="stylesheet" href="stylesheets/general_enclosed_foundicons.css">
-    <script src="javascripts/jquery.js"></script>
-    <script src="javascripts/modernizr.foundation.js"></script>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/general_enclosed_foundicons.css">
+    <script src="js/jquery.js"></script>
     <!-- Included JS Files (Compressed) -->
-    <script src="javascripts/foundation.min.js"></script>
-    <!-- load the jQuery and require.js libraries -->
-    <!-- OF COURSE YOU NEED TO ADAPT NEXT LINE TO YOUR tiny_mce.js PATH -->
-
-    <!-- Initialize JS Plugins -->
-    <script src="javascripts/app.js"></script>
+    <script src="js/foundation.min.js"></script>
     <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
     <!--<script src="javascripts/angular/angular.js"></script> -->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-    <script type="text/javascript" src="javascripts/angular/angular-resource.js"></script>
-    <script type="text/javascript" src="javascripts/external/socketmodule.js"></script>
-    <script src="javascripts/app/blog.js"></script>
-    <script type="text/javascript" src="javascripts/external/resources/blogService.js"></script>
-    <script type="text/javascript" src="javascripts/external/resources/userService.js"></script>
-    <script type="text/javascript" src="javascripts/external/services/BlogService.js"></script>
-    <script type="text/javascript" src="javascripts/external/services/updateService.js"></script>
-    <script type="text/javascript" src="javascripts/external/filters/byTag.js"></script>
-    <script type="text/javascript" src="javascripts/external/GlobalCtrls/TitleCtrl.js"></script>
-    <script type="text/javascript" src="javascripts/external/GlobalCtrls/BlogListCtrl.js"></script>
-    <script type="text/javascript" src="javascripts/external/resources/twitterService.js"></script>
-    <script type="text/javascript" src="javascripts/external/directives/loader.js"></script>
-    <script type="text/javascript" src="javascripts/external/scope.onready.js"></script>
+    <script type="text/javascript" src="js/angular/angular-resource.js"></script>
+    <script type="text/javascript" src="js/external/socketmodule.js"></script>
+    <script src="js/app/blog.js"></script>
+    <script type="text/javascript" src="js/external/resources/blogService.js"></script>
+    <script type="text/javascript" src="js/external/resources/userService.js"></script>
+    <script type="text/javascript" src="js/external/services/BlogService.js"></script>
+    <script type="text/javascript" src="js/external/services/updateService.js"></script>
+    <script type="text/javascript" src="js/external/filters/byTag.js"></script>
+    <script type="text/javascript" src="js/external/GlobalCtrls/TitleCtrl.js"></script>
+    <script type="text/javascript" src="js/external/GlobalCtrls/BlogListCtrl.js"></script>
+    <script type="text/javascript" src="js/external/resources/twitterService.js"></script>
+    <script type="text/javascript" src="js/external/directives/loader.js"></script>
+    <script type="text/javascript" src="../../Blogular/public/javascripts/external/directives/ng-infinite-scroll.js"></script>
+    <script type="text/javascript" src="js/external/scope.onready.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="javascripts/external/angular-http-auth.js"></script>
-    <script type="text/javascript" src="javascripts/external/directives/login.js"></script>
+    <script type="text/javascript" src="js/external/angular-http-auth.js"></script>
+    <script type="text/javascript" src="js/external/directives/login.js"></script>
     <script src="underscore.js"></script>
 </head>
-<a href="https://github.com/ray-garner/Blogular"><img style="position: absolute; top: 0; right: 0; border: 0;"
-                                                      src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"
-                                                      alt="Fork me on GitHub"></a>
-
+<!-- TODO:Rename app instance to mwApp -->
 <body ng-app="blogApp">
+<div class="fixed title">
+    <!-- Nav Bar -->
+    <div class="row gradient-main">
 
-<!-- Nav Bar -->
-<div class="row border-main gradient-main">
-
-
-    <div class="eight columns ">
-        <div ng-controller="TitleCtrl">
-            <h1 ng-bind="title">
-                <small><span ng-bind="subtitle">{{subtitle}} </span></small>
-            </h1>
+        <div class="small-4 columns">
+            <a href="#/workshops"  class="small button">Workshops</a>
+            <a href="#/pets"  class="small button">Pets</a>
 
         </div>
-
-
+        <div class="small-4 columns">
+            <div ng-controller="TitleCtrl">
+                <h1 ng-bind="title"></h1>
+            </div>
+        </div>
+        <div class="small-4 columns">
+            <div ng-controller="UserInfoCtrl">
+                <p>{{username}}</p>
+                <a href="#" ng-click="logout()" if-authed="show" class="button">logout</a>
+                <a href="#" if-authed="hide" class="small button" data-reveal-id="myModal">Register</a>
+                <a href="#" if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
+            </div>
+        </div>
     </div>
-    <div class="four columns">
-        <div ng-controller="UserInfoCtrl">
-            <p>{{username}}</p>
-            <a href="#" ng-click="logout()" if-authed="show" class="button">logout</a>
-            <a href="#" if-authed="hide" class="button" data-reveal-id="myModal">Register</a>
-            <a href="#" if-authed="hide" class="button" data-reveal-id="loginModal">Login</a>
+
+    <div class="searchBar">
+        <div class="row">
+            <div class="small-6 columns large-centered">
+                    <div class="row collapse">
+                                    <div class="small-10 columns">
+                                        <input type="text" placeholder="Enter your search">
+                                    </div>
+                                    <div class="small-2 columns">
+                                        <span class="postfix radius">Search</span>
+                                    </div>
+                    </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="grouping">
+        <div class="row">
+                Memorials by Groupings
+
+                <a href="#/mothers" class="button small success radius">Mothers</a>
+                <a href="#/family" class="button small success radius">Family</a>
+                <a href="#/friends" class="button small success radius">Friends</a>
+                <a href="#/removeFilters" class="button small success radius">Remove Filters</a>
+
         </div>
     </div>
 </div>
-<div class="row border-main gradient-main">
-    <ul class="nav-bar">
-        <li><a href="#/">Blog</a></li>
-        <li><a href="#/about">About Me</a></li>
-        <li><a href="#/projects">Projects</a></li>
-        <li><a href="#/shoutouts">Shoutouts</a></li>
-    </ul>
 
-</div>
-<div class="row border-main gradient-main">
+<div class="row gradient-main">
     <!-- Main  Content -->
     <ng-view>
 
@@ -103,32 +115,7 @@
     <!-- End  Content -->
 
 
-    <!-- Sidebar -->
-    <div class="row">
-        <div ng-controller="blogViewCtrl">
-            <aside class="three columns" ng-hide="show.state">
 
-                <h5>Categories</h5>
-                <ul class="side-nav">
-                    <li ng-repeat="cattag in categories"><a href="#/listByTag/{{cattag.name}}">{{cattag.name}}({{cattag.count}})</a>
-                    </li>
-
-                </ul>
-
-                <div class="panel" ng-controller="TwitterCtrl">
-                    <h5>Featured</h5>
-
-                    <div ng-repeat="tweet in twitterResult.results">
-                        <img src="{{tweet.profile_image_url}}" alt="{{tweet.from_user}}"/>
-                        <p>{{tweet.text}}</p>
-                    </div>
-                    <a href="#">Read More &rarr;</a>
-                </div>
-
-            </aside>
-        </div>
-    </div>
-    <!-- End Sidebar -->
 </div>
 
 <footer class="row border-main border-footer">
@@ -208,6 +195,7 @@
 <div id="login-inner" ng-controller="LoginController">
     <div reveal-modal="login" id="loginModal" class="reveal-modal [expand, xlarge, large, medium, small]">
         <p><b>{{error}}</b></p>
+
         <p><b>{{message}}</b></p>
         <table border="0" cellpadding="0" cellspacing="0">
             <tr>
