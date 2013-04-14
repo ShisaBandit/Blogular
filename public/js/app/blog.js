@@ -57,6 +57,7 @@ app.directive('revealModal', function () {
 
 app.directive('ifAuthed', function ($http) {
     return {
+        //TODO:autoscroll being called to early in the link process????
         link: function (scope, elm, attrs) {
             $http.get('/checkauthed').then(function (data) {
                 scope.username = data.data;
@@ -91,6 +92,25 @@ app.directive('ifAuthed', function ($http) {
         }
     }
 });
+
+app.directive('autoscroll',function(){
+    return{
+        link:function(scope,elm,attrs){
+                angular.element(document).ready(function(){
+
+                    elm.autoscroll(
+                        {
+                            direction: "down",
+                            step: 50,
+                            scroll: true,
+                            pauseOnHover: false
+                        }
+                    );
+                })
+
+        }
+    }
+})
 
 app.factory('show', function () {
     return {state: false};
@@ -292,19 +312,3 @@ app.controller('TwitterCtrl', function ($scope, Blog, Twitter, $routeParams) {
     $scope.twitterResult = Twitter.get();
 });
 
-app.controller('DemoController', function($scope) {
-    $scope.images = [1, 2, 3, 4, 5, 6, 7, 8];
-    setTimeout(function () {
-        console.log("test");
-        //if (scope.$eval(attributes.scrollIf)) {
-        window.scrollTo(0,5000)
-        //}
-    });
-    $scope.loadMore = function() {
-
-        var last = $scope.images[$scope.images.length - 1];
-        for(var i = 1; i <= 8; i++) {
-            $scope.images.push(last + i);
-        }
-    };
-});

@@ -69,7 +69,7 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
 
         $scope.busy = false;
         $scope.skip = 0;
-        $scope.limit = 2;
+        $scope.limit = 8;
 
         $scope.nextPage = function(){
                 if($scope.busy)return;
