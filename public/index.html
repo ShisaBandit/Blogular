@@ -56,17 +56,16 @@
 <!-- TODO:Rename app instance to mwApp -->
 <body ng-app="blogApp">
 <div class="fixed title">
-    <!-- Nav Bar -->
     <div class="row gradient-main">
 
         <div class="small-4 columns">
-            <a href="#/workshops"  class="small button">Workshops</a>
-            <a href="#/pets"  class="small button">Pets</a>
+            <a href="#/workshops" class="small button">Workshops</a>
+            <a href="#/pets" class="small button">Pets</a>
 
         </div>
         <div class="small-4 columns">
             <div ng-controller="TitleCtrl">
-                <h1 ng-bind="title"></h1>
+                <a href="#/"><h1 ng-bind="title"></h1></a>
             </div>
         </div>
         <div class="small-4 columns">
@@ -78,43 +77,43 @@
             </div>
         </div>
     </div>
-
-    <div class="searchBar">
-        <div class="row">
-            <div class="small-6 columns large-centered">
+    <div ng-controller="SearchBarCtrl">
+        <div ng-hide="searchViewable" ng-animate="'fade'" class="searchBar">
+            <div class="row">
+                <div class="small-6 columns large-centered">
                     <div class="row collapse">
-                                    <div class="small-10 columns">
-                                        <input type="text" placeholder="Enter your search">
-                                    </div>
-                                    <div class="small-2 columns">
-                                        <span class="postfix radius">Search</span>
-                                    </div>
+                        <div class="small-10 columns">
+                            <input type="text" placeholder="Enter your search">
+                        </div>
+                        <div class="small-2 columns">
+                            <span class="postfix radius">Search</span>
+                        </div>
                     </div>
-            </div>
+                </div>
 
+            </div>
         </div>
     </div>
-
-    <div class="grouping">
-        <div class="row">
+    <div ng-controller="GroupingCtrl">
+        <div ng-hide="groupingViewable" ng-animate="'fade'" class="grouping">
+            <div class="row">
                 Memorials by Groupings
-
                 <a href="#/mothers" class="button small success radius">Mothers</a>
                 <a href="#/family" class="button small success radius">Family</a>
                 <a href="#/friends" class="button small success radius">Friends</a>
                 <a href="#/removeFilters" class="button small success radius">Remove Filters</a>
 
+            </div>
         </div>
     </div>
 </div>
 
-<div class="row gradient-main">
+<div class="row offsetHeight">
     <!-- Main  Content -->
     <ng-view>
 
     </ng-view>
     <!-- End  Content -->
-
 
 
 </div>

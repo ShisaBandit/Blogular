@@ -98,14 +98,26 @@ app.directive('autoscroll',function(){
         link:function(scope,elm,attrs){
                 angular.element(document).ready(function(){
 
-                    elm.autoscroll(
+                    $('body').autoscroll(
                         {
                             direction: "down",
                             step: 50,
-                            scroll: true,
-                            pauseOnHover: false
+                            scroll: false,
+                            //problems with this
+                            pauseOnHover: true
                         }
                     );
+
+                    /*
+                    elm.animate({
+                        opacity: 0.25,
+                        left: '+=50'
+                        //height: 'toggle'
+                    }, 5000, function() {
+                        // Animation complete.
+                        console.log("animation complete");
+                    });
+                    */
                 })
 
         }
@@ -137,6 +149,8 @@ app.service('userInfoService', function () {
 app.controller('blogViewCtrl', function ($scope, show, categoryService, BlogsService) {
     $scope.categories = BlogsService.getCategories();
     $scope.show = show;
+
+
 });
 
 app.controller('blogEntryCtrl', function ($scope, show, Blog, $routeParams, socket,BlogsService) {
@@ -217,6 +231,30 @@ app.controller('blogEntryCtrl', function ($scope, show, Blog, $routeParams, sock
         socket.removeAllListeners('updateusers');
     });
 });
+
+app.controller('SearchBarCtrl',function($scope,$routeParams){
+    $scope.$on('$routeChangeSuccess',function(next,current){
+                                   console.log(current);
+        if(current.templateUrl == "partials/blog.html"){
+            $scope.searchViewable = false;
+        }else{
+            $scope.searchViewable = true;
+        }
+    })
+})
+
+app.controller('GroupingCtrl',function($scope){
+    $scope.$on('$routeChangeSuccess',function(next,current){
+        console.log(current);
+        if(current.templateUrl == "partials/blog.html"){
+            $scope.groupingViewable = false;
+        }else{
+            $scope.groupingViewable = true;
+        }
+    })
+
+
+})
 
 app.controller('LoginController', function ($scope, $http, authService, userInfoService, socket, $rootScope) {
     $scope.error = "";
