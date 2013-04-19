@@ -69,8 +69,23 @@
    Page Name 1
 ----------------------------------------- */
 
+#picheader{
 
+}
+#portrait{
+    border: 4px solid #000000;
+    z-index: 100;
+}
 
+.nav-container{ background: url('images/nav_bg.jpg') repeat-x 0 0;}
+.f-nav{ z-index: 9999; position: fixed; left: 0; top: 0; width: 100%;}
+
+.nav { height: 42px;}
+.nav ul { list-style: none; }
+.nav ul li{float: left; margin-top: 6px; padding: 6px; border-right: 1px solid #ACACAC;}
+.nav ul li:first-child{ padding-left: 0;}
+.nav ul li a { }
+.nav ul li a:hover{ text-decoration: underline;}
 
 /* -----------------------------------------
    Page Name 2

@@ -32,6 +32,36 @@ app.directive('becomeMainContent', function () {
     }
 });
 
+app.directive('fixedMenu',function(){
+    return{
+        link:function(scope,elm,attrs){
+
+            $("document").ready(function($){
+
+                var nav = elm;
+                //var nav = $('.nav-container');
+
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 136) {
+                        nav.addClass("f-nav");
+                    } else {
+                        nav.removeClass("f-nav");
+                    }
+                });
+
+            });
+        }
+    }
+})
+
+app.directive('offsetHeight',function(){
+    return{
+        link:function(scope,elm,attrs){
+            elm.css({marginTop:attrs.offsetHeight+'px'});
+        }
+    }
+})
+
 app.directive('revealModal', function () {
     return {
         link: function (scope, elm, attrs) {
@@ -202,6 +232,7 @@ app.controller('blogEntryCtrl', function ($scope, show, Blog, $routeParams, sock
     show.state = true;
     $scope.show = show;
     $scope.$prepareForReady();
+    /*
     BlogsService.getBlogFromLocal($routeParams.id,function(blog){
 
         $scope.entry = blog;
@@ -209,8 +240,8 @@ app.controller('blogEntryCtrl', function ($scope, show, Blog, $routeParams, sock
         $scope.comments = blog.comments;
         $scope.$onReady("success");
     });
+    */
 
-    /*
     Blog.get({id: $routeParams.id}, function (blog) {
             $scope.entry = blog[0];
             $scope.text = blog[0].text;
@@ -220,7 +251,7 @@ app.controller('blogEntryCtrl', function ($scope, show, Blog, $routeParams, sock
         function () {
             $scope.$onFailure("failed");
         });
-        */
+
     $scope.$on('$routeChangeStart', function (scope, next, current) {
         socket.emit('unsubscribe', {room: $routeParams.id});
     });
@@ -234,27 +265,25 @@ app.controller('blogEntryCtrl', function ($scope, show, Blog, $routeParams, sock
 
 app.controller('SearchBarCtrl',function($scope,$routeParams){
     $scope.$on('$routeChangeSuccess',function(next,current){
-                                   console.log(current);
-        if(current.templateUrl == "partials/blog.html"){
+        console.log(current);
+        if(current.templateUrl == "partials/blog.html" || current.templateUrl == undefined){
             $scope.searchViewable = false;
         }else{
             $scope.searchViewable = true;
         }
-    })
-})
+    });
+});
 
 app.controller('GroupingCtrl',function($scope){
     $scope.$on('$routeChangeSuccess',function(next,current){
         console.log(current);
-        if(current.templateUrl == "partials/blog.html"){
+        if(current.templateUrl == "partials/blog.html" || current.templateUrl == undefined){
             $scope.groupingViewable = false;
         }else{
             $scope.groupingViewable = true;
         }
-    })
-
-
-})
+    });
+});
 
 app.controller('LoginController', function ($scope, $http, authService, userInfoService, socket, $rootScope) {
     $scope.error = "";
