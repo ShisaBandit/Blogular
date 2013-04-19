@@ -57,7 +57,7 @@
 </head>
 <!-- TODO:Rename app instance to mwApp -->
 <body ng-app="blogApp">
-<div class="fixed title">
+<div class="fixed title z-index-1000">
     <div class="row gradient-main">
 
         <div class="small-4 columns">
@@ -108,12 +108,13 @@
             </div>
         </div>
     </div>
-</div>
-    <!-- Main  Content -->
-    <ng-view>
 
-    </ng-view>
-    <!-- End  Content -->
+</div>
+<!-- Main  Content -->
+<ng-view>
+
+</ng-view>
+<!-- End  Content -->
 <footer class="row border-main border-footer">
     <!--
     <div class="four columns right-separator footer-child">

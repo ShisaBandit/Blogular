@@ -183,12 +183,26 @@ app.controller('blogViewCtrl', function ($scope, show, categoryService, BlogsSer
 
 });
 
-app.controller('blogEntryCtrl', function ($scope, show, Blog, $routeParams, socket,BlogsService) {
+ app.controller('blogEntryPicCtrl',function($scope){
+     $scope.test = "TEST RESULT";
+ });
+
+app.controller('blogEntryCtrl', function ($scope, show, Blog, $routeParams, socket,$rootScope) {
+     if(!$scope.template){
+         $scope.template = '/partials/profile/index.html';
+
+     }
+    $scope.loadPage = function(page){
+        console.log("loadpage");
+        $scope.template = '/partials/profile/'+page+'.html';
+
+    }
+
     socket.connect();
     $scope.entry = "";
     $scope.viewers = [];
     $scope.entry.comments = [];
-
+    $rootScope.profileMenuViewable = true;
     socket.emit('subscribe', {room: $routeParams.id});
     socket.on('login', function () {
         socket.emit('subscribe', {room: $routeParams.id});

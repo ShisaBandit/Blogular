@@ -1,89 +1,43 @@
-<div  ng-controller="blogEntryCtrl">
+<div ng-controller="blogEntryCtrl">
+    <div class="fixed">
+        <div class="row" offset-height="90" ng-show="profileMenuViewable" ng-animate="fade" id="profile-menu">
+            <div class="small-6 small-offset-6">
+                <nav class="top-bar">
+                    <section class="top-bar-section">
+                        <ul class="left">
+                            <li class="active" ng-click="loadPage('index')"><a>Home</a></li>
+                            <li class="divider"></li>
+                            <li class="active" ng-click="loadPage('pics')"><a>Pics</a></li>
+                            <li class="divider"></li>
+                            <li class="active" ng-click="loadPage('videos')"><a>Videos</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#/about">About</a></li>
+                        </ul>
+                    </section>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="twelve columns" offset-height="100" role="content">
+            <div id="picheader">
+                <div class="row">
+                    <div class="large-12 columns">
+                        <img src="http://placehold.it/1000x300&text=[img]">
 
-    <div class="twelve columns" offset-height="100" role="content">
-        <div id="picheader">
-            <div class="row">
-                <div class="large-12 columns">
-                    <img src="http://placehold.it/1000x300&text=[img]">
+                        <hr>
 
-                    <hr>
+                        <div offset-height="-300">
+                            <img id="portrait" src="http://placehold.it/200x300&text=[img]">
 
-                    <div  offset-height="-300">
-                        <img id="portrait" src="http://placehold.it/200x300&text=[img]">
-
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div fixed-menu class="nav-container">
-            <div class="nav">
-                <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">CSS</a></li>
-                    <li><a href="">PHP</a></li>
-                    <li><a href="">SEO</a></li>
-                    <li><a href="">jQuery</a></li>
-                    <li><a href="">Wordpress</a></li>
-                    <li><a href="">Services</a></li>
-                </ul>
-                <div class="clear"></div>
-            </div>
+        <div ng-include="template">
+
         </div>
-        <article>
 
-            <h3><b>{{entry.title}}</b></h3>
-            <h6>Written by <a href="#">{{entry.author}}</a> on {{entry.date}}.</h6>
-
-            <div class="row">
-                <div class="ten columns">
-                    <div ng-bind-html-unsafe="text"></div>
-                </div>
-                <div class="two columns">
-
-                </div>
-            </div>
-            <hr />
-            <br />
-        </article>
-        <div login>
-            <div id="login-inner" ng-controller="LoginController">
-                <i class="foundicon-error">You must login to submit comments.</i>
-                <i class="foundicon-error">{{error}}</i>
-                <table border="0" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <th>Username</th>
-                        <td><input type="text" class="login-inp" ng-model="form.username"/></td>
-                    </tr>
-                    <tr>
-                        <th>Password</th>
-                        <td><input type="password" class="login-inp" ng-model="form.password"/></td>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <td><a class="button" ng-click="submitAuth()">Login</a></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div id="comments" class="row">
-            <div class="six columns">
-                <div id="submitComment">
-                    <textarea ng-model="body"></textarea>
-                    <p>
-                        <a ng-click="submitComment()" class="button" resetOnSubmit="true"></a>
-                    </p>
-                </div>
-
-                <div class="comment" ng-repeat="comment in comments">
-                    <p><b>{{comment.username}}</b></p>
-                   <p>{{comment.body}}</p>
-                </div>
-            </div>
-            <div class="six columns">
-                <div ng-repeat="viewer in viewers">
-                    <p>{{viewer.username}}</p>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

@@ -77,6 +77,14 @@
     z-index: 100;
 }
 
+#profileMenuViewable{
+    height: 500px;
+    background-color: #000000;
+}
+.z-index-1000{
+    z-index: 1000;
+}
+   /*
 .nav-container{ background: url('images/nav_bg.jpg') repeat-x 0 0;}
 .f-nav{ z-index: 9999; position: fixed; left: 0; top: 0; width: 100%;}
 
@@ -86,7 +94,7 @@
 .nav ul li:first-child{ padding-left: 0;}
 .nav ul li a { }
 .nav ul li a:hover{ text-decoration: underline;}
-
+  */
 /* -----------------------------------------
    Page Name 2
 ----------------------------------------- */
