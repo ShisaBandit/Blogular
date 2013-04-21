@@ -187,15 +187,30 @@ app.controller('blogViewCtrl', function ($scope, show, categoryService, BlogsSer
      $scope.test = "TEST RESULT";
  });
 
-app.controller('blogEntryCtrl', function ($scope, show, Blog, $routeParams, socket,$rootScope) {
-     if(!$scope.template){
-         $scope.template = '/partials/profile/index.html';
+app.controller('blogEntryCtrl', function ($scope, show, Blog, $routeParams, socket,$rootScope,$http) {
+    $scope.postText = "";
+    if(!$scope.template){
+         $scope.template = '/partials/profile/Latest.html';
+         $scope.contentHeaderTitle = 'Latest';
 
      }
     $scope.loadPage = function(page){
         console.log("loadpage");
         $scope.template = '/partials/profile/'+page+'.html';
+        $scope.contentHeaderTitle = page;
 
+
+    }
+
+    $scope.submit = function () {
+        console.log("button fired");
+        $http.post('/addtextpost',{text:$scope.postText,id:$scope.entry._id}).
+            success(function(data,status){
+                console.log(data);
+                $scope.postText = "";
+            }).error(function(err){
+                console.log(err);
+            });
     }
 
     socket.connect();
@@ -391,5 +406,16 @@ app.controller('UserInfoCtrl', function ($scope, userInfoService, $http) {
 //TODO:add a simple twitter feed here
 app.controller('TwitterCtrl', function ($scope, Blog, Twitter, $routeParams) {
     $scope.twitterResult = Twitter.get();
+});
+
+       //Child of BlogEntry
+app.controller('LatestCtrl',function($scope,$http,$routeParams){
+    $http.get('/lastestPosts/'+$scope.entry._id).
+        success(function(data,err){
+              $scope.posts = data;
+        }).
+        error(function(err,code,status){
+            console.log(err+code+status);
+        })
 });
 

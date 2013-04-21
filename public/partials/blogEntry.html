@@ -1,17 +1,19 @@
 <div ng-controller="blogEntryCtrl">
     <div class="fixed">
         <div class="row" offset-height="90" ng-show="profileMenuViewable" ng-animate="fade" id="profile-menu">
-            <div class="small-6 small-offset-6">
+            <div class="small-8 small-offset-4">
                 <nav class="top-bar">
                     <section class="top-bar-section">
                         <ul class="left">
-                            <li class="active" ng-click="loadPage('index')"><a>Home</a></li>
+                            <li class="active" ng-click="loadPage('Latest')"><a>Home</a></li>
                             <li class="divider"></li>
-                            <li class="active" ng-click="loadPage('pics')"><a>Pics</a></li>
+                            <li class="active" ng-click="loadPage('Pics')"><a>Pics</a></li>
                             <li class="divider"></li>
-                            <li class="active" ng-click="loadPage('videos')"><a>Videos</a></li>
+                            <li class="active" ng-click="loadPage('Videos')"><a>Videos</a></li>
                             <li class="divider"></li>
-                            <li><a href="#/about">About</a></li>
+                            <li class="active" ng-click="loadPage('Anniversaries')"><a>Angels Anniversaries</a></li>
+                            <li class="divider"></li>
+                            <li class="active" ng-click="loadPage('Friends and Family')"><a>Friends and Family</a></li>
                         </ul>
                     </section>
                 </nav>
@@ -23,7 +25,7 @@
             <div id="picheader">
                 <div class="row">
                     <div class="large-12 columns">
-                        <img src="http://placehold.it/1000x300&text=[img]">
+                                    <img src="http://placehold.it/1000x300&text=[img]">
 
                         <hr>
 
@@ -35,8 +37,89 @@
                 </div>
             </div>
         </div>
-        <div ng-include="template">
 
+
+    </div>
+    <div class="row">
+        <div class="small-8 columns">
+            <div class="row collapse">
+                <div class="postEntry small-10 columns">
+                    <input type="text" ng-model="postText"/>
+                </div>
+                <div class="small-2 columns">
+                    <button ng-click="submit()" class="buton postfix">Submit</button>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div id="contentHeader" class="small-12 columns">
+                    <h2 class="contentHeaderTitle">{{contentHeaderTitle}}</h2>
+                </div>
+            </div>
+            <div ng-include="template">
+
+            </div>
+        </div>
+
+        <div class="small-3 columns small-offset-1">
+            <div class="row">
+                <div id="chat" class="small-12 columns">
+                    <h2 class="contentHeaderTitle">Chat</h2>
+                </div>
+            </div>
+            <div class="contentContainer row">
+            <div class="row">
+                <div class="small-12 columns">
+                    <p><b>Greg</b></p>
+
+                    <p>Thanks for all your guys support</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="small-12 columns">
+                    <p><b>Greg</b></p>
+
+                    <p>Thanks for all your guys support</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-12 columns">
+                    <p><b>Greg</b></p>
+
+                    <p>Thanks for all your guys support</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-12 columns">
+                    <p><b>Greg</b></p>
+
+                    <p>Thanks for all your guys support</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-12 columns">
+                    <p><b>Greg</b></p>
+
+                    <p>Thanks for all your guys support</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-12 columns">
+                    <p><b>Greg</b></p>
+
+                    <p>Thanks for all your guys support</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-12 columns">
+                    <p><b>Greg</b></p>
+
+                    <p>Thanks for all your guys support</p>
+                </div>
+            </div>
+            </div>
         </div>
 
     </div>

@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var blogSchema = mongoose.Schema({
+    views: Number,
     title: String,
     author: String,
     text: String,
@@ -9,12 +10,21 @@ var blogSchema = mongoose.Schema({
         { body: String, date: Date, username: String }
     ],
     date: { type: Date, default: Date.now },
-    updateDate:{type:Date,default:Date.now},
+    updateDate: {type: Date, default: Date.now},
     hidden: Boolean,
     meta: {
         votes: Number,
         favs: Number
     },
+    postText: [
+        {user_id: String, text: String, date: {type:Date,default:Date.now}}
+    ],
+    postPic:[
+        {user_id:String,url:String,data:Date}
+    ],
+    postVideo:[
+        {user_id:String,url:String,date:Date}
+    ],
     titleImage: String,
     categories: [
         {name: String}
@@ -23,7 +33,7 @@ var blogSchema = mongoose.Schema({
 var userSchema = mongoose.Schema({
     username: String,
     password: String,
-    admin:String,
+    admin: String,
     email: String
 });
 var updateSchema = mongoose.Schema({
@@ -42,6 +52,6 @@ var Update = mongoose.model('Update', updateSchema);
 
 module.exports = {
     Blog: Blog,
-    User:User,
-    Update:Update
+    User: User,
+    Update: Update
 }

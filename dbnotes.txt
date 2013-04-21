@@ -1,0 +1,13 @@
+*=denotes many possible
+||Denotes a document
+| Denotes a document object
+
+||Profile-   == BLOG
+        |-Name
+        |-DOB
+        |-DOD
+        |-Post*
+            |-Text*
+            |-Video*
+            |-Pics*
+        |-Comments

@@ -83,6 +83,21 @@
 }
 .z-index-1000{
     z-index: 1000;
+
+}
+
+#contentHeader{
+    background-color: midnightblue;
+}
+.contentHeaderTitle{
+    color: #ffffff;
+}
+.contentContainer{
+    border: 2px solid black;
+}
+#chat{
+    background-color: midnightblue;
+    color: #ffffff;
 }
    /*
 .nav-container{ background: url('images/nav_bg.jpg') repeat-x 0 0;}

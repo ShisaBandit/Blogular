@@ -105,3 +105,47 @@ exports.addBlogEntry = function(req,res){
     });
     return res.end(JSON.stringify({'success': 'true'}));
 }
+
+exports.addTextPost = function(req,res){
+        console.log(req.body);
+  Blog.findOne({_id:req.body.id},function(err,blog){
+      if(err)console.log(err);
+        console.log("MIKE CHECK ");
+      blog.postText.push(req.body);
+      blog.save(function(err,doc){
+          if(err)console.log(err);
+          console.log("saved textpost");
+
+          console.log(doc);
+      });
+  });
+}
+
+exports.addPicPost = function(req,res){
+    console.log(req.body);
+    Blog.findOneAndUpdate({_id:req.body.id},function(err,blog){
+        console.log("MIKE CHECK ");
+        blog.postText.push(req.body);
+    });
+}
+
+exports.addVideoPost = function(req,res){
+    console.log(req.body);
+    Blog.findOneAndUpdate({_id:req.body.id},function(err,blog){
+        console.log("MIKE CHECK ");
+        blog.postText.push(req.body);
+    });
+}
+
+
+exports.lastestPosts = function(req,res){
+    console.log(req.params.id);
+    var skip = req.params.skip,
+        limit = req.params.limit;
+    console.log(skip,limit);
+    Blog.findOne({_id:req.params.id}).lean().exec(function (err, blog) {
+
+                 return res.end(JSON.stringify(blog.postText.reverse()));
+
+    });
+}

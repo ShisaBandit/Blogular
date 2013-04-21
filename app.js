@@ -93,10 +93,13 @@ app.get('/blog/:skip/:limit',blogRoutes.getPaginatedBlogs);
 
 app.get('/blogLastUpdate/:id',blogRoutes.getLastBlogUpdateDate);
 
+app.get('/lastestPosts/:id',blogRoutes.lastestPosts);
+
 app.post('/blog', passport.ensureAuthenticated, blogRoutes.createBlog);
 //edit
 app.post('/blog/:id', passport.ensureAuthenticated, blogRoutes.updateBlog);
 
+app.post('/addtextpost', blogRoutes.addTextPost);
 
 
 app.delete('/blog/:id', passport.ensureAuthenticated, blogRoutes.deleteBlog);
