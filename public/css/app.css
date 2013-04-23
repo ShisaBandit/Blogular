@@ -31,18 +31,67 @@
 }
 
 .title{
-    background-color: dodgerblue;
+
+    background: url("/img/background/cloudBG.jpg")no-repeat center -195px;
 
 }
+#workpets{
+    margin-top: 40px;
 
+}
+.workpetsbuttons{
+
+}
+#petbutton{
+    background-color: pink;
+    border: none;
+    height: 26px;
+    z-index: -2;
+
+}
+#workshopbutton{
+    background-color: #000080;
+    border: none;
+
+}
 .offsetHeight{
     margin-top: 280px;
 }
+
+#login{
+
+}
+#register{
+
+}
+#logout{
+
+}
+.navstyles{
+    background-color: dodgerblue;
+}
+#username{
+    margin-bottom: 0px;
+}
+
+.mediaicons{
+    font-size: 32px;
+}
+.mediabuttons{
+    height: 40px;
+    margin-bottom: 20px;
+    margin-top: -15px;
+    padding-top: 0px;
+    width: 40px;
+
+}
+
 
 .searchBar{
     background-color: #000080;
     padding-top: 15px;
     z-index: 10;
+    margin-top: -24px;
 }
 
 .grouping{

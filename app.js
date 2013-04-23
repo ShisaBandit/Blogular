@@ -95,6 +95,10 @@ app.get('/blogLastUpdate/:id',blogRoutes.getLastBlogUpdateDate);
 
 app.get('/lastestPosts/:id',blogRoutes.lastestPosts);
 
+app.get('/lastestPics/:id',blogRoutes.latestPics);
+
+app.get('/lastestVideos/:id',blogRoutes.latestVideos);
+
 app.post('/blog', passport.ensureAuthenticated, blogRoutes.createBlog);
 //edit
 app.post('/blog/:id', passport.ensureAuthenticated, blogRoutes.updateBlog);
@@ -205,6 +209,17 @@ io.sockets.on('connection', function (socket) {
     socket.on('sentcomment', function (data) {
         socket.broadcast.in(data.room).emit('commentsupdated', '', "updateNow");
     });
+
+    socket.on('postText',function(data){
+        console.log('posttext event received');
+        Blog.findOne({_id:data.room},function(err,blog){
+                         if(err)console.log(err);
+            console.log(blog.postText[blog.postText.length]);
+            socket.broadcast.in(data.room).emit('newPostText','',blog.postText[0]);
+
+        })
+    });
+
     socket.on('unsubscribe', function (data) {
         console.log('unsubscribe');
         socket.leave(data.room);

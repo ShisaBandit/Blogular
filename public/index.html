@@ -26,8 +26,9 @@
 
     <link rel="stylesheet" href="css/foundation.min.css">
     <link rel="stylesheet" type="text/css" href="css/normalize.css" media="all"/>
+    <link rel="stylesheet" href="stylesheets/general_foundicons.css">
     <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="css/general_enclosed_foundicons.css">
+
     <script src="js/vendor/custom.modernizr.js"></script>
     <script src="js/jquery.js"></script>
     <!-- Included JS Files (Compressed) -->
@@ -63,9 +64,9 @@
 <div class="fixed title z-index-1000">
     <div class="row gradient-main">
 
-        <div class="small-4 columns">
-            <a href="#/workshops" class="small button">Workshops</a>
-            <a href="#/pets" class="small button">Pets</a>
+        <div id="workpets" class="small-4 columns">
+            <a href="#/workshops" id="workshopbutton" class="small radius button workpetsbuttons">Workshops</a>
+            <a href="#/pets" id="petbutton" class="small radius button workpetsbuttons">Pets</a>
 
         </div>
         <div class="small-4 columns">
@@ -75,10 +76,10 @@
         </div>
         <div class="small-4 columns">
             <div ng-controller="UserInfoCtrl">
-                <p>{{username}}</p>
-                <a href="#" ng-click="logout()" if-authed="show" class="button">logout</a>
-                <a href="#" if-authed="hide" class="small button" data-reveal-id="myModal">Register</a>
-                <a href="#" if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
+                <p id="username">{{username}}</p>
+                <a href="#"  ng-click="logout()" if-authed="show" class="button">logout</a>
+                <a href="#"  if-authed="hide" class="small button" data-reveal-id="myModal">Register</a>
+                <a href="#"  if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
             </div>
         </div>
     </div>
@@ -91,7 +92,7 @@
                             <input type="text" placeholder="Enter your search">
                         </div>
                         <div class="small-2 columns">
-                            <span class="postfix radius">Search</span>
+                            <span class="button postfix radius">Search</span>
                         </div>
                     </div>
                 </div>

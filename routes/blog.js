@@ -2,6 +2,8 @@ var models = require('../models/models');
 var Blog = models.Blog;
 var User = models.User;
 var Update = models.Update;
+var PICTYPE  = 1;
+var VIDEOTYPE = 2;
 /*
  * GET home page.
  */
@@ -107,7 +109,6 @@ exports.addBlogEntry = function(req,res){
 }
 
 exports.addTextPost = function(req,res){
-        console.log(req.body);
   Blog.findOne({_id:req.body.id},function(err,blog){
       if(err)console.log(err);
         console.log("MIKE CHECK ");
@@ -116,7 +117,8 @@ exports.addTextPost = function(req,res){
           if(err)console.log(err);
           console.log("saved textpost");
 
-          console.log(doc);
+          return res.end(JSON.stringify({'success': 'true'}));
+
       });
   });
 }
@@ -126,6 +128,8 @@ exports.addPicPost = function(req,res){
     Blog.findOneAndUpdate({_id:req.body.id},function(err,blog){
         console.log("MIKE CHECK ");
         blog.postText.push(req.body);
+        return res.end(JSON.stringify({'success': 'true'}));
+
     });
 }
 
@@ -134,6 +138,9 @@ exports.addVideoPost = function(req,res){
     Blog.findOneAndUpdate({_id:req.body.id},function(err,blog){
         console.log("MIKE CHECK ");
         blog.postText.push(req.body);
+        return res.end(JSON.stringify({'success': 'true'}));
+
+
     });
 }
 
@@ -144,8 +151,33 @@ exports.lastestPosts = function(req,res){
         limit = req.params.limit;
     console.log(skip,limit);
     Blog.findOne({_id:req.params.id}).lean().exec(function (err, blog) {
+        return res.end(JSON.stringify(blog.postText.reverse()));
+    });
+};
 
-                 return res.end(JSON.stringify(blog.postText.reverse()));
+exports.latestPics = function(req,res){
+    console.log(req.params.id);
+    var skip = req.params.skip,
+        limit = req.params.limit;
+    console.log(skip,limit);
+    Blog.findOne({_id:req.params.id}).lean().exec(function (err, blog) {
+        var postPics = blog.postText.filter(function(ele,ind,arr){
+            return ele.postType == PICTYPE;
+        })
+        return res.end(JSON.stringify(postPics.reverse()));
+    });
+}
 
+
+exports.latestVideos = function(req,res){
+    console.log(req.params.id);
+    var skip = req.params.skip,
+        limit = req.params.limit;
+    console.log(skip,limit);
+    Blog.findOne({_id:req.params.id}).lean().exec(function (err, blog) {
+        var postVideos = blog.postText.filter(function(ele,ind,arr){
+            return ele.postType == VIDEOTYPE;
+        })
+        return res.end(JSON.stringify(postVideos.reverse()));
     });
 }

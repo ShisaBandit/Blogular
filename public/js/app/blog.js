@@ -188,6 +188,13 @@ app.controller('blogViewCtrl', function ($scope, show, categoryService, BlogsSer
  });
 
 app.controller('blogEntryCtrl', function ($scope, show, Blog, $routeParams, socket,$rootScope,$http) {
+    $scope.routeParamId = $routeParams.id;
+    socket.connect();
+    $scope.entry = "";
+    $scope.viewers = [];
+    $scope.entry.comments = [];
+    $rootScope.profileMenuViewable = true;
+
     $scope.postText = "";
     if(!$scope.template){
          $scope.template = '/partials/profile/Latest.html';
@@ -207,17 +214,13 @@ app.controller('blogEntryCtrl', function ($scope, show, Blog, $routeParams, sock
         $http.post('/addtextpost',{text:$scope.postText,id:$scope.entry._id}).
             success(function(data,status){
                 console.log(data);
+                socket.emit('postText',{room: $routeParams.id});
                 $scope.postText = "";
             }).error(function(err){
                 console.log(err);
             });
     }
 
-    socket.connect();
-    $scope.entry = "";
-    $scope.viewers = [];
-    $scope.entry.comments = [];
-    $rootScope.profileMenuViewable = true;
     socket.emit('subscribe', {room: $routeParams.id});
     socket.on('login', function () {
         socket.emit('subscribe', {room: $routeParams.id});
@@ -409,13 +412,23 @@ app.controller('TwitterCtrl', function ($scope, Blog, Twitter, $routeParams) {
 });
 
        //Child of BlogEntry
-app.controller('LatestCtrl',function($scope,$http,$routeParams){
-    $http.get('/lastestPosts/'+$scope.entry._id).
+app.controller('LatestCtrl',function($scope,$http,$routeParams,socket){
+    console.log('LatestCtrl started');
+    console.log($scope);
+    console.log($scope.routeParamId);
+    $http.get('/lastestPosts/'+$scope.routeParamId).
         success(function(data,err){
               $scope.posts = data;
         }).
         error(function(err,code,status){
             console.log(err+code+status);
-        })
+        });
+
+    socket.on('newPostText', function (data) {
+        console.log("get new POst text");
+        console.log(data);
+        $scope.posts.unshift(data);
+    });
+
 });
 

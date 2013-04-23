@@ -17,13 +17,7 @@ var blogSchema = mongoose.Schema({
         favs: Number
     },
     postText: [
-        {user_id: String, text: String, date: {type:Date,default:Date.now}}
-    ],
-    postPic:[
-        {user_id:String,url:String,data:Date}
-    ],
-    postVideo:[
-        {user_id:String,url:String,date:Date}
+        {user_id: String, text: String, date: {type:Date,default:Date.now},postType:Number}//postType 0=text,1=pic,2=video
     ],
     titleImage: String,
     categories: [
