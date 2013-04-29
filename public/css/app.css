@@ -45,7 +45,6 @@
 #petbutton{
     background-color: pink;
     border: none;
-    height: 26px;
     z-index: -2;
 
 }
@@ -83,6 +82,7 @@
     margin-top: -15px;
     padding-top: 0px;
     width: 40px;
+    padding-left:3px;
 
 }
 

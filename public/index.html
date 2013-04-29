@@ -77,9 +77,9 @@
         <div class="small-4 columns">
             <div ng-controller="UserInfoCtrl">
                 <p id="username">{{username}}</p>
-                <a href="#"  ng-click="logout()" if-authed="show" class="button">logout</a>
-                <a href="#"  if-authed="hide" class="small button" data-reveal-id="myModal">Register</a>
-                <a href="#"  if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
+                <a href="#" ng-click="logout()" if-authed="show" class="button">logout</a>
+                <a href="#" if-authed="hide" class="small button" data-reveal-id="myModal">Register</a>
+                <a href="#" if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
             </div>
         </div>
     </div>
@@ -112,7 +112,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <!-- Main  Content -->
 <ng-view>
