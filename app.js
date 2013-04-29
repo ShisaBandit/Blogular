@@ -31,9 +31,10 @@ var Update = blogModels.Update;
 var app = express();
 
 //noinspection JSValidateTypes
-app.configure(function () {
+app.configure('production',function () {
     //noinspection JSUnresolvedVariable,JSValidateTypes,MagicNumberJS
-    app.set('port', process.env.PORT || 3000);
+    app.set('port', process.env.PORT || 80);
+    app.set('ip', '173.247.247.179');
     //noinspection JSUnresolvedVariable
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
@@ -81,6 +82,8 @@ app.configure(function () {
 })();
 
 app.configure('development', function () {
+    app.set('port', process.env.PORT || 3000);
+    app.set('ip','localhost');
     app.use(express.errorHandler());
 });
 
@@ -147,8 +150,8 @@ app.post('/upload', passport.ensureAuthenticated, fileHandlerRoutes.upload);
 
 
 
-var server = http.createServer(app).listen(app.get('port'), function () {
-    console.log("server listening " + app.get('port'));
+var server = http.createServer(app).listen(app.get('port'),app.get('ip'), function () {
+    console.log("server listening " +app.get('ip')+':'+app.get('port'));
 });
 var io = require('socket.io').listen(server);
 
