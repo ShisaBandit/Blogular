@@ -4,9 +4,6 @@ var User = models.User;
 var Update = models.Update;
 var PICTYPE  = 1;
 var VIDEOTYPE = 2;
-/*
- * GET home page.
- */
 
 exports.allBlogs = function(req, res){
         var skip = req.params.skip,
@@ -144,7 +141,6 @@ exports.addVideoPost = function(req,res){
     });
 }
 
-
 exports.lastestPosts = function(req,res){
     console.log(req.params.id);
     var skip = req.params.skip,
@@ -168,7 +164,6 @@ exports.latestPics = function(req,res){
         return res.end(JSON.stringify(postPics.reverse()));
     });
 }
-
 
 exports.latestVideos = function(req,res){
     console.log(req.params.id);
