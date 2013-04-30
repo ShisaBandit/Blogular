@@ -25,7 +25,7 @@
             <div id="picheader">
                 <div class="row">
                     <div class="large-12 columns">
-                                    <img src="http://placehold.it/1000x300&text=[img]">
+                        <img src="http://placehold.it/1000x300&text=[img]">
 
                         <hr>
 
@@ -54,7 +54,7 @@
             </div>
             <div class="row">
                 <div class="small-4 columns">
-                    <button class="mediabuttons"><i class="general foundicon-video mediaicons"></i> </button>
+                    <button class="mediabuttons"><i class="general foundicon-video mediaicons"></i></button>
                     <button class="mediabuttons"><i class="general foundicon-photo mediaicons"></i></button>
                 </div>
                 <div class="small-offset-8 columns"></div>
@@ -76,56 +76,19 @@
                 </div>
             </div>
             <div class="contentContainer row">
-            <div class="row">
-                <div class="small-12 columns">
-                    <p><b>Greg</b></p>
-
-                    <p>Thanks for all your guys support</p>
+                <div id="submitComment">
+                    <textarea ng-model="body"></textarea>
+                    <p>
+                        <a ng-click="submitComment()" class="button" resetOnSubmit="true"></a>
+                    </p>
                 </div>
-            </div>
+                <div ng-repeat="comment in comments" class="row">
+                    <div class="small-12 columns">
+                        <p><b>{{comment.username}}</b></p>
 
-            <div class="row">
-                <div class="small-12 columns">
-                    <p><b>Greg</b></p>
-
-                    <p>Thanks for all your guys support</p>
+                        <p>{{comment.body}}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="small-12 columns">
-                    <p><b>Greg</b></p>
-
-                    <p>Thanks for all your guys support</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="small-12 columns">
-                    <p><b>Greg</b></p>
-
-                    <p>Thanks for all your guys support</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="small-12 columns">
-                    <p><b>Greg</b></p>
-
-                    <p>Thanks for all your guys support</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="small-12 columns">
-                    <p><b>Greg</b></p>
-
-                    <p>Thanks for all your guys support</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="small-12 columns">
-                    <p><b>Greg</b></p>
-
-                    <p>Thanks for all your guys support</p>
-                </div>
-            </div>
             </div>
         </div>
 
