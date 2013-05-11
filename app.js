@@ -61,6 +61,30 @@ app.configure('production',function () {
     app.use(express.static(path.join(__dirname, 'public')));
 });
 
+app.configure('development', function () {
+    app.set('port', process.env.PORT || 3000);
+    app.set('ip','localhost');
+    //noinspection JSUnresolvedVariable
+    app.set('views', __dirname + '/views');
+    app.set('view engine', 'jade');
+    //noinspection JSUnresolvedFunction
+    app.use(express.favicon());
+    app.use(express.logger('dev'));
+    //noinspection JSUnresolvedFunction
+    app.use(express.bodyParser());
+    app.use(express.methodOverride());
+    app.use(express.cookieParser('secret'));
+    //TODO:Config: make secrete changable in config
+    app.use(express.session({store: sessionStore, secret: 'secret', key: 'express.sid'}));
+    // Initialize Passport! Also use passport.session() middleware, to support
+    // persistent login sessions (recommended).
+    app.use(passport.initialize());
+    app.use(passport.session());
+    app.use(app.router);
+    app.use(require('less-middleware')({ src: __dirname + '/public' }));
+    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.errorHandler());
+});
 
 
 
@@ -86,30 +110,6 @@ app.configure('production',function () {
     });
 })();
 
-app.configure('development', function () {
-    app.set('port', process.env.PORT || 3000);
-    app.set('ip','localhost');
-    //noinspection JSUnresolvedVariable
-    app.set('views', __dirname + '/views');
-    app.set('view engine', 'jade');
-    //noinspection JSUnresolvedFunction
-    app.use(express.favicon());
-    app.use(express.logger('dev'));
-    //noinspection JSUnresolvedFunction
-    app.use(express.bodyParser());
-    app.use(express.methodOverride());
-    app.use(express.cookieParser('secret'));
-    //TODO:Config: make secrete changable in config
-    app.use(express.session({store: sessionStore, secret: 'secret', key: 'express.sid'}));
-    // Initialize Passport! Also use passport.session() middleware, to support
-    // persistent login sessions (recommended).
-    app.use(passport.initialize());
-    app.use(passport.session());
-    app.use(app.router);
-    app.use(require('less-middleware')({ src: __dirname + '/public' }));
-    app.use(express.static(path.join(__dirname, 'public')));
-    app.use(express.errorHandler());
-});
 
 //Blog Routes
 app.get('/blog', blogRoutes.allBlogs);
