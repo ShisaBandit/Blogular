@@ -1,7 +1,7 @@
 var app = angular.module('blogApp', [
         'twitterService', 'userService', 'http-auth-interceptor', 'login', 'socketio', 'updateService',
         'Scope.onReady', 'blogResource', 'loaderModule', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries',
-        'blogFilter','blogService','infinite-scroll'
+        'blogFilter','blogService','infinite-scroll','dropzone'
     ]).
     config(function ($routeProvider) {
         $routeProvider.
@@ -126,6 +126,7 @@ app.directive('ifAuthed', function ($http) {
 app.directive('autoscroll',function(){
     return{
         link:function(scope,elm,attrs){
+            //no reason for this to be in a directive
                 angular.element(document).ready(function(){
 
                     $('body').autoscroll(
@@ -150,6 +151,15 @@ app.directive('autoscroll',function(){
                     */
                 })
 
+        }
+    }
+})
+
+app.directive('dropzone',function(dropzone){
+    return{
+        link:function(scope,elm,attrs){
+            console.log(elm);
+            dropzone.createDropzone(elm,attrs.action);
         }
     }
 })
@@ -183,7 +193,7 @@ app.controller('blogViewCtrl', function ($scope, show, categoryService, BlogsSer
 
 });
 
- app.controller('blogEntryPicCtrl',function($scope){
+app.controller('blogEntryPicCtrl',function($scope){
      $scope.test = "TEST RESULT";
  });
 
@@ -194,6 +204,12 @@ app.controller('blogEntryCtrl', function ($scope, show, Blog, $routeParams, sock
     $scope.viewers = [];
     $scope.entry.comments = [];
     $rootScope.profileMenuViewable = true;
+    $scope.textorphoto = false;
+
+    $scope.flipEntry = function(){
+        console.log("fipped");
+        $scope.textorphoto = !$scope.textorphoto;
+    }
 
     $scope.postText = "";
     if(!$scope.template){
@@ -228,6 +244,7 @@ app.controller('blogEntryCtrl', function ($scope, show, Blog, $routeParams, sock
     socket.on('initialuserlist', function (data) {
         $scope.viewers = data;
     });
+
 
 
     socket.on('commentsupdated', function () {
@@ -273,6 +290,9 @@ app.controller('blogEntryCtrl', function ($scope, show, Blog, $routeParams, sock
         $scope.$onReady("success");
     });
     */
+
+
+
 
     Blog.get({id: $routeParams.id}, function (blog) {
             $scope.entry = blog[0];

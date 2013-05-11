@@ -28,7 +28,8 @@
     <link rel="stylesheet" type="text/css" href="css/normalize.css" media="all"/>
     <link rel="stylesheet" href="stylesheets/general_foundicons.css">
     <link rel="stylesheet" href="css/app.css">
-
+    <link rel="stylesheet" href="css/basic.css"/>
+    <link rel="stylesheet" href="css/dropzone.css"/>
     <script src="js/vendor/custom.modernizr.js"></script>
     <script src="js/jquery.js"></script>
     <!-- Included JS Files (Compressed) -->
@@ -54,6 +55,9 @@
     <script type="text/javascript" src="js/external/angular-http-auth.js"></script>
     <script type="text/javascript" src="js/external/directives/login.js"></script>
     <script type="text/javascript" src="js/jqAutoscroller.js"></script>
+    <script type="text/javascript" src="js/vendor/dropzone.js"></script>
+    <script type="text/javascript" src="js/external/dropzonemodule.js"></script>
+
     <script src="underscore.js"></script>
     <script>
         $(document).foundation();
@@ -61,6 +65,7 @@
 </head>
 <!-- TODO:Rename app instance to mwApp -->
 <body ng-app="blogApp">
+
 <div class="fixed title z-index-1000">
     <div class="row gradient-main">
 
@@ -119,6 +124,7 @@
 </ng-view>
 <!-- End  Content -->
 <footer class="row border-main border-footer">
+
     <!--
     <div class="four columns right-separator footer-child">
         <ul>

@@ -1,10 +1,13 @@
-
+var fs = require('fs');
 exports.upload = function (req, res) {
-    var name = req.files.userPhoto.name;
-    fs.readFile(req.files.userPhoto.path, function (err, data) {
-        var newPath = __dirname + "/public/uploads/" + name;
+    var name = req.files.file.name;
+    fs.readFile(req.files.file.path, function (err, data) {
+        var newPath = global.__approot + "/public/uploads/" + name;
+        console.log(newPath);
         fs.writeFile(newPath, data, function (err) {
-            res.redirect("back");
+            if(err)console.log(err);res.send(401,'error');
+            //res.send(200,{'success': 'true'});
+            res.redirect('back');
         });
     });
 };

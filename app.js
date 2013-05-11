@@ -3,6 +3,9 @@ Object.clone = function (obj) {
         return (memo[name] = Object.getOwnPropertyDescriptor(obj, name)) && memo;
     }, {}));
 }
+
+
+
 //noinspection JSUnresolvedVariable
 
 var express = require('express')
@@ -23,6 +26,7 @@ var express = require('express')
     , blogModels = require('./models/models')
     , passport = require('./auth/local').passport_local;
 
+global.__approot = __dirname;
 //set up database models to mongoose
 var Blog = blogModels.Blog;
 var User = blogModels.User;
