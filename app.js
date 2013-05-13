@@ -36,6 +36,8 @@ var app = express();
 
 //noinspection JSValidateTypes
 app.configure('production',function () {
+    app.use(express.compress());
+
     //noinspection JSUnresolvedVariable,JSValidateTypes,MagicNumberJS
     app.set('port', process.env.PORT || 80);
     app.set('ip', '173.247.247.179');
@@ -43,6 +45,7 @@ app.configure('production',function () {
     //noinspection JSUnresolvedVariable
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
+
     //noinspection JSUnresolvedFunction
     app.use(express.favicon());
     app.use(express.logger('dev'));
@@ -58,10 +61,12 @@ app.configure('production',function () {
     app.use(passport.session());
     app.use(app.router);
     app.use(require('less-middleware')({ src: __dirname + '/public' }));
-    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.static(path.join(__dirname, 'public'),{ maxAge: 86400000 /* 1d */ }));
 });
 
 app.configure('development', function () {
+    app.use(express.compress());
+
     app.set('port', process.env.PORT || 3000);
     app.set('ip','localhost');
     //noinspection JSUnresolvedVariable
@@ -85,8 +90,6 @@ app.configure('development', function () {
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.errorHandler());
 });
-
-
 
 //TODO:config: This will be the intial admin user
 (function checkForAdmin() {
