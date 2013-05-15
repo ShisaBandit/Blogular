@@ -76,11 +76,11 @@
         </div>
         <div class="small-4 columns">
             <div ng-controller="TitleCtrl">
-                <a href="#/"><h1 ng-bind="title"></h1></a>
+                <a href="#/" ng-bind="title" class="logo"></a>
             </div>
         </div>
         <div class="small-4 columns">
-            <div ng-controller="UserInfoCtrl">
+            <div ng-controller="UserInfoCtrl" class="loginBlock">
                 <p id="username">{{username}}</p>
                 <a href="#" ng-click="logout()" if-authed="show" class="button">logout</a>
                 <a href="#" if-authed="hide" class="small button" data-reveal-id="myModal">Register</a>
@@ -88,7 +88,7 @@
             </div>
         </div>
     </div>
-    <div ng-controller="SearchBarCtrl">
+    <div ng-controller="SearchBarCtrl" class="searchBarBlock">
         <div ng-hide="searchViewable" ng-animate="'fade'" class="searchBar">
             <div class="row">
                 <div class="small-6 columns large-centered">

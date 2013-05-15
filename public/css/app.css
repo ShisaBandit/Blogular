@@ -20,6 +20,7 @@
 .comment{
     border-top: 1px solid #000000;
 }
+
 .backgroundTitleImage{
     width: 300px;
     height: 300px;
@@ -32,7 +33,7 @@
 
 .title{
 
-    background: url("/img/background/clouds.jpg")no-repeat center -195px;
+    background: #275c95 url("/img/background/cloudBG.jpg")no-repeat center -195px;
 
 }
 #workpets{
@@ -43,18 +44,19 @@
 
 }
 #petbutton{
-    background-color: pink;
+    background-color: #c562e1;
     border: none;
     z-index: -2;
 
 }
 #workshopbutton{
-    background-color: #000080;
+    background-color: #275c95;
     border: none;
 
 }
 .offsetHeight{
     margin-top: 280px;
+  background: #275c95;
 }
 
 #login{
@@ -69,7 +71,11 @@
 .navstyles{
     background-color: dodgerblue;
 }
-#username{
+.loginBlock {
+	margin-left: 100px;
+}
+
+#username{    
     margin-bottom: 0px;
 }
 
@@ -86,16 +92,30 @@
 
 }
 
+.logo {
+	display: block;
+	width: 524px;
+	height: 65px;
+	margin-left: -120px;
+	text-indent: -9000px;
+	background: url("/img/memWallLogo.png") center top;
+}
+
+.searchBarBlock {
+	margin-top: -20px;
+	padding-top: 30px;
+	background: #275c95;
+}
 
 .searchBar{
-    background-color: #000080;
+    background-color: #132c48;
     padding-top: 15px;
     z-index: 10;
     margin-top: -24px;
 }
 
 .grouping{
-    background-color: paleturquoise;
+    background-color: #8fb2d7;
     padding-top: 15px;
     z-index: 1;
 }
