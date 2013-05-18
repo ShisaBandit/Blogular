@@ -9,6 +9,7 @@ exports.allBlogs = function(req, res){
        // var skip = req.params.skip,
          //   limit = req.params.limit;
         Blog.find({},{},{skip:0,limit:3}).lean().exec(function (err, posts) {
+            //limit this to only what is needed for the memorial main wall
             return res.end(JSON.stringify(posts));
         });
 };
@@ -18,6 +19,7 @@ exports.getPaginatedBlogs = function(req, res){
         limit = req.params.limit;
     console.log(skip,limit);
     Blog.find({},{},{skip:skip,limit:limit}).lean().exec(function (err, posts) {
+        //TODO:return only what we need for the memorial wall view
         return res.end(JSON.stringify(posts));
     });
 };
@@ -28,28 +30,33 @@ exports.getABlog = function(req,res){
     User.findOne({_id: req.session.passport.user}, function (err, user) {
         var matchfound = false;
         if (err)console.log(err);
-        if(user != null){
 
-            for(var x = 0;x < user.profiles.length;x++){
-                console.log(user.profiles[x].profile);
+        Blog.find({'author': id}).lean().exec(function (err, post) {
+            if(user != null){
 
-                if(user.profiles[x].profile == null){
-
-                }else{
+                for(var x = 0;x < user.profiles.length;x++){
                     console.log(user.profiles[x].profile);
-                    if(id == user.profiles[x].profile){
-                        matchfound = true;
-                    }
-                }
 
+                    if(user.profiles[x].profile == null){
+
+                    }else{
+                        console.log(user.profiles[x].profile);
+                        if(post[0]._id == user.profiles[x].profile){
+                            matchfound = true;
+                        }
+                    }
+
+                }
             }
-        }
-        Blog.find({'_id': id}).lean().exec(function (err, post) {
+            if(post == undefined){
+                return res.send(200);
+            }
             if(matchfound == true){
                 post.limited = false;
                 return res.end(JSON.stringify(post));
 
             }else{
+
                 var modifiedpost = [];
                 var modifiedpostentry  ={};
                 modifiedpostentry.limited = true;

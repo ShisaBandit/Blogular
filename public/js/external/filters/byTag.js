@@ -1,6 +1,10 @@
 angular.module('blogFilter', []).
-    filter('byTag', function () {
+    filter('bySubgroup', function ($rootScope) {
+
         return function (blogs, tag) {
+            console.log("filter applied");
+            console.log("tag : "+tag);
+            console.log("search :" +$rootScope.search.search);
             if (blogs == undefined && tag == undefined) {
                 return;
             } else if (blogs != undefined && tag == undefined) {
@@ -8,11 +12,9 @@ angular.module('blogFilter', []).
             } else if (blogs != undefined && tag != undefined) {
                 var buffer = [];
                 for (var x = 0; x < blogs.length; x++) {
-                    for (var i = 0; i < blogs[x].categories.length; i++) {
-                        if (blogs[x].categories[i].name === tag) {
+                        if (blogs[x].subgroup === tag) {
                             buffer.push(blogs[x]);
                         }
-                    }
                 }
                 return buffer;
             }

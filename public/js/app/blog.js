@@ -200,7 +200,10 @@ app.controller('blogEntryPicCtrl',function($scope){
 
 app.controller('blogEntryCtrl', function ($scope,$location, show, Blog, $routeParams, socket,$rootScope,$http) {
 
-    $scope.routeParamId = $routeParams.id;
+    $scope.parentObject = {
+        routeParamId : $routeParams.id,
+        entryId : ""
+    }
     socket.connect();
     $scope.entry = "";
     $scope.viewers = [];
@@ -232,16 +235,16 @@ app.controller('blogEntryCtrl', function ($scope,$location, show, Blog, $routePa
         $http.post('/addtextpost',{text:$scope.postText,id:$scope.entry._id}).
             success(function(data,status){
                 console.log(data);
-                socket.emit('postText',{room: $routeParams.id});
+                socket.emit('postText',{room: $scope.entry._id});
                 $scope.postText = "";
             }).error(function(err){
                 console.log(err);
             });
     }
 
-    socket.emit('subscribe', {room: $routeParams.id});
+    socket.emit('subscribe', {room: $scope.entry._id});
     socket.on('login', function () {
-        socket.emit('subscribe', {room: $routeParams.id});
+        socket.emit('subscribe', {room:$scope.entry._id});
     });
     socket.on('initialuserlist', function (data) {
         $scope.viewers = data;
@@ -277,7 +280,7 @@ app.controller('blogEntryCtrl', function ($scope,$location, show, Blog, $routePa
         $scope.entry.$save(function (blog) {
             $scope.comments = blog.comments;
             $scope.body = "";
-            socket.emit('sentcomment', {room: $routeParams.id});
+            socket.emit('sentcomment', {room:$scope.entry._id});
         });
     };
     show.state = true;
@@ -304,7 +307,7 @@ app.controller('blogEntryCtrl', function ($scope,$location, show, Blog, $routePa
                 $scope.profileMenuViewable = false;
                 $location.path("/public/"+$routeParams.id);
             }else{
-
+                $scope.parentObject.entryId = blog[0]._id;
                 $scope.text = blog[0].text;
                 $scope.comments = blog[0].comments;
                 $scope.$onReady("success");
@@ -317,7 +320,7 @@ app.controller('blogEntryCtrl', function ($scope,$location, show, Blog, $routePa
         });
 
     $scope.$on('$routeChangeStart', function (scope, next, current) {
-        socket.emit('unsubscribe', {room: $routeParams.id});
+        socket.emit('unsubscribe', {room:$scope.entry._id});
     });
     $scope.$on('$destroy', function () {
         socket.removeListener('enterroom');
@@ -327,8 +330,11 @@ app.controller('blogEntryCtrl', function ($scope,$location, show, Blog, $routePa
     });
 });
 
-app.controller('SearchBarCtrl',function($scope,$routeParams){
-    $scope.$on('$routeChangeSuccess',function(next,current){
+app.controller('SearchBarCtrl',function($scope,$filter,$rootScope){
+    $rootScope.search = {
+        search : ""
+    }
+$scope.$on('$routeChangeSuccess',function(next,current){
         console.log(current);
         if(current.templateUrl == "partials/blog.html" || current.templateUrl == undefined){
             $scope.searchViewable = false;
@@ -336,9 +342,16 @@ app.controller('SearchBarCtrl',function($scope,$routeParams){
             $scope.searchViewable = true;
         }
     });
+
+    $scope.clearSearch = function(){
+        $rootScope.search.search ="";
+    }
+
+
 });
 
-app.controller('GroupingCtrl',function($scope){
+app.controller('GroupingCtrl',function($scope,$rootScope){
+    $rootScope.subgroup = undefined;
     $scope.$on('$routeChangeSuccess',function(next,current){
         console.log(current);
         if(current.templateUrl == "partials/blog.html" || current.templateUrl == undefined){
@@ -347,6 +360,10 @@ app.controller('GroupingCtrl',function($scope){
             $scope.groupingViewable = true;
         }
     });
+    $scope.changeSubgroup = function(subgroup){
+        console.log(subgroup);
+        $rootScope.subgroup = subgroup;
+    }
 });
 
 app.controller('LoginController', function ($scope, $http, authService, userInfoService, socket, $rootScope) {
@@ -448,7 +465,7 @@ app.controller('LatestCtrl',function($scope,$http,$routeParams,socket){
     console.log('LatestCtrl started');
     console.log($scope);
     console.log($scope.routeParamId);
-    $http.get('/lastestPosts/'+$scope.routeParamId).
+    $http.get('/lastestPosts/'+$scope.parentObject.entryId).
         success(function(data,err){
               $scope.posts = data;
         }).

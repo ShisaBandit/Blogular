@@ -56,9 +56,9 @@ angular.module('blogService', ['ngResource']).
                 var deferred = $q.defer();
                 blogResource.get(function (blogs) {
                         callback(processBlogs(blogs));
-                    },
-                    function () {
-                    });
+                },
+                function () {
+                });
             },
             getCategories: function () {
                 return categories;

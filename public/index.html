@@ -94,10 +94,10 @@
                 <div class="small-6 columns large-centered">
                     <div class="row collapse">
                         <div class="small-10 columns">
-                            <input type="text" placeholder="Enter your search">
+                            <input ng-model="search.search" type="text" placeholder="Enter your search">
                         </div>
                         <div class="small-2 columns">
-                            <span class="button postfix radius">Search</span>
+                            <span ng-click="clearSearch()" class="button postfix radius">Clear</span>
                         </div>
                     </div>
                 </div>
@@ -109,10 +109,10 @@
         <div ng-hide="groupingViewable" ng-animate="'fade'" class="grouping">
             <div class="row">
                 Memorials by Groupings
-                <a href="#/mothers" class="button small success radius">Mothers</a>
-                <a href="#/family" class="button small success radius">Family</a>
-                <a href="#/friends" class="button small success radius">Friends</a>
-                <a href="#/" class="button small success radius">Remove Filters</a>
+                <a ng-click="changeSubgroup(0)" class="button small success radius">Mothers</a>
+                <a ng-click="changeSubgroup(1)" class="button small success radius">Family</a>
+                <a ng-click="changeSubgroup(2)" class="button small success radius">Friends</a>
+                <a ng-click="changeSubgroup(undefined)" class="button small success radius">Remove Filters</a>
 
             </div>
         </div>

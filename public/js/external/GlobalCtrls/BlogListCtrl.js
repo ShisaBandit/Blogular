@@ -10,7 +10,7 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
         $scope.entries = [];
         $scope.$prepareForReady();
 
-        $scope.filterTag = $routeParams.name;
+        $scope.filtersubgroup = $scope.subgroup;
         //check if user wants to see blogs by categories or not
         if ($routeParams.name) {
             UpdateService.checkIfUpdate(function (result) {
