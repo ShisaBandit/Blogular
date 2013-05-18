@@ -11,6 +11,7 @@ var app = angular.module('blogApp', [
             when("/shoutouts", {templateUrl: "partials/shoutouts.html"}).
             when("/admin/AddBlogEntry", {templateUrl: "partials/admin/createBlogEntry.html"}).
             when("/blog/:id", {templateUrl: "partials/blogEntry.html"}).
+            when("/public/:id",{templateUrl:"partials/publicAngelProfile.html"}).
             when("/listByTag/:name", {templateUrl: "partials/blog.html"})
     });
 
@@ -197,7 +198,8 @@ app.controller('blogEntryPicCtrl',function($scope){
      $scope.test = "TEST RESULT";
  });
 
-app.controller('blogEntryCtrl', function ($scope, show, Blog, $routeParams, socket,$rootScope,$http) {
+app.controller('blogEntryCtrl', function ($scope,$location, show, Blog, $routeParams, socket,$rootScope,$http) {
+
     $scope.routeParamId = $routeParams.id;
     socket.connect();
     $scope.entry = "";
@@ -292,13 +294,23 @@ app.controller('blogEntryCtrl', function ($scope, show, Blog, $routeParams, sock
     */
 
 
-
-
     Blog.get({id: $routeParams.id}, function (blog) {
+            console.log('got blog');
+            console.log(blog[0].limited);
+            console.log(blog[0]);
             $scope.entry = blog[0];
-            $scope.text = blog[0].text;
-            $scope.comments = blog[0].comments;
-            $scope.$onReady("success");
+
+            if(blog[0].limited){
+                $scope.profileMenuViewable = false;
+                $location.path("/public/"+$routeParams.id);
+            }else{
+
+                $scope.text = blog[0].text;
+                $scope.comments = blog[0].comments;
+                $scope.$onReady("success");
+                $location.path("/blog/"+$routeParams.id);
+            }
+
         },
         function () {
             $scope.$onFailure("failed");

@@ -4,20 +4,38 @@ var User = models.User;
 var Update = models.Update;
 
 exports.checkAuthed = function (req, res) {
-    User.find({_id:req.session.passport.user},function(err,user){
-        if(err)console.log(err);
+    User.find({_id: req.session.passport.user}, function (err, user) {
+        if (err)console.log(err);
         console.log(user[0].username);
         //noinspection MagicNumberJS
         return res.send(user[0].username, 200);
     })
 };
 
+exports.checkProfileAuthed = function (req, res,next) {
+    User.findOne({_id: req.session.passport.user}, function (err, users) {
+        var matchfound = false;
+        if (err)console.log(err);
+            for(var x = 0;x < users.profiles.length;x++){
+                console.log(users.profiles[x]._id);
+                if(req.params.id == users.profiles[x]._id){
+                    matchfound = true;
+                }
+            }
+        if(matchfound == true){
+            return next();
+        }else{
+            return res.send({fail:'noaccess'}, 200);
+        }
+
+    })
+}
 
 //update docs route
 exports.lastUpdateSame = function (req, res) {
     Update.findOne({}).lean().exec(function (err, update) {
         var returnResult = [];
-        if (err)(err);
+        if (err)console.log(err);
         if (update == null) {
             var updateCreate = new Update();
             updateCreate.save(function (err, newUpdate) {
@@ -60,8 +78,8 @@ exports.logout = function (req, res) {
     res.send('loggedout', 410);
 };
 
-exports.loginAuth =  function (req, res) {
-    User.findOne({'username': req.body.username, 'password': req.body.password,admin:{$in:['superuser','admin']}}, function (err, administrator) {
+exports.loginAuth = function (req, res) {
+    User.findOne({'username': req.body.username, 'password': req.body.password, admin: {$in: ['superuser', 'admin']}}, function (err, administrator) {
         if (err)console.log(err);
         if (administrator) {
             req.session.loggedIn = true;
@@ -74,7 +92,7 @@ exports.loginAuth =  function (req, res) {
 
 };
 
-exports.register =  function (req, res) {
+exports.register = function (req, res) {
     var userCount = 0,
         adminCount = 0,
         username = req.body.username,
@@ -88,7 +106,7 @@ exports.register =  function (req, res) {
         if (err)console.log(err);
         userCount = count;
         //then get admin count
-        User.count({username: username,admin :{$in:['superuser','admin']}} , function (err, count) {
+        User.count({username: username, admin: {$in: ['superuser', 'admin']}}, function (err, count) {
             if (err)console.log(err);
             adminCount = count;
             //then check count

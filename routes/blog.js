@@ -6,8 +6,8 @@ var PICTYPE  = 1;
 var VIDEOTYPE = 2;
 
 exports.allBlogs = function(req, res){
-        var skip = req.params.skip,
-            limit = req.params.limit;
+       // var skip = req.params.skip,
+         //   limit = req.params.limit;
         Blog.find({},{},{skip:0,limit:3}).lean().exec(function (err, posts) {
             return res.end(JSON.stringify(posts));
         });
@@ -24,17 +24,56 @@ exports.getPaginatedBlogs = function(req, res){
 
 exports.getABlog = function(req,res){
     var id = req.params.id;
-    Blog.find({'_id': id}).lean().exec(function (err, post) {
-        return res.end(JSON.stringify(post));
-    });
-}
+
+    User.findOne({_id: req.session.passport.user}, function (err, user) {
+        var matchfound = false;
+        if (err)console.log(err);
+        if(user != null){
+
+            for(var x = 0;x < user.profiles.length;x++){
+                console.log(user.profiles[x].profile);
+
+                if(user.profiles[x].profile == null){
+
+                }else{
+                    console.log(user.profiles[x].profile);
+                    if(id == user.profiles[x].profile){
+                        matchfound = true;
+                    }
+                }
+
+            }
+        }
+        Blog.find({'_id': id}).lean().exec(function (err, post) {
+            if(matchfound == true){
+                post.limited = false;
+                return res.end(JSON.stringify(post));
+
+            }else{
+                var modifiedpost = [];
+                var modifiedpostentry  ={};
+                modifiedpostentry.limited = true;
+                modifiedpostentry.firstName = post[0].firstName;
+                modifiedpostentry.lastName = post[0].lastName;
+                modifiedpostentry.gender = post[0].gender;
+                modifiedpostentry.memorialDate = post[0].memorialDate;
+                modifiedpostentry.profilePicWide = post[0].memorialDate;
+                modifiedpostentry.profilePicPortrait = post[0].profilePicPortrait;
+                modifiedpost.push(modifiedpostentry);
+                return res.end(JSON.stringify(modifiedpost));
+            }
+        });
+        //return res.send(user[0].username, 200);
+    })
+
+};
 //TODO:verify and test this functionality.
 exports.getLastBlogUpdateDate = function(req,res){
     var id = req.params.id;
     Blog.find({'_id': id}).lean().exec(function (err, post) {
         return res.end(JSON.stringify(post.updateDate));
     });
-}
+};
 
 exports.createBlog = function(req,res){
     var title = req.body.title;
@@ -56,7 +95,6 @@ exports.updateBlog = function(req,res){
     delete req.body._id;
     User.findOne({username: req.user[0]._doc.username}, function (err, user) {
         loggedInUser = user;
-        (loggedInUser);
         if (user === null) {
             res.send('error:not an admin account', 401);
         } else {
@@ -146,7 +184,10 @@ exports.lastestPosts = function(req,res){
     var skip = req.params.skip,
         limit = req.params.limit;
     console.log(skip,limit);
+    console.log(req.params.id);
     Blog.findOne({_id:req.params.id}).lean().exec(function (err, blog) {
+        if(err)console.log(err);return res.send(200);
+        if(blog === undefined) return res.send(200);
         if(blog.postText === undefined)return res.send(200);
         return res.end(JSON.stringify(blog.postText.reverse()));
     });

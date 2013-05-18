@@ -95,17 +95,17 @@ app.configure('development', function () {
 (function checkForAdmin() {
     var defaultAdminName = 'administrator';
     var usertype = "superuser";
-    ('Checking for initial admin user');
+    console.log('Checking for initial admin user');
     User.count({username: defaultAdminName,admin:usertype}, function (err, count) {
         if (count < 1) {
-            ('did not find admin user ... creating...');
+            console.log('did not find admin user ... creating...');
             var user = new User({username: defaultAdminName, password: defaultAdminName,admin:usertype}).
                 save(function (err) {
                     if (err) {
                         console.log(err);
-                        ('error creating initial admin user admin');
+                        console.log('error creating initial admin user admin');
                     } else {
-                        ('inital admin user created username is '+defaultAdminName+'  password is '+defaultAdminName+'. \n ' +
+                        console.log('inital admin user created username is '+defaultAdminName+'  password is '+defaultAdminName+'. \n ' +
                             'please change password for username '+defaultAdminName+' a.s.a.p.');
                     }
                 });
@@ -142,6 +142,7 @@ app.post('/addBlogPost', passport.ensureAuthenticated, blogRoutes.addBlogEntry);
 //Auth Routes
 
 app.get('/checkauthed', passport.ensureAuthenticated, authRoutes.checkAuthed);
+app.get('/checkaccess', passport.ensureAuthenticated, authRoutes.checkProfileAuthed);
 
 //Update docs routes
 app.get('/lastUpdateSame', authRoutes.lastUpdateSame);
@@ -203,11 +204,11 @@ var connectedusers = [];
 io.sockets.on('connection', function (socket) {
     socket.emit('connected', {conn: 'true'});
     socket.on('loggedin', function () {
-        ('logged in ');
+        console.log('logged in ');
         socket.emit('login');
     });
     socket.on('subscribe', function (data) {
-        ('subscribed');
+        console.log('subscribed');
 
         socket.handshake.room = data.room;
         var duplicateUserForRoom = false;
@@ -264,7 +265,7 @@ io.sockets.on('connection', function (socket) {
             }
         }
         connectedusers = buffer;
-        (io.sockets.manager.rooms);
+        console.log(io.sockets.manager.rooms);
         var clients = io.sockets.clients(data.room);
         for (var i = 0; i < clients.length; i++) {
             console.log("================================================================next client loading....");
