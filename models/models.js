@@ -110,6 +110,8 @@ Blog.find({}, function (err, blogs) {
                 blogs[key].owner_id = user._id;
             })
         }
+        blogs[key].owner_id = users._id;
+        console.log(blogs[key]);
         blogs[key].save(function (err) {
             if (err)console.log(err.message);
         })
