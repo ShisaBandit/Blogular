@@ -46,14 +46,14 @@
                 <div class="postEntry small-10 columns">
                     <input type="text" ng-hide="textorphoto" ng-model="postText"/>
 
-                    <div class="panel" ng-show="textorphoto" ng-model="postText"></div>
-                    <div id="UploadBox">
-                        <h2>Video Uploader</h2>
-                        <!--      <span id='UploadArea'>
-                                 <form dropzone action="/upload"
-                                       class="dropzone"
-                                       id="my-awesome-dropzone"></form>
-                              </span>-->
+                    <div ng-show="textorphoto" id="UploadBox">
+                        <h2>Photo Uploader</h2>
+                              <span id='UploadArea'>
+                                 <dropzone url="/upload"
+                                           class="dropzone"
+                                           id="my-awesome-dropzone">
+                                 </dropzone>
+                              </span>
                     </div>
                 </div>
                 <div class="small-2 columns">

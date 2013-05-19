@@ -158,9 +158,13 @@ app.directive('autoscroll', function () {
 
 app.directive('dropzone', function (dropzone) {
     return{
+        restrict: 'E',
         link: function (scope, elm, attrs) {
             console.log(elm);
-            dropzone.createDropzone(elm, attrs.action);
+            dropzone.createDropzone(elm, attrs.url);
+            dropzone.registerEvent('complete', elm, function () {
+                console.log("success directive");
+            })
         }
     }
 })
