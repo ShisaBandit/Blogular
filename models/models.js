@@ -6,20 +6,21 @@ var blogSchema = mongoose.Schema({
     lastName: String,
     gender: Boolean,//0=female,1=male
     dob: Date,
-    memorialDate:Date,
+    memorialDate: Date,
     anniverssaryDays: [
         {
             event: String,
             date: Date
         }
     ],
-    profilePicWide:String,
-    profilePicPortrait:String,
-    subgroup:Number,//0:mothers,1:fathers,2:family,3:friends
+    profilePicWide: String,
+    profilePicPortrait: String,
+    subgroup: Number,//0:mothers,1:fathers,2:family,3:friends
     views: Number,
     title: String,
     author: String,//author is the url TODO:Ensure that there are NEVER TWO "urls"/authors of the same string
     //if you dont it will always pick the first and cause confusion
+    //TODO:ensure that no special characters are allowed in the input of this data field (url)
     text: String,
     reversed: {type: Boolean, default: false},
     comments: [
@@ -55,10 +56,12 @@ var blogSchema = mongoose.Schema({
             title: String,
             text: String,
             dateStarted: {type: Date, default: Date.now},
-            signatures: [{
-                user_id:String,
-                signedDate:Date
-            }]
+            signatures: [
+                {
+                    user_id: String,
+                    signedDate: Date
+                }
+            ]
         }
     ]
 
@@ -80,8 +83,8 @@ var updateSchema = mongoose.Schema({
     lastUpdate: {type: Date, default: Date.now()}
 });
 var urlSchema = mongoose.Schema({
-    publicFacingUrl:String,
-    profileId:String
+    publicFacingUrl: String,
+    profileId: String
 })
 mongoose.connect('mongodb://localhost/test');
 
@@ -93,63 +96,63 @@ db.once('open', function callback() {
 var Blog = mongoose.model('Blog', blogSchema);
 var User = mongoose.model('User', userSchema);
 var Update = mongoose.model('Update', updateSchema);
-var Url = mongoose.model('Url',urlSchema);
- /*
+var Url = mongoose.model('Url', urlSchema);
+
 //set all profiles to administrator as owner
-    Blog.find({},function(err,blogs){
-        _.each(blogs,function(blog,key){
-            if(key %2 == 0){
-                User.findOne({username:"administrator"},function(err,user){
-                    blogs[key].owner_id = user._id;
-                })
-            }else{
-                User.findOne({username:"projectskillz"},function(err,user){
-                    blogs[key].owner_id = user._id;
-                })
-            }
-            blogs[key].owner_id = users._id;
-            console.log(blogs[key]);
-            blogs[key].save(function(err){
-                if(err)console.log(err.message);
+Blog.find({}, function (err, blogs) {
+    _.each(blogs, function (blog, key) {
+        if (key % 2 == 0) {
+            User.findOne({username: "administrator"}, function (err, user) {
+                blogs[key].owner_id = user._id;
             })
+        } else {
+            User.findOne({username: "projectskillz"}, function (err, user) {
+                blogs[key].owner_id = user._id;
+            })
+        }
+        blogs[key].owner_id = users._id;
+        console.log(blogs[key]);
+        blogs[key].save(function (err) {
+            if (err)console.log(err.message);
         })
     })
-                     //set all profiles basic data
-    Blog.find({},function(err,blogs){
-        _.each(blogs,function(blog,key){
-            blogs[key].firstName = "Johnny";
-            blogs[key].lastName = "Angel";
-            blogs[key].gender = 0;
-            blogs[key].dob = new Date(1997,05,15);
-            blogs[key].memorialDate = new Date();
-            if(key % 2 == 0)
-                blogs[key].subgroup = 0;
-            else
-                blogs[key].subgroup = 1;
-            console.log(blogs[key]);
-            blogs[key].save(function(err){
-                if(err)console.log(err.message);
-            })
+})
+//set all profiles basic data
+Blog.find({}, function (err, blogs) {
+    _.each(blogs, function (blog, key) {
+        blogs[key].firstName = "Johnny";
+        blogs[key].lastName = "Angel";
+        blogs[key].gender = 0;
+        blogs[key].dob = new Date(1997, 05, 15);
+        blogs[key].memorialDate = new Date();
+        if (key % 2 == 0)
+            blogs[key].subgroup = 0;
+        else
+            blogs[key].subgroup = 1;
+        console.log(blogs[key]);
+        blogs[key].save(function (err) {
+            if (err)console.log(err.message);
         })
     })
+})
 
 
-User.findOne({username:"projectskillz"},function(err,users){
+User.findOne({username: "TestName"}, function (err, users) {
     console.log(users);
 
-    users.profiles.push({profile:'516a329362f0af3550000009'});
-    users.save(function(err){
-        if(err)console.log(err.message);
+    users.profiles.push({profile: '516a329362f0af3550000009'});
+    users.save(function (err) {
+        if (err)console.log(err.message);
 
     })
 
 
 })
-  */
+
 
 module.exports = {
     Blog: Blog,
     User: User,
     Update: Update,
-    Url:Url
+    Url: Url
 }
