@@ -5,12 +5,11 @@ Object.clone = function (obj) {
 }
 
 
-
 //noinspection JSUnresolvedVariable
 
 var express = require('express')
     , http = require('http')
-    //routes
+//routes
     , blogRoutes = require('./routes/blog')
     , authRoutes = require('./routes/auth')
     , commentRoutes = require('./routes/comments')
@@ -22,7 +21,7 @@ var express = require('express')
     , MemoryStore = express.session.MemoryStore
     , sessionStore = new MemoryStore()
     , q = require('q')
-    //models
+//models
     , blogModels = require('./models/models')
     , passport = require('./auth/local').passport_local;
 
@@ -35,7 +34,7 @@ var Update = blogModels.Update;
 var app = express();
 
 //noinspection JSValidateTypes
-app.configure('production',function () {
+app.configure('production', function () {
     app.use(express.compress());
 
     //noinspection JSUnresolvedVariable,JSValidateTypes,MagicNumberJS
@@ -61,14 +60,14 @@ app.configure('production',function () {
     app.use(passport.session());
     app.use(app.router);
     app.use(require('less-middleware')({ src: __dirname + '/public' }));
-    app.use(express.static(path.join(__dirname, 'public'),{ maxAge: 86400000 /* 1d */ }));
+    app.use(express.static(path.join(__dirname, 'public'), { maxAge: 86400000 /* 1d */ }));
 });
 
 app.configure('development', function () {
     app.use(express.compress());
 
     app.set('port', process.env.PORT || 3000);
-    app.set('ip','localhost');
+    app.set('ip', 'localhost');
     //noinspection JSUnresolvedVariable
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
@@ -96,17 +95,17 @@ app.configure('development', function () {
     var defaultAdminName = 'administrator';
     var usertype = "superuser";
     console.log('Checking for initial admin user');
-    User.count({username: defaultAdminName,admin:usertype}, function (err, count) {
+    User.count({username: defaultAdminName, admin: usertype}, function (err, count) {
         if (count < 1) {
             console.log('did not find admin user ... creating...');
-            var user = new User({username: defaultAdminName, password: defaultAdminName,admin:usertype}).
+            var user = new User({username: defaultAdminName, password: defaultAdminName, admin: usertype}).
                 save(function (err) {
                     if (err) {
                         console.log(err);
                         console.log('error creating initial admin user admin');
                     } else {
-                        console.log('inital admin user created username is '+defaultAdminName+'  password is '+defaultAdminName+'. \n ' +
-                            'please change password for username '+defaultAdminName+' a.s.a.p.');
+                        console.log('inital admin user created username is ' + defaultAdminName + '  password is ' + defaultAdminName + '. \n ' +
+                            'please change password for username ' + defaultAdminName + ' a.s.a.p.');
                     }
                 });
         }
@@ -119,15 +118,15 @@ app.get('/blog', blogRoutes.allBlogs);
 
 app.get('/blog/:id', blogRoutes.getABlog);
 
-app.get('/blog/:skip/:limit',blogRoutes.getPaginatedBlogs);
+app.get('/blog/:skip/:limit', blogRoutes.getPaginatedBlogs);
 
-app.get('/blogLastUpdate/:id',blogRoutes.getLastBlogUpdateDate);
+app.get('/blogLastUpdate/:id', blogRoutes.getLastBlogUpdateDate);
 
-app.get('/lastestPosts/:id',blogRoutes.lastestPosts);
+app.get('/lastestPosts/:id', blogRoutes.lastestPosts);
 
-app.get('/lastestPics/:id',blogRoutes.latestPics);
+app.get('/lastestPics/:id', blogRoutes.latestPics);
 
-app.get('/lastestVideos/:id',blogRoutes.latestVideos);
+app.get('/lastestVideos/:id', blogRoutes.latestVideos);
 
 app.post('/blog', passport.ensureAuthenticated, blogRoutes.createBlog);
 //edit
@@ -159,13 +158,13 @@ app.post('/login',
         res.send('authed', 200);
     });
 
-app.post('/auth/login',authRoutes.loginAuth);
+app.post('/auth/login', authRoutes.loginAuth);
 
-app.get('username',passport.ensureAuthenticated,function(req,res){
-    req.send(req.session.username,200);
+app.get('username', passport.ensureAuthenticated, function (req, res) {
+    req.send(req.session.username, 200);
 });
 
-app.post('/register',authRoutes.register);
+app.post('/register', authRoutes.register);
 
 //comment system routes
 
@@ -177,9 +176,8 @@ app.post('/comments', passport.ensureAuthenticated, commentRoutes.comments);
 app.post('/upload', passport.ensureAuthenticated, fileHandlerRoutes.upload);
 
 
-
-var server = http.createServer(app).listen(app.get('port'),app.get('ip'), function () {
-    console.log("server listening " +app.get('ip')+':'+app.get('port'));
+var server = http.createServer(app).listen(app.get('port'), app.get('ip'), function () {
+    console.log("server listening " + app.get('ip') + ':' + app.get('port'));
 });
 var io = require('socket.io').listen(server);
 
@@ -232,25 +230,31 @@ io.sockets.on('connection', function (socket) {
 
 
             socket.emit('initialuserlist', usersForThisRoom);
-            socket.broadcast.in(data.room).emit('updateusers', usersForThisRoom);
+            io.sockets.in(data.room).emit('updateusers', usersForThisRoom);
         }
 
 
     });
     socket.on('sentcomment', function (data) {
-        socket.broadcast.in(data.room).emit('commentsupdated', '', "updateNow");
+        console.log("sentcomment");
+        //socket.emit('commentsupdated',"updateNow");
+        //socket.broadcast.in(data.room).emit('commentsupdated', '', "updateNow");
+        io.sockets.in(data.room).emit('commentsupdated', "YEAH");
     });
 
-    socket.on('postText',function(data){
+    socket.on('postText', function (data) {
         console.log('posttext event received');
-        Blog.findOne({_id:data.room},function(err,blog){
-                         if(err)console.log(err);
-            console.log(blog.postText[blog.postText.length]);
-            socket.broadcast.in(data.room).emit('newPostText','',blog.postText[0]);
-
+        Blog.findOne({_id: data.room}, function (err, blog) {
+            if (err)console.log(err);
+            console.log(blog.postText[blog.postText.length - 1]);
+            io.sockets.in(data.room).emit('newPostText', blog.postText[blog.postText.length - 1]);
         })
-    });
 
+    });
+    socket.on('test', function (data) {
+        console.log("post text");
+        io.sockets.in(data.room).emit('testrec', {testdata: 'sent'});
+    })
     socket.on('unsubscribe', function (data) {
         console.log('unsubscribe');
         socket.leave(data.room);
@@ -270,7 +274,7 @@ io.sockets.on('connection', function (socket) {
         for (var i = 0; i < clients.length; i++) {
             console.log("================================================================next client loading....");
         }
-        socket.broadcast.to(data.room).emit('updateusers', usersForThisRoom);
+        io.sockets.to(data.room).emit('updateusers', usersForThisRoom);
     });
     socket.on('disconnect', function () {
         socket.leave(socket.room);
@@ -287,6 +291,6 @@ io.sockets.on('connection', function (socket) {
         }
         connectedusers = buffer;
         console.log(socket.handshake.user[0].username);
-        socket.broadcast.to(socket.room).emit('updateusers', usersForThisRoom);
+        io.sockets.to(socket.room).emit('updateusers', usersForThisRoom);
     });
 });

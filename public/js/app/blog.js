@@ -1,7 +1,7 @@
 var app = angular.module('blogApp', [
         'twitterService', 'userService', 'http-auth-interceptor', 'login', 'socketio', 'updateService',
         'Scope.onReady', 'blogResource', 'loaderModule', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries',
-        'blogFilter','blogService','infinite-scroll','dropzone'
+        'blogFilter', 'blogService', 'infinite-scroll', 'dropzone'
     ]).
     config(function ($routeProvider) {
         $routeProvider.
@@ -11,7 +11,7 @@ var app = angular.module('blogApp', [
             when("/shoutouts", {templateUrl: "partials/shoutouts.html"}).
             when("/admin/AddBlogEntry", {templateUrl: "partials/admin/createBlogEntry.html"}).
             when("/blog/:id", {templateUrl: "partials/blogEntry.html"}).
-            when("/public/:id",{templateUrl:"partials/publicAngelProfile.html"}).
+            when("/public/:id", {templateUrl: "partials/publicAngelProfile.html"}).
             when("/listByTag/:name", {templateUrl: "partials/blog.html"})
     });
 
@@ -33,11 +33,11 @@ app.directive('becomeMainContent', function () {
     }
 });
 
-app.directive('fixedMenu',function(){
+app.directive('fixedMenu', function () {
     return{
-        link:function(scope,elm,attrs){
+        link: function (scope, elm, attrs) {
 
-            $("document").ready(function($){
+            $("document").ready(function ($) {
 
                 var nav = elm;
                 //var nav = $('.nav-container');
@@ -55,10 +55,10 @@ app.directive('fixedMenu',function(){
     }
 })
 
-app.directive('offsetHeight',function(){
+app.directive('offsetHeight', function () {
     return{
-        link:function(scope,elm,attrs){
-            elm.css({marginTop:attrs.offsetHeight+'px'});
+        link: function (scope, elm, attrs) {
+            elm.css({marginTop: attrs.offsetHeight + 'px'});
         }
     }
 })
@@ -124,43 +124,43 @@ app.directive('ifAuthed', function ($http) {
     }
 });
 
-app.directive('autoscroll',function(){
+app.directive('autoscroll', function () {
     return{
-        link:function(scope,elm,attrs){
+        link: function (scope, elm, attrs) {
             //no reason for this to be in a directive
-                angular.element(document).ready(function(){
+            angular.element(document).ready(function () {
 
-                    $('body').autoscroll(
-                        {
-                            direction: "down",
-                            step: 50,
-                            scroll: false,
-                            //problems with this
-                            pauseOnHover: true
-                        }
-                    );
+                $('body').autoscroll(
+                    {
+                        direction: "down",
+                        step: 50,
+                        scroll: false,
+                        //problems with this
+                        pauseOnHover: true
+                    }
+                );
 
-                    /*
-                    elm.animate({
-                        opacity: 0.25,
-                        left: '+=50'
-                        //height: 'toggle'
-                    }, 5000, function() {
-                        // Animation complete.
-                        console.log("animation complete");
-                    });
-                    */
-                })
+                /*
+                 elm.animate({
+                 opacity: 0.25,
+                 left: '+=50'
+                 //height: 'toggle'
+                 }, 5000, function() {
+                 // Animation complete.
+                 console.log("animation complete");
+                 });
+                 */
+            })
 
         }
     }
 })
 
-app.directive('dropzone',function(dropzone){
+app.directive('dropzone', function (dropzone) {
     return{
-        link:function(scope,elm,attrs){
+        link: function (scope, elm, attrs) {
             console.log(elm);
-            dropzone.createDropzone(elm,attrs.action);
+            dropzone.createDropzone(elm, attrs.action);
         }
     }
 })
@@ -194,15 +194,15 @@ app.controller('blogViewCtrl', function ($scope, show, categoryService, BlogsSer
 
 });
 
-app.controller('blogEntryPicCtrl',function($scope){
-     $scope.test = "TEST RESULT";
- });
+app.controller('blogEntryPicCtrl', function ($scope) {
+    $scope.test = "TEST RESULT";
+});
 
-app.controller('blogEntryCtrl', function ($scope,$location, show, Blog, $routeParams, socket,$rootScope,$http) {
+app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http) {
 
     $scope.parentObject = {
-        routeParamId : $routeParams.id,
-        entryId : ""
+        routeParamId: $routeParams.id,
+        entryId: ""
     }
     socket.connect();
     $scope.entry = "";
@@ -211,20 +211,20 @@ app.controller('blogEntryCtrl', function ($scope,$location, show, Blog, $routePa
     $rootScope.profileMenuViewable = true;
     $scope.textorphoto = false;
 
-    $scope.flipEntry = function(){
+    $scope.flipEntry = function () {
         console.log("fipped");
         $scope.textorphoto = !$scope.textorphoto;
     }
 
     $scope.postText = "";
-    if(!$scope.template){
-         $scope.template = '/partials/profile/Latest.html';
-         $scope.contentHeaderTitle = 'Latest';
+    if (!$scope.template) {
+        $scope.template = '/partials/profile/Latest.html';
+        $scope.contentHeaderTitle = 'Latest';
 
-     }
-    $scope.loadPage = function(page){
+    }
+    $scope.loadPage = function (page) {
         console.log("loadpage");
-        $scope.template = '/partials/profile/'+page+'.html';
+        $scope.template = '/partials/profile/' + page + '.html';
         $scope.contentHeaderTitle = page;
 
 
@@ -232,27 +232,31 @@ app.controller('blogEntryCtrl', function ($scope,$location, show, Blog, $routePa
 
     $scope.submit = function () {
         console.log("button fired");
-        $http.post('/addtextpost',{text:$scope.postText,id:$scope.entry._id}).
-            success(function(data,status){
+        $http.post('/addtextpost', {text: $scope.postText, id: $scope.entry._id}).
+            success(function (data, status) {
                 console.log(data);
-                socket.emit('postText',{room: $scope.entry._id});
+                console.log("emited socket events");
+                socket.emit('postText', {room: $scope.entry._id});
                 $scope.postText = "";
-            }).error(function(err){
+            }).error(function (err) {
                 console.log(err);
             });
     }
+    socket.on('testrec', function (data) {
+        console.log(data);
+        console.log("rece socket event");
+    })
 
-    socket.emit('subscribe', {room: $scope.entry._id});
     socket.on('login', function () {
-        socket.emit('subscribe', {room:$scope.entry._id});
+        socket.emit('subscribe', {room: $scope.entry._id});
     });
     socket.on('initialuserlist', function (data) {
         $scope.viewers = data;
     });
 
 
-
     socket.on('commentsupdated', function () {
+        console.log("commentsupdated received");
         Blog.get({id: $routeParams.id}, function (blog) {
                 $scope.entry = blog[0];
                 $scope.text = blog[0].text;
@@ -280,21 +284,23 @@ app.controller('blogEntryCtrl', function ($scope,$location, show, Blog, $routePa
         $scope.entry.$save(function (blog) {
             $scope.comments = blog.comments;
             $scope.body = "";
-            socket.emit('sentcomment', {room:$scope.entry._id});
+            console.log("sentcomment socket event emitted");
+            console.log({room: $scope.entry._id});
+            socket.emit('sentcomment', {room: $scope.entry._id});
         });
     };
     show.state = true;
     $scope.show = show;
     $scope.$prepareForReady();
     /*
-    BlogsService.getBlogFromLocal($routeParams.id,function(blog){
+     BlogsService.getBlogFromLocal($routeParams.id,function(blog){
 
-        $scope.entry = blog;
-        $scope.text = blog.text;
-        $scope.comments = blog.comments;
-        $scope.$onReady("success");
-    });
-    */
+     $scope.entry = blog;
+     $scope.text = blog.text;
+     $scope.comments = blog.comments;
+     $scope.$onReady("success");
+     });
+     */
 
 
     Blog.get({id: $routeParams.id}, function (blog) {
@@ -303,15 +309,17 @@ app.controller('blogEntryCtrl', function ($scope,$location, show, Blog, $routePa
             console.log(blog[0]);
             $scope.entry = blog[0];
 
-            if(blog[0].limited){
+            if (blog[0].limited) {
                 $scope.profileMenuViewable = false;
-                $location.path("/public/"+$routeParams.id);
-            }else{
+                $location.path("/public/" + $routeParams.id);
+            } else {
                 $scope.parentObject.entryId = blog[0]._id;
                 $scope.text = blog[0].text;
                 $scope.comments = blog[0].comments;
+                socket.emit('subscribe', {room: blog[0]._id});
+
                 $scope.$onReady("success");
-                $location.path("/blog/"+$routeParams.id);
+                $location.path("/blog/" + $routeParams.id);
             }
 
         },
@@ -320,7 +328,7 @@ app.controller('blogEntryCtrl', function ($scope,$location, show, Blog, $routePa
         });
 
     $scope.$on('$routeChangeStart', function (scope, next, current) {
-        socket.emit('unsubscribe', {room:$scope.entry._id});
+        socket.emit('unsubscribe', {room: $scope.entry._id});
     });
     $scope.$on('$destroy', function () {
         socket.removeListener('enterroom');
@@ -330,37 +338,37 @@ app.controller('blogEntryCtrl', function ($scope,$location, show, Blog, $routePa
     });
 });
 
-app.controller('SearchBarCtrl',function($scope,$filter,$rootScope){
+app.controller('SearchBarCtrl', function ($scope, $filter, $rootScope) {
     $rootScope.search = {
-        search : ""
+        search: ""
     }
-$scope.$on('$routeChangeSuccess',function(next,current){
+    $scope.$on('$routeChangeSuccess', function (next, current) {
         console.log(current);
-        if(current.templateUrl == "partials/blog.html" || current.templateUrl == undefined){
+        if (current.templateUrl == "partials/blog.html" || current.templateUrl == undefined) {
             $scope.searchViewable = false;
-        }else{
+        } else {
             $scope.searchViewable = true;
         }
     });
 
-    $scope.clearSearch = function(){
-        $rootScope.search.search ="";
+    $scope.clearSearch = function () {
+        $rootScope.search.search = "";
     }
 
 
 });
 
-app.controller('GroupingCtrl',function($scope,$rootScope){
+app.controller('GroupingCtrl', function ($scope, $rootScope) {
     $rootScope.subgroup = undefined;
-    $scope.$on('$routeChangeSuccess',function(next,current){
+    $scope.$on('$routeChangeSuccess', function (next, current) {
         console.log(current);
-        if(current.templateUrl == "partials/blog.html" || current.templateUrl == undefined){
+        if (current.templateUrl == "partials/blog.html" || current.templateUrl == undefined) {
             $scope.groupingViewable = false;
-        }else{
+        } else {
             $scope.groupingViewable = true;
         }
     });
-    $scope.changeSubgroup = function(subgroup){
+    $scope.changeSubgroup = function (subgroup) {
         console.log(subgroup);
         $rootScope.subgroup = subgroup;
     }
@@ -385,7 +393,7 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
                 $scope.error = "Failed to connect to server please check your connection";
             });
     };
-    /*
+
     socket.on('connect', function () {
         console.log("connect");
     });
@@ -415,7 +423,7 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
             $scope.error = "Username or password is incorrect";
         }
     });
-    */
+
 
 });
 
@@ -460,24 +468,28 @@ app.controller('TwitterCtrl', function ($scope, Blog, Twitter, $routeParams) {
     $scope.twitterResult = Twitter.get();
 });
 
-       //Child of BlogEntry
-app.controller('LatestCtrl',function($scope,$http,$routeParams,socket){
+//Child of BlogEntry
+app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
     console.log('LatestCtrl started');
     console.log($scope);
     console.log($scope.routeParamId);
-    $http.get('/lastestPosts/'+$scope.parentObject.entryId).
-        success(function(data,err){
-              $scope.posts = data;
-        }).
-        error(function(err,code,status){
-            console.log(err+code+status);
-        });
+    $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
+        console.log(oldVal);
+        console.log(newVal);
+        $http.get('/lastestPosts/' + newVal).
+            success(function (data, err) {
+                $scope.posts = data;
+            }).
+            error(function (err, code, status) {
+                console.log(err + code + status);
+            });
+    })
 
     socket.on('newPostText', function (data) {
         console.log("get new POst text");
         console.log(data);
+
         $scope.posts.unshift(data);
     });
-
 });
 

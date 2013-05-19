@@ -198,8 +198,10 @@ exports.lastestPosts = function (req, res) {
     console.log(skip, limit);
     console.log(req.params.id);
     Blog.findOne({_id: req.params.id}).lean().exec(function (err, blog) {
-        if (err)console.log(err);
-        return res.send(200);
+        if (err) {
+            console.log(err);
+            return res.send(200);
+        }
         if (blog === undefined) return res.send(200);
         if (blog.postText === undefined)return res.send(200);
         return res.end(JSON.stringify(blog.postText.reverse()));
