@@ -97,58 +97,58 @@ var Blog = mongoose.model('Blog', blogSchema);
 var User = mongoose.model('User', userSchema);
 var Update = mongoose.model('Update', updateSchema);
 var Url = mongoose.model('Url', urlSchema);
-
-//set all profiles to administrator as owner
-Blog.find({}, function (err, blogs) {
-    _.each(blogs, function (blog, key) {
-        if (key % 2 == 0) {
-            User.findOne({username: "administrator"}, function (err, user) {
-                blogs[key].owner_id = user._id;
-            })
-        } else {
-            User.findOne({username: "projectskillz"}, function (err, user) {
-                blogs[key].owner_id = user._id;
-            })
-        }
-        blogs[key].owner_id = users._id;
-        console.log(blogs[key]);
-        blogs[key].save(function (err) {
-            if (err)console.log(err.message);
-        })
-    })
-})
-//set all profiles basic data
-Blog.find({}, function (err, blogs) {
-    _.each(blogs, function (blog, key) {
-        blogs[key].firstName = "Johnny";
-        blogs[key].lastName = "Angel";
-        blogs[key].gender = 0;
-        blogs[key].dob = new Date(1997, 05, 15);
-        blogs[key].memorialDate = new Date();
-        if (key % 2 == 0)
-            blogs[key].subgroup = 0;
-        else
-            blogs[key].subgroup = 1;
-        console.log(blogs[key]);
-        blogs[key].save(function (err) {
-            if (err)console.log(err.message);
-        })
-    })
-})
-
-
-User.findOne({username: "TestName"}, function (err, users) {
-    console.log(users);
-
-    users.profiles.push({profile: '516a329362f0af3550000009'});
-    users.save(function (err) {
-        if (err)console.log(err.message);
-
-    })
+/*
+ //set all profiles to administrator as owner
+ Blog.find({}, function (err, blogs) {
+ _.each(blogs, function (blog, key) {
+ if (key % 2 == 0) {
+ User.findOne({username: "administrator"}, function (err, user) {
+ blogs[key].owner_id = user._id;
+ })
+ } else {
+ User.findOne({username: "projectskillz"}, function (err, user) {
+ blogs[key].owner_id = user._id;
+ })
+ }
+ blogs[key].owner_id = users._id;
+ console.log(blogs[key]);
+ blogs[key].save(function (err) {
+ if (err)console.log(err.message);
+ })
+ })
+ })
+ //set all profiles basic data
+ Blog.find({}, function (err, blogs) {
+ _.each(blogs, function (blog, key) {
+ blogs[key].firstName = "Johnny";
+ blogs[key].lastName = "Angel";
+ blogs[key].gender = 0;
+ blogs[key].dob = new Date(1997, 05, 15);
+ blogs[key].memorialDate = new Date();
+ if (key % 2 == 0)
+ blogs[key].subgroup = 0;
+ else
+ blogs[key].subgroup = 1;
+ console.log(blogs[key]);
+ blogs[key].save(function (err) {
+ if (err)console.log(err.message);
+ })
+ })
+ })
 
 
-})
+ User.findOne({username: "TestName"}, function (err, users) {
+ console.log(users);
 
+ users.profiles.push({profile: '516a329362f0af3550000009'});
+ users.save(function (err) {
+ if (err)console.log(err.message);
+
+ })
+
+
+ })
+ */
 
 module.exports = {
     Blog: Blog,
