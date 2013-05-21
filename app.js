@@ -170,6 +170,7 @@ app.post('/register', authRoutes.register);
 
 
 app.post('/comments', passport.ensureAuthenticated, commentRoutes.comments);
+app.post('/subcomment', passport.ensureAuthenticated, commentRoutes.subcomment);
 
 //file handler routes
 
@@ -241,7 +242,9 @@ io.sockets.on('connection', function (socket) {
         //socket.broadcast.in(data.room).emit('commentsupdated', '', "updateNow");
         io.sockets.in(data.room).emit('commentsupdated', "YEAH");
     });
-
+    socket.on('subcomment',function(data){
+        io.sockets.in(data.room).emit('subcommentupdated',data)
+    })
     socket.on('postText', function (data) {
         console.log('posttext event received');
         Blog.findOne({_id: data.room}, function (err, blog) {

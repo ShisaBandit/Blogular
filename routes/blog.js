@@ -49,9 +49,17 @@ exports.getABlog = function (req, res) {
 
                 }
             }
+            if(process.env.NODE_ENV == "production"){
+                console.log("WE are in production so setting privacy on mem walls")
+            }else{
+                console.log("not production so all walls are public for convinience");
+                matchfound = true;
+            }
+
             if (post == undefined) {
                 return res.send(200);
             }
+
             if (matchfound == true) {
                 post.limited = false;
                 return res.end(JSON.stringify(post));

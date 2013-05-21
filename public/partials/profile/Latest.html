@@ -1,11 +1,40 @@
 <div ng-controller="LatestCtrl">
     <div class="small-12 columns contentContainer" ng-repeat="post in posts">
         <div class="row">
-            <div class="small-12 columns">
+            <div class="small-12 columns postcontainer">
                 <h6>Posted by <a href="#">{{post.username}}</a> on {{post.date}}.</h6>
 
                 <div>
                     {{post.text}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-12 columns">
+                    <a ng-click="showcommentbox({{$index}})" class="button tiny">comment</a>
+                    <div ng-show="commentbox[{{$index}}]">
+                        <input type="text" on-keyup="submitComment($index)" keys="[27,13]" ng-model="newcomment.text" ng-maxlength="200" ng-minlength="4"/>
+                    </div>
+                </div>
+            </div>
+            <div ng-repeat="comment in post.comments" class="row replycontainer">
+                <div class="row">
+
+                    <div class="small-2 columns avatarcontainer">
+                        <p>{{comment.user_id}}</p>
+
+                    </div>
+                    <div class="small-10 columns">
+                        <p>{{comment.text}}</p>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-6 columns">
+                        <a ng-click="voteup()" class="button tiny">voteup</a>
+                    </div>
+                    <div class="small-6 columns">
+                        <a ng-click="votedown()"class="button tiny">votedown</a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -42,7 +42,16 @@ var blogSchema = mongoose.Schema({
             user_id: String,
             text: String,
             date: {type: Date, default: Date.now},
-            postType: Number
+            postType: Number,
+            comments:[
+                {
+                user_id:String,
+                text:String,
+                voteUp:Number,
+                voteDown:Number,
+                data:{type:Date,default:Date.now}
+            }
+            ]
         }
     ],//postType 0=text,1=pic,2=video
     titleImage: String,
@@ -149,6 +158,15 @@ var Url = mongoose.model('Url', urlSchema);
 
  })
  */
+//populate some commments on blog  { "_id" : 516a720562f0af3550000010}
+//post text   { "_id" : 519b4f4a9023298a1500000a}
+Blog.findOne({_id: '516a720562f0af3550000010'},function(err,blog){
+    for(var x = 0;x<10;x++){
+        blog.postText[2].comments.push({text:"THIS IS TEXT TEXT", user_id : '51487fc5da6c0dc968000003'});
+    }
+    blog.save();
+
+})
 
 module.exports = {
     Blog: Blog,

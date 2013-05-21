@@ -169,6 +169,29 @@ app.directive('dropzone', function (dropzone) {
     }
 })
 
+app.directive('onKeyup', function() {
+    return function(scope, elm, attrs) {
+        function applyKeyup() {
+            scope.$apply(attrs.onKeyup);
+        };
+
+        var allowedKeys = scope.$eval(attrs.keys);
+        elm.bind('keyup', function(evt) {
+            //if no key restriction specified, always fire
+            if (!allowedKeys || allowedKeys.length == 0) {
+                applyKeyup();
+            } else {
+                angular.forEach(allowedKeys, function(key) {
+                    if (key == evt.which) {
+                        applyKeyup();
+                    }
+                });
+            }
+        });
+    };
+});
+
+
 app.factory('show', function () {
     return {state: false};
 });
@@ -477,6 +500,8 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
     console.log('LatestCtrl started');
     console.log($scope);
     console.log($scope.routeParamId);
+    $scope.commentbox = [];
+    $scope.newcomment ={text:"HHHHH"};
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
@@ -488,12 +513,36 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
                 console.log(err + code + status);
             });
     })
+    $scope.showcommentbox = function(index){
+        $scope.commentbox[index] = true;
+    }
+    $scope.submitComment = function(index){
+        console.log(index);
+            console.log($scope.newcomment.text);
+        $http.post('/subcomment',{text:$scope.newcomment.text,comment_id:$scope.posts[index]._id,id:$scope.parentObject.entryId}).
+            success(function(data){
+                console.log("Successfully sent data");
+                console.log(data);
+                socket.emit('subcomment',{room:$scope.parentObject.entryId,text:$scope.newcomment.text,comment_id:$scope.posts[index]._id})
+               // $scope.posts[index].comments.unshift({text:$scope.newcomment.text});
+                $scope.newcomment.text = "";
+                $scope.commentbox[index] = false;
+            })
+            console.log("comment submitted")
 
+    }
     socket.on('newPostText', function (data) {
         console.log("get new POst text");
         console.log(data);
 
         $scope.posts.unshift(data);
     });
+    socket.on('subcommentupdated',function(data){
+        for(var x = 0;x<$scope.posts.length;x++){
+            if($scope.posts[x]._id == data.comment_id){
+                $scope.posts[x].comments.unshift({text:data.text});
+            }
+        }
+    })
 });
 

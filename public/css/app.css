@@ -170,6 +170,18 @@
     background-color: #275c95;
     color: #ffffff;
 }
+.postcontainer{
+    background-color: #ffffff;
+
+}
+.replycontainer{
+    background-color: lightblue;
+    border-bottom: 1px solid #808080;
+}
+.avatarcontainer{
+    border-right: 1px solid #808080;
+    overflow: hidden;
+}
    /*
 .nav-container{ background: url('images/nav_bg.jpg') repeat-x 0 0;}
 .f-nav{ z-index: 9999; position: fixed; left: 0; top: 0; width: 100%;}

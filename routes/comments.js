@@ -13,3 +13,13 @@ exports.comments = function (req) {
         })
     })
 };
+exports.subcomment = function (req,res) {
+    Blog.findOne({_id: req.body.id}, function (err, blog) {
+        var doc = blog.postText.id(req.body.comment_id);
+        doc.comments.unshift({text: req.body.text, date: Date.now()});
+        blog.save(function (err, blog) {
+            if (err)console.log(err);
+            res.send(200);
+        })
+    })
+};
