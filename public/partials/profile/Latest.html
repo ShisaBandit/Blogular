@@ -12,7 +12,7 @@
                 <div class="small-12 columns">
                     <a ng-click="showcommentbox({{$index}})" class="button tiny">comment</a>
                     <div ng-show="commentbox[{{$index}}]">
-                        <input type="text" on-keyup="submitComment($index)" keys="[27,13]" ng-model="newcomment.text" ng-maxlength="200" ng-minlength="4"/>
+                        <input type="text" on-keyup="submitComment($index)" keys="[27,13]" ng-model="newcomment[$index]" />
                     </div>
                 </div>
             </div>

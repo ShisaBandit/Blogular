@@ -501,7 +501,7 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
     console.log($scope);
     console.log($scope.routeParamId);
     $scope.commentbox = [];
-    $scope.newcomment ={text:"HHHHH"};
+    $scope.newcomment =[];
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
@@ -517,13 +517,14 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
         $scope.commentbox[index] = true;
     }
     $scope.submitComment = function(index){
-        console.log(index);
-            console.log($scope.newcomment.text);
-        $http.post('/subcomment',{text:$scope.newcomment.text,comment_id:$scope.posts[index]._id,id:$scope.parentObject.entryId}).
+                    console.log("Submitted");
+        console.log($scope.posts);
+            console.log($scope.newcomment[index]);
+        $http.post('/subcomment',{text:$scope.newcomment[index],comment_id:$scope.posts[index]._id,id:$scope.parentObject.entryId}).
             success(function(data){
                 console.log("Successfully sent data");
                 console.log(data);
-                socket.emit('subcomment',{room:$scope.parentObject.entryId,text:$scope.newcomment.text,comment_id:$scope.posts[index]._id})
+                socket.emit('subcomment',{room:$scope.parentObject.entryId,text:$scope.newcomment[index],comment_id:$scope.posts[index]._id})
                // $scope.posts[index].comments.unshift({text:$scope.newcomment.text});
                 $scope.newcomment.text = "";
                 $scope.commentbox[index] = false;
@@ -540,7 +541,14 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
     socket.on('subcommentupdated',function(data){
         for(var x = 0;x<$scope.posts.length;x++){
             if($scope.posts[x]._id == data.comment_id){
-                $scope.posts[x].comments.unshift({text:data.text});
+                console.log($scope.posts[x]);
+                if($scope.posts[x].comments == undefined){
+                    $scope.posts[x].comments = [];
+                    $scope.posts[x].comments.push({text:data.text})
+                }else{
+                    $scope.posts[x].comments.unshift({text:data.text});
+
+                }
             }
         }
     })
