@@ -50,10 +50,33 @@ var blogSchema = mongoose.Schema({
                 voteUp:Number,
                 voteDown:Number,
                 data:{type:Date,default:Date.now}
+
             }
+            ],
+            photos:[
+                {
+                    filename:String
+                }
             ]
+
         }
     ],//postType 0=text,1=pic,2=video
+    orphanedphotos:[
+        {             //TODO:Upon upload of photo generate thumbnails by other process not node
+            filename:String,
+            uploader:String
+        }
+    ],
+    albums:[
+        {
+          name:String,
+          photos:[
+              {
+                  filename:String
+              }
+          ]
+        }
+    ],
     titleImage: String,
     categories: [
         {

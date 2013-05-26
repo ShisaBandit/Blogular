@@ -175,6 +175,8 @@ app.post('/subcomment', passport.ensureAuthenticated, commentRoutes.subcomment);
 //file handler routes
 
 app.post('/upload', passport.ensureAuthenticated, fileHandlerRoutes.upload);
+app.post('/submitphotodata', passport.ensureAuthenticated, fileHandlerRoutes.submitphotodata);
+app.post('/submitphotodata', passport.ensureAuthenticated, fileHandlerRoutes.cancelphotodata);
 
 
 var server = http.createServer(app).listen(app.get('port'), app.get('ip'), function () {

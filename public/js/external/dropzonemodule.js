@@ -1,6 +1,7 @@
 angular.module('dropzone', []).
     factory('dropzone', function ($rootScope) {
         var dropzoneInstance = {};
+        var uiFiles = [];
         return{
             /**
              * @name CreateDropzone
@@ -22,6 +23,27 @@ angular.module('dropzone', []).
             registerEvent: function (event, element, callback) {
                 dropzoneInstance = Dropzone.forElement('#' + element.attr('id'));
                 dropzoneInstance.on(event, callback)
+            },
+            processQueue:function(){
+                return dropzoneInstance.processQueue();
+            },
+            getFilesQueue:function(){
+                return dropzoneInstance.filesQueue;
+            },
+            setFileLoadedInUi:function(file){
+                uiFiles.push(file);
+            },
+            getFilesLoadedInUI:function(){
+                var infoObjects = [];
+                for(file in uiFiles){
+                    var newFileObj = {};
+                    newFileObj.name = uiFiles[file].name;
+                    newFileObj.size = uiFiles[file].size;
+                    newFileObj.type = uiFiles[file].type;
+                    infoObjects.push(newFileObj);
+                }
+
+                return infoObjects;
             }
         }
     })

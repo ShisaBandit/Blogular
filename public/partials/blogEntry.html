@@ -48,12 +48,15 @@
 
                     <div ng-show="textorphoto" id="UploadBox">
                         <h2>Photo Uploader</h2>
-                              <span id='UploadArea'>
+                              <div id='UploadArea'>
                                  <dropzone url="/upload"
                                            class="dropzone"
                                            id="my-awesome-dropzone">
                                  </dropzone>
-                              </span>
+
+                              </div>
+                            <a ng-click="submitphotodata()" class="button">Upload</a>
+                            <a ng-click="cancelphotodata()" class="button">Cancel</a>
                     </div>
                 </div>
                 <div class="small-2 columns">

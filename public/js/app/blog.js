@@ -156,15 +156,29 @@ app.directive('autoscroll', function () {
     }
 })
 
-app.directive('dropzone', function (dropzone) {
+app.directive('dropzone', function (dropzone,$rootScope) {
     return{
         restrict: 'E',
         link: function (scope, elm, attrs) {
+            //using entryid from BlogEntry Scope not ideal ;8
             console.log(elm);
             dropzone.createDropzone(elm, attrs.url);
-            dropzone.registerEvent('complete', elm, function () {
-                console.log("success directive");
+            $rootScope.dropzone = dropzone;
+            dropzone.registerEvent('complete', elm, function (file) {
+                console.log("upload event");
+                $rootScope.$broadcast('uploadedFile',{file:file});
             })
+            dropzone.registerEvent("addedfile",elm, function(file) {
+                console.log("added a file");
+                $rootScope.$on('addedFile',{file:file});
+                dropzone.setFileLoadedInUi(file);
+                //console.log(file);
+                /* Maybe display some more file information on your page */
+            });
+            dropzone.registerEvent("sending",elm, function(file, xhr, formData) {
+                console.log(scope);
+                formData.append("memwall", scope.entry._id); // Will send the filesize along with the file as POST data.
+            });
         }
     }
 })
@@ -225,7 +239,7 @@ app.controller('blogEntryPicCtrl', function ($scope) {
     $scope.test = "TEST RESULT";
 });
 
-app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http) {
+app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http,dropzone) {
 
     $scope.parentObject = {
         routeParamId: $routeParams.id,
@@ -284,6 +298,7 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
 
     socket.on('commentsupdated', function () {
         console.log("commentsupdated received");
+        //TODO: is this sending the right parameters?
         Blog.get({id: $routeParams.id}, function (blog) {
                 $scope.entry = blog[0];
                 $scope.text = blog[0].text;
@@ -316,6 +331,22 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
             socket.emit('sentcomment', {room: $scope.entry._id});
         });
     };
+    $scope.submitphotodata = function(){
+        console.log("dropzone pq")
+        console.log(dropzone.getFilesLoadedInUI());
+
+        $http.post('/submitphotodata',{files:dropzone.getFilesLoadedInUI()})
+               .success(function(data){
+                    console.log(data);
+                //TODO:if data is successfully submitted show user message and clear queue and ui
+               })
+    }
+    $scope.cancelphotodata = function(){
+        $http.post('/cancelphotodata')
+            .success(function(){
+                //TODO:if canceled show user message and clear queue and ui
+            })
+    }
     show.state = true;
     $scope.show = show;
     $scope.$prepareForReady();
@@ -363,7 +394,13 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         socket.removeAllListeners('commentsupdated');
         socket.removeAllListeners('updateusers');
     });
+    $scope.$on('uploadedFile',function(data){
+        console.log("uploaded scope event called");
+        //$http.post('/uploadeddata',{file:data.file,memwall:$routeParams.id})
+        console.log(data);
+    })
 });
+
 
 app.controller('SearchBarCtrl', function ($scope, $filter, $rootScope) {
     $rootScope.search = {
