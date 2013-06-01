@@ -1,22 +1,23 @@
-<div class="small-12 columns contentContainer">
-    <div class="row">
-        <ul class="small-block-grid-2">
-            <li><iframe width="315" height="177" src="http://www.youtube.com/embed/gnuFrtTNUTc" frameborder="0" allowfullscreen></iframe></iframe></li>
-            <li><iframe width="315" height="177" src="http://www.youtube.com/embed/gnuFrtTNUTc" frameborder="0" allowfullscreen></iframe></iframe></li>
-            <li><iframe width="315" height="177" src="http://www.youtube.com/embed/gnuFrtTNUTc" frameborder="0" allowfullscreen></iframe></iframe></li>
-            <li><iframe width="315" height="177" src="http://www.youtube.com/embed/gnuFrtTNUTc" frameborder="0" allowfullscreen></iframe></iframe></li>
-            <li><iframe width="315" height="177" src="http://www.youtube.com/embed/gnuFrtTNUTc" frameborder="0" allowfullscreen></iframe></iframe></li>
-            <li><iframe width="315" height="177" src="http://www.youtube.com/embed/gnuFrtTNUTc" frameborder="0" allowfullscreen></iframe></iframe></li>
-            <li><iframe width="315" height="177" src="http://www.youtube.com/embed/gnuFrtTNUTc" frameborder="0" allowfullscreen></iframe></iframe></li>
-            <li><iframe width="315" height="177" src="http://www.youtube.com/embed/gnuFrtTNUTc" frameborder="0" allowfullscreen></iframe></iframe></li>
-            <li><iframe width="315" height="177" src="http://www.youtube.com/embed/gnuFrtTNUTc" frameborder="0" allowfullscreen></iframe></iframe></li>
-            <li><iframe width="315" height="177" src="http://www.youtube.com/embed/gnuFrtTNUTc" frameborder="0" allowfullscreen></iframe></iframe></li>
-            <li><iframe width="315" height="177" src="http://www.youtube.com/embed/gnuFrtTNUTc" frameborder="0" allowfullscreen></iframe></iframe></li>
+<div class="row">
+    <div class="small-12 columns contentContainer">
+        <div class="row">
+            <ul class="small-block-grid-2">
+                <li>
+                    <iframe ng-repeat="video in videos"
+                            width="315" height="177"
+                            src="http://www.youtube.com/embed/{{video.embedYouTube}}"
+                            frameborder="0"
+                            allowfullscreen>
+                    </iframe>
+                </li>
 
-        </ul>
+
+            </ul>
+        </div>
+
     </div>
-
 </div>
+
 
 <!--
 <h3><b>{{entry.title}}</b></h3>

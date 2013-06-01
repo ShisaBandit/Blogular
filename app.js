@@ -155,6 +155,30 @@ app.post('/logout', authRoutes.logout);
 app.post('/login',
     passport.authenticate('local'),
     function (req, res) {
+        //TODO:check user relationship
+        //find other users with same relationship
+        //add notification to database
+        //notifications are real time but still poll every 10 mins just in case
+        User.findOne({username:req.body.username},function(err,loggeduser){
+            console.log("user"+user.username+" has logged in");
+            if(loggeduser.lost == undefined){
+                Console.log("wrong: User should always have at least ONE type")
+            }else{
+
+                User.find({type:loggeduser.type},function(err,users){
+                    if(users.length != undefined){
+                        for(user in users){
+                            var nUser = users[user];
+                            if(nUser.type == user.type){
+                               nUser.notifications.push({text:"A new user has joined that has lost a "+loggeduser.type});
+                               //TODO:Save user
+                            }
+                        }
+                    }
+
+                })
+            }
+        })
         res.send('authed', 200);
     });
 
@@ -177,7 +201,7 @@ app.post('/subcomment', passport.ensureAuthenticated, commentRoutes.subcomment);
 app.post('/upload', passport.ensureAuthenticated, fileHandlerRoutes.upload);
 app.post('/submitphotodata', passport.ensureAuthenticated, fileHandlerRoutes.submitphotodata);
 app.post('/submitphotodata', passport.ensureAuthenticated, fileHandlerRoutes.cancelphotodata);
-
+app.get('/getPicsForBlog/:id',passport.ensureAuthenticated,fileHandlerRoutes.getPicsForBlog);
 
 var server = http.createServer(app).listen(app.get('port'), app.get('ip'), function () {
     console.log("server listening " + app.get('ip') + ':' + app.get('port'));

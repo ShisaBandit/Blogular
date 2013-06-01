@@ -1,21 +1,16 @@
-<div class="small-12 columns contentContainer">
-    <div class="row">
-        <ul class="small-block-grid-2">
-            <li><img src="http://placehold.it/300x300&text=[img]"></li>
-            <li><img src="http://placehold.it/300x300&text=[img]"></li>
-            <li><img src="http://placehold.it/300x300&text=[img]"></li>
-            <li><img src="http://placehold.it/300x300&text=[img]"></li>
-            <li><img src="http://placehold.it/300x300&text=[img]"></li>
-            <li><img src="http://placehold.it/300x300&text=[img]"></li>
-            <li><img src="http://placehold.it/300x300&text=[img]"></li>
-            <li><img src="http://placehold.it/300x300&text=[img]"></li>
-            <li><img src="http://placehold.it/300x300&text=[img]"></li>
-            <li><img src="http://placehold.it/300x300&text=[img]"></li>
-            <li><img src="http://placehold.it/300x300&text=[img]"></li>
+<div ng-controller="PicsCtrl">
+    <div class="small-12 columns contentContainer">
+        <div class="row">
+            <ul class="small-block-grid-2">
+                <div ng-repeat="pic in pics">
+                    <li><img src="uploads/{{pic.filename}}" /></li>
+                </div>
 
-        </ul>
+
+            </ul>
+        </div>
+
     </div>
-
 </div>
 
 <!--

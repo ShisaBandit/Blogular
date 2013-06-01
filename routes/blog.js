@@ -1,4 +1,5 @@
 var models = require('../models/models');
+var Common = require('../constants/constants.js')
 var Blog = models.Blog;
 var User = models.User;
 var Update = models.Update;
@@ -190,12 +191,13 @@ exports.addPicPost = function (req, res) {
 
 exports.addVideoPost = function (req, res) {
     console.log(req.body);
-    Blog.findOneAndUpdate({_id: req.body.id}, function (err, blog) {
-        console.log("MIKE CHECK ");
+    Blog.findOne({_id: req.body.id}, function (err, blog) {
+        console.log("Found Blog");
         blog.postText.push(req.body);
+        blog.save(function(err,doc){
+            console.log(err);
+        })
         return res.end(JSON.stringify({'success': 'true'}));
-
-
     });
 }
 
@@ -235,9 +237,22 @@ exports.latestVideos = function (req, res) {
         limit = req.params.limit;
     console.log(skip, limit);
     Blog.findOne({_id: req.params.id}).lean().exec(function (err, blog) {
-        var postVideos = blog.postText.filter(function (ele, ind, arr) {
-            return ele.postType == VIDEOTYPE;
-        })
-        return res.end(JSON.stringify(postVideos.reverse()));
+            return res.end(JSON.stringify(getPostText(blog,Common.postTextTypes.video,"text")));
     });
+}
+function getPostText(blog,type,getProp){
+    if(getProp == undefined)getProp = false;
+    var buffer = [];
+    for(var p = 0;p<blog.postText.length;p++){
+        if(blog.postText[p].postType == type){
+            var prop;
+            if(getProp == true){
+                     prop = getProp;
+                buffer.push(blog.postText[p][getProp]);
+            }else{
+                buffer.push(blog.postText[p]);
+            }
+        }
+    }
+    return postTexts;
 }

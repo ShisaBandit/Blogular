@@ -43,6 +43,7 @@ var blogSchema = mongoose.Schema({
             text: String,
             date: {type: Date, default: Date.now},
             postType: Number,
+            saved:Boolean,
             comments:[
                 {
                 user_id:String,
@@ -55,9 +56,12 @@ var blogSchema = mongoose.Schema({
             ],
             photos:[
                 {
-                    filename:String
+                    filename:String,
+                    uploader:String,
                 }
-            ]
+            ],
+            embedYouTube:String,
+            embedAnimoto:String
 
         }
     ],//postType 0=text,1=pic,2=video
@@ -108,8 +112,11 @@ var userSchema = mongoose.Schema({
     ],
     city: String,
     Age: Number,
-    avatar: String//urllink
-
+    avatar: String,//urllink
+    lost:{type:String},
+    notifications:[
+        {text:String}
+    ]
 });
 var updateSchema = mongoose.Schema({
     lastUpdate: {type: Date, default: Date.now()}
@@ -183,6 +190,7 @@ var Url = mongoose.model('Url', urlSchema);
  */
 //populate some commments on blog  { "_id" : 516a720562f0af3550000010}
 //post text   { "_id" : 519b4f4a9023298a1500000a}
+/*
 Blog.findOne({_id: '516a720562f0af3550000010'},function(err,blog){
     for(var x = 0;x<10;x++){
         blog.postText[2].comments.push({text:"THIS IS TEXT TEXT", user_id : '51487fc5da6c0dc968000003'});
@@ -190,6 +198,7 @@ Blog.findOne({_id: '516a720562f0af3550000010'},function(err,blog){
     blog.save();
 
 })
+*/
 
 module.exports = {
     Blog: Blog,

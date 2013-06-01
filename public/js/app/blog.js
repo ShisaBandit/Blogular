@@ -239,7 +239,8 @@ app.controller('blogEntryPicCtrl', function ($scope) {
     $scope.test = "TEST RESULT";
 });
 
-app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http,dropzone) {
+app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams,
+                                          socket, $rootScope, $http,dropzone) {
 
     $scope.parentObject = {
         routeParamId: $routeParams.id,
@@ -335,7 +336,7 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         console.log("dropzone pq")
         console.log(dropzone.getFilesLoadedInUI());
 
-        $http.post('/submitphotodata',{files:dropzone.getFilesLoadedInUI()})
+        $http.post('/submitphotodata',{files:dropzone.getFilesLoadedInUI(),id:$scope.entry._id})
                .success(function(data){
                     console.log(data);
                 //TODO:if data is successfully submitted show user message and clear queue and ui
@@ -491,7 +492,7 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
 
 });
 
-app.controller('RegisterCtrl', function ($scope, $http, $rootScope) {
+app.controller('RegisterCtrl', function ($scope, $http, $rootScope,socket) {
     $scope.submitRegi = function () {
         $http.post('/register', $scope.form).
             success(function (data) {
@@ -591,3 +592,52 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
     })
 });
 
+app.controller('PicsCtrl',function($scope,$http){
+    $scope.pics = [];
+    $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
+        console.log(oldVal);
+        console.log(newVal);
+        $http.get('getPicsForBlog/'+newVal).
+            success(function(data){
+                console.log(data);
+                $scope.pics = data;
+            })
+    })
+
+})
+
+ /*
+function youtube($string,$autoplay=0,$width=480,$height=390)
+{
+    preg_match('#(?:http://)?(?:www\.)?(?:youtube\.com/(?:v/|watch\?v=)|youtu\.be/)([\w-]+)(?:\S+)?#', $string, $match);
+    $embed = <<<YOUTUBE
+        <div align="center">
+            <iframe title="YouTube video player" width="$width" height="$height" src="http://www.youtube.com/embed/$match[1]?autoplay=$autoplay" frameborder="0" allowfullscreen></iframe>
+        </div>
+    YOUTUBE;
+
+    return str_replace($match[0], $embed, $string);
+    }
+     */
+
+var vidWidth = 425;
+var vidHeight = 344;
+
+var obj = '<object width="' + vidWidth + '" height="' + vidHeight + '">' +
+    '<param name="movie" value="http://www.youtube.com/v/[vid]&hl=en&fs=1">' +
+    '</param><param name="allowFullScreen" value="true"></param><param ' +
+    'name="allowscriptaccess" value="always"></param><em' +
+    'bed src="http://www.youtube.com/v/[vid]&hl=en&fs=1" ' +
+    'type="application/x-shockwave-flash" allowscriptaccess="always" ' +
+    'allowfullscreen="true" width="' + vidWidth + '" ' + 'height="' +
+    vidHeight + '"></embed></object> ';
+
+$('.content:contains("youtube.com/watch")').each(function(){
+    var that = $(this);
+    var vid = that.html().match(/(?:v=)([\w\-]+)/g); // end up with v=oHg5SJYRHA0
+    if (vid.length) {
+        $.each(vid, function(){
+            that.append( obj.replace(/\[vid\]/g, this.replace('v=','')) );
+        });
+    }
+});

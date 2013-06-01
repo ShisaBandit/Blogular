@@ -79,7 +79,8 @@ exports.logout = function (req, res) {
 };
 
 exports.loginAuth = function (req, res) {
-    User.findOne({'username': req.body.username, 'password': req.body.password, admin: {$in: ['superuser', 'admin']}}, function (err, administrator) {
+    User.findOne({'username': req.body.username, 'password': req.body.password, admin: {$in: ['superuser', 'admin']}},
+        function (err, administrator) {
         if (err)console.log(err);
         if (administrator) {
             req.session.loggedIn = true;
