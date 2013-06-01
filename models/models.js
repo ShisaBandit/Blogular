@@ -86,27 +86,26 @@ var blogSchema = mongoose.Schema({
         {
             name: String
         }
-    ],
-    petitions: [  //do petitions belong to users or profiles
-        {
-            title: String,
-            text: String,
-            dateStarted: {type: Date, default: Date.now},
-            signatures: [
-                {
-                    user_id: String,
-                    signedDate: Date
-                }
-            ]
-        }
     ]
 
 });
+var petitionSchema = mongoose.Schema({
+        title: {type:String,required:true},
+        text: {type:String,required:true},
+        dateStarted: {type: Date, default: Date.now},
+        signatures: [
+            {
+                user_id: String, //user  id ??
+                email:{type:String,required:true},
+                signedDate: Date
+            }
+        ]
+})
 var userSchema = mongoose.Schema({
-    username: String,
-    password: String,
+    username: {type:String,required:true},
+    password: {type:String,required:true},
     admin: String,
-    email: String,
+    email: {type:String,required:true},//normalize to lowercase
     profiles: [
         {profile: String}
     ],
@@ -114,8 +113,12 @@ var userSchema = mongoose.Schema({
     Age: Number,
     avatar: String,//urllink
     lost:{type:String},
+    firstAccess:Boolean,
     notifications:[
-        {text:String}
+        {
+            text:String,
+            viewed:{type:Boolean,default:false}
+        }
     ]
 });
 var updateSchema = mongoose.Schema({
@@ -136,6 +139,7 @@ var Blog = mongoose.model('Blog', blogSchema);
 var User = mongoose.model('User', userSchema);
 var Update = mongoose.model('Update', updateSchema);
 var Url = mongoose.model('Url', urlSchema);
+var Petition = mongoose.model('Petition',petitionSchema);
 /*
  //set all profiles to administrator as owner
  Blog.find({}, function (err, blogs) {
@@ -204,5 +208,6 @@ module.exports = {
     Blog: Blog,
     User: User,
     Update: Update,
-    Url: Url
+    Url: Url,
+    Petition:Petition
 }

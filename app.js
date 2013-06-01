@@ -14,6 +14,7 @@ var express = require('express')
     , authRoutes = require('./routes/auth')
     , commentRoutes = require('./routes/comments')
     , fileHandlerRoutes = require('./routes/fileHandler')
+    , apiv2 = require('./routes/apiv2')
     , path = require('path')
     , fs = require('fs')
     , cookie = require('cookie')
@@ -155,26 +156,38 @@ app.post('/logout', authRoutes.logout);
 app.post('/login',
     passport.authenticate('local'),
     function (req, res) {
+
         //TODO:check user relationship
         //find other users with same relationship
         //add notification to database
         //notifications are real time but still poll every 10 mins just in case
-        User.findOne({username:req.body.username},function(err,loggeduser){
-            console.log("user"+user.username+" has logged in");
-            if(loggeduser.lost == undefined){
-                Console.log("wrong: User should always have at least ONE type")
-            }else{
+        User.findOne({username: req.body.username}, function (err, loggeduser) {
+            if (loggeduser.firstAccess == true) {
 
-                User.find({type:loggeduser.type},function(err,users){
-                    if(users.length != undefined){
-                        for(user in users){
-                            var nUser = users[user];
-                            if(nUser.type == user.type){
-                               nUser.notifications.push({text:"A new user has joined that has lost a "+loggeduser.type});
-                               //TODO:Save user
+
+                console.log("user" + user.username + " has logged in");
+                if (loggeduser.lost == undefined) {
+                    Console.log("wrong: User should always have at least ONE type from registration")
+                } else {
+                    User.find({type: loggeduser.type}, function (err, users) {
+                        if (users.length != undefined) {
+                            for (user in users) {
+                                var nUser = users[user];
+                                if (nUser.type == loggeduser.type) {
+                                    nUser.notifications.push({text: "A new user has joined that has lost a " + loggeduser.type});
+                                    //TODO:Save user
+                                    nUser.save(function (err, doc) {
+                                        if (err)console.log(err);
+                                    })
+                                }
                             }
                         }
-                    }
+
+                    })
+                }
+                loggeduser.firstAccess = false;
+                loggeduser.save(function(err){
+                    if(err)console.log(err);
 
                 })
             }
@@ -201,7 +214,19 @@ app.post('/subcomment', passport.ensureAuthenticated, commentRoutes.subcomment);
 app.post('/upload', passport.ensureAuthenticated, fileHandlerRoutes.upload);
 app.post('/submitphotodata', passport.ensureAuthenticated, fileHandlerRoutes.submitphotodata);
 app.post('/submitphotodata', passport.ensureAuthenticated, fileHandlerRoutes.cancelphotodata);
-app.get('/getPicsForBlog/:id',passport.ensureAuthenticated,fileHandlerRoutes.getPicsForBlog);
+app.get('/getPicsForBlog/:id', passport.ensureAuthenticated, fileHandlerRoutes.getPicsForBlog);
+
+//apiv2 : EXPERIMENTAL
+
+app.post('/create/:type',apiv2.createData);
+app.get('/get/:type/:id',apiv2.getData);//id:ALL = get all blogs anythings else must be an id
+app.get('/get/:type/:field/:query',apiv2.getData);
+
+
+
+
+
+
 
 var server = http.createServer(app).listen(app.get('port'), app.get('ip'), function () {
     console.log("server listening " + app.get('ip') + ':' + app.get('port'));
@@ -268,8 +293,8 @@ io.sockets.on('connection', function (socket) {
         //socket.broadcast.in(data.room).emit('commentsupdated', '', "updateNow");
         io.sockets.in(data.room).emit('commentsupdated', "YEAH");
     });
-    socket.on('subcomment',function(data){
-        io.sockets.in(data.room).emit('subcommentupdated',data)
+    socket.on('subcomment', function (data) {
+        io.sockets.in(data.room).emit('subcommentupdated', data)
     })
     socket.on('postText', function (data) {
         console.log('posttext event received');
