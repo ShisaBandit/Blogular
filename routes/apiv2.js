@@ -9,29 +9,28 @@ exports.createData = function (req, res) {
     console.log(subdoc);
     if(subdoc == undefined){
         var modelInstance = new model(req.body);
-
-        //TODO:
-
         //TODO:use the chain of responsibility pattern here to
         //set datamodifiers
         //TODO:make a class that decides which chain to delegate to
         //based on request.
+        dataFilter(type,null,modelInstance);
         modelInstance.save(function(err){
             if(err)console.log(err);
             return sendSuccess(res);
         })
     }else{
+        condition._id = req.params.id;
+        console.log(condition);
         model.findOne(condition,function(err,doc){
             console.log(req.body);
-            //TODO:
-
             //TODO:use the chain of responsibility pattern here to
             //set datamodifiers
             //TODO:make a class that decides which chain to delegate to
             //based on request.
             doc[subdoc].push(req.body);
+            dataFilter(type,subdoc,doc[subdoc]);
 
-            model.save(function(err){
+            doc.save(function(err){
                 console.log(err);
                 return sendSuccess(res);
 
@@ -49,6 +48,36 @@ exports.createData = function (req, res) {
         if (err)console.log(err);
     });
     */
+}
+
+var setFirstName ={register:"postText"};
+
+var dataFilter = function(type,subtype,data){
+
+    switch(type){
+        case"Blog":{
+            data = setAllFirstNames(data);
+            data = setAllLastNames(data);
+            break;
+        }
+        case "Petition":{
+
+            break;
+        }
+    }
+
+
+
+
+    return data;
+}
+function setAllFirstNames(data){
+    data.firstName = "Chain of Resp First Name ";
+    return data;
+}
+function setAllLastNames(data){
+    data.firstName = "Chain of Resp First Name ";
+    return data;
 }
 
 function getModelInstance(name){
@@ -76,7 +105,6 @@ exports.getData = function(req,res){
             }else{
                 condition = {_id:idPar};
             }
-
     }
                     console.log(condition);
 
@@ -84,41 +112,6 @@ exports.getData = function(req,res){
     model.find(condition,function(err,docs){
         return res.end(JSON.stringify(docs));
     })
-}
-
-var setFirstName ={register:"postText"};
-
-var dataModifier = function(data){
-    var next = null;
-
-    return{
-        setNext:function(stack){
-            next = stack;
-        },
-        setFirstName:function(data){
-            data.firstName = "BILLY";
-            return data;
-        },
-        setLastName:function(data){
-            data.lastName = "JEAN";
-            return data;
-        },
-        gotoNext:function(){
-            if(next){
-
-            }
-        }
-
-    }
-}
-function setAllFirstNames(data){
-    data.firstName = "Chain of Resp First Name ";
-    return data;
-}
-
-function setAllLastNames(data){
-    data.firstName = "Chain of Resp First Name ";
-    return data;
 }
 
 function sendSuccess(res){

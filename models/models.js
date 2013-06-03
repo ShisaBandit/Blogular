@@ -95,6 +95,8 @@ var petitionSchema = mongoose.Schema({
         dateStarted: {type: Date, default: Date.now},
         signatures: [
             {
+                initals:String,
+                cityState:String,
                 user_id: String, //user  id ??
                 email:{type:String,required:true},
                 signedDate: Date

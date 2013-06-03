@@ -219,7 +219,7 @@ app.get('/getPicsForBlog/:id', passport.ensureAuthenticated, fileHandlerRoutes.g
 //apiv2 : EXPERIMENTAL
 
 app.post('/create/:type',apiv2.createData);
-app.post('/create/:type/:subdoc',apiv2.createData);
+app.post('/create/:type/:id/:subdoc',apiv2.createData);
 app.get('/get/:type/:id',apiv2.getData);//id:ALL = get all blogs anythings else must be an id
 app.get('/get/:type/:field/:query',apiv2.getData);
 

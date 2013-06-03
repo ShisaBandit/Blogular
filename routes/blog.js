@@ -50,8 +50,8 @@ exports.getABlog = function (req, res) {
 
                 }
             }
-            if(process.env.NODE_ENV == "production"){
-                console.log("WE are in production so setting privacy on mem walls")
+            if(true){//TODO:Remove commented line this should not always be true!"!!!//if(process.env.NODE_ENV == "production"){
+                console.log("WE are in production so setting privacy on mem walls");
             }else{
                 console.log("not production so all walls are public for convinience");
                 matchfound = true;

@@ -1,7 +1,7 @@
 var app = angular.module('blogApp', [
         'twitterService', 'userService', 'http-auth-interceptor', 'login', 'socketio', 'updateService',
         'Scope.onReady', 'blogResource', 'loaderModule', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries',
-        'blogFilter', 'blogService', 'infinite-scroll', 'dropzone'
+        'blogFilter', 'blogService', 'infinite-scroll', 'dropzone','apiResource'
     ]).
     config(function ($routeProvider) {
         $routeProvider.
@@ -12,7 +12,9 @@ var app = angular.module('blogApp', [
             when("/admin/AddBlogEntry", {templateUrl: "partials/admin/createBlogEntry.html"}).
             when("/blog/:id", {templateUrl: "partials/blogEntry.html"}).
             when("/public/:id", {templateUrl: "partials/publicAngelProfile.html"}).
-            when("/listByTag/:name", {templateUrl: "partials/blog.html"})
+            when("/listByTag/:name", {templateUrl: "partials/blog.html"}).
+            when("/petitions",{templateUrl:"partials/petitions.html"}).
+            when("/petition/:title",{templateUrl:"partials/petition.html"})
     });
 
 app.directive('becomeMainContent', function () {
@@ -204,7 +206,6 @@ app.directive('onKeyup', function() {
         });
     };
 });
-
 
 app.factory('show', function () {
     return {state: false};
@@ -604,7 +605,40 @@ app.controller('PicsCtrl',function($scope,$http){
             })
     })
 
-})
+});
+
+app.controller('PetitionCtrl',function($scope,api){
+    $scope.petitions = [];
+
+    api.getResourceById('Petition','all',function(petitions){
+       $scope.petitions = petitions;
+
+    });
+    $scope.submit = function(){
+        var text = $scope.text;
+        var title = $scope.title;
+        api.createResource('Petition',{text:text,title:title});
+        $scope.title = "";
+        $scope.text  = "";
+    }
+});
+app.controller('PetitionEntryCtrl',function($scope,api,$routeParams){
+    $scope.petition = [];
+
+    api.getResourceByField('Petition',{field:"title",query:$routeParams.title},function(petitions){
+       $scope.petition = petitions;
+        $scope.signatures = $scope.petition[1].signatures;
+
+    });
+    $scope.submit = function(){
+        var text = $scope.text;
+        var title = $scope.title;
+        api.createResource('Petition',{text:text,title:title});
+        $scope.title = "";
+        $scope.text  = "";
+    }
+});
+
 
  /*
 function youtube($string,$autoplay=0,$width=480,$height=390)

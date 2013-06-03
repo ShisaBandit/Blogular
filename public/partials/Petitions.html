@@ -1,0 +1,51 @@
+<div ng-controller="PetitionCtrl">
+    <div class="row">
+        <div class="small-12 columns">
+              <div>YOYOO</div>
+        </div>
+
+    </div> <div class="row">
+        <div class="small-12 columns">
+              <div>YOYOO</div>
+        </div>
+
+    </div> <div class="row">
+        <div class="small-12 columns">
+              <div>YOYOO</div>
+        </div>
+
+    </div><div class="row">
+        <div class="small-12 columns">
+              <div>YOYOO</div>
+        </div>
+
+    </div><div class="row">
+        <div class="small-12 columns">
+              <div>YOYOO</div>
+        </div>
+
+    </div><div class="row">
+        <div class="small-12 columns">
+              <div>YOYOO</div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="small-12 columns">
+            <input type="text" ng-hide="textorphoto" ng-model="title"/>
+            <input type="text" ng-hide="textorphoto" ng-model="text"/>
+
+            <button ng-click="submit()" class="button postfix">Submit</button>
+        </div>
+
+
+
+    </div>
+    <div class="row" ng-repeat="petition in petitions">
+        <div class="small-12 columns">
+            <h3><a href="#/petition/{{petition.title}}">{{petition.title}}</a> </h3>
+
+        </div>
+
+    </div>
+</div>
