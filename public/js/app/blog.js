@@ -267,7 +267,7 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
     }
     $scope.loadPage = function (page) {
         console.log("loadpage");
-        $scope.template = '/partials/profile/' + page + '.html';
+        $scope.template = '/partials/profile/' + page.toLowerCase() + '.html';
         $scope.contentHeaderTitle = page;
 
 
