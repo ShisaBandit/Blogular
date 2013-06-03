@@ -23,28 +23,6 @@ exports.getPaginatedPetitions= function (req, res) {
     });
 };
 
-exports.getAPetition = function (req, res) {
-    var title = req.params.title;
-        Petition.find({'title': title}).lean().exec(function (err, petition) {
-            if (post === undefined)return res.send(404);
-               return res.end(JSON.stringify(petition));
-        });
-
-};
-
-exports.createPetition = function (req, res) {
-    var title = req.body.title;
-    //noinspection JSValidateTypes
-    if (title === '' || title === null || title === undefined)return res.send('need a title', 404);
-    else {
-
-        var newPetition= new Petition(req.body);
-        newPetition(function (err) {
-            if (err)console.log(err);
-        });
-        return res.end(JSON.stringify({'success': 'true'}));
-    }
-}
 exports.createData = function (req, res) {
     var title = req.body.title;
                      getModelInstance("Blog");
