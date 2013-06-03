@@ -627,7 +627,7 @@ app.controller('PetitionEntryCtrl',function($scope,api,$routeParams){
 
     api.getResourceByField('Petition',{field:"title",query:$routeParams.title},function(petitions){
        $scope.petition = petitions;
-        $scope.signatures = $scope.petition[1].signatures;
+        $scope.signatures = $scope.petition[0].signatures;
 
     });
     $scope.submit = function(){
