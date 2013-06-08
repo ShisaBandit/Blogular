@@ -76,14 +76,31 @@ app.directive('revealModal', function () {
                 }
             });
             scope.$on('event:auth-registered', function () {
+                console.log("registered event fired in directive");
                 if (attrs.revealModal == 'register') {
-                    elm.trigger('reveal:close');
+                    elm.foundation('reveal', 'close');
                 }
+                if(attrs.revealModal == 'userdetails') {
+                    scope.message = 'Please fill out your user details';
+                    elm.foundation('reveal', 'open');
+                }
+
+                /*
                 if (attrs.revealModal == 'login') {
                     scope.message = 'Use your credentials to login';
-                    elm.reveal();
+                    elm.foundation('reveal', 'open');
                 }
+                */
             });
+            $scope.$on('event:userdetails-success',function(){
+                if(attrs.revealModal == 'userdetails'){
+                    elm.foundation('reveal','close');
+                }
+                if(attrs.revealModal == 'wallregistration'){
+                    elm.foundation('reveal','open');
+                }
+
+            })
         }
     }
 });
@@ -243,6 +260,7 @@ app.controller('blogEntryPicCtrl', function ($scope) {
 app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams,
                                           socket, $rootScope, $http,dropzone) {
 
+
     $scope.parentObject = {
         routeParamId: $routeParams.id,
         entryId: ""
@@ -255,8 +273,44 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
     $scope.textorphoto = false;
 
     $scope.flipEntry = function () {
-        console.log("fipped");
+
         $scope.textorphoto = !$scope.textorphoto;
+        $scope.photobox = !$scope.photobox;
+        $scope.videobox = false;
+        $scope.eventbox = false;
+        switchCheckFromPhotoToVideo();
+    }
+
+    $scope.toogleVideoEntry  = function(){
+
+        $scope.videobox = !$scope.videobox;
+        $scope.photobox = false;
+        $scope.eventbox = false;
+        switchCheckFromPhotoToVideo();
+    }
+    $scope.toogleEventEntry  = function(){
+        console.log("eetest")
+        $scope.eventbox = !$scope.eventbox;
+        $scope.videobox = false;
+        $scope.photobox = false;
+        switchCheckFromPhotoToVideo();
+    }
+
+    function switchCheckFromPhotoToVideo(){
+        console.log($scope.photobox +" "+$scope.videobox+" "+$scope.eventbox);
+      if($scope.photobox || $scope.videobox || $scope.eventbox){
+          $scope.textbox = true;
+
+      }else{
+        $scope.textbox = false;
+      }
+    }
+
+    $scope.submitVideo = function(){
+        $http.post('')
+    }
+    $scope.submitEvent = function(){
+        $http.post('')
     }
 
     $scope.postText = "";
@@ -508,6 +562,20 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope,socket) {
                 $scope.message = "Registration failed please check connection";
             });
     }
+    $scope.submitUserDetails = function () {
+        $http.post('/register', $scope.form).
+            success(function (data) {
+                if (data.fail) {
+                    $scope.message = data.fail;
+                } else {
+                    $scope.form = {};
+                    $rootScope.$broadcast('event:userdetails-success');
+                }
+            }).
+            error(function () {
+                $scope.message = "Registration failed please check connection";
+            });
+    }
 });
 
 app.controller('UserInfoCtrl', function ($scope, userInfoService, $http) {
@@ -630,12 +698,9 @@ app.controller('PetitionEntryCtrl',function($scope,api,$routeParams){
         $scope.signatures = $scope.petition[0].signatures;
 
     });
-    $scope.submit = function(){
-        var text = $scope.text;
-        var title = $scope.title;
-        api.createResource('Petition',{text:text,title:title});
-        $scope.title = "";
-        $scope.text  = "";
+    $scope.signPetition = function(){
+        console.log($scope.petition)
+        api.createSubDocResource('Petition',$scope.petition[0]._id,'signatures');
     }
 });
 
@@ -653,25 +718,3 @@ function youtube($string,$autoplay=0,$width=480,$height=390)
     return str_replace($match[0], $embed, $string);
     }
      */
-
-var vidWidth = 425;
-var vidHeight = 344;
-
-var obj = '<object width="' + vidWidth + '" height="' + vidHeight + '">' +
-    '<param name="movie" value="http://www.youtube.com/v/[vid]&hl=en&fs=1">' +
-    '</param><param name="allowFullScreen" value="true"></param><param ' +
-    'name="allowscriptaccess" value="always"></param><em' +
-    'bed src="http://www.youtube.com/v/[vid]&hl=en&fs=1" ' +
-    'type="application/x-shockwave-flash" allowscriptaccess="always" ' +
-    'allowfullscreen="true" width="' + vidWidth + '" ' + 'height="' +
-    vidHeight + '"></embed></object> ';
-
-$('.content:contains("youtube.com/watch")').each(function(){
-    var that = $(this);
-    var vid = that.html().match(/(?:v=)([\w\-]+)/g); // end up with v=oHg5SJYRHA0
-    if (vid.length) {
-        $.each(vid, function(){
-            that.append( obj.replace(/\[vid\]/g, this.replace('v=','')) );
-        });
-    }
-});

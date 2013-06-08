@@ -62,6 +62,30 @@
     <script src="underscore.js"></script>
     <script>
         $(document).foundation();
+        $(document).ready(function(){
+
+            var vidWidth = 425;
+            var vidHeight = 344;
+
+            var obj = '<object width="' + vidWidth + '" height="' + vidHeight + '">' +
+                    '<param name="movie" value="http://www.youtube.com/v/[vid]&hl=en&fs=1">' +
+                    '</param><param name="allowFullScreen" value="true"></param><param ' +
+                    'name="allowscriptaccess" value="always"></param><em' +
+                    'bed src="http://www.youtube.com/v/[vid]&hl=en&fs=1" ' +
+                    'type="application/x-shockwave-flash" allowscriptaccess="always" ' +
+                    'allowfullscreen="true" width="' + vidWidth + '" ' + 'height="' +
+                    vidHeight + '"></embed></object> ';
+
+            $('.content:contains("youtube.com/watch")').each(function(){
+                var that = $(this);
+                var vid = that.html().match(/(?:v=)([\w\-]+)/g); // end up with v=oHg5SJYRHA0
+                if (vid.length) {
+                    $.each(vid, function(){
+                        that.append( obj.replace(/\[vid\]/g, this.replace('v=','')) );
+                    });
+                }
+            });
+        })
     </script>
 </head>
 <!-- TODO:Rename app instance to mwApp -->
@@ -234,6 +258,85 @@
                 <th>Password</th>
                 <td><input type="password" class="login-inp" ng-model="form.password"/></td>
             </tr>
+            <tr>
+                <th>First Name</th>
+                <td><input type="text" class="login-inp" ng-model="form.firstname"/></td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td><input type="text" class="login-inp" ng-model="form.lastname"/></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><input type="email" class="login-inp" ng-model="form.email"/></td>
+            </tr>
+            <tr>
+                <th>Day your angel got wings</th>
+                <td><input type="date" class="login-inp" ng-model="form.memorialdate"/></td>
+            </tr>
+
+            <tr>
+                <th></th>
+                <td><a class="button" ng-click="submitRegi()">Register</a></td>
+                <td><a class="close-reveal-modal button">Cancel</a></td>
+            </tr>
+        </table>
+    </div>
+    <div reveal-modal="userdetails" id="userdetails" class="reveal-modal small">
+        <p><b>{{message}}</b></p>
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>City</th>
+                <td><input type="text" class="login-inp" ng-model="form.city"/></td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td><input type="number" class="login-inp" ng-model="form.age"/></td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td><input type="checkbox" class="login-inp" ng-model="form.male"/></td>
+                <td><input type="checkbox" class="login-inp" ng-model="form.female"/></td>
+            </tr>
+            <tr>
+                <th>Avatar</th>
+                <!--TODO:Make this a n uploadable file-->
+                <td><input type="text" class="login-inp" ng-model="form.avatar"/></td>
+            </tr>
+
+            <tr>
+                <th></th>
+                <td><a class="button" ng-click="submitRegi()">Register</a></td>
+                <td><a class="close-reveal-modal button">Cancel</a></td>
+            </tr>
+        </table>
+    </div>
+    <div reveal-modal="wallregistration" id="" class="reveal-modal small">
+        <p><b>{{message}}</b></p>
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>Name of Angel</th>
+                <h5>First</h5>
+                <td><input type="text" class="login-inp" ng-model="form.firstname"/></td>
+                <h5>Last</h5>
+                <td><input type="text" class="login-inp" ng-model="form.lastname"/></td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td><input type="checkbox" class="login-inp" ng-model="form.male"/></td>
+                <td><input type="checkbox" class="login-inp" ng-model="form.female"/></td>
+            </tr>
+            <tr>
+                <th>Date of Birth</th>
+                <!--TODO:Make this a n uploadable file-->
+                <td><input type="date" class="login-inp" ng-model="form.avatar"/></td>
+            </tr>
+            <tr>
+                <th>Angels memory databank</th>
+                <!--TODO:Make this a n uploadable file-->
+                <td><input type="text" class="login-inp" ng-model="form.avatar"/></td>
+            </tr>
+
             <tr>
                 <th></th>
                 <td><a class="button" ng-click="submitRegi()">Register</a></td>

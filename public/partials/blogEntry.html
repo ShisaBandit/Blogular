@@ -44,9 +44,9 @@
         <div class="small-8 columns">
             <div class="row collapse">
                 <div class="postEntry small-10 columns">
-                    <input type="text" ng-hide="textorphoto" ng-model="postText"/>
+                    <input type="text" ng-hide="textbox" ng-model="postText"/>
 
-                    <div ng-show="textorphoto" id="UploadBox">
+                    <div ng-show="photobox" id="UploadBox">
                         <h2>Photo Uploader</h2>
                               <div id='UploadArea'>
                                  <dropzone url="/upload"
@@ -58,6 +58,25 @@
                             <!--<a ng-click="submitphotodata()" class="button">Save</a> -->
                             <a ng-click="flipEntry()" class="button">Finished</a>
                     </div>
+                    <div ng-show="videobox" id="videobox">
+                        <h2>Video Uploader</h2>
+                        <div>
+                            <h4>You Tube Link</h4>
+                            <input type="text" name="youtube"  ng-model="youtube" id="youtube"/>
+                            <h4>Animoto Link</h4>
+                            <input type="text" name="animoto" ng-model="animoto" id="animoto"/>
+                        </div>
+                    </div>
+                    <div ng-show="eventbox" id="eventbox">
+                        <h2>Events</h2>
+                        <div>
+                            <h4>New Event</h4>
+                            <h5>Title</h5>
+                            <input type="text" name="eventheader" ng-model="eventheader" id=""/>
+                            <h5>Details</h5>
+                            <input type="text" name="eventdetails" ng-model="eventdetails" id="event"/>
+                        </div>
+                    </div>
                 </div>
                 <div class="small-2 columns">
                     <button ng-click="submit()" class="button postfix">Submit</button>
@@ -67,13 +86,19 @@
                 <div class="small-2 columns">
                     <span>add videos</span>
                 </div>
-                <div class="small-2 columns">
+                <div class="small-2 columns" ng-click="toogleVideoEntry()">
                     <button class="mediabuttons"><i class="general foundicon-video mediaicons"></i></button>
                 </div>
                 <div class="small-2 columns">
                     <span>add photos</span>
                 </div>
                 <div class="small-2 columns" ng-click="flipEntry()">
+                    <button class="mediabuttons"><i class="general foundicon-photo mediaicons"></i></button>
+                </div>
+                <div class="small-2 columns">
+                    <span>Events</span>
+                </div>
+                <div class="small-2 columns" ng-click="toogleEventEntry()">
                     <button class="mediabuttons"><i class="general foundicon-photo mediaicons"></i></button>
                 </div>
                 <div class="small-offset-8 columns"></div>

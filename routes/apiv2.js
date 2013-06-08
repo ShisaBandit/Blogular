@@ -13,7 +13,7 @@ exports.createData = function (req, res) {
         //set datamodifiers
         //TODO:make a class that decides which chain to delegate to
         //based on request.
-        dataFilter(type,null,modelInstance);
+        dataFilter(req,type,null,modelInstance);
         modelInstance.save(function(err){
             if(err)console.log(err);
             return sendSuccess(res);
@@ -27,14 +27,17 @@ exports.createData = function (req, res) {
             //set datamodifiers
             //TODO:make a class that decides which chain to delegate to
             //based on request.
-            doc[subdoc].push(req.body);
-            dataFilter(type,subdoc,doc[subdoc]);
+            //doc[subdoc].push(req.body);
+            dataFilter(req,type,subdoc,req.body,function(data){
+                doc[subdoc].push(data);
+                doc.save(function(err){
+                    console.log(err);
+                    return sendSuccess(res);
 
-            doc.save(function(err){
-                console.log(err);
-                return sendSuccess(res);
+                })
+            });
 
-            })
+
         })
 
 
@@ -52,16 +55,36 @@ exports.createData = function (req, res) {
 
 var setFirstName ={register:"postText"};
 
-var dataFilter = function(type,subtype,data){
+var dataFilter = function(req,type,subtype,data,callback){
 
     switch(type){
         case"Blog":{
             data = setAllFirstNames(data);
             data = setAllLastNames(data);
+            callback(data);
             break;
         }
         case "Petition":{
+            if(subtype == "signatures"){
+                models.User.findOne({_id:req.session.passport.user},function(err,user){
+                    if(user == null ){
 
+                    }else{
+                        if(user.firstName === undefined){
+                            data.initals = "ANON";
+                        }else{
+                            data.initals = user.firstName.charAt(0).toUpperCase()+"."+user.lastName.charAt(0).toUpperCase()+".";
+                        }
+                        data.cityState = user.city;//TODO:add in later+" "+user.State;
+                        callback(data);
+
+                    }
+
+
+                })
+
+
+            }
             break;
         }
     }
@@ -69,7 +92,6 @@ var dataFilter = function(type,subtype,data){
 
 
 
-    return data;
 }
 function setAllFirstNames(data){
     data.firstName = "Chain of Resp First Name ";

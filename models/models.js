@@ -98,12 +98,13 @@ var petitionSchema = mongoose.Schema({
                 initals:String,
                 cityState:String,
                 user_id: String, //user  id ??
-                email:{type:String,required:true},
-                signedDate: Date
+                signedDate: {type:Date,default:Date.now()}
             }
         ]
 })
 var userSchema = mongoose.Schema({
+    firstName:String,
+    lastName:String,
     username: {type:String,required:true},
     password: {type:String,required:true},
     admin: String,
@@ -112,6 +113,7 @@ var userSchema = mongoose.Schema({
         {profile: String}
     ],
     city: String,
+    state:String,
     Age: Number,
     avatar: String,//urllink
     lost:{type:String},

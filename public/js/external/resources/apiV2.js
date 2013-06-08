@@ -59,12 +59,12 @@ angular.module('apiResource', ['ngResource']).
 
                     })
             },
-            createSubDocResource: function (type,subdoc,bodydata) {
+            createSubDocResource: function (type,id,subdoc,bodydata) {
                 /*apiCreateSubDocResource({type:type,subdoc:subdoc},bodydata).
                     success(function(err){
                         if(err)console.log(err);
                     })*/
-                $http.post('create/'+type+'/'+subdoc,bodydata).
+                $http.post('create/'+type+'/'+id+'/'+subdoc,bodydata).
                     success(function(err){
                         if(err)console.log(err);
                     })
