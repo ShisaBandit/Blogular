@@ -98,10 +98,18 @@ exports.register = function (req, res) {
         adminCount = 0,
         username = req.body.username,
         password = req.body.password,
+        firstname = req.body.firstname,
+        lastname = req.body.lastname,
+        email = req.body.email;
+
         minUsernameLength = 5,
         maxUsernameLength = 16,
         minPasswordLength = 5,
-        maxPasswordLength = 16;
+        maxPasswordLength = 16
+        minfirstnameLength = 1,
+        minlastnameLength = 1,
+        maxfirstNameLength = 15,
+        maxlastNameLength = 15;
 
     User.count({username: username}, function (err, count) {
         if (err)console.log(err);
@@ -113,37 +121,84 @@ exports.register = function (req, res) {
             //then check count
             //TODO:redo this section of code in promises
             //username checks
-            if (userCount < 1 && adminCount < 1 && username != undefined && username != "" && username.length > minUsernameLength && username.length < maxUsernameLength &&
+            if (
+                    userCount < 1 && adminCount < 1 &&
+                    username != undefined &&
+                    username != "" &&
+                    username.length > minUsernameLength &&
+                    username.length < maxUsernameLength &&
                 //password checks
-                password != undefined && password.length > minPasswordLength && password.length < maxPasswordLength && password != username) {
+                    password != undefined &&
+                    password.length > minPasswordLength &&
+                    password.length < maxPasswordLength &&
+                    password != username &&
+                //firstname checks
+                    firstname != undefined &&
+                    firstname.length > minfirstnameLength &&
+                        firstname.length < maxfirstNameLength &&
+                        firstname != username &&
+            //lastname checks
+                lastname != undefined &&
+                    lastname.length > minlastnameLength &&
+                    lastname.length < maxlastNameLength &&
+                lastname != username
+
+
+            ) {
                 var user = new User(req.body);
                 user.save(function (err) {
                     if (err)console.log(err);
+                        return res.end(JSON.stringify({'fail': err}));
+                    return res.end(JSON.stringify({'success': 'true'}));
                 });
-                return res.end(JSON.stringify({'success': 'true'}));
             } else {
-                var errorMessage = "";
+                var errorMessage = [];
+                var undUsername = false,
+                    undPasswrd = false,
+                    undFN = false,
+                    undLN = false;
+
                 if (password == undefined) {
                     password = "";
                 }
-                if (username == undefined || username == "") {
-                    errorMessage = 'Please enter a username';
-                } else if (username.length < minUsernameLength) {
-                    errorMessage = 'Username must be longer than ' + minUsernameLength;
-                } else if (username.length > maxUsernameLength) {
-                    errorMessage = 'Username must be shorter than ' + maxUsernameLength;
-                } else if (password.length < minPasswordLength) {
-                    errorMessage = 'Password must be longer than ' + minPasswordLength;
-                } else if (password.length > maxPasswordLength) {
-                    errorMessage = 'Password must be shorter than ' + maxPasswordLength;
-                } else if (password == username) {
-                    errorMessage = 'Password can not be the same as username';
+                if (undUsername && username == undefined || username == "") {
+                    errorMessage.push('Please enter a username');
+                }
+                if (undUsername && username.length < minUsernameLength) {
+                    errorMessage.push('Username must be longer than ' + minUsernameLength);
+                }
+                if (undUsername && username.length > maxUsernameLength) {
+                    errorMessage.push('Username must be shorter than ' + maxUsernameLength);
+                }
+                if (undPasswrd && password.length < minPasswordLength) {
+                    errorMessage.push('Password must be longer than ' + minPasswordLength);
+                }
+                if (undPasswrd && password.length > maxPasswordLength) {
+                    errorMessage.push('Password must be shorter than ' + maxPasswordLength);
+                }
+                if (undPasswrd && undUsername && password == username) {
+                    errorMessage.push('Password can not be the same as username');
                 }
                 if (userCount >= 1 || adminCount >= 1) {
-                    errorMessage = 'username already taken';
+                    errorMessage.push('username already taken');
                 }
-                if (errorMessage == "") {
-                    errorMessage = 'unknown error';
+
+                if (undFN && firstname.length < minfirstnameLength) {
+                    errorMessage.push('First name must be longer than ' + minfirstnameLength);
+                }
+                if (undFN && firstname.length > maxfirstNameLength) {
+                    errorMessage.push('First name must be shorter than ' + maxPasswordLength);
+                }
+                if (undLN && lastname.length < minlastnameLength) {
+                    errorMessage.push('Last name must be longer than ' + minlastnameLength);
+                }
+                if (undLN && lastname.length > maxlastNameLength) {
+                    errorMessage.push('Last name must be shorter than ' + maxlastNameLength);
+                }
+
+
+                if (errorMessage.length == 0 || errorMessage === undefined) {
+                    errorMessage.push('unknown error');
                 }
                 return res.end(JSON.stringify({'fail': errorMessage}));
             }

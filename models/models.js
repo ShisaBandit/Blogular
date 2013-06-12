@@ -103,8 +103,8 @@ var petitionSchema = mongoose.Schema({
         ]
 })
 var userSchema = mongoose.Schema({
-    firstName:String,
-    lastName:String,
+    firstName:{type:String,required:true},
+    lastName:{type:String,require:true},
     username: {type:String,required:true},
     password: {type:String,required:true},
     admin: String,

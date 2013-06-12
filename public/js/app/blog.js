@@ -1,7 +1,7 @@
 var app = angular.module('blogApp', [
         'twitterService', 'userService', 'http-auth-interceptor', 'login', 'socketio', 'updateService',
         'Scope.onReady', 'blogResource', 'loaderModule', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries',
-        'blogFilter', 'blogService', 'infinite-scroll', 'dropzone','apiResource'
+        'blogFilter', 'blogService', 'infinite-scroll', 'dropzone', 'apiResource'
     ]).
     config(function ($routeProvider) {
         $routeProvider.
@@ -13,8 +13,8 @@ var app = angular.module('blogApp', [
             when("/blog/:id", {templateUrl: "partials/blogEntry.html"}).
             when("/public/:id", {templateUrl: "partials/publicAngelProfile.html"}).
             when("/listByTag/:name", {templateUrl: "partials/blog.html"}).
-            when("/petitions",{templateUrl:"partials/petitions.html"}).
-            when("/petition/:title",{templateUrl:"partials/petition.html"})
+            when("/petitions", {templateUrl: "partials/petitions.html"}).
+            when("/petition/:title", {templateUrl: "partials/petition.html"})
     });
 
 app.directive('becomeMainContent', function () {
@@ -63,7 +63,7 @@ app.directive('offsetHeight', function () {
             elm.css({marginTop: attrs.offsetHeight + 'px'});
         }
     }
-})
+});
 
 app.directive('revealModal', function () {
     return {
@@ -75,29 +75,48 @@ app.directive('revealModal', function () {
                 } else {
                 }
             });
-            scope.$on('event:auth-registered', function () {
+            scope.$on('event:reg-step1', function () {
                 console.log("registered event fired in directive");
                 if (attrs.revealModal == 'register') {
                     elm.foundation('reveal', 'close');
                 }
-                if(attrs.revealModal == 'userdetails') {
+                if (attrs.revealModal == 'userdetails') {
                     scope.message = 'Please fill out your user details';
                     elm.foundation('reveal', 'open');
                 }
 
                 /*
-                if (attrs.revealModal == 'login') {
-                    scope.message = 'Use your credentials to login';
+                 if (attrs.revealModal == 'login') {
+                 scope.message = 'Use your credentials to login';
+                 elm.foundation('reveal', 'open');
+                 }
+                 */
+            });
+            scope.$on('event:reg-step2', function () {
+                if (attrs.revealModal == 'userdetails') {
+                    elm.foundation('reveal', 'close');
+                }
+                console.log("try open wall reg modal")
+
+                if (attrs.revealModal == 'wallregistration') {
+                    console.log("open wall reg modal")
+
+                    scope.message = 'Would you like to create a wall for your angel?';
                     elm.foundation('reveal', 'open');
                 }
-                */
-            });
-            $scope.$on('event:userdetails-success',function(){
-                if(attrs.revealModal == 'userdetails'){
-                    elm.foundation('reveal','close');
+
+            })
+            scope.$on('event:reg-error', function () {
+                if (attrs.revealModal == 'wallregistration') {
+                    elm.foundation('reveal', 'close');
                 }
-                if(attrs.revealModal == 'wallregistration'){
-                    elm.foundation('reveal','open');
+                console.log("try open wall reg modal")
+
+                if (attrs.revealModal == 'register') {
+                    console.log("open wall reg modal")
+
+                    //scope.message = 'Would you like to create a wall for your angel?';
+                    elm.foundation('reveal', 'open');
                 }
 
             })
@@ -175,7 +194,7 @@ app.directive('autoscroll', function () {
     }
 })
 
-app.directive('dropzone', function (dropzone,$rootScope) {
+app.directive('dropzone', function (dropzone, $rootScope) {
     return{
         restrict: 'E',
         link: function (scope, elm, attrs) {
@@ -185,16 +204,16 @@ app.directive('dropzone', function (dropzone,$rootScope) {
             $rootScope.dropzone = dropzone;
             dropzone.registerEvent('complete', elm, function (file) {
                 console.log("upload event");
-                $rootScope.$broadcast('uploadedFile',{file:file});
+                $rootScope.$broadcast('uploadedFile', {file: file});
             })
-            dropzone.registerEvent("addedfile",elm, function(file) {
+            dropzone.registerEvent("addedfile", elm, function (file) {
                 console.log("added a file");
-                $rootScope.$on('addedFile',{file:file});
+                $rootScope.$on('addedFile', {file: file});
                 dropzone.setFileLoadedInUi(file);
                 //console.log(file);
                 /* Maybe display some more file information on your page */
             });
-            dropzone.registerEvent("sending",elm, function(file, xhr, formData) {
+            dropzone.registerEvent("sending", elm, function (file, xhr, formData) {
                 console.log(scope);
                 formData.append("memwall", scope.entry._id); // Will send the filesize along with the file as POST data.
             });
@@ -202,19 +221,19 @@ app.directive('dropzone', function (dropzone,$rootScope) {
     }
 })
 
-app.directive('onKeyup', function() {
-    return function(scope, elm, attrs) {
+app.directive('onKeyup', function () {
+    return function (scope, elm, attrs) {
         function applyKeyup() {
             scope.$apply(attrs.onKeyup);
         };
 
         var allowedKeys = scope.$eval(attrs.keys);
-        elm.bind('keyup', function(evt) {
+        elm.bind('keyup', function (evt) {
             //if no key restriction specified, always fire
             if (!allowedKeys || allowedKeys.length == 0) {
                 applyKeyup();
             } else {
-                angular.forEach(allowedKeys, function(key) {
+                angular.forEach(allowedKeys, function (key) {
                     if (key == evt.which) {
                         applyKeyup();
                     }
@@ -257,8 +276,7 @@ app.controller('blogEntryPicCtrl', function ($scope) {
     $scope.test = "TEST RESULT";
 });
 
-app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams,
-                                          socket, $rootScope, $http,dropzone) {
+app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http, dropzone) {
 
 
     $scope.parentObject = {
@@ -281,14 +299,14 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         switchCheckFromPhotoToVideo();
     }
 
-    $scope.toogleVideoEntry  = function(){
+    $scope.toogleVideoEntry = function () {
 
         $scope.videobox = !$scope.videobox;
         $scope.photobox = false;
         $scope.eventbox = false;
         switchCheckFromPhotoToVideo();
     }
-    $scope.toogleEventEntry  = function(){
+    $scope.toogleEventEntry = function () {
         console.log("eetest")
         $scope.eventbox = !$scope.eventbox;
         $scope.videobox = false;
@@ -296,20 +314,20 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         switchCheckFromPhotoToVideo();
     }
 
-    function switchCheckFromPhotoToVideo(){
-        console.log($scope.photobox +" "+$scope.videobox+" "+$scope.eventbox);
-      if($scope.photobox || $scope.videobox || $scope.eventbox){
-          $scope.textbox = true;
+    function switchCheckFromPhotoToVideo() {
+        console.log($scope.photobox + " " + $scope.videobox + " " + $scope.eventbox);
+        if ($scope.photobox || $scope.videobox || $scope.eventbox) {
+            $scope.textbox = true;
 
-      }else{
-        $scope.textbox = false;
-      }
+        } else {
+            $scope.textbox = false;
+        }
     }
 
-    $scope.submitVideo = function(){
+    $scope.submitVideo = function () {
         $http.post('')
     }
-    $scope.submitEvent = function(){
+    $scope.submitEvent = function () {
         $http.post('')
     }
 
@@ -387,19 +405,19 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
             socket.emit('sentcomment', {room: $scope.entry._id});
         });
     };
-    $scope.submitphotodata = function(){
+    $scope.submitphotodata = function () {
         console.log("dropzone pq")
         console.log(dropzone.getFilesLoadedInUI());
 
-        $http.post('/submitphotodata',{files:dropzone.getFilesLoadedInUI(),id:$scope.entry._id})
-               .success(function(data){
-                    console.log(data);
+        $http.post('/submitphotodata', {files: dropzone.getFilesLoadedInUI(), id: $scope.entry._id})
+            .success(function (data) {
+                console.log(data);
                 //TODO:if data is successfully submitted show user message and clear queue and ui
-               })
+            })
     }
-    $scope.cancelphotodata = function(){
+    $scope.cancelphotodata = function () {
         $http.post('/cancelphotodata')
-            .success(function(){
+            .success(function () {
                 //TODO:if canceled show user message and clear queue and ui
             })
     }
@@ -450,7 +468,7 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         socket.removeAllListeners('commentsupdated');
         socket.removeAllListeners('updateusers');
     });
-    $scope.$on('uploadedFile',function(data){
+    $scope.$on('uploadedFile', function (data) {
         console.log("uploaded scope event called");
         //$http.post('/uploadeddata',{file:data.file,memwall:$routeParams.id})
         console.log(data);
@@ -547,26 +565,49 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
 
 });
 
-app.controller('RegisterCtrl', function ($scope, $http, $rootScope,socket) {
+app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket) {
+    $scope.form = {};
     $scope.submitRegi = function () {
-        $http.post('/register', $scope.form).
-            success(function (data) {
-                if (data.fail) {
-                    $scope.message = data.fail;
-                } else {
-                    $scope.form = {};
-                    $rootScope.$broadcast('event:auth-registered');
-                }
-            }).
-            error(function () {
-                $scope.message = "Registration failed please check connection";
-            });
+        /*
+         $http.post('/register', $scope.form).
+         success(function (data) {
+         if (data.fail) {
+         $scope.message = data.fail;
+         } else {
+         $scope.form = {};
+         $rootScope.$broadcast('event:auth-registered');
+         }
+         }).
+         error(function () {
+         $scope.message = "Registration failed please check connection";
+         });
+         */
+        $rootScope.$broadcast('event:reg-step1');
     }
     $scope.submitUserDetails = function () {
+        /*
+         $http.post('/register', $scope.form).
+         success(function (data) {
+         if (data.fail) {
+         $scope.message = data.fail;
+         } else {
+         $scope.form = {};
+         $rootScope.$broadcast('event:userdetails-success');
+         }
+         }).
+         error(function () {
+         $scope.message = "Registration failed please check connection";
+         });
+         */
+        $rootScope.$broadcast('event:reg-step2');
+    }
+    $scope.submitFinalDetails = function () {
+
         $http.post('/register', $scope.form).
             success(function (data) {
                 if (data.fail) {
-                    $scope.message = data.fail;
+                    $scope.message = data.fail[0];
+                    $rootScope.$broadcast('event:reg-error');
                 } else {
                     $scope.form = {};
                     $rootScope.$broadcast('event:userdetails-success');
@@ -575,6 +616,9 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope,socket) {
             error(function () {
                 $scope.message = "Registration failed please check connection";
             });
+
+        console.log($scope.form)
+        $rootScope.$broadcast('event:reg-step3');
     }
 });
 
@@ -608,7 +652,7 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
     console.log($scope);
     console.log($scope.routeParamId);
     $scope.commentbox = [];
-    $scope.newcomment =[];
+    $scope.newcomment = [];
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
@@ -620,23 +664,23 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
                 console.log(err + code + status);
             });
     })
-    $scope.showcommentbox = function(index){
+    $scope.showcommentbox = function (index) {
         $scope.commentbox[index] = true;
     }
-    $scope.submitComment = function(index){
-                    console.log("Submitted");
+    $scope.submitComment = function (index) {
+        console.log("Submitted");
         console.log($scope.posts);
-            console.log($scope.newcomment[index]);
-        $http.post('/subcomment',{text:$scope.newcomment[index],comment_id:$scope.posts[index]._id,id:$scope.parentObject.entryId}).
-            success(function(data){
+        console.log($scope.newcomment[index]);
+        $http.post('/subcomment', {text: $scope.newcomment[index], comment_id: $scope.posts[index]._id, id: $scope.parentObject.entryId}).
+            success(function (data) {
                 console.log("Successfully sent data");
                 console.log(data);
-                socket.emit('subcomment',{room:$scope.parentObject.entryId,text:$scope.newcomment[index],comment_id:$scope.posts[index]._id})
-               // $scope.posts[index].comments.unshift({text:$scope.newcomment.text});
+                socket.emit('subcomment', {room: $scope.parentObject.entryId, text: $scope.newcomment[index], comment_id: $scope.posts[index]._id})
+                // $scope.posts[index].comments.unshift({text:$scope.newcomment.text});
                 $scope.newcomment.text = "";
                 $scope.commentbox[index] = false;
             })
-            console.log("comment submitted")
+        console.log("comment submitted")
 
     }
     socket.on('newPostText', function (data) {
@@ -645,15 +689,15 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
 
         $scope.posts.unshift(data);
     });
-    socket.on('subcommentupdated',function(data){
-        for(var x = 0;x<$scope.posts.length;x++){
-            if($scope.posts[x]._id == data.comment_id){
+    socket.on('subcommentupdated', function (data) {
+        for (var x = 0; x < $scope.posts.length; x++) {
+            if ($scope.posts[x]._id == data.comment_id) {
                 console.log($scope.posts[x]);
-                if($scope.posts[x].comments == undefined){
+                if ($scope.posts[x].comments == undefined) {
                     $scope.posts[x].comments = [];
-                    $scope.posts[x].comments.push({text:data.text})
-                }else{
-                    $scope.posts[x].comments.unshift({text:data.text});
+                    $scope.posts[x].comments.push({text: data.text})
+                } else {
+                    $scope.posts[x].comments.unshift({text: data.text});
 
                 }
             }
@@ -661,13 +705,13 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
     })
 });
 
-app.controller('PicsCtrl',function($scope,$http){
+app.controller('PicsCtrl', function ($scope, $http) {
     $scope.pics = [];
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
-        $http.get('getPicsForBlog/'+newVal).
-            success(function(data){
+        $http.get('getPicsForBlog/' + newVal).
+            success(function (data) {
                 console.log(data);
                 $scope.pics = data;
             })
@@ -675,46 +719,46 @@ app.controller('PicsCtrl',function($scope,$http){
 
 });
 
-app.controller('PetitionCtrl',function($scope,api){
+app.controller('PetitionCtrl', function ($scope, api) {
     $scope.petitions = [];
 
-    api.getResourceById('Petition','all',function(petitions){
-       $scope.petitions = petitions;
+    api.getResourceById('Petition', 'all', function (petitions) {
+        $scope.petitions = petitions;
 
     });
-    $scope.submit = function(){
+    $scope.submit = function () {
         var text = $scope.text;
         var title = $scope.title;
-        api.createResource('Petition',{text:text,title:title});
+        api.createResource('Petition', {text: text, title: title});
         $scope.title = "";
-        $scope.text  = "";
+        $scope.text = "";
     }
 });
-app.controller('PetitionEntryCtrl',function($scope,api,$routeParams){
+app.controller('PetitionEntryCtrl', function ($scope, api, $routeParams) {
     $scope.petition = [];
 
-    api.getResourceByField('Petition',{field:"title",query:$routeParams.title},function(petitions){
-       $scope.petition = petitions;
+    api.getResourceByField('Petition', {field: "title", query: $routeParams.title}, function (petitions) {
+        $scope.petition = petitions;
         $scope.signatures = $scope.petition[0].signatures;
 
     });
-    $scope.signPetition = function(){
+    $scope.signPetition = function () {
         console.log($scope.petition)
-        api.createSubDocResource('Petition',$scope.petition[0]._id,'signatures');
+        api.createSubDocResource('Petition', $scope.petition[0]._id, 'signatures');
     }
 });
 
 
- /*
-function youtube($string,$autoplay=0,$width=480,$height=390)
-{
-    preg_match('#(?:http://)?(?:www\.)?(?:youtube\.com/(?:v/|watch\?v=)|youtu\.be/)([\w-]+)(?:\S+)?#', $string, $match);
-    $embed = <<<YOUTUBE
-        <div align="center">
-            <iframe title="YouTube video player" width="$width" height="$height" src="http://www.youtube.com/embed/$match[1]?autoplay=$autoplay" frameborder="0" allowfullscreen></iframe>
-        </div>
-    YOUTUBE;
+/*
+ function youtube($string,$autoplay=0,$width=480,$height=390)
+ {
+ preg_match('#(?:http://)?(?:www\.)?(?:youtube\.com/(?:v/|watch\?v=)|youtu\.be/)([\w-]+)(?:\S+)?#', $string, $match);
+ $embed = <<<YOUTUBE
+ <div align="center">
+ <iframe title="YouTube video player" width="$width" height="$height" src="http://www.youtube.com/embed/$match[1]?autoplay=$autoplay" frameborder="0" allowfullscreen></iframe>
+ </div>
+ YOUTUBE;
 
-    return str_replace($match[0], $embed, $string);
-    }
-     */
+ return str_replace($match[0], $embed, $string);
+ }
+ */
