@@ -41,21 +41,24 @@
 
 }
 .workpetsbuttons{
-
+   color: #ffffff;
 }
+
 #petbutton{
     background-color: #c562e1;
     border: none;
+    color: #ffffff;
     z-index: -2;
 
 }
 #workshopbutton{
     background-color: #275c95;
+    color: #ffffff;
     border: none;
 
 }
 .offsetHeight{
-    margin-top: 280px;
+    margin-top: 200px;
   background: #275c95;
 }
 
@@ -121,8 +124,8 @@
 }
 
 .border-footer{
-    border-top: 1px solid #000000;
-    border-bottom: 1px solid #000000;
+    /*border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000; */
 }
 .footer-child{
     height: 200px;
@@ -138,7 +141,7 @@
    Page Name 1
 ----------------------------------------- */
 .mainBG {
-	background: red;
+	background: none;
 }
 #picheader{
 
@@ -165,6 +168,8 @@
 }
 .contentContainer{
     border: 2px solid black;
+    background: #ffffff;
+    overflow: hidden;
 }
 #chat{
     background-color: #275c95;
@@ -175,8 +180,9 @@
 
 }
 .replycontainer{
-    background-color: lightblue;
+    background-color: #AFC5DC;
     border-bottom: 1px solid #808080;
+    padding: 20px;
 }
 .avatarcontainer{
     border-right: 1px solid #808080;

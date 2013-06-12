@@ -10,7 +10,6 @@ body {
   font-size: 100%; }
 
 body {
-  background: white;
   color: #222222;
   padding: 0;
   margin: 0;
@@ -167,7 +166,9 @@ select {
 
   .row .small-8 {
     position: relative;
-    width: 66.66667%; }
+    width: 66.66667%;
+    background: #ffffff;
+  }
 
   .row .small-9 {
     position: relative;
