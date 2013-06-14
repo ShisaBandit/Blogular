@@ -14,7 +14,8 @@ var app = angular.module('blogApp', [
             when("/public/:id", {templateUrl: "partials/publicAngelProfile.html"}).
             when("/listByTag/:name", {templateUrl: "partials/blog.html"}).
             when("/petitions", {templateUrl: "partials/petitions.html"}).
-            when("/petition/:title", {templateUrl: "partials/petition.html"})
+            when("/petition/:title", {templateUrl: "partials/petition.html"}).
+            when("/registration", {templateUrl: "partials/registration.html"})
     });
 
 app.directive('becomeMainContent', function () {
@@ -75,51 +76,19 @@ app.directive('revealModal', function () {
                 } else {
                 }
             });
-            scope.$on('event:reg-step1', function () {
+            scope.$on('event:auth-registered', function () {
                 console.log("registered event fired in directive");
+              /*
                 if (attrs.revealModal == 'register') {
                     elm.foundation('reveal', 'close');
                 }
-                if (attrs.revealModal == 'userdetails') {
+                */
+                if (attrs.revealModal == 'login') {
                     scope.message = 'Please fill out your user details';
                     elm.foundation('reveal', 'open');
                 }
-
-                /*
-                 if (attrs.revealModal == 'login') {
-                 scope.message = 'Use your credentials to login';
-                 elm.foundation('reveal', 'open');
-                 }
-                 */
             });
-            scope.$on('event:reg-step2', function () {
-                if (attrs.revealModal == 'userdetails') {
-                    elm.foundation('reveal', 'close');
-                }
-                console.log("try open wall reg modal")
 
-                if (attrs.revealModal == 'wallregistration') {
-                    console.log("open wall reg modal")
-
-                    scope.message = 'Would you like to create a wall for your angel?';
-                    elm.foundation('reveal', 'open');
-                }
-
-            })
-            scope.$on('event:reg-error', function () {
-                if (attrs.revealModal == 'wallregistration') {
-                    elm.foundation('reveal', 'close');
-                }
-                console.log("try open wall reg modal")
-
-                if (attrs.revealModal == 'register') {
-                    console.log("open wall reg modal")
-
-                    //scope.message = 'Would you like to create a wall for your angel?';
-                    elm.foundation('reveal', 'open');
-                }
-
-            })
         }
     }
 });
@@ -512,7 +481,7 @@ app.controller('GroupingCtrl', function ($scope, $rootScope) {
     }
 });
 
-app.controller('LoginController', function ($scope, $http, authService, userInfoService, socket, $rootScope) {
+app.controller('LoginController', function ($scope, $http, authService, userInfoService, socket, $rootScope,$location,$window) {
     $scope.error = "";
     $scope.message = "";
     $scope.loginAttempt = false;
@@ -526,7 +495,7 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
                 $scope.form.username = "";
                 $scope.form.password = "";
                 authService.loginConfirmed();
-                window.location.reload();
+                $window.location.href = "";
             }).error(function (data, status) {
                 $scope.error = "Failed to connect to server please check your connection";
             });
@@ -567,42 +536,7 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
 
 app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket) {
     $scope.form = {};
-    $scope.submitRegi = function () {
-        /*
-         $http.post('/register', $scope.form).
-         success(function (data) {
-         if (data.fail) {
-         $scope.message = data.fail;
-         } else {
-         $scope.form = {};
-         $rootScope.$broadcast('event:auth-registered');
-         }
-         }).
-         error(function () {
-         $scope.message = "Registration failed please check connection";
-         });
-         */
-        $rootScope.$broadcast('event:reg-step1');
-    }
-    $scope.submitUserDetails = function () {
-        /*
-         $http.post('/register', $scope.form).
-         success(function (data) {
-         if (data.fail) {
-         $scope.message = data.fail;
-         } else {
-         $scope.form = {};
-         $rootScope.$broadcast('event:userdetails-success');
-         }
-         }).
-         error(function () {
-         $scope.message = "Registration failed please check connection";
-         });
-         */
-        $rootScope.$broadcast('event:reg-step2');
-    }
     $scope.submitFinalDetails = function () {
-
         $http.post('/register', $scope.form).
             success(function (data) {
                 if (data.fail) {
@@ -610,15 +544,15 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket) {
                     $rootScope.$broadcast('event:reg-error');
                 } else {
                     $scope.form = {};
-                    $rootScope.$broadcast('event:userdetails-success');
+
+                    $rootScope.$broadcast('event:auth-registered');
+
                 }
             }).
             error(function () {
                 $scope.message = "Registration failed please check connection";
             });
 
-        console.log($scope.form)
-        $rootScope.$broadcast('event:reg-step3');
     }
 });
 

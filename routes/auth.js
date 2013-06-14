@@ -98,8 +98,8 @@ exports.register = function (req, res) {
         adminCount = 0,
         username = req.body.username,
         password = req.body.password,
-        firstname = req.body.firstname,
-        lastname = req.body.lastname,
+        firstname = req.body.firstName,
+        lastname = req.body.lastName,
         email = req.body.email;
 
         minUsernameLength = 5,
@@ -136,12 +136,10 @@ exports.register = function (req, res) {
                     firstname != undefined &&
                     firstname.length > minfirstnameLength &&
                         firstname.length < maxfirstNameLength &&
-                        firstname != username &&
             //lastname checks
                 lastname != undefined &&
                     lastname.length > minlastnameLength &&
-                    lastname.length < maxlastNameLength &&
-                lastname != username
+                    lastname.length < maxlastNameLength
 
 
             ) {
