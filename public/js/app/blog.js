@@ -15,7 +15,8 @@ var app = angular.module('blogApp', [
             when("/listByTag/:name", {templateUrl: "partials/blog.html"}).
             when("/petitions", {templateUrl: "partials/petitions.html"}).
             when("/petition/:title", {templateUrl: "partials/petition.html"}).
-            when("/registration", {templateUrl: "partials/registration.html"})
+            when("/registration", {templateUrl: "partials/registration.html"}).
+            when("/profile/:username", {templateUrl: "partials/userprofile.html"})
     });
 
 app.directive('becomeMainContent', function () {
@@ -680,6 +681,13 @@ app.controller('PetitionEntryCtrl', function ($scope, api, $routeParams) {
         console.log($scope.petition)
         api.createSubDocResource('Petition', $scope.petition[0]._id, 'signatures');
     }
+});
+app.controller('UserProfileCtrl', function ($scope, api, $routeParams) {
+
+    api.getResourceByField('User', {field:"username",query:$routeParams.username}, function (user) {
+        $scope.user = user[0];
+    });
+
 });
 
 
