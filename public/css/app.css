@@ -33,7 +33,7 @@
 
 .title{
 
-    background: #275c95 url("/img/background/cloudBG.jpg")no-repeat center -195px;
+    background: #26619D url("/img/background/cloudBG.jpg")no-repeat center -195px;
 
 }
 #workpets{
@@ -52,15 +52,22 @@
 
 }
 #workshopbutton{
-    background-color: #275c95;
+    background-color: #26619D;
     color: #ffffff;
     border: none;
 
 }
 .offsetHeight{
     margin-top: 200px;
-  background: #275c95;
+  background: #26619D;
 }
+
+.offsetHeight100 {
+    margin-top: 100px;
+    background: #26619D;
+    box-shadow: 10px 10px 20px rgb(0, 52, 85);
+}
+
 
 #login{
 
@@ -107,11 +114,11 @@
 .searchBarBlock {
 	margin-top: -20px;
 	padding-top: 30px;
-	background: #275c95;
+	background: #26619D;
 }
 
 .searchBar{
-    background-color: #132c48;
+    background-color: #26619D;
     padding-top: 15px;
     z-index: 10;
     margin-top: -24px;
@@ -153,7 +160,7 @@
 
 #profileMenuViewable{
     height: 500px;
-    background-color: #132C48;
+    background-color: #26619D;
 }
 .z-index-1000{
     z-index: 1000;
@@ -161,7 +168,7 @@
 }
 
 #contentHeader{
-    background-color: #275c95;
+    background-color: #26619D;
 }
 .contentHeaderTitle{
     color: #ffffff;
@@ -172,7 +179,7 @@
     overflow: hidden;
 }
 #chat{
-    background-color: #275c95;
+    background-color: #26619D;
     color: #ffffff;
 }
 .postcontainer{

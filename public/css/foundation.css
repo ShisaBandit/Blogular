@@ -1238,9 +1238,9 @@ button, .button {
   text-decoration: none;
   text-align: center;
   display: inline-block;
-  padding-top: 0.75em;
+  padding-top: 0.01em;
   padding-right: 1.5em;
-  padding-bottom: 0.8125em;
+  padding-bottom: 0.81em;
   padding-left: 1.5em;
   font-size: 1em;
   background-color: #2ba6cb;
@@ -2315,7 +2315,7 @@ form.custom {
   height: 45px;
   line-height: 45px;
   position: relative;
-  background: #111111;
+  background: #26619D;
   margin-bottom: 1.875em; }
   .top-bar ul {
     margin-bottom: 0;
