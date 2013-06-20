@@ -1,9 +1,17 @@
 <div ng-controller="PicsCtrl">
     <div class="small-12 columns contentContainer">
         <div class="row">
+            <input type="text" ng-model="newAlbumName" />
+            <a href="#" ng-click="addnewalbum()" class="button">Create a new album</a>
+            <a href="#" ng-click="addtoalbum()" class="button">Add To album</a>
+        </div>
+        <div class="row">
+            <ul class="small-block-grid-2">
+                <li ng-repeat="album in albums"><a href="album/{{album.id}}">{{album.name}}</a></li>
+            </ul>
             <ul class="small-block-grid-2">
                 <div ng-repeat="pic in pics">
-                    <li><img src="uploads/{{pic.filename}}" /></li>
+                    <li><div><input type="checkbox" ng-model="createalbum" ng-change="addpictoalbum({{pic.id}}" ng-checked="false" /></div><img src="uploads/{{pic.filename}}" /></li>
                 </div>
 
 

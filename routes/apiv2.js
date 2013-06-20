@@ -2,6 +2,8 @@ var models = require('../models/models');
 
 exports.createData = function (req, res) {
     var subdoc = req.params.subdoc;
+    var subdocid = req.params.subdocid;
+    var subsubdoc = req.params.subsubdoc;
     var type  = req.params.type;
     var condition = {};
     var model = getModelInstance(type);
@@ -18,7 +20,7 @@ exports.createData = function (req, res) {
             if(err)console.log(err);
             return sendSuccess(res);
         })
-    }else{
+    }else if(subsubdoc == undefined && subdoc != undefined){
         condition._id = req.params.id;
         console.log(condition);
         model.findOne(condition,function(err,doc){
@@ -33,13 +35,32 @@ exports.createData = function (req, res) {
                 doc.save(function(err){
                     console.log(err);
                     return sendSuccess(res);
+                })
+            });
+        })
+    }else{
+        condition._id = req.params.id;
+        console.log(condition);
+        model.findOne(condition,function(err,doc){
+            console.log(req.body);
+            //TODO:use the chain of responsibility pattern here to
+            //set datamodifiers
+            //TODO:make a class that decides which chain to delegate to
+            //based on request.
+            //doc[subdoc].push(req.body);
+            dataFilter(req,type,subdoc,req.body,function(data){
+                var doc = doc[subdoc].id(subdocid);
+                doc.push[subsubdoc] = subsubdoc;
+
+                doc.save(function(err){
+                    console.log(err);
+                    return sendSuccess(res);
 
                 })
             });
 
 
         })
-
 
     }
 

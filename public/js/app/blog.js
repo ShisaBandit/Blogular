@@ -640,18 +640,37 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
     })
 });
 
-app.controller('PicsCtrl', function ($scope, $http) {
+app.controller('PicsCtrl', function ($scope, $http,api) {
     $scope.pics = [];
+    $scope.createalbum = [];
+    $scope.blogId = "";
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
+        $scope.blogId = newVal;
         $http.get('getPicsForBlog/' + newVal).
             success(function (data) {
                 console.log(data);
                 $scope.pics = data;
             })
-    })
+    });
+    $scope.addnewalbum= function(){
+        api.createSubDocResource('album',$scope.blogId,$scope.createalbum,function(){
 
+        })
+    }
+    $scope.addtoalbum = function(){
+
+    }
+    $scope.albumAdded = function(id){
+        $scope.createalbum.push(id);
+    }
+    $scope.createAlbumData = function(){
+
+        api.createSubDocResource('album',$scope.blogId,$scope.createalbum,function(){
+
+        });
+    }
 });
 
 app.controller('PetitionCtrl', function ($scope, api) {
@@ -679,7 +698,9 @@ app.controller('PetitionEntryCtrl', function ($scope, api, $routeParams) {
     });
     $scope.signPetition = function () {
         console.log($scope.petition)
-        api.createSubDocResource('Petition', $scope.petition[0]._id, 'signatures');
+        api.createSubDocResource('Petition', $scope.petition[0]._id, 'signatures',function(){
+
+        });
     }
 });
 app.controller('UserProfileCtrl', function ($scope, api, $routeParams) {
