@@ -710,7 +710,29 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams) {
     });
 
 });
+appAdmin.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $location, $cookies) {
+    $scope.submitPost = function () {
+        if($scope.form.categories != undefined){
+            var categories = $scope.form.categories.split(',');
+            var bufferArr = [];
+            angular.forEach(categories, function (value) {
+                var bufferObj = {name: value};
+                bufferArr.push(bufferObj);
+            });
+            $scope.form.categories = bufferArr;
+        }
 
+        BlogsService.updateBlog($scope.form,function(err){
+            if(err){
+                $scope.message = "Blog entry must have a title.";
+            }
+            $scope.form.title = "";
+            $scope.form.author = "";
+            $scope.form.text = "";
+            $scope.message = "";
+        });
+    }
+});
 
 /*
  function youtube($string,$autoplay=0,$width=480,$height=390)
