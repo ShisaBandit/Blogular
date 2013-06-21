@@ -146,12 +146,22 @@ exports.register = function (req, res) {
             ) {
                 var user = new User(req.body);
                 user.save(function (err) {
-                    if (err)
+                    if (err){
                         console.log(err);
                         for(var name in err.errors){
                             errorMessage.push("not valid "+name);
                         }
                         return res.end(JSON.stringify({'fail': errorMessage}));
+
+                    }
+                    //register a new wall if one was attached to request
+                    var blog = new Blog({
+                        firstName:req.body.firstName,
+                        lastName:req.body.lastName,
+                        subgroup:req.body.subgroup,
+                        subgroup:req.body.groupcode,
+
+                    })
                     return res.end(JSON.stringify({'success': 'true'}));
                 });
             } else {

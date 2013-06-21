@@ -15,7 +15,7 @@ var blogSchema = mongoose.Schema({
     ],
     profilePicWide: String,
     profilePicPortrait: String,
-    subgroup: Number,//0:mothers,1:fathers,2:family,3:friends
+    subgroup: Number,//0:mothers,1:fathers,2:family,3:friends,4:brothers,5:sisters,6:others
     views: Number,
     title: String,
     author: String,//author is the url TODO:Ensure that there are NEVER TWO "urls"/authors of the same string
@@ -125,6 +125,10 @@ var userSchema = mongoose.Schema({
         }
     ]
 });
+var groupTypeSchema = mongoose.Schema({
+    name:String,
+    code:Number
+})
 var updateSchema = mongoose.Schema({
     lastUpdate: {type: Date, default: Date.now()}
 });

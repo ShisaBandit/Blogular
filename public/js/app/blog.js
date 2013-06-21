@@ -537,18 +537,41 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
 
 app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket) {
     $scope.form = {};
+    $scope.subgroup = [];
+    $scope.form.groupcode;
+    $scope.selectedSubgroup = {};
+    $scope.groups = [
+        {name:"Mother",code:0},
+        {name:"Father",code:1},
+        {name:"Brother",code:4},
+        {name:"Sister",code:5},
+        {name:"Friend",code:3},
+        {name:"Family",code:2},
+        {name:"Other",code:6},
+    ];
+    $scope.checked = function(){
+            for(var sgroup in $scope.groups){
+                if($scope.groups[sgroup].name == $scope.selectedSubgroup.name){
+                    $scope.groups[sgroup].checked = false;
+                }
+            }
+            for(var sgroup in $scope.groups){
+                if($scope.groups[sgroup].checked){
+                    $scope.selectedSubgroup = $scope.groups[sgroup];
+                    $scope.form.groupcode = $scope.selectedSubgroup.code;
+                }
+            }
+    }
+console.log($scope.groups);
     $scope.submitFinalDetails = function () {
         $http.post('/register', $scope.form).
             success(function (data) {
                 if (data.fail) {
                     $scope.messages = data.fail;
-
                     $rootScope.$broadcast('event:reg-error');
                 } else {
                     $scope.form = {};
-
                     $rootScope.$broadcast('event:auth-registered');
-
                 }
             }).
             error(function () {
