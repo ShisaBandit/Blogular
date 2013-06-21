@@ -1,7 +1,7 @@
 <div ng-controller="RegisterCtrl">
     <div class="row">
         <div class="twelve columns offsetHeight100" role="content">
-            <p><b>{{message}}</b></p>
+            <p ng-repeat="message in messages"><b>{{message}}</b></p>
             <table border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <th>Username</th>
@@ -58,11 +58,7 @@
                     <th>Day your angel got wings</th>
                     <td><input type="date" class="login-inp" ng-model="form.memorialdate"/></td>
                 </tr>
-                <tr>
-                    <th>Gender</th>
-                    <td><input type="checkbox" class="login-inp" ng-model="form.male"/>Male</td>
-                    <td><input type="checkbox" class="login-inp" ng-model="form.female"/>Female</td>
-                </tr>
+
                 <tr>
                     <th>Date of Birth</th>
                     <!--TODO:Make this a n uploadable file-->

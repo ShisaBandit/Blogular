@@ -94,6 +94,7 @@ exports.loginAuth = function (req, res) {
 };
 
 exports.register = function (req, res) {
+    var errorMessage = [];
     var userCount = 0,
         adminCount = 0,
         username = req.body.username,
@@ -145,52 +146,55 @@ exports.register = function (req, res) {
             ) {
                 var user = new User(req.body);
                 user.save(function (err) {
-                    if (err)console.log(err);
-                        return res.end(JSON.stringify({'fail': err}));
+                    if (err)
+                        console.log(err);
+                        for(var name in err.errors){
+                            errorMessage.push("not valid "+name);
+                        }
+                        return res.end(JSON.stringify({'fail': errorMessage}));
                     return res.end(JSON.stringify({'success': 'true'}));
                 });
             } else {
-                var errorMessage = [];
-                var undUsername = false,
-                    undPasswrd = false,
-                    undFN = false,
-                    undLN = false;
 
-                if (password == undefined) {
-                    password = "";
-                }
-                if (undUsername && username == undefined || username == "") {
+
+                 //uername length check
+                if (username == undefined || username == "") {
                     errorMessage.push('Please enter a username');
-                }
-                if (undUsername && username.length < minUsernameLength) {
+                }else if ( username.length < minUsernameLength) {
                     errorMessage.push('Username must be longer than ' + minUsernameLength);
-                }
-                if (undUsername && username.length > maxUsernameLength) {
+                }else if (username.length > maxUsernameLength) {
                     errorMessage.push('Username must be shorter than ' + maxUsernameLength);
                 }
-                if (undPasswrd && password.length < minPasswordLength) {
+                //password check
+                if (password == undefined || password == "") {
+                    errorMessage.push('Please enter a password');
+                }else if ( password.length < minPasswordLength) {
                     errorMessage.push('Password must be longer than ' + minPasswordLength);
-                }
-                if (undPasswrd && password.length > maxPasswordLength) {
+                }else if (password.length > maxPasswordLength) {
                     errorMessage.push('Password must be shorter than ' + maxPasswordLength);
                 }
-                if (undPasswrd && undUsername && password == username) {
+
+                if (password == username) {
                     errorMessage.push('Password can not be the same as username');
                 }
+
                 if (userCount >= 1 || adminCount >= 1) {
                     errorMessage.push('username already taken');
                 }
 
-                if (undFN && firstname.length < minfirstnameLength) {
+                if (firstname == undefined || firstname == "") {
+                    errorMessage.push('Please enter a first name');
+                }else if (firstname.length < minfirstnameLength) {
                     errorMessage.push('First name must be longer than ' + minfirstnameLength);
-                }
-                if (undFN && firstname.length > maxfirstNameLength) {
+                }else if (firstname.length > maxfirstNameLength) {
                     errorMessage.push('First name must be shorter than ' + maxPasswordLength);
                 }
-                if (undLN && lastname.length < minlastnameLength) {
+
+                if (lastname == undefined || lastname == "") {
+                    errorMessage.push('Please enter a last name');
+                }else if (lastname.length < minlastnameLength) {
                     errorMessage.push('Last name must be longer than ' + minlastnameLength);
-                }
-                if (undLN && lastname.length > maxlastNameLength) {
+                }else if (lastname.length > maxlastNameLength) {
                     errorMessage.push('Last name must be shorter than ' + maxlastNameLength);
                 }
 

@@ -59,6 +59,7 @@ appAdmin.controller('LoginController', function ($scope, Admin, authService, $ht
         }
     }
 );
+
 appAdmin.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $location, $cookies) {
     $scope.submitPost = function () {
         if($scope.form.categories != undefined){

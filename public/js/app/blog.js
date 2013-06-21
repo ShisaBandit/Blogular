@@ -9,7 +9,7 @@ var app = angular.module('blogApp', [
             when("/about", {templateUrl: "partials/about.html"}).
             when("/projects", {templateUrl: "partials/projects.html"}).
             when("/shoutouts", {templateUrl: "partials/shoutouts.html"}).
-            when("/admin/AddBlogEntry", {templateUrl: "partials/admin/createBlogEntry.html"}).
+            when("/AddBlogEntry", {templateUrl: "partials/admin/createBlogEntry.html"}).
             when("/blog/:id", {templateUrl: "partials/blogEntry.html"}).
             when("/public/:id", {templateUrl: "partials/publicAngelProfile.html"}).
             when("/listByTag/:name", {templateUrl: "partials/blog.html"}).
@@ -541,7 +541,8 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket) {
         $http.post('/register', $scope.form).
             success(function (data) {
                 if (data.fail) {
-                    $scope.message = data.fail[0];
+                    $scope.messages = data.fail;
+
                     $rootScope.$broadcast('event:reg-error');
                 } else {
                     $scope.form = {};
@@ -612,7 +613,8 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
                 console.log(data);
                 socket.emit('subcomment', {room: $scope.parentObject.entryId, text: $scope.newcomment[index], comment_id: $scope.posts[index]._id})
                 // $scope.posts[index].comments.unshift({text:$scope.newcomment.text});
-                $scope.newcomment.text = "";
+                $scope.newcomment[index] = "";
+                console.log($scope.newcomment[index])
                 $scope.commentbox[index] = false;
             })
         console.log("comment submitted")
@@ -710,7 +712,8 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams) {
     });
 
 });
-appAdmin.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $location, $cookies) {
+
+app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog) {
     $scope.submitPost = function () {
         if($scope.form.categories != undefined){
             var categories = $scope.form.categories.split(',');
@@ -721,7 +724,6 @@ appAdmin.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $locati
             });
             $scope.form.categories = bufferArr;
         }
-
         BlogsService.updateBlog($scope.form,function(err){
             if(err){
                 $scope.message = "Blog entry must have a title.";
