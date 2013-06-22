@@ -43,8 +43,15 @@
     float: left;
 }
 
+.headerCol2 {
+    display: block;
+    width: auto;
+    float: right;
+}
+
 #workpets{
     margin-top: 40px;
+    margin-right: 10px;
 
 }
 .workpetsbuttons{
@@ -106,12 +113,11 @@
     white-space: nowrap;
     -webkit-border-radius: 3px;
     border-radius: 3px; }
-
 }
 
 #username b {
     font-size: small;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .mediaicons{
