@@ -11,11 +11,9 @@
             </ul>
             <ul class="small-block-grid-2">
                 <div ng-repeat="pic in pics">
-                    <li><div><input type="checkbox" ng-model="createalbum" ng-change="addpictoalbum({{pic.id}}" ng-checked="false" /></div><img src="uploads/{{pic.filename}}" /></li>
+                    <li><div><input type="checkbox" ng-model="pic[$index].checked" ng-change="addpictoalbum({{pic.id}}" ng-checked="false" /></div><img src="uploads/{{pic.filename}}" /></li>
                 </div>
-
-
-            </ul>
+ay            </ul>
         </div>
 
     </div>

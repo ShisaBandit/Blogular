@@ -669,6 +669,7 @@ app.controller('PicsCtrl', function ($scope, $http,api) {
     $scope.pics = [];
     $scope.createalbum = [];
     $scope.blogId = "";
+    $scope.blog = [];
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
@@ -686,6 +687,13 @@ app.controller('PicsCtrl', function ($scope, $http,api) {
     }
     $scope.addtoalbum = function(){
 
+        $http.post('addAlbum',{blog:blog}).
+            success(function(){
+
+            }).
+            error(function(){
+                console.log('addAlbume was error');
+            })
     }
     $scope.albumAdded = function(id){
         $scope.createalbum.push(id);

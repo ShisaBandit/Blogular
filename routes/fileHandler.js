@@ -132,3 +132,18 @@ exports.cancelphotodata = function (req, res) {
     //find the files in orphaned files remove it from the orphaned files
     //finished
 }
+
+exports.addAlbum = function(req,res){
+      var blogid = req.blog.id;
+
+    Blog.find({_id:req.blog.id},function(err,blog){
+        var newAlbum = {name:req.album.name};
+        for(var album in albums){
+            newAlbum.photos.push({filename:albums[album].filename})
+        }
+        blog.save(function(err){
+            if(err)console.log(err);
+        });
+
+    })
+}
