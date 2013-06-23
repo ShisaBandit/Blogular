@@ -99,11 +99,11 @@
             </div>
         </div>
 
-        <div id="workpets" class="headerCol">
+        <div id="workpets" class="headerCol2">
             <a href="#/workshops" id="workshopbutton" class="small radius button workpetsbuttons">Workshops</a>
             <a href="#/pets" id="petbutton" class="small radius button workpetsbuttons">Pets</a>
+            <a href="#/Petitions" id="pettionbutton" class="small radius button workpetsbuttons">Petitions</a>
         </div>
-        <div class="headerCol2">
             <div ng-controller="UserInfoCtrl" class="loginBlock">
                 <div id="username">
                     <b>{{username}}</b>
@@ -113,7 +113,6 @@
                     <a href="#" if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
                 </div>
             </div>
-        </div>
     </div>
     <div ng-controller="SearchBarCtrl" class="searchBarBlock">
         <div ng-hide="searchViewable" ng-animate="'fade'" class="searchBar">
@@ -143,6 +142,21 @@
             </div>
         </div>
     </div>
+</div>
+<div id="loginMessage"  if-authed="hide">
+    <p>
+        <h1>Welcome to Angels of Eureka's Memorial Wall</h1>
+        Angels of Eureka is about Love, Hope and Life with People and Pets.<br />
+        You loved one can be celebrated and remembered here by creating a memorial wall for them. Signing up is easy.
+        Once you sign-up for your free personal profile, you can create a memorial wall for your lost loved one, we call
+        them your "Angel". On the memorial page you can share memories via photos, videos and celebrate their memory with Angel
+        anniverseries. You can invite your friends to join your private network as well as meet people with experience similar to yours
+        and find and give much needed support and comfort!
+    </p>
+    It looks like you are not a member yet. Sign up Here!
+    <a href="#/registration" class="small button">Register</a><br />
+    Already a member? Log-in to your account here!
+    <a href="#" class="small button" data-reveal-id="loginModal">Login</a>
 </div>
 <!-- Main  Content -->
 <ng-view class="mainBG">
