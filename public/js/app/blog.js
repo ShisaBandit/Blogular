@@ -670,6 +670,9 @@ app.controller('PicsCtrl', function ($scope, $http,api) {
     $scope.createalbum = [];
     $scope.blogId = "";
     $scope.blog = [];
+    $scope.albums = [];
+    $scope.albumName = "";
+    $scope.updatingAlbum = false;
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
@@ -679,30 +682,92 @@ app.controller('PicsCtrl', function ($scope, $http,api) {
                 console.log(data);
                 $scope.pics = data;
             })
+        $http.get('/albums/'+$scope.blogId).
+            success(function(data){
+                $scope.albums = data;
+            })
     });
-    $scope.addnewalbum= function(){
-        api.createSubDocResource('album',$scope.blogId,$scope.createalbum,function(){
+    $scope.addpictoalbum = function(){
+        console.log(pic);
+        for(var pic in $scope.pics){
+            console.log($scope.pics[pic][pic])
+        }
+    }
 
-        })
+    $scope.addnewalbum= function(){
+        $scope.addingNewAlbum = true;
+        $scope.updatingAlbum = false;
+       // api.createSubDocResource('album',$scope.blogId,$scope.createalbum,function(){
+
+        //})
     }
     $scope.addtoalbum = function(){
-
-        $http.post('addAlbum',{blog:blog}).
-            success(function(){
-
-            }).
-            error(function(){
-                console.log('addAlbume was error');
+        $scope.updatingAlbum = true;
+                   //get list of albums to display
+        $http.get('/albums/'+$scope.blogId).
+            success(function(data){
+                $scope.albums = data;
             })
     }
+    /*
     $scope.albumAdded = function(id){
         $scope.createalbum.push(id);
+    }  */
+    $scope.createAlbum = function(){
+        var picstoadd = [];//filter $Scope.pics check
+        for(var pic in $scope.pics){
+                if($scope.pics[pic][pic] == true){
+                    picstoadd.push($scope.pics[pic]);
+                }
+        }
+          $http.post('/createNewAlbum/'+$scope.blogId,{name:$scope.albumName,pics:picstoadd}).
+              success(function(){
+                 console.log("created")
+                  $scope.albumName = "";
+                  for(var pics in $scope.pics){
+                      $scope.pics[pic][pic] = false;
+                  }
+                  $scope.addingNewAlbum = false;
+              }).
+              error(function(){
+                  console.log("error");
+              })
+
     }
-    $scope.createAlbumData = function(){
+    $scope.createAlbumCancel = function(){
+        $scope.addingNewAlbum = false;
+        $scope.updatingAlbum = false;
+    }
+    $scope.updateAlbum = function(albumid){
+        var picstoadd = [];
+        for(var pic in $scope.pics){
+            if($scope.pics[pic][pic] == true){
+                picstoadd.push($scope.pics[pic]);
+            }
+        }
 
-        api.createSubDocResource('album',$scope.blogId,$scope.createalbum,function(){
+        $http.post('/updateAlbum/'+$scope.blogId,{albumid:albumid, pics:picstoadd}).
+            success(function(){
+                console.log("created")
+                $scope.albumName = "";
+                for(var pics in $scope.pics){
+                    $scope.pics[pic][pic] = false;
+                }
+                $scope.addingNewAlbum = false;
+            }).
+            error(function(){
+                console.log("error");
+            })
+    }
 
-        });
+    $scope.showAlbum = function(albumid){
+        $http.get('/showAlbum/'+$scope.blogId+'/'+albumid).
+            success(function(data){
+                $scope.pics = data;
+            }).
+            error(function(){
+
+            })
     }
 });
 

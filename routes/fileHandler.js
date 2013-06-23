@@ -53,7 +53,6 @@ exports.submitphotodata = function (req, res) {
                     //loop throu all the uploaded files to this memwall
                     console.log(blog.orphanedphotos);
                     for (var i = 0; i < blog.orphanedphotos.length; i++) {
-
                         console.log(blog.orphanedphotos[i]);
                         //check if the file already is in the orphaned files if yes add it to
                         //an array of files to be added to a new post(photo) text entry
@@ -133,17 +132,51 @@ exports.cancelphotodata = function (req, res) {
     //finished
 }
 
-exports.addAlbum = function(req,res){
-      var blogid = req.blog.id;
+exports.createNewAlbum = function(req,res){
+    //  var blogid = req.params.id;
+      console.log(req.params);
 
-    Blog.find({_id:req.blog.id},function(err,blog){
-        var newAlbum = {name:req.album.name};
-        for(var album in albums){
-            newAlbum.photos.push({filename:albums[album].filename})
+    Blog.findOne({_id:req.params.id},function(err,blog){
+        var newAlbum = req.body.name;
+        var photoToPush = [];
+        for(var pic in req.body.pics){
+            photoToPush.push({filename:req.body.pics[pic].filename});
+            console.log(req.body.pics[pic])
+        }
+        //console.log(blog.albums);
+        blog.albums.push({name:newAlbum,photos:photoToPush});
+        blog.save(function(err){
+            if(err)console.log(err);
+            res.send(200,"success");
+        });
+    })
+}
+
+exports.updateAlbum = function(req,res){
+    Blog.findOne({_id:req.params.id},function(err,blog){
+        var album = blog.albums.id(req.body.albumid);
+
+        for(var pic in req.body.pics){
+            album.photos.push({filename:req.body.pics[pic].filename});
         }
         blog.save(function(err){
             if(err)console.log(err);
-        });
+            res.send(200,"success");
+        })
+    })
+}
 
+exports.albums = function(req,res){
+    var blog = req.params.id;
+    Blog.findOne({_id:blog},function(err,blog){
+        res.end(JSON.stringify(blog.albums));
+    })
+}
+
+exports.showAlbum = function(req,res){
+    var albumid = req.params.albumid;
+    Blog.findOne({_id:req.params.id},function(err,blog){
+        var albdoc = blog.albums.id(albumid);
+        res.end(JSON.stringify(albdoc.photos));
     })
 }

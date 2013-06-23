@@ -1,19 +1,45 @@
 <div ng-controller="PicsCtrl">
     <div class="small-12 columns contentContainer">
         <div class="row">
-            <input type="text" ng-model="newAlbumName" />
-            <a href="#" ng-click="addnewalbum()" class="button">Create a new album</a>
-            <a href="#" ng-click="addtoalbum()" class="button">Add To album</a>
+            <input type="text" ng-model="newAlbumName"/>
+            <a ng-click="addnewalbum()" class="button">Create a new album</a>
+            <input type="text" ng-show="addingNewAlbum" ng-model="albumName"/>
+            <a class="button" ng-show="addingNewAlbum" ng-click="createAlbum()">Submit</a>
+            <a class="button" ng-show="addingNewAlbum" ng-click="createAlbumCancel()">Cancel</a>
+            <a ng-click="addtoalbum()" ng-hide="addingNewAlbum" class="button">Add To album</a>
+
+            <div ng-show="updatingAlbum" class="row">
+                <ul  class="small-block-grid-2">
+                    <li ng-repeat="album in albums"><a class="button"
+                                                       ng-click="updateAlbum(album._id)">{{album.name}}</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="row">
-            <ul class="small-block-grid-2">
-                <li ng-repeat="album in albums"><a href="album/{{album.id}}">{{album.name}}</a></li>
+        <!--
+        <div ng-show="addingNewAlbum" class="row">
+            <h1>TEST</h1>
+            <ul class="small-block-grid-6">
+                <li ng-repeat="album in albums">{{album.name}}</li>
             </ul>
+        </div>-->
+
+        <div class="row">
+            <div class="row">
+                <h3>View Pics by album</h3>
+                <ul>
+                    <li ng-repeat="album in albums"><a class="button" ng-click="showAlbum(album._id)">{{album.name}}</a></li>
+                </ul>
+            </div>
             <ul class="small-block-grid-2">
                 <div ng-repeat="pic in pics">
-                    <li><div><input type="checkbox" ng-model="pic[$index].checked" ng-change="addpictoalbum({{pic.id}}" ng-checked="false" /></div><img src="uploads/{{pic.filename}}" /></li>
+                    <li>
+                        <div><input type="checkbox" ng-model="pic[$index]" ng-change="addpictoalbum()"
+                                    ng-checked="false"/></div>
+                        <img src="uploads/{{pic.filename}}"/></li>
                 </div>
-ay            </ul>
+
+            </ul>
         </div>
 
     </div>

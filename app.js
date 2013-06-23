@@ -213,9 +213,13 @@ app.post('/subcomment', passport.ensureAuthenticated, commentRoutes.subcomment);
 
 app.post('/upload', passport.ensureAuthenticated, fileHandlerRoutes.upload);
 app.post('/submitphotodata', passport.ensureAuthenticated, fileHandlerRoutes.submitphotodata);
-app.post('/addAlbum',fileHandlerRoutes.addAlbum);
+//app.post('/addAlbum',fileHandlerRoutes.addAlbum);
 app.post('/submitphotodata', passport.ensureAuthenticated, fileHandlerRoutes.cancelphotodata);
 app.get('/getPicsForBlog/:id', passport.ensureAuthenticated, fileHandlerRoutes.getPicsForBlog);
+app.get('/albums/:id',fileHandlerRoutes.albums);
+app.post('/createNewAlbum/:id',fileHandlerRoutes.createNewAlbum);
+app.post('/updateAlbum/:id',fileHandlerRoutes.updateAlbum);
+app.get('/showAlbum/:id/:albumid',fileHandlerRoutes.showAlbum);
 
 //apiv2 : EXPERIMENTAL
 
