@@ -239,6 +239,12 @@ h2 {
 .memProfilePreview img {
     margin: auto;
 }
+
+h1.sectionHeader {
+    color: #fff;
+    padding: 10px;
+    background: #132D48;
+}
 /* -----------------------------------------
    Page Name 1
 ----------------------------------------- */
@@ -405,4 +411,8 @@ width: 665px;
     color: darkslategrey;
     border-radius: 7px;
     box-shadow: 2px 2px 2px #000;
+}
+
+#loginModal {
+    margin-top: 100px;
 }
