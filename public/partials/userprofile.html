@@ -10,9 +10,10 @@
             </div>
             <div class="profileGravatar">
                 Your gravatar will show here.
+                <img src="http://www.gravatar.com/avatar/{{user.gravatar}}" />
             </div>
             <ul class="profile">
-                <li><img src="http://www.gravatar.com/avatar/{{user.gravatar}}" /> </li>
+
                 <li>First Name : {{user.firstName}}</li>
                 <li>Last Name: {{user.lastName}}     </li>
                 <li>email : {{user.email}}     </li>
@@ -21,7 +22,7 @@
                 <li>About you : {{user.about}}     </li>
                 <li>You have lost a {{user.lost}}</li>
             </ul>
-            Click here to add a wall <a href="#/AddBlogEntry">Add</a> <br />
+
             Click here to edit your profile
         </div>
         <div class="small-12 columns">

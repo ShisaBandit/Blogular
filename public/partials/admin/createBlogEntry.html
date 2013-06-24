@@ -24,6 +24,39 @@
 
         <label for="titleImage">Title Image:</label>
         <input id="titleImage" ng-model="form.titleImage" name="titleImage">
+
+            <tr>
+                <th>Name of Angel</th>
+
+                <td><input type="text" class="login-inp" ng-model="form.firstname"/> <h5>First</h5></td>
+
+                <td><input type="text" class="login-inp" ng-model="form.lastname"/><h5>Last</h5></td>
+            </tr>
+            <tr>
+                <th>Day your angel got wings</th>
+                <td><input type="date" class="login-inp" ng-model="form.memorialDate"/></td>
+            </tr>
+
+            <tr>
+                <th>Date of Birth</th>
+                <!--TODO:Make this a n uploadable file-->
+                <td><input type="date" class="login-inp" ng-model="form.dob"/></td>
+            </tr>
+            <!--
+            <tr>
+                <th>Angels memory databank</th>
+                <td><input type="text" class="login-inp" ng-model="form.avatar"/></td>
+            </tr>
+            -->
+            <tr>
+                <th>This is my</th>
+                <!--<td><input type="checkbox" ng-repeat="group in groups" class="login-inp" ng-model="form.subgroup"/>{{type.name}}</td>
+            -->
+
+                <td ng-repeat="group in groups">{{group.name}}:<input type="checkbox" ng-change="checked()" ng-model="groups[$index].checked"  class="login-inp"  name="{{group.name}}"/></td>
+
+
+            </tr>
     <!--
     <h4>Tagegories</h4>
         <p>These will show up as categories on the main screen and be used to filter aritcles on the main page.</p>
