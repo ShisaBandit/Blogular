@@ -40,13 +40,17 @@ var blogSchema = mongoose.Schema({
     postText: [
         {
             user_id: String,
+            username:String,
+            gravatar:String,
             text: String,
             date: {type: Date, default: Date.now},
             postType: Number,
             saved:Boolean,
             comments:[
                 {
-                user_id:String,
+                user_id: String,
+                username:String,
+                gravatar:String,
                 text:String,
                 voteUp:Number,
                 voteDown:Number,

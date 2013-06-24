@@ -2,7 +2,8 @@
     <div class="small-12 columns contentContainer" ng-repeat="post in posts">
         <div class="row">
             <div class="small-12 columns postcontainer">
-                <h6>Posted by <a href="#">{{post.username}}</a> on {{post.date}}.</h6>
+                <div><img src="http://www.gravatar.com/avatar/{{post.gravatar}}" /> </div>
+                <h6>Posted by <a href="#/profile/{{post.username}}">{{post.username}} </a> on {{post.date}}.</h6>
 
                 <div>
                     {{post.text}}
@@ -20,10 +21,12 @@
                 <div class="row">
 
                     <div class="small-2 columns avatarcontainer">
-                        <p>{{comment.user_id}}</p>
+                        <p><img src="http://www.gravatar.com/avatar/{{comment.gravatar}}"</p>
 
                     </div>
+
                     <div class="small-10 columns">
+                        <h3><a href="#/profile/{{comment.username}}">{{comment.username}}</a> </h3>
                         <p>{{comment.text}}</p>
 
                     </div>
