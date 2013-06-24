@@ -62,7 +62,7 @@
     <script src="underscore.js"></script>
     <script>
         $(document).foundation();
-        $(document).ready(function(){
+        $(document).ready(function () {
 
             var vidWidth = 425;
             var vidHeight = 344;
@@ -76,12 +76,12 @@
                     'allowfullscreen="true" width="' + vidWidth + '" ' + 'height="' +
                     vidHeight + '"></embed></object> ';
 
-            $('.content:contains("youtube.com/watch")').each(function(){
+            $('.content:contains("youtube.com/watch")').each(function () {
                 var that = $(this);
                 var vid = that.html().match(/(?:v=)([\w\-]+)/g); // end up with v=oHg5SJYRHA0
                 if (vid.length) {
-                    $.each(vid, function(){
-                        that.append( obj.replace(/\[vid\]/g, this.replace('v=','')) );
+                    $.each(vid, function () {
+                        that.append(obj.replace(/\[vid\]/g, this.replace('v=', '')));
                     });
                 }
             });
@@ -104,15 +104,15 @@
             <a href="#/pets" id="petbutton" class="small radius button workpetsbuttons">Pets</a>
             <a href="#/Petitions" id="pettionbutton" class="small radius button workpetsbuttons">Petitions</a>
         </div>
-            <div ng-controller="UserInfoCtrl" class="loginBlock">
-                <div id="username">
-                    <b>{{username}}</b>
-                    <a href="#/profile/{{username}}" if-authed="show" class="small button">My Account</a>
-                    <a href="#" ng-click="logout()" if-authed="show" class="small button">logout</a>
-                    <a href="#/registration" if-authed="hide" class="small button">Register</a>
-                    <a href="#" if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
-                </div>
+        <div ng-controller="UserInfoCtrl" class="loginBlock">
+            <div id="username">
+                <b>{{username}}</b>
+                <a href="#/profile/{{username}}" if-authed="show" class="small button">My Account</a>
+                <a href="#" ng-click="logout()" if-authed="show" class="small button">logout</a>
+                <a href="#/registration" if-authed="hide" class="small button">Register</a>
+                <a href="#" if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
             </div>
+        </div>
     </div>
     <div ng-controller="SearchBarCtrl" class="searchBarBlock">
         <div ng-hide="searchViewable" ng-animate="'fade'" class="searchBar">
@@ -143,20 +143,26 @@
         </div>
     </div>
 </div>
-<div id="loginMessage"  if-authed="hide">
-    <p>
+<div ng-controller="WelcomeCtrl">
+    <div ng-hide="groupingViewable" ng-animate="'fade'" id="loginMessage" if-authed="hide">
+        <p>
         <h1>Welcome to Angels of Eureka's Memorial Wall</h1>
+
         <h2>Angels of Eureka is about Love, Hope and Life with People and Pets.</h2>
         Your loved one can be celebrated and remembered here by creating a memorial wall for them. Signing up is easy.
         Once you sign-up for your free personal profile, you can create a memorial wall for your lost loved one, we call
-        them your "Angel". On the memorial page you can share memories via photos, videos and celebrate their memory with Angel
-        anniverseries. You can invite your friends to join your private network as well as meet people with experience similar to yours
+        them your "Angel". On the memorial page you can share memories via photos, videos and celebrate their memory
+        with Angel
+        anniverseries. You can invite your friends to join your private network as well as meet people with experience
+        similar to yours
         and find and give much needed support and comfort!
-    </p>
-    It looks like you are not a member yet. Sign up Here!
-    <a href="#/registration" class="small button">Register</a><br />
-    Already a member? Log-in to your account here!
-    <a href="#" class="small button" data-reveal-id="loginModal">Login</a>
+        </p>
+        It looks like you are not a member yet. Sign up Here!
+        <a href="#/registration" class="small button">Register</a><br/>
+        Already a member? Log-in to your account here!
+        <a href="#" class="small button" data-reveal-id="loginModal">Login</a>
+        <a class="button" closeparent>Close</a>
+    </div>
 </div>
 <!-- Main  Content -->
 <ng-view class="mainBG">

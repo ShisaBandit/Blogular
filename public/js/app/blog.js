@@ -19,6 +19,16 @@ var app = angular.module('blogApp', [
             when("/profile/:username", {templateUrl: "partials/userprofile.html"})
     });
 
+app.directive('closeparent', function () {
+    return {
+        link: function (scope, ele, attr) {
+            ele.click(function(){
+                ele.parent().slideUp();
+            });
+        }
+    }
+});
+
 app.directive('becomeMainContent', function () {
     return {
         link: function (scope, ele) {
@@ -467,6 +477,21 @@ app.controller('SearchBarCtrl', function ($scope, $filter, $rootScope) {
 });
 
 app.controller('GroupingCtrl', function ($scope, $rootScope) {
+    $rootScope.subgroup = undefined;
+    $scope.$on('$routeChangeSuccess', function (next, current) {
+        console.log(current);
+        if (current.templateUrl == "partials/blog.html" || current.templateUrl == undefined) {
+            $scope.groupingViewable = false;
+        } else {
+            $scope.groupingViewable = true;
+        }
+    });
+    $scope.changeSubgroup = function (subgroup) {
+        console.log(subgroup);
+        $rootScope.subgroup = subgroup;
+    }
+});
+app.controller('WelcomeCtrl', function ($scope, $rootScope) {
     $rootScope.subgroup = undefined;
     $scope.$on('$routeChangeSuccess', function (next, current) {
         console.log(current);
