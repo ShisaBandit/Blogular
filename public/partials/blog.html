@@ -4,11 +4,9 @@
         <div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' autoscroll>
             <ul class="small-block-grid-4">
                 <li ng-repeat="entry in entries | filter:search.search | bySubgroup:subgroup">
-                    <div style="background-image: url({{entry.titleImage}})" ng-style="getBackImg(entry._id)">
+                    <div style="background-image: url({{entry.titleImage}})" ng-style="getBackImg(entry._id)" class="memProfilePreview">
                         <h6><a href="#/blog/{{entry.author}}">{{entry.author}}</a></h6>
-                        <img src="/uploads/child.jpg" alt="child pick"/>
-                        <hr/>
-                        <br/>
+                        <a href="#/blog/{{entry.author}}"><img src="/uploads/child.jpg" alt="child pick"/></a>
                     </div>
 
                 </li>

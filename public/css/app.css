@@ -80,8 +80,11 @@
 }
 
 .offsetHeight{
+    max-width: 980px;
     margin-top: 200px;
-  background: #26619D;
+    margin-left: auto;
+    margin-right: auto;
+    background: #26619D;
 }
 
 .offsetHeight100 {
@@ -90,6 +93,18 @@
     box-shadow: 10px 10px 20px rgb(0, 52, 85);
 }
 
+.closeButton {
+    position: absolute;
+    top: 0px;
+    right: -5px;
+    padding: 10px;
+    font-size: large;
+    font-weight: bold;
+    color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #fff;
+    background: #132D48;
+}
 
 #login{
 
@@ -108,7 +123,7 @@
     display: block;
     width: 300px;
     height: 35px;
-    top: -15px;
+    top: -10px;
     text-align: right;
     right: 0px
 }
@@ -164,7 +179,7 @@
 }
 
 .searchBar{
-    background-color: #26619D;
+    background-color: #132D48;
     padding-top: 15px;
     z-index: 10;
     margin-top: -24px;
@@ -193,6 +208,36 @@
     width: 1020px;
     margin: auto;
     white-space: nowrap;
+}
+
+h1 {
+    font-size: x-large;
+}
+
+h2 {
+    font-size: large;
+}
+
+.memProfilePreview {
+    color: #fff;
+    padding: 10px;
+    background: #1F4A77;
+    border-radius: 4px;
+}
+
+.memProfilePreview h6 {
+    padding: 10px;
+    background: #132D48;
+}
+
+.memProfilePreview h6 a {
+    display:block;
+    color: #fff;
+    width: 100%;
+}
+
+.memProfilePreview img {
+    margin: auto;
 }
 /* -----------------------------------------
    Page Name 1
@@ -352,6 +397,7 @@ width: 665px;
     top:200px;
     display:block;
     width: 80%;
+    max-width: 980px;
     height: auto;
     background: #f5f5f5;
     margin: auto;
