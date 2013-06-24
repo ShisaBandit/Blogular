@@ -34,8 +34,13 @@
             <ul class="small-block-grid-2">
                 <div ng-repeat="pic in pics">
                     <li>
-                        <div><input type="checkbox" ng-model="pic[$index]" ng-change="addpictoalbum()"
-                                    ng-checked="false"/></div>
+                        <div>
+                            <input
+                                type="checkbox"
+                                ng-model="pic[$index]"
+                                ng-change="addpictoalbum()"
+                                ng-checked="false"/>
+                        </div>
                         <img src="uploads/{{pic.filename}}"/></li>
                 </div>
 
