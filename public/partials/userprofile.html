@@ -1,6 +1,6 @@
 <div ng-controller="UserProfileCtrl">
-    <div class="row offsetHeight">
-        <div class="small-8 columns">
+    <div class="row offsetHeight100">
+        <div class="small-12 columns">
 
 
             <div class="row ">
@@ -8,15 +8,48 @@
                     <h2 class="contentHeaderTitle">Basic Profile</h2>
                 </div>
             </div>
+            <div class="profileGravatar">
+                Your gravatar will show here.
+            </div>
             <ul class="profile">
                 <li>First Name : {{user.firstName}}</li>
                 <li>Last Name: {{user.lastName}}     </li>
                 <li>email : {{user.email}}     </li>
-                <li>Has lost a {{user.lost}}</li>
+                <li>City : {{user.city}}     </li>
+                <li>Age : {{user.age}}     </li>
+                <li>About you : {{user.about}}     </li>
+                <li>You have lost a {{user.lost}}</li>
+            </ul>
+            Click here to edit your profile
+        </div>
+        <div class="small-12 columns">
+        <div class="row ">
+            <div id="contentHeader" class="small-12 columns">
+                <h2 class="contentHeaderTitle">My Memorial Walls</h2>
+            </div>
+        </div>
+        <div class="profileGravatar">
+            I am going to have the Angel icon displayed here from branding. This is temporary text.
+        </div>
+        <ul class="profile">
+            <li>Angel's Name : (Angel's full name) - <a href="#">View or Edit this memorial wall</a> - <a href="#">Delete this memorial wall</a></li>
+        </ul>
+            <a href="#"><b>Create a new memorial wall profile here!</b></a>
+        </div>
+        <div class="small-12 columns">
+            <div class="row ">
+                <div id="contentHeader" class="small-12 columns">
+                    <h2 class="contentHeaderTitle">Memorial Walls of My Friends and Aquaintenses <br />(This is where memorial wall's that users have been invited to will appear)</h2>
+                </div>
+            </div>
+            <div class="profileGravatar">
+                I am going to have the Angel icon displayed here from branding. This is temporary text.
+            </div>
+            <ul class="profile">
+                <li>Friend's Name : (Friend's full name) <br />
+                     - Angel's Name : (Angel's full name)  - <a href="#">View or this memorial wall</a> - <a href="#">Remove yourself from this memorial wall network</a></li>
             </ul>
         </div>
-
-
 
     </div>
 </div>

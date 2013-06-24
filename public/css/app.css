@@ -245,6 +245,15 @@ h1.sectionHeader {
     padding: 10px;
     background: #132D48;
 }
+
+.profileGravatar {
+    display: block;
+    width: 250px;
+    height: 300px;
+    padding: 20px;
+    float: right;
+    background: dimgrey;
+}
 /* -----------------------------------------
    Page Name 1
 ----------------------------------------- */
