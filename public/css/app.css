@@ -239,6 +239,21 @@ h2 {
 .memProfilePreview img {
     margin: auto;
 }
+
+h1.sectionHeader {
+    color: #fff;
+    padding: 10px;
+    background: #132D48;
+}
+
+.profileGravatar {
+    display: block;
+    width: 250px;
+    height: 300px;
+    padding: 20px;
+    float: right;
+    background: dimgrey;
+}
 /* -----------------------------------------
    Page Name 1
 ----------------------------------------- */
@@ -263,7 +278,7 @@ h2 {
 }
 
 #contentHeader{
-    background-color: #26619D;
+    background-color: #132D48;
 }
 .contentHeaderTitle{
     color: #ffffff;
@@ -282,14 +297,27 @@ h2 {
 
 }
 .replycontainer{
+    display:block;
     background-color: #AFC5DC;
     border-bottom: 1px solid #808080;
     padding: 20px;
+    margin: 20px;
+    width: 500px;
+    border: red 1px solid;
 }
+
 .avatarcontainer{
     border-right: 1px solid #808080;
     overflow: hidden;
 }
+
+.row .small-12 {
+    position: relative;
+    width: 100%;
+    background: none repeat scroll 0% 0% rgb(255, 255, 255);
+    box-shadow: 5px 5px 5px #132D48;
+}
+
    /*
 .nav-container{ background: url('images/nav_bg.jpg') repeat-x 0 0;}
 .f-nav{ z-index: 9999; position: fixed; left: 0; top: 0; width: 100%;}
@@ -405,4 +433,8 @@ width: 665px;
     color: darkslategrey;
     border-radius: 7px;
     box-shadow: 2px 2px 2px #000;
+}
+
+#loginModal {
+    margin-top: 100px;
 }
