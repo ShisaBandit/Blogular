@@ -113,6 +113,7 @@ var userSchema = mongoose.Schema({
     password: {type:String,required:true},
     admin: String,
     email: {type:String,required:true},//normalize to lowercase
+    gravatar:String,
     profiles: [
         {profile: String}
     ],
