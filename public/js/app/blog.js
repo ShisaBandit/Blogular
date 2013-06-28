@@ -16,7 +16,9 @@ var app = angular.module('blogApp', [
             when("/petitions", {templateUrl: "partials/petitions.html"}).
             when("/petition/:title", {templateUrl: "partials/petition.html"}).
             when("/registration", {templateUrl: "partials/registration.html"}).
-            when("/profile/:username", {templateUrl: "partials/userprofile.html"})
+            when("/profile/:username", {templateUrl: "partials/userprofile.html"}).
+            when("/AddBlogEntry/uploadportrait/:id",{templateUrl:"partials/admin/addportrait.html"}).
+            when("/AddBlogEntry/uploadspread/:id",{templateUrl:"partials/admin/addspread.html"})
     });
 
 app.directive('closeparent', function () {
@@ -176,26 +178,56 @@ app.directive('autoscroll', function () {
 
 app.directive('dropzone', function (dropzone, $rootScope) {
     return{
+        scope:{},
         restrict: 'E',
         link: function (scope, elm, attrs) {
+            var maxImages;
+            scope.images = 0;
+            console.log("max images"+maxImages);
             //using entryid from BlogEntry Scope not ideal ;8
-            console.log(elm);
-            dropzone.createDropzone(elm, attrs.url);
+            console.log("auto = "+(attrs.autoupload == undefined ? false:true));
+            var dropzoneOptions = {
+                url:attrs.url,
+                enqueueForUpload:(attrs.autoupload == undefined ? true : false)
+            }
+            //make a maxsize so can make a dropzone that only accepts
+            //a set number of images
+            //TODO:TEST ALL THIS STUFF
+            dropzone.createDropzone(elm, dropzoneOptions);
+            if(attrs.maximages != undefined){
+                //dropzone.setMaxNoImages(parseInt(attrs.maximages,10)+1)
+                maxImages = parseInt(attrs.maximages,10)+1;
+                console.log("max images"+maxImages);
+
+            }
             $rootScope.dropzone = dropzone;
             dropzone.registerEvent('complete', elm, function (file) {
-                console.log("upload event");
                 $rootScope.$broadcast('uploadedFile', {file: file});
             })
             dropzone.registerEvent("addedfile", elm, function (file) {
-                console.log("added a file");
-                $rootScope.$on('addedFile', {file: file});
-                dropzone.setFileLoadedInUi(file);
+                     scope.images++;
+                console.log("images "+scope.images+" maximges "+maxImages);
+                if(
+                    maxImages != 0 &&
+                    maxImages <= scope.images
+
+                ){
+                    dropzone.removeFile(file);
+                }else{
+                    dropzone.setFileLoadedInUi(file);
+                    $rootScope.$on('addedFile', {file: file});
+
+                }
+
                 //console.log(file);
                 /* Maybe display some more file information on your page */
             });
             dropzone.registerEvent("sending", elm, function (file, xhr, formData) {
                 console.log(scope);
-                formData.append("memwall", scope.entry._id); // Will send the filesize along with the file as POST data.
+                for(var data in attrs.appenddata){
+                    formData.append(data,attrs.appenddata[data]);
+                }
+                //formData.append("memwall", scope.entry._id);
             });
         }
     }
@@ -835,16 +867,10 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams) {
 });
 
 app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog) {
+    $scope.template = {};
+    $scope.hidemainform = false;
     $scope.submitPost = function () {
-        if($scope.form.categories != undefined){
-            var categories = $scope.form.categories.split(',');
-            var bufferArr = [];
-            angular.forEach(categories, function (value) {
-                var bufferObj = {name: value};
-                bufferArr.push(bufferObj);
-            });
-            $scope.form.categories = bufferArr;
-        }
+
         BlogsService.updateBlog($scope.form,function(err){
             if(err){
                 $scope.message = "Blog entry must have a title.";
@@ -853,7 +879,17 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog) {
             $scope.form.author = "";
             $scope.form.text = "";
             $scope.message = "";
+            $scope.template.url = '/partials/admin/addportrait.html';
+            $scope.hidemainform = true;
         });
+    }
+
+    $scope.submitportrait = function(){
+        $scope.$parent.template.url = '/partials/admin/addspread.html';
+
+    }
+    $scope.submitspread = function(){
+        $scope.$parent.template.url = 'partials/admin/mwregcom.html';
     }
 });
 

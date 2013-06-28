@@ -117,12 +117,14 @@ var userSchema = mongoose.Schema({
     profiles: [
         {profile: String}
     ],
+    address:String,
     city: String,
     state:String,
     Age: Number,
     avatar: String,//urllink
     lost:{type:String},
     firstAccess:Boolean,
+    about:String,
     notifications:[
         {
             text:String,
@@ -133,7 +135,7 @@ var userSchema = mongoose.Schema({
 var groupTypeSchema = mongoose.Schema({
     name:String,
     code:Number
-})
+});
 var updateSchema = mongoose.Schema({
     lastUpdate: {type: Date, default: Date.now()}
 });

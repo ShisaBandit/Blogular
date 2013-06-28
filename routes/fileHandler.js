@@ -37,6 +37,24 @@ exports.upload = function (req, res) {
         });
     });
 };
+exports.uploadportrait = function (req, res) {
+    var name = req.files.userPhoto.name;
+    fs.readFile(req.files.userPhoto.path, function (err, data) {
+        var newPath = __dirname + "/public/uploads/" + name;
+        fs.writeFile(newPath, data, function (err) {
+            res.redirect("back");
+        });
+    });
+};
+exports.uploadspread= function (req, res) {
+    var name = req.files.userPhoto.name;
+    fs.readFile(req.files.userPhoto.path, function (err, data) {
+        var newPath = __dirname + "/public/uploads/" + name;
+        fs.writeFile(newPath, data, function (err) {
+            res.redirect("back");
+        });
+    });
+};
 exports.submitphotodata = function (req, res) {
     var photoForPostText = [];
     var photos = req.body.files;

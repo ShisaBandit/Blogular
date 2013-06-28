@@ -2,6 +2,7 @@ angular.module('dropzone', []).
     factory('dropzone', function ($rootScope) {
         var dropzoneInstance = {};
         var uiFiles = [];
+        var maxImages = 0;//0 == infinity;
         return{
             /**
              * @name CreateDropzone
@@ -9,9 +10,9 @@ angular.module('dropzone', []).
              * @param {string} elm The elmement to attach this object to
              * @param {string} url The url to pass to the url object this url will be upload url
              **/
-            createDropzone: function (elm, url) {
+            createDropzone: function (elm, options) {
                 //return new Dropzone(elm,{url:url});
-                elm.dropzone({url: url});
+                elm.dropzone(options);
             },
             /**
              * @name ReisterEvent
@@ -26,6 +27,9 @@ angular.module('dropzone', []).
             },
             processQueue:function(){
                 return dropzoneInstance.processQueue();
+            },
+            removeFile:function(file){
+                dropzoneInstance.removeFile(file);
             },
             getFilesQueue:function(){
                 return dropzoneInstance.filesQueue;
@@ -44,6 +48,13 @@ angular.module('dropzone', []).
                 }
 
                 return infoObjects;
+            },
+            setMaxNoImages:function(noOfImages){
+                maxImages  = noOfImages;
+            },
+            getMaxNoImages:function(){
+                return maxImages;
             }
+
         }
     })
