@@ -107,11 +107,14 @@ angular.module('blogService', ['ngResource']).
             },
             updateBlog:function(form,callback){
                 var b = new blogResource(form);
-                b.$save(function () {
-                        callback();
+                b.$save(function (res) {
+                        console.log("response from server?");
+                        console.log(res);
+                        var err = null;
+                        callback(err,res);
                     },
                     function (err) {
-                        callback(err);
+                        callback(err,res);
                     });
             },
             paginatedBlogs:function(skip,limit,callback){

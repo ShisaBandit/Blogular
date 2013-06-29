@@ -178,26 +178,26 @@ app.directive('autoscroll', function () {
 
 app.directive('dropzone', function (dropzone, $rootScope) {
     return{
-        scope:{},
+       // scope:{},
         restrict: 'E',
         link: function (scope, elm, attrs) {
+
+
             var maxImages;
             scope.images = 0;
-            console.log("max images"+maxImages);
-            //using entryid from BlogEntry Scope not ideal ;8
-            console.log("auto = "+(attrs.autoupload == undefined ? false:true));
+            console.log(attrs.autoupload);
             var dropzoneOptions = {
                 url:attrs.url,
-                enqueueForUpload:(attrs.autoupload == undefined ? true : false)
+                enqueueForUpload:(attrs.autoupload == "true" ? true:false),
+                addRemoveLinks:(attrs.addremovelinks == "true" ? true: false)
             }
             //make a maxsize so can make a dropzone that only accepts
             //a set number of images
             //TODO:TEST ALL THIS STUFF
-            dropzone.createDropzone(elm, dropzoneOptions);
+            dropzone.createDropzone(elm,attrs.url, dropzoneOptions,attrs.id);
             if(attrs.maximages != undefined){
                 //dropzone.setMaxNoImages(parseInt(attrs.maximages,10)+1)
                 maxImages = parseInt(attrs.maximages,10)+1;
-                console.log("max images"+maxImages);
 
             }
             $rootScope.dropzone = dropzone;
@@ -206,7 +206,6 @@ app.directive('dropzone', function (dropzone, $rootScope) {
             })
             dropzone.registerEvent("addedfile", elm, function (file) {
                      scope.images++;
-                console.log("images "+scope.images+" maximges "+maxImages);
                 if(
                     maxImages != 0 &&
                     maxImages <= scope.images
@@ -215,20 +214,26 @@ app.directive('dropzone', function (dropzone, $rootScope) {
                     dropzone.removeFile(file);
                 }else{
                     dropzone.setFileLoadedInUi(file);
-                    $rootScope.$on('addedFile', {file: file});
+
+                    $rootScope.$broadcast('addedFile', {file: file});
 
                 }
 
                 //console.log(file);
                 /* Maybe display some more file information on your page */
             });
+            dropzone.registerEvent('removedFile',elm,function(file){
+                scope.images--;
+            })
             dropzone.registerEvent("sending", elm, function (file, xhr, formData) {
-                console.log(scope);
-                for(var data in attrs.appenddata){
-                    formData.append(data,attrs.appenddata[data]);
-                }
-                //formData.append("memwall", scope.entry._id);
+                if(scope.$parent.blogId != undefined)
+                    formData.append('blogId',scope.$parent.blogId.blogId);
+                if(scope.entry != undefined)
+                    formData.append("memwall", $rootScope.entry._id);
             });
+            scope.$on('uploadit',function(event,data){
+                 dropzone.uploadFile(data.file);
+            })
         }
     }
 })
@@ -866,15 +871,19 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams) {
 
 });
 
-app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog) {
+app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog,$rootScope) {
     $scope.template = {};
     $scope.hidemainform = false;
+    $scope.blogId = {blogId:""};
+    $scope.addedFile = {};
     $scope.submitPost = function () {
 
-        BlogsService.updateBlog($scope.form,function(err){
+        BlogsService.updateBlog($scope.form,function(err,res){
             if(err){
                 $scope.message = "Blog entry must have a title.";
             }
+
+            $scope.blogId.blogId = res.blogId;
             $scope.form.title = "";
             $scope.form.author = "";
             $scope.form.text = "";
@@ -883,13 +892,35 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog) {
             $scope.hidemainform = true;
         });
     }
-
+    $rootScope.$on('addedFile',function(event,file){
+        console.log("addedfile");
+        console.log($scope.addedFile);
+        $scope.addedFile = file.file;
+    })
     $scope.submitportrait = function(){
-        $scope.$parent.template.url = '/partials/admin/addspread.html';
 
+
+        $rootScope.$broadcast('uploadit',{file:$scope.addedFile});
+
+        $rootScope.$on('uploadedFile',function(){
+            console.log("completed now spreadem")  ;
+
+            $scope.$parent.template.url = 'partials/admin/addspread.html';
+            $scope.$apply()
+        })
     }
     $scope.submitspread = function(){
-        $scope.$parent.template.url = 'partials/admin/mwregcom.html';
+
+
+        console.log("addedfile");
+        console.log($scope.addedFile);
+        $rootScope.$broadcast('uploadit',{file:$scope.addedFile});
+
+        $rootScope.$on('uploadedFile',function(){
+            $scope.$parent.template.url = 'partials/admin/mwregcom.html';
+            $scope.$apply()
+        })
+
     }
 });
 

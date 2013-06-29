@@ -100,10 +100,10 @@ exports.createBlog = function (req, res) {
     else {
 
         var newBlogEntry = new Blog(req.body);
-        newBlogEntry.save(function (err) {
+        newBlogEntry.save(function (err,newblog) {
             if (err)console.log(err);
+            return res.end(JSON.stringify({'success': 'true',blogId:newblog._id}));
         });
-        return res.end(JSON.stringify({'success': 'true'}));
     }
 }
 
