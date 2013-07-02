@@ -100,10 +100,10 @@ exports.createBlog = function (req, res) {
     else {
 
         var newBlogEntry = new Blog(req.body);
-        newBlogEntry.save(function (err) {
+        newBlogEntry.save(function (err,newblog) {
             if (err)console.log(err);
+            return res.end(JSON.stringify({'success': 'true',blogId:newblog._id}));
         });
-        return res.end(JSON.stringify({'success': 'true'}));
     }
 }
 
@@ -249,12 +249,8 @@ exports.latestPics = function (req, res) {
 }
 
 exports.latestVideos = function (req, res) {
-    console.log(req.params.id);
-    var skip = req.params.skip,
-        limit = req.params.limit;
-    console.log(skip, limit);
     Blog.findOne({_id: req.params.id}).lean().exec(function (err, blog) {
-        return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.video, "text")));
+            return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.video, "embedYouTube")));
     });
 }
 function getPostText(blog, type, getProp) {
@@ -265,13 +261,29 @@ function getPostText(blog, type, getProp) {
             var prop;
             if (getProp == true) {
                 prop = getProp;
-                buffer.push(blog.postText[p][getProp]);
+                var pushdata;
+                if(prop = "embedYouTube"){
+                   pushdata =  blog.postText[p][getProp].str.slice(0,1);
+                   pushdata.str.slice(0,-1);
+                    console.log(pushdata)
+                }else{
+                    pushdata = blog.postText[p][getProp];
+                }
+                buffer.push(pushdata);
             } else {
-                buffer.push(blog.postText[p]);
+                var pushdata;
+                if(getProp = "embedYouTube"){
+                    pushdata =  blog.postText[p][getProp].slice(0,blog.postText[p][getProp].length);
+                    pushdata.slice(0,-1);
+                    console.log(pushdata)
+                    buffer.push(pushdata);
+                }else{
+                    buffer.push(blog.postText[p]);
+                }
             }
         }
     }
-    return postTexts;
+    return buffer;
 }
 
 

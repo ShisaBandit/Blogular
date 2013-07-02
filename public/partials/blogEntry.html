@@ -25,12 +25,14 @@
             <div id="picheader">
                 <div class="row">
                     <div class="large-12 columns">
-                        <img src="http://placehold.it/1000x300&text=[img]">
+                        <div id="widepic">
+                            <img width="1000" height="300" src="/uploads/{{ entry.profilePicWide }}">
 
+                        </div>
                         <hr>
 
-                        <div offset-height="-300">
-                            <img id="portrait" src="http://placehold.it/200x300&text=[img]">
+                        <div id="portraitpic" offset-height="-300">
+                            <img id="portrait" src="/uploads/{{ entry.profilePicPortrait }}">
 
                         </div>
                     </div>
@@ -48,27 +50,33 @@
 
                     <div ng-show="photobox" id="UploadBox">
                         <h2>Photo Uploader</h2>
-                              <div id='UploadArea'>
-                                 <dropzone url="/upload"
-                                           class="dropzone"
-                                           id="my-awesome-dropzone">
-                                 </dropzone>
 
-                              </div>
-                            <!--<a ng-click="submitphotodata()" class="button">Save</a> -->
-                            <a ng-click="flipEntry()" class="button">Finished</a>
+                        <div id='UploadArea'>
+                            <dropzone url="/upload"
+                                      class="dropzone"
+                                      id="my-awesome-dropzone">
+                            </dropzone>
+
+                        </div>
+                        <!--<a ng-click="submitphotodata()" class="button">Save</a> -->
+                        <a ng-click="flipEntry()" class="button">Finished</a>
                     </div>
                     <div ng-show="videobox" id="videobox">
                         <h2>Video Uploader</h2>
+
                         <div>
                             <h4>You Tube Link</h4>
-                            <input type="text" name="youtube"  ng-model="youtube" id="youtube"/>
+                            <b>You have to use the embed code from youtube for now</b>
+                            <input type="text" name="youtube" ng-model="embedYouTube" id="youtube"/>
                             <h4>Animoto Link</h4>
-                            <input type="text" name="animoto" ng-model="animoto" id="animoto"/>
+                            <input type="text" name="animoto" ng-model="embedAnimoto" id="animoto"/>
+                            <a ng-click="submitVideo()" class="button">Submit video links</a>
                         </div>
+
                     </div>
                     <div ng-show="eventbox" id="eventbox">
                         <h2>Events</h2>
+
                         <div>
                             <h4>New Event</h4>
                             <h5>Title</h5>
@@ -112,31 +120,31 @@
 
             </div>
         </div>
-           <!--
-        <div class="small-3 columns small-offset-1">
-            <div class="row">
-                <div id="chat" class="small-12 columns">
-                    <h2 class="contentHeaderTitle">Chat</h2>
-                </div>
-            </div>
-            <div class="contentContainer row">
-                <div id="submitComment">
-                    <textarea ng-model="body"></textarea>
+        <!--
+     <div class="small-3 columns small-offset-1">
+         <div class="row">
+             <div id="chat" class="small-12 columns">
+                 <h2 class="contentHeaderTitle">Chat</h2>
+             </div>
+         </div>
+         <div class="contentContainer row">
+             <div id="submitComment">
+                 <textarea ng-model="body"></textarea>
 
-                    <p>
-                        <a ng-click="submitComment()" class="button" resetOnSubmit="true"></a>
-                    </p>
-                </div>
-                <div ng-repeat="comment in comments" class="row">
-                    <div class="small-12 columns">
-                        <p><b>{{comment.username}}</b></p>
+                 <p>
+                     <a ng-click="submitComment()" class="button" resetOnSubmit="true"></a>
+                 </p>
+             </div>
+             <div ng-repeat="comment in comments" class="row">
+                 <div class="small-12 columns">
+                     <p><b>{{comment.username}}</b></p>
 
-                        <p>{{comment.body}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        -->
+                     <p>{{comment.body}}</p>
+                 </div>
+             </div>
+         </div>
+     </div>
+     -->
 
     </div>
 </div>

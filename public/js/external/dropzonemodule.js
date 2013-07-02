@@ -2,6 +2,7 @@ angular.module('dropzone', []).
     factory('dropzone', function ($rootScope) {
         var dropzoneInstance = {};
         var uiFiles = [];
+        var maxImages = 0;//0 == infinity;
         return{
             /**
              * @name CreateDropzone
@@ -9,9 +10,13 @@ angular.module('dropzone', []).
              * @param {string} elm The elmement to attach this object to
              * @param {string} url The url to pass to the url object this url will be upload url
              **/
-            createDropzone: function (elm, url) {
-                //return new Dropzone(elm,{url:url});
-                elm.dropzone({url: url});
+            createDropzone: function (elm,url, options,dropzoneID) {
+                dropzoneInstance = new Dropzone('#'+dropzoneID,options);
+                console.log(dropzoneInstance);
+                console.log(Dropzone.version);
+               // dropzoneInstance.options = options;
+                return dropzoneInstance;
+                //elm.dropzone({url:url});
             },
             /**
              * @name ReisterEvent
@@ -21,11 +26,20 @@ angular.module('dropzone', []).
              * @param callback callback when event is fired
              */
             registerEvent: function (event, element, callback) {
-                dropzoneInstance = Dropzone.forElement('#' + element.attr('id'));
+                //dropzoneInstance = Dropzone.forElement('#' + element.attr('id'));
                 dropzoneInstance.on(event, callback)
             },
             processQueue:function(){
                 return dropzoneInstance.processQueue();
+            },
+            processFile:function(file){
+                        dropzoneInstance.processFile(file);
+            },
+            uploadFile:function(file){
+                dropzoneInstance.uploadFile(file);
+            },
+            removeFile:function(file){
+                dropzoneInstance.removeFile(file);
             },
             getFilesQueue:function(){
                 return dropzoneInstance.filesQueue;
@@ -44,6 +58,13 @@ angular.module('dropzone', []).
                 }
 
                 return infoObjects;
+            },
+            setMaxNoImages:function(noOfImages){
+                maxImages  = noOfImages;
+            },
+            getMaxNoImages:function(){
+                return maxImages;
             }
+
         }
     })

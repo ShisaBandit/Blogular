@@ -21,12 +21,15 @@ exports.upload = function (req, res) {
                 //2. if=> submit is pushed.. move files to proper profilememwall and posttext
                 //3. if=> cancel is pusshed ... find and delete files from the orphaned list
                 //4. will clean all orphaned files every 24 hours or so to ensure no unneeded files stay
-                for(var o = 0;o<blog.orphanedphotos.length;o++){
-                    if(blog.orphanedphotos[o].filename == req.files.file.name){
-                        res.send(404,'already file by that name');
-                        return;
+                if(!blog.orphanedphotos == null){
+                    for(var o = 0;o<blog.orphanedphotos.length;o++){
+                        if(blog.orphanedphotos[o].filename == req.files.file.name){
+                            res.send(404,'already file by that name');
+                            return;
+                        }
                     }
                 }
+
                 blog.orphanedphotos.push({filename: req.files.file.name, uploader: req.session.passport.user});
                 blog.save(function () {
                     console.log('orphanedfiles saved name:' + req.files.file.name + ' uploaded by : ' + req.session.passport.user);
@@ -34,6 +37,38 @@ exports.upload = function (req, res) {
 
                 });
             })
+        });
+    });
+};
+exports.uploadportrait = function (req, res) {
+    var name = req.files.file.name;
+    fs.readFile(req.files.file.path, function (err, data) {
+        var newPath = __dirname + "/public/uploads/" + name;
+        fs.writeFile(newPath, data, function (err) {
+            if(err)res.send(401,'error');
+            Blog.findOne({_id:req.body.blogId},function(err,blog){
+                blog.profilePicPortrait = name;
+                blog.save(function(err){
+                    if(err)console.log(err);
+                })
+            });
+            res.redirect("back");
+        });
+    });
+};
+exports.uploadspread= function (req, res) {
+    var name = req.files.file.name;
+    fs.readFile(req.files.file.path, function (err, data) {
+        var newPath = __dirname + "/public/uploads/" + name;
+        fs.writeFile(newPath, data, function (err) {
+            if(err)res.send(401,'error');
+            Blog.findOne({_id:req.body.blogId},function(err,blog){
+               blog.profilePicWide = name;
+                blog.save(function(err){
+                    if(err)console.log(err);
+                })
+            });
+            res.redirect("back");
         });
     });
 };

@@ -12,6 +12,14 @@
 /* -----------------------------------------
    Shared Styles
 ----------------------------------------- */
+#portraitpic img{
+    width: 200px;
+    height: 300px;
+}
+#widepic img{
+    width: 1000px;
+    height: 300px;
+}
 
 #tagTest {
     width: 300px;
@@ -142,7 +150,7 @@
     color: #fff;
     white-space: nowrap;
     -webkit-border-radius: 3px;
-    border-radius: 3px; }
+    border-radius: 3px;
 }
 
 #username b {

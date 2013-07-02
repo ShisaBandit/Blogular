@@ -1,0 +1,17 @@
+<div ng-controller="AddBlogCtrl">
+    <p>
+        Thank you for uploading a portrait photo.
+        Now upload a background photo for you portrait photo.
+    </p>
+    <h3>Spread</h3>
+    <dropzone url="/uploadspread"
+                  class="dropzone"
+                  id="spreadDropzone"
+                  autoupload="false"
+                  maximages="1"
+                  addRemoveLinks="true"
+                >
+        </dropzone>
+        <a ng-click="submitspread()" class="button"></a>
+
+</div>
