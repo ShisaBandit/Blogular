@@ -89,6 +89,8 @@ var dataFilter = function(req,type,subtype,data,callback){
                     data.user_id = user._id;
                     callback(data);
                 });
+            }else{
+                callback(data);
             }
 
             break;
@@ -114,7 +116,13 @@ var dataFilter = function(req,type,subtype,data,callback){
                 })
 
 
+            }else{
+                callback(data);
             }
+            break;
+        }
+        default :{
+             callback(data);
             break;
         }
     }

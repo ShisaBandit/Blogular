@@ -35,7 +35,7 @@
             I am going to have the Angel icon displayed here from branding. This is temporary text.
         </div>
         <ul class="profile">
-            <li>Angel's Name : (Angel's full name) - <a href="#">View or Edit this memorial wall</a> - <a href="#">Delete this memorial wall</a></li>
+            <li ng-repeat="angel in angels">Angel's Name : {{ angel.firstName }} {{ angel.lastName }}- {{ angel.title }}<a href="#/editwall/{{ angel.author }}">View, edit or delete this memorial wall</a> - <a href="#/">invite or block other registered members</a></li>
         </ul>
             <a href="#/AddBlogEntry"><b>Create a new memorial wall profile here!</b></a>
         </div>

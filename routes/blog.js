@@ -93,6 +93,22 @@ exports.getLastBlogUpdateDate = function (req, res) {
     });
 };
 
+exports.blogdataforuser = function(req,res){
+                       var buffer = [];
+                Blog.find({owner_id:req.session.passport.user},function(err,blogs){
+                    for(var blog in blogs){
+                        var data = {};
+                        data.author = blogs[blog].author;
+                        data.firstName = blogs[blog].firstName;
+                        data.lastName = blogs[blog].lastName;
+                        data.title = blogs[blog].title;
+                        buffer.push(data);
+                    }
+                    res.send(JSON.stringify(buffer));
+
+                })
+}
+
 exports.createBlog = function (req, res) {
     var title = req.body.title;
     //noinspection JSValidateTypes
@@ -100,6 +116,7 @@ exports.createBlog = function (req, res) {
     else {
 
         var newBlogEntry = new Blog(req.body);
+        newBlogEntry.owner_id = req.session.passport.user;
         newBlogEntry.save(function (err,newblog) {
             if (err)console.log(err);
             return res.end(JSON.stringify({'success': 'true',blogId:newblog._id}));
