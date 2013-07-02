@@ -203,10 +203,19 @@ exports.addVideoPost = function (req, res) {
     console.log(req.body);
     Blog.findOne({_id: req.body.id}, function (err, blog) {
         console.log("Found Blog");
-        blog.postText.push(req.body);
-        blog.save(function (err, doc) {
-            console.log(err);
-        })
+        var user = req.session
+        User.findOne({_id: req.session.passport.user}, function (err,user) {
+            req.body.username = user.username;
+            req.body.gravatar = calcMD5(user.email);
+
+            req.body.user_id = user._id;
+            blog.postText.push(req.body);
+            blog.save(function (err, doc) {
+                console.log(err);
+            })
+
+        });
+
         return res.end(JSON.stringify({'success': 'true'}));
     });
 }

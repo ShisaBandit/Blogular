@@ -82,7 +82,15 @@ var dataFilter = function(req,type,subtype,data,callback){
         case"Blog":{
             data = setAllFirstNames(data);
             data = setAllLastNames(data);
-            callback(data);
+            if(subtype == "postText"){
+                models.User.findOne({_id: req.session.passport.user}, function (err,user) {
+                    data.username = user.username;
+                    data.gravatar = calcMD5(user.email);
+                    data.user_id = user._id;
+                    callback(data);
+                });
+            }
+
             break;
         }
         case "Petition":{

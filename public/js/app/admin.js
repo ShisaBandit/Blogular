@@ -5,10 +5,11 @@
  * Time: 10:00
  * To change this template use File | Settings | File Templates.
  */
-var appAdmin = angular.module('blogAppAdmin', ['blogService','userService', 'login', 'ngCookies', 'loaderModule', 'blogResource', 'adminResource', 'http-auth-interceptor', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries']).
+var appAdmin = angular.module('blogAppAdmin', ['apiResource','blogService','userService', 'login', 'ngCookies', 'loaderModule', 'blogResource', 'adminResource', 'http-auth-interceptor', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries']).
     config(function ($routeProvider) {
         $routeProvider.
             when("/", {templateUrl: "partials/admin/blogList.html"}).
+            when("/members", {templateUrl: "partials/admin/members.html"}).
             when("/edit/:blogId", {templateUrl: "partials/admin/edit.html"}).
             when("/add", {templateUrl: "partials/admin/createBlogEntry.html"}).
             when("/adminInstructions", {templateUrl: "partials/admin/adminInstructions.html"})
@@ -96,4 +97,14 @@ appAdmin.controller('EditBlogCtrl', function ($scope, Blog, $routeParams) {
     $scope.deletePost = function () {
         $scope.form.$remove();
     };
+});
+appAdmin.controller('AdmMembersCtrl', function ($scope, Blog, $routeParams,api) {
+
+    $scope.members;
+    api.getResourceById('User','all',function(users){
+        console.log("gEt users");
+        console.log(users);
+        $scope.members = users;
+    })
+
 });

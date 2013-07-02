@@ -111,111 +111,116 @@ exports.register = function (req, res) {
         minlastnameLength = 1,
         maxfirstNameLength = 15,
         maxlastNameLength = 15;
-
-    User.count({username: username}, function (err, count) {
-        if (err)console.log(err);
-        userCount = count;
-        //then get admin count
-        User.count({username: username, admin: {$in: ['superuser', 'admin']}}, function (err, count) {
+    if(req.body.betacode == "hardcoded"){
+        User.count({username: username}, function (err, count) {
             if (err)console.log(err);
-            adminCount = count;
-            //then check count
-            //TODO:redo this section of code in promises
-            //username checks
-            if (
+            userCount = count;
+            //then get admin count
+            User.count({username: username, admin: {$in: ['superuser', 'admin']}}, function (err, count) {
+                if (err)console.log(err);
+                adminCount = count;
+                //then check count
+                //TODO:redo this section of code in promises
+                //username checks
+                if (
                     userCount < 1 && adminCount < 1 &&
-                    username != undefined &&
-                    username != "" &&
-                    username.length > minUsernameLength &&
-                    username.length < maxUsernameLength &&
-                //password checks
-                    password != undefined &&
-                    password.length > minPasswordLength &&
-                    password.length < maxPasswordLength &&
-                    password != username &&
-                //firstname checks
-                    firstname != undefined &&
-                    firstname.length > minfirstnameLength &&
+                        username != undefined &&
+                        username != "" &&
+                        username.length > minUsernameLength &&
+                        username.length < maxUsernameLength &&
+                        //password checks
+                        password != undefined &&
+                        password.length > minPasswordLength &&
+                        password.length < maxPasswordLength &&
+                        password != username &&
+                        //firstname checks
+                        firstname != undefined &&
+                        firstname.length > minfirstnameLength &&
                         firstname.length < maxfirstNameLength &&
-            //lastname checks
-                lastname != undefined &&
-                    lastname.length > minlastnameLength &&
-                    lastname.length < maxlastNameLength
+                        //lastname checks
+                        lastname != undefined &&
+                        lastname.length > minlastnameLength &&
+                        lastname.length < maxlastNameLength
 
 
-            ) {
-                var user = new User(req.body);
-                user.save(function (err) {
-                    if (err){
-                        console.log(err);
-                        for(var name in err.errors){
-                            errorMessage.push("not valid "+name);
+                    ) {
+                    var user = new User(req.body);
+                    user.save(function (err) {
+                        if (err){
+                            console.log(err);
+                            for(var name in err.errors){
+                                errorMessage.push("not valid "+name);
+                            }
+                            return res.end(JSON.stringify({'fail': errorMessage}));
+
                         }
-                        return res.end(JSON.stringify({'fail': errorMessage}));
+                        //register a new wall if one was attached to request
+                        var blog = new Blog({
+                            firstName:req.body.firstName,
+                            lastName:req.body.lastName,
+                            subgroup:req.body.subgroup,
+                            subgroup:req.body.groupcode,
 
+                        })
+                        return res.end(JSON.stringify({'success': 'true'}));
+                    });
+                } else {
+
+
+                    //uername length check
+                    if (username == undefined || username == "") {
+                        errorMessage.push('Please enter a username');
+                    }else if ( username.length < minUsernameLength) {
+                        errorMessage.push('Username must be longer than ' + minUsernameLength);
+                    }else if (username.length > maxUsernameLength) {
+                        errorMessage.push('Username must be shorter than ' + maxUsernameLength);
                     }
-                    //register a new wall if one was attached to request
-                    var blog = new Blog({
-                        firstName:req.body.firstName,
-                        lastName:req.body.lastName,
-                        subgroup:req.body.subgroup,
-                        subgroup:req.body.groupcode,
+                    //password check
+                    if (password == undefined || password == "") {
+                        errorMessage.push('Please enter a password');
+                    }else if ( password.length < minPasswordLength) {
+                        errorMessage.push('Password must be longer than ' + minPasswordLength);
+                    }else if (password.length > maxPasswordLength) {
+                        errorMessage.push('Password must be shorter than ' + maxPasswordLength);
+                    }
 
-                    })
-                    return res.end(JSON.stringify({'success': 'true'}));
-                });
-            } else {
+                    if (password == username) {
+                        errorMessage.push('Password can not be the same as username');
+                    }
+
+                    if (userCount >= 1 || adminCount >= 1) {
+                        errorMessage.push('username already taken');
+                    }
+
+                    if (firstname == undefined || firstname == "") {
+                        errorMessage.push('Please enter a first name');
+                    }else if (firstname.length < minfirstnameLength) {
+                        errorMessage.push('First name must be longer than ' + minfirstnameLength);
+                    }else if (firstname.length > maxfirstNameLength) {
+                        errorMessage.push('First name must be shorter than ' + maxPasswordLength);
+                    }
+
+                    if (lastname == undefined || lastname == "") {
+                        errorMessage.push('Please enter a last name');
+                    }else if (lastname.length < minlastnameLength) {
+                        errorMessage.push('Last name must be longer than ' + minlastnameLength);
+                    }else if (lastname.length > maxlastNameLength) {
+                        errorMessage.push('Last name must be shorter than ' + maxlastNameLength);
+                    }
 
 
-                 //uername length check
-                if (username == undefined || username == "") {
-                    errorMessage.push('Please enter a username');
-                }else if ( username.length < minUsernameLength) {
-                    errorMessage.push('Username must be longer than ' + minUsernameLength);
-                }else if (username.length > maxUsernameLength) {
-                    errorMessage.push('Username must be shorter than ' + maxUsernameLength);
+                    if (errorMessage.length == 0 || errorMessage === undefined) {
+                        errorMessage.push('unknown error');
+                    }
+                    return res.end(JSON.stringify({'fail': errorMessage}));
                 }
-                //password check
-                if (password == undefined || password == "") {
-                    errorMessage.push('Please enter a password');
-                }else if ( password.length < minPasswordLength) {
-                    errorMessage.push('Password must be longer than ' + minPasswordLength);
-                }else if (password.length > maxPasswordLength) {
-                    errorMessage.push('Password must be shorter than ' + maxPasswordLength);
-                }
-
-                if (password == username) {
-                    errorMessage.push('Password can not be the same as username');
-                }
-
-                if (userCount >= 1 || adminCount >= 1) {
-                    errorMessage.push('username already taken');
-                }
-
-                if (firstname == undefined || firstname == "") {
-                    errorMessage.push('Please enter a first name');
-                }else if (firstname.length < minfirstnameLength) {
-                    errorMessage.push('First name must be longer than ' + minfirstnameLength);
-                }else if (firstname.length > maxfirstNameLength) {
-                    errorMessage.push('First name must be shorter than ' + maxPasswordLength);
-                }
-
-                if (lastname == undefined || lastname == "") {
-                    errorMessage.push('Please enter a last name');
-                }else if (lastname.length < minlastnameLength) {
-                    errorMessage.push('Last name must be longer than ' + minlastnameLength);
-                }else if (lastname.length > maxlastNameLength) {
-                    errorMessage.push('Last name must be shorter than ' + maxlastNameLength);
-                }
-
-
-                if (errorMessage.length == 0 || errorMessage === undefined) {
-                    errorMessage.push('unknown error');
-                }
-                return res.end(JSON.stringify({'fail': errorMessage}));
-            }
+            });
         });
-    });
+    }
+    else{
+
+    }
+
 
 
 };

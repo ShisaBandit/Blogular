@@ -306,6 +306,9 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
     $scope.entry.comments = [];
     $rootScope.profileMenuViewable = true;
     $scope.textorphoto = false;
+    $scope.event;
+    $scope.eventdate;
+    $scope.eventdesc;
 
     $scope.flipEntry = function () {
 
@@ -350,7 +353,9 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
          })
     }
     $scope.submitEvent = function () {
-        $http.post('')
+        api.createSubDocResource('Blog',$scope.entry._id,'anniverssaryDays',{event:$scope.event,date:$scope.eventdate,description:$scope.eventdesc},function(){
+
+        })
     }
 
     $scope.postText = "";
@@ -931,7 +936,6 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog,$rootScope) {
 });
 app.controller('VideoCtrl', function ($scope, BlogsService, Blog,$rootScope,$http) {
     $scope.videos = [];
-    $scope.TEST = "VIDSS"
     $scope.blogId = "";
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
@@ -951,6 +955,14 @@ app.controller('VideoCtrl', function ($scope, BlogsService, Blog,$rootScope,$htt
         })
 
 });
+app.controller('AnniCtrl',function($scope){
+    $scope.anis;
+    $scope.$watch('parentObject.entry', function (newVal, oldVal) {
+        console.log(oldVal);
+        console.log(newVal);
+        $scope.anis = newVal.anniverssaryDays;
+    });
+})
 
 /*
  function youtube($string,$autoplay=0,$width=480,$height=390)
