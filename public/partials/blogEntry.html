@@ -66,10 +66,13 @@
 
                         <div>
                             <h4>You Tube Link</h4>
-                            <input type="text" name="youtube" ng-model="youtube" id="youtube"/>
+                            <b>You have to use the embed code from youtube for now</b>
+                            <input type="text" name="youtube" ng-model="embedYouTube" id="youtube"/>
                             <h4>Animoto Link</h4>
-                            <input type="text" name="animoto" ng-model="animoto" id="animoto"/>
+                            <input type="text" name="animoto" ng-model="embedAnimoto" id="animoto"/>
+                            <a ng-click="submitVideo()" class="button">Submit video links</a>
                         </div>
+
                     </div>
                     <div ng-show="eventbox" id="eventbox">
                         <h2>Events</h2>

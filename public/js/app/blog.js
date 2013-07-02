@@ -293,7 +293,7 @@ app.controller('blogEntryPicCtrl', function ($scope) {
     $scope.test = "TEST RESULT";
 });
 
-app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http, dropzone) {
+app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http, dropzone,api) {
 
 
     $scope.parentObject = {
@@ -342,7 +342,12 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
     }
 
     $scope.submitVideo = function () {
-        $http.post('')
+        //TODO:Checkk this
+        console.log("submitvideo");
+        console.log($scope.entry._id);
+         api.createSubDocResource('Blog',$scope.entry._id,'postText',{embedYouTube:$scope.embedYouTube,embedAnimoto:$scope.embedAnimoto,postType:2},function(){
+
+         })
     }
     $scope.submitEvent = function () {
         $http.post('')
@@ -452,7 +457,8 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
      */
 
 
-    Blog.get({id: $routeParams.id}, function (blog) {
+    Blog.get({id: $routeParams.id}, function (blog)
+        {
             console.log('got blog');
             console.log(blog[0].limited);
             console.log(blog[0]);
@@ -922,6 +928,28 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog,$rootScope) {
         })
 
     }
+});
+app.controller('VideoCtrl', function ($scope, BlogsService, Blog,$rootScope,$http) {
+    $scope.videos = [];
+    $scope.TEST = "VIDSS"
+    $scope.blogId = "";
+    $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
+        console.log(oldVal);
+        console.log(newVal);
+        $scope.blogId = newVal;
+        $http.get('lastestVideos/' + newVal).
+            success(function (data) {
+                console.log(data);
+                $scope.videos = data;
+            })
+
+    });
+    $http.get('lastestVideos/' + $scope.blogId).
+        success(function (data) {
+            console.log(data);
+            $scope.videos = data;
+        })
+
 });
 
 /*

@@ -4,7 +4,7 @@
             <div class="small-12 columns postcontainer">
                 <div><img src="http://www.gravatar.com/avatar/{{post.gravatar}}" /> </div>
                 <h6>Posted by <a href="#/profile/{{post.username}}">{{post.username}} </a> on {{post.date}}.</h6>
-
+                <div ng-bind-html-unsafe="post.embedYouTube"></div>
                 <div>
                     {{post.text}}
                 </div>
