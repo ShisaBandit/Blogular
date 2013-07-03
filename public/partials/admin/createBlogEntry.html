@@ -4,16 +4,17 @@
             <div id="mainform" ng-hide="hidemainform">
                 <h1><span ng-bind="message"></span></h1>
 
-                <h2 class="subHeader">Events:</h2>
-
                 <div id="log"></div>
-                <h2>Create Post</h2>
+                <h2 class="subHeader">Create Memorial Profile</h2>
 
                 <label for="title">Title: </label>
                 <input id="title" ng-model="form.title" name="title">
-                <label for="author">URL: </label>
+                <br />
+                <br />
+                <label for="author">Please specify a short address for your profile (Less than 300 characters, including underscores and dashes with no spaces): </label>
                 <input type="text" name="author" id="author" ng-model="form.author">
-                <label for="content">About: </label>
+                <br />
+                <label for="content">Tell your Angel's story here: </label>
 
                 <!-- add on to later for now just use regular text area
                  <div id="toolbar" style="display: none;">
@@ -23,62 +24,26 @@
                  </div>
                  -->
                 <textarea id="content" placeholder="Enter text ..." ng-model="form.text" cols="50" rows="15"></textarea>
+                <br />
 
-                <tr>
-                    <th>Name of Angel</th>
-
-                    <td><input type="text" class="login-inp" ng-model="form.firstname"/> <h5>First</h5></td>
-
-                    <td><input type="text" class="login-inp" ng-model="form.lastname"/><h5>Last</h5></td>
-                </tr>
-                <tr>
-                    <th>Day your angel got wings</th>
-                    <td><input type="date" class="login-inp" ng-model="form.memorialDate"/></td>
-                </tr>
-                <!--
-                <tr>
-                    <th>Pic Portrait</th>
-                    <td>
-                        <form action="uploadportrait" enctype="multipart/form-data">
-                            <input type="file" name="wallportrait"/>
-                            <input type="submit">
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Portrait Spread</th>
-                    <td>
-                        <form action="uploadspread" enctype="multipart/form-data">
-                            <input type="file" name="wallspread"/>
-                            <input type="submit">
-                        </form>
-                    </td>
-                </tr>
-                 -->
-
-
-                <tr>
-                    <th>Date of Birth</th>
-                    <!--TODO:Make this a n uploadable file-->
-                    <td><input type="date" class="login-inp" ng-model="form.dob"/></td>
-                </tr>
-                <!--
-                <tr>
-                    <th>Angels memory databank</th>
-                    <td><input type="text" class="login-inp" ng-model="form.avatar"/></td>
-                </tr>
-                -->
-                <tr>
-                    <th>This is my</th>
+                <label>Name of Angel</label>
+                <input type="text" class="login-inp" ng-model="form.firstname" placeholder="First Name" />
+                <input type="text" class="login-inp" ng-model="form.lastname" placeholder="Last Name" />
+                <br />
+                <label>Day your angel got wings</label>
+                <input type="date" class="login-inp" ng-model="form.memorialDate"/>
+                <br />
+                <label>Date of Birth</label>
+                <!--TODO:Make this a n uploadable file-->
+                <input type="date" class="login-inp" ng-model="form.dob"/>
+                <br />
+                <label>This is my</label>
                     <!--<td><input type="checkbox" ng-repeat="group in groups" class="login-inp" ng-model="form.subgroup"/>{{type.name}}</td>
                 -->
 
-                    <td ng-repeat="group in groups">{{group.name}}:<input type="checkbox" ng-change="checked()"
+                    <div ng-repeat="group in groups">{{group.name}}:<input type="checkbox" ng-change="checked()"
                                                                           ng-model="groups[$index].checked"
-                                                                          class="login-inp" name="{{group.name}}"/></td>
-
-
-                </tr>
+                                                                          class="login-inp" name="{{group.name}}"/></div>
 
                 <!--
                 <h4>Tagegories</h4>
@@ -88,8 +53,10 @@
                     <input type="text" name="categories" id="categories" ng-model="form.categories">
                     <p>Comma seperated values ONLY!! Be aware no validation here is added yet!</p>
                     -->
+                <br />
+                <br />
                 <p>
-                    <a ng-click="submitPost()" class="button" resetOnSubmit="true"></a>
+                    <a ng-click="submitPost()" class="button" resetOnSubmit="true">On to the Next Step</a>
 
                 </p>
             </div>
