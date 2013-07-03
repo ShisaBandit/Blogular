@@ -326,7 +326,15 @@ h1.sectionHeader {
     box-shadow: 5px 5px 5px #132D48;
 }
 
-   /*
+label {
+    font-size: 1em;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.1875em;
+}
+  /*
 .nav-container{ background: url('images/nav_bg.jpg') repeat-x 0 0;}
 .f-nav{ z-index: 9999; position: fixed; left: 0; top: 0; width: 100%;}
 
