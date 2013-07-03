@@ -995,7 +995,7 @@ app.controller('FriendsFamilyCtrl',function($scope,api){
         })
     });
 });
-app.controller('InviteBlockCtrl',function($scope,api){
+app.controller('InviteBlockCtrl',function($scope,api,$http,$routeParams){
     $scope.users = [];
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
@@ -1008,7 +1008,9 @@ app.controller('InviteBlockCtrl',function($scope,api){
         })
     });
     $scope.invite = function(){
+        $http.get('invite/'+$routeParams.wall).success(function(data){
 
+        });
     }
     $scope.block = function(){
 
