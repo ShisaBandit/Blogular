@@ -18,7 +18,8 @@ var app = angular.module('blogApp', [
             when("/registration", {templateUrl: "partials/registration.html"}).
             when("/profile/:username", {templateUrl: "partials/userprofile.html"}).
             when("/AddBlogEntry/uploadportrait/:id",{templateUrl:"partials/admin/addportrait.html"}).
-            when("/AddBlogEntry/uploadspread/:id",{templateUrl:"partials/admin/addspread.html"})
+            when("/AddBlogEntry/uploadspread/:id",{templateUrl:"partials/admin/addspread.html"}).
+            when("/inviteblock/:wall",{templateUrl:"partials/inviteblock.html"})
     });
 
 app.directive('closeparent', function () {
@@ -48,6 +49,15 @@ app.directive('becomeMainContent', function () {
         }
     }
 });
+
+
+
+
+
+
+
+
+
 
 app.directive('fixedMenu', function () {
     return{
@@ -984,7 +994,28 @@ app.controller('FriendsFamilyCtrl',function($scope,api){
 
         })
     });
-})
+});
+app.controller('InviteBlockCtrl',function($scope,api){
+    $scope.users = [];
+    $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
+        console.log(oldVal);
+        console.log(newVal);
+        //TODO:get users that can access this memwall(blog)
+        api.getResourceById('User','all',function(data){
+            console.log(data);
+            $scope.users = data;
+
+        })
+    });
+    $scope.invite = function(){
+
+    }
+    $scope.block = function(){
+
+    }
+});
+
+
 
 /*
  function youtube($string,$autoplay=0,$width=480,$height=390)
