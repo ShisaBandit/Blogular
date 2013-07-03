@@ -123,6 +123,8 @@ app.get('/blog/:skip/:limit', blogRoutes.getPaginatedBlogs);
 
 app.get('/blogLastUpdate/:id', blogRoutes.getLastBlogUpdateDate);
 
+app.get('/blogdataforuser', blogRoutes.blogdataforuser);
+
 app.get('/lastestPosts/:id', blogRoutes.lastestPosts);
 
 app.get('/lastestPics/:id', blogRoutes.latestPics);

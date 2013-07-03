@@ -9,6 +9,7 @@ var blogSchema = mongoose.Schema({
     memorialDate: Date,
     anniverssaryDays: [
         {
+            description:String,
             event: String,
             date: Date
         }

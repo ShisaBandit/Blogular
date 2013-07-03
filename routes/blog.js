@@ -93,6 +93,22 @@ exports.getLastBlogUpdateDate = function (req, res) {
     });
 };
 
+exports.blogdataforuser = function(req,res){
+                       var buffer = [];
+                Blog.find({owner_id:req.session.passport.user},function(err,blogs){
+                    for(var blog in blogs){
+                        var data = {};
+                        data.author = blogs[blog].author;
+                        data.firstName = blogs[blog].firstName;
+                        data.lastName = blogs[blog].lastName;
+                        data.title = blogs[blog].title;
+                        buffer.push(data);
+                    }
+                    res.send(JSON.stringify(buffer));
+
+                })
+}
+
 exports.createBlog = function (req, res) {
     var title = req.body.title;
     //noinspection JSValidateTypes
@@ -100,6 +116,7 @@ exports.createBlog = function (req, res) {
     else {
 
         var newBlogEntry = new Blog(req.body);
+        newBlogEntry.owner_id = req.session.passport.user;
         newBlogEntry.save(function (err,newblog) {
             if (err)console.log(err);
             return res.end(JSON.stringify({'success': 'true',blogId:newblog._id}));
@@ -203,10 +220,19 @@ exports.addVideoPost = function (req, res) {
     console.log(req.body);
     Blog.findOne({_id: req.body.id}, function (err, blog) {
         console.log("Found Blog");
-        blog.postText.push(req.body);
-        blog.save(function (err, doc) {
-            console.log(err);
-        })
+        var user = req.session
+        User.findOne({_id: req.session.passport.user}, function (err,user) {
+            req.body.username = user.username;
+            req.body.gravatar = calcMD5(user.email);
+
+            req.body.user_id = user._id;
+            blog.postText.push(req.body);
+            blog.save(function (err, doc) {
+                console.log(err);
+            })
+
+        });
+
         return res.end(JSON.stringify({'success': 'true'}));
     });
 }

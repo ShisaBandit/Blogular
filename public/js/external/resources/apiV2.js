@@ -8,7 +8,7 @@ angular.module('apiResource', ['ngResource']).
             }
         );
         var apiGetByField = $resource('/get/:type/:field/:query',
-            {id: '@_id',type:'@type',field:'@field'},
+            {type:'@type',field:'@field'},
             {
                 'get': {method: 'GET', isArray: 'true'},
                 'save': {method: 'POST'}

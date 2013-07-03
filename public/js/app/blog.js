@@ -306,6 +306,9 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
     $scope.entry.comments = [];
     $rootScope.profileMenuViewable = true;
     $scope.textorphoto = false;
+    $scope.event;
+    $scope.eventdate;
+    $scope.eventdesc;
 
     $scope.flipEntry = function () {
 
@@ -350,7 +353,9 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
          })
     }
     $scope.submitEvent = function () {
-        $http.post('')
+        api.createSubDocResource('Blog',$scope.entry._id,'anniverssaryDays',{event:$scope.event,date:$scope.eventdate,description:$scope.eventdesc},function(){
+
+        })
     }
 
     $scope.postText = "";
@@ -363,7 +368,7 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         console.log("loadpage");
         $scope.template = '/partials/profile/' + page.toLowerCase() + '.html';
         $scope.contentHeaderTitle = page;
-
+        console.log($scope.template);
 
     }
 
@@ -869,11 +874,18 @@ app.controller('PetitionEntryCtrl', function ($scope, api, $routeParams) {
         });
     }
 });
-app.controller('UserProfileCtrl', function ($scope, api, $routeParams) {
+app.controller('UserProfileCtrl', function ($scope, api, $routeParams,$http) {
 
     api.getResourceByField('User', {field:"username",query:$routeParams.username}, function (user) {
         $scope.user = user[0];
+        //get all angel profiles(blogs) that this user has in his profile id
+
     });
+    $http.get('/blogdataforuser').
+        success(function(data){
+            console.log(data);
+            $scope.angels = data;
+        })
 
 });
 
@@ -931,7 +943,6 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog,$rootScope) {
 });
 app.controller('VideoCtrl', function ($scope, BlogsService, Blog,$rootScope,$http) {
     $scope.videos = [];
-    $scope.TEST = "VIDSS"
     $scope.blogId = "";
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
@@ -951,6 +962,29 @@ app.controller('VideoCtrl', function ($scope, BlogsService, Blog,$rootScope,$htt
         })
 
 });
+app.controller('AnniCtrl',function($scope,api){
+    $scope.anis = [];
+    $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
+        console.log(oldVal);
+        console.log(newVal);
+        api.getResourceById('Blog',newVal,function(blogs){
+            console.log(blogs[0]);
+            $scope.anis = blogs[0].anniverssaryDays;
+        })
+    });
+})
+app.controller('FriendsFamilyCtrl',function($scope,api){
+    $scope.anis = [];
+    $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
+        console.log(oldVal);
+        console.log(newVal);
+        //TODO:get users that can access this memwall(blog)
+        api.getResourceByField('User',{field:'profile',query:newVal},function(data){
+            console.log(data);
+
+        })
+    });
+})
 
 /*
  function youtube($string,$autoplay=0,$width=480,$height=390)
