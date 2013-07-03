@@ -279,6 +279,18 @@ exports.latestVideos = function (req, res) {
             return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.video, "embedYouTube")));
     });
 }
+
+exports.sendWallInvite = function(req,res){
+    Blog.findOne({author:req.params.wallid},function(err,blog){
+         User.findOne({_id:req.params.user},function(err,user){
+             user.profiles.push(blog._id);
+             user.save(function(err){
+                 console.log("profile pushed to user"+user.username);
+             })
+         })
+    })
+}
+
 function getPostText(blog, type, getProp) {
     if (getProp == undefined)getProp = false;
     var buffer = [];

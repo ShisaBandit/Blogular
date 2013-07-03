@@ -43,7 +43,7 @@ exports.upload = function (req, res) {
 exports.uploadportrait = function (req, res) {
     var name = req.files.file.name;
     fs.readFile(req.files.file.path, function (err, data) {
-        var newPath = __dirname + "/public/uploads/" + name;
+        var newPath = global.__approot  + "/public/uploads/" + name;
         fs.writeFile(newPath, data, function (err) {
             if(err)res.send(401,'error');
             Blog.findOne({_id:req.body.blogId},function(err,blog){
@@ -59,7 +59,7 @@ exports.uploadportrait = function (req, res) {
 exports.uploadspread= function (req, res) {
     var name = req.files.file.name;
     fs.readFile(req.files.file.path, function (err, data) {
-        var newPath = __dirname + "/public/uploads/" + name;
+        var newPath = global.__approot  + "/public/uploads/" + name;
         fs.writeFile(newPath, data, function (err) {
             if(err)res.send(401,'error');
             Blog.findOne({_id:req.body.blogId},function(err,blog){

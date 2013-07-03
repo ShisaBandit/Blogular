@@ -1007,8 +1007,8 @@ app.controller('InviteBlockCtrl',function($scope,api,$http,$routeParams){
 
         })
     });
-    $scope.invite = function(){
-        $http.get('invite/'+$routeParams.wall).success(function(data){
+    $scope.invite = function(user){
+        $http.get('invite/'+$routeParams.wall+'/'+user).success(function(data){
 
         });
     }

@@ -3,8 +3,8 @@
         <li ng-repeat="user in users">
             {{ user.firstName }} {{ user.lastName }}
             <p>Username:{{ user.username }}</p>
-            <a ng-click="invite()">Invite</a>
-            <a ng-click="block()">Block</a>
+            <a ng-click="invite({{ user._id }})">Invite</a>
+            <a ng-click="block({{ user._id }})">Block</a>
         </li>
     </ul>
 </div>
