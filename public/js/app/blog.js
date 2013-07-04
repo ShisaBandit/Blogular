@@ -1029,6 +1029,11 @@ app.controller('InviteBlockCtrl',function($scope,api,$http,$routeParams){
 
 
 app.controller('EditWallCtrl',function($http,$scope,api,$routeParams){
+
+    $http.get('subscribedto/'+$routeParams.id).
+        success(function(data){
+            $scope.subscribers = data;
+        })
                 $scope.form;
     api.getResourceByField('Blog',{field:'author',query:$routeParams.wall},function(data){
         console.log(data);

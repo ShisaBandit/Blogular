@@ -313,6 +313,25 @@ exports.block = function(req,res){
     })
 }
 
+exports.selfremove = function(req,res){
+    var wall = req.params.id;
+    User.findOne({_id:req.sessions.passport.user},function(err,user){
+        var profiles = user.profiles;
+        var x = 0;
+        for(var profile in profiles){
+            if(profiles[profile].profile == wall){
+                profiles.slice(x,1);
+            }
+            x++;
+        }
+        user.profiles = profiles;
+        user.save(function(data){
+
+        })
+    })
+}
+
+
 exports.subscribed = function(req,res){
    var blogId = req.params.id;
     console.log(blogId);
@@ -323,6 +342,10 @@ exports.subscribed = function(req,res){
             res.send(JSON.stringify(users));
         })
     })
+}
+
+exports.subscribedto = function(req,res){
+
 }
 
 function getPostText(blog, type, getProp) {

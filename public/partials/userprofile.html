@@ -47,8 +47,7 @@
             <div class="profileGravatar">
             </div>
             <ul class="profile">
-                <li>Friend's Name : (Friend's full name) <br />
-                     - Angel's Name : (Angel's full name)  - <a href="#">View or this memorial wall</a> - <a href="#">Remove yourself from this memorial wall network</a></li>
+                <li ng-repeat="angelmember in angelmembers">Angel's Name : (Angel's full name)  - <a href="#/blog/{{ angelmember.author }}">View or this memorial wall</a> - <a href="#/selfremove/{{ angelmember.author }}">Remove yourself from this memorial wall network</a></li>
             </ul>
         </div>
 

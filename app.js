@@ -235,6 +235,8 @@ app.get('/get/:type/:field/:query',apiv2.getData);
 app.get('/invite/:wallid/:user',blogRoutes.sendWallInvite);
 app.get('/block/:wallid/:user',blogRoutes.block);
 app.get('/subscribed/:id',blogRoutes.subscribed);
+app.get('/selfremove/:id',blogRoutes.selfremove);
+app.get('/selfremove/:id',blogRoutes.subscribedto);
 
 
 
