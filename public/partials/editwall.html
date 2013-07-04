@@ -1,0 +1,52 @@
+<div ng-controller="EditWallCtrl">
+
+   <div class="offsetHeight">
+    <h2>Events:</h2>
+    <div id="log"></div>
+    <h2>Edit Post</h2>
+    <form>
+        <label for="title">Title: </label>
+        <input id="title" ng-model="form.title" name="title">
+        <label for="author">Author: </label>
+        <input type="text" name="author" id="author" ng-model="form.author">
+        <label for="content">Content: </label>
+        <label>Name of Angel</label>
+        <input type="text" class="login-inp" ng-model="form.firstname" placeholder="First Name" />
+        <input type="text" class="login-inp" ng-model="form.lastname" placeholder="Last Name" />
+        <label for="content">Tell your Angel's story here: </label>
+
+        <!-- add on to later for now just use regular text area
+         <div id="toolbar" style="display: none;">
+             <a data-wysihtml5-command="bold" title="CTRL+B">bold</a> |
+             <a data-wysihtml5-command="italic" title="CTRL+I">italic</a>
+             <a data-wysihtml5-action="change_view">switch to html view</a>
+         </div>
+         -->
+        <textarea id="content" placeholder="Enter text ..." ng-model="form.text" cols="50" rows="15"></textarea>
+        <br />
+        <label for="titleImage">Title Image:</label>
+        <input id="titleImage" ng-model="form.titleImage" name="titleImage">
+
+        <label>Date of Birth</label>
+        <!--TODO:Make this a n uploadable file-->
+        <input type="date" class="login-inp" ng-model="form.dob"/>
+        <br />
+        <label>This is my</label>
+            <div ng-repeat="group in groups">{{group.name}}:<input type="checkbox" nge="checked()"
+                                                               ng-model="groups[$index].checked"
+                                                               class="login-inp" name="{{group.name}}"/></div>
+        <label>Day your angel got wings</label>
+        <input type="date" class="login-inp" ng-model="form.memorialDate"/>
+
+
+    <br />
+
+    <p>
+        <button ng-click="editPost()" resetOnSubmit="true">Submit Post</button>
+    </p>
+    </form>
+    <h2>Delete Wall</h2>
+    <button ng-click="deletePost()">DELETE !!!</button>
+
+   </div>
+</div>

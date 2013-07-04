@@ -232,7 +232,9 @@ app.post('/create/:type/:id/:subdoc',apiv2.createData);
 app.get('/get/:type/:id',apiv2.getData);//id:ALL = get all blogs anythings else must be an id
 app.get('/get/:type/:field/:query',apiv2.getData);
 
-app.get('/invite/:wallid/:user',blogRoutes.sendWallInvite)
+app.get('/invite/:wallid/:user',blogRoutes.sendWallInvite);
+app.get('/block/:wallid/:user',blogRoutes.block);
+app.get('/subscribed/:id',blogRoutes.subscribed);
 
 
 

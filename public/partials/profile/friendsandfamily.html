@@ -1,6 +1,8 @@
 <div ng-controller="FriendsFamilyCtrl">
     <h1>Test</h1>
-    <div ng-repeat="subscriber in subscribers">
-        {{ subscriber.firstName }}
-    </div>
+    <ul>
+        <li ng-repeat="subscriber in subscribers">
+            <p>{{ subscriber.firstName }} {{ subscriber.lastName }}</p>
+        </li>
+    </ul>
 </div>

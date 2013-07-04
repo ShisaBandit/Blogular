@@ -19,7 +19,8 @@ var app = angular.module('blogApp', [
             when("/profile/:username", {templateUrl: "partials/userprofile.html"}).
             when("/AddBlogEntry/uploadportrait/:id",{templateUrl:"partials/admin/addportrait.html"}).
             when("/AddBlogEntry/uploadspread/:id",{templateUrl:"partials/admin/addspread.html"}).
-            when("/inviteblock/:wall",{templateUrl:"partials/inviteblock.html"})
+            when("/inviteblock/:wall",{templateUrl:"partials/inviteblock.html"}).
+            when("/editwall/:wall",{templateUrl:"partials/editwall.html"})
     });
 
 app.directive('closeparent', function () {
@@ -196,14 +197,20 @@ app.directive('dropzone', function (dropzone, $rootScope) {
             var maxImages;
             scope.images = 0;
             console.log(attrs.autoupload);
+            if(attrs.autoupload == undefined){
+                console.log("autoupload == false")
+                attrs.autoupload = true;
+            }
             var dropzoneOptions = {
                 url:attrs.url,
-                enqueueForUpload:(attrs.autoupload == "true" ? true:false),
+
+                autoProcessQueue:(attrs.autoupload == "true" ? true:false),
                 addRemoveLinks:(attrs.addremovelinks == "true" ? true: false)
             }
             //make a maxsize so can make a dropzone that only accepts
             //a set number of images
             //TODO:TEST ALL THIS STUFF
+            console.log(dropzoneOptions)
             dropzone.createDropzone(elm,attrs.url, dropzoneOptions,attrs.id);
             if(attrs.maximages != undefined){
                 //dropzone.setMaxNoImages(parseInt(attrs.maximages,10)+1)
@@ -239,7 +246,7 @@ app.directive('dropzone', function (dropzone, $rootScope) {
                 if(scope.$parent.blogId != undefined)
                     formData.append('blogId',scope.$parent.blogId.blogId);
                 if(scope.entry != undefined)
-                    formData.append("memwall", $rootScope.entry._id);
+                    formData.append("memwall", scope.entry._id);
             });
             scope.$on('uploadit',function(event,data){
                  dropzone.uploadFile(data.file);
@@ -983,16 +990,16 @@ app.controller('AnniCtrl',function($scope,api){
         })
     });
 })
-app.controller('FriendsFamilyCtrl',function($scope,api){
-    $scope.anis = [];
+app.controller('FriendsFamilyCtrl',function($scope,api,$routeParams,$http){
+    $scope.subscribers = [];
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
         //TODO:get users that can access this memwall(blog)
-        api.getResourceByField('User',{field:'profile',query:newVal},function(data){
-            console.log(data);
-
-        })
+        $http.get('subscribed/'+$routeParams.id).
+            success(function(data){
+                $scope.subscribers = data;
+            })
     });
 });
 app.controller('InviteBlockCtrl',function($scope,api,$http,$routeParams){
@@ -1012,12 +1019,34 @@ app.controller('InviteBlockCtrl',function($scope,api,$http,$routeParams){
 
         });
     }
-    $scope.block = function(){
+    $scope.block = function(user){
+        $http.get('block/'+$routeParams.wall+'/'+user).
+            success(function(data){
 
+            })
     }
 });
 
 
+app.controller('EditWallCtrl',function($http,$scope,api,$routeParams){
+                $scope.form;
+    api.getResourceByField('Blog',{field:'author',query:$routeParams.wall},function(data){
+        console.log(data);
+        $scope.form = data[0];
+    })
+    $scope.editPost = function () {
+        console.log("Trying to save");
+        console.log($scope.form._id);
+        $http.post('blog/'+$scope.form._id,$scope.form).
+            success(function(data){
+
+            })
+    };
+
+    $scope.deletePost = function () {
+        $scope.form.$remove();
+    };
+})
 
 /*
  function youtube($string,$autoplay=0,$width=480,$height=390)

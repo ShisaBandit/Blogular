@@ -84,11 +84,15 @@ var dataFilter = function(req,type,subtype,data,callback){
             data = setAllLastNames(data);
             if(subtype == "postText"){
                 models.User.findOne({_id: req.session.passport.user}, function (err,user) {
-                    data.username = user.username;
-                    data.gravatar = calcMD5(user.email);
-                    data.user_id = user._id;
-                    callback(data);
-                });
+                    if(user == null){
+                        callback(data);
+                    }else{
+                        data.username = user.username;
+                        data.gravatar = calcMD5(user.email);
+                        data.user_id = user._id;
+                        callback(data);
+                    }
+                   });
             }else{
                 callback(data);
             }

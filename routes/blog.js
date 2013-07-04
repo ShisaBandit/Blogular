@@ -283,11 +283,45 @@ exports.latestVideos = function (req, res) {
 exports.sendWallInvite = function(req,res){
     Blog.findOne({author:req.params.wallid},function(err,blog){
          User.findOne({_id:req.params.user},function(err,user){
-             user.profiles.push(blog._id);
+             user.profiles.push({profile:blog._id});
              user.save(function(err){
                  console.log("profile pushed to user"+user.username);
+                 res.send(200,'success');
              })
          })
+    })
+}
+exports.block = function(req,res){
+    var wall = req.params.wallid;
+    Blog.findOne({author:req.params.wallid},function(err,blog){
+         User.findOne({_id:req.params.user},function(err,user){
+            var profiles = user.profiles;
+            console.log(user.profiles);
+             var x = 0;
+            for(var profile in profiles){
+                if(profile.profile == blog._id){
+                    profile.splice(x,1);
+                }
+                x++;
+            }
+               user.profiles = profiles;
+                console.log(user.profiles);
+             user.save(function(err){
+                 console.log("profile removed to user"+user.username);
+             })
+         });
+    })
+}
+
+exports.subscribed = function(req,res){
+   var blogId = req.params.id;
+    console.log(blogId);
+    Blog.findOne({author:blogId},function(err,blog){
+        console.log(blog._id);
+        User.find({profiles:{$elemMatch:{profile:blog._id}}},function(err,users){
+             console.log(users);
+            res.send(JSON.stringify(users));
+        })
     })
 }
 
@@ -303,7 +337,7 @@ function getPostText(blog, type, getProp) {
                 if(prop = "embedYouTube"){
                    pushdata =  blog.postText[p][getProp].str.slice(0,1);
                    pushdata.str.slice(0,-1);
-                    console.log(pushdata)
+                   console.log(pushdata)
                 }else{
                     pushdata = blog.postText[p][getProp];
                 }
@@ -311,6 +345,7 @@ function getPostText(blog, type, getProp) {
             } else {
                 var pushdata;
                 if(getProp = "embedYouTube"){
+                    if(blog.postText[p][getProp] == undefined)return buffer;
                     pushdata =  blog.postText[p][getProp].slice(0,blog.postText[p][getProp].length);
                     pushdata.slice(0,-1);
                     console.log(pushdata)
