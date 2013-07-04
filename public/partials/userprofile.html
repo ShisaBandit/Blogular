@@ -9,7 +9,6 @@
                 </div>
             </div>
             <div class="profileGravatar">
-                Your gravatar will show here.
                 <img src="http://www.gravatar.com/avatar/{{user.gravatar}}" />
             </div>
             <ul class="profile">
@@ -34,9 +33,12 @@
         <div class="profileGravatar">
         </div>
         <ul class="profile">
-            <li ng-repeat="angel in angels">Angel's Name : {{ angel.firstName }} {{ angel.lastName }}- {{ angel.title }}<a href="#/editwall/{{ angel.author }}">View, edit or delete this memorial wall</a> - <a href="#/inviteblock/{{ angel.author }}">invite or block other registered members</a></li>
+            <li ng-repeat="angel in angels">Angel's Name : {{ angel.firstName }} {{ angel.lastName }}- {{ angel.title }}
+                <br />- <a href="#/editwall/{{ angel.author }}">View, edit or delete this memorial wall</a>
+                <br />- <a href="#/inviteblock/{{ angel.author }}">invite or block other registered members</a><br /><br />
+            </li>
         </ul>
-            <a href="#/AddBlogEntry"><b>Create a new memorial wall profile here!</b></a>
+            <a href="#/AddBlogEntry"><b>Create a new memorial wall profile here!</b></a>  <br /><br />
         </div>
         <div class="small-12 columns">
             <div class="row ">
