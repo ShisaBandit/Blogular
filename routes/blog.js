@@ -338,14 +338,20 @@ exports.subscribed = function(req,res){
     Blog.findOne({author:blogId},function(err,blog){
         console.log(blog._id);
         User.find({profiles:{$elemMatch:{profile:blog._id}}},function(err,users){
-             console.log(users);
+            console.log(users);
             res.send(JSON.stringify(users));
         })
     })
 }
 
 exports.subscribedto = function(req,res){
-
+    var blogId = req.params.id;
+    console.log(blogId);
+    //TODO:Ask rodney about what this should be... not friends but people on your walls??
+    //we have no "friends perse"
+    Blog.findOne({author:blogId},function(err,blog){
+        console.log(blog._id);
+    })
 }
 
 function getPostText(blog, type, getProp) {
