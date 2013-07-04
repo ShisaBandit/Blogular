@@ -259,9 +259,10 @@ h1.sectionHeader {
     width: 250px;
     height: 300px;
     padding: 20px;
+    margin-right: -15px;
     float: right;
     background: #f5f5f5 url("/img/AngelIcon2b.jpg") no-repeat center center;
-    box-shadow: -2px -10px darkgrey;
+    box-shadow: -2px 0px 5px 5px darkgrey;
 }
 /* -----------------------------------------
    Page Name 1
