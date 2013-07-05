@@ -53,6 +53,13 @@ app.directive('becomeMainContent', function () {
 
 
 
+app.directive('nivogallery', function () {
+    return{
+        link: function (scope, elm, attrs) {
+            elm.nivoGallery();
+        }
+    }
+})
 
 
 
