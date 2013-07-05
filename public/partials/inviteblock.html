@@ -7,7 +7,7 @@
                 </div>
                 <br />
                 <ul class="profile">
-                    <li ng-repeat="user in users">
+                    <li class="wallViewers" ng-repeat="user in users">
                         <h3><img src="http://www.gravatar.com/avatar/{{user.gravatar}}" /> {{ user.firstName }} {{ user.lastName }}</h3>
                         <b>Username:{{ user.username }}</b>
                         <a ng-click="invite(user._id )" class="small radius button workpetsbuttons">Invite</a>
