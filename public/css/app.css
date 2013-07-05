@@ -12,11 +12,20 @@
 /* -----------------------------------------
    Shared Styles
 ----------------------------------------- */
-#portraitpic img{
+#portraitpic {
+    position: relative;
+    top:400px;
+    left: 0px;
     width: 200px;
     height: 300px;
+    background: #132D48;
+    color: #fff;
+    font-weight: bold;
+    font-size: large;
+    z-index: 400;
 }
-#widepic img{
+
+#widepic {
     width: 1000px;
     height: 300px;
 }
@@ -280,7 +289,7 @@ h1.sectionHeader {
 
 }
 #portrait{
-    border: 4px solid #000000;
+    border: 4px solid ##132D48;
     z-index: 100;
 }
 
