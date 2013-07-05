@@ -24,16 +24,21 @@
         <div class="twelve columns" offset-height="100" role="content">
             <div id="picheader">
                 <div class="row">
-                    <div class="large-12 columns">
-                        <div id="widepic">
-                            <img width="1000" height="300" src="/uploads/{{ entry.profilePicWide }}">
-
+                    <div class="large-12 columns" offset-height="-300">
+                        <div id="portraitpic">
+                            <img id="portrait" src="/uploads/{{ entry.profilePicPortrait }}"><br />
+                            Angel Name
                         </div>
-                        <hr>
-
-                        <div id="portraitpic" offset-height="-300">
-                            <img id="portrait" src="/uploads/{{ entry.profilePicPortrait }}">
-
+                        <div id="gallery" class="nivoGallery">
+                            <ul>
+                                <li data-title="This is an Image Slide" data-caption="Put a caption in here">
+                                    <img width="1000" height="300" src="/uploads/{{ entry.profilePicWide }}">
+                                </li>
+                                <li data-type="html" data-title="This is a HTML Slide">
+                                    <h1>Heading</h1>
+                                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -150,3 +155,9 @@
 
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#gallery').nivoGallery();
+    });
+</script>
