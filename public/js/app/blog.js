@@ -326,7 +326,6 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
     $scope.event;
     $scope.eventdate;
     $scope.eventdesc;
-
     $scope.flipEntry = function () {
 
         $scope.textorphoto = !$scope.textorphoto;
@@ -560,7 +559,10 @@ app.controller('WelcomeCtrl', function ($scope, $rootScope) {
     $rootScope.subgroup = undefined;
     $scope.$on('$routeChangeSuccess', function (next, current) {
         console.log(current);
-        if (current.templateUrl == "partials/blog.html" || current.templateUrl == undefined) {
+        if (
+            current.templateUrl == "partials/blog.html"
+                ||
+            current.templateUrl == undefined) {
             $scope.groupingViewable = false;
         } else {
             $scope.groupingViewable = true;
@@ -755,7 +757,7 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
     })
 });
 
-app.controller('PicsCtrl', function ($scope, $http,api) {
+app.controller('PicsCtrl', function ($rootScope,$scope, $http,api) {
     $scope.pics = [];
     $scope.createalbum = [];
     $scope.blogId = "";
@@ -763,6 +765,8 @@ app.controller('PicsCtrl', function ($scope, $http,api) {
     $scope.albums = [];
     $scope.albumName = "";
     $scope.updatingAlbum = false;
+    $rootScope.groupingViewable = true;
+
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
@@ -859,6 +863,7 @@ app.controller('PicsCtrl', function ($scope, $http,api) {
 
             })
     }
+
 });
 
 app.controller('PetitionCtrl', function ($scope, api) {

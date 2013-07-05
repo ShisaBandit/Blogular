@@ -6,7 +6,7 @@
                 <li ng-repeat="entry in entries | filter:search.search | bySubgroup:subgroup">
                     <div style="background-image: url({{entry.titleImage}})" ng-style="getBackImg(entry._id)" class="memProfilePreview">
                         <h6><a href="#/blog/{{entry.author}}">{{entry.author}}</a></h6>
-                        <a href="#/blog/{{entry.author}}"><img src="/uploads/child.jpg" alt="child pick"/></a>
+                        <a href="#/blog/{{entry.author}}"><img src="/uploads/{{ entry.profilePicWide }}" alt="child pick"/></a>
                     </div>
 
                 </li>
