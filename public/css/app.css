@@ -471,3 +471,7 @@ width: 665px;
 #loginModal {
     margin-top: 100px;
 }
+
+.editMemWall label {
+    color: #000000;
+}

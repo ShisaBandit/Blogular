@@ -34,7 +34,8 @@
         </div>
         <ul class="profile">
             <li ng-repeat="angel in angels">Angel's Name : {{ angel.firstName }} {{ angel.lastName }}- {{ angel.title }}
-                <br />- <a href="#/editwall/{{ angel.author }}">View, edit or delete this memorial wall</a>
+                <br />- <a href="#/editwall/{{ angel.author }}">View and edit this memorial wall</a>
+                <br />- <a href="#/deletewall/{{ angel.author }}">Delete this memorial wall</a>
                 <br />- <a href="#/inviteblock/{{ angel.author }}">invite or block other registered members</a><br /><br />
             </li>
         </ul>
