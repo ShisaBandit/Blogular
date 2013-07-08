@@ -6,6 +6,24 @@ var Update = models.Update;
 var PICTYPE = 1;
 var VIDEOTYPE = 2;
 
+exports.notifications = function(req,res){
+
+    User.findOne({_id:req.session.passport.user},function(err,user){
+        if(user == undefined){
+            res.send(200,"ok");
+        }else{
+            var buffer =[];
+            for(noti in user.notifications){
+                if(user.notifications[noti].viewed == false){
+                    buffer.push(user.notifications[noti])
+                }
+            }
+            res.send(JSON.stringify(buffer));
+        }
+
+    })
+}
+
 exports.allBlogs = function (req, res) {
     // var skip = req.params.skip,
     //   limit = req.params.limit;

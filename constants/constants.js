@@ -5,6 +5,17 @@ Common = {
     event:3
 
 }
+LostTypes = [
+    "mother",
+    "faster",
+    "brother",
+    "sister",
+    "friend",
+    "family",
+    "other"
+]
 module.exports = {
-    postTextTypes:Common
+    postTextTypes:Common,
+    lostTypes:LostTypes
+
 };

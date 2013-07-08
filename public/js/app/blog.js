@@ -1109,7 +1109,13 @@ app.controller('EditWallCtrl',function($http,$scope,api,$routeParams){
     };
 })
 
-app.controller('NotificationsCtrl',function($scope,$http){
+app.controller('NotificationsCtrl',function($scope,$http,api){
+    $scope.notifications = [];
+
+       $http.get('notifications').
+           success(function(data){
+               $scope.notifications = data;
+           })
 
 })
 /*

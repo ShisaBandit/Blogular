@@ -58,7 +58,7 @@
     <script type="text/javascript" src="js/jqAutoscroller.js"></script>
     <script type="text/javascript" src="js/vendor/dropzone.js"></script>
     <script type="text/javascript" src="js/external/dropzonemodule.js"></script>
-    <link rel="stylesheet" href="css/nivo-gallery.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/nivo-gallery.css" type="text/css" media="screen"/>
     <script src="js/jquery.nivo.gallery.min.js" type="text/javascript"></script>
     <script src="underscore.js"></script>
     <script>
@@ -101,7 +101,8 @@
         </div>
 
         <div id="workpets" class="headerCol2">
-            <a href="http://www.angelsofeureka.com/shop" id="workshopbutton" class="small radius button workpetsbuttons">Web Store</a>
+            <a href="http://www.angelsofeureka.com/shop" id="workshopbutton"
+               class="small radius button workpetsbuttons">Web Store</a>
             <a href="#/workshops" id="workshopbutton" class="small radius button workpetsbuttons">Workshops</a>
             <a href="#/petitions" id="pettionbutton" class="small radius button workpetsbuttons">Petitions</a>
             <a href="#/pets" id="petbutton" class="small radius button workpetsbuttons">Pets</a>
@@ -147,14 +148,11 @@
     </div>
 </div>
 
-<div ng-controller="NotificationsCtrl">
-    <ul>
-        <li ng-repeat="noti in notifications">{{ noti.message }}</li>
-    </ul>
-</div>
+
 <div ng-controller="WelcomeCtrl">
     <div ng-animate="'fade'" id="loginMessage" if-authed="hide">
         <p>
+
         <h1>Welcome to Angels of Eureka's Memorial Wall</h1>
 
         <h2>Angels of Eureka is about Love, Hope and Life with People and Pets.</h2>
@@ -171,6 +169,13 @@
         Already a member? Log-in to your account here!
         <a href="#" class="small button" data-reveal-id="loginModal">Login</a>
         <a class="closeButton" closeparent title="Hide this box by clicking here">X</a>
+    </div>
+</div>
+<div ng-controller="NotificationsCtrl">
+    <div id="notifications">
+        <ul>
+            <li ng-repeat="noti in notifications">{{ noti.text }}</li>
+        </ul>
     </div>
 </div>
 <!-- Main  Content -->
@@ -275,54 +280,166 @@
         </table>
     </div>
     <div reveal-modal="login" id="rulesModal" class="reveal-modal [expand, xlarge, large, medium, small]">
-        <p>Angels of Eureka for Bereaved Parents/ Families is dedicated to providing support to parents, families who are suffering as the result of ...the death of their child or children, mom , dad, sister, brother grandparent etc.,. In no way does this group/website take any responsibility for your mental health. If you are suffering from depression or if you are having suicidal thoughts, please call 911 or consult your physician. If you see someone contact Administration Immediately so we can help guide them.</p>
-        <p>Group is available to those seeking uplifting support from other bereaved families walking the same journey. Angels of Eureka believes in showing tolerance, broad-mindedness, patience and acceptance of and towards fellow grieving families/ Parents, understanding that we are all from different backgrounds, cultures, countries and religions.</p>
-        <p>To Families of lost loved ones Your unique grief journey will be shaped by many factors. No two deaths are mourned the same way. Your grief is yours and yours only. Although other bereaved families understand what you are going through, there is no right or wrong way to grieve. We just have to focus on grieving healthy, not only for ourselves but our families. Your grief is what it is. It's your right to express it. </p>
-        <p>Our purpose is to offer understanding, suggestions for coping, support, friendship, and most of all,l hope for all who are struggling with grief that this Journey at Angels of Eureka find you with moving towards a better tomorrow. </p>
-        <p>People will be divided in Groups that's why its important to put your correct information so you go into the right group of peers to support you. That doesn't mean someone can't invite you to their group, you can go with an invitation. We make sure you control your audience.</p>
-        <p>You will be able to have more then one memorial wall if you choose, all within your pages. With many tools!</p>
-        <p>Your loved one will go on the Memorial Wall of Honor if you share their uploaded photo at the time of registering and you can share photos, videos and many other things in your own Memorial Web Site Wall. We wanted to have a place where you could put everything in one place. This is a Free Service.</p>
+        <p>Angels of Eureka for Bereaved Parents/ Families is dedicated to providing support to parents, families who
+            are suffering as the result of ...the death of their child or children, mom , dad, sister, brother
+            grandparent etc.,. In no way does this group/website take any responsibility for your mental health. If you
+            are suffering from depression or if you are having suicidal thoughts, please call 911 or consult your
+            physician. If you see someone contact Administration Immediately so we can help guide them.</p>
+
+        <p>Group is available to those seeking uplifting support from other bereaved families walking the same journey.
+            Angels of Eureka believes in showing tolerance, broad-mindedness, patience and acceptance of and towards
+            fellow grieving families/ Parents, understanding that we are all from different backgrounds, cultures,
+            countries and religions.</p>
+
+        <p>To Families of lost loved ones Your unique grief journey will be shaped by many factors. No two deaths are
+            mourned the same way. Your grief is yours and yours only. Although other bereaved families understand what
+            you are going through, there is no right or wrong way to grieve. We just have to focus on grieving healthy,
+            not only for ourselves but our families. Your grief is what it is. It's your right to express it. </p>
+
+        <p>Our purpose is to offer understanding, suggestions for coping, support, friendship, and most of all,l hope
+            for all who are struggling with grief that this Journey at Angels of Eureka find you with moving towards a
+            better tomorrow. </p>
+
+        <p>People will be divided in Groups that's why its important to put your correct information so you go into the
+            right group of peers to support you. That doesn't mean someone can't invite you to their group, you can go
+            with an invitation. We make sure you control your audience.</p>
+
+        <p>You will be able to have more then one memorial wall if you choose, all within your pages. With many
+            tools!</p>
+
+        <p>Your loved one will go on the Memorial Wall of Honor if you share their uploaded photo at the time of
+            registering and you can share photos, videos and many other things in your own Memorial Web Site Wall. We
+            wanted to have a place where you could put everything in one place. This is a Free Service.</p>
+
         <h2>Read Rules Below, Past Bereaved Parents / Grandparents please!</h2>
-        <b>To Bereaved Parents / Grandparents Only:</b> <br /><br />
-        <p>To a bereaved parent understands the pain that the death of a child brings. The Grandparent can suffer that same pain because of it being their grandchild and child hurting. I think its important Grandparents understand what their child is going through and the best educators are the parents.</p>
-        <p>A Death of a Loved one is part of life as we were to understand, ''unless they were gone to soon''. Which in most cases people can get through the grief up to few years with the right support and counseling. </p>
-        <p>A death of a child is lifelong, it changes a person forever, they can lose their identities. They feel very alone in their Journeys, They learn to wear a mask, Some go towards alcohol, pills, drugs, We will not Judge them for you have not lived what they went through, We will welcome them to speak freely so they know its OK and really its normal if they don't have tools to cope.</p>
-        <p>Some feel very suicidal and if you see any suicidal behavior please contact admin. we would like to help them and reach out to them as soon as possible. </p>
-        <p>We are all traveling the journey of grief and even though our grief is our own, the understanding, support and compassion you receive from another grieving parent / grandparent is of utmost importance. </p>
-        <p>Grief is what we think and feel on the inside when someone we love dies. It's numbness, sadness, anger, guilt, and sometimes relief, all rolled up into one. It's the pain in our gut and a hole in our heart. Grief can be physical pain as well, we can have a lot of downs in the beginning process so be gentle to yourself. With support from people that have walked in your shoes, they can help you through..</p>
-        <p>Mourning is expressing our grief, letting it out somehow.<br />We mourn when we cry, talk about death, write about it, punch a pillow or scream at the top of our lungs.  </p>
-        <p>Everyone grieves inside when the child that was loved with such passion dies. We MUST mourn to begin the healing process and to learn to live a much different life now. </p>
+        <b>To Bereaved Parents / Grandparents Only:</b> <br/><br/>
+
+        <p>To a bereaved parent understands the pain that the death of a child brings. The Grandparent can suffer that
+            same pain because of it being their grandchild and child hurting. I think its important Grandparents
+            understand what their child is going through and the best educators are the parents.</p>
+
+        <p>A Death of a Loved one is part of life as we were to understand, ''unless they were gone to soon''. Which in
+            most cases people can get through the grief up to few years with the right support and counseling. </p>
+
+        <p>A death of a child is lifelong, it changes a person forever, they can lose their identities. They feel very
+            alone in their Journeys, They learn to wear a mask, Some go towards alcohol, pills, drugs, We will not Judge
+            them for you have not lived what they went through, We will welcome them to speak freely so they know its OK
+            and really its normal if they don't have tools to cope.</p>
+
+        <p>Some feel very suicidal and if you see any suicidal behavior please contact admin. we would like to help them
+            and reach out to them as soon as possible. </p>
+
+        <p>We are all traveling the journey of grief and even though our grief is our own, the understanding, support
+            and compassion you receive from another grieving parent / grandparent is of utmost importance. </p>
+
+        <p>Grief is what we think and feel on the inside when someone we love dies. It's numbness, sadness, anger,
+            guilt, and sometimes relief, all rolled up into one. It's the pain in our gut and a hole in our heart. Grief
+            can be physical pain as well, we can have a lot of downs in the beginning process so be gentle to yourself.
+            With support from people that have walked in your shoes, they can help you through..</p>
+
+        <p>Mourning is expressing our grief, letting it out somehow.<br/>We mourn when we cry, talk about death, write
+            about it, punch a pillow or scream at the top of our lungs. </p>
+
+        <p>Everyone grieves inside when the child that was loved with such passion dies. We MUST mourn to begin the
+            healing process and to learn to live a much different life now. </p>
+
         <p>Every parent is welcome here no matter how you have lost your child. </p>
-        <p>In no way does this group take any responsibility for your mental health. If you are suffering from depression or if you are having suicidal thoughts, please call 911 or consult your physician. </p>
-        <p>We all know one of the signs of grief is anger there are times when we are angry and lash out but lets not try to lash out to the other grieving person.  Hopefully we will get through those times together.  We all look for a way to connect with our lost children or loved ones.  Everyone has their own way of trying to do this.  For some it might be through religion, for others through spiritualism, yet others might not have found any way.  Whatever way you choose, its YOUR way.  Please respect that we all have our own way, and don't judge.  Please don't think that your way is better than anyone else's, its just different. We have to accept that this is how we are.</p>
-        <h2>Group Rules which,  Angels of Eureka think are important! </h2>
-        <p>No advertising here unless approved by Angels of Eureka, we are open to it! Some advertising business's we will charge for but for some we will make a trade with them. </p>
-        <p>We are open to supporting your charities to honor your loved ones.    </p>
-        <p>We are open to Petitions to help you with Changing laws or getting Justice. In Numbers we can make change at Angels of Eureka!  </p>
+
+        <p>In no way does this group take any responsibility for your mental health. If you are suffering from
+            depression or if you are having suicidal thoughts, please call 911 or consult your physician. </p>
+
+        <p>We all know one of the signs of grief is anger there are times when we are angry and lash out but lets not
+            try to lash out to the other grieving person. Hopefully we will get through those times together. We all
+            look for a way to connect with our lost children or loved ones. Everyone has their own way of trying to do
+            this. For some it might be through religion, for others through spiritualism, yet others might not have
+            found any way. Whatever way you choose, its YOUR way. Please respect that we all have our own way, and don't
+            judge. Please don't think that your way is better than anyone else's, its just different. We have to accept
+            that this is how we are.</p>
+
+        <h2>Group Rules which, Angels of Eureka think are important! </h2>
+
+        <p>No advertising here unless approved by Angels of Eureka, we are open to it! Some advertising business's we
+            will charge for but for some we will make a trade with them. </p>
+
+        <p>We are open to supporting your charities to honor your loved ones. </p>
+
+        <p>We are open to Petitions to help you with Changing laws or getting Justice. In Numbers we can make change at
+            Angels of Eureka! </p>
+
         <p>We are Open to Honor your Pets with our Pet Page.</p>
-        <p>We are open to finding extra help for people with other groups outside Angels of Eureka if you can't find it here. We want our people to Heal and be Happy again.</p>
-        <p> We are here to Educate about Grief, Health, Holistic Health, Recipes whatever you people come up with..Everyone can bring hope to this table. </p>
-        <p>Bring your sense of humor, people need to be able to laugh a little through this journey. One day we hope they have built friendships and are laughing a lot with each other even planning trips together. </p>
+
+        <p>We are open to finding extra help for people with other groups outside Angels of Eureka if you can't find it
+            here. We want our people to Heal and be Happy again.</p>
+
+        <p> We are here to Educate about Grief, Health, Holistic Health, Recipes whatever you people come up
+            with..Everyone can bring hope to this table. </p>
+
+        <p>Bring your sense of humor, people need to be able to laugh a little through this journey. One day we hope
+            they have built friendships and are laughing a lot with each other even planning trips together. </p>
+
         <p>Speak as you would like to be spoken to, we treat others like we want to be treated. </p>
-        <p>If you can't say something nice, Don't say anything at all. Be Positive, Give Encouraging words, Lift people up, don't drag them down when they are telling you their experience. Try to help them move forward with love and hope, if you don't see a person moving forward and they are truly stuck  please contact admin. We can help them with this hopefully.</p>
-        <p>Believe everyone has the best intentions to help you through (try not to take anything personally) I will post some things to say and not say below. </p>
-        <p>A death can change a person forever, they can lose their identities. They feel very alone in their Journeys, They learn to wear a mask, Some go towards alcohol, pills, drugs, We will not Judge them for you have not lived what they went through, We will welcome them to speak freely so they know its OK and really its normal if they don't have tools to cope with their pain, their loss, their grief. Everyone is different.</p>
-        <p>A Parent that loses a Child has gone through Trauma! This last a lifetime! But we learn to walk through the pain.  </p>
-        <p>Some feel very suicidal and if you see any suicidal behavior please contact admin. we would like to help them and reach out to them as soon as possible. </p>
-        <p>During times of grief a lot can happen to a person because there life has been flipped, they can lose their jobs, their homes, their friends, their family because no one understands their road or why they can't move on or get over it..WRONG THING TO SAY! Everyone heals on their time. </p>
+
+        <p>If you can't say something nice, Don't say anything at all. Be Positive, Give Encouraging words, Lift people
+            up, don't drag them down when they are telling you their experience. Try to help them move forward with love
+            and hope, if you don't see a person moving forward and they are truly stuck please contact admin. We can
+            help them with this hopefully.</p>
+
+        <p>Believe everyone has the best intentions to help you through (try not to take anything personally) I will
+            post some things to say and not say below. </p>
+
+        <p>A death can change a person forever, they can lose their identities. They feel very alone in their Journeys,
+            They learn to wear a mask, Some go towards alcohol, pills, drugs, We will not Judge them for you have not
+            lived what they went through, We will welcome them to speak freely so they know its OK and really its normal
+            if they don't have tools to cope with their pain, their loss, their grief. Everyone is different.</p>
+
+        <p>A Parent that loses a Child has gone through Trauma! This last a lifetime! But we learn to walk through the
+            pain. </p>
+
+        <p>Some feel very suicidal and if you see any suicidal behavior please contact admin. we would like to help them
+            and reach out to them as soon as possible. </p>
+
+        <p>During times of grief a lot can happen to a person because there life has been flipped, they can lose their
+            jobs, their homes, their friends, their family because no one understands their road or why they can't move
+            on or get over it..WRONG THING TO SAY! Everyone heals on their time. </p>
+
         <p>They have a right to privacy and healing.</p>
-        <p>So if you see someone on the web site that is a stalker please let us know ASAP. We will find them and take all the necessary steps legally. You have a right to Heal, you have a right for privacy.</p>
-        <p>This is to all the People that have dealt with Suicide in your life or those of you that have an opinion. Angels of Eureka has been on many other web site/groups where people had an opinion on suicide. I have seen these opinions hurt people deeply where they couldn't heal. Peoples words compounded their pain and healing. </p>
-        <p>Angels of Eureka will not tolerate any ones remarks on this subject that is negative in any way shape or form. </p>
-        <p>You are not here to Judge or make Judgment and make the decisions what happens when a person receives their wings or where that person goes after they crossed over because Angels of Eureka believe's in Heaven, Love, Forgiveness and many things.</p>
-        <p>We at Angels of Eureka will not have it. If anyone is bothered by someone else's behavior report them at once! There will be NO WARNINGS! YOU WILL BE REMOVED AT ONCE!</p>
-        <p>Angels of Eureka will not allow ganging up on a person or the clicks, you be respectful here or be removed! Treat everyone fairly and with kindness. If you can't, this web site is not for you.</p>
-        <p>We love People here at Angels of Eureka, We want them to have a place for their loved ones to be remembered and still have purpose that's why we have set up charities to Honor those in Heaven helping people here, there is nothing more beautiful then that.</p>
-        <p>We wanted to make sure all your data could be in one place for others in your family to carry on your memories/legacy of who their families were for generations to come.</p>
-        <p>A child that lost his mommy or daddy, one day the child can come here and see who they were..How beautiful is that?</p>
+
+        <p>So if you see someone on the web site that is a stalker please let us know ASAP. We will find them and take
+            all the necessary steps legally. You have a right to Heal, you have a right for privacy.</p>
+
+        <p>This is to all the People that have dealt with Suicide in your life or those of you that have an opinion.
+            Angels of Eureka has been on many other web site/groups where people had an opinion on suicide. I have seen
+            these opinions hurt people deeply where they couldn't heal. Peoples words compounded their pain and
+            healing. </p>
+
+        <p>Angels of Eureka will not tolerate any ones remarks on this subject that is negative in any way shape or
+            form. </p>
+
+        <p>You are not here to Judge or make Judgment and make the decisions what happens when a person receives their
+            wings or where that person goes after they crossed over because Angels of Eureka believe's in Heaven, Love,
+            Forgiveness and many things.</p>
+
+        <p>We at Angels of Eureka will not have it. If anyone is bothered by someone else's behavior report them at
+            once! There will be NO WARNINGS! YOU WILL BE REMOVED AT ONCE!</p>
+
+        <p>Angels of Eureka will not allow ganging up on a person or the clicks, you be respectful here or be removed!
+            Treat everyone fairly and with kindness. If you can't, this web site is not for you.</p>
+
+        <p>We love People here at Angels of Eureka, We want them to have a place for their loved ones to be remembered
+            and still have purpose that's why we have set up charities to Honor those in Heaven helping people here,
+            there is nothing more beautiful then that.</p>
+
+        <p>We wanted to make sure all your data could be in one place for others in your family to carry on your
+            memories/legacy of who their families were for generations to come.</p>
+
+        <p>A child that lost his mommy or daddy, one day the child can come here and see who they were..How beautiful is
+            that?</p>
+
         <p>We want you to feel safe, and loved and know that You Matter and your Loved one Matters!</p>
+
         <p>So one that note: Things to say and not say to a grieving person/ parent</p>
         <b>The following are some suggestions of what not to say and what to say:</b>
+
         <h2>Things Not to Say to Someone in Grief:</h2>
         <ul>
             <li>How are you
@@ -344,25 +461,41 @@
             <li>I'm so sorry for your loss.</li>
             <li>I don't know what to say, I wish I had the right words to comfort you.</li>
             <li>You, your family and your loved one will be in my thoughts and prayers.</li>
-            <li>She was so nice to me; one of my favorite memories of her was…(share a happy memory of the person who passed)</li>
+            <li>She was so nice to me; one of my favorite memories of her was…(share a happy memory of the person who
+                passed)
+            </li>
             <li>Whenever you want to talk, just know I am a phone call away.</li>
             <li>She/He was so wonderful, she/ he be missed by so many people.</li>
             <li>I'm your friend—I'm here for you.</li>
             <li>If you can't think of anything to say, a hug may be appropriate.</li>
             <li>Sometimes just be with the person, you don't have to say anything.</li>
         </ul>
-            <p>Its OK to bring up their loved one, they want you too. They want you to Remember! It shows you care!</p>
-            <p>Remember, grieving the loss of a loved one is the worst pain someone can endure. Be respectful and polite. Don't discount anyone’s feelings. Even if someone puts on a brave face and looks like he or she is handling it well, don't assume that person is. Show that you care. Actions often speak louder then words. You can just listen and support. Offer to take them to the grocery store, watch the children for an afternoon, and help around the house. These gestures mean a lot to a person whose world has just been turned upside down.</p>
-            <p>You might ask a person 50 times to do something with you and they keep saying No, Just move on and understand they are not ready, don't force them to feel what they are not ready for. Keep calling and trying because one day they will say yes, and they will know you never gave up or forgot about them. </p>
-            <p>Hopefully one day I can incorporate a group for NA and AA here to help those who couldn't cope with losing a loved one because they didn't have the tools so they have sponsor support. We will grow as we go along this Journey, We are just getting started. Any Ideas are welcomed here at Angels of Eureka!</p>
-            <p>Thank you for taking the time to read our rules, we hope you have a wonderful journey here and we bring some hope for your tomorrow!</p>
+        <p>Its OK to bring up their loved one, they want you too. They want you to Remember! It shows you care!</p>
+
+        <p>Remember, grieving the loss of a loved one is the worst pain someone can endure. Be respectful and polite.
+            Don't discount anyone’s feelings. Even if someone puts on a brave face and looks like he or she is handling
+            it well, don't assume that person is. Show that you care. Actions often speak louder then words. You can
+            just listen and support. Offer to take them to the grocery store, watch the children for an afternoon, and
+            help around the house. These gestures mean a lot to a person whose world has just been turned upside
+            down.</p>
+
+        <p>You might ask a person 50 times to do something with you and they keep saying No, Just move on and understand
+            they are not ready, don't force them to feel what they are not ready for. Keep calling and trying because
+            one day they will say yes, and they will know you never gave up or forgot about them. </p>
+
+        <p>Hopefully one day I can incorporate a group for NA and AA here to help those who couldn't cope with losing a
+            loved one because they didn't have the tools so they have sponsor support. We will grow as we go along this
+            Journey, We are just getting started. Any Ideas are welcomed here at Angels of Eureka!</p>
+
+        <p>Thank you for taking the time to read our rules, we hope you have a wonderful journey here and we bring some
+            hope for your tomorrow!</p>
     </div>
 </div>
 
 
 </div>
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#gallery').nivoGallery();
     });
 </script>

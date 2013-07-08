@@ -24,7 +24,8 @@ var express = require('express')
     , q = require('q')
 //models
     , blogModels = require('./models/models')
-    , passport = require('./auth/local').passport_local;
+    , passport = require('./auth/local').passport_local
+    , Constants = require('./constants/constants.js');
 
 global.__approot = __dirname;
 //set up database models to mongoose
@@ -176,8 +177,8 @@ app.post('/login',
                         if (users.length != undefined) {
                             for (user in users) {
                                 var nUser = users[user];
-                                if (nUser.type == loggeduser.type) {
-                                    nUser.notifications.push({text: "A new user has joined that has lost a " + loggeduser.type});
+                                if (nUser.lost == loggeduser.lost) {
+                                    nUser.notifications.push({text: "A new user "+nUser.username+" has joined that has lost a " + Constants.lostTypes[loggeduser.type]});
                                     //TODO:Save user
                                     nUser.save(function (err, doc) {
                                         if (err)console.log(err);
@@ -238,6 +239,7 @@ app.get('/block/:wallid/:user',blogRoutes.block);
 app.get('/subscribed/:id',blogRoutes.subscribed);
 app.get('/selfremove/:id',blogRoutes.selfremove);
 app.get('/selfremove/:id',blogRoutes.subscribedto);
+app.get('/notifications',blogRoutes.notifications);
 
 
 
