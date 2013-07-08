@@ -177,13 +177,12 @@ app.post('/login',
                         if (users.length != undefined) {
                             for (user in users) {
                                 var nUser = users[user];
-                                if (nUser.lost == loggeduser.lost) {
-                                    nUser.notifications.push({text: "A new user "+nUser.username+" has joined that has lost a " + Constants.lostTypes[loggeduser.type]});
+                                    console.log("pushed noti to "+nUser.username+" ");
+                                    nUser.notifications.push({text: "A new user "+loggeduser.username+" has joined that has lost a " + Constants.lostTypes[loggeduser.lost]});
                                     //TODO:Save user
                                     nUser.save(function (err, doc) {
                                         if (err)console.log(err);
                                     })
-                                }
                             }
                         }
 
