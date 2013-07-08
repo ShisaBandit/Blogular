@@ -1,13 +1,12 @@
 <div ng-controller="EditWallCtrl">
 
     <div class="row offsetHeight100"><div class="small-12 columns">
-    <h2>Events:</h2>
+    <h2>Edit Your Angel's Memorial Profile:</h2>
     <div id="log"></div>
-    <h2>Edit Post</h2>
     <form class="editMemWall">
         <label for="title">Title: </label>
         <input id="title" ng-model="form.title" name="title">
-        <label for="author">Author: </label>
+        <label for="author">Short Address: </label>
         <input type="text" name="author" id="author" ng-model="form.author">
         <label for="content">Content: </label>
         <label>Name of Angel</label>
@@ -24,9 +23,6 @@
          -->
         <textarea id="content" placeholder="Enter text ..." ng-model="form.text" cols="50" rows="15"></textarea>
         <br />
-        <label for="titleImage">Title Image:</label>
-        <input id="titleImage" ng-model="form.titleImage" name="titleImage">
-
         <label>Date of Birth</label>
         <!--TODO:Make this a n uploadable file-->
         <input type="date" class="login-inp" ng-model="form.dob"/>

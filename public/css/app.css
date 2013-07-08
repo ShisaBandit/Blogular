@@ -475,3 +475,18 @@ width: 665px;
 .editMemWall label {
     color: #000000;
 }
+
+.editMemWall input {
+    margin-bottom: 20px;
+}
+
+.angelStory {
+    width: 100%;
+    font-size: large;
+    margin-left: 200px;
+}
+
+.angelStory h1 {
+    color: #ffffff;
+    margin-top: 20px;
+}
