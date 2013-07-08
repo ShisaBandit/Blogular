@@ -146,6 +146,8 @@ exports.register = function (req, res) {
                     ) {
                     var user = new User(req.body);
                     user.gravatar = calcMD5(user.email);
+                    user.lost = req.body.groupcode;
+
                     user.save(function (err) {
                         if (err){
                             console.log(err);
@@ -159,8 +161,7 @@ exports.register = function (req, res) {
                         var blog = new Blog({
                             firstName:req.body.firstName,
                             lastName:req.body.lastName,
-                            subgroup:req.body.subgroup,
-                            subgroup:req.body.groupcode,
+                            subgroup:req.body.subgroup
 
                         })
                         return res.end(JSON.stringify({'success': 'true'}));

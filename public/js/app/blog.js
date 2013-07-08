@@ -931,6 +931,28 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog,$rootScope) {
     $scope.hidemainform = false;
     $scope.blogId = {blogId:""};
     $scope.addedFile = {};
+    $scope.groups = [
+        {name:"Mother",code:0},
+        {name:"Father",code:1},
+        {name:"Brother",code:4},
+        {name:"Sister",code:5},
+        {name:"Friend",code:3},
+        {name:"Family",code:2},
+        {name:"Other",code:6},
+    ];
+    $scope.checked = function(){
+        for(var sgroup in $scope.groups){
+            if($scope.groups[sgroup].name == $scope.selectedSubgroup.name){
+                $scope.groups[sgroup].checked = false;
+            }
+        }
+        for(var sgroup in $scope.groups){
+            if($scope.groups[sgroup].checked){
+                $scope.selectedSubgroup = $scope.groups[sgroup];
+                $scope.form.groupcode = $scope.selectedSubgroup.code;
+            }
+        }
+    }
     $scope.submitPost = function () {
 
         BlogsService.updateBlog($scope.form,function(err,res){

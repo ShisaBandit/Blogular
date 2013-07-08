@@ -124,7 +124,7 @@ var userSchema = mongoose.Schema({
     state:String,
     Age: Number,
     avatar: String,//urllink
-    lost:{type:String},
+    lost:Number,  //codes are   0:mother,1:father
     firstAccess:{type:Boolean,default:true},
     about:String,
     notifications:[

@@ -56,7 +56,15 @@
                     <th>About</th>
                     <td><input type="text" class="login-inp" ng-model="form.about"/></td>
                 </tr>
+                <tr>
+                    <th>I have lost my: </th>
+                    <!--<td><input type="checkbox" ng-repeat="group in groups" class="login-inp" ng-model="form.subgroup"/>{{type.name}}</td>
+                -->
 
+                    <td><div ng-repeat="group in groups">{{group.name}}:<input type="checkbox" ng-change="checked()"
+                                                                           ng-model="groups[$index].checked"
+                                                                           class="login-inp" name="{{group.name}}"/></div>  </td>
+                </tr>
                 <tr>
                     <th></th>
                     <td><a class="button" ng-click="submitFinalDetails()">Register</a></td>

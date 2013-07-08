@@ -168,11 +168,11 @@ app.post('/login',
             if (loggeduser.firstAccess == true) {
 
 
-                console.log("user" + user.username + " has logged in");
+                console.log("user" + loggeduser.username + " has logged in");
                 if (loggeduser.lost == undefined) {
-                    Console.log("wrong: User should always have at least ONE type from registration")
+                    console.log("wrong: User should always have at least ONE type from registration")
                 } else {
-                    User.find({type: loggeduser.type}, function (err, users) {
+                    User.find({lost: loggeduser.lost}, function (err, users) {
                         if (users.length != undefined) {
                             for (user in users) {
                                 var nUser = users[user];
