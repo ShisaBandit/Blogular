@@ -279,6 +279,11 @@ exports.latestVideos = function (req, res) {
             return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.video, "embedYouTube")));
     });
 }
+exports.latestEvents = function (req, res) {
+    Blog.findOne({_id: req.params.id}).lean().exec(function (err, blog) {
+            return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.event)));
+    });
+}
 
 exports.sendWallInvite = function(req,res){
     Blog.findOne({author:req.params.wallid},function(err,blog){
@@ -373,7 +378,7 @@ function getPostText(blog, type, getProp) {
                 buffer.push(pushdata);
             } else {
                 var pushdata;
-                if(getProp = "embedYouTube"){
+                if(getProp == "embedYouTube"){
                     if(blog.postText[p][getProp] == undefined)return buffer;
                     pushdata =  blog.postText[p][getProp].slice(0,blog.postText[p][getProp].length);
                     pushdata.slice(0,-1);

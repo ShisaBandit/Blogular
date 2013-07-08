@@ -42,6 +42,7 @@ var blogSchema = mongoose.Schema({
         {
             user_id: String,
             username:String,
+            event:String,
             gravatar:String,
             text: String,
             date: {type: Date, default: Date.now},
@@ -124,7 +125,7 @@ var userSchema = mongoose.Schema({
     Age: Number,
     avatar: String,//urllink
     lost:{type:String},
-    firstAccess:Boolean,
+    firstAccess:{type:Boolean,default:true},
     about:String,
     notifications:[
         {

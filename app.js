@@ -130,6 +130,7 @@ app.get('/lastestPosts/:id', blogRoutes.lastestPosts);
 app.get('/lastestPics/:id', blogRoutes.latestPics);
 
 app.get('/lastestVideos/:id', blogRoutes.latestVideos);
+app.get('/lastestEvents/:id', blogRoutes.latestEvents);
 
 app.post('/blog', passport.ensureAuthenticated, blogRoutes.createBlog);
 //edit

@@ -146,6 +146,12 @@
         </div>
     </div>
 </div>
+
+<div ng-controller="NotificationsCtrl">
+    <ul>
+        <li ng-repeat="noti in notifications">{{ noti.message }}</li>
+    </ul>
+</div>
 <div ng-controller="WelcomeCtrl">
     <div ng-animate="'fade'" id="loginMessage" if-authed="hide">
         <p>

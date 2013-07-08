@@ -317,7 +317,8 @@ app.controller('blogEntryPicCtrl', function ($scope) {
     $scope.test = "TEST RESULT";
 });
 
-app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http, dropzone,api) {
+app.controller('blogEntryCtrl', function ($scope, $location, show, Blog,
+                                          $routeParams, socket, $rootScope, $http, dropzone,api) {
 
 
     $scope.parentObject = {
@@ -371,14 +372,20 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         //TODO:Checkk this
         console.log("submitvideo");
         console.log($scope.entry._id);
-         api.createSubDocResource('Blog',$scope.entry._id,'postText',{embedYouTube:$scope.embedYouTube,embedAnimoto:$scope.embedAnimoto,postType:2},function(){
+         api.createSubDocResource('Blog',$scope.entry._id,'postText',{
+             embedYouTube:$scope.embedYouTube,embedAnimoto:$scope.embedAnimoto,postType:2
+         },function(){
 
          })
     }
     $scope.submitEvent = function () {
-        api.createSubDocResource('Blog',$scope.entry._id,'anniverssaryDays',{event:$scope.event,date:$scope.eventdate,description:$scope.eventdesc},function(){
+        api.createSubDocResource('Blog',$scope.entry._id,'postText',{
+            event:  $scope.event,
+            date:$scope.eventdate,
+            text:$scope.eventdesc,
+            postType:3
+        },function(){})
 
-        })
     }
 
     $scope.postText = "";
@@ -991,16 +998,30 @@ app.controller('VideoCtrl', function ($scope, BlogsService, Blog,$rootScope,$htt
         })
 
 });
-app.controller('AnniCtrl',function($scope,api){
+app.controller('AnniCtrl',function($scope,api,$http){
     $scope.anis = [];
+    $scope.blogId = "";
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
+        /*
         api.getResourceById('Blog',newVal,function(blogs){
             console.log(blogs[0]);
             $scope.anis = blogs[0].anniverssaryDays;
         })
+        */
+        $scope.blogId = newVal;
+        $http.get('lastestEvents/' + newVal).
+            success(function (data) {
+                console.log(data);
+                $scope.anis = data;
+            })
     });
+    $http.get('lastestEvents/' + $scope.blogId).
+        success(function (data) {
+            console.log(data);
+            $scope.anis = data;
+        })
 })
 app.controller('FriendsFamilyCtrl',function($scope,api,$routeParams,$http){
     $scope.subscribers = [];
@@ -1065,6 +1086,9 @@ app.controller('EditWallCtrl',function($http,$scope,api,$routeParams){
     };
 })
 
+app.controller('NotificationsCtrl',function($scope,$http){
+
+})
 /*
  function youtube($string,$autoplay=0,$width=480,$height=390)
  {

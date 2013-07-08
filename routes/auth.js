@@ -145,7 +145,7 @@ exports.register = function (req, res) {
 
                     ) {
                     var user = new User(req.body);
-                    user.gravatar(calcMD5(user.email));
+                    user.gravatar = calcMD5(user.email);
                     user.save(function (err) {
                         if (err){
                             console.log(err);
