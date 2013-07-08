@@ -325,14 +325,7 @@ h1.sectionHeader {
 
 .replycontainer{
     display:block;
-    background: #f0f9ff; /* Old browsers */
-    background: -moz-linear-gradient(top,  #f0f9ff 34%, #d0d5db 91%, #afc5dc 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(34%,#f0f9ff), color-stop(91%,#d0d5db), color-stop(100%,#afc5dc)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #f0f9ff 34%,#d0d5db 91%,#afc5dc 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #f0f9ff 34%,#d0d5db 91%,#afc5dc 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #f0f9ff 34%,#d0d5db 91%,#afc5dc 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #f0f9ff 34%,#d0d5db 91%,#afc5dc 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#afc5dc',GradientType=0 ); /* IE6-9 */
+    background: #f0f9ff;
     padding: 20px;
     margin: 10px;
     height: 100px;
