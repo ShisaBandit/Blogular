@@ -1,10 +1,10 @@
 <div ng-controller="EditWallCtrl">
 
-   <div class="offsetHeight">
+    <div class="row offsetHeight100"><div class="small-12 columns">
     <h2>Events:</h2>
     <div id="log"></div>
     <h2>Edit Post</h2>
-    <form>
+    <form class="editMemWall">
         <label for="title">Title: </label>
         <input id="title" ng-model="form.title" name="title">
         <label for="author">Author: </label>
@@ -45,8 +45,6 @@
         <button ng-click="editPost()" resetOnSubmit="true">Submit Post</button>
     </p>
     </form>
-    <h2>Delete Wall</h2>
-    <button ng-click="deletePost()">DELETE !!!</button>
 
-   </div>
+   </div></div>
 </div>
