@@ -10,28 +10,23 @@
                 </div>
             </div>
             <div class="row">
-                <div class="small-12 columns">
-                    <a ng-click="showcommentbox({{$index}})" class="button tiny">comment</a>
+                <div class="columns postComment">
+                    <a ng-click="showcommentbox({{$index}})" class="button tiny">Join the conversation</a>
                     <div ng-show="commentbox[{{$index}}]">
-                        <input type="text" on-keyup="submitComment($index)" keys="[27,13]" ng-model="newcomment[$index]" />
+                        <input type="text" on-keyup="submitComment($index)" keys="[27,13]" ng-model="newcomment[$index]" placeholder="Add your thoughts here! (Click enter to submit)" />
                     </div>
                 </div>
             </div>
             <div ng-repeat="comment in post.comments" class="row replycontainer">
-                <div class="row">
-
-                    <div class="small-2 columns avatarcontainer">
-                        <p><img src="http://www.gravatar.com/avatar/{{comment.gravatar}}"/></p>
-
+                    <div class="small-1 columns avatarcontainer">
+                        <img src="http://www.gravatar.com/avatar/{{comment.gravatar}}"/>
                     </div>
 
-                    <div class="small-10 columns">
-                        <h3><a href="#/profile/{{comment.username}}">{{comment.username}}</a> </h3>
+                    <div class="small-11 columns">
+                        <a href="#/profile/{{comment.username}}"><b>{{comment.username}}</b></a>
                         <p>{{comment.text}}</p>
 
                     </div>
-                </div>
-
             </div>
         </div>
 
