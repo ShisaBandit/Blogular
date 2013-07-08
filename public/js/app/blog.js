@@ -20,7 +20,7 @@ var app = angular.module('blogApp', [
             when("/AddBlogEntry/uploadportrait/:id",{templateUrl:"partials/admin/addportrait.html"}).
             when("/AddBlogEntry/uploadspread/:id",{templateUrl:"partials/admin/addspread.html"}).
             when("/inviteblock/:wall",{templateUrl:"partials/inviteblock.html"}).
-            when("/delete/:wall",{templateUrl:"partials/deletewall.html"}).
+            when("/deletewall/:wall",{templateUrl:"partials/deletewall.html"}).
             when("/editwall/:wall",{templateUrl:"partials/editwall.html"})
     });
 
