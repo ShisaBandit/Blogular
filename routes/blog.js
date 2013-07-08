@@ -23,6 +23,23 @@ exports.notifications = function(req,res){
 
     })
 }
+exports.notified = function(req,res){
+
+    User.findOne({_id:req.session.passport.user},function(err,user){
+            var notis = user.notifications;
+            var i = 0;
+
+            for(var noti in notis){
+                if(notis[noti]._id == req.params.id){
+                    notis[noti].viewed = true;
+                }
+                i++;
+            }
+        user.save(function(err){
+           res.send(200,"success");
+        })
+    })
+}
 
 exports.allBlogs = function (req, res) {
     // var skip = req.params.skip,

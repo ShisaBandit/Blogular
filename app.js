@@ -239,6 +239,7 @@ app.get('/subscribed/:id',blogRoutes.subscribed);
 app.get('/selfremove/:id',blogRoutes.selfremove);
 app.get('/selfremove/:id',blogRoutes.subscribedto);
 app.get('/notifications',blogRoutes.notifications);
+app.get('/notified/:id',blogRoutes.notified);
 
 
 

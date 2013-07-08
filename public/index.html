@@ -172,10 +172,10 @@
     </div>
 </div>
 <div ng-controller="NotificationsCtrl">
-    <div id="notifications">
-        <ul>
-            <li ng-repeat="noti in notifications">{{ noti.text }}</li>
-        </ul>
+    <div ng-repeat="noti in notifications" id="notifications">
+
+            {{ noti.text }}
+        <a class="closeButton" ng-click="notiviewed( noti._id )" closeparent title="Hide this box by clicking here">X</a>
     </div>
 </div>
 <!-- Main  Content -->

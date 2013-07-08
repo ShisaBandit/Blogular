@@ -1115,7 +1115,15 @@ app.controller('NotificationsCtrl',function($scope,$http,api){
        $http.get('notifications').
            success(function(data){
                $scope.notifications = data;
-           })
+           });
+
+    $scope.notiviewed = function(id){
+        console.log("Running this functions notviewed")
+        $http.get('notified/'+id).
+            success(function(data){
+
+            })
+    }
 
 })
 /*
