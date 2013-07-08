@@ -51,7 +51,8 @@
         <div class="small-12 columns">
             <div class="row collapse">
                 <div class="postEntry small-10 columns">
-                    <input type="text" ng-hide="textbox" ng-model="postText"/>
+                    <br />
+                    <input type="text" ng-hide="textbox" ng-model="postText" placeholder="Begin a new conversation here"/> <br />
 
                     <div ng-show="photobox" id="UploadBox">
                         <h2>Photo Uploader</h2>
@@ -93,28 +94,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="small-2 columns">
-                    <button ng-click="submit()" class="button postfix">Submit</button>
+                <div class="small-2 columns"><br /><button ng-click="submit()" class="button postfix">Submit</button>
                 </div>
             </div>
             <div class="row">
-                <div class="small-2 columns">
-                    <span>add videos</span>
+                <div class="small-3 columns" ng-click="toogleVideoEntry()">
+                    <button class="mediabuttons"><i class="general foundicon-video mediaicons"></i></button> <span>Add Videos</span>
+
                 </div>
-                <div class="small-2 columns" ng-click="toogleVideoEntry()">
-                    <button class="mediabuttons"><i class="general foundicon-video mediaicons"></i></button>
+                <div class="small-3 columns" ng-click="flipEntry()">
+                    <button class="mediabuttons"><i class="general foundicon-photo mediaicons"></i></button> <span>Add Photos</span>
+
                 </div>
-                <div class="small-2 columns">
-                    <span>add photos</span>
-                </div>
-                <div class="small-2 columns" ng-click="flipEntry()">
-                    <button class="mediabuttons"><i class="general foundicon-photo mediaicons"></i></button>
-                </div>
-                <div class="small-2 columns">
-                    <span>Events</span>
-                </div>
-                <div class="small-2 columns" ng-click="toogleEventEntry()">
-                    <button class="mediabuttons"><i class="general foundicon-photo mediaicons"></i></button>
+                <div class="small-3 columns" ng-click="toogleEventEntry()">
+                    <button class="mediabuttons"><i class="general foundicon-calendar mediaicons"></i></button> <span>Add Angel Anniversaries</span>
+
                 </div>
                 <div class="small-offset-8 columns"></div>
             </div>

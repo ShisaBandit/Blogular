@@ -12,9 +12,11 @@
 .nivoGallery {
     position:relative;
     background:#fff url(../img/loading.gif) no-repeat 50% 50%;
-    width:100%; /* Width can be fixed px or dynamic % value */
+    width:1000px; /* Width can be fixed px or dynamic % value */
     height:400px; /* Height must be fixed px value */
+    margin-left: -17px;
     margin-bottom:28px;
+    background: #132D48;
 }
 .nivoGallery.loaded {
     background:#000; /* Remove the loading gif */
@@ -50,6 +52,7 @@
 
 .nivoGallery-slides {
     position:relative;
+    width: 1000px;
     height:100%;
     overflow:hidden;
 }
