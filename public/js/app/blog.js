@@ -22,6 +22,11 @@ var app = angular.module('blogApp', [
             when("/inviteblock/:wall",{templateUrl:"partials/inviteblock.html"}).
             when("/deletewall/:wall",{templateUrl:"partials/deletewall.html"}).
             when("/rules",{templateUrl:"partials/rules.html"}).
+            when("/addworkshop",{templateUrl:"partials/addWorkshop.html"}).
+            when("/editworkshop",{templateUrl:"partials/editWorkshop.html"}).
+            when("/deleteworkshop",{templateUrl:"partials/deleteWorkshop.html"}).
+            when("/workshops",{templateUrl:"partials/workshops.html"}).
+            when("/pets",{templateUrl:"partials/pets.html"}).
             when("/editwall/:wall",{templateUrl:"partials/editwall.html"})
     });
 

@@ -1,9 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+<div ng-controller="WorkshopCtrl">
+    <div class="row">
+        <div class="twelve columns offsetHeight100" role="content">
+            <div id="mainform" ng-hide="hidemainform">
+                <h1><span ng-bind="message"></span></h1>
 
-</body>
-</html>
+                <div id="log"></div>
+                <h2 class="subHeader">Workshops</h2>
+                <div ng-repeat="workshop">
+
+                </div>
+            </div>
+            <div class="offsetHeight" ng-include src="template.url">
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
