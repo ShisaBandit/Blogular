@@ -21,6 +21,7 @@ var app = angular.module('blogApp', [
             when("/AddBlogEntry/uploadspread/:id",{templateUrl:"partials/admin/addspread.html"}).
             when("/inviteblock/:wall",{templateUrl:"partials/inviteblock.html"}).
             when("/deletewall/:wall",{templateUrl:"partials/deletewall.html"}).
+            when("/rules",{templateUrl:"partials/rules.html"}).
             when("/editwall/:wall",{templateUrl:"partials/editwall.html"})
     });
 
