@@ -122,7 +122,7 @@ appAdmin.controller('WorkshopCtrl',function($scope,$http,api){
     */
     $scope.submit = function(){
         console.log("YOYOYO TEST SUCcess");
-        api.createResource('Workshops',$scope.form);
+        api.createResource('Workshop',$scope.form);
     }
     $scope.submitedit = function(){
         $http.post('updateworkshop/'+$scope.workshops._id).

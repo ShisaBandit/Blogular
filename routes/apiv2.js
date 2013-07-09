@@ -10,20 +10,22 @@ exports.createData = function (req, res) {
     console.log(req.body);
     console.log(subdoc);
     if(subdoc == undefined){
-        var modelInstance = new model(req.body);
-
         //TODO:DO UPDATE AND CREATE ON THE SAME API
         //1. check if ther eis an instance of the same id in the database if so
-        //use update other wise create a new entry!!
+        //use update other wise create a new i
+
+        var modelInstance = new model(req.body);
         //TODO:use the chain of responsibility pattern here to
         //set datamodifiers
         //TODO:make a class that decides which chain to delegate to
         //based on request.
-        dataFilter(req,type,null,modelInstance);
-        modelInstance.save(function(err){
-            if(err)console.log(err);
-            return sendSuccess(res);
-        })
+        dataFilter(req,type,null,modelInstance,function(data){
+            data.save(function(err){
+                if(err)console.log(err);
+                return sendSuccess(res);
+            })
+        });
+
     }else if(subsubdoc == undefined && subdoc != undefined){
         condition._id = req.params.id;
         console.log(condition);
