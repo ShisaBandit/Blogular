@@ -1125,6 +1125,12 @@ app.controller('NotificationsCtrl',function($scope,$http,api){
             })
     }
 
+});
+app.controller('WorkshopCtrl',function($scope,$http,api){
+    $scope.workshops = [];
+    api.getResourceById('Workshop','all',function(workshops){
+         $scope.workshops = workshops;
+    });
 })
 /*
  function youtube($string,$autoplay=0,$width=480,$height=390)

@@ -9,7 +9,7 @@ var blogSchema = mongoose.Schema({
     memorialDate: Date,
     anniverssaryDays: [
         {
-            description:String,
+            description: String,
             event: String,
             date: Date
         }
@@ -41,50 +41,50 @@ var blogSchema = mongoose.Schema({
     postText: [
         {
             user_id: String,
-            username:String,
-            event:String,
-            gravatar:String,
+            username: String,
+            event: String,
+            gravatar: String,
             text: String,
             date: {type: Date, default: Date.now},
             postType: Number,
-            saved:Boolean,
-            comments:[
+            saved: Boolean,
+            comments: [
                 {
-                user_id: String,
-                username:String,
-                gravatar:String,
-                text:String,
-                voteUp:Number,
-                voteDown:Number,
-                data:{type:Date,default:Date.now}
+                    user_id: String,
+                    username: String,
+                    gravatar: String,
+                    text: String,
+                    voteUp: Number,
+                    voteDown: Number,
+                    data: {type: Date, default: Date.now}
 
-            }
-            ],
-            photos:[
-                {
-                    filename:String,
-                    uploader:String,
                 }
             ],
-            embedYouTube:String,
-            embedAnimoto:String
+            photos: [
+                {
+                    filename: String,
+                    uploader: String,
+                }
+            ],
+            embedYouTube: String,
+            embedAnimoto: String
 
         }
     ],//postType 0=text,1=pic,2=video
-    orphanedphotos:[
+    orphanedphotos: [
         {             //TODO:Upon upload of photo generate thumbnails by other process not node
-            filename:String,
-            uploader:String
+            filename: String,
+            uploader: String
         }
     ],
-    albums:[
+    albums: [
         {
-          name:String,
-          photos:[
-              {
-                  filename:String
-              }
-          ]
+            name: String,
+            photos: [
+                {
+                    filename: String
+                }
+            ]
         }
     ],
     titleImage: String,
@@ -96,47 +96,80 @@ var blogSchema = mongoose.Schema({
 
 });
 var petitionSchema = mongoose.Schema({
-        title: {type:String,required:true},
-        text: {type:String,required:true},
-        dateStarted: {type: Date, default: Date.now},
-        signatures: [
-            {
-                initals:String,
-                cityState:String,
-                user_id: String, //user  id ??
-                signedDate: {type:Date,default:Date.now()}
-            }
-        ]
+    title: {type: String, required: true},
+    text: {type: String, required: true},
+    dateStarted: {type: Date, default: Date.now},
+    signatures: [
+        {
+            initals: String,
+            cityState: String,
+            user_id: String, //user  id ??
+            signedDate: {type: Date, default: Date.now()}
+        }
+    ]
 })
 var userSchema = mongoose.Schema({
-    firstName:{type:String,required:true},
-    lastName:{type:String,require:true},
-    username: {type:String,required:true},
-    password: {type:String,required:true},
+    firstName: {type: String, required: true},
+    lastName: {type: String, require: true},
+    username: {type: String, required: true},
+    password: {type: String, required: true},
     admin: String,
-    email: {type:String,required:true},//normalize to lowercase
-    gravatar:String,
+    email: {type: String, required: true},//normalize to lowercase
+    gravatar: String,
     profiles: [
         {profile: String}
     ],
-    address:String,
+    address: String,
     city: String,
-    state:String,
+    state: String,
     Age: Number,
     avatar: String,//urllink
-    lost:Number,  //codes are   0:mother,1:father
-    firstAccess:{type:Boolean,default:true},
-    about:String,
-    notifications:[
+    lost: Number,  //codes are   0:mother,1:father
+    firstAccess: {type: Boolean, default: true},
+    about: String,
+    notifications: [
         {
-            text:String,
-            viewed:{type:Boolean,default:false}
+            text: String,
+            viewed: {type: Boolean, default: false}
         }
     ]
 });
+
+/*
+ * Creating workshop blog post
+
+
+ * Should contain the following info
+
+ * Name of event
+ * Name of key person(s)
+ * Date of event
+ * Time of event
+ * Location of event if applicable
+ * Google+ address of event if applicable
+ * Event photo
+ * Event organiser contact info
+ * Event details
+ */
+var workshopSchema = mongoose.Schema({
+    eventname: String,
+    keypersons: [
+        {
+            name: String
+        }
+    ],
+    eventdate: {type: Date, default: Date.now()},
+    address: String,
+    hangour: String,
+    photo: String,
+    orgcontactinfo: String,
+    details: String
+});
+
+
 var groupTypeSchema = mongoose.Schema({
-    name:String,
-    code:Number
+    name: String,
+    code: Number
 });
 var updateSchema = mongoose.Schema({
     lastUpdate: {type: Date, default: Date.now()}
@@ -156,7 +189,8 @@ var Blog = mongoose.model('Blog', blogSchema);
 var User = mongoose.model('User', userSchema);
 var Update = mongoose.model('Update', updateSchema);
 var Url = mongoose.model('Url', urlSchema);
-var Petition = mongoose.model('Petition',petitionSchema);
+var Petition = mongoose.model('Petition', petitionSchema);
+var Workshop = mongoose.model('Workshop',workshopSchema);
 /*
  //set all profiles to administrator as owner
  Blog.find({}, function (err, blogs) {
@@ -212,19 +246,20 @@ var Petition = mongoose.model('Petition',petitionSchema);
 //populate some commments on blog  { "_id" : 516a720562f0af3550000010}
 //post text   { "_id" : 519b4f4a9023298a1500000a}
 /*
-Blog.findOne({_id: '516a720562f0af3550000010'},function(err,blog){
-    for(var x = 0;x<10;x++){
-        blog.postText[2].comments.push({text:"THIS IS TEXT TEXT", user_id : '51487fc5da6c0dc968000003'});
-    }
-    blog.save();
+ Blog.findOne({_id: '516a720562f0af3550000010'},function(err,blog){
+ for(var x = 0;x<10;x++){
+ blog.postText[2].comments.push({text:"THIS IS TEXT TEXT", user_id : '51487fc5da6c0dc968000003'});
+ }
+ blog.save();
 
-})
-*/
+ })
+ */
 
 module.exports = {
     Blog: Blog,
     User: User,
     Update: Update,
     Url: Url,
-    Petition:Petition
+    Petition: Petition,
+    Workshop:Workshop
 }
