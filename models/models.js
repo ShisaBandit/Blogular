@@ -63,7 +63,7 @@ var blogSchema = mongoose.Schema({
             photos: [
                 {
                     filename: String,
-                    uploader: String,
+                    uploader: String
                 }
             ],
             embedYouTube: String,
@@ -153,17 +153,20 @@ var userSchema = mongoose.Schema({
  */
 var workshopSchema = mongoose.Schema({
     eventname: String,
-    keypersons: [
-        {
-            name: String
-        }
-    ],
+    keyfirstname: String,
+    keylastname: String,
     eventdate: {type: Date, default: Date.now()},
-    address: String,
+    eventLocaction: String,
     hangour: String,
     photo: String,
-    orgcontactinfo: String,
-    details: String
+    eventOrganizer: String,
+    eventOrganizerPhone: String,
+    eventOrganizerFax: String,
+    eventOrganizerEmail: String,
+    eventOrganizerWebsite: String,
+    eventOrganizerAddress: String,
+    eventDetails: String,
+    googleHangoutURL: String
 });
 
 

@@ -5,14 +5,16 @@
  * Time: 10:00
  * To change this template use File | Settings | File Templates.
  */
-var appAdmin = angular.module('blogAppAdmin', ['apiResource','blogService','userService', 'login', 'ngCookies', 'loaderModule', 'blogResource', 'adminResource', 'http-auth-interceptor', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries']).
+var appAdmin = angular.module('blogAppAdmin', ['apiResource','apiResource','blogService','userService', 'login', 'ngCookies', 'loaderModule', 'blogResource', 'adminResource', 'http-auth-interceptor', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries']).
     config(function ($routeProvider) {
         $routeProvider.
             when("/", {templateUrl: "partials/admin/blogList.html"}).
             when("/members", {templateUrl: "partials/admin/members.html"}).
             when("/edit/:blogId", {templateUrl: "partials/admin/edit.html"}).
             when("/add", {templateUrl: "partials/admin/createBlogEntry.html"}).
-            when("/adminInstructions", {templateUrl: "partials/admin/adminInstructions.html"})
+            when("/adminInstructions", {templateUrl: "partials/admin/adminInstructions.html"}).
+            when('/addWorkshop',{templateUrl:'partials/admin/addWorkshop.html'}).
+            when('/workshops',{templateUrl:'partials/admin/workshops.html'})
     });
 
 appAdmin.directive('login', function () {
@@ -108,3 +110,28 @@ appAdmin.controller('AdmMembersCtrl', function ($scope, Blog, $routeParams,api) 
     })
 
 });
+
+
+appAdmin.controller('WorkshopCtrl',function($scope,$http,api){
+    $scope.workshops = [];
+    $scope.form ;
+    /*
+    api.getResourceById('Workshop','all',function(workshops){
+        $scope.workshops = workshops;
+    });
+    */
+    $scope.submit = function(){
+        console.log("YOYOYO TEST SUCcess");
+        api.createResource('Workshops',$scope.form);
+    }
+    $scope.submitedit = function(){
+        $http.post('updateworkshop/'+$scope.workshops._id).
+            success(function(data){
+
+            }).
+            error(function(data){
+
+            })
+    }
+
+})

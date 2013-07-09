@@ -17,10 +17,10 @@
                 <input type="text" class="login-inp" ng-model="form.keylastname" placeholder="Last Name" />
                 <br />
                 <label>Day your workshop/event will take place</label>
-                <input type="date" class="login-inp" ng-model="form.eventDate"/>
+                <input type="date" class="login-inp" ng-model="time.eventdate"/>
                 <br />
                 <label>Time your workshop/event will take place</label>
-                <input type="time" class="login-inp" ng-model="form.eventTime"/>
+                <input type="time" class="login-inp" ng-model="time.eventtime"/>
                 <br />
                 <label>Location of Event</label>
                 <input type="text" class="login-inp" ng-model="form.eventLocaction"/>
@@ -65,7 +65,7 @@
                 <br />
                 <br />
                 <p>
-                    <a ng-click="submitPost()" class="button" resetOnSubmit="true">On to the Next Step</a>
+                    <a ng-click="submit()" class="button" resetOnSubmit="true">On to the Next Step</a>
 
                 </p>
             </div>
