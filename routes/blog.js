@@ -3,6 +3,7 @@ var Common = require('../constants/constants.js')
 var Blog = models.Blog;
 var User = models.User;
 var Update = models.Update;
+var Workshop = models.Workshop;
 var PICTYPE = 1;
 var VIDEOTYPE = 2;
 
@@ -21,6 +22,15 @@ exports.notifications = function(req,res){
             res.send(JSON.stringify(buffer));
         }
 
+    })
+}
+
+exports.editworkshop = function(req,res){
+    Workshop.findOne({_id:req.params.id},function(err,workshop){
+        workshop = req.body;
+        workshop.save(function(err){
+            res.send(200,"success");
+        })
     })
 }
 exports.notified = function(req,res){

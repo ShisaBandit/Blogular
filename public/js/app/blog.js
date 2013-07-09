@@ -1129,9 +1129,24 @@ app.controller('NotificationsCtrl',function($scope,$http,api){
 });
 app.controller('WorkshopCtrl',function($scope,$http,api){
     $scope.workshops = [];
+    $scope.form ;
+
     api.getResourceById('Workshop','all',function(workshops){
          $scope.workshops = workshops;
     });
+    $scope.submit = function(){
+        api.createResource('Workshops',$scope.form);
+    }
+    $scope.submitedit = function(){
+        $http.post('updateworkshop/'+$scope.workshops._id).
+            success(function(data){
+
+            }).
+            error(function(data){
+
+            })
+    }
+
 })
 /*
  function youtube($string,$autoplay=0,$width=480,$height=390)

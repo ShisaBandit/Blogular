@@ -241,6 +241,7 @@ app.get('/selfremove/:id',blogRoutes.subscribedto);
 app.get('/notifications',blogRoutes.notifications);
 app.get('/notified/:id',blogRoutes.notified);
 
+app.post('/updateworkshop/:id',blogRoutes.editworkshop);
 
 
 
