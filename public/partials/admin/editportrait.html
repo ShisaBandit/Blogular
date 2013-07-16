@@ -1,0 +1,17 @@
+<div ng-controller="EditWallCtrl">
+    <h3>Portrait</h3>
+    <img src="uploads/{{ portrait.portrait }}" />
+    <dropzone
+            url="/uploadportrait"
+            class="dropzone"
+            id="portraitDropzone"
+            autoupload="false"
+            maximages="1"
+            addRemoveLinks="true"
+            >
+    </dropzone>
+
+    <a ng-click="submitportrait()" class="button"></a>
+    <a ng-click="nochange(portrait)" class="button">No change</a>
+
+</div>

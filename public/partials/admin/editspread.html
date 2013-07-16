@@ -1,0 +1,18 @@
+<div ng-controller="EditWallCtrl">
+    <p>
+        You edited your portrait photo.
+        Would you like to edit the background photo for you portrait photo.
+    </p>
+    <h3>Spread</h3>
+    <img src="uploads/{{ spread.spread  }}" />
+    <dropzone url="/uploadspread"
+              class="dropzone"
+              id="spreadDropzone"
+              autoupload="false"
+              maximages="1"
+              addRemoveLinks="true"
+            >
+    </dropzone>
+    <a ng-click="submitspread()" class="button">Submit new pic</a>
+    <a ng-click="nochange(spread)" class="button">No change</a>
+</div>

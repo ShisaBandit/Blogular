@@ -1,46 +1,51 @@
 <div ng-controller="EditWallCtrl">
+    <div class="row offsetHeight100">
+        <div ng-hide="hidemainform" class="small-12 columns">
+            <h2>Edit Your Angel's Memorial Profile:</h2>
+            <div id="log"></div>
+            <form class="editMemWall">
+                <label for="title">Title: </label>
+                <input id="title" ng-model="form.title" name="title">
+                <label for="author">Short Address: </label>
+                <input type="text" name="author" id="author" ng-model="form.author">
+                <label for="content">Content: </label>
+                <label>Name of Angel</label>
+                <input type="text" class="login-inp" ng-model="form.firstName" placeholder="First Name"/>
+                <input type="text" class="login-inp" ng-model="form.lastName" placeholder="Last Name"/>
+                <label for="content">Tell your Angel's story here: </label>
 
-    <div class="row offsetHeight100"><div class="small-12 columns">
-    <h2>Edit Your Angel's Memorial Profile:</h2>
-    <div id="log"></div>
-    <form class="editMemWall">
-        <label for="title">Title: </label>
-        <input id="title" ng-model="form.title" name="title">
-        <label for="author">Short Address: </label>
-        <input type="text" name="author" id="author" ng-model="form.author">
-        <label for="content">Content: </label>
-        <label>Name of Angel</label>
-        <input type="text" class="login-inp" ng-model="form.firstName" placeholder="First Name" />
-        <input type="text" class="login-inp" ng-model="form.lastName" placeholder="Last Name" />
-        <label for="content">Tell your Angel's story here: </label>
+                <!-- add on to later for now just use regular text area
+                 <div id="toolbar" style="display: none;">
+                     <a data-wysihtml5-command="bold" title="CTRL+B">bold</a> |
+                     <a data-wysihtml5-command="italic" title="CTRL+I">italic</a>
+                     <a data-wysihtml5-action="change_view">switch to html view</a>
+                 </div>
+                 -->
+                <textarea id="content" placeholder="Enter text ..." ng-model="form.text" cols="50" rows="15"></textarea>
+                <br/>
+                <label>Date of Birth</label>
+                <!--TODO:Make this a n uploadable file-->
+                <input type="date" class="login-inp" ng-model="form.dob"/>
+                <br/>
+                <label>This is my</label>
 
-        <!-- add on to later for now just use regular text area
-         <div id="toolbar" style="display: none;">
-             <a data-wysihtml5-command="bold" title="CTRL+B">bold</a> |
-             <a data-wysihtml5-command="italic" title="CTRL+I">italic</a>
-             <a data-wysihtml5-action="change_view">switch to html view</a>
-         </div>
-         -->
-        <textarea id="content" placeholder="Enter text ..." ng-model="form.text" cols="50" rows="15"></textarea>
-        <br />
-        <label>Date of Birth</label>
-        <!--TODO:Make this a n uploadable file-->
-        <input type="date" class="login-inp" ng-model="form.dob"/>
-        <br />
-        <label>This is my</label>
-            <div ng-repeat="group in groups">{{group.name}}:<input type="checkbox" nge="checked()"
-                                                               ng-model="groups[$index].checked"
-                                                               class="login-inp" name="{{group.name}}"/></div>
-        <label>Day your angel got wings</label>
-        <input type="date" class="login-inp" ng-model="form.memorialDate"/>
+                <div ng-repeat="group in groups">{{group.name}}:<input type="checkbox" nge="checked()"
+                                                                       ng-model="groups[$index].checked"
+                                                                       class="login-inp" name="{{group.name}}"/></div>
+                <label>Day your angel got wings</label>
+                <input type="date" class="login-inp" ng-model="form.memorialDate"/>
 
 
-    <br />
+                <br/>
 
-    <p>
-        <button ng-click="editPost()" resetOnSubmit="true">Submit Post</button>
-    </p>
-    </form>
+                <p>
+                    <button ng-click="editPost()" resetOnSubmit="true">Submit Post</button>
+                </p>
+            </form>
 
-   </div></div>
+        </div>
+        <div class="offsetHeight" ng-include src="template.url">
+
+        </div>
+    </div>
 </div>

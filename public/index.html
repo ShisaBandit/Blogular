@@ -90,7 +90,7 @@
     </script>
 </head>
 <!-- TODO:Rename app instance to mwApp -->
-<body ng-app="blogApp">
+<body class="ng-app:blogApp" id="ng-app" ng-app="blogApp">
 
 <div class="fixed title z-index-1000">
     <div class="row gradient-main">
@@ -179,9 +179,9 @@
     </div>
 </div>
 <!-- Main  Content -->
-<ng-view class="mainBG">
+<div ng-view class="mainBG">
 
-</ng-view>
+</div>
 <!-- End  Content -->
 <footer class="row border-main border-footer">
 
