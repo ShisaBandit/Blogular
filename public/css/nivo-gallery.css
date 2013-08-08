@@ -59,6 +59,8 @@
 
 .nivoGallery-htmlwrap {
     padding:20px;
+    margin-left: 200px;
+    margin-top: 20px;
     height:100%;
     overflow:auto;
     -webkit-box-sizing: border-box;
