@@ -16,7 +16,7 @@ var blogSchema = mongoose.Schema({
     ],
     profilePicWide: String,
     profilePicPortrait: String,
-    subgroup: Number,//0:mothers,1:fathers,2:family,3:friends,4:brothers,5:sisters,6:others
+    subgroup: Number,//0:mothers,1:fathers,2:family,3:friends,4:brothers,5:sisters,6:others,7:grandchild,8:child
     views: Number,
     title: String,
     author: String,//author is the url TODO:Ensure that there are NEVER TWO "urls"/authors of the same string

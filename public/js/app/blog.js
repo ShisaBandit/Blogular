@@ -656,6 +656,8 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket) {
     $scope.groups = [
         {name:"Mother",code:0},
         {name:"Father",code:1},
+        {name:"Grandchild",code:7},
+        {name:"Child",code:8},
         {name:"Brother",code:4},
         {name:"Sister",code:5},
         {name:"Friend",code:3},

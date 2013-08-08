@@ -12,7 +12,9 @@ LostTypes = [
     "sister",
     "friend",
     "family",
-    "other"
+    "other",
+    "grandchild",
+    "child"
 ]
 module.exports = {
     postTextTypes:Common,
