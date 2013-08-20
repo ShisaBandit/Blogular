@@ -1233,11 +1233,15 @@ app.controller('WorkshopCtrl',function($scope,$http,api){
     $scope.form ;
 
     api.getResourceById('Workshop','all',function(workshops){
+        console.log(workshops);
+        console.log("TESTING !#");
          $scope.workshops = workshops;
     });
+
     $scope.submit = function(){
         api.createResource('Workshops',$scope.form);
     }
+
     $scope.submitedit = function(){
         $http.post('updateworkshop/'+$scope.workshops._id).
             success(function(data){

@@ -1,7 +1,7 @@
 <div ng-controller="WorkshopCtrl">
     <div class="row">
         <div class="twelve columns offsetHeight100" role="content">
-            <div id="mainform" ng-hide="hidemainform">
+            <div id="mainform" ng-hide="hidemainform" ng-init="getWorkshopToEdit()">
                 <h1><span ng-bind="message"></span></h1>
 
                 <div id="log"></div>
@@ -65,7 +65,7 @@
                 <br />
                 <br />
                 <p>
-                    <a ng-click="submitPost()" class="button" resetOnSubmit="true">On to the Next Step</a>
+                    <a ng-click="submitedit()" class="button" resetOnSubmit="true">On to the Next Step</a>
                     <a class="button" ng-click="delete({{ post._id }}">DeleteWorkshop</a>
 
                 </p>

@@ -1,5 +1,5 @@
 angular.module('apiResource', ['ngResource']).
-    factory('api', function ($resource, $q,$http) {
+    factory('api', function ($resource, $q,$http,$rootScope) {
         var apiGetById = $resource('/get/:type/:id',
             {id: '@_id',type:'@type'},
             {
@@ -37,7 +37,9 @@ angular.module('apiResource', ['ngResource']).
             getResourceById: function (type,id,callback) {
                 var deferred = $q.defer();
                 apiGetById.get({type:type,id:id},function (docs) {
+
                         callback(docs);
+
                     },
                     function () {
                     });
@@ -59,6 +61,13 @@ angular.module('apiResource', ['ngResource']).
 
                     })
             },
+            /*creates a subdoc array entry on adocument
+                @param type mongoose model on DB
+                @param id the id of the document to add a subdocuemt entry to
+                @param subdoc the name of the subdocument to add an entry to
+                @param bodydata the post data to send to be added to the subdoc
+                @param callback for callbacks
+             */
             createSubDocResource: function (type,id,subdoc,bodydata,callback) {
                 /*apiCreateSubDocResource({type:type,subdoc:subdoc},bodydata).
                     success(function(err){

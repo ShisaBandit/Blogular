@@ -14,7 +14,8 @@ var appAdmin = angular.module('blogAppAdmin', ['apiResource','apiResource','blog
             when("/add", {templateUrl: "partials/admin/createBlogEntry.html"}).
             when("/adminInstructions", {templateUrl: "partials/admin/adminInstructions.html"}).
             when('/addWorkshop',{templateUrl:'partials/admin/addWorkshop.html'}).
-            when('/workshops',{templateUrl:'partials/admin/workshops.html'})
+            when('/workshops',{templateUrl:'partials/admin/workshops.html'}).
+            when('/editworkshop/:workshop',{templateUrl:'partials/admin/editWorkshop.html'})
     });
 
 appAdmin.directive('login', function () {
@@ -112,20 +113,31 @@ appAdmin.controller('AdmMembersCtrl', function ($scope, Blog, $routeParams,api) 
 });
 
 
-appAdmin.controller('WorkshopCtrl',function($scope,$http,api){
+appAdmin.controller('WorkshopCtrl',function($scope,$http,api,$routeParams){
     $scope.workshops = [];
-    $scope.form ;
-    /*
+    $scope.form = [];
+
     api.getResourceById('Workshop','all',function(workshops){
         $scope.workshops = workshops;
+
     });
-    */
+
+    $scope.getWorkshopToEdit = function(){
+        console.log("running get workshop to edit function");
+        api.getResourceById('Workshop',$routeParams.workshop,function(workshop){
+            console.log(workshop);
+            $scope.form = workshop[0];
+            console.log($scope.form.eventDetails);
+        })
+    }
+
     $scope.submit = function(){
         console.log("YOYOYO TEST SUCcess");
         api.createResource('Workshop',$scope.form);
     }
     $scope.submitedit = function(){
-        $http.post('updateworkshop/'+$scope.workshops._id).
+
+        $http.post('edit/Workshop/'+$routeParams.workshop,$scope.form).
             success(function(data){
 
             }).

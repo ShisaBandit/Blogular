@@ -109,7 +109,9 @@ var dataFilter = function(req,type,subtype,data,callback){
             if(subtype == "signatures"){
                 models.User.findOne({_id:req.session.passport.user},function(err,user){
                     if(user == null ){
-
+                           data.initals = "testing";
+                            data.cityState = "testplace";
+                        callback(data);
                     }else{
                         if(user.firstName === undefined){
                             data.initals = "ANON";
@@ -180,6 +182,7 @@ exports.getData = function(req,res){
 
 
     model.find(condition,function(err,docs){
+
         return res.end(JSON.stringify(docs));
     })
 }
@@ -188,6 +191,27 @@ function sendSuccess(res){
     return res.end(JSON.stringify({'success': 'true'}));
 
 }
+
+exports.editData = function(req,res){
+    var idPar = req.params.id;
+    var model = getModelInstance(req.params.type);
+    var condition = {};
+    console.log(idPar);
+    //if api route id is undefined we are doing a sub doc query
+    console.log(typeof(idPar))
+    //set the condition of the condition
+    condition = {_id:idPar};
+    console.log(condition);
+    //find the doc we are going to edit
+    console.log(req.body)
+    delete req.body["_id"];
+    model.findByIdAndUpdate(idPar,req.body,function(err,docs){
+        if(err)console.log(err)
+        console.log(docs);
+        return res.send({result:"success"});
+    })
+}
+
 
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
