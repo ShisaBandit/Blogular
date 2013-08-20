@@ -301,6 +301,20 @@ app.factory('categoryService', function () {
     ];
 });
 
+app.factory('groupsListing',function(){
+    return[
+        {name:"Mother",code:0},
+        {name:"Father",code:1},
+        {name:"Grandchild",code:7},
+        {name:"Child",code:8},
+        {name:"Brother",code:4},
+        {name:"Sister",code:5},
+        {name:"Friend",code:3},
+        {name:"Family",code:2},
+        {name:"Other",code:6}
+    ];
+})
+
 app.service('userInfoService', function () {
     var username = "Guest";
     return {
@@ -648,22 +662,12 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
 
 });
 
-app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket) {
+app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket,groupsListing) {
     $scope.form = {};
     $scope.subgroup = [];
     $scope.form.groupcode;
     $scope.selectedSubgroup = {};
-    $scope.groups = [
-        {name:"Mother",code:0},
-        {name:"Father",code:1},
-        {name:"Grandchild",code:7},
-        {name:"Child",code:8},
-        {name:"Brother",code:4},
-        {name:"Sister",code:5},
-        {name:"Friend",code:3},
-        {name:"Family",code:2},
-        {name:"Other",code:6},
-    ];
+    $scope.groups = groupsListing;
     $scope.checked = function(){
             for(var sgroup in $scope.groups){
                 if($scope.groups[sgroup].name == $scope.selectedSubgroup.name){
@@ -934,21 +938,13 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams,$http) {
 
 });
 
-app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog,$rootScope) {
+app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog,$rootScope,groupsListing) {
     $scope.template = {};
     $scope.hidemainform = false;
     $scope.blogId = {blogId:""};
     $scope.addedFile = {};
     $scope.author = {author:""};
-    $scope.groups = [
-        {name:"Mother",code:0},
-        {name:"Father",code:1},
-        {name:"Brother",code:4},
-        {name:"Sister",code:5},
-        {name:"Friend",code:3},
-        {name:"Family",code:2},
-        {name:"Other",code:6},
-    ];
+    $scope.groups = groupsListing;
     $scope.checked = function(){
         for(var sgroup in $scope.groups){
             if($scope.groups[sgroup].name == $scope.selectedSubgroup.name){
@@ -1093,7 +1089,7 @@ app.controller('InviteBlockCtrl',function($scope,api,$http,$routeParams){
 });
 
 
-app.controller('EditWallCtrl',function($rootScope,$http,$scope,api,$routeParams,BlogsService){
+app.controller('EditWallCtrl',function($rootScope,$http,$scope,api,$routeParams,BlogsService,groupsListing){
     $scope.template = {};
          $scope.portrait ={portrait:""};
     $scope.spread ={spread:""};
@@ -1187,15 +1183,7 @@ app.controller('EditWallCtrl',function($rootScope,$http,$scope,api,$routeParams,
 
 
        }
-    $scope.groups = [
-        {name:"Mother",code:0},
-        {name:"Father",code:1},
-        {name:"Brother",code:4},
-        {name:"Sister",code:5},
-        {name:"Friend",code:3},
-        {name:"Family",code:2},
-        {name:"Other",code:6},
-    ];
+    $scope.groups = groupsListing;
     $scope.checked = function(){
         for(var sgroup in $scope.groups){
             if($scope.groups[sgroup].name == $scope.selectedSubgroup.name){
