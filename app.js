@@ -96,11 +96,14 @@ app.configure('development', function () {
 (function checkForAdmin() {
     var defaultAdminName = 'administrator';
     var usertype = "superuser";
+    var defaultEmail = "raygarner13@gmail.com";
+    var defFName = "Ray";
+    var defLName = "Garner";
     console.log('Checking for initial admin user');
     User.count({username: defaultAdminName, admin: usertype}, function (err, count) {
         if (count < 1) {
             console.log('did not find admin user ... creating...');
-            var user = new User({username: defaultAdminName, password: defaultAdminName, admin: usertype}).
+            var user = new User({username: defaultAdminName, password: defaultAdminName, admin: usertype,email:defaultEmail,firstName:defFName,lastName:defLName}).
                 save(function (err) {
                     if (err) {
                         console.log(err);
