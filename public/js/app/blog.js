@@ -396,7 +396,9 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog,
          api.createSubDocResource('Blog',$scope.entry._id,'postText',{
              embedYouTube:$scope.embedYouTube,embedAnimoto:$scope.embedAnimoto,postType:2
          },function(){
-
+            console.log("video sent");
+            $scope.embedYouTube = "";
+            $scope.embedAnimoto = "";
          })
     }
     $scope.submitEvent = function () {
@@ -1123,7 +1125,16 @@ app.controller('EditWallCtrl',function($rootScope,$http,$scope,api,$routeParams,
     };
 
     $scope.deletePost = function () {
+        //TODO:Properly imlement this function
         $scope.form.$remove();
+        console.log("blog/"+$scope.form._id);
+        $http.delete('/blog/'+$scope.form._id).
+        success(function(){
+            console.log("wall deleted");
+        }).
+        error(function(){
+            console.log("wall not deleted error");
+        })
     };
     $scope.submitPost = function () {
 

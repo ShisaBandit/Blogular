@@ -58,7 +58,6 @@ angular.module('apiResource', ['ngResource']).
                 //apiCreateResource({type:type},bodydata);
                 $http.post("create/"+type,bodydata).
                     success(function(err){
-
                     })
             },
             /*creates a subdoc array entry on adocument

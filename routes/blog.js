@@ -215,13 +215,11 @@ exports.updateBlog = function (req, res) {
 }
 
 exports.deleteBlog = function (req, res) {
+    console.log("trying to remove "+req.params.id);
     Blog.remove({'_id': req.params.id}, function (err) {
         if (err)
             console.log(err);
-        update.save(function (err, update) {
-            if (err)console.log(err);
-        });
-
+        
     });
 }
 
