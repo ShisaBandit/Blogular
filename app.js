@@ -22,6 +22,7 @@ var express = require('express')
     , MemoryStore = express.session.MemoryStore
     , sessionStore = new MemoryStore()
     , q = require('q')
+    
 //models
     , blogModels = require('./models/models')
     , passport = require('./auth/local').passport_local

@@ -1,3 +1,5 @@
+var mongoose = require('mongoose');
+
 var blogSchema = mongoose.Schema({
     owner_id: String, //has relation to the subgroup
     firstName: String,
