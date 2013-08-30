@@ -100,22 +100,12 @@
 
 <body class="ng-app:blogApp" id="ng-app" ng-app="blogApp">
 
-<div class="fixed title z-index-1000">
+<div class="fixed titleHdr z-index-1000">
     <div class="row gradient-main">
         <div class="headerCol">
             <div ng-controller="TitleCtrl">
                 <a href="#/" ng-bind="title" class="logo"></a>
             </div>
-        </div>
-
-        <div id="workpets" class="headerCol2">
-            <a href="/" id="workshopbutton"
-               class="small radius button workpetsbuttons">Home</a>
-            <a href="http://www.angelsofeureka.com/shop" id="workshopbutton"
-               class="small radius button workpetsbuttons">Web Store</a>
-            <a href="#/workshops" id="workshopbutton" class="small radius button workpetsbuttons">Workshops</a>
-            <a href="#/petitions" id="pettionbutton" class="small radius button workpetsbuttons">Petitions</a>
-            <a href="#/pets" id="petbutton" class="small radius button workpetsbuttons">Pets</a>
         </div>
         <div ng-controller="UserInfoCtrl" class="loginBlock">
             <div id="username">
@@ -129,15 +119,21 @@
         </div>
     </div>
     <div ng-controller="SearchBarCtrl" class="searchBarBlock">
+        <div id="workpets" class="headerCol2">
+            <a href="/" id="homebutton"
+               class="small radius button workpetsbuttons">Home</a>
+            <a href="http://www.angelsofeureka.com/shop" id="webstorebutton"
+               class="small radius button workpetsbuttons">Web Store</a>
+            <a href="#/workshops" id="workshopbutton" class="small radius button workpetsbuttons">Workshops</a>
+            <a href="#/petitions" id="pettionbutton" class="small radius button workpetsbuttons">Petitions</a>
+            <a href="#/pets" id="petbutton" class="small radius button workpetsbuttons">Pets</a>
+        </div>
         <div ng-hide="searchViewable" ng-animate="'fade'" class="searchBar">
             <div class="row">
-                <div class="small-6 columns large-centered">
+                <div class="small-4 columns large-centered">
                     <div class="row collapse">
-                        <div class="small-10 columns">
+                        <div class="small-5 columns">
                             <input ng-model="search.search" type="text" placeholder="Enter your search">
-                        </div>
-                        <div class="small-2 columns">
-                            <span ng-click="clearSearch()" class="button postfix radius">Clear</span>
                         </div>
                     </div>
                 </div>
