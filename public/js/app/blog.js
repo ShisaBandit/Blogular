@@ -58,6 +58,15 @@ app.directive('becomeMainContent', function () {
     }
 });
 
+app.directive('reflow',function(){
+    return{
+        link:function(scope,ele)
+        {
+            console.log("reflowing a "+ele);
+            ele.foundation('section', 'reflow');
+        }
+    }
+})
 
 
 app.directive('nivogallery', function () {
