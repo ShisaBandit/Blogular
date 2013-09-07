@@ -293,10 +293,12 @@ h1.sectionHeader {
     width: 250px;
     height: 300px;
     padding: 20px;
-    margin-right: -15px;
-    float: right;
+    margin-top: -20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    float: left;
     background: #f5f5f5 url("/img/AngelIcon2b.jpg") no-repeat center center;
-    box-shadow: -2px 0px 5px 5px darkgrey;
+    box-shadow: -1px 0px 5px 5px #dcdcdc;
 }
 
 .wallViewers {
@@ -329,6 +331,7 @@ h1.sectionHeader {
 
 #contentHeader{
     background-color: #132D48;
+    margin-bottom: 20px;
 }
 .contentHeaderTitle{
     color: #ffffff;
@@ -386,6 +389,46 @@ label {
     display: block;
     font-weight: 500;
     margin-bottom: 0.1875em;
+}
+
+.columns label {
+    font-size: 1em;
+    color: #132d48;
+    cursor: pointer;
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.1875em;
+    float: left;
+    clear: left;
+}
+
+.small-6 input[type=text],.small-6 input[type=password],.small-6 input[type=email] {
+    width: 250px;
+}
+
+.small-6 textarea {
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+.regColl {
+    padding: 10px;
+}
+
+.regColl2 {
+    padding: 20px;
+}
+
+.regColl2 div {
+    display: block;
+    width: 16%;
+    height: 30px;
+    text-align: left;
+    line-height: 30px;
+    padding-left: 20px;
+    background: #B7B7B7;
+    float: left;
+    border: 1px #f5f5f5 dashed;
 }
   /*
 .nav-container{ background: url('images/nav_bg.jpg') repeat-x 0 0;}

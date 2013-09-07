@@ -2651,7 +2651,12 @@ form.custom .custom.disabled {
 }
 
 .section-container section.active .content, .section-container .section.active .content, .section-container.auto section.active .content, .section-container.auto .section.active .content {
-    display: block
+    display: block;
+    width: 100%;
+    height: auto;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    float: left;
 }
 
 .section-container section.active .title, .section-container .section.active .title, .section-container.auto section.active .title, .section-container.auto .section.active .title {
@@ -4914,5 +4919,6 @@ table thead tr th, table tfoot tr th, table tbody tr td, table tr td, table tfoo
 }
 
 .profile {
-    padding: 30px;
+    padding: 10px;
+    margin-left: 280px;
 }

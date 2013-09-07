@@ -318,9 +318,12 @@ app.factory('groupsListing',function(){
         {name:"Child",code:8},
         {name:"Brother",code:4},
         {name:"Sister",code:5},
+        {name:"Husband",code:6},
+        {name:"Wife",code:9},
+        {name:"Aunt",code:10},
+        {name:"Uncle",code:11},
         {name:"Friend",code:3},
-        {name:"Family",code:2},
-        {name:"Other",code:6}
+        {name:"Cousin",code:2}
     ];
 })
 

@@ -7,70 +7,64 @@
                     <h1>We are in closed beta: Enter your code to access the closed beta.</h1>
                     <h4>If you do not have a code find someone that does or please be patient till we open to the public.
                     sorry for the inconvenience. </h4>
-                    <th>Beta code</th>
-                    <td><input type="text" class="login-inp" ng-model="form.betacode"/></td>
-                </tr>
-                <tr>
 
-                    <th>Username</th>
-                    <td><input type="text" class="login-inp" ng-model="form.username"/></td>
-                </tr>
-                <tr>
-                    <th>Password</th>
-                    <td><input type="password" class="login-inp" ng-model="form.password"/></td>
-                </tr>
-                <tr>
-                    <th>First Name</th>
-                    <td><input type="text" class="login-inp" ng-model="form.firstName"/></td>
-                </tr>
-                <tr>
-                    <th>Last Name</th>
-                    <td><input type="text" class="login-inp" ng-model="form.lastName"/></td>
-                </tr>
-                <tr>
-                    <th>Gender</th>
-                    <td><input type="checkbox" class="login-inp" ng-model="form.male"/>Male</td>
-                    <td><input type="checkbox" class="login-inp" ng-model="form.female"/>Female</td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td><input type="email" class="login-inp" ng-model="form.email"/></td>
-                </tr>
-                <tr>
-                    <th>Address</th>
-                    <td><input type="text" class="login-inp" ng-model="form.address"/></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><p><b>{{message}}</b></p></td>
-                </tr>
-
-                <tr>
-                    <th>City</th>
-                    <td><input type="text" class="login-inp" ng-model="form.city"/></td>
-                </tr>
-                <tr>
-                    <th>Age</th>
-                    <td><input type="number" class="login-inp" ng-model="form.age"/></td>
-                </tr>
-                <tr>
-                    <th>About</th>
-                    <td><input type="text" class="login-inp" ng-model="form.about"/></td>
-                </tr>
-                <tr>
-                    <th>I have lost my: </th>
-                    <!--<td><input type="checkbox" ng-repeat="group in groups" class="login-inp" ng-model="form.subgroup"/>{{type.name}}</td>
-                -->
-
-                    <td><div ng-repeat="group in groups">{{group.name}}:<input type="checkbox" ng-change="checked()"
-                                                                           ng-model="groups[$index].checked"
-                                                                           class="login-inp" name="{{group.name}}"/></div>  </td>
-                </tr>
-                <tr>
-                    <th></th>
-                    <td><a class="button" ng-click="submitFinalDetails()">Register</a></td>
-                    <td><a class="close-reveal-modal button">Cancel</a></td>
                 </tr>
             </table>
+            <div class="small-12 columns">
+                  <div class="row ">
+                    <div class="small-6 columns regColl">
+                    <label>Beta code:</label>
+                    <input type="text" class="login-inp" ng-model="form.betacode"/>
+
+                    <label>Username:</label>
+                    <input type="text" class="login-inp" ng-model="form.username"/>
+
+                    <label>Password:</label>
+                    <input type="password" class="login-inp" ng-model="form.password"/>
+
+                    <label>First Name:</label>
+                    <input type="text" class="login-inp" ng-model="form.firstName"/>
+
+                    <label>Last Name:</label>
+                    <input type="text" class="login-inp" ng-model="form.lastName"/>
+
+                    <label>Gender:</label>
+                    <input type="checkbox" class="login-inp" ng-model="form.male"/> Male
+                    <input type="checkbox" class="login-inp" ng-model="form.female"/> Female
+                    <br /><br />
+                    <label>Email:</label>
+                    <input type="email" class="login-inp" ng-model="form.email"/>
+
+                    <label>Address:</label>
+                    <input type="text" class="login-inp" ng-model="form.address"/>
+
+                    <label>City:</label>
+                    <input type="text" class="login-inp" ng-model="form.city"/>
+
+                    <label>State/Province:</label>
+                    <input type="text" class="login-inp" ng-model="form.state"/>
+
+                    <label>Postal Address:</label>
+                    <input type="text" class="login-inp" ng-model="form.zip"/>
+                  </div>
+                  <div class="small-6 columns regColl">
+                    <label>Personal Bio Here:</label>
+                    <textarea class="login-inp" ng-model="form.age"></textarea>
+
+                    <label>Date of Birth:</label>
+                    <input type="text" class="login-inp" ng-model="form.about"/>
+                  </div>
+                 </div>
+                 <div class="row regColl2">
+                    <label>I have lost my: </label> <br /> <br />
+                    <div ng-repeat="group in groups">{{group.name}}<input type="checkbox" ng-change="checked()"
+                                                                           ng-model="groups[$index].checked"
+                                                                           class="login-inp" name="{{group.name}}"/></div>
+                 </div>
+                    <a class="button" ng-click="submitFinalDetails()">Register</a>
+                    <a class="close-reveal-modal button">Cancel</a>
+
+            </div>
         </div>
     </div>
 </div>
