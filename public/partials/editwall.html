@@ -6,6 +6,7 @@
             <form class="editMemWall">
                 <label for="title">Title: </label>
                 <input id="title" ng-model="form.title" name="title">
+                <br />
                 <label for="author">Short Address: </label>
                 <input type="text" name="author" id="author" ng-model="form.author">
                 <label for="content">Content: </label>
@@ -28,10 +29,13 @@
                 <input type="date" class="login-inp" ng-model="form.dob"/>
                 <br/>
                 <label>This is my</label>
+                <div class="row regColl2">
+                    <label>I have lost my: </label> <br /> <br />
+                    <div ng-repeat="group in groups">{{group.name}}<input type="checkbox" ng-change="checked()"
+                                                                          ng-model="groups[$index].checked"
+                                                                          class="login-inp" name="{{group.name}}"/></div>
+                </div>
 
-                <div ng-repeat="group in groups">{{group.name}}:<input type="checkbox" nge="checked()"
-                                                                       ng-model="groups[$index].checked"
-                                                                       class="login-inp" name="{{group.name}}"/></div>
                 <label>Day your angel got wings</label>
                 <input type="date" class="login-inp" ng-model="form.memorialDate"/>
 
@@ -39,7 +43,7 @@
                 <br/>
 
                 <p>
-                    <button ng-click="editPost()" resetOnSubmit="true">Submit Post</button>
+                    <button ng-click="editPost()" resetOnSubmit="true">Submit Changes</button>
                 </p>
             </form>
 

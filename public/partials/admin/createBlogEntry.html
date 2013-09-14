@@ -6,61 +6,62 @@
 
                 <div id="log"></div>
                 <h2 class="subHeader">Create Memorial Profile</h2>
+                    <div class="small-12 columns">
+                        <br />
+                        <label for="title">Memorial Wall Title: </label>
+                        <input type="text" id="title" ng-model="form.title" name="title" placeholder="This is seen as the name of your memorial wall, usually the full name of your Angel. Please enter a title here.">
+                        <br />
+                        <br />
+                        <label for="author">Please specify a short address for your profile : </label>
+                        <input type="text" name="author" id="author" ng-model="form.author" placeholder="(Less than 100 characters, including underscores and dashes with no spaces)">
+                        <br />
+                        <label for="content">Tell your Angel's story here: </label>
 
-                <label for="title">Title: </label>
-                <input id="title" ng-model="form.title" name="title">
-                <br />
-                <br />
-                <label for="author">Please specify a short address for your profile (Less than 300 characters, including underscores and dashes with no spaces): </label>
-                <input type="text" name="author" id="author" ng-model="form.author">
-                <br />
-                <label for="content">Tell your Angel's story here: </label>
+                        <!-- add on to later for now just use regular text area
+                         <div id="toolbar" style="display: none;">
+                             <a data-wysihtml5-command="bold" title="CTRL+B">bold</a> |
+                             <a data-wysihtml5-command="italic" title="CTRL+I">italic</a>
+                             <a data-wysihtml5-action="change_view">switch to html view</a>
+                         </div>
+                         -->
+                        <textarea id="content" placeholder="Enter your Angel's legacy here..." ng-model="form.text" cols="50" rows="25"></textarea>
+                        <br />
 
-                <!-- add on to later for now just use regular text area
-                 <div id="toolbar" style="display: none;">
-                     <a data-wysihtml5-command="bold" title="CTRL+B">bold</a> |
-                     <a data-wysihtml5-command="italic" title="CTRL+I">italic</a>
-                     <a data-wysihtml5-action="change_view">switch to html view</a>
-                 </div>
-                 -->
-                <textarea id="content" placeholder="Enter text ..." ng-model="form.text" cols="50" rows="15"></textarea>
-                <br />
+                        <label>What is your Angel's name?</label>
+                        <input type="text" class="login-inp" ng-model="form.firstName" placeholder="First Name" />
+                        <input type="text" class="login-inp" ng-model="form.lastName" placeholder="Last Name" />
+                        <br />
+                        <label>Date of Birth:</label>
+                        <!--TODO:Make this a n uploadable file-->
+                        <input type="date" class="login-inp" ng-model="form.dob"/>
+                        <br />
+                        <label>Day your Angel got their wings:</label>
+                        <input type="date" class="login-inp" ng-model="form.memorialDate"/>
 
-                <label>Name of Angel</label>
-                <input type="text" class="login-inp" ng-model="form.firstName" placeholder="First Name" />
-                <input type="text" class="login-inp" ng-model="form.lastName" placeholder="Last Name" />
-                <br />
-                <label>Day your angel got wings</label>
-                <input type="date" class="login-inp" ng-model="form.memorialDate"/>
-                <br />
-                <label>Date of Birth</label>
-                <!--TODO:Make this a n uploadable file-->
-                <input type="date" class="login-inp" ng-model="form.dob"/>
-                <br />
-                <label>This is my</label>
-                    <!--<td><input type="checkbox" ng-repeat="group in groups" class="login-inp" ng-model="form.subgroup"/>{{type.name}}</td>
-                -->
+                         <div class="row regColl2">
+                            <label>I have lost my: </label> <br /> <br />
+                            <div ng-repeat="group in groups">{{group.name}}<input type="checkbox" ng-change="checked()"
+                                                                                  ng-model="groups[$index].checked"
+                                                                                  class="login-inp" name="{{group.name}}"/></div>
+                        </div>
 
-                    <div ng-repeat="group in groups">{{group.name}}:<input type="checkbox" ng-change="checked()"
-                                                                          ng-model="groups[$index].checked"
-                                                                          class="login-inp" name="{{group.name}}"/></div>
+                        <!--
+                        <h4>Tagegories</h4>
+                            <p>These will show up as categories on the main screen and be used to filter aritcles on the main page.</p>
+                            <p>These are to be comma seperated values ONLY!</p>
+                            <label for="categories">Categories/Tags:</label>
+                            <input type="text" name="categories" id="categories" ng-model="form.categories">
+                            <p>Comma seperated values ONLY!! Be aware no validation here is added yet!</p>
+                            -->
+                        <br />
+                        <br />
+                        <p>
+                            <a ng-click="submitPost()" class="button" resetOnSubmit="true">On to the Next Step</a>
 
-                <!--
-                <h4>Tagegories</h4>
-                    <p>These will show up as categories on the main screen and be used to filter aritcles on the main page.</p>
-                    <p>These are to be comma seperated values ONLY!</p>
-                    <label for="categories">Categories/Tags:</label>
-                    <input type="text" name="categories" id="categories" ng-model="form.categories">
-                    <p>Comma seperated values ONLY!! Be aware no validation here is added yet!</p>
-                    -->
-                <br />
-                <br />
-                <p>
-                    <a ng-click="submitPost()" class="button" resetOnSubmit="true">On to the Next Step</a>
-
-                </p>
+                        </p>
+                    </div>
             </div>
-            <div class="offsetHeight" ng-include src="template.url">
+            <div class="" ng-include src="template.url">
 
             </div>
         </div>

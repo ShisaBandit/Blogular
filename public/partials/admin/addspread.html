@@ -1,9 +1,9 @@
 <div ng-controller="AddBlogCtrl">
-    <p>
+    <h2>
         Thank you for uploading a portrait photo.
         Now upload a background photo for you portrait photo.
-    </p>
-    <h3>Spread</h3>
+    </h2>
+    <h3>Upload an image to use as the background of your memorial wall</h3>
     <dropzone url="/uploadspread"
                   class="dropzone"
                   id="spreadDropzone"
@@ -12,6 +12,6 @@
                   addRemoveLinks="true"
                 >
         </dropzone>
-        <a ng-click="submitspread()" class="button"></a>
+        <a ng-click="submitspread()" class="button">Upload</a>
 
 </div>
