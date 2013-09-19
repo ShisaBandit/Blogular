@@ -11,6 +11,8 @@ var app = angular.module('blogApp', [
             when("/shoutouts", {templateUrl: "partials/shoutouts.html"}).
             when("/AddBlogEntry", {templateUrl: "partials/admin/createBlogEntry.html"}).
             when("/blog/:id", {templateUrl: "partials/blogEntry.html"}).
+            when("/AddGroupCtrl", {templateUrl: "partials/admin/createGroup.html"}).
+            when("/group/:id", {templateUrl: "partials/groupHome.html"}).
             when("/public/:id", {templateUrl: "partials/publicAngelProfile.html"}).
             when("/listByTag/:name", {templateUrl: "partials/blog.html"}).
             when("/petitions", {templateUrl: "partials/petitions.html"}).
@@ -1043,6 +1045,75 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog,$rootScope,gr
 
     }
 });
+
+app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog,$rootScope,groupsListing) {
+    $scope.template = {};
+    $scope.hidemainform = false;
+    $scope.blogId = {blogId:""};
+    $scope.addedFile = {};
+    $scope.author = {author:""};
+    $scope.groups = groupsListing;
+    $scope.checked = function(){
+        for(var sgroup in $scope.groups){
+            if($scope.groups[sgroup].name == $scope.selectedSubgroup.name){
+                $scope.groups[sgroup].checked = false;
+            }
+        }
+        for(var sgroup in $scope.groups){
+            if($scope.groups[sgroup].checked){
+                $scope.selectedSubgroup = $scope.groups[sgroup];
+                $scope.form.groupcode = $scope.selectedSubgroup.code;
+            }
+        }
+    }
+    $scope.submitPost = function () {
+
+        BlogsService.updateBlog($scope.form,function(err,res){
+            if(err){
+                $scope.message = "Group must have a title.";
+            }
+
+            $scope.blogId.blogId = res.blogId;
+            $scope.form.title = "";
+            $scope.form.author = "";
+            $scope.form.text = "";
+            $scope.message = "";
+            $scope.template.url = '/partials/admin/addportrait.html';
+            $scope.hidemainform = true;
+        });
+    }
+    $rootScope.$on('addedFile',function(event,file){
+        console.log("addedfile");
+        console.log($scope.addedFile);
+        $scope.addedFile = file.file;
+    })
+    $scope.submitportrait = function(){
+
+
+        $rootScope.$broadcast('uploadit',{file:$scope.addedFile});
+
+        $rootScope.$on('uploadedFile',function(){
+            console.log("completed now spreadem")  ;
+
+            $scope.$parent.template.url = 'partials/admin/addspread.html';
+            $scope.$apply()
+        })
+    }
+    $scope.submitspread = function(){
+
+
+        console.log("addedfile");
+        console.log($scope.addedFile);
+        $rootScope.$broadcast('uploadit',{file:$scope.addedFile});
+
+        $rootScope.$on('uploadedFile',function(){
+            $scope.$parent.template.url = 'partials/admin/mwregcom.html';
+            $scope.$apply()
+        })
+
+    }
+});
+
 app.controller('VideoCtrl', function ($scope, BlogsService, Blog,$rootScope,$http) {
     $scope.videos = [];
     $scope.blogId = "";

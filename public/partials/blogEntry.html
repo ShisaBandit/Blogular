@@ -50,66 +50,92 @@
     <div class="row">
         <div class="small-12 columns">
             <div class="row collapse">
-                <div class="postEntry small-10 columns">
-                    <br />
-                    <input type="text" ng-hide="textbox" ng-model="postText" class="addNewPost" placeholder="Begin a new conversation here"/> <br />
+                <div class="postEntry small-12 columns">
+                <div class="section-container auto" reflow data-section>
+                    <section>
+                        <p class="title" data-section-title><a href="#panel1">Begin Conversation</a></p>
+                        <div class="content" data-section-content>
+                            <div id="contentHeader" class="small-12 columns">
+                                <h2 class="contentHeaderTitle">Start a New Conversation</h2>
+                            </div>
+                            <br />
+                            <div class="small-12 columns">
+                                <input type="text" ng-model="postText" class="addNewPost small-10 columns" placeholder="Begin a new conversation here"/>
+                                <div class="small-2 columns"><br /><button ng-click="submit()" class="button postfix">Submit</button>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <p class="title" data-section-title><a href="#panel1" ng-click="flipEntry()">Add Pics</a></p>
+                        <div class="content" data-section-content>
+                            <div id="contentHeader" class="small-12 columns">
+                                <h2 class="contentHeaderTitle">Upload Photos</h2>
+                            </div>
+                            <div ng-show="photobox" id="UploadBox">
+                                <h2>Photo Uploader</h2>
 
-                    <div ng-show="photobox" id="UploadBox">
-                        <h2>Photo Uploader</h2>
+                                <div id='UploadArea'>
+                                    <dropzone url="/upload"
+                                              class="dropzone"
+                                              id="my-awesome-dropzone"
+                                            >
+                                    </dropzone>
 
-                        <div id='UploadArea'>
-                            <dropzone url="/upload"
-                                      class="dropzone"
-                                      id="my-awesome-dropzone"
-                                    >
-                            </dropzone>
+                                </div>
+                                <!--<a ng-click="submitphotodata()" class="button">Save</a> -->
+                                <a ng-click="flipEntry()" class="button">Finished</a>
+                            </div>
 
                         </div>
-                        <!--<a ng-click="submitphotodata()" class="button">Save</a> -->
-                        <a ng-click="flipEntry()" class="button">Finished</a>
-                    </div>
-                    <div ng-show="videobox" id="videobox">
-                        <h2>Video Uploader</h2>
+                    </section>
+                    <section>
+                        <p class="title" data-section-title><a href="#panel1" ng-click="toogleVideoEntry()">Add Videos</a></p>
+                        <div class="content" data-section-content>
+                            <div class="row ">
+                                <div id="contentHeader" class="small-12 columns">
+                                    <h2 class="contentHeaderTitle">Upload Videos</h2>
+                                </div>
+                            </div>
+                            <div ng-show="videobox" id="videobox">
+                                <h2>Video Uploader</h2>
 
-                        <div>
-                            <h4>You Tube Link</h4>
-                            <b>You have to use the embed code from youtube for now</b>
-                            <input type="text" name="youtube" ng-model="embedYouTube" id="youtube"/>
-                            <h4>Animoto Link</h4>
-                            <input type="text" name="animoto" ng-model="embedAnimoto" id="animoto"/>
-                            <a ng-click="submitVideo()" class="button">Submit video links</a>
+                                <div>
+                                    <h4>You Tube Link</h4>
+                                    <b>You have to use the embed code from youtube for now</b>
+                                    <input type="text" name="youtube" ng-model="embedYouTube" id="youtube"/>
+                                    <h4>Animoto Link</h4>
+                                    <input type="text" name="animoto" ng-model="embedAnimoto" id="animoto"/>
+                                    <a ng-click="submitVideo()" class="button">Submit video links</a>
+                                </div>
+
+                            </div>
                         </div>
+                    </section>
+                    <section>
+                        <p class="title" data-section-title><a href="#panel1" ng-click="toogleEventEntry()">Add Angel Anniversary</a></p>
+                        <div class="content" data-section-content>
+                            <div class="row ">
+                                <div id="contentHeader" class="small-12 columns">
+                                    <h2 class="contentHeaderTitle">Add Angel Anniversary</h2>
+                                </div>
+                            </div>
+                            <div ng-show="eventbox" id="eventbox">
+                                <h2>Events</h2>
 
-                    </div>
-                    <div ng-show="eventbox" id="eventbox">
-                        <h2>Events</h2>
-
-                        <div>
-                            <h4>New Event</h4>
-                            <h5>Title</h5>
-                            <input type="text" name="eventheader" ng-model="event" id=""/>
-                            <h5>Details</h5>
-                            <input type="text" name="eventdetails" ng-model="eventdesc" id="event"/>
-                            <a ng-click="submitEvent()" class="button">Submit anni</a>
+                                <div>
+                                    <h4>New Event</h4>
+                                    <h5>Title</h5>
+                                    <input type="text" name="eventheader" ng-model="event" id=""/>
+                                    <h5>Details</h5>
+                                    <input type="text" name="eventdetails" ng-model="eventdesc" id="event"/>
+                                    <a ng-click="submitEvent()" class="button">Submit Angel Anniversary</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="small-2 columns"><br /><button ng-click="submit()" class="button postfix">Submit</button>
+                    </section>
                 </div>
             </div>
-            <div class="row">
-                <div class="small-3 columns" ng-click="toogleVideoEntry()">
-                    <button class="mediabuttons"><i class="general foundicon-video mediaicons"></i></button> <span>Add Videos</span>
 
-                </div>
-                <div class="small-3 columns" ng-click="flipEntry()">
-                    <button class="mediabuttons"><i class="general foundicon-photo mediaicons"></i></button> <span>Add Photos</span>
-
-                </div>
-                <div class="small-3 columns" ng-click="toogleEventEntry()">
-                    <button class="mediabuttons"><i class="general foundicon-calendar mediaicons"></i></button> <span>Add Angel Anniversary</span>
-
-                </div>
                 <div class="small-offset-8 columns"></div>
             </div>
             <div class="row">
