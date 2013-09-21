@@ -11,8 +11,9 @@ var app = angular.module('blogApp', [
             when("/shoutouts", {templateUrl: "partials/shoutouts.html"}).
             when("/AddBlogEntry", {templateUrl: "partials/admin/createBlogEntry.html"}).
             when("/blog/:id", {templateUrl: "partials/blogEntry.html"}).
-            when("/AddGroupCtrl", {templateUrl: "partials/admin/createGroup.html"}).
+            when("/StartGroup", {templateUrl: "partials/admin/createGroup.html"}).
             when("/group/:id", {templateUrl: "partials/groupHome.html"}).
+            when("/groupPreview/:id", {templateUrl: "partials/groupHomePublic.html"}).
             when("/public/:id", {templateUrl: "partials/publicAngelProfile.html"}).
             when("/listByTag/:name", {templateUrl: "partials/blog.html"}).
             when("/petitions", {templateUrl: "partials/petitions.html"}).
@@ -1078,7 +1079,7 @@ app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog,$rootScope,g
             $scope.form.author = "";
             $scope.form.text = "";
             $scope.message = "";
-            $scope.template.url = '/partials/admin/addportrait.html';
+            $scope.template.url = '/partials/admin/addGroupLogohtml';
             $scope.hidemainform = true;
         });
     }
@@ -1095,7 +1096,7 @@ app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog,$rootScope,g
         $rootScope.$on('uploadedFile',function(){
             console.log("completed now spreadem")  ;
 
-            $scope.$parent.template.url = 'partials/admin/addspread.html';
+            $scope.$parent.template.url = 'partials/admin/addGroupBG.html';
             $scope.$apply()
         })
     }
@@ -1159,7 +1160,33 @@ app.controller('AnniCtrl',function($scope,api,$http){
             console.log(data);
             $scope.anis = data;
         })
-})
+});
+
+app.controller('groupEvntCtrl',function($scope,api,$http){
+    $scope.grpEvnt = [];
+    $scope.blogId = "";
+    $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
+        console.log(oldVal);
+        console.log(newVal);
+        /*
+         api.getResourceById('Blog',newVal,function(blogs){
+         console.log(blogs[0]);
+         $scope.anis = blogs[0].anniverssaryDays;
+         })
+         */
+        $scope.blogId = newVal;
+        $http.get('lastestEvents/' + newVal).
+            success(function (data) {
+                console.log(data);
+                $scope.grpEvnt = data;
+            })
+    });
+    $http.get('lastestEvents/' + $scope.blogId).
+        success(function (data) {
+            console.log(data);
+            $scope.anis = data;
+        })
+});
 app.controller('FriendsFamilyCtrl',function($scope,api,$routeParams,$http){
     $scope.subscribers = [];
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
