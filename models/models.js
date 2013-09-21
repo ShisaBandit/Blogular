@@ -1,8 +1,7 @@
 var mongoose = require('mongoose');
 
-group:{type: Boolean, default: false},
-
 var blogSchema = mongoose.Schema({
+    group:{type: Boolean, default: false},
     owner_id: String, //has relation to the subgroup
     firstName: String,
     lastName: String,
