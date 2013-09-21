@@ -595,6 +595,223 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog,
     })
 });
 
+app.controller('groupEntryCtrl', function ($scope, $location, show, Blog,
+                                          $routeParams, socket, $rootScope, $http, dropzone,api) {
+
+
+    $scope.parentObject = {
+        routeParamId: $routeParams.id,
+        entryId: ""
+    }
+    socket.connect();
+    $scope.entry = "";
+    $scope.viewers = [];
+    $scope.entry.comments = [];
+    $rootScope.profileMenuViewable = true;
+    $scope.textorphoto = false;
+    $scope.event;
+    $scope.eventdate;
+    $scope.eventdesc;
+    $scope.flipEntry = function () {
+
+        $scope.textorphoto = !$scope.textorphoto;
+        $scope.photobox = !$scope.photobox;
+        $scope.videobox = false;
+        $scope.eventbox = false;
+        switchCheckFromPhotoToVideo();
+    }
+
+    $scope.toogleVideoEntry = function () {
+
+        $scope.videobox = !$scope.videobox;
+        $scope.photobox = false;
+        $scope.eventbox = false;
+        switchCheckFromPhotoToVideo();
+    }
+    $scope.toogleEventEntry = function () {
+        console.log("eetest")
+        $scope.eventbox = !$scope.eventbox;
+        $scope.videobox = false;
+        $scope.photobox = false;
+        switchCheckFromPhotoToVideo();
+    }
+
+    function switchCheckFromPhotoToVideo() {
+        console.log($scope.photobox + " " + $scope.videobox + " " + $scope.eventbox);
+        if ($scope.photobox || $scope.videobox || $scope.eventbox) {
+            $scope.textbox = true;
+
+        } else {
+            $scope.textbox = false;
+        }
+    }
+
+    $scope.submitVideo = function () {
+        //TODO:Checkk this
+        console.log("submitvideo");
+        console.log($scope.entry._id);
+        api.createSubDocResource('Blog',$scope.entry._id,'postText',{
+            embedYouTube:$scope.embedYouTube,embedAnimoto:$scope.embedAnimoto,postType:2
+        },function(){
+            console.log("video sent");
+            $scope.embedYouTube = "";
+            $scope.embedAnimoto = "";
+        })
+    }
+    $scope.submitEvent = function () {
+        api.createSubDocResource('Blog',$scope.entry._id,'postText',{
+            event:  $scope.event,
+            date:$scope.eventdate,
+            text:$scope.eventdesc,
+            postType:3
+        },function(){})
+
+    }
+
+    $scope.postText = "";
+    if (!$scope.template) {
+        $scope.template = '/partials/profile/Latest.html';
+        $scope.contentHeaderTitle = 'Latest';
+
+    }
+    $scope.loadPage = function (page) {
+        console.log("loadpage");
+        $scope.template = '/partials/profile/' + page.toLowerCase() + '.html';
+        $scope.contentHeaderTitle = page;
+        console.log($scope.template);
+
+    }
+
+    $scope.submit = function () {
+        console.log("button fired");
+        $http.post('/addtextpost', {text: $scope.postText, id: $scope.entry._id}).
+            success(function (data, status) {
+                console.log(data);
+                console.log("emited socket events");
+                socket.emit('postText', {room: $scope.entry._id});
+                $scope.postText = "";
+            }).error(function (err) {
+                console.log(err);
+            });
+    }
+    socket.on('testrec', function (data) {
+        console.log(data);
+        console.log("rece socket event");
+    })
+
+    socket.on('login', function () {
+        socket.emit('subscribe', {room: $scope.entry._id});
+    });
+    socket.on('initialuserlist', function (data) {
+        $scope.viewers = data;
+    });
+
+
+    socket.on('commentsupdated', function () {
+        console.log("commentsupdated received");
+        //TODO: is this sending the right parameters?
+        Blog.get({id: $routeParams.id}, function (blog) {
+                $scope.entry = blog[0];
+                $scope.text = blog[0].text;
+                $scope.comments = blog[0].comments;
+                $scope.$onReady("commentsupdated");
+            },
+            function () {
+                $scope.$onFailure("failed");
+            });
+    });
+    socket.on('updateusers', function (data) {
+        $scope.viewers = data;
+    });
+    socket.on('removeuser', function (data) {
+        var viewers = [];
+        angular.copy($scope.viewers, viewers);
+        angular.forEach($scope.viewers, function (value, key) {
+            if (value.id == data) {
+                $scope.viewers.splice(key, 1);
+            }
+        });
+    });
+    $scope.submitComment = function () {
+        $scope.entry.comments.unshift({body: $scope.body, date: Date.now()});
+        $scope.entry.$save(function (blog) {
+            $scope.comments = blog.comments;
+            $scope.body = "";
+            console.log("sentcomment socket event emitted");
+            console.log({room: $scope.entry._id});
+            socket.emit('sentcomment', {room: $scope.entry._id});
+        });
+    };
+    $scope.submitphotodata = function () {
+        console.log("dropzone pq")
+        console.log(dropzone.getFilesLoadedInUI());
+
+        $http.post('/submitphotodata', {files: dropzone.getFilesLoadedInUI(), id: $scope.entry._id})
+            .success(function (data) {
+                console.log(data);
+                //TODO:if data is successfully submitted show user message and clear queue and ui
+            })
+    }
+    $scope.cancelphotodata = function () {
+        $http.post('/cancelphotodata')
+            .success(function () {
+                //TODO:if canceled show user message and clear queue and ui
+            })
+    }
+    show.state = true;
+    $scope.show = show;
+    $scope.$prepareForReady();
+    /*
+     BlogsService.getBlogFromLocal($routeParams.id,function(blog){
+
+     $scope.entry = blog;
+     $scope.text = blog.text;
+     $scope.comments = blog.comments;
+     $scope.$onReady("success");
+     });
+     */
+
+
+    Blog.get({id: $routeParams.id}, function (blog)
+        {
+            console.log('got blog');
+            console.log(blog[0].limited);
+            console.log(blog[0]);
+            $scope.entry = blog[0];
+
+            if (blog[0].limited) {
+                $scope.profileMenuViewable = false;
+                $location.path("/public/" + $routeParams.id);
+            } else {
+                $scope.parentObject.entryId = blog[0]._id;
+                $scope.text = blog[0].text;
+                $scope.comments = blog[0].comments;
+                socket.emit('subscribe', {room: blog[0]._id});
+
+                $scope.$onReady("success");
+                $location.path("/group/" + $routeParams.id);
+            }
+
+        },
+        function () {
+            $scope.$onFailure("failed");
+        });
+
+    $scope.$on('$routeChangeStart', function (scope, next, current) {
+        socket.emit('unsubscribe', {room: $scope.entry._id});
+    });
+    $scope.$on('$destroy', function () {
+        socket.removeListener('enterroom');
+        socket.removeAllListeners('initialuserlist');
+        socket.removeAllListeners('commentsupdated');
+        socket.removeAllListeners('updateusers');
+    });
+    $scope.$on('uploadedFile', function (data) {
+        console.log("uploaded scope event called");
+        //$http.post('/uploadeddata',{file:data.file,memwall:$routeParams.id})
+        console.log(data);
+    })
+});
 
 app.controller('SearchBarCtrl', function ($scope, $filter, $rootScope) {
     $rootScope.search = {
@@ -1069,6 +1286,7 @@ app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog,$rootScope,g
     }
     $scope.submitPost = function () {
 
+        $scope.form.group = true;
         BlogsService.updateBlog($scope.form,function(err,res){
             if(err){
                 $scope.message = "Group must have a title.";
