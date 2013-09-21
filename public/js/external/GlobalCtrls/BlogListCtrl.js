@@ -30,6 +30,7 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
                     //if we dont have any updates just show from cache
                     //**********how to encapsulate in angular??************//
                     BlogsService.getAllBlogs(function (blogs) {
+
                         $scope.entries = blogs;
                         $scope.fiterTag = $routeParams.name;
                         $scope.$onReady("filter");
@@ -77,7 +78,10 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
                 $scope.busy = true;
                 BlogsService.paginatedBlogs($scope.skip,$scope.limit,function(blogs){
                     for(var i = 0;i<blogs.length;i++){
-                        $scope.entries.push(blogs[i]);
+                        console.log("paginated blogs");
+                        console.log(blogs[i].group)
+                        if(blogs[i].group == false || blogs[i].group == undefined)
+                            $scope.entries.push(blogs[i]);
                     }
                     $scope.skip += $scope.limit;
 
