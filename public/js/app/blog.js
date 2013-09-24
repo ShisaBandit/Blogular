@@ -671,7 +671,7 @@ app.controller('groupEntryCtrl', function ($scope, $location, show, Blog,
 
     $scope.postText = "";
     if (!$scope.template) {
-        $scope.template = '/partials/profile/Latest.html';
+        $scope.template = '/partials/profile/LatestGroups.html';
         $scope.contentHeaderTitle = 'Latest';
 
     }
@@ -986,6 +986,66 @@ app.controller('TwitterCtrl', function ($scope, Blog, Twitter, $routeParams) {
 //Child of BlogEntry
 app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
     console.log('LatestCtrl started');
+    console.log($scope);
+    console.log($scope.routeParamId);
+    $scope.commentbox = [];
+    $scope.newcomment = [];
+    $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
+        console.log(oldVal);
+        console.log(newVal);
+        $http.get('/lastestPosts/' + newVal).
+            success(function (data, err) {
+                $scope.posts = data;
+            }).
+            error(function (err, code, status) {
+                console.log(err + code + status);
+            });
+    })
+    $scope.showcommentbox = function (index) {
+        $scope.commentbox[index] = true;
+    }
+    $scope.submitComment = function (index) {
+        console.log("Submitted");
+        console.log($scope.posts);
+        console.log($scope.newcomment[index]);
+        $http.post('/subcomment', {text: $scope.newcomment[index], comment_id: $scope.posts[index]._id, id: $scope.parentObject.entryId}).
+            success(function (data) {
+                console.log("Successfully sent data");
+                console.log(data);
+                socket.emit('subcomment', {room: $scope.parentObject.entryId, text: $scope.newcomment[index], comment_id: $scope.posts[index]._id})
+                // $scope.posts[index].comments.unshift({text:$scope.newcomment.text});
+                $scope.newcomment[index] = "";
+                console.log($scope.newcomment[index])
+                $scope.commentbox[index] = false;
+            })
+        console.log("comment submitted")
+
+    }
+    socket.on('newPostText', function (data) {
+        console.log("get new POst text");
+        console.log(data);
+
+        $scope.posts.unshift(data);
+    });
+    socket.on('subcommentupdated', function (data) {
+        for (var x = 0; x < $scope.posts.length; x++) {
+            if ($scope.posts[x]._id == data.comment_id) {
+                console.log($scope.posts[x]);
+                if ($scope.posts[x].comments == undefined) {
+                    $scope.posts[x].comments = [];
+                    $scope.posts[x].comments.push({text: data.text})
+                } else {
+                    $scope.posts[x].comments.unshift({text: data.text});
+
+                }
+            }
+        }
+    })
+});
+
+
+app.controller('GrpLatestCtrl', function ($scope, $http, $routeParams, socket) {
+    console.log('GrpLatestCtrl started');
     console.log($scope);
     console.log($scope.routeParamId);
     $scope.commentbox = [];

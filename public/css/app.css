@@ -347,7 +347,7 @@ h1.sectionHeader {
 }
 .postcontainer{
     background-color: #ffffff;
-    margin-top: 20px;
+    margin-top: 0px;
     padding-bottom: 10px;
 }
 
@@ -620,4 +620,16 @@ input.addNewPost {
     display: inline-block;
     height: auto;
     border-right: solid 1px #808080;
+}
+
+.postBoxes {
+    padding-left: 20px;
+    /*background: red;
+    border: 1px solid cadetblue; */
+}
+
+.postcontainer .postBoxes {
+    padding-left: 30px;
+    /*background: red;
+    border: 1px solid cadetblue; */
 }
