@@ -7,13 +7,13 @@
                         <ul class="left">
                             <li class="active" ng-click="loadPage('LatestGroups')"><a>Group Home</a></li>
                             <li class="divider"></li>
-                            <li class="active" ng-click="loadPage('Pics')"><a>Pics</a></li>
-                            <li class="divider"></li>
-                            <li class="active" ng-click="loadPage('Videos')"><a>Videos</a></li>
-                            <li class="divider"></li>
+                            <li class="active" if-authed="show"  ng-click="loadPage('Pics')"><a>Pics</a></li>
+                            <li class="divider" if-authed="show" ></li>
+                            <li class="active" if-authed="show"  ng-click="loadPage('Videos')"><a>Videos</a></li>
+                            <li class="divider" if-authed="show" ></li>
                             <li class="active" ng-click="loadPage('groupEvents')"><a>Group Events & Dates</a></li>
                             <li class="divider"></li>
-                            <li class="active" ng-click="loadPage('friendsandfamily')"><a>Group Members</a></li>
+                            <li class="active" if-authed="show"  ng-click="loadPage('friendsandfamily')"><a>Group Members</a></li>
                         </ul>
                     </section>
                 </nav>
@@ -26,15 +26,14 @@
                 <div class="row">
                     <div class="large-12 columns" offset-height="-300">
                         <div id="portraitpic">
-                            <img id="portrait" src="/uploads/{{ entry.profilePicPortrait }}"><br />
-                            {{ entry.groupName }}
+                            <img id="portrait" src="/uploads/{{ entry.profilePicPortrait }}">
                         </div>
                         <div id="gallery" class="nivoGallery" nivogallery>
                             <ul>
-                                <li data-title="This is an Image Slide" data-caption="Put a caption in here">
+                                <li data-title="{{ entry.title }}" data-caption="Group Owner: {{ entry.firstName }} {{ entry.lastName }}">
                                     <img id="widepic" width="1000" height="300" src="/uploads/{{ entry.profilePicWide }}">
                                 </li>
-                                <li data-type="html" data-title="This is a HTML Slide">
+                                <li data-type="html" data-title="{{ entry.title }}">
                                     {{ entry.text }}
 
                                 </li>

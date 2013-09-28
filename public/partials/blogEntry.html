@@ -7,13 +7,13 @@
                         <ul class="left">
                             <li class="active" ng-click="loadPage('Latest')"><a>Home</a></li>
                             <li class="divider"></li>
-                            <li class="active" ng-click="loadPage('Pics')"><a>Pics</a></li>
-                            <li class="divider"></li>
-                            <li class="active" ng-click="loadPage('Videos')"><a>Videos</a></li>
-                            <li class="divider"></li>
+                            <li class="active" if-authed="show"  ng-click="loadPage('Pics')"><a>Pics</a></li>
+                            <li class="divider" if-authed="show" ></li>
+                            <li class="active" if-authed="show"  ng-click="loadPage('Videos')"><a>Videos</a></li>
+                            <li class="divider" if-authed="show" ></li>
                             <li class="active" ng-click="loadPage('anniversaries')"><a>Angels Anniversaries</a></li>
                             <li class="divider"></li>
-                            <li class="active" ng-click="loadPage('friendsandfamily')"><a>Friends and Family</a></li>
+                            <li class="active" if-authed="show"  ng-click="loadPage('friendsandfamily')"><a>Friends and Family</a></li>
                         </ul>
                     </section>
                 </nav>
@@ -31,12 +31,11 @@
                         </div>
                         <div id="gallery" class="nivoGallery" nivogallery>
                             <ul>
-                                <li data-title="This is an Image Slide" data-caption="Put a caption in here">
+                                <li data-title="{{ entry.firstName }} {{ entry.lastName }}" data-caption="{{ entry.memorialDate }}">
                                     <img id="widepic" width="1000" height="300" src="/uploads/{{ entry.profilePicWide }}">
                                 </li>
-                                <li data-type="html" data-title="This is a HTML Slide">
+                                <li data-type="html" data-title="{{ entry.firstName }} {{ entry.lastName }}">
                                     {{ entry.text }}
-
                                 </li>
                             </ul>
                         </div>
@@ -44,12 +43,10 @@
                 </div>
             </div>
         </div>
-
-
     </div>
     <div class="row">
         <div class="small-12 columns">
-            <div class="row collapse">
+            <div if-authed="show"  class="row collapse">
                 <div class="postEntry small-12 columns">
                 <div class="section-container auto" reflow data-section>
                     <section>
