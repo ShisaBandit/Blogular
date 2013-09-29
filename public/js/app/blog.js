@@ -921,6 +921,59 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
 
 });
 
+app.controller('messageController', function ($scope, $http, authService, userInfoService, socket, $rootScope,$location,$window) {
+    $scope.error = "";
+    $scope.message = "";
+    $scope.loginAttempt = false;
+    $scope.submitAuth = function () {
+        $rootScope.$broadcast('event:auth-loginAttempt');
+        $scope.loginAttempt = true;
+        $scope.error = "";
+        $http.post('/login', $scope.form)
+            .success(function (data, status) {
+                userInfoService.setUsername($scope.form.username);
+                $scope.form.username = "";
+                $scope.form.password = "";
+                authService.loginConfirmed();
+                $window.location.href = "";
+            }).error(function (data, status) {
+                $scope.error = "Failed to connect to server please check your connection";
+            });
+    };
+
+    socket.on('connect', function () {
+        console.log("connect");
+    });
+    socket.on('disconnect', function () {
+        console.log("disconnect");
+    });
+    socket.on('connecting', function (x) {
+        console.log("connecting", x);
+    });
+    socket.on('connect_failed', function () {
+        console.log("connect_failed");
+    });
+    socket.on('close', function () {
+        console.log("close");
+    });
+    socket.on('reconnect', function (a, b) {
+        console.log("reconnect", a, b);
+    });
+    socket.on('reconnecting', function (a, b) {
+        console.log("reconnecting", a, b);
+    });
+    socket.on('reconnect_failed', function () {
+        console.log("reconnect_failed");
+    });
+    $scope.$on('event:auth-loginRequired', function () {
+        if ($scope.loginAttempt == true) {
+            $scope.error = "Username or password is incorrect";
+        }
+    });
+
+
+});
+
 app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket,groupsListing) {
     $scope.form = {};
     $scope.subgroup = [];

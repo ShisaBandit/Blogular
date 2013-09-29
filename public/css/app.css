@@ -50,7 +50,7 @@
 }
 
 .titleHdr {
-    background: #26619D url("/img/background/cloudBG.jpg")no-repeat center -195px;
+    background: #0072BC url("/img/background/cloudBG.jpg")no-repeat center -195px;
 }
 
 .headerCol {
@@ -79,7 +79,6 @@
     background-color: #c562e1;
     border: none;
     color: #ffffff;
-    margin-left: 10px;
 }
 
 #workshopbutton{
@@ -109,12 +108,12 @@
     margin-top: 200px;
     margin-left: auto;
     margin-right: auto;
-    background: #26619D;
+    background: #0072BC;
 }
 
 .offsetHeight100 {
     margin-top: 150px;
-    background: #26619D;
+    background: #0072BC;
     /* IE9 SVG, needs conditional override of 'filter' to 'none' */
     background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzFlNTc5OSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzI5ODlkOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUxJSIgc3RvcC1jb2xvcj0iIzIwN2NjYSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM3ZGI5ZTgiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
     background: linear-gradient(to bottom,  #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); /* W3C */
@@ -131,13 +130,15 @@
 
 .closeButton {
     position: absolute;
-    top: 0px;
-    right: -5px;
+    top: -2px;
+    right: -7px;
+    width: 35px;
+    height: 35px;
     padding: 10px;
     font-size: large;
     font-weight: bold;
     color: #f5f5f5;
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 5px 5px 5px #fff;
     background: #132D48;
 }
@@ -218,7 +219,7 @@
 
 .searchBar{
     height:45px;
-    background-color: #132D48;
+    background-color: #143A5F;
     padding-top: 5px;
     z-index: 10;
     margin-top: -5px;
@@ -263,13 +264,13 @@ h2 {
 .memProfilePreview {
     color: #fff;
     padding: 10px;
-    background: #1F4A77;
+    background: #0059A3;
     border-radius: 4px;
 }
 
 .memProfilePreview h6 {
     padding: 10px;
-    background: #132D48;
+    background: #143A5F;
 }
 
 .memProfilePreview h6 a {
