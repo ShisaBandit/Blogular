@@ -1,11 +1,12 @@
 var app = angular.module('blogApp', [
         'twitterService', 'userService', 'http-auth-interceptor', 'login', 'socketio', 'updateService',
-        'Scope.onReady', 'blogResource', 'loaderModule', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries',
+        'Scope.onReady', 'blogResource', 'loaderModule', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries', 'Plugin.Controller.GroupEntries',
         'blogFilter', 'blogService', 'infinite-scroll', 'dropzone', 'apiResource'
     ]).
     config(function ($routeProvider) {
         $routeProvider.
             when("/", {templateUrl: "partials/blog.html"}).
+            when("/groups", {templateUrl: "partials/groups.html"}).
             when("/about", {templateUrl: "partials/about.html"}).
             when("/projects", {templateUrl: "partials/projects.html"}).
             when("/shoutouts", {templateUrl: "partials/shoutouts.html"}).

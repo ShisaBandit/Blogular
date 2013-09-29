@@ -5,8 +5,8 @@
  * Time: 0:45
  * To change this template use File | Settings | File Templates.
  */
-angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService', 'Scope.onReady'])
-    .controller('ContentCtrl', function ($scope, show, Blog, BlogsService, $q, $routeParams, UpdateService) {
+angular.module('Plugin.Controller.GroupEntries', ['updateService', 'blogService', 'Scope.onReady'])
+    .controller('ContentGroupsCtrl', function ($scope, show, Blog, BlogsService, $q, $routeParams, UpdateService) {
         $scope.entries = [];
         $scope.$prepareForReady();
 
@@ -77,7 +77,7 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
                 $scope.busy = true;
                 BlogsService.paginatedBlogs($scope.skip,$scope.limit,function(blogs){
                     for(var i = 0;i<blogs.length;i++){
-                        if(blogs[i].group == false || blogs[i].group == undefined)
+                        if(blogs[i].group == true)
                             $scope.entries.push(blogs[i]);
                     }
                     $scope.skip += $scope.limit;
