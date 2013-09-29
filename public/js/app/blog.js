@@ -671,7 +671,7 @@ app.controller('groupEntryCtrl', function ($scope, $location, show, Blog,
 
     $scope.postText = "";
     if (!$scope.template) {
-        $scope.template = '/partials/profile/Latest.html';
+        $scope.template = '/partials/profile/LatestGroups.html';
         $scope.contentHeaderTitle = 'Latest';
 
     }
@@ -921,6 +921,59 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
 
 });
 
+app.controller('messageController', function ($scope, $http, authService, userInfoService, socket, $rootScope,$location,$window) {
+    $scope.error = "";
+    $scope.message = "";
+    $scope.loginAttempt = false;
+    $scope.submitAuth = function () {
+        $rootScope.$broadcast('event:auth-loginAttempt');
+        $scope.loginAttempt = true;
+        $scope.error = "";
+        $http.post('/login', $scope.form)
+            .success(function (data, status) {
+                userInfoService.setUsername($scope.form.username);
+                $scope.form.username = "";
+                $scope.form.password = "";
+                authService.loginConfirmed();
+                $window.location.href = "";
+            }).error(function (data, status) {
+                $scope.error = "Failed to connect to server please check your connection";
+            });
+    };
+
+    socket.on('connect', function () {
+        console.log("connect");
+    });
+    socket.on('disconnect', function () {
+        console.log("disconnect");
+    });
+    socket.on('connecting', function (x) {
+        console.log("connecting", x);
+    });
+    socket.on('connect_failed', function () {
+        console.log("connect_failed");
+    });
+    socket.on('close', function () {
+        console.log("close");
+    });
+    socket.on('reconnect', function (a, b) {
+        console.log("reconnect", a, b);
+    });
+    socket.on('reconnecting', function (a, b) {
+        console.log("reconnecting", a, b);
+    });
+    socket.on('reconnect_failed', function () {
+        console.log("reconnect_failed");
+    });
+    $scope.$on('event:auth-loginRequired', function () {
+        if ($scope.loginAttempt == true) {
+            $scope.error = "Username or password is incorrect";
+        }
+    });
+
+
+});
+
 app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket,groupsListing) {
     $scope.form = {};
     $scope.subgroup = [];
@@ -986,6 +1039,66 @@ app.controller('TwitterCtrl', function ($scope, Blog, Twitter, $routeParams) {
 //Child of BlogEntry
 app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
     console.log('LatestCtrl started');
+    console.log($scope);
+    console.log($scope.routeParamId);
+    $scope.commentbox = [];
+    $scope.newcomment = [];
+    $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
+        console.log(oldVal);
+        console.log(newVal);
+        $http.get('/lastestPosts/' + newVal).
+            success(function (data, err) {
+                $scope.posts = data;
+            }).
+            error(function (err, code, status) {
+                console.log(err + code + status);
+            });
+    })
+    $scope.showcommentbox = function (index) {
+        $scope.commentbox[index] = true;
+    }
+    $scope.submitComment = function (index) {
+        console.log("Submitted");
+        console.log($scope.posts);
+        console.log($scope.newcomment[index]);
+        $http.post('/subcomment', {text: $scope.newcomment[index], comment_id: $scope.posts[index]._id, id: $scope.parentObject.entryId}).
+            success(function (data) {
+                console.log("Successfully sent data");
+                console.log(data);
+                socket.emit('subcomment', {room: $scope.parentObject.entryId, text: $scope.newcomment[index], comment_id: $scope.posts[index]._id})
+                // $scope.posts[index].comments.unshift({text:$scope.newcomment.text});
+                $scope.newcomment[index] = "";
+                console.log($scope.newcomment[index])
+                $scope.commentbox[index] = false;
+            })
+        console.log("comment submitted")
+
+    }
+    socket.on('newPostText', function (data) {
+        console.log("get new POst text");
+        console.log(data);
+
+        $scope.posts.unshift(data);
+    });
+    socket.on('subcommentupdated', function (data) {
+        for (var x = 0; x < $scope.posts.length; x++) {
+            if ($scope.posts[x]._id == data.comment_id) {
+                console.log($scope.posts[x]);
+                if ($scope.posts[x].comments == undefined) {
+                    $scope.posts[x].comments = [];
+                    $scope.posts[x].comments.push({text: data.text})
+                } else {
+                    $scope.posts[x].comments.unshift({text: data.text});
+
+                }
+            }
+        }
+    })
+});
+
+
+app.controller('GrpLatestCtrl', function ($scope, $http, $routeParams, socket) {
+    console.log('GrpLatestCtrl started');
     console.log($scope);
     console.log($scope.routeParamId);
     $scope.commentbox = [];

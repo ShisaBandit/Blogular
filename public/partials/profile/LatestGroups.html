@@ -1,7 +1,7 @@
-<div ng-controller="LatestCtrl">
+<div ng-controller="GrpLatestCtrl">
     <div class="small-12 columns row2 contentContainer" ng-repeat="post in posts">
-        <div class="row">
-            <div class="small-12 columns postcontainer">
+        <div class="row postBoxes">
+            <div class="small-12 columns postcontainer postBoxes">
                 <div><img src="http://www.gravatar.com/avatar/{{post.gravatar}}" /> </div>
                 <h6>Posted by <a href="#/profile/{{post.username}}">{{post.username}} </a> on {{post.date}}.</h6>
                 <div ng-bind-html-unsafe="post.embedYouTube"></div>
@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="columns postComment">
+                <div class="columns postComment postBoxes">
                     <a ng-click="showcommentbox({{$index}})" class="button tiny">Join the conversation</a>
                     <div ng-show="commentbox[{{$index}}]">
                         <input type="text" on-keyup="submitComment($index)" keys="[27,13]" ng-model="newcomment[$index]" placeholder="Add your thoughts here! (Click enter to submit)" />
