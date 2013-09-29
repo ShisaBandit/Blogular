@@ -214,7 +214,8 @@
     margin-top: 0px;
 	padding-top: 10px;
     padding-bottom: 10px;
-	background: #26619D;
+    background: linear-gradient(to bottom, rgb(30, 87, 153) 0%, rgb(41, 137, 216) 50%, rgb(32, 124, 202) 51%, rgb(125, 185, 232) 100%) repeat scroll 0% 0% transparent;
+    box-shadow: 10px 10px 20px rgb(0, 52, 85);
 }
 
 .searchBar{
