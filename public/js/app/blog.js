@@ -1300,6 +1300,7 @@ app.controller('PetitionEntryCtrl', function ($scope, api, $routeParams) {
 });
 app. controller('UserProfileCtrl', function ($scope, api, $routeParams,$http,userInfoService) {
     $scope.messagedUsers = [];
+    $scope.messages = [];
     api.getResourceByField('User', {field:"username",query:$routeParams.username}, function (user) {
         $scope.user = user[0];
         //get all angel profiles(blogs) that this user has in his profile id
@@ -1310,13 +1311,33 @@ app. controller('UserProfileCtrl', function ($scope, api, $routeParams,$http,use
             console.log(data);
             $scope.angels = data;
         })
-
+    /*
     api.getResourceByField('User',{field:"username",query:userInfoService.getUsername()},function(users){
         console.log("messaged users are ");
         console.log(users);
         $scope.messagedUsers = users;
-    })
+    })*/
+    $http.get('/getMessagedUsers').
+        success(function(data){
+            console.log("Got messaged users list")
+            console.log(data);
+            $scope.messagedUsers = data;
+        })
+    $scope.getMessages = function(mUser){
+        console.log("getting messages for mUser");
+        console.log(mUser);
+        $http.get('/getMessages/'+mUser).
+            success(function(data){
+                $scope.messages = data;
+            })
 
+    }
+    $scope.getRecentMessages = function(){
+        $http.get('/getRecentMessages').
+            success(function(data){
+                console.log(data);
+            })
+    }
 });
 
 app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog,$rootScope,groupsListing) {

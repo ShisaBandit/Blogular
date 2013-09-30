@@ -32,7 +32,7 @@ angular.module('apiResource', ['ngResource']).
             {'get':{method:'GET',isArray:'true'}
             });
         */
-        //TODO:Create an api that returns ONLY the subdocuments
+        //TODO:Create an api that responds with ONLY the subdocuments
         var apiResource = {
             getResourceById: function (type,id,callback) {
                 var deferred = $q.defer();

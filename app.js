@@ -14,6 +14,7 @@ var express = require('express')
     , authRoutes = require('./routes/auth')
     , commentRoutes = require('./routes/comments')
     , fileHandlerRoutes = require('./routes/fileHandler')
+    , messageRoutes = require('./routes/messageRoutes')
     , apiv2 = require('./routes/apiv2')
     , path = require('path')
     , fs = require('fs')
@@ -249,8 +250,8 @@ app.get('/notified/:id',blogRoutes.notified);
 app.post('/updateworkshop/:id',blogRoutes.editworkshop);
 
 //message center api
-//app.get('/userlistmessages/:id',messageRoutes.userlistMessages);
-
+app.get('/getMessagedUsers',messageRoutes.getMessagedUsers);
+app.get('/getMessages/:username',messageRoutes.getMessagesForUser);
 
 
 var server = http.createServer(app).listen(app.get('port'), app.get('ip'), function () {
