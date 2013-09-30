@@ -921,7 +921,7 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
 
 });
 
-app.controller('messageController', function ($scope, $http, authService, userInfoService, socket, $rootScope,$location,$window) {
+app.controller('messageController', function ($scope,api, $http, authService, userInfoService, socket, $rootScope,$location,$window) {
     $scope.error = "";
     $scope.message = "";
     $scope.loginAttempt = false;
@@ -971,6 +971,9 @@ app.controller('messageController', function ($scope, $http, authService, userIn
         }
     });
 
+    $scope.sendMessage = function(){
+        api.createResource('Message',{to:$scope.form.to,from:$scope.form.from,message:$scope.form.message});
+    }
 
 });
 
@@ -1295,8 +1298,8 @@ app.controller('PetitionEntryCtrl', function ($scope, api, $routeParams) {
         });
     }
 });
-app.controller('UserProfileCtrl', function ($scope, api, $routeParams,$http) {
-
+app. controller('UserProfileCtrl', function ($scope, api, $routeParams,$http,userInfoService) {
+    $scope.messagedUsers = [];
     api.getResourceByField('User', {field:"username",query:$routeParams.username}, function (user) {
         $scope.user = user[0];
         //get all angel profiles(blogs) that this user has in his profile id
@@ -1307,6 +1310,12 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams,$http) {
             console.log(data);
             $scope.angels = data;
         })
+
+    api.getResourceByField('User',{field:"username",query:userInfoService.getUsername()},function(users){
+        console.log("messaged users are ");
+        console.log(users);
+        $scope.messagedUsers = users;
+    })
 
 });
 
