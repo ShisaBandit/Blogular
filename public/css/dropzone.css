@@ -171,12 +171,12 @@
   transition: opacity 0.3s ease-in-out;
   background-image: url("../img/spritemap.png");
   background-repeat: no-repeat;
-  background-position: 0 0;
+  background-position: 20px 0;
   position: relative;
-  width: 428px;
-  height: 123px;
-  margin-top: 20px;
-  margin-left: -214px;
+  width: 500px;
+  height: 130px;
+  margin-top: -20px;
+  margin-left: -50px;
   padding: 20px;
   top: 30%;
   left: 30%;
