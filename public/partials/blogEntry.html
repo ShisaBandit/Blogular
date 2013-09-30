@@ -97,10 +97,10 @@
                                 <h2>Video Uploader</h2>
 
                                 <div>
-                                    <h4>You Tube Link</h4>
-                                    <b>You have to use the embed code from youtube for now</b>
+                                    <h4 class="dark">You Tube Link</h4>
+                                    <b class="dark">You have to use the embed code from youtube for now</b>
                                     <input type="text" name="youtube" ng-model="embedYouTube" id="youtube"/>
-                                    <h4>Animoto Link</h4>
+                                    <h4 class="dark">Animoto Link</h4>
                                     <input type="text" name="animoto" ng-model="embedAnimoto" id="animoto"/>
                                     <a ng-click="submitVideo()" class="button">Submit video links</a>
                                 </div>
@@ -117,10 +117,8 @@
                                 </div>
                             </div>
                             <div ng-show="eventbox" id="eventbox">
-                                <h2>Events</h2>
-
                                 <div>
-                                    <h4>New Event</h4>
+                                    <h4 class="dark">Add a New Event</h4>
                                     <h5>Title</h5>
                                     <input type="text" name="eventheader" ng-model="event" id=""/>
                                     <h5>Details</h5>

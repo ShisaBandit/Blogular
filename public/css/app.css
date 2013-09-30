@@ -132,6 +132,10 @@ h2.dark {
     color: dodgerblue;
 }
 
+.dark {
+    color: dodgerblue;
+}
+
 .closeButton {
     position: absolute;
     top: -2px;
