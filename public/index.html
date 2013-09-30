@@ -296,7 +296,7 @@
         <table border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <th>Send Message to:</th>
-                <td><input type="text" class="login-inp" ng-model="form.recipient"/></td>
+                <td><input type="text" class="login-inp" ng-model="form.to"/></td>
             </tr>
             <tr>
                 <th>Message</th>
@@ -306,7 +306,7 @@
             </tr>
             <tr>
                 <th></th>
-                <td><a class="button" ng-click="submitAuth()">Send (Swap text here with invite, message, etc...)</a></td>
+                <td><a class="button" ng-click="sendMessage()">Send (Swap text here with invite, message, etc...)</a></td>
                 <td><a class="close-reveal-modal button">Cancel</a></td>
             </tr>
         </table>

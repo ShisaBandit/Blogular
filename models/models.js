@@ -133,7 +133,19 @@ var userSchema = mongoose.Schema({
             text: String,
             viewed: {type: Boolean, default: false}
         }
+    ],//wtf
+    messagedUsers:[//TODO:Finish this up
+        {
+            user:String
+        }
     ]
+});
+
+var messageSchema = mongoose.Schema({
+    to:{type:String,required:true},
+    from:{type:String,required:true},
+    message:String,
+    date:{type:Date,default:Date.now()}
 });
 
 /*
@@ -195,6 +207,8 @@ var Update = mongoose.model('Update', updateSchema);
 var Url = mongoose.model('Url', urlSchema);
 var Petition = mongoose.model('Petition', petitionSchema);
 var Workshop = mongoose.model('Workshop',workshopSchema);
+var Message = mongoose.model('Message',messageSchema);
+
 /*
  //set all profiles to administrator as owner
  Blog.find({}, function (err, blogs) {
@@ -265,5 +279,6 @@ module.exports = {
     Update: Update,
     Url: Url,
     Petition: Petition,
-    Workshop:Workshop
+    Workshop:Workshop,
+    Message:Message
 }

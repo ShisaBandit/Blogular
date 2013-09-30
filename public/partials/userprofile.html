@@ -142,6 +142,7 @@
                 <section>
                     <p class="title" data-section-title><a href="#panel1">My Network</a></p>
                     <div class="content" data-section-content>
+
                         <div id="contentHeader" class="small-12 columns">
                             <h2 class="contentHeaderTitle">My Network</h2>
                         </div>
@@ -223,11 +224,10 @@
                                     <span class="small-3 columns">Date</span>
                                     <span class="small-3 columns"><a class="button">Delete</a></span>
                                 </div>
-                                <div class="row">
-                                    <span class="small-3 columns">John Doe</span>
-                                    <span class="small-3 columns">Message Title</span>
-                                    <span class="small-3 columns">Date</span>
-                                    <span class="small-3 columns"><a class="button">Delete</a></span>
+                                <div class="row" ng-repeat="message in messages">
+                                    <span class="small-3 columns">{{message.from}}</span>
+                                    <span class="small-3 columns">{{message.title}}</span>
+                                    <span class="small-3 columns">{{message.date}}</span>
                                 </div>
                             </section>
                         </div>

@@ -32,7 +32,7 @@ angular.module('apiResource', ['ngResource']).
             {'get':{method:'GET',isArray:'true'}
             });
         */
-
+        //TODO:Create an api that returns ONLY the subdocuments
         var apiResource = {
             getResourceById: function (type,id,callback) {
                 var deferred = $q.defer();
@@ -58,7 +58,8 @@ angular.module('apiResource', ['ngResource']).
                 //apiCreateResource({type:type},bodydata);
                 $http.post("create/"+type,bodydata).
                     success(function(err){
-                    })
+
+                    });
             },
             /*creates a subdoc array entry on adocument
                 @param type mongoose model on DB

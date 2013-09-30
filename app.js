@@ -248,7 +248,8 @@ app.get('/notified/:id',blogRoutes.notified);
 
 app.post('/updateworkshop/:id',blogRoutes.editworkshop);
 
-
+//message center api
+//app.get('/userlistmessages/:id',messageRoutes.userlistMessages);
 
 
 
