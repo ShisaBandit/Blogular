@@ -95,36 +95,19 @@
                         <div class="small-4 columns rghtDvd">
                             <b>Groups I Own</b>
                             <br />      <br />
-                           <!--
-                            <section>
-                                <b>Group Name: Kids with additions</b>
-                                <br />
-                                Group Moderator: Ashley Wilson
-                                <br />
-                                <ul>
-                                    <li>View this group's page</li>
-                                    <li>Edit Group Details</li>
-                                    <li>View Group Members</li>
-                                    <li>Invite new members</li>
-                                    <li>Restrict or remove member</li>
-                                    <li>Designate Moderators</li>
-                                    <li>Assign ownership of group to new owner</li>
-                                </ul>
-
-                                <a class="button">Delete this group</a>
-                            </section>
-                            -->
                             <section ng-repeat="group in groups">
                                 <b>Group Name: {{group.title}}</b>
                                 <br />
                                 Group Moderator: {{group.author}}
                                 <br />
+                                <ul>
                                 <li ng-repeat="angel in angels">Angel's Name : {{ angel.firstName }} {{ angel.lastName }} - {{ angel.title }}
-                                    <br />- <a href="#/group/{{angel.author}}">View this group's page</a>
-                                    <br />- <a href="#/editwall/{{ angel.author }}">Edit Group Details</a>
-                                    <br />- <a href="#/deletewall/{{ angel.author }}">View Group Members</a>
+                                    <br />- <a href="#/group/{{angel.author}}">View this memorial group</a>
+                                    <br />- <a href="#/editwall/{{ angel.author }}">Edit this memorial group</a>
                                     <br />- <a href="#/inviteblock/{{ angel.author }}">invite or block other registered members</a><br /><br />
                                 </li>
+                                </ul>
+                                <br />- <a href="#/deletewall/{{ angel.author }}" class="button">Delete this memorial group</a>
                             </section>
                         </div>
 

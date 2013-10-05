@@ -591,10 +591,11 @@ width: 665px;
     color: darkslategrey;
     border-radius: 7px;
     box-shadow: 2px 2px 5px rgb(19, 45, 72);
+    z-index: 1000;
 }
 #notifications {
     position:relative;
-    top:100px;
+    top:140px;
     display:block;
     width: 80%;
     max-width: 980px;
@@ -605,6 +606,7 @@ width: 665px;
     color: darkslategrey;
     border-radius: 7px;
     box-shadow: 2px 2px 2px #000;
+    z-index: 1000;
 }
 
 #loginModal {
