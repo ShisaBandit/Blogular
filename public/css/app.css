@@ -738,6 +738,12 @@ input.addNewPost {
         border-radius: 3px;
     }
 
+    #workpets{
+        margin-top: -15px;
+        margin-right: 0px;
+        margin-left: 10px;
+    }
+
 }
 
 @media only screen and (max-width: 451px) {
@@ -789,6 +795,12 @@ input.addNewPost {
         border-bottom-right-radius:2em;
         border-top: none;
         border-right: 4px solid #143A5F;
+    }
+
+    #workpets{
+        margin-top: -15px;
+        margin-right: 0px;
+        margin-left: 10px;
     }
 }
 
