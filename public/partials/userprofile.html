@@ -224,10 +224,11 @@
                                     <span class="small-3 columns">Date</span>
                                     <span class="small-3 columns"><a class="button">Delete</a></span>
                                 </div>
-                                <div class="row" ng-repeat="message in messages">
-                                    <span class="small-3 columns">{{message.from}}</span>
-                                    <span class="small-3 columns">{{message.title}}</span>
-                                    <span class="small-3 columns">{{message.date}}</span>
+                                <div class="row" ng-repeat="messagedUser in messagedUsers">
+                                    <a href="" ng-click="getMessages(messagedUser.user)">
+                                        <span class="small-3 columns">{{messagedUser.user}}</span>
+                                    </a>
+                                    <span class="small-3 columns"><a class="button">Delete</a></span>
                                 </div>
                             </section>
                         </div>
@@ -240,26 +241,12 @@
                                     <span class="small-6 columns">Message Contents</span>
                                     <span class="small-2 columns">Date</span>
                                 </div>
-                                <div class="row">
-                                    <span class="small-4 columns">Me</span>
-                                    <span class="small-6 columns">Message Contents</span>
-                                    <span class="small-2 columns">Date</span>
+                                <div class="row" ng-repeat="message in messages">
+                                    <span class="small-4 columns">{{message.from}}</span>
+                                    <span class="small-6 columns">{{message.message}}</span>
+                                    <span class="small-2 columns">{{message.date}}</span>
                                 </div>
-                                <div class="row">
-                                    <span class="small-4 columns">John Doe</span>
-                                    <span class="small-6 columns">Message Contents</span>
-                                    <span class="small-2 columns">Date</span>
-                                </div>
-                                <div class="row">
-                                    <span class="small-4 columns">Me</span>
-                                    <span class="small-6 columns">Message Contents</span>
-                                    <span class="small-2 columns">Date</span>
-                                </div>
-                                <div class="row">
-                                    <span class="small-4 columns">John Doe</span>
-                                    <span class="small-6 columns">Message Contents</span>
-                                    <span class="small-2 columns">Date</span>
-                                </div>
+
                                 <div class="row">
                                     <input type="text" ng-model="postText" class="addNewPost small-12 columns" placeholder="Add to this conversation"/>
                                 </div>

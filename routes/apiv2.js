@@ -140,9 +140,9 @@ var dataFilter = function (req, type, subtype, data, callback) {
             var from;
             var message = data.message;
             //TODO:add check for verifying user can receive a message. !!
-            data.from = req.session.passport.user;
+            //data.from = req.session.passport.user;
             models.User.findOne({_id:req.session.passport.user},function(err,doc){
-                from = doc.username;
+                from = data.from = doc.username;
                 models.User.findOne({username:to},function(err,doc){
                     if(err)console.log(err);
                     var messagedUsers = doc.messagedUsers;
@@ -179,6 +179,8 @@ var dataFilter = function (req, type, subtype, data, callback) {
                         })
                     })
                 });
+                callback(data);
+
             })
             /*
             models.User.findOne({username: to}, {$push: {notifications: {text: "You have a new message from ( add user data here)"}}}, function (err, user) {
@@ -188,7 +190,6 @@ var dataFilter = function (req, type, subtype, data, callback) {
             */
 
 
-            callback(data);
 
             break;
         }
