@@ -50,6 +50,8 @@
 }
 
 .titleHdr {
+    height: 118px;
+    overflow: hidden;
     background: #0072BC url("/img/background/cloudBG.jpg")no-repeat center -195px;
 }
 
