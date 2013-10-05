@@ -159,6 +159,29 @@ exports.blogdataforuser = function(req,res){
 
                 })
 }
+exports.friendsMemorials = function(req,res){
+    var buffer = [];
+    User.find({_id:req.session.passport.user},function(err,doc){
+        //get the user loop thourgh profiles sort out groups from mem walls
+        for(var profile in doc.profiles){
+
+        }
+    })
+}
+
+exports.getGroups = function(req,res){
+    var buffer = [];
+    Blog.find({owner_id:req.session.passport.user},function(err,docs){
+        for(var doc in docs){
+            console.log("is this a group "+docs[doc].group)
+            if(docs[doc].group == true)
+                buffer.push(docs[doc]);
+            return res.send(JSON.stringify(buffer));
+        }
+    })
+
+
+}
 
 exports.createBlog = function (req, res) {
     var title = req.body.title;

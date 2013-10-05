@@ -199,7 +199,7 @@ app.directive('autoscroll', function () {
                     {
                         direction: "down",
                         step: 50,
-                        scroll: false,
+                        scroll: true,
                         //problems with this
                         pauseOnHover: true
                     }
@@ -1326,7 +1326,6 @@ app. controller('UserProfileCtrl', function ($scope, api, $routeParams,$http,use
     api.getResourceByField('User', {field:"username",query:$routeParams.username}, function (user) {
         $scope.user = user[0];
         //get all angel profiles(blogs) that this user has in his profile id
-
     });
     $http.get('/blogdataforuser').
         success(function(data){
@@ -1341,19 +1340,23 @@ app. controller('UserProfileCtrl', function ($scope, api, $routeParams,$http,use
     })*/
     $http.get('/getMessagedUsers').
         success(function(data){
-            console.log("Got messaged users list")
-            console.log(data);
             $scope.messagedUsers = data;
         })
+
+    $http.get('/getGroups').
+        success(function(data){
+            $scope.groups = data;
+        })
+
     $scope.getMessages = function(mUser){
-        console.log("getting messages for mUser");
-        console.log(mUser);
         $http.get('/getMessages/'+mUser).
             success(function(data){
                 $scope.messages = data;
             })
-
     }
+
+
+
     $scope.getRecentMessages = function(){
         $http.get('/getRecentMessages').
             success(function(data){
