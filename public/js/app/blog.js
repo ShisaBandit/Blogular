@@ -129,7 +129,7 @@ app.directive('revealModal', function () {
             });
             scope.$on('event:auth-registered', function () {
                 console.log("registered event fired in directive");
-              /*
+                /*
                 if (attrs.revealModal == 'register') {
                     elm.foundation('reveal', 'close');
                 }
@@ -986,6 +986,9 @@ app.controller('messageController', function ($scope,api, $http, authService, us
             if(status == 400){
                 $scope.message = data;
             }else{
+                $scope.message = "message sent!!"
+                $scope.form.username = "";
+                $scope.form.password = "";
                 $rootScope.$broadcast('event:message-sent');
             }
         });
