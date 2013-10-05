@@ -20,8 +20,8 @@ exports.createData = function (req, res) {
         //TODO:make a class that decides which chain to delegate to
         //based on request.
         dataFilter(req, type, null, modelInstance, function (data,err) {
-            console.log(err);
-            if (err){
+            console.log(" the error is "+err);
+            if (err != undefined){
                 console.log(err);
                 return res.send(400,err);
             }else{
@@ -147,49 +147,52 @@ var dataFilter = function (req, type, subtype, data, callback) {
             var message = data.message;
             //TODO:add check for verifying user can receive a message. !!
             //data.from = req.session.passport.user;
-            models.User.findOne({_id:req.session.passport.user},function(err,doc){
-                from = data.from = doc.username;
-                models.User.findOne({username:to},function(err,doc){
+            //Find the current user
+            models.User.findOne({_id:req.session.passport.user},function(err,fromdoc){
+                from = data.from = fromdoc.username;
+                //find the user we are sending amessage to
+                models.User.findOne({username:to},function(err,todoc){
+                    console.log("TODOC IS "+todoc)
                     if(err)console.log(err);
-                    if(doc == undefined)
+                    //if we didnt find one ent this callback a error and end this func
+                    if(todoc == undefined){
+                        console.log("not sending message");
                         var messageToUser = "No user by that name";
                         callback(data,messageToUser);
                         return;
-                    var messagedUsers = doc.messagedUsers;
+                    }
+                    var messagedUsersTo = todoc.messagedUsers;
                     var added = false;
-
-                    for(var user in messagedUsers){
-                        if(messagedUsers[user].user == from){
+                    //check if we are adding a new messaged user
+                    for(var user in messagedUsersTo){
+                        if(messagedUsersTo[user].user == from){
                             added = true;
                         }
                     }
-                    doc.notifications.push({text:"You have a new message from "+from});
+                    todoc.notifications.push({text:"You have a new message from "+from});
 
                     if(!added){
-                        doc.messagedUsers.push({user:from});
+                        todoc.messagedUsers.push({user:from});
                     }
-                    doc.save(function(err){
-                        if(err)console.log(err);
-                        models.User.findOne({_id:req.session.passport.user},function(err,doc){
-                            if(err)console.log(err);
-                            var messagedUsers = doc.messagedUsers;
-                            var added = false;
+                    var messagedUsersFrom = fromdoc.messagedUsers;
+                    var added = false;
+                    //check if we are adding a new messaged user
+                    for(var user in messagedUsersFrom){
+                        if(messagedUsersFrom[user].user == from){
+                            added = true;
+                        }
+                    }
 
-                            for(var user in messagedUsers){
-                                if(messagedUsers[user].user == to){
-                                    added = true;
-                                }
-                            }
-                            if(!added){
-                                doc.messagedUsers.push({user:to});
-                            }
-                            doc.save(function(err){
-                                if(err)console.log(err);
-                                callback(data);
-
-                            })
-                        })
+                    if(!added){
+                        fromdoc.messagedUsers.push({user:from});
+                    }
+                    fromdoc.save(function(err){
+                        if(err)console.log(err)
                     })
+                    todoc.save(function(err){
+                        if(err)console.log(err)
+                    })
+                    callback(data);
                 });
 
             })
