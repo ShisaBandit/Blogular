@@ -66,7 +66,7 @@
 }
 
 #workpets{
-    margin-top: -10px;
+    margin-top: -60px;
     margin-right: 0px;
     margin-left: 10px;
 }
@@ -168,12 +168,25 @@ h2.dark {
 }
 
 .loginBlock {
+    position:relative;
+    top:-75px;
+    left:0px;
     display: block;
-    width: 300px;
-    height: 35px;
-    margin-top: -10px;
+    width: 100%;
+    height: 75px;
+    margin-top: 0px;
+    padding-right: 20px;
     text-align: right;
     float: right;
+    background: rgba(7.8%,22.7%,37.3%, 0.6);
+    border-bottom-left-radius:2em;
+    border-bottom-right-radius:2em;
+    border-top: none;
+    border-right: 4px solid #143A5F;
+    border-left: 4px solid #143A5F;
+    border-bottom: 4px solid #143A5F;
+    box-shadow: 2px 2px 5px rgb(19, 45, 72);
+    z-index: 2;
 }
 
 #username{
@@ -211,14 +224,20 @@ h2.dark {
 
 }
 
+
 .logo {
-	display: block;
-	width: 524px;
-	height: 64px;
-	margin: 0px;
-	text-indent: -9000px;
-	background: url("/img/memWallLogo.png") center top no-repeat;
+    position:relative;
+    left: 20px;
+    display: block;
+    width: 524px;
+    height: 64px;
+    margin: 0px;
+    padding-top: 75px;
+    text-indent: -9000px;
+    background: url("/img/memWallLogo.png") center top no-repeat;
+    z-index: 20;
 }
+
 
 .searchBarBlock {
 	height:40px;
@@ -230,6 +249,9 @@ h2.dark {
 }
 
 .searchBar{
+    position:relative;
+    top:-100px;
+    width: 200px;
     height:45px;
     background-color: #143A5F;
     padding-top: 5px;
@@ -238,10 +260,16 @@ h2.dark {
 }
 
 .grouping{
-    height:45px;
-    margin-top: 10px;
+    position:relative;
+    top: 00px;
+    display:block;
+    width:100%;
+    height:85px;
+    margin-top: -20px;
     background-color: #8fb2d7;
-    padding: 15px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 65px;
     z-index: 1;
 }
 
@@ -647,6 +675,69 @@ input.addNewPost {
     border: 1px solid cadetblue; */
 }
 
+@media only screen and (max-width: 850px) {
+    .loginBlock {
+        position:relative;
+        top:-75px;
+        left:0px;
+        display: block;
+        width: 100%;
+        height: 30px;
+        margin-top: 0px;
+        padding-right: 20px;
+        text-align: right;
+        float: right;
+        background: rgba(7.8%,22.7%,37.3%, 0.6);
+        border-bottom-left-radius:2em;
+        border-bottom-right-radius:2em;
+        border-top: none;
+        border-right: 4px solid #143A5F;
+        border-left: 4px solid #143A5F;
+        border-bottom: 4px solid #143A5F;
+        box-shadow: 2px 2px 5px rgb(19, 45, 72);
+        z-index: 2;
+    }
+
+    .button.small {
+        margin-top: -20px;
+        margin-bottom: 20px;
+        padding: 5px;
+        font-size: 0.5em;
+    }
+
+    .logo {
+        position:relative;
+        left: 10px;
+        top:25px;
+        display: block;
+        width: 524px;
+        height: 64px;
+        margin: 0px;
+        padding-top: 75px;
+        text-indent: -9000px;
+        background: url("/img/memWallLogo.png") center top no-repeat;
+
+    }
+
+    #username{
+        display: block;
+        width: auto;
+        height: 25px;
+        margin-top: -10px;
+        margin-bottom: 10px;
+        margin-left: 0px;
+        margin-right: 0px;
+        padding: 10px;
+        padding-bottom: 0px;
+        /* background: #26619D; */
+        color: #fff;
+        white-space: nowrap;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+    }
+
+}
+
 @media only screen and (max-width: 451px) {
     /* Makes the responsive menu fit in the navigation container and change its background to black */
     html {
@@ -655,6 +746,9 @@ input.addNewPost {
     }
 
     .logo {
+        position:relative;
+        left: 10px;
+        top:-5px;
         display: block;
         width: 524px;
         height: 64px;
@@ -684,10 +778,15 @@ input.addNewPost {
         left:-60px;
         display: block;
         width: 100%;
-        height: 35px;
+        height: 30px;
         margin-top: 0px;
         text-align: right;
         float: right;
-        background: #000;
+        background: rgba(7.8%,22.7%,37.3%, 0.6);
+        border-bottom-left-radius:2em;
+        border-bottom-right-radius:2em;
+        border-top: none;
+        border-right: 4px solid #143A5F;
     }
 }
+

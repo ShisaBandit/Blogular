@@ -1,5 +1,18 @@
 <div ng-controller="ContentCtrl">
     <div class="nine columns offsetHeight" role="content" >
+        <div ng-controller="GroupingCtrl">
+            <div ng-hide="groupingViewable" ng-animate="'fade'" class="grouping">
+                <div class="row">
+                    Memorials by Groupings
+                    <a ng-click="changeSubgroup(0)" class="button small success radius">Mothers</a>
+                    <a ng-click="changeSubgroup(1)" class="button small success radius">Family</a>
+                    <a ng-click="changeSubgroup(2)" class="button small success radius">Friends</a>
+                    <a ng-click="changeSubgroup(undefined)" class="button small success radius">Remove Filters</a>
+                    <input ng-model="search.search" type="text" class="searchBar" placeholder="Search Memorials">
+
+                </div>
+            </div>
+        </div>
         <div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' autoscroll>
             <ul class="small-block-grid-4">
                 <li ng-repeat="entry in entries | filter:search.search | bySubgroup:subgroup">
