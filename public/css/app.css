@@ -646,3 +646,48 @@ input.addNewPost {
     /*background: red;
     border: 1px solid cadetblue; */
 }
+
+@media only screen and (max-width: 451px) {
+    /* Makes the responsive menu fit in the navigation container and change its background to black */
+    html {
+        font-family: sans-serif;
+        background: url("/img/background/Gobi-rainbow-2b.jpg") no-repeat scroll center -150px / cover rgb(39, 92, 149);
+    }
+
+    .logo {
+        display: block;
+        width: 524px;
+        height: 64px;
+        margin: 0px;
+        padding-top: 75px;
+        text-indent: -9000px;
+        background: url("/img/memWallLogo.png") center top no-repeat;
+    }
+
+    button.small, .button.small {
+        padding: 0.5625em 1.125em 0.625em;
+        font-size: .5em;
+    }
+
+    .headerCol {
+        position:relative;
+        top:35px;
+        left:0px;
+        display: block;
+        width: auto;
+        float: left;
+    }
+
+    .loginBlock {
+        position:relative;
+        top:-75px;
+        left:-60px;
+        display: block;
+        width: 100%;
+        height: 35px;
+        margin-top: 0px;
+        text-align: right;
+        float: right;
+        background: #000;
+    }
+}
