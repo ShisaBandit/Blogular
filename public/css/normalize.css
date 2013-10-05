@@ -65,7 +65,7 @@ html {
     font-family: sans-serif; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */
     -ms-text-size-adjust: 100%; /* 2 */
-    background: url("/img/background/Gobi-rainbow-2b.jpg") no-repeat scroll center -150px rgb(39, 92, 149);
+    background: url("/img/background/Gobi-rainbow-2b.jpg") no-repeat scroll center -150px #A19790;
     background-size: cover;
     
 }
