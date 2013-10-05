@@ -3466,7 +3466,7 @@ form.custom .custom.disabled {
     width: 100%;
     background: #000;
     background: rgba(0, 0, 0, 0.45);
-    z-index: 98;
+    z-index: 9800;
     display: none;
     top: 0;
     left: 0
@@ -3477,7 +3477,7 @@ form.custom .custom.disabled {
     display: none;
     position: absolute;
     left: 50%;
-    z-index: 99;
+    z-index: 9900;
     height: auto;
     background-color: #fff;
     margin-left: -40%;
