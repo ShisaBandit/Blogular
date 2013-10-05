@@ -109,6 +109,7 @@
                                     <li>Designate Moderators</li>
                                     <li>Assign ownership of group to new owner</li>
                                 </ul>
+
                                 <a class="button">Delete this group</a>
                             </section>
                             <section ng-repeat="group in groups">
@@ -116,7 +117,12 @@
                                 <br />
                                 Group Moderator: {{group.author}}
                                 <br />
-
+                                <li ng-repeat="angel in angels">Angel's Name : {{ angel.firstName }} {{ angel.lastName }} - {{ angel.title }}
+                                    <br />- <a href="#/group/{{angel.author}}">View this memorial wall</a>
+                                    <br />- <a href="#/editwall/{{ angel.author }}">Edit this memorial wall</a>
+                                    <br />- <a href="#/deletewall/{{ angel.author }}">Delete this memorial wall</a>
+                                    <br />- <a href="#/inviteblock/{{ angel.author }}">invite or block other registered members</a><br /><br />
+                                </li>
                             </section>
                         </div>
 
