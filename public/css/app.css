@@ -108,7 +108,10 @@
     margin-top: 200px;
     margin-left: auto;
     margin-right: auto;
-    background: #0072BC;
+    background: #3F77B4;
+    -webkit-box-shadow: 2px 2px 5px rgb(19, 45, 72);
+    -moz-box-shadow: 2px 2px 5px rgb(19, 45, 72);
+    box-shadow: 2px 2px 5px rgb(19, 45, 72);
 }
 
 .offsetHeight100 {
@@ -340,7 +343,7 @@ h1.sectionHeader {
 }
 
 #contentHeader{
-    background-color: #132D48;
+    background-color: #3F77B4;
     margin-bottom: 20px;
 }
 .contentHeaderTitle{
