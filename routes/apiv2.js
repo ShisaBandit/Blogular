@@ -106,6 +106,7 @@ var dataFilter = function (req, type, subtype, data, callback) {
                     }
                 });
             } else {
+                data.profile.push({profile:req.session.passport.user})
                 callback(data);
             }
 

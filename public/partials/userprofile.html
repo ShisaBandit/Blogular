@@ -56,7 +56,7 @@
                         </div>
                         <ul class="profile">
                             <li ng-repeat="angel in angels">Angel's Name : {{ angel.firstName }} {{ angel.lastName }} - {{ angel.title }}
-                                <br />- <a href="#/blog/{{form.author}}">View this memorial wall</a>
+                                <br />- <a href="#/blog/{{angel.author}}">View this memorial wall</a>
                                 <br />- <a href="#/editwall/{{ angel.author }}">Edit this memorial wall</a>
                                 <br />- <a href="#/deletewall/{{ angel.author }}">Delete this memorial wall</a>
                                 <br />- <a href="#/inviteblock/{{ angel.author }}">invite or block other registered members</a><br /><br />
@@ -101,10 +101,9 @@
                                 Group Moderator: {{group.author}}
                                 <br />
                                 <ul>
-                                <li ng-repeat="angel in angels">Angel's Name : {{ angel.firstName }} {{ angel.lastName }} - {{ angel.title }}
-                                    <br />- <a href="#/group/{{angel.author}}">View this memorial group</a>
-                                    <br />- <a href="#/editwall/{{ angel.author }}">Edit this memorial group</a>
-                                    <br />- <a href="#/inviteblock/{{ angel.author }}">invite or block other registered members</a><br /><br />
+                                    <br />- <a href="#/group/{{group.author}}">View this memorial group</a>
+                                    <br />- <a href="#/editwall/{{ group.author }}">Edit this memorial group</a>
+                                    <br />- <a href="#/inviteblock/{{ group.author }}">invite or block other registered members</a><br /><br />
                                 </li>
                                 </ul>
                                 <a href="#/deletewall/{{ angel.author }}" class="button">Delete this group</a>
