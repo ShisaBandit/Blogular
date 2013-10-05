@@ -19,11 +19,18 @@ exports.createData = function (req, res) {
         //set datamodifiers
         //TODO:make a class that decides which chain to delegate to
         //based on request.
-        dataFilter(req, type, null, modelInstance, function (data) {
-            data.save(function (err) {
-                if (err)console.log(err);
-                return sendSuccess(res);
-            })
+        dataFilter(req, type, null, modelInstance, function (data,err) {
+            console.log(err);
+            if (err){
+                console.log(err);
+                return res.send(400,err);
+            }else{
+                data.save(function (err) {
+
+                    return sendSuccess(res);
+                })
+            }
+
         });
 
     } else if (subsubdoc == undefined && subdoc != undefined) {
@@ -80,7 +87,6 @@ exports.createData = function (req, res) {
 };
 
 var setFirstName = {register: "postText"};
-
 var dataFilter = function (req, type, subtype, data, callback) {
 
     switch (type) {
@@ -145,6 +151,10 @@ var dataFilter = function (req, type, subtype, data, callback) {
                 from = data.from = doc.username;
                 models.User.findOne({username:to},function(err,doc){
                     if(err)console.log(err);
+                    if(doc == undefined)
+                        var messageToUser = "No user by that name";
+                        callback(data,messageToUser);
+                        return;
                     var messagedUsers = doc.messagedUsers;
                     var added = false;
 
@@ -175,11 +185,12 @@ var dataFilter = function (req, type, subtype, data, callback) {
                             }
                             doc.save(function(err){
                                 if(err)console.log(err);
+                                callback(data);
+
                             })
                         })
                     })
                 });
-                callback(data);
 
             })
             /*

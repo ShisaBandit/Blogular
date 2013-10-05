@@ -54,12 +54,19 @@ angular.module('apiResource', ['ngResource']).
                     function () {
                     });
             },
-            createResource: function (type,bodydata) {
+            createResource: function (type,bodydata,callback) {
                 //apiCreateResource({type:type},bodydata);
                 $http.post("create/"+type,bodydata).
-                    success(function(err){
-
-                    });
+                    success(function(data,status,headers,config){
+                        console.log("succes from server "+data)
+                        callback(data,status);
+                    }).error(function(data,status,headers,config){
+                        console.log("succes from server "+data)
+                        callback(data,status);
+                    })
+            },
+            createResourceNew:function(type,bodydata,callback){
+                //apiCreateResource.save({type:type},)
             },
             /*creates a subdoc array entry on adocument
                 @param type mongoose model on DB
@@ -74,9 +81,10 @@ angular.module('apiResource', ['ngResource']).
                         if(err)console.log(err);
                     })*/
                 $http.post('create/'+type+'/'+id+'/'+subdoc,bodydata).
-                    success(function(err){
-                        if(err)console.log(err);
-                       callback();
+                    success(function(data,status,headers,config){
+                        callback(data);
+                    }).error(function(data,status,headers,config){
+                        callback(data);
                     })
             }
 

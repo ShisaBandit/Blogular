@@ -139,6 +139,13 @@ app.directive('revealModal', function () {
                     elm.foundation('reveal', 'open');
                 }
             });
+            scope.$on('event:message-sent',function(){
+                console.log("registered event message sent closing modal view");
+                if(attrs.revealModal =='message'){
+                    console.log("EVENT TRIGGERED" + event);
+                    elm.foundation('reveal','close');
+                }
+            })
 
         }
     }
@@ -941,6 +948,8 @@ app.controller('messageController', function ($scope,api, $http, authService, us
             });
     };
 
+
+    /*
     socket.on('connect', function () {
         console.log("connect");
     });
@@ -970,10 +979,20 @@ app.controller('messageController', function ($scope,api, $http, authService, us
             $scope.error = "Username or password is incorrect";
         }
     });
-
+    */
     $scope.sendMessage = function(){
-        api.createResource('Message',{to:$scope.form.to,from:$scope.form.from,message:$scope.form.message});
+        api.createResource('Message',{to:$scope.form.to,from:$scope.form.from,message:$scope.form.message},function(data,status){
+            console.log(status);
+            if(status == 400){
+                $scope.message = data;
+            }else{
+                $rootScope.$broadcast('event:message-sent');
+            }
+        });
+
+
     }
+
 
 });
 
