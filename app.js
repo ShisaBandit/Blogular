@@ -122,7 +122,7 @@ app.configure('development', function () {
 
 //Blog Routes
 app.get('/blog', blogRoutes.allBlogs);
-
+app.get('/getGroups',blogRoutes.getGroups);
 app.get('/blog/:id', blogRoutes.getABlog);
 
 app.get('/blog/:skip/:limit', blogRoutes.getPaginatedBlogs);

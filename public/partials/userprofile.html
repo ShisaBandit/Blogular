@@ -111,7 +111,15 @@
                                 </ul>
                                 <a class="button">Delete this group</a>
                             </section>
+                            <section ng-repeat="group in groups">
+                                <b>Group Name: {{group.title}}</b>
+                                <br />
+                                Group Moderator: {{group.author}}
+                                <br />
+
+                            </section>
                         </div>
+
                         <div class="small-4 columns rghtDvd">
                             <b>Groups I Joined / Group Invites</b>
                             <br /> <br />
@@ -244,7 +252,7 @@
                                 <div class="row" ng-repeat="message in messages">
                                     <span class="small-4 columns">{{message.from}}</span>
                                     <span class="small-6 columns">{{message.message}}</span>
-                                    <span class="small-2 columns">{{message.date}}</span>
+                                   <!-- <span class="small-2 columns">{{message.date}}</span> -->
                                 </div>
 
                                 <div class="row">
