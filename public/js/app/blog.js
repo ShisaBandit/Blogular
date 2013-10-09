@@ -1018,7 +1018,6 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket,group
                 }
             }
     }
-console.log($scope.groups);
     $scope.submitFinalDetails = function () {
         $http.post('/register', $scope.form).
             success(function (data) {
