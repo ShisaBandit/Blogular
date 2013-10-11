@@ -94,8 +94,8 @@ var blogSchema = mongoose.Schema({
             name: String
         }
     ]
-
 });
+
 var petitionSchema = mongoose.Schema({
     title: {type: String, required: true},
     text: {type: String, required: true},
@@ -108,7 +108,8 @@ var petitionSchema = mongoose.Schema({
             signedDate: {type: Date, default: Date.now()}
         }
     ]
-})
+});
+
 var userSchema = mongoose.Schema({
     firstName: {type: String, required: true},
     lastName: {type: String, require: true},
@@ -124,6 +125,7 @@ var userSchema = mongoose.Schema({
     city: String,
     state: String,
     Age: Number,
+    dob:Date,
     avatar: String,//urllink
     lost: Number,  //codes are   0:mother,1:father
     firstAccess: {type: Boolean, default: true},
@@ -140,7 +142,10 @@ var userSchema = mongoose.Schema({
         }
     ]
 });
-
+userSchema.pre('save', function (next) {
+    // do stuff
+    next();
+});
 var messageSchema = mongoose.Schema({
     to:{type:String,required:true},
     from:{type:String,required:true},

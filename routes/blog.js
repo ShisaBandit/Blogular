@@ -86,18 +86,22 @@ exports.getABlog = function (req, res) {
         Blog.find({'author': id}).lean().exec(function (err, post) {
             if (post === undefined)return res.send(404);
             if (user != null) {
-
-                for (var x = 0; x < user.profiles.length; x++) {
-                    console.log(user.profiles[x].profile);
-
-                    if (user.profiles[x].profile == null) {
-
-                    } else {
+                if(post[0].owner_id == req.session.passport.user){
+                    matchfound = true
+                }else{
+                    for (var x = 0; x < user.profiles.length; x++) {
                         console.log(user.profiles[x].profile);
-                        if (post[0]._id == user.profiles[x].profile) {
-                            matchfound = true;
+
+                        if (user.profiles[x].profile == null) {
+
+                        } else {
+                            console.log(user.profiles[x].profile);
+                            if (post[0]._id == user.profiles[x].profile) {
+                                matchfound = true;
+                            }
                         }
-                    }
+                }
+
 
                 }
             }
@@ -106,7 +110,7 @@ exports.getABlog = function (req, res) {
                 console.log("WE are in production so setting privacy on mem walls");
             } else {
                 console.log("not production so all walls are public for convinience");
-                matchfound = true;
+               // matchfound = true;
             }
 
             if (post == undefined) {
@@ -171,13 +175,16 @@ exports.friendsMemorials = function(req,res){
 
 exports.getGroups = function(req,res){
     var buffer = [];
-    Blog.find({owner_id:req.session.passport.user},function(err,docs){
-        for(var doc in docs){
-            console.log("is this a group "+docs[doc].group)
+    Blog.find({owner_id:req.session.passport.user,group:true},function(err,docs){
+        /*
+        for(var doc = 0; doc < docs.length; doc++){
+            console.log("is this a group "+docs[doc].group+" "+docs.length)
             if(docs[doc].group == true)
                 buffer.push(docs[doc]);
-            return res.send(JSON.stringify(buffer));
+
         }
+        */
+        return res.send(JSON.stringify(docs));
     })
 
 

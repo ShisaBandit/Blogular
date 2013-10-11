@@ -568,7 +568,7 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog,
             console.log(blog[0].limited);
             console.log(blog[0]);
             $scope.entry = blog[0];
-
+            console.log('wall limited? '+blog[0].limited    )
             if (blog[0].limited) {
                 $scope.profileMenuViewable = false;
                 $location.path("/public/" + $routeParams.id);
@@ -1018,7 +1018,6 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket,group
                 }
             }
     }
-console.log($scope.groups);
     $scope.submitFinalDetails = function () {
         $http.post('/register', $scope.form).
             success(function (data) {

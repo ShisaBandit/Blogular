@@ -1,7 +1,7 @@
     <div ng-controller="RegisterCtrl">
     <div class="row">
         <div class="twelve columns offsetHeight100" role="content">
-            <p ng-repeat="message in messages"><b>{{message}}</b></p>
+
             <table border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <h1>We are in closed beta: Enter your code to access the closed beta.</h1>
@@ -11,6 +11,7 @@
                 </tr>
             </table>
             <div class="small-12 columns">
+                <p style="color:#ee162d" ng-repeat="message in messages"><b>{{message}}</b></p>
                   <div class="row ">
                     <div class="small-6 columns regColl">
                     <label>Beta code:</label>
@@ -46,25 +47,27 @@
 
                     <label>Postal Address:</label>
                     <input type="text" class="login-inp" ng-model="form.zip"/>
+                  </div>
+                  <div class="small-6 columns regColl">
                     <label>Personal Bio Here:</label>
-                    <textarea class="login-inp" ng-model="form.age"></textarea>
+                    <textarea class="login-inp" ng-model="form.about"></textarea>
 
                     <label>Date of Birth:</label>
-                        <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                            <input class="span2" size="16" type="text" value="12-02-2012">
-                            <span class="add-on"><i class="icon-th"></i></span>
-                        </div>
+                    <input type="text" class="login-inp" ng-model="form.dob"/>
                   </div>
                  </div>
                  <div class="row regColl2">
-                    <label>I have lost my: </label> <br />
-                    <select name="lostAngel"><option ng-change="checked()" ng-repeat="group in groups" ng-model="groups[$index].checked"
-                                                                           class="login-inp"  value="{{group.name}}">{{group.name}}</option></select>
+                    <label>I have lost my: </label> <br /> <br />
+                    <div ng-repeat="group in groups">{{group.name}}<input type="checkbox" ng-change="checked()"
+                                                                           ng-model="groups[$index].checked"
+                                                                           class="login-inp" name="{{group.name}}"/></div>
                  </div>
+                <p style="color:#ee162d" ng-repeat="message in messages"><b>{{message}}</b></p>
                     <a class="button" ng-click="submitFinalDetails()">Register</a>
                     <a class="close-reveal-modal button">Cancel</a>
 
             </div>
+
         </div>
     </div>
 </div>

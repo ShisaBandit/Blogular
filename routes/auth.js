@@ -2,6 +2,8 @@ var models = require('../models/models');
 var Blog = models.Blog;
 var User = models.User;
 var Update = models.Update;
+var check = require('validator').check,
+    sanitize = require('validator').sanitize;
 
 exports.checkAuthed = function (req, res) {
     User.find({_id: req.session.passport.user}, function (err, user) {
@@ -101,14 +103,32 @@ exports.register = function (req, res) {
         password = req.body.password,
         firstname = req.body.firstName,
         lastname = req.body.lastName,
-        email = req.body.email;
+        email = req.body.email,
+        dob = req.body.dob;
+
+    var validEmail = true;
+    var validDob = true;
+        //var checkObject = check(email).len(6,64).isEmail();
+    try{
+        check(email,'not a valid email').len(6,64).isEmail();
+    }catch(e){
+        console.log(e.message);
+        validEmail = false;
+    }
+
+    try{
+        check(dob).isDate();
+    }catch (e)
+    {
+        validDob = false;
+    }
 
         minUsernameLength = 5,
         maxUsernameLength = 16,
         minPasswordLength = 5,
         maxPasswordLength = 16
-        minfirstnameLength = 1,
-        minlastnameLength = 1,
+        minfirstnameLength = 0,
+        minlastnameLength = 0,
         maxfirstNameLength = 15,
         maxlastNameLength = 15;
     if(req.body.betacode == "hardcoded"){
@@ -140,20 +160,21 @@ exports.register = function (req, res) {
                         //lastname checks
                         lastname != undefined &&
                         lastname.length > minlastnameLength &&
-                        lastname.length < maxlastNameLength
+                        lastname.length < maxlastNameLength &&
+                        validEmail == true &&
+                        validDob == true
 
 
                     ) {
                     var user = new User(req.body);
+
                     user.gravatar = calcMD5(user.email);
                     user.lost = req.body.groupcode;
 
                     user.save(function (err) {
                         if (err){
                             console.log(err);
-                            for(var name in err.errors){
-                                errorMessage.push("not valid "+name);
-                            }
+                            console.log(err.path);
                             return res.end(JSON.stringify({'fail': errorMessage}));
 
                         }
@@ -210,7 +231,13 @@ exports.register = function (req, res) {
                         errorMessage.push('Last name must be shorter than ' + maxlastNameLength);
                     }
 
-
+                    if(!validEmail)
+                    {
+                        errorMessage.push('Not a valid email')
+                    }
+                    if(!validDob){
+                        errorMessage.push('Not a valid Date')
+                    }
                     if (errorMessage.length == 0 || errorMessage === undefined) {
                         errorMessage.push('unknown error');
                     }
@@ -220,7 +247,8 @@ exports.register = function (req, res) {
         });
     }
     else{
-
+        errorMessage.push('Beta code is incorrect');
+        return res.end(JSON.stringify({'fail':errorMessage}));
     }
 
 

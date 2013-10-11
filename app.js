@@ -23,6 +23,7 @@ var express = require('express')
     , MemoryStore = express.session.MemoryStore
     , sessionStore = new MemoryStore()
     , q = require('q')
+    , MongoStore = require('connect-mongo')(express)
     
 //models
     , blogModels = require('./models/models')
@@ -57,7 +58,8 @@ app.configure('production', function () {
     app.use(express.methodOverride());
     app.use(express.cookieParser('secret'));
     //TODO:Config: make secrete changable in config
-    app.use(express.session({store: sessionStore, secret: 'secret', key: 'express.sid'}));
+//    app.use(express.session({store: sessionStore, secret: 'secret', key: 'express.sid'}));
+    app.use(express.session({store: new MongoStore({url:'mongodb://localhost/test'}), secret: 'secret', key: 'express.sid'}));
     // Initialize Passport! Also use passport.session() middleware, to support
     // persistent login sessions (recommended).
     app.use(passport.initialize());
@@ -83,7 +85,8 @@ app.configure('development', function () {
     app.use(express.methodOverride());
     app.use(express.cookieParser('secret'));
     //TODO:Config: make secrete changable in config
-    app.use(express.session({store: sessionStore, secret: 'secret', key: 'express.sid'}));
+   // app.use(express.session({store: sessionStore, secret: 'secret', key: 'express.sid'}));
+    app.use(express.session({store: new MongoStore({url:'mongodb://localhost/test'}), secret: 'secret', key: 'express.sid'}));
     // Initialize Passport! Also use passport.session() middleware, to support
     // persistent login sessions (recommended).
     app.use(passport.initialize());
