@@ -949,6 +949,13 @@ th.hide-for-touch {
         padding: 0 10px 10px
     }
 
+    @media only screen and (max-width: 518px) {
+        .small-block-grid-4>li {
+            width: 50%;
+            padding: 0 5px 5px;
+        }
+    }
+
     .small-block-grid-4>li:nth-of-type(4n+1) {
         clear: both
     }

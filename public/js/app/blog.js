@@ -197,7 +197,7 @@ app.directive('autoscroll', function () {
 
                 $('body').autoscroll(
                     {
-                        direction: "down",
+                        direction: "left",
                         step: 50,
                         scroll: true,
                         //problems with this
