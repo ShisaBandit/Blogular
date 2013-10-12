@@ -59,8 +59,6 @@
                  <div class="row regColl2">
                     <label>I have lost my: </label> <br /> <br />
                     <div ng-repeat="group in groups">{{group.name}}<input type="checkbox" ng-change="checked()"
-                                                                           ng-model="groups[$index].checked"
-                                                                           class="login-inp" name="{{group.name}}"/></div>
                  </div>
                 <p style="color:#ee162d" ng-repeat="message in messages"><b>{{message}}</b></p>
                     <a class="button" ng-click="submitFinalDetails()">Register</a>

@@ -377,3 +377,36 @@ io.sockets.on('connection', function (socket) {
         io.sockets.to(socket.room).emit('updateusers', usersForThisRoom);
     });
 });
+
+
+
+//TODO:REMOVE THIS CODE
+//TODO: Javascrip LInked list
+function LinkedList(){
+    var _list = [];
+    var _head = null;
+    var _length = 0;
+    var _current = null;
+
+
+    return {
+        add:function(newNode){
+            var _node = {
+                data:{},
+                next:null
+            }
+            current
+            if(_head === null){
+                _head = node;
+            }else{
+            }
+
+              list.push(newNode);
+
+        },
+        remove:function(){
+
+        }
+    }
+
+}

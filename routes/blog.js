@@ -6,6 +6,18 @@ var Update = models.Update;
 var Workshop = models.Workshop;
 var PICTYPE = 1;
 var VIDEOTYPE = 2;
+var Validator = require('validator').check,
+    sanitize = require('validator').sanitize;
+
+Validator.prototype.error = function (msg) {
+    console.log("error added to validator"+msg);
+    this._errors.push(msg);
+    return this;
+}
+
+Validator.prototype.getErrors = function () {
+    return this._errors;
+}
 
 exports.notifications = function(req,res){
 
@@ -191,10 +203,21 @@ exports.getGroups = function(req,res){
 }
 
 exports.createBlog = function (req, res) {
+
     var title = req.body.title;
+    var url = req.body.author;
+    var validator = new Validator();
+    var hasTitle = true;
     //noinspection JSValidateTypes
-    if (title === '' || title === null || title === undefined)return res.send('need a title', 404);
-    else {
+        validator.check(title,'You need a title').notNull();
+        validator.check(url,'You must assign a url').notNull();
+
+     console.log(validator.getErrors());
+    if (
+        title === '' || title === null || title === undefined
+        ){
+        return res.send('need a title', 404);
+    }else {
 
         var newBlogEntry = new Blog(req.body);
         newBlogEntry.owner_id = req.session.passport.user;

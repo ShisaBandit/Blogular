@@ -4,6 +4,8 @@ var User = models.User;
 var Update = models.Update;
 var check = require('validator').check,
     sanitize = require('validator').sanitize;
+var nodemailer = require('nodemailer');
+var smtpTransport = nodemailer.createTransport("sendmail");
 
 exports.checkAuthed = function (req, res) {
     User.find({_id: req.session.passport.user}, function (err, user) {
@@ -185,6 +187,7 @@ exports.register = function (req, res) {
                             subgroup:req.body.subgroup
 
                         })
+                        SendConfirmationMail(email);
                         return res.end(JSON.stringify({'success': 'true'}));
                     });
                 } else {
@@ -255,7 +258,23 @@ exports.register = function (req, res) {
 
 };
 
-
+function SendConfirmationMail(to){
+    var mailOptions = {
+        from:"Welcome@AngelsOfEureka.org",
+        to:to,
+        subject:"Welcome to AngelsOfEureka.org",
+        text:"This is a confirmation email please click this link to confirm you want to register",
+        html:"<p>BOLDNESS</p>"
+    }
+    smtpTransport.sendMail(mailOptions,function(error,response){
+        if(error){
+            console.log(error);
+            console.log("problems sending mail")
+        }else{
+            console.log("message sent")
+        }
+    })
+}
 
 
 /*
