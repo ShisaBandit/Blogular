@@ -33,16 +33,15 @@
                         <br />
                         <label>Date of Birth:</label>
                         <!--TODO:Make this a n uploadable file-->
-                        <input type="date" class="login-inp" ng-model="form.dob"/>
+                        <input type="date" class="login-inp" ng-model="form.dob" placeholder="12-02-2012"　/>
                         <br />
                         <label>Day your Angel got their wings:</label>
-                        <input type="date" class="login-inp" ng-model="form.memorialDate"/>
+                        <input type="date" class="login-inp" ng-model="form.memorialDate" placeholder="12-02-2012"　/>
 
                          <div class="row regColl2">
-                            <label>I have lost my: </label> <br /> <br />
-                            <div ng-repeat="group in groups">{{group.name}}<input type="checkbox" ng-change="checked()"
-                                                                                  ng-model="groups[$index].checked"
-                                                                                  class="login-inp" name="{{group.name}}"/></div>
+                             <label>I have lost my: </label> <br />
+                             <select name="lostAngel"><option ng-change="checked()" ng-repeat="group in groups" ng-model="groups[$index].checked"
+                                                              class="login-inp"  value="{{group.name}}">{{group.name}}</option></select>
                         </div>
 
                         <!--
