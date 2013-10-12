@@ -24,12 +24,13 @@ var express = require('express')
     , sessionStore = new MemoryStore()
     , q = require('q')
     , MongoStore = require('connect-mongo')(express)
-    
+    , expressValidator = require('express-validator')
 //models
     , blogModels = require('./models/models')
     , passport = require('./auth/local').passport_local
     , Constants = require('./constants/constants.js');
 
+console.log(expressValidator)
 global.__approot = __dirname;
 //set up database models to mongoose
 var Blog = blogModels.Blog;
@@ -37,7 +38,7 @@ var User = blogModels.User;
 var Update = blogModels.Update;
 
 var app = express();
-
+app.use(expressValidator());
 //noinspection JSValidateTypes
 app.configure('production', function () {
     app.use(express.compress());
@@ -95,6 +96,8 @@ app.configure('development', function () {
     app.use(require('less-middleware')({ src: __dirname + '/public' }));
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.errorHandler());
+
+
 });
 
 //TODO:config: This will be the intial admin user

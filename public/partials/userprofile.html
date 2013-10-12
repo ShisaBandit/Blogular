@@ -56,7 +56,7 @@
                         </div>
                         <ul class="profile">
                             <li ng-repeat="angel in angels">Angel's Name : {{ angel.firstName }} {{ angel.lastName }} - {{ angel.title }}
-                                <br />- <a href="#/blog/{{angel.author}}">View this memorial wall</a>
+                                <br />- <a href="#/angel/{{angel.author}}">View this memorial wall</a>
                                 <br />- <a href="#/editwall/{{ angel.author }}">Edit this memorial wall</a>
                                 <br />- <a href="#/deletewall/{{ angel.author }}">Delete this memorial wall</a>
                                 <br />- <a href="#/inviteblock/{{ angel.author }}">invite or block other registered members</a><br /><br />
@@ -75,7 +75,7 @@
                         <div class="profileGravatar">
                         </div>
                         <ul class="profile">
-                            <li ng-repeat="angelmember in angelmembers">Angel's Name : (Angel's full name)  - <a href="#/blog/{{ angelmember.author }}">View this memorial wall</a> - <a href="#/selfremove/{{ angelmember.author }}">Remove yourself from this memorial wall network</a></li>
+                            <li ng-repeat="angelmember in angelmembers">Angel's Name : (Angel's full name)  - <a href="#/angel/{{ angelmember.author }}">View this memorial wall</a> - <a href="#/selfremove/{{ angelmember.author }}">Remove yourself from this memorial wall network</a></li>
                         </ul>
                         <!-- This next UL is for demonstration purposes only. Delete after demo to client -->
                         <ul class="profile">

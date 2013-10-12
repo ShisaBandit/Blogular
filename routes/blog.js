@@ -1,23 +1,13 @@
 var models = require('../models/models');
-var Common = require('../constants/constants.js')
+var Common = require('../constants/constants.js');
+var util = require('util');
 var Blog = models.Blog;
 var User = models.User;
 var Update = models.Update;
 var Workshop = models.Workshop;
 var PICTYPE = 1;
 var VIDEOTYPE = 2;
-var Validator = require('validator').check,
-    sanitize = require('validator').sanitize;
 
-Validator.prototype.error = function (msg) {
-    console.log("error added to validator"+msg);
-    this._errors.push(msg);
-    return this;
-}
-
-Validator.prototype.getErrors = function () {
-    return this._errors;
-}
 
 exports.notifications = function(req,res){
 
@@ -198,37 +188,60 @@ exports.getGroups = function(req,res){
         */
         return res.send(JSON.stringify(docs));
     })
-
-
 }
 
 exports.createBlog = function (req, res) {
+/*
+    if(req.body.group == undefined){
+        req.checkBody('dob','Must be a valid data').notNull().isDate();
+        req.checkBody('memorialDate','Must be a valid date').notNull().isDate();
+        req.checkBody('subgroup','Must select a group').notNull();
+    }
+    req.checkBody('title','You need a title').notNull();
+    req.checkBody('author','You must assign a url').notNull();
 
-    var title = req.body.title;
-    var url = req.body.author;
-    var validator = new Validator();
-    var hasTitle = true;
-    //noinspection JSValidateTypes
-        validator.check(title,'You need a title').notNull();
-        validator.check(url,'You must assign a url').notNull();
 
-     console.log(validator.getErrors());
-    if (
-        title === '' || title === null || title === undefined
-        ){
-        return res.send('need a title', 404);
-    }else {
-
+    req.checkBody('firstName','Must enter a first name').notNull();
+    req.checkBody('lastName','Must enter a first name').notNull();
+    var errors = req.validationErrors(true);
+    var myRe = /^(\w*[-_]?\w*){1,100}$/;
+    var myArray = myRe.exec(req.body.author);
+    if(myArray == null){
+        console.log("not a valid url")
+        errors.author = {param:'author',msg:'Please enter a valid url. Only characters A-Z or numbers 1-9 and "-" or "_" allowed.'};
+    }
+    console.log(errors);
+    if (errors) {
+        res.send(errors, 500);
+        return;
+    }
+    */
+    /*
+     var charsNotAllowed = [' ','{','}','|','\\','^','~','[',']','`',';','/','?',':','@','=','&'];
+     for(var i = 0;i< charsNotAllowed.length;i++){
+     console.log(charsNotAllowed[i])
+     req.checkBody('author','The '+charsNotAllowed[i]+' character is not allowed').notContains(charsNotAllowed[i])
+     }
+     */
+    var errors = BlogGroupValidation(req);
+    if(errors){
+        res.send(errors,500);
+        return;
+    }
         var newBlogEntry = new Blog(req.body);
         newBlogEntry.owner_id = req.session.passport.user;
         newBlogEntry.save(function (err,newblog) {
             if (err)console.log(err);
             return res.end(JSON.stringify({'success': 'true',blogId:newblog._id}));
         });
-    }
 }
 
 exports.updateBlog = function (req, res) {
+    var errors = BlogGroupValidation(req);
+    if(errors){
+        res.send(errors,500);
+        return;
+    }
     //Updates whatever blog is sent to it
     //break this up into updateBlog and updateComment/addComment
     delete req.body._id;
@@ -266,7 +279,34 @@ exports.updateBlog = function (req, res) {
     });
 
 }
+function BlogGroupValidation(req){
+    if(req.body.group == undefined){
+        req.checkBody('dob','Must be a valid data').notNull().isDate();
+        req.checkBody('memorialDate','Must be a valid date').notNull().isDate();
+        req.checkBody('subgroup','Must select a group').notNull();
+    }
+    req.checkBody('title','You need a title').notNull();
+    req.checkBody('author','You must assign a url').notNull();
+    /*
+     var charsNotAllowed = [' ','{','}','|','\\','^','~','[',']','`',';','/','?',':','@','=','&'];
+     for(var i = 0;i< charsNotAllowed.length;i++){
+     console.log(charsNotAllowed[i])
+     req.checkBody('author','The '+charsNotAllowed[i]+' character is not allowed').notContains(charsNotAllowed[i])
+     }
+     */
 
+    req.checkBody('firstName','Must enter a first name').notNull();
+    req.checkBody('lastName','Must enter a first name').notNull();
+    var errors = req.validationErrors(true);
+    var myRe = /^(\w*[-_]?\w*){1,100}$/;
+    var myArray = myRe.exec(req.body.author);
+    if(myArray == null){
+        console.log("not a valid url")
+        errors.author = {param:'author',msg:'Please enter a valid url. Only characters A-Z or numbers 1-9 and "-" or "_" allowed.'};
+    }
+    return errors;
+
+}
 exports.deleteBlog = function (req, res) {
     console.log("trying to remove "+req.params.id);
     Blog.remove({'_id': req.params.id}, function (err) {

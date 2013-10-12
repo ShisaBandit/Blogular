@@ -8,12 +8,15 @@
                 <h2 class="subHeader">Create Memorial Profile</h2>
                     <div class="small-12 columns">
                         <br />
+
                         <label for="title">Memorial Wall Title: </label>
                         <input type="text" id="title" ng-model="form.title" name="title" placeholder="This is seen as the name of your memorial wall, usually the full name of your Angel. Please enter a title here.">
+                        <p class="validation-error">{{message.title}}</p>
                         <br />
                         <br />
                         <label for="author">Please specify a short address for your profile : </label>
                         <input type="text" name="author" id="author" ng-model="form.author" placeholder="(Less than 100 characters, including underscores and dashes with no spaces)">
+                        <p class="validation-error">{{message.url}}</p>
                         <br />
                         <label for="content">Tell your Angel's story here: </label>
 
@@ -29,19 +32,42 @@
 
                         <label>What is your Angel's name?</label>
                         <input type="text" class="login-inp" ng-model="form.firstName" placeholder="First Name" />
+                        <p class="validation-error">{{message.firstName}}</p>
+
                         <input type="text" class="login-inp" ng-model="form.lastName" placeholder="Last Name" />
+                        <p class="validation-error">{{message.lastName}}</p>
+
                         <br />
                         <label>Date of Birth:</label>
                         <!--TODO:Make this a n uploadable file-->
-                        <input type="date" class="login-inp" ng-model="form.dob" placeholder="12-02-2012"　/>
+                        <input type="date" class="login-inp" ng-model="form.dob" placeholder="12-02-2012"/>
+                        <p class="validation-error">{{message.dob}}</p>
+
                         <br />
                         <label>Day your Angel got their wings:</label>
-                        <input type="date" class="login-inp" ng-model="form.memorialDate" placeholder="12-02-2012"　/>
+                        <input type="date" class="login-inp" ng-model="form.memorialDate" placeholder="12-02-2012"/>
+                        <p class="validation-error">{{message.memorialDate}}</p>
 
-                         <div class="row regColl2">
+
+                        <div class="row regColl2">
                              <label>I have lost my: </label> <br />
-                             <select name="lostAngel"><option ng-change="checked()" ng-repeat="group in groups" ng-model="groups[$index].checked"
-                                                              class="login-inp"  value="{{group.name}}">{{group.name}}</option></select>
+                             <select class="login-inp"
+                                     name="lostAngel"
+                                     ng-change="checked()"
+                                     ng-model="selectedGroup"
+                                     ng-options="group.name for group in groups">
+
+                                 <!--<option
+                                         ng-change="checked()"
+                                         ng-repeat="group in groups"
+                                         ng-model="groups[$index].checked"
+                                         class="login-inp"
+                                         value="{{group.name}}">
+                                 {{group.name}}-->
+                                </option>
+                             </select>
+                            <p class="validation-error">{{message.subgroup}}</p>
+
                         </div>
 
                         <!--

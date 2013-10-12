@@ -10,7 +10,6 @@
                     <a ng-click="changeSubgroup(undefined)" class="button small success radius">View All</a>
                     <br class="clear" />
                     <input ng-model="search.search" type="text" class="searchBar" placeholder="Search Memorials">
-
                 </div>
             </div>
         </div>
@@ -18,8 +17,8 @@
             <ul class="small-block-grid-4">
                 <li ng-repeat="entry in entries | filter:search.search | bySubgroup:subgroup">
                     <div style="background-image: url({{entry.titleImage}})" ng-style="getBackImg(entry._id)" class="memProfilePreview">
-                        <h6><a href="#/blog/{{entry.author}}">{{entry.lastName}}, {{entry.firstName}}</a></h6>
-                        <a href="#/blog/{{entry.author}}"><img src="/uploads/{{ entry.profilePicPortrait }}" alt="child pick"/></a>
+                        <h6><a href="#/angel/{{entry.author}}">{{entry.lastName}}, {{entry.firstName}}</a></h6>
+                        <a href="#/angel/{{entry.author}}"><img src="/uploads/{{ entry.profilePicPortrait }}" alt="child pick"/></a>
                     </div>
                 </li>
             </ul>

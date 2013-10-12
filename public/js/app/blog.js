@@ -11,7 +11,9 @@ var app = angular.module('blogApp', [
             when("/projects", {templateUrl: "partials/projects.html"}).
             when("/shoutouts", {templateUrl: "partials/shoutouts.html"}).
             when("/AddBlogEntry", {templateUrl: "partials/admin/createBlogEntry.html"}).
-            when("/blog/:id", {templateUrl: "partials/blogEntry.html"}).
+            //when("/blog/:id", {templateUrl: "partials/blogEntry.html"}).
+            when("/angel/:id", {templateUrl: "partials/blogEntry.html"}).
+
             when("/StartGroup", {templateUrl: "partials/admin/createGroup.html"}).
             when("/group/:id", {templateUrl: "partials/groupHome.html"}).
             when("/groupPreview/:id", {templateUrl: "partials/groupHomePublic.html"}).
@@ -579,7 +581,7 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog,
                 socket.emit('subscribe', {room: blog[0]._id});
 
                 $scope.$onReady("success");
-                $location.path("/blog/" + $routeParams.id);
+                $location.path("/angel/" + $routeParams.id);
             }
 
         },
@@ -1371,7 +1373,11 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog,$rootScope,gr
     $scope.addedFile = {};
     $scope.author = {author:""};
     $scope.groups = groupsListing;
+    $scope.message = {};
+    $scope.selectedGroup = undefined;
+    $scope.form = {};
     $scope.checked = function(){
+        /*
         for(var sgroup in $scope.groups){
             if($scope.groups[sgroup].name == $scope.selectedSubgroup.name){
                 $scope.groups[sgroup].checked = false;
@@ -1383,12 +1389,27 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog,$rootScope,gr
                 $scope.form.groupcode = $scope.selectedSubgroup.code;
             }
         }
+        */
+        //777-7888
+        //this should-match-WWWW_www-coul- hkjh
+        console.log($scope.selectedGroup)
+        $scope.form.subgroup = $scope.selectedGroup.code;
     }
     $scope.submitPost = function () {
 
         BlogsService.updateBlog($scope.form,function(err,res){
             if(err){
-                $scope.message = "Blog entry must have a title.";
+                $scope.message = {};
+                for(var error in err.data)
+                {
+                    if(error == "author"){
+                        $scope.message.url = err.data.author.msg;
+                    }
+                    else{
+                        $scope.message[error] = err.data[error].msg;
+                    }
+                }
+                return;
             }
 
             $scope.blogId.blogId = res.blogId;
@@ -1439,25 +1460,24 @@ app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog,$rootScope,g
     $scope.addedFile = {};
     $scope.author = {author:""};
     $scope.groups = groupsListing;
-    $scope.checked = function(){
-        for(var sgroup in $scope.groups){
-            if($scope.groups[sgroup].name == $scope.selectedSubgroup.name){
-                $scope.groups[sgroup].checked = false;
-            }
-        }
-        for(var sgroup in $scope.groups){
-            if($scope.groups[sgroup].checked){
-                $scope.selectedSubgroup = $scope.groups[sgroup];
-                $scope.form.groupcode = $scope.selectedSubgroup.code;
-            }
-        }
-    }
+    $scope.form = {};
+    $scope.message = {};
     $scope.submitPost = function () {
 
         $scope.form.group = true;
         BlogsService.updateBlog($scope.form,function(err,res){
             if(err){
-                $scope.message = "Group must have a title.";
+                $scope.message = {};
+                for(var error in err.data)
+                {
+                    if(error == "author"){
+                        $scope.message.url = err.data.author.msg;
+                    }
+                    else{
+                        $scope.message[error] = err.data[error].msg;
+                    }
+                }
+                return;
             }
 
             $scope.blogId.blogId = res.blogId;
@@ -1617,7 +1637,7 @@ app.controller('EditWallCtrl',function($rootScope,$http,$scope,api,$routeParams,
     $scope.spread ={spread:""};
     $scope.blogId = {blogId:""};
     $scope.addedFile = {};
-                $scope.form;
+                $scope.form = {};
     api.getResourceByField('Blog',{field:'author',query:$routeParams.wall},function(data){
         console.log(data);
         $scope.form = data[0];

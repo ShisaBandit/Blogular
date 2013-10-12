@@ -114,7 +114,7 @@ angular.module('blogService', ['ngResource']).
                         callback(err,res);
                     },
                     function (err) {
-                        callback(err,res);
+                        callback(err);
                     });
             },
             paginatedBlogs:function(skip,limit,callback){

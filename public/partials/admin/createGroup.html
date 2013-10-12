@@ -10,10 +10,14 @@
                     <br />
                     <label for="title">Group Name: </label>
                     <input type="text" id="title" ng-model="form.title" name="title" placeholder="This is seen as the name of your private group. Please enter a title here.">
+                    <p class="validation-error">{{message.title}}</p>
+
                     <br />
                     <br />
                     <label for="author">Please specify a short address for your group : </label>
                     <input type="text" name="author" id="author" ng-model="form.author" placeholder="(Less than 100 characters, including underscores and dashes with no spaces)">
+                    <p class="validation-error">{{message.url}}</p>
+
                     <br />
                     <label for="content">Tell your group's story here: </label>
 
@@ -29,7 +33,11 @@
 
                     <label>What is your group founder's name?</label>
                     <input type="text" class="login-inp" ng-model="form.firstName" placeholder="First Name" />
+                    <p class="validation-error">{{message.firstName}}</p>
+
                     <input type="text" class="login-inp" ng-model="form.lastName" placeholder="Last Name" />
+                    <p class="validation-error">{{message.lastName}}</p>
+
                     <br />
 
                     <!--
