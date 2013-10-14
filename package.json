@@ -26,7 +26,8 @@
         "nodemailer":"0.5.x",
         "connect-mongo":"0.3.x",
         "validator":"1.x.x",
-        "nodemailer":"0.5.x"
+        "nodemailer":"0.5.x",
+        "express-validator":"0.8.x"
 
     },
     "license":"MIT",

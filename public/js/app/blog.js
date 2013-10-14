@@ -1,7 +1,7 @@
 var app = angular.module('blogApp', [
         'twitterService', 'userService', 'http-auth-interceptor', 'login', 'socketio', 'updateService',
         'Scope.onReady', 'blogResource', 'loaderModule', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries', 'Plugin.Controller.GroupEntries',
-        'blogFilter', 'blogService', 'infinite-scroll', 'dropzone', 'apiResource'
+        'blogFilter', 'blogService', 'infinite-scroll', 'dropzone', 'apiResource','ui.bootstrap'
     ]).
     config(function ($routeProvider) {
         $routeProvider.
@@ -35,7 +35,14 @@ var app = angular.module('blogApp', [
             when("/pets",{templateUrl:"partials/pets.html"}).
             when("/editwall/:wall",{templateUrl:"partials/editwall.html"})
     });
-
+app.directive('fdatepicker',function(){
+    return{
+        link:function(scopee,ele,attr){
+            ele.fdatepicker();
+            ele.fdatepicker('hide')
+        }
+    }
+})
 app.directive('closeparent', function () {
     return {
         link: function (scope, ele, attr) {
@@ -1001,12 +1008,14 @@ app.controller('messageController', function ($scope,api, $http, authService, us
 
 });
 
-app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket,groupsListing) {
+app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket,groupsListing,$timeout) {
     $scope.form = {};
     $scope.subgroup = [];
     $scope.form.groupcode;
     $scope.selectedSubgroup = {};
     $scope.groups = groupsListing;
+    $scope.message = {};
+
     $scope.checked = function(){
             for(var sgroup in $scope.groups){
                 if($scope.groups[sgroup].name == $scope.selectedSubgroup.name){
@@ -1024,18 +1033,35 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket,group
         $http.post('/register', $scope.form).
             success(function (data) {
                 if (data.fail) {
-                    $scope.messages = data.fail;
+                    //$scope.messages = data.fail;
+
                     $rootScope.$broadcast('event:reg-error');
                 } else {
                     $scope.form = {};
                     $rootScope.$broadcast('event:auth-registered');
                 }
             }).
-            error(function () {
-                $scope.message = "Registration failed please check connection";
+            error(function (err) {
+                if(err){
+                    $scope.message = {};
+                    console.log(err)
+                    for(var error in err)
+                    {
+                        console.log(err[error].msg)
+                            $scope.message[error] = err[error].msg;
+                    }
+                    $rootScope.$broadcast('event:reg-error');
+                    return;
+                }
+               // $scope.message = "Registration failed please check connection";
             });
 
     }
+    $scope.open = function(no) {
+        $timeout(function() {
+                $scope.opened = true;
+        });
+    };
 });
 
 app.controller('UserInfoCtrl', function ($scope, userInfoService, $http) {
@@ -1366,7 +1392,7 @@ app. controller('UserProfileCtrl', function ($scope, api, $routeParams,$http,use
     }
 });
 
-app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog,$rootScope,groupsListing) {
+app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog,$rootScope,groupsListing,$timeout) {
     $scope.template = {};
     $scope.hidemainform = false;
     $scope.blogId = {blogId:""};
@@ -1377,21 +1403,6 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog,$rootScope,gr
     $scope.selectedGroup = undefined;
     $scope.form = {};
     $scope.checked = function(){
-        /*
-        for(var sgroup in $scope.groups){
-            if($scope.groups[sgroup].name == $scope.selectedSubgroup.name){
-                $scope.groups[sgroup].checked = false;
-            }
-        }
-        for(var sgroup in $scope.groups){
-            if($scope.groups[sgroup].checked){
-                $scope.selectedSubgroup = $scope.groups[sgroup];
-                $scope.form.groupcode = $scope.selectedSubgroup.code;
-            }
-        }
-        */
-        //777-7888
-        //this should-match-WWWW_www-coul- hkjh
         console.log($scope.selectedGroup)
         $scope.form.subgroup = $scope.selectedGroup.code;
     }
@@ -1451,6 +1462,16 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog,$rootScope,gr
         })
 
     }
+    $scope.open = function(no) {
+        $timeout(function() {
+            if(no == 1){
+                $scope.opened1 = true;
+            }
+            if(no == 2){
+                $scope.opened2 = true;
+            }
+        });
+    };
 });
 
 app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog,$rootScope,groupsListing) {
@@ -1631,24 +1652,37 @@ app.controller('InviteBlockCtrl',function($scope,api,$http,$routeParams){
 });
 
 
-app.controller('EditWallCtrl',function($rootScope,$http,$scope,api,$routeParams,BlogsService,groupsListing){
+app.controller('EditWallCtrl',function($rootScope,$http,$scope,api,$routeParams,BlogsService,groupsListing,$timeout){
     $scope.template = {};
-         $scope.portrait ={portrait:""};
+    $scope.portrait ={portrait:""};
     $scope.spread ={spread:""};
     $scope.blogId = {blogId:""};
     $scope.addedFile = {};
-                $scope.form = {};
+    $scope.form = {};
+    $scope.groups = groupsListing;
+    $scope.selectedGroup = undefined;
+
+    $scope.checked = function(){
+        console.log($scope.selectedGroup)
+        $scope.form.subgroup = $scope.selectedGroup.code;
+    }
     api.getResourceByField('Blog',{field:'author',query:$routeParams.wall},function(data){
         console.log(data);
         $scope.form = data[0];
         $scope.portrait.portrait = data[0].profilePicPortrait;
         $scope.spread.spread = data[0].profilePicWide;
         $scope.blogId.blogId = data[0]._id;
+        for(var group in $scope.groups){
+            if($scope.groups[group].code == data[0].subgroup){
+                $scope.selectedGroup = $scope.groups[group];
+            }
+        }
+
+        console.log($scope.selectedGroup)
         console.log($scope.form);
         console.log("portrait "+$scope.portrait+" spread "+$scope.spread);
     })
     $scope.editPost = function () {
-        console.log("Trying to save");
         console.log($scope.form._id);
 
         $http.post('blog/'+$scope.form._id,$scope.form).
@@ -1659,6 +1693,25 @@ app.controller('EditWallCtrl',function($rootScope,$http,$scope,api,$routeParams,
                 $scope.template.url = '/partials/admin/editportrait.html';
                 $scope.hidemainform = true;
 
+            }).error(function(err){
+                console.log("error");
+
+                if(err){
+                    console.log(err)
+
+                    $scope.message = {};
+                    for(var error in err)
+                    {
+
+                        if(error == "author"){
+                            $scope.message.url = err.author.msg;
+                        }
+                        else{
+                            $scope.message[error] = err[error].msg;
+                        }
+                    }
+                    return;
+                }
             })
 
 
@@ -1734,20 +1787,17 @@ app.controller('EditWallCtrl',function($rootScope,$http,$scope,api,$routeParams,
 
 
        }
-    $scope.groups = groupsListing;
-    $scope.checked = function(){
-        for(var sgroup in $scope.groups){
-            if($scope.groups[sgroup].name == $scope.selectedSubgroup.name){
-                $scope.groups[sgroup].checked = false;
+
+    $scope.open = function(no) {
+        $timeout(function() {
+            if(no == 1){
+                $scope.opened1 = true;
             }
-        }
-        for(var sgroup in $scope.groups){
-            if($scope.groups[sgroup].checked){
-                $scope.selectedSubgroup = $scope.groups[sgroup];
-                $scope.form.groupcode = $scope.selectedSubgroup.code;
+            if(no == 2){
+                $scope.opened2 = true;
             }
-        }
-    }
+        });
+    };
 })
 
 app.controller('NotificationsCtrl',function($scope,$http,api){

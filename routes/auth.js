@@ -106,34 +106,42 @@ exports.register = function (req, res) {
         firstname = req.body.firstName,
         lastname = req.body.lastName,
         email = req.body.email,
-        dob = req.body.dob;
-
-    var validEmail = true;
-    var validDob = true;
-        //var checkObject = check(email).len(6,64).isEmail();
-    try{
-        check(email,'not a valid email').len(6,64).isEmail();
-    }catch(e){
-        console.log(e.message);
-        validEmail = false;
-    }
-
-    try{
-        check(dob).isDate();
-    }catch (e)
-    {
-        validDob = false;
-    }
-
+        dob = req.body.dob,
         minUsernameLength = 5,
         maxUsernameLength = 16,
         minPasswordLength = 5,
-        maxPasswordLength = 16
-        minfirstnameLength = 0,
-        minlastnameLength = 0,
+        maxPasswordLength = 16,
         maxfirstNameLength = 15,
         maxlastNameLength = 15;
-    if(req.body.betacode == "hardcoded"){
+
+
+    req.checkBody('username','Username must be longer than'+minUsernameLength+' and shorther than '+ maxUsernameLength+' characters.')
+        .notNull().len(minUsernameLength,maxUsernameLength);
+    req.checkBody('password','Password must be longer than'+minPasswordLength+' and shorther than '+maxPasswordLength+' characters.')
+        .notNull().len(minPasswordLength,maxPasswordLength);
+    req.checkBody('firstName','Must have a first name.')
+        .notNull().len(1,maxfirstNameLength);
+    req.checkBody('lastName','Must have a last name.')
+        .notNull().len(1,maxlastNameLength);
+    req.checkBody('email','Must have a valid email.')
+        .notNull().isEmail();
+    req.checkBody('dob','Date of Birth must be a valid date.')
+        .notNull().isDate();
+    req.checkBody('betacode','Incorrect beta code.')
+        .notNull().equals('hardcoded')
+
+    if (password == username) {
+        errorMessage.push('Password can not be the same as username');
+    }
+
+    var errors = req.validationErrors(true);
+    if (password == username) {
+        errors.password = {param:'password',msg:'Password can not be the same as username.'};
+    }
+    if(errors){
+        res.send(errors,500);
+        return;
+    }
         User.count({username: username}, function (err, count) {
             if (err)console.log(err);
             userCount = count;
@@ -145,28 +153,7 @@ exports.register = function (req, res) {
                 //TODO:redo this section of code in promises
                 //username checks
                 if (
-                    userCount < 1 && adminCount < 1 &&
-                        username != undefined &&
-                        username != "" &&
-                        username.length > minUsernameLength &&
-                        username.length < maxUsernameLength &&
-                        //password checks
-                        password != undefined &&
-                        password.length > minPasswordLength &&
-                        password.length < maxPasswordLength &&
-                        password != username &&
-                        //firstname checks
-                        firstname != undefined &&
-                        firstname.length > minfirstnameLength &&
-                        firstname.length < maxfirstNameLength &&
-                        //lastname checks
-                        lastname != undefined &&
-                        lastname.length > minlastnameLength &&
-                        lastname.length < maxlastNameLength &&
-                        validEmail == true &&
-                        validDob == true
-
-
+                    userCount < 1 && adminCount < 1
                     ) {
                     var user = new User(req.body);
 
@@ -180,6 +167,7 @@ exports.register = function (req, res) {
                             return res.end(JSON.stringify({'fail': errorMessage}));
 
                         }
+                        /*
                         //register a new wall if one was attached to request
                         var blog = new Blog({
                             firstName:req.body.firstName,
@@ -187,12 +175,12 @@ exports.register = function (req, res) {
                             subgroup:req.body.subgroup
 
                         })
+                        */
                         SendConfirmationMail(email);
                         return res.end(JSON.stringify({'success': 'true'}));
                     });
                 } else {
-
-
+                    /*
                     //uername length check
                     if (username == undefined || username == "") {
                         errorMessage.push('Please enter a username');
@@ -213,11 +201,16 @@ exports.register = function (req, res) {
                     if (password == username) {
                         errorMessage.push('Password can not be the same as username');
                     }
-
+                    */
+                    if(!errors){
+                        errors = {};
+                    }
                     if (userCount >= 1 || adminCount >= 1) {
                         errorMessage.push('username already taken');
-                    }
+                        errors.username = {param:'username',msg:'username already taken.'};
 
+                    }
+                    /*
                     if (firstname == undefined || firstname == "") {
                         errorMessage.push('Please enter a first name');
                     }else if (firstname.length < minfirstnameLength) {
@@ -244,15 +237,18 @@ exports.register = function (req, res) {
                     if (errorMessage.length == 0 || errorMessage === undefined) {
                         errorMessage.push('unknown error');
                     }
-                    return res.end(JSON.stringify({'fail': errorMessage}));
+                    if (password == username) {
+                        errors.password = {param:'password',msg:'Password can not be the same as username.'};
+                    }
+                    */
+                    if(errors){
+                        res.send(errors,500);
+                        return;
+                    }
                 }
             });
         });
-    }
-    else{
-        errorMessage.push('Beta code is incorrect');
-        return res.end(JSON.stringify({'fail':errorMessage}));
-    }
+
 
 
 

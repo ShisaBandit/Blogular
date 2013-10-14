@@ -40,14 +40,24 @@
                         <br />
                         <label>Date of Birth:</label>
                         <!--TODO:Make this a n uploadable file-->
-                        <input type="date" class="login-inp" ng-model="form.dob" placeholder="12-02-2012"/>
+                        <div ng-hide="form.group" class="form-horizontal">
+                            <input type="text" datepicker-popup="yyyy/MMMM/dd" ng-model="form.dob" is-open="opened1" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+                            <button class="btn" ng-click="open(1)"><i class="general foundicon-calendar"></i></button>
+                        </div>
+                        <!--<input type="date" class="login-inp" ng-model="form.dob" placeholder="12-02-2012"/>
+                        -->
                         <p class="validation-error">{{message.dob}}</p>
 
                         <br />
                         <label>Day your Angel got their wings:</label>
+                        <div class="form-horizontal">
+                            <input type="text" datepicker-popup="yyyy/MMMM/dd" ng-model="form.memorialDate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+                            <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
+                        </div>
+                        <!--
                         <input type="date" class="login-inp" ng-model="form.memorialDate" placeholder="12-02-2012"/>
                         <p class="validation-error">{{message.memorialDate}}</p>
-
+                        -->
 
                         <div class="row regColl2">
                              <label>I have lost my: </label> <br />

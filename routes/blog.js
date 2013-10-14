@@ -280,7 +280,7 @@ exports.updateBlog = function (req, res) {
 
 }
 function BlogGroupValidation(req){
-    if(req.body.group == undefined){
+    if(req.body.group == undefined || !req.body.group){
         req.checkBody('dob','Must be a valid data').notNull().isDate();
         req.checkBody('memorialDate','Must be a valid date').notNull().isDate();
         req.checkBody('subgroup','Must select a group').notNull();
@@ -302,6 +302,9 @@ function BlogGroupValidation(req){
     var myArray = myRe.exec(req.body.author);
     if(myArray == null){
         console.log("not a valid url")
+        if(!errors){
+            errors = {};
+        }
         errors.author = {param:'author',msg:'Please enter a valid url. Only characters A-Z or numbers 1-9 and "-" or "_" allowed.'};
     }
     return errors;
