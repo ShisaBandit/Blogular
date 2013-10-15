@@ -23,7 +23,7 @@
     <div class="row">
         <div class="twelve columns" offset-height="100" role="content">
             <div id="picheader">
-                <div class="row">
+               <!-- <div class="row">
                     <div class="large-12 columns">
                         <img src="http://placehold.it/1000x300&text=[img]">
 
@@ -32,6 +32,24 @@
                         <div offset-height="-300">
                             <img id="portrait" src="http://placehold.it/200x300&text=[img]">
 
+                        </div>
+                    </div>
+                </div>-->
+                <div class="row">
+                    <div class="large-12 columns" offset-height="-300">
+                        <div id="portraitpic">
+                            <img id="portrait" src="/uploads/{{ entry.profilePicPortrait }}"><br />
+                            {{ entry.firstName }} {{ entry.lastName }}
+                        </div>
+                        <div id="gallery" class="nivoGallery" nivogallery>
+                            <ul>
+                                <li data-title="{{ entry.firstName }} {{ entry.lastName }}" data-caption="{{ entry.memorialDate }}">
+                                    <img id="widepic" width="1000" height="300" src="/uploads/{{ entry.profilePicWide }}">
+                                </li>
+                                <li data-type="html" data-title="{{ entry.firstName }} {{ entry.lastName }}">
+                                    {{ entry.text }}
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
