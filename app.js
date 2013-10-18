@@ -259,7 +259,9 @@ app.post('/updateworkshop/:id',blogRoutes.editworkshop);
 app.get('/getMessagedUsers',messageRoutes.getMessagedUsers);
 app.get('/getMessages/:username',messageRoutes.getMessagesForUser);
 
-
+//password recover
+app.post('/passrecover',authRoutes.passrecover);
+app.post('/updatepass',authRoutes.updatePass);
 var server = http.createServer(app).listen(app.get('port'), app.get('ip'), function () {
     console.log("server listening " + app.get('ip') + ':' + app.get('port'));
 });

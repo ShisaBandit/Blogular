@@ -2,10 +2,19 @@ var models = require('../models/models');
 var Blog = models.Blog;
 var User = models.User;
 var Update = models.Update;
+var PassRec = models.PasswordRecovery;
 var check = require('validator').check,
     sanitize = require('validator').sanitize;
 var nodemailer = require('nodemailer');
-var smtpTransport = nodemailer.createTransport("sendmail");
+//var smtpTransport = nodemailer.createTransport("sendmail");
+var smtpTransport = nodemailer.createTransport("SMTP",{
+    service: "Gmail",
+    auth: {
+        user: "projectskillz@gmail.com",
+        pass: "ayabua0607J"
+    }
+});
+var crypto = require('crypto');
 
 exports.checkAuthed = function (req, res) {
     User.find({_id: req.session.passport.user}, function (err, user) {
@@ -248,19 +257,15 @@ exports.register = function (req, res) {
                 }
             });
         });
-
-
-
-
 };
 
 function SendConfirmationMail(to){
     var mailOptions = {
-        from:"Welcome@AngelsOfEureka.org",
+        from:"noreply@AngelsOfEureka.org",
         to:to,
         subject:"Welcome to AngelsOfEureka.org",
         text:"This is a confirmation email please click this link to confirm you want to register",
-        html:"<p>BOLDNESS</p>"
+        html:"<p>This is a confirmation email.  You have signed up successfully to angels of eureka.org.  Thank you please enjoy your time on the site.</p> "
     }
     smtpTransport.sendMail(mailOptions,function(error,response){
         if(error){
@@ -269,10 +274,110 @@ function SendConfirmationMail(to){
         }else{
             console.log("message sent")
         }
+        console.log(response);
     })
 }
 
+exports.passrecover = function(req,res){
+    //TODO:First send email with key
+    //then if email is successful log the key in the db with a username
 
+    var email = req.body.email;
+    console.log(email)
+    req.checkBody('email','You must enter a valid email.').
+        isEmail().notNull();
+    var errors = req.validationErrors(true);
+    if(errors){
+        console.log(errors)
+        res.send('Please enter a valid email.',500);
+        return;
+    }
+
+    User.findOne({email:email},function(err,doc){
+        console.log(doc)
+        if(!doc){
+            res.send(500,'This email is not registered with our system');
+            return;
+        }
+
+        //generate a key then enter it in the database with the user id
+        var key = crypto.randomBytes(20).toString('hex');
+        var hash = crypto.createHash('sha1').update(key).digest('hex');
+        //Remove any previous password update attempts
+        //TODO: remove is not working found out why  
+        PassRec.find({key:hash},function(err,recs){
+            console.log(recs)
+            for(rec in recs){
+                console.log(recs[rec]+' has been removed')
+                recs[rec].remove();
+            }
+        });
+        var passrec = new PassRec({user_id:doc._id,key:hash});
+        passrec.save(function(err){
+            if(err)console.log(err)
+            console.log(key)
+            SendPasswordRecoveryMail(email,key);
+            res.send(200,'Mail sent.')
+        })
+        //clean these keys out every 1 hour.
+    })
+
+}
+
+exports.updatePass = function(req,res){
+    var key = req.body.key;
+    var password = req.body.password;
+    req.checkBody('password','Must enter a password').
+        notNull();
+    req.checkBody('passwordconfirm','Passwords must match').
+        equals(password);
+    var errors = req.validationErrors(true);
+    if(errors){
+        console.log(errors)
+        res.send('Please enter a valid email.',500);
+        return;
+    }
+
+    var hash = crypto.createHash('sha1').update(key).digest('hex');
+    //TODO: Then if the user click on the link we get the key from the request
+    //check it against the database then
+    //if the key matches the request key we then reest the password
+    //and respond with a success or error
+    PassRec.findOne({key:hash},function(err,doc){
+        if(!doc){
+            res.send(500,'Token is wrong.');
+            return;
+        }
+        User.findOne({_id:doc.user_id},function(err,user){
+            console.log('got user '+user.username);
+            console.log(password)
+            user.password = password;
+            user.save(function(err){
+                if(err)console.log(err)
+            })
+            res.send(200,'Password has been updated.  Thank you.')
+        })
+    })
+}
+
+function SendPasswordRecoveryMail(to,link){
+    var mailOptions = {
+        from:"noreply@AngelsOfEureka.org",
+        to:to,
+        subject:"Memorial Wall password recovery",
+        text:"This is a confirmation email please click this link to confirm you want to register",
+        html:"<p>We have received a request to change your password.  Please click this link http://localhost:3000/#/updatepass?key="+link.toString()+" and reset your password.</p> "
+    }
+    smtpTransport.sendMail(mailOptions,function(error,response){
+        if(error){
+            console.log(error);
+            console.log("problems sending mail")
+        }else{
+            console.log("message sent")
+        }
+        console.log(response);
+    })
+}
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
  * Digest Algorithm, as defined in RFC 1321.

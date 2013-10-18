@@ -33,7 +33,9 @@ var app = angular.module('blogApp', [
             when("/deleteworkshop",{templateUrl:"partials/deleteWorkshop.html"}).
             when("/workshops",{templateUrl:"partials/workshops.html"}).
             when("/pets",{templateUrl:"partials/pets.html"}).
-            when("/editwall/:wall",{templateUrl:"partials/editwall.html"})
+            when("/editwall/:wall",{templateUrl:"partials/editwall.html"}).
+            when("/passwordrecovery",{templateUrl:"partials/forgotpassword.html"}).
+            when("/updatepass",{templateUrl:"partials/updatepass.html"})
     });
 app.directive('fdatepicker',function(){
     return{
@@ -1841,6 +1843,36 @@ app.controller('WorkshopCtrl',function($scope,$http,api){
             })
     }
 
+})
+
+app.controller('PasswordRecoveryCtrl',function($scope,$http,$routeParams){
+    $scope.message = "";
+    $scope.recover = function(){
+        $http.post('passrecover',{email:$scope.email}).
+            success(function(data){
+                console.log(data);
+                $scope.message = "Email has been sent please check your email.";
+            }).
+            error(function(err){
+                console.log(err);
+                $scope.message = "We could not send you an email.  Please check you have the right email addresss."
+            });
+    }
+    $scope.updatePass = function(){
+        if($scope.password != $scope.passwordconfirm){
+            $scope.message = "Please verify that your password and password confirmation are the same.";
+            return;
+        }
+        $http.post('updatepass',{password:$scope.password,passwordconfirm:$scope.passwordconfirm,key:$routeParams.key}).
+            success(function(err,data){
+                console.log(data);
+                $scope.message = "Your password has been reset please try and login."
+            }).
+            error(function(err){
+                console.log(err);
+                $scope.message = "Your password could not be reset.  Please try again."
+            })
+    }
 })
 /*
  function youtube($string,$autoplay=0,$width=480,$height=390)

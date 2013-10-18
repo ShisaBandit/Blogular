@@ -198,7 +198,15 @@ var updateSchema = mongoose.Schema({
 var urlSchema = mongoose.Schema({
     publicFacingUrl: String,
     profileId: String
+});
+
+var passwordRecoverySchema = mongoose.Schema({
+    user_id:String,
+    key:String,
+    createdDate:{type:Date,default:Date.now()},
+    expired:Boolean
 })
+
 mongoose.connect('mongodb://localhost/test');
 
 var db = mongoose.connection;
@@ -213,7 +221,7 @@ var Url = mongoose.model('Url', urlSchema);
 var Petition = mongoose.model('Petition', petitionSchema);
 var Workshop = mongoose.model('Workshop',workshopSchema);
 var Message = mongoose.model('Message',messageSchema);
-
+var PasswordRecovery = mongoose.model('PasswordRecovery',passwordRecoverySchema);
 /*
  //set all profiles to administrator as owner
  Blog.find({}, function (err, blogs) {
@@ -285,5 +293,6 @@ module.exports = {
     Url: Url,
     Petition: Petition,
     Workshop:Workshop,
-    Message:Message
+    Message:Message,
+    PasswordRecovery:PasswordRecovery
 }
