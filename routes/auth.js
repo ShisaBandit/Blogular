@@ -8,12 +8,14 @@ var check = require('validator').check,
 var nodemailer = require('nodemailer');
 //var smtpTransport = nodemailer.createTransport("sendmail");
 var smtpTransport = nodemailer.createTransport("SMTP",{
-    service: "Gmail",
+    host: "mail.angelsofeureka.org",
+    port:"465",
     auth: {
-        user: "projectskillz@gmail.com",
-        pass: "ayabua0607J"
+        user: "noreply@angelsofeureka.org",
+        pass: "regEmail2013"
     }
 });
+
 var crypto = require('crypto');
 
 exports.checkAuthed = function (req, res) {
@@ -304,7 +306,7 @@ exports.passrecover = function(req,res){
         var key = crypto.randomBytes(20).toString('hex');
         var hash = crypto.createHash('sha1').update(key).digest('hex');
         //Remove any previous password update attempts
-        //TODO: remove is not working found out why  
+        //TODO: remove is not working found out why
         PassRec.find({key:hash},function(err,recs){
             console.log(recs)
             for(rec in recs){
