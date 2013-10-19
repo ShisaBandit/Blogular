@@ -156,6 +156,11 @@ app.directive('revealModal', function () {
                     console.log("EVENT TRIGGERED" + event);
                     elm.foundation('reveal','close');
                 }
+            });
+            scope.$on('event:forgot-password',function(){
+                if (attrs.revealModal == 'login') {
+                    elm.foundation('reveal', 'close');
+                }
             })
 
         }
@@ -905,7 +910,9 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
                 $scope.error = "Failed to connect to server please check your connection";
             });
     };
-
+    $scope.forgot = function(){
+       $rootScope.$broadcast('event:forgot-password');
+    }
     socket.on('connect', function () {
         console.log("connect");
     });
