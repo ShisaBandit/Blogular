@@ -10,6 +10,7 @@ var nodemailer = require('nodemailer');
 var smtpTransport = nodemailer.createTransport("SMTP",{
     host: "mail.angelsofeureka.org",
     port:"465",
+    secureConnection:true,
     auth: {
         user: "noreply@angelsofeureka.org",
         pass: "regEmail2013"
@@ -267,7 +268,8 @@ function SendConfirmationMail(to){
         to:to,
         subject:"Welcome to AngelsOfEureka.org",
         text:"This is a confirmation email please click this link to confirm you want to register",
-        html:"<p>This is a confirmation email.  You have signed up successfully to angels of eureka.org.  Thank you please enjoy your time on the site.</p> "
+        html:"<p>This is a confirmation email.  You have signed up successfully to angels of eureka.org.</p>" +
+            "<p>Thank you please enjoy your time on the site.</p> "
     }
     smtpTransport.sendMail(mailOptions,function(error,response){
         if(error){
@@ -318,7 +320,7 @@ exports.passrecover = function(req,res){
         passrec.save(function(err){
             if(err)console.log(err)
             console.log(key)
-            SendPasswordRecoveryMail(email,key);
+            SendPasswordRecoveryMail(email,key,req);
             res.send(200,'Mail sent.')
         })
         //clean these keys out every 1 hour.
@@ -362,13 +364,18 @@ exports.updatePass = function(req,res){
     })
 }
 
-function SendPasswordRecoveryMail(to,link){
+function SendPasswordRecoveryMail(to,link,req){
     var mailOptions = {
         from:"noreply@AngelsOfEureka.org",
         to:to,
         subject:"Memorial Wall password recovery",
         text:"This is a confirmation email please click this link to confirm you want to register",
-        html:"<p>We have received a request to change your password.  Please click this link http://localhost:3000/#/updatepass?key="+link.toString()+" and reset your password.</p> "
+        html:"<p>We have received a request to change your password.  <p>" +
+            "<p>Please click this link </p>" +
+            "</br>" +
+            "<p>"+req.protocol+"://"+req.host+"/#/updatepass?key="+link.toString()+" </p>" +
+            "</br>" +
+            "<p>and reset your password.</p> "
     }
     smtpTransport.sendMail(mailOptions,function(error,response){
         if(error){
