@@ -247,6 +247,8 @@ app.post('/edit/:type/:id',apiv2.editData);//simple edit only
 
 app.get('/invite/:wallid/:user',blogRoutes.sendWallInvite);
 app.get('/block/:wallid/:user',blogRoutes.block);
+app.get('/getFriendsMemorials',blogRoutes.getFriendsMemorials);
+app.get('/removeself/:wall',blogRoutes.selfRemove);
 app.get('/subscribed/:id',blogRoutes.subscribed);
 app.get('/selfremove/:id',blogRoutes.selfremove);
 app.get('/selfremove/:id',blogRoutes.subscribedto);

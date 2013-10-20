@@ -434,13 +434,74 @@ exports.sendWallInvite = function(req,res){
     Blog.findOne({author:req.params.wallid},function(err,blog){
          User.findOne({_id:req.params.user},function(err,user){
              user.profiles.push({profile:blog._id});
+             var duplicate = false;
+             console.log(user.memwalls)
+
+             for(var x = 0;x < user.memwalls.length;x++){
+                 console.log(user.memwalls[x]+" "+blog._id)
+                 if(user.memwalls[x].toString() == blog._id.toString()){
+                     duplicate = true;
+                 }
+             }
+             if(duplicate){
+                 res.send(500,'duplicate request')
+                 return;
+             }
+             user.memwalls.push(blog);
              user.save(function(err){
                  console.log("profile pushed to user"+user.username);
-                 res.send(200,'success');
+                res.send(200,'success');
              })
          })
     })
 }
+//TODO:Remove if has been blocked or self remvoed
+exports.getFriendsMemorials = function(req,res){
+    User.find({_id:req.session.passport.user}).populate('memwalls').exec(function(err,user){
+            if(err)console.log(err)
+        console.log("getting memwalls references¢")
+        var returndata = [];
+        var memwalls = user[0].memwalls;
+        //console.log(memwalls)
+        for(var x = 0;x < memwalls.length;x++){
+            var memwall = memwalls[x];
+            //console.log(memwall)
+            var tempObj = {
+                id:memwall._id,
+                author:memwall.author,
+                firstName:memwall.firstName,
+                lastName:memwall.lastName,
+                title:memwall.title
+            }
+            returndata.push(tempObj);
+        }
+
+        return res.end(JSON.stringify(returndata));
+    })
+}
+
+exports.selfRemove = function(req,res){
+    var wall = req.params.wall;
+    User.findOne({_id:req.session.passport.user},function(err,user){
+        var walls = user.memwalls;
+        console.log(walls)
+        for(var x = 0; x < user.memwalls.length;x++){
+            if(walls[x].toString() == wall.toString()){
+                walls.splice(x,1);
+                console.log("duplicate found "+walls[x]+" slicing x"+x)
+                break;
+            }
+        }
+        console.log(walls)
+        user.memwalls = walls;
+        user.save(function(err){
+            console.log(err);
+            res.send(200,'works good');
+        })
+    })
+
+}
+
 exports.block = function(req,res){
     var wall = req.params.wallid;
     Blog.findOne({author:req.params.wallid},function(err,blog){

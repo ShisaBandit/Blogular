@@ -1359,6 +1359,7 @@ app.controller('PetitionEntryCtrl', function ($scope, api, $routeParams) {
 app. controller('UserProfileCtrl', function ($scope, api, $routeParams,$http,userInfoService) {
     $scope.messagedUsers = [];
     $scope.messages = [];
+    $scope.walls =[];
     api.getResourceByField('User', {field:"username",query:$routeParams.username}, function (user) {
         $scope.user = user[0];
         //get all angel profiles(blogs) that this user has in his profile id
@@ -1383,7 +1384,17 @@ app. controller('UserProfileCtrl', function ($scope, api, $routeParams,$http,use
         success(function(data){
             $scope.groups = data;
         })
-
+    $scope.getFriendsMemorials = function(){
+    $http.get('getFriendsMemorials').
+        success(function(data){
+            $scope.walls = data;
+            console.log(data)
+        }).
+        error(function(err){
+            console.log(err)
+        })
+    }
+    $scope.getFriendsMemorials();
     $scope.getMessages = function(mUser){
         $http.get('/getMessages/'+mUser).
             success(function(data){
@@ -1399,6 +1410,19 @@ app. controller('UserProfileCtrl', function ($scope, api, $routeParams,$http,use
                 console.log(data);
             })
     }
+
+    $scope.removeself = function(wall){
+        $http.get('removeself/'+wall).
+            success(function(data){
+                console.log(data)
+                $scope.getFriendsMemorials();
+            }).
+            error(function(err){
+                console.log(err)
+            })
+
+    }
+
 });
 
 app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog,$rootScope,groupsListing,$timeout) {

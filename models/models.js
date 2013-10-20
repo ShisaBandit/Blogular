@@ -121,6 +121,9 @@ var userSchema = mongoose.Schema({
     profiles: [
         {profile: String}
     ],
+    memwalls: [
+        {type:mongoose.Schema.Types.ObjectId, ref: 'Blog'}
+    ],
     address: String,
     city: String,
     state: String,
@@ -135,7 +138,7 @@ var userSchema = mongoose.Schema({
             text: String,
             viewed: {type: Boolean, default: false}
         }
-    ],//wtf
+    ],
     messagedUsers:[//TODO:Finish this up
         {
             user:String
