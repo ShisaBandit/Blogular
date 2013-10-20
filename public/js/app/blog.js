@@ -946,7 +946,7 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
 
 });
 
-app.controller('messageController', function ($scope,api, $http, authService, userInfoService, socket, $rootScope,$location,$window) {
+app.controller('messageController', function ($scope,api, $http, authService, userInfoService, socket, $rootScope,$location,$window,limitToFilter) {
     $scope.error = "";
     $scope.message = "";
     $scope.loginAttempt = false;
@@ -966,40 +966,18 @@ app.controller('messageController', function ($scope,api, $http, authService, us
             });
     };
 
-
-    /*
-    socket.on('connect', function () {
-        console.log("connect");
-    });
-    socket.on('disconnect', function () {
-        console.log("disconnect");
-    });
-    socket.on('connecting', function (x) {
-        console.log("connecting", x);
-    });
-    socket.on('connect_failed', function () {
-        console.log("connect_failed");
-    });
-    socket.on('close', function () {
-        console.log("close");
-    });
-    socket.on('reconnect', function (a, b) {
-        console.log("reconnect", a, b);
-    });
-    socket.on('reconnecting', function (a, b) {
-        console.log("reconnecting", a, b);
-    });
-    socket.on('reconnect_failed', function () {
-        console.log("reconnect_failed");
-    });
-    $scope.$on('event:auth-loginRequired', function () {
-        if ($scope.loginAttempt == true) {
-            $scope.error = "Username or password is incorrect";
-        }
-    });
-    */
+    //$scope.selected = undefined;
+    //$scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+    $scope.getPossibles = function(userdata){
+        console.log(userdata)
+        return $http.get('usersinnetwork/'+$scope.selected).
+            then(function(data){
+                console.log(data);
+                return limitToFilter(data.data,15);
+            })
+    }
     $scope.sendMessage = function(){
-        api.createResource('Message',{to:$scope.form.to,from:$scope.form.from,message:$scope.form.message},function(data,status){
+        api.createResource('Message',{to:$scope.selected,from:$scope.form.from,message:$scope.form.message},function(data,status){
             console.log(status);
             if(status == 400){
                 $scope.message = data;
