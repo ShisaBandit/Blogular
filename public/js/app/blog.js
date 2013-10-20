@@ -983,6 +983,8 @@ app.controller('messageController', function ($scope,api, $http, authService, us
                 $scope.message = data;
             }else{
                 $scope.message = "message sent!!"
+                $scope.form.message = "";
+                $scope.selected = "";
                 $scope.form.username = "";
                 $scope.form.password = "";
                 $rootScope.$broadcast('event:message-sent');
