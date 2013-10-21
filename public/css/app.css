@@ -14,8 +14,8 @@
 ----------------------------------------- */
 #portraitpic {
     position: relative;
-    top:400px;
-    left: 30px;
+    top:350px;
+    left: 50px;
     width: 200px;
     height: 300px;
     background: #132D48;
@@ -376,10 +376,16 @@ h1.sectionHeader {
 }
 
 #contentHeader{
+    display:block;
+    width: 100%;
+    clear: both;
     background-color: #3F77B4;
     margin-bottom: 20px;
 }
 .contentHeaderTitle{
+    display:block;
+    width: 100%;
+    clear: both;
     color: #ffffff;
 }
 .contentContainer{
@@ -859,3 +865,8 @@ input.addNewPost {
     }
 }
 
+#rulesModal {
+    display:block;
+    width: 100%;
+    float: left;
+}

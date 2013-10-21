@@ -39,6 +39,7 @@
 
                         <br />
                         <label>Date of Birth:</label>
+                        <br />
                         <!--TODO:Make this a n uploadable file-->
                         <div ng-hide="form.group" class="form-horizontal">
                             <input type="text" datepicker-popup="yyyy/MMMM/dd" ng-model="form.dob" is-open="opened1" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
@@ -49,7 +50,7 @@
                         <p class="validation-error">{{message.dob}}</p>
 
                         <br />
-                        <label>Day your Angel got their wings:</label>
+                        <label>Day your Angel got their wings:</label><br class="clear" />
                         <div class="form-horizontal">
                             <input type="text" datepicker-popup="yyyy/MMMM/dd" ng-model="form.memorialDate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
                             <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
@@ -62,7 +63,7 @@
                         -->
 
                         <div class="row regColl2">
-                             <label>I have lost my: </label> <br />
+                             <label>This person is my: </label> <br />
                              <select class="login-inp"
                                      name="lostAngel"
                                      ng-change="checked()"
