@@ -9,15 +9,15 @@ var PICTYPE = 1;
 var VIDEOTYPE = 2;
 
 
-exports.notifications = function(req,res){
+exports.notifications = function (req, res) {
 
-    User.findOne({_id:req.session.passport.user},function(err,user){
-        if(user == undefined){
-            res.send(200,"ok");
-        }else{
-            var buffer =[];
-            for(noti in user.notifications){
-                if(user.notifications[noti].viewed == false){
+    User.findOne({_id: req.session.passport.user}, function (err, user) {
+        if (user == undefined) {
+            res.send(200, "ok");
+        } else {
+            var buffer = [];
+            for (noti in user.notifications) {
+                if (user.notifications[noti].viewed == false) {
                     buffer.push(user.notifications[noti])
                 }
             }
@@ -27,33 +27,33 @@ exports.notifications = function(req,res){
     })
 }
 
-exports.editworkshop = function(req,res){
-    Workshop.findOne({_id:req.params.id},function(err,workshop){
+exports.editworkshop = function (req, res) {
+    Workshop.findOne({_id: req.params.id}, function (err, workshop) {
         workshop = req.body;
-        workshop.save(function(err){
-            res.send(200,"success");
+        workshop.save(function (err) {
+            res.send(200, "success");
         })
     })
 }
-exports.notified = function(req,res){
+exports.notified = function (req, res) {
 
-    User.findOne({_id:req.session.passport.user},function(err,user){
-           if(user == undefined){
-              res.send(200,"failed")
-           }else{
-               var notis = user.notifications;
-               var i = 0;
+    User.findOne({_id: req.session.passport.user}, function (err, user) {
+        if (user == undefined) {
+            res.send(200, "failed")
+        } else {
+            var notis = user.notifications;
+            var i = 0;
 
-               for(var noti in notis){
-                   if(notis[noti]._id == req.params.id){
-                       notis[noti].viewed = true;
-                   }
-                   i++;
-               }
-               user.save(function(err){
-                   res.send(200,"success");
-               })
-           }
+            for (var noti in notis) {
+                if (notis[noti]._id == req.params.id) {
+                    notis[noti].viewed = true;
+                }
+                i++;
+            }
+            user.save(function (err) {
+                res.send(200, "success");
+            })
+        }
 
 
     })
@@ -88,9 +88,9 @@ exports.getABlog = function (req, res) {
         Blog.find({'author': id}).lean().exec(function (err, post) {
             if (post === undefined)return res.send(404);
             if (user != null) {
-                if(post[0].owner_id == req.session.passport.user){
+                if (post[0].owner_id == req.session.passport.user) {
                     matchfound = true
-                }else{
+                } else {
                     for (var x = 0; x < user.profiles.length; x++) {
                         console.log(user.profiles[x].profile);
 
@@ -102,17 +102,17 @@ exports.getABlog = function (req, res) {
                                 matchfound = true;
                             }
                         }
-                }
+                    }
 
 
                 }
             }
             //if (true) {//TODO:Remove commented line this should not always be true!"!!!//
-             if(process.env.NODE_ENV == "production"){
+            if (process.env.NODE_ENV == "production") {
                 console.log("WE are in production so setting privacy on mem walls");
             } else {
                 console.log("not production so all walls are public for convinience");
-               // matchfound = true;
+                // matchfound = true;
             }
 
             if (post == undefined) {
@@ -150,72 +150,72 @@ exports.getLastBlogUpdateDate = function (req, res) {
     });
 };
 
-exports.blogdataforuser = function(req,res){
-                       var buffer = [];
-                Blog.find({owner_id:req.session.passport.user},function(err,blogs){
-                    for(var blog in blogs){
-                        var data = {};
-                        data.author = blogs[blog].author;
-                        data.firstName = blogs[blog].firstName;
-                        data.lastName = blogs[blog].lastName;
-                        data.title = blogs[blog].title;
-                        buffer.push(data);
-                    }
-                    res.send(JSON.stringify(buffer));
-
-                })
-}
-exports.friendsMemorials = function(req,res){
+exports.blogdataforuser = function (req, res) {
     var buffer = [];
-    User.find({_id:req.session.passport.user},function(err,doc){
+    Blog.find({owner_id: req.session.passport.user}, function (err, blogs) {
+        for (var blog in blogs) {
+            var data = {};
+            data.author = blogs[blog].author;
+            data.firstName = blogs[blog].firstName;
+            data.lastName = blogs[blog].lastName;
+            data.title = blogs[blog].title;
+            buffer.push(data);
+        }
+        res.send(JSON.stringify(buffer));
+
+    })
+}
+exports.friendsMemorials = function (req, res) {
+    var buffer = [];
+    User.find({_id: req.session.passport.user}, function (err, doc) {
         //get the user loop thourgh profiles sort out groups from mem walls
-        for(var profile in doc.profiles){
+        for (var profile in doc.profiles) {
 
         }
     })
 }
 
-exports.getGroups = function(req,res){
+exports.getGroups = function (req, res) {
     var buffer = [];
-    Blog.find({owner_id:req.session.passport.user,group:true},function(err,docs){
+    Blog.find({owner_id: req.session.passport.user, group: true}, function (err, docs) {
         /*
-        for(var doc = 0; doc < docs.length; doc++){
-            console.log("is this a group "+docs[doc].group+" "+docs.length)
-            if(docs[doc].group == true)
-                buffer.push(docs[doc]);
+         for(var doc = 0; doc < docs.length; doc++){
+         console.log("is this a group "+docs[doc].group+" "+docs.length)
+         if(docs[doc].group == true)
+         buffer.push(docs[doc]);
 
-        }
-        */
+         }
+         */
         return res.send(JSON.stringify(docs));
     })
 }
 
 exports.createBlog = function (req, res) {
-/*
-    if(req.body.group == undefined){
-        req.checkBody('dob','Must be a valid data').notNull().isDate();
-        req.checkBody('memorialDate','Must be a valid date').notNull().isDate();
-        req.checkBody('subgroup','Must select a group').notNull();
-    }
-    req.checkBody('title','You need a title').notNull();
-    req.checkBody('author','You must assign a url').notNull();
+    /*
+     if(req.body.group == undefined){
+     req.checkBody('dob','Must be a valid data').notNull().isDate();
+     req.checkBody('memorialDate','Must be a valid date').notNull().isDate();
+     req.checkBody('subgroup','Must select a group').notNull();
+     }
+     req.checkBody('title','You need a title').notNull();
+     req.checkBody('author','You must assign a url').notNull();
 
 
-    req.checkBody('firstName','Must enter a first name').notNull();
-    req.checkBody('lastName','Must enter a first name').notNull();
-    var errors = req.validationErrors(true);
-    var myRe = /^(\w*[-_]?\w*){1,100}$/;
-    var myArray = myRe.exec(req.body.author);
-    if(myArray == null){
-        console.log("not a valid url")
-        errors.author = {param:'author',msg:'Please enter a valid url. Only characters A-Z or numbers 1-9 and "-" or "_" allowed.'};
-    }
-    console.log(errors);
-    if (errors) {
-        res.send(errors, 500);
-        return;
-    }
-    */
+     req.checkBody('firstName','Must enter a first name').notNull();
+     req.checkBody('lastName','Must enter a first name').notNull();
+     var errors = req.validationErrors(true);
+     var myRe = /^(\w*[-_]?\w*){1,100}$/;
+     var myArray = myRe.exec(req.body.author);
+     if(myArray == null){
+     console.log("not a valid url")
+     errors.author = {param:'author',msg:'Please enter a valid url. Only characters A-Z or numbers 1-9 and "-" or "_" allowed.'};
+     }
+     console.log(errors);
+     if (errors) {
+     res.send(errors, 500);
+     return;
+     }
+     */
     /*
      var charsNotAllowed = [' ','{','}','|','\\','^','~','[',']','`',';','/','?',':','@','=','&'];
      for(var i = 0;i< charsNotAllowed.length;i++){
@@ -224,22 +224,24 @@ exports.createBlog = function (req, res) {
      }
      */
     var errors = BlogGroupValidation(req);
-    if(errors){
-        res.send(errors,500);
+    if (errors) {
+        console.log(errors)
+        res.send(errors, 500);
         return;
     }
-        var newBlogEntry = new Blog(req.body);
-        newBlogEntry.owner_id = req.session.passport.user;
-        newBlogEntry.save(function (err,newblog) {
-            if (err)console.log(err);
-            return res.end(JSON.stringify({'success': 'true',blogId:newblog._id}));
-        });
+    var newBlogEntry = new Blog(req.body);
+    newBlogEntry.owner_id = req.session.passport.user;
+    newBlogEntry.user = req.session.passport.user;
+    newBlogEntry.save(function (err, newblog) {
+        if (err)console.log(err);
+        return res.end(JSON.stringify({'success': 'true', blogId: newblog._id}));
+    });
 }
 
 exports.updateBlog = function (req, res) {
     var errors = BlogGroupValidation(req);
-    if(errors){
-        res.send(errors,500);
+    if (errors) {
+        res.send(errors, 500);
         return;
     }
     //Updates whatever blog is sent to it
@@ -254,14 +256,14 @@ exports.updateBlog = function (req, res) {
             //TODO:Highly ineffecient!!! for the network rework this to only have the comment that needs be updated sent and
             //sorted
             Blog.findOneAndUpdate({'_id': req.params.id}, req.body, function (err, doc) {
-                if(err) {
+                if (err) {
                     console.log(err);
                     res.end(JSON.stringify({result: 'error'}));
                 }
-                if(doc.comments == undefined || doc.comments.length < 1) {
+                if (doc.comments == undefined || doc.comments.length < 1) {
                     //do nothing for now
                     doc.updateDate = Date.now();
-                }else {
+                } else {
                     doc.comments[0].username = user.username;
                 }
 
@@ -279,14 +281,14 @@ exports.updateBlog = function (req, res) {
     });
 
 }
-function BlogGroupValidation(req){
-    if(req.body.group == undefined || !req.body.group){
-        req.checkBody('dob','Must be a valid data').notNull().isDate();
-        req.checkBody('memorialDate','Must be a valid date').notNull().isDate();
-        req.checkBody('subgroup','Must select a group').notNull();
+function BlogGroupValidation(req) {
+    if (req.body.group == undefined || !req.body.group) {
+        req.checkBody('dob', 'Must be a valid data').notNull().isDate();
+        req.checkBody('memorialDate', 'Must be a valid date').notNull().isDate();
+        req.checkBody('subgroup', 'Must select a group').notNull();
     }
-    req.checkBody('title','You need a title').notNull();
-    req.checkBody('author','You must assign a url').notNull();
+    req.checkBody('title', 'You need a title').notNull();
+    req.checkBody('author', 'You must assign a url').notNull();
     /*
      var charsNotAllowed = [' ','{','}','|','\\','^','~','[',']','`',';','/','?',':','@','=','&'];
      for(var i = 0;i< charsNotAllowed.length;i++){
@@ -295,27 +297,27 @@ function BlogGroupValidation(req){
      }
      */
 
-    req.checkBody('firstName','Must enter a first name').notNull();
-    req.checkBody('lastName','Must enter a first name').notNull();
+    req.checkBody('firstName', 'Must enter a first name').notNull();
+    req.checkBody('lastName', 'Must enter a first name').notNull();
     var errors = req.validationErrors(true);
     var myRe = /^(\w*[-_]?\w*){1,100}$/;
     var myArray = myRe.exec(req.body.author);
-    if(myArray == null){
+    if (myArray == null) {
         console.log("not a valid url")
-        if(!errors){
+        if (!errors) {
             errors = {};
         }
-        errors.author = {param:'author',msg:'Please enter a valid url. Only characters A-Z or numbers 1-9 and "-" or "_" allowed.'};
+        errors.author = {param: 'author', msg: 'Please enter a valid url. Only characters A-Z or numbers 1-9 and "-" or "_" allowed.'};
     }
     return errors;
 
 }
 exports.deleteBlog = function (req, res) {
-    console.log("trying to remove "+req.params.id);
+    console.log("trying to remove " + req.params.id);
     Blog.remove({'_id': req.params.id}, function (err) {
         if (err)
             console.log(err);
-        
+
     });
 }
 
@@ -332,7 +334,7 @@ exports.addTextPost = function (req, res) {
         if (err)console.log(err);
         console.log("MIKE CHECK ");
         var userid = req.session.passport.user;
-        User.findOne({_id: userid}, function (err,user) {
+        User.findOne({_id: userid}, function (err, user) {
             req.body.username = user.username;
             req.body.gravatar = calcMD5(user.email);
 
@@ -366,7 +368,7 @@ exports.addVideoPost = function (req, res) {
     Blog.findOne({_id: req.body.id}, function (err, blog) {
         console.log("Found Blog");
         var user = req.session
-        User.findOne({_id: req.session.passport.user}, function (err,user) {
+        User.findOne({_id: req.session.passport.user}, function (err, user) {
             req.body.username = user.username;
             req.body.gravatar = calcMD5(user.email);
 
@@ -421,85 +423,181 @@ exports.latestPics = function (req, res) {
 
 exports.latestVideos = function (req, res) {
     Blog.findOne({_id: req.params.id}).lean().exec(function (err, blog) {
-            return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.video, "embedYouTube")));
+        return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.video, "embedYouTube")));
     });
 }
 exports.latestEvents = function (req, res) {
     Blog.findOne({_id: req.params.id}).lean().exec(function (err, blog) {
-            return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.event)));
+        return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.event)));
     });
 }
 
-exports.sendWallInvite = function(req,res){
-    Blog.findOne({author:req.params.wallid},function(err,blog){
-         User.findOne({_id:req.params.user},function(err,user){
-             user.profiles.push({profile:blog._id});
-             user.save(function(err){
-                 console.log("profile pushed to user"+user.username);
-                 res.send(200,'success');
-             })
-         })
+exports.sendWallInvite = function (req, res) {
+    Blog.findOne({author: req.params.wallid}, function (err, blog) {
+        User.findOne({_id: req.params.user}, function (err, user) {
+            var duplicate = false;
+            console.log(user.memwalls)
+
+            for (var x = 0; x < user.memwalls.length; x++) {
+                console.log(user.memwalls[x] + " " + blog._id)
+                if (user.memwalls[x].toString() == blog._id.toString()) {
+                    duplicate = true;
+                }
+            }
+            if (duplicate) {
+                res.send(500, 'duplicate request')
+                return;
+            }
+            user.memwalls.push(blog);
+            user.profiles.push({profile: blog._id});
+            user.save(function (err) {
+                console.log("profile pushed to user" + user.username);
+                res.send(200, 'success');
+            })
+        })
     })
 }
-exports.block = function(req,res){
-    var wall = req.params.wallid;
-    Blog.findOne({author:req.params.wallid},function(err,blog){
-         User.findOne({_id:req.params.user},function(err,user){
-            var profiles = user.profiles;
-            console.log(user.profiles);
-             var x = 0;
-            for(var profile in profiles){
-                if(profile.profile == blog._id){
-                    profile.splice(x,1);
-                }
-                x++;
+//TODO:Remove if has been blocked or self remvoed
+exports.getFriendsMemorials = function (req, res) {
+    User.find({_id: req.session.passport.user}).populate('memwalls').exec(function (err, user) {
+        if (err)console.log(err)
+        console.log("getting memwalls references¢")
+        var returndata = [];
+        var memwalls = user[0].memwalls;
+        //console.log(memwalls)
+        for (var x = 0; x < memwalls.length; x++) {
+            var memwall = memwalls[x];
+            //console.log(memwall)
+            var tempObj = {
+                id: memwall._id,
+                author: memwall.author,
+                firstName: memwall.firstName,
+                lastName: memwall.lastName,
+                title: memwall.title
             }
-               user.profiles = profiles;
-                console.log(user.profiles);
-             user.save(function(err){
-                 console.log("profile removed to user"+user.username);
-             })
-         });
+            returndata.push(tempObj);
+        }
+
+        return res.end(JSON.stringify(returndata));
     })
 }
 
-exports.selfremove = function(req,res){
+exports.selfRemove = function (req, res) {
+    var wall = req.params.wall;
+    User.findOne({_id: req.session.passport.user}, function (err, user) {
+        var walls = user.memwalls;
+        console.log(walls)
+        for (var x = 0; x < user.memwalls.length; x++) {
+            if (walls[x].toString() == wall.toString()) {
+                walls.splice(x, 1);
+                console.log("duplicate found " + walls[x] + " slicing x" + x)
+                break;
+            }
+        }
+        console.log(walls)
+        user.memwalls = walls;
+        user.save(function (err) {
+            console.log(err);
+            res.send(200, 'works good');
+        })
+    })
+
+}
+
+exports.block = function (req, res) {
+    var wall = req.params.wallid;
+    Blog.findOne({author: req.params.wallid}, function (err, blog) {
+        User.findOne({_id: req.params.user}, function (err, user) {
+            var profiles = user.profiles;
+            console.log(user.profiles);
+            var x = 0;
+            for (var profile in profiles) {
+                if (profile.profile == blog._id) {
+                    profile.splice(x, 1);
+                }
+                x++;
+            }
+            user.profiles = profiles;
+            console.log(user.profiles);
+            user.save(function (err) {
+                console.log("profile removed to user" + user.username);
+            })
+        });
+    })
+}
+
+exports.selfremove = function (req, res) {
     var wall = req.params.id;
-    User.findOne({_id:req.sessions.passport.user},function(err,user){
+    User.findOne({_id: req.sessions.passport.user}, function (err, user) {
         var profiles = user.profiles;
         var x = 0;
-        for(var profile in profiles){
-            if(profiles[profile].profile == wall){
-                profiles.slice(x,1);
+        for (var profile in profiles) {
+            if (profiles[profile].profile == wall) {
+                profiles.slice(x, 1);
             }
             x++;
         }
         user.profiles = profiles;
-        user.save(function(data){
+        user.save(function (data) {
 
         })
     })
 }
 
+exports.usersInNetwork = function (req, res) {
+    console.log(req.params.search)
+    var search = req.params.search;
+    User.find({_id: req.session.passport.user}).populate('memwalls').exec(function (err, user) {
+        var returnData = [];
+        Blog.populate(user[0].memwalls,{path:'user',match:{username:new RegExp(search,"i")}},function(err,walls){
 
-exports.subscribed = function(req,res){
-   var blogId = req.params.id;
+            for(var x = 0;x < walls.length;x++){
+               if(!walls[x].user){
+
+               }else{
+                   console.log(walls[x].user.email)
+                   /*
+                   var tempObj = {
+                       email:walls[x].user.email,
+                       username:walls[x].user.username,
+                       firstname:walls[x].user.firstName,
+                       lastname:walls[x].user.lastName
+
+                   };
+                    returnData.push(tempObj);
+                    */
+                   //returnData.push(walls[x].user.email);
+                   returnData.push(walls[x].user.username);
+                   //returnData.push(walls[x].user.firstName);
+                   //returnData.push(walls[x].user.lastName);
+
+               }
+
+            }
+            console.log(returnData)
+            res.end(JSON.stringify(returnData));
+        })
+    })
+}
+
+exports.subscribed = function (req, res) {
+    var blogId = req.params.id;
     console.log(blogId);
-    Blog.findOne({author:blogId},function(err,blog){
+    Blog.findOne({author: blogId}, function (err, blog) {
         console.log(blog._id);
-        User.find({profiles:{$elemMatch:{profile:blog._id}}},function(err,users){
+        User.find({profiles: {$elemMatch: {profile: blog._id}}}, function (err, users) {
             console.log(users);
             res.send(JSON.stringify(users));
         })
     })
 }
 
-exports.subscribedto = function(req,res){
+exports.subscribedto = function (req, res) {
     var blogId = req.params.id;
     console.log(blogId);
     //TODO:Ask rodney about what this should be... not friends but people on your walls??
     //we have no "friends perse"
-    Blog.findOne({author:blogId},function(err,blog){
+    Blog.findOne({author: blogId}, function (err, blog) {
         console.log(blog._id);
     })
 }
@@ -513,23 +611,23 @@ function getPostText(blog, type, getProp) {
             if (getProp == true) {
                 prop = getProp;
                 var pushdata;
-                if(prop = "embedYouTube"){
-                   pushdata =  blog.postText[p][getProp].str.slice(0,1);
-                   pushdata.str.slice(0,-1);
-                   console.log(pushdata)
-                }else{
+                if (prop = "embedYouTube") {
+                    pushdata = blog.postText[p][getProp].str.slice(0, 1);
+                    pushdata.str.slice(0, -1);
+                    console.log(pushdata)
+                } else {
                     pushdata = blog.postText[p][getProp];
                 }
                 buffer.push(pushdata);
             } else {
                 var pushdata;
-                if(getProp == "embedYouTube"){
-                    if(blog.postText[p][getProp] == undefined)return buffer;
-                    pushdata =  blog.postText[p][getProp].slice(0,blog.postText[p][getProp].length);
-                    pushdata.slice(0,-1);
+                if (getProp == "embedYouTube") {
+                    if (blog.postText[p][getProp] == undefined)return buffer;
+                    pushdata = blog.postText[p][getProp].slice(0, blog.postText[p][getProp].length);
+                    pushdata.slice(0, -1);
                     console.log(pushdata)
                     buffer.push(pushdata);
-                }else{
+                } else {
                     buffer.push(blog.postText[p]);
                 }
             }
