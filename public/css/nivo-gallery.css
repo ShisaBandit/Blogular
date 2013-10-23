@@ -73,7 +73,8 @@
 
 .nivoGallery-htmlwrap {
     padding:30px;
-    margin-left: 220px;
+    margin-left: 240px;
+    margin-right: 20px;
     margin-top: 50px;
     height:100%;
     overflow:auto;
