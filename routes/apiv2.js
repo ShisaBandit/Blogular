@@ -144,6 +144,14 @@ var dataFilter = function (req, type, subtype, data, callback) {
         case "Message":
         {
             var to = data.to;
+            console.log("sending message")
+            var index = to.indexOf(':');
+            console.log(index)
+            if(index>0){
+                to = data.to.substring(0,index);
+            }
+            console.log(to)
+            data.to = to;
             var from;
             var message = data.message;
             //TODO:add check for verifying user can receive a message. !!
@@ -177,15 +185,22 @@ var dataFilter = function (req, type, subtype, data, callback) {
                     }
                     var messagedUsersFrom = fromdoc.messagedUsers;
                     var added = false;
+                    var addedTo = false;
                     //check if we are adding a new messaged user
                     for(var user in messagedUsersFrom){
                         if(messagedUsersFrom[user].user == from){
                             added = true;
                         }
+                        if(messagedUsersFrom[user].user == to){
+                            addedTo = true;
+                        }
                     }
 
                     if(!added){
                         fromdoc.messagedUsers.push({user:from});
+                    }
+                    if(!addedTo){
+                        fromdoc.messagedUsers.push({user:to});
                     }
                     fromdoc.save(function(err){
                         if(err)console.log(err)

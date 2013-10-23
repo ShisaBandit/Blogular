@@ -2,8 +2,18 @@ describe('LoginCtrl tests: ',function(){
     beforeEach(module('blogApp'));
     var scope,ctrl,$httpBackend;
     beforeEach(inject(function ($rootScope, $controller, $routeParams, $injector) {
-        $httpBackend = $injector.get('$httpBackend');
+        io = {
+            connect:function(){
+                console.log("connected fake")
+                return{
+                    on:function(){
+                        console.log("fake on")
+                    }
+                }
+            }
 
+        };
+        $httpBackend = $injector.get('$httpBackend');
         $httpBackend.when('POST', '/login')
             .respond(
                 [

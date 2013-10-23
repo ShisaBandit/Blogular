@@ -1,9 +1,22 @@
 
 describe('blogEntryCtrl test: ', function () {
     beforeEach(module('blogApp'));
-    var io = io;
+    //var io = io;
     var scope, ctrl, $httpBackend;
     beforeEach(inject(function ($rootScope, $controller, $injector) {
+        io = {
+            connect:function(){
+                console.log("connected fake")
+                return{
+                    on:function(){
+                        console.log("fake on")
+                    },
+                    emit:function(){
+                        console.log("fake emitting")
+                    }
+                }
+            }
+        }
         $httpBackend = $injector.get('$httpBackend');
         $httpBackend.when('GET', '/blog')
             .respond(

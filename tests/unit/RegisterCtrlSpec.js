@@ -11,21 +11,21 @@ describe('RegisterCtrl tests: ',function(){
     }));
     it('should submit registration',function(){
         $httpBackend.expectPOST('/register').respond(200,{success:'test'});
-        scope.submitRegi();
+        scope.submitFinalDetails();
         $httpBackend.flush();
 
     });
 
     it('should set message upon failure of registration',function(){
         $httpBackend.expectPOST('/register').respond(200,{'fail':'some error message'});
-        scope.submitRegi();
+        scope.submitFinalDetails();
         $httpBackend.flush();
         expect(scope.message).toBeDefined();
     });
 
     it('should set message upon total failure of request',function(){
         $httpBackend.expectPOST('/register').respond(41);
-        scope.submitRegi();
+        scope.submitFinalDetails();
         $httpBackend.flush();
         expect(scope.message).toBeDefined();
     });

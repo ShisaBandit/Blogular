@@ -125,6 +125,9 @@ var userSchema = mongoose.Schema({
     memwalls: [
         {type:mongoose.Schema.Types.ObjectId, ref: 'Blog'}
     ],
+    invitessent:[
+        {type:mongoose.Schema.Types.ObjectId, ref: 'User'}
+    ],
     address: String,
     city: String,
     state: String,

@@ -431,8 +431,10 @@ exports.latestEvents = function (req, res) {
         return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.event)));
     });
 }
-
+//TODO: Add notification when getting invite
+//TODO: create invite acceptance system
 exports.sendWallInvite = function (req, res) {
+
     Blog.findOne({author: req.params.wallid}, function (err, blog) {
         User.findOne({_id: req.params.user}, function (err, user) {
             var duplicate = false;
@@ -448,12 +450,19 @@ exports.sendWallInvite = function (req, res) {
                 res.send(500, 'duplicate request')
                 return;
             }
-            user.memwalls.push(blog);
-            user.profiles.push({profile: blog._id});
-            user.save(function (err) {
-                console.log("profile pushed to user" + user.username);
-                res.send(200, 'success');
+            User.findOne({_id:req.session.passport.user},function(err,inviter){
+                inviter.invitessent.push(user);
+                inviter.save(function(err){
+                    if(err)console.log(err)
+                    user.memwalls.push(blog);
+                    user.profiles.push({profile: blog._id});
+                    user.save(function (err) {
+                        console.log("profile pushed to user" + user.username);
+                        res.send(200, 'success');
+                    })
+                })
             })
+
         })
     })
 }
@@ -543,10 +552,15 @@ exports.selfremove = function (req, res) {
         })
     })
 }
-
+//TODO:store any invitations sent
+//TODO:do not allow message to be sent to user before accepted invite
+//TOOD: can not send message to people you invited only if you have been invited
 exports.usersInNetwork = function (req, res) {
     console.log(req.params.search)
     var search = req.params.search;
+    //get all the blogs that are in this user profiles memwalls array then find all the blogs
+    //in the memwalls that match the user name search passed by user
+    //invitations sent to us
     User.find({_id: req.session.passport.user}).populate('memwalls').exec(function (err, user) {
         var returnData = [];
         Blog.populate(user[0].memwalls,{path:'user',match:{username:new RegExp(search,"i")}},function(err,walls){
@@ -555,7 +569,7 @@ exports.usersInNetwork = function (req, res) {
                if(!walls[x].user){
 
                }else{
-                   console.log(walls[x].user.email)
+                   //console.log(walls[x].user.email)
                    /*
                    var tempObj = {
                        email:walls[x].user.email,
@@ -567,15 +581,32 @@ exports.usersInNetwork = function (req, res) {
                     returnData.push(tempObj);
                     */
                    //returnData.push(walls[x].user.email);
-                   returnData.push(walls[x].user.username);
+                   returnData.push(walls[x].user.username+": "+walls[x].user.firstName+" "+walls[x].user.lastName);
                    //returnData.push(walls[x].user.firstName);
                    //returnData.push(walls[x].user.lastName);
 
                }
 
             }
-            console.log(returnData)
-            res.end(JSON.stringify(returnData));
+            //invitations we sent
+            console.log(search)
+            //User.populate(user[0].invitessent,{path:'invitessent',match:{username:new RegExp(search,'i')}},function(err,invited){
+            User.find({_id:req.session.passport.user}).
+                populate({path:'invitessent',
+                match:{$or:[{firstName:new RegExp(search,"i")},{username:new RegExp(search,"i")},{lastName:new RegExp(search,"i")}]}
+            }).exec(function(err,invited){
+               console.log("Invited")
+              //console.log(invited[0].invitessent.username)
+               for(var y = 0;y < invited[0].invitessent.length;y++){
+                    //returnData.push(invtited[y].username+": "+invited[y].firstName+" "+invited[y].lastName)
+                    console.log(invited[0].invitessent[y].username)
+                    returnData.push(invited[0].invitessent[y].username+': '+invited[0].invitessent[y].firstName+' '+invited[0].invitessent[y].lastName)
+                }
+                //console.log(returnData)
+                res.end(JSON.stringify(returnData));
+            })
+
+
         })
     })
 }

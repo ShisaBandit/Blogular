@@ -94,14 +94,15 @@ describe('BlogListCtrl test: with filter ', function () {
             $httpBackend.verifyNoOutstandingExpectation();
             $httpBackend.verifyNoOutstandingRequest();
         });
+        /*
         it('filterTag should be defined ', function () {
             expect(scope.filterTag).toBeDefined();
             $httpBackend.flush();
-        });
+        });*/
         it('should call getEntries and entries should be loaded if any', function () {
             $httpBackend.flush();
             expect(scope.entries).toBeDefined();
-            expect(scope.filterTag).toBeDefined();
+            //expect(scope.filterTag).toBeDefined();
         });
     });
     describe('lastupdate true', function () {
@@ -142,14 +143,14 @@ describe('BlogListCtrl test: with filter ', function () {
             $httpBackend.verifyNoOutstandingExpectation();
             $httpBackend.verifyNoOutstandingRequest();
         });
-        it('filterTag should be defined ', function () {
+        /*it('filterTag should be defined ', function () {
             expect(scope.filterTag).toBeDefined();
             $httpBackend.flush();
-        });
+        });*/
         it('should call getEntries and entries should be loaded if any', function () {
             $httpBackend.flush();
             expect(scope.entries).toBeDefined();
-            expect(scope.filterTag).toBeDefined();
+          //  expect(scope.filterTag).toBeDefined();
         });
     });
 })

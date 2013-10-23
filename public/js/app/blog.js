@@ -913,6 +913,7 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
     $scope.forgot = function(){
        $rootScope.$broadcast('event:forgot-password');
     }
+
     socket.on('connect', function () {
         console.log("connect");
     });
