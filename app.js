@@ -73,7 +73,7 @@ app.configure('production', function () {
 app.configure('development', function () {
     app.use(express.compress());
 
-    app.set('port', process.env.PORT || 80);
+    app.set('port', process.env.PORT || 3000);
     app.set('ip', 'localhost');
     //noinspection JSUnresolvedVariable
     app.set('views', __dirname + '/views');
@@ -277,7 +277,7 @@ io.configure(function () {
     io.set("authorization", passportSocketIo.authorize({
         key: 'express.sid',       //the cookie where express (or connect) stores its session id.
         secret: 'secret', //the session secret to parse the cookie
-        store: sessionStore,     //the session store that express uses
+        store:  new MongoStore({url:'mongodb://localhost/test'}),     //the session store that express uses
         fail: function (data, accept) {
             accept(null, false);             // second param takes boolean on whether or not to allow handshake
         },
