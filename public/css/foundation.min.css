@@ -1477,6 +1477,28 @@ blockquote, blockquote p {
 }
 
 button, .button {
+     border-style: solid;
+     border-width: 1px;
+     cursor: pointer;
+     font-family: inherit;
+     font-weight: bold;
+     line-height: 1;
+     margin: 0 0 1.25em;
+     position: relative;
+     text-decoration: none;
+     text-align: center;
+     display: inline-block;
+     padding-top: 0.75em;
+     padding-right: 1.5em;
+     padding-bottom: 0.8125em;
+     padding-left: 1.5em;
+     font-size: 1em;
+     background-color: #afc5dc;
+     border-color: #6590bd;
+     color: #132c48
+ }
+
+.buttonSmall {
     border-style: solid;
     border-width: 1px;
     cursor: pointer;
@@ -1488,11 +1510,11 @@ button, .button {
     text-decoration: none;
     text-align: center;
     display: inline-block;
-    padding-top: 0.75em;
-    padding-right: 1.5em;
-    padding-bottom: 0.8125em;
-    padding-left: 1.5em;
-    font-size: 1em;
+    padding-top: 0.25em;
+    padding-right: 0.25em;
+    padding-bottom: 0.25em;
+    padding-left: 0.25em;
+    font-size: 0.7em;
     background-color: #afc5dc;
     border-color: #6590bd;
     color: #132c48
