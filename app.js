@@ -211,6 +211,8 @@ app.post('/login',
 
 app.post('/auth/login', authRoutes.loginAuth);
 
+app.get('/getreguserdata',passport.ensureAuthenticated,authRoutes.getRegUserData);
+app.post('/updateuserdata',passport.ensureAuthenticated,authRoutes.updateuserdata);
 app.get('username', passport.ensureAuthenticated, function (req, res) {
     req.send(req.session.username, 200);
 });

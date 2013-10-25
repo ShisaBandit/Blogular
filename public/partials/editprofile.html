@@ -1,0 +1,98 @@
+<div ng-controller="EditProfileCtrl">
+    <div class="row">
+        <div class="twelve columns offsetHeight100" role="content">
+
+
+            <div class="small-12 columns">
+                <!-- <p style="color:#ee162d" ng-repeat="message in messages"><b>{{message}}</b></p>-->
+                <div class="row ">
+                    <div class="small-6 columns regColl">
+<p class="message">{{message}}</p>
+                        <label>Username:</label>
+                        <input type="text" class="login-inp" ng-model="form.username"/>
+                        <p class="validation-error">{{message.username}}</p>
+
+                        <label>Password:</label>
+                        <input type="password" class="login-inp" ng-model="form.password"/>
+                        <p class="validation-error">{{message.password}}</p>
+
+                        <label>First Name:</label>
+                        <input type="text" class="login-inp" ng-model="form.firstName"/>
+                        <p class="validation-error">{{message.firstName}}</p>
+
+                        <label>Last Name:</label>
+                        <input type="text" class="login-inp" ng-model="form.lastName"/>
+                        <p class="validation-error">{{message.lastName}}</p>
+
+
+                        <label>Gender:</label>
+                        <input type="checkbox" class="login-inp" ng-model="form.male"/> Male
+                        <input type="checkbox" class="login-inp" ng-model="form.female"/> Female
+                        <p class="validation-error">{{message.male}}</p>
+
+                        <br /><br />
+                        <label>Email:</label>
+                        <input type="email" class="login-inp" ng-model="form.email"/>
+                        <p class="validation-error">{{message.email}}</p>
+
+                        <label>Address:</label>
+                        <input type="text" class="login-inp" ng-model="form.address"/>
+                        <p class="validation-error">{{message.address}}</p>
+
+                        <label>City:</label>
+                        <input type="text" class="login-inp" ng-model="form.city"/>
+                        <p class="validation-error">{{message.city}}</p>
+
+                        <label>State/Province:</label>
+                        <input type="text" class="login-inp" ng-model="form.state"/>
+                        <p class="validation-error">{{message.state}}</p>
+
+                        <label>Postal Address:</label>
+                        <input type="text" class="login-inp" ng-model="form.zip"/>
+                        <p class="validation-error">{{message.zip}}</p>
+                        <label>Personal Bio Here:</label>
+                        <textarea class="login-inp" ng-model="form.about"></textarea>
+
+                        <label>Date of Birth:</label>
+                   
+
+                        <div class="form-horizontal">
+                            <input type="text" datepicker-popup="yyyy/MMMM/dd" ng-model="form.dob" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+                            <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
+                        </div>
+                        <p class="validation-error">{{message.dob}}</p>
+
+                        <!--
+                    <input type="text" class="login-inp" ng-model="form.dob"/>
+-->
+                    </div>
+                </div>
+                     
+                <div ng-hide="form.group">
+                    <label>I have lost my: </label> <br />
+                    <select class="login-inp"
+                            name="lostAngel"
+                            ng-change="checked()"
+                            ng-model="selectedGroup"
+                            ng-options="group.name for group in groups">
+                        </option>
+                    </select>
+                    <p class="validation-error">{{message.subgroup}}</p>
+                </div>
+                <!--<div class="row regColl2">
+                    <label>I have lost my: </label> <br /> <br />
+                    <select name="lostAngel"><option ng-change="checked()" ng-repeat="group in groups" ng-model="groups[$index].checked"
+                                                     class="login-inp"  value="{{group.name}}">{{group.name}}</option></select>
+                </div>
+                <p class="validation-error">{{message.subgroup}}</p>
+                    -->
+                <!-- <p style="color:#ee162d" ng-repeat="message in messages"><b>{{message}}</b></p>-->
+                <a class="button" ng-click="submitEdits()">Register</a>
+                <a class="close-reveal-modal button">Cancel</a>
+               <p class="message">{{message}}</p>
+
+            </div>
+
+        </div>
+    </div>
+</div>

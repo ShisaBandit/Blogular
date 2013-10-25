@@ -128,7 +128,9 @@ var userSchema = mongoose.Schema({
     invitessent:[
         {type:mongoose.Schema.Types.ObjectId, ref: 'User'}
     ],
+    sex:Boolean, //female = true,male = false
     address: String,
+    zip:String,
     city: String,
     state: String,
     Age: Number,

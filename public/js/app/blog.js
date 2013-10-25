@@ -35,7 +35,8 @@ var app = angular.module('blogApp', [
             when("/pets",{templateUrl:"partials/pets.html"}).
             when("/editwall/:wall",{templateUrl:"partials/editwall.html"}).
             when("/passwordrecovery",{templateUrl:"partials/forgotpassword.html"}).
-            when("/updatepass",{templateUrl:"partials/updatepass.html"})
+            when("/updatepass",{templateUrl:"partials/updatepass.html"}).
+            when("/editprofile",{templateUrl:"partials/editprofile.html"})
     });
 app.directive('fdatepicker',function(){
     return{
@@ -380,12 +381,14 @@ app.factory('groupsListing',function(){
 
 app.service('userInfoService', function () {
     var username = "Guest";
+    var _id = "";
     return {
         getUsername: function () {
             return username;
         },
-        setUsername: function (value) {
+        setUsername: function (value,id) {
             username = value;
+            _id = id;
         }
     }
 });
@@ -1005,19 +1008,12 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket,group
     $scope.selectedSubgroup = {};
     $scope.groups = groupsListing;
     $scope.message = {};
-
+    $scope.groups = groupsListing;
+    $scope.selectedGroup = undefined;
+    $scope.form.groupcode = $scope.groups[0].code;
     $scope.checked = function(){
-            for(var sgroup in $scope.groups){
-                if($scope.groups[sgroup].name == $scope.selectedSubgroup.name){
-                    $scope.groups[sgroup].checked = false;
-                }
-            }
-            for(var sgroup in $scope.groups){
-                if($scope.groups[sgroup].checked){
-                    $scope.selectedSubgroup = $scope.groups[sgroup];
-                    $scope.form.groupcode = $scope.selectedSubgroup.code;
-                }
-            }
+        console.log($scope.selectedGroup)
+        $scope.form.groupcode = $scope.selectedGroup.code;
     }
     $scope.submitFinalDetails = function () {
         $http.post('/register', $scope.form).
@@ -1686,12 +1682,15 @@ app.controller('EditWallCtrl',function($rootScope,$http,$scope,api,$routeParams,
         $scope.portrait.portrait = data[0].profilePicPortrait;
         $scope.spread.spread = data[0].profilePicWide;
         $scope.blogId.blogId = data[0]._id;
+        console.log("GROUPS ARE "+$scope.groups)
         for(var group in $scope.groups){
+            console.log(data[0].subgroup)
             if($scope.groups[group].code == data[0].subgroup){
+                console.log("found subgroup "+$scope.groups[group])
                 $scope.selectedGroup = $scope.groups[group];
             }
         }
-
+        $scope.checked();
         console.log($scope.selectedGroup)
         console.log($scope.form);
         console.log("portrait "+$scope.portrait+" spread "+$scope.spread);
@@ -1886,6 +1885,66 @@ app.controller('PasswordRecoveryCtrl',function($scope,$http,$routeParams){
             })
     }
 })
+
+app.controller('EditProfileCtrl',function($scope,$http,api,groupsListing){
+    $scope.messages = {};
+    $scope.selectedGroup = undefined;
+    $scope.groups = groupsListing;
+    $scope.checked = function(){
+        console.log($scope.selectedGroup)
+        $scope.form.groupcode = $scope.selectedGroup.code;
+    }
+    $http.get('getreguserdata').
+        success(function (data) {
+            console.log(data)
+            $scope.form = data;
+            for(var group in $scope.groups){
+                console.log(group)
+                console.log(data.lost+" was lost")
+                if($scope.groups[group].code == data.lost){
+                    $scope.selectedGroup = $scope.groups[group];
+                }
+            }
+            $scope.checked();
+
+        console.log($scope.selectedGroup)
+        }).
+        error(function (err) {
+            console.log(err)
+        })
+    $scope.submitEdits = function(){
+        console.log($scope.form)
+        $http.post( 'updateuserdata', $scope.form)
+            .success(function(data){
+                // success
+                $scope.message = "User data updated.";
+                console.log(data)
+            }).
+            error(function(err){
+                $scope.message = "Please check errors."
+                console.log("error response")
+                // error
+                if(err){
+                    console.log(err)
+
+                    $scope.message = {};
+                    for(var error in err)
+                    {
+
+                        if(error == "author"){
+                            $scope.message.url = err.author.msg;
+                        }
+                        else{
+                            $scope.message[error] = err[error].msg;
+                        }
+                    }
+                    return;
+                }
+                console.log(response)
+            });
+    }
+})
+
 /*
  function youtube($string,$autoplay=0,$width=480,$height=390)
  {

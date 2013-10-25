@@ -75,11 +75,24 @@
 -->
                     </div>
                  </div>
+                <div ng-hide="form.group">
+                    <label>I have lost my: </label> <br />
+                    <select class="login-inp"
+                            name="lostAngel"
+                            ng-change="checked()"
+                            ng-model="selectedGroup"
+                            ng-options="group.name for group in groups">
+                        </option>
+                    </select>
+                    <p class="validation-error">{{message.subgroup}}</p>
+                </div>
+                <!--
                  <div class="row regColl2">
                     <label>I have lost my: </label> <br /> <br />
                      <select name="lostAngel"><option ng-change="checked()" ng-repeat="group in groups" ng-model="groups[$index].checked"
                                                       class="login-inp"  value="{{group.name}}">{{group.name}}</option></select>
                  </div>
+                 -->
                 <p class="validation-error">{{message.subgroup}}</p>
 
                <!-- <p style="color:#ee162d" ng-repeat="message in messages"><b>{{message}}</b></p>-->

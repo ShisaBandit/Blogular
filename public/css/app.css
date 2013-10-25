@@ -12,6 +12,9 @@
 /* -----------------------------------------
    Shared Styles
 ----------------------------------------- */
+.message{
+    color: green;
+}
 #portraitpic {
     position: relative;
     top:350px;
