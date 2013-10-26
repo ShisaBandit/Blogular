@@ -207,49 +207,50 @@
                         </div>
 
                         <p>Welcome to the Message Center. From here you can create, manage and view messages from your network members, administrators and other registered users..</p>
+                        <a class="button" data-reveal-id="messageModal"><img src="img/mail_2.png"> Send a New Message</a>
+                        <br />
+                            <div class="small-4 columns rghtDvd">
+                                <b>Conversation With:</b>
+                                <br />      <br />
+                                <section>
+                                    <!--
+                                    <div class="row">
+                                        <input type="text" ng-model="postText" class="addNewPost small-12 columns" placeholder="Search Messages"/>
+                                    </div>
+                                    -->
+                                    <div class="row" ng-repeat="messagedUser in messagedUsers">
+                                        <a href="" ng-click="getMessages(messagedUser.user)">
+                                            <span class="small-10 columns">{{messagedUser.user}} <a class="button buttonSmall" title="Delete This Message"><img src="img/trash.png"></a></span>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="small-8 columns rghtDvd">
+                                <b>Conversation History</b>
+                                <br /> <br />
+                                <section>
+                                    <div class="row">
+                                        <span class="small-3 columns"><b>Sent By:</b></span>
+                                        <!--
+                                        <span class="small-2 columns"><b>Date:</b></span>
+                                        -->
+                                    </div>
+                                    <br />
+                                    <div class="row" ng-repeat="message in messages">
 
-                        <div class="small-6 columns rghtDvd">
-                            <a class="button" data-reveal-id="messageModal">Create a new message here!</a>
-                            <br />
-                            <b>Mailbox</b>
-                            <br />      <br />
-                            <section>
-                                <div class="row">
-                                    <input type="text" ng-model="postText" class="addNewPost small-12 columns" placeholder="Search Messages"/>
-                                </div>
-                                <div class="row">
-                                    <span class="small-3 columns"><b>User:</b></span>
-                                    <span class="small-3 columns"><b>Title:</b></span>
-                                    <span class="small-3 columns"><b>Date:</b></span>
-                                    <span class="small-3 columns"><a class="button">Delete</a></span>
-                                </div>
-                                <div class="row" ng-repeat="messagedUser in messagedUsers">
-                                    <a href="" ng-click="getMessages(messagedUser.user)">
-                                        <span class="small-3 columns">{{messagedUser.user}}</span>
-                                    </a>
-                                    <span class="small-3 columns"><a class="button">Delete</a></span>
-                                </div>
-                            </section>
-                        </div>
-                        <div class="small-6 columns rghtDvd">
-                            <b>Conversation History</b>
-                            <br /> <br />
-                            <section>
-                                <div class="row">
-                                    <span class="small-4 columns"><b>Sent By::</b></b></span>
-                                    <span class="small-6 columns"><b>Message Contents:</b></span>
-                                    <span class="small-2 columns"><b>Date:</b></span>
-                                </div>
-                                <br />
-                                <div class="row" ng-repeat="message in messages">
-                                    <span class="small-4 columns">{{message.from}}</span>
-                                    <span class="small-6 columns">{{message.message}}</span>
-                                   <!-- <span class="small-2 columns">{{message.date}}</span> -->
-                                </div>
+                                        <span class="small-30 columns" style="background: #F4F4F4; margin-bottom: 10px; padding5px; border-bottom: 1px dashed #000000"><b>{{message.from}}</b>  <i style="font: x-small serif; color: steelblue;float: right">{{message.date}}</i>
+                                            <br />
+                                            <span class="small-9 columns">{{message.message}}</span>
+                                            <br />
+                                        </span>
+
+                                        <!-- <span class="small-2 columns">{{message.date}}</span> -->
+                                    </div>
+                                <!--
                                 <div class="row">
                                     <br />
                                     <input type="text" ng-model="postText" class="addNewPost small-12 columns" placeholder="Add to this conversation"/>
                                 </div>
+                                -->
                             </section>
                         </div>
 
