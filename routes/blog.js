@@ -674,6 +674,13 @@ function getPostText(blog, type, getProp) {
     return buffer;
 }
 
+exports.getInvitedGroup = function(req,res){
+    User.findOne({_id:req.session.passport.user}, function (err,usr) {
+        for(var profile in usr.profiles){
+            console.log(usr.profiles[profile])
+        }
+    })
+}
 
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
