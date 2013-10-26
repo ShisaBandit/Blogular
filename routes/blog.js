@@ -455,6 +455,7 @@ exports.sendWallInvite = function (req, res) {
                 inviter.save(function(err){
                     if(err)console.log(err)
                     user.memwalls.push(blog);
+                    blog.members.push(user);
                     user.profiles.push({profile: blog._id});//TODO:Remove this in now for backwards compatibility with new style
                     user.save(function (err) {
                         console.log("profile pushed to user" + user.username);
@@ -617,6 +618,45 @@ exports.usersInNetwork = function (req, res) {
 
         })
     })
+}
+exports.usersInNetworkAll = function (req, res) {
+    //TODO:get all users of blogs that belong to???
+    //right now just getting all the users invited by
+    //get all the blogs that are in this user profiles memwalls array then find all the blogs
+    //in the memwalls that match the user name search passed by user
+    //invitations sent to us
+    User.find({_id: req.session.passport.user}).populate('memwalls').exec(function (err, user) {
+        var returnData = [];
+        Blog.populate(user[0].memwalls,{path:'user'},function(err,walls){
+
+            for(var x = 0;x < walls.length;x++){
+               if(!walls[x].user){
+
+               }else{
+                   returnData.push(walls[x].user);
+               }
+            }
+            //invitations we sent
+            console.log(search)
+            User.find({_id:req.session.passport.user}).
+                populate({path:'invitessent'
+                //match:{$or:[{firstName:new RegExp(search,"i")},{username:new RegExp(search,"i")},{lastName:new RegExp(search,"i")}]}
+            }).exec(function(err,invited){
+               console.log("Invited")
+              //console.log(invited[0].invitessent.username)
+               for(var y = 0;y < invited[0].invitessent.length;y++){
+                    console.log(invited[0].invitessent[y].username)
+                    returnData.push(invited[0].invitessent[y])
+                }
+                //console.log(returnData)
+                res.end(JSON.stringify(returnData));
+            })
+
+
+        })
+    })
+
+
 }
 
 exports.subscribed = function (req, res) {

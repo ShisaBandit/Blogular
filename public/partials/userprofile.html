@@ -142,6 +142,7 @@
 
                     </div>
                 </section>
+                <!--
                 <section>
                     <p class="title" data-section-title><a href="#paneli">My Network</a></p>
                     <div class="content" data-section-content>
@@ -155,8 +156,8 @@
                             Quickly find and contact your friends here.
                         </p>
                         <ul>
-                            <li>
-                                Anthony Lemrick - Affiliation: Mary Adam’s Memorial Wall - <a class="button" data-reveal-id="messageModal">Send private message</a>
+                            <li ng-repeat="user in newtworkedusersall">
+                                {{user.firstName}} {{user.lastName}} - Affiliation: Mary Adam’s Memorial Wall - <a class="button" data-reveal-id="messageModal">Send private message</a>
                             </li>
                             <li>
                                 Michael Deidricks - Affiliation: Grieving Family Group - <a class="button" data-reveal-id="messageModal">Send private message</a>
@@ -183,6 +184,7 @@
 
                     </div>
                 </section>
+                -->
                 <section>
                     <p class="title" data-section-title><a href="#paneli">My Petitions</a></p>
                     <div class="content" data-section-content>
@@ -194,8 +196,8 @@
                             Here are all of the petitions that you have started.
                         </p>
                         <ul>
-                            <li>
-                                Petition Name - <a class="button">Edit</a> - <a class="button">Delete</a>
+                            <li ng-repeat="petition in petitions">
+                                {{petition.title}}- <a href="#/editpetition/{{petition._id}}" class="button">Edit</a> - <a ng-click="deletePetition(petition._id)" class="button">Delete</a>
                             </li>
 
                         </ul>

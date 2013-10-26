@@ -20,6 +20,7 @@ var app = angular.module('blogApp', [
             when("/listByTag/:name", {templateUrl: "partials/blog.html"}).
             when("/petitions", {templateUrl: "partials/petitions.html"}).
             when("/petition/:title", {templateUrl: "partials/petition.html"}).
+            when("/editpetition/:id", {templateUrl: "partials/editpetitions.html"}).
             when("/registration", {templateUrl: "partials/registration.html"}).
             when("/profile/:username", {templateUrl: "partials/userprofile.html"}).
             when("/AddBlogEntry/uploadportrait/:id", {templateUrl: "partials/admin/addportrait.html"}).
@@ -1293,13 +1294,28 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api) {
 
 });
 
-app.controller('PetitionCtrl', function ($scope, api) {
+app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams) {
     $scope.petitions = [];
-
+    //$scope.edittitle = "";
+    //$scope.edittext = "";
     api.getResourceById('Petition', 'all', function (petitions) {
         $scope.petitions = petitions;
 
     });
+
+    api.getResourceByField('Petition',{field:'_id',query:$routeParams.id}, function (petition) {
+        $scope.title = petition[0].title;
+        $scope.text = petition[0].text;
+    })
+    $scope.submitedit = function () {
+        $http.post('updatePetition',{id:$routeParams.id, title: $scope.title , text:$scope.text}).
+            success(function (data) {
+                console.log(data)
+            }).error(function (err) {
+                console.log(err)
+            })
+    }
+
     $scope.submit = function () {
         var text = $scope.text;
         var title = $scope.title;
@@ -1337,12 +1353,7 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, us
             console.log(data);
             $scope.angels = data;
         })
-    /*
-     api.getResourceByField('User',{field:"username",query:userInfoService.getUsername()},function(users){
-     console.log("messaged users are ");
-     console.log(users);
-     $scope.messagedUsers = users;
-     })*/
+
     $http.get('/getMessagedUsers').
         success(function (data) {
             $scope.messagedUsers = data;
@@ -1383,6 +1394,15 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, us
             })
     }
     $scope.getInvitedGroups();
+    $scope.getNetworkedUsersAll = function(){
+        $http.get('/usersinnetworkAll').
+            success(function (data) {
+                console.log(data);
+            }).error(function (err) {
+                console.log(err);
+            })
+    }
+    $scope.getNetworkedUsersAll();
     $scope.getRecentMessages = function () {
         $http.get('/getRecentMessages').
             success(function (data) {
@@ -1410,9 +1430,27 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, us
             error(function (err) {
                 console.log(err)
             })
-
     }
-
+    $scope.getPetitions = function () {
+        $http.get('getPetitionsForUser').
+            success(function (data) {
+                console.log(data)
+                $scope.petitions = data;
+            }).
+            error(function (err) {
+                console.log(err)
+            })
+    }
+    $scope.getPetitions();
+    $scope.deletePetition = function (id) {
+        $http.get('deletePetition/'+id).
+            success(function (data) {
+                console.log(data)
+                $scope.getPetitions();
+            }).error(function (err) {
+                console.log(err)
+            })
+    }
 });
 
 app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing, $timeout) {

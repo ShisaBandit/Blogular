@@ -15,6 +15,7 @@ var express = require('express')
     , commentRoutes = require('./routes/comments')
     , fileHandlerRoutes = require('./routes/fileHandler')
     , messageRoutes = require('./routes/messageRoutes')
+    , petitionRoutes = require('./routes/petitions')
     , apiv2 = require('./routes/apiv2')
     , path = require('path')
     , fs = require('fs')
@@ -252,7 +253,9 @@ app.get('/invite/:wallid/:user',blogRoutes.sendWallInvite);
 app.get('/block/:wallid/:user',blogRoutes.block);
 app.get('/getFriendsMemorials',blogRoutes.getFriendsMemorials);
 app.get('/removeself/:wall',blogRoutes.selfRemove);
-app.get('/usersinnetwork/:search',blogRoutes.usersInNetwork)
+app.get('/usersinnetwork/:search',blogRoutes.usersInNetwork);
+//app.get('/usersinnetworkAll',blogRoutes.usersInNetworkAll);
+
 app.get('/subscribed/:id',blogRoutes.subscribed);///TODO:THE NAMES HERE ARE WRONG"!!!! FIX THESE
 app.get('/selfremove/:id',blogRoutes.selfremove);
 app.get('/selfremove/:id',blogRoutes.subscribedto);
@@ -268,6 +271,11 @@ app.get('/getMessages/:username',messageRoutes.getMessagesForUser);
 //password recover
 app.post('/passrecover',authRoutes.passrecover);
 app.post('/updatepass',authRoutes.updatePass);
+
+//petition using apiv2
+app.get('/getPetitionsForUser',passport.ensureAuthenticated,petitionRoutes.getAllPetitionsForUser);
+app.post('/updatePetition',passport.ensureAuthenticated,petitionRoutes.updatePetition);
+app.get('/deletePetition/:id',passport.ensureAuthenticated,petitionRoutes.deletePetition);
 var server = http.createServer(app).listen(app.get('port'), app.get('ip'), function () {
     console.log("server listening " + app.get('ip') + ':' + app.get('port'));
 });
