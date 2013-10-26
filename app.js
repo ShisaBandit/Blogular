@@ -253,7 +253,7 @@ app.get('/block/:wallid/:user',blogRoutes.block);
 app.get('/getFriendsMemorials',blogRoutes.getFriendsMemorials);
 app.get('/removeself/:wall',blogRoutes.selfRemove);
 app.get('/usersinnetwork/:search',blogRoutes.usersInNetwork)
-app.get('/subscribed/:id',blogRoutes.subscribed);
+app.get('/subscribed/:id',blogRoutes.subscribed);///TODO:THE NAMES HERE ARE WRONG"!!!! FIX THESE
 app.get('/selfremove/:id',blogRoutes.selfremove);
 app.get('/selfremove/:id',blogRoutes.subscribedto);
 app.get('/notifications',blogRoutes.notifications);

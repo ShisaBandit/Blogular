@@ -1,7 +1,7 @@
 var app = angular.module('blogApp', [
         'twitterService', 'userService', 'http-auth-interceptor', 'login', 'socketio', 'updateService',
         'Scope.onReady', 'blogResource', 'loaderModule', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries', 'Plugin.Controller.GroupEntries',
-        'blogFilter', 'blogService', 'infinite-scroll', 'dropzone', 'apiResource','ui.bootstrap'
+        'blogFilter', 'blogService', 'infinite-scroll', 'dropzone', 'apiResource', 'ui.bootstrap'
     ]).
     config(function ($routeProvider) {
         $routeProvider.
@@ -13,7 +13,6 @@ var app = angular.module('blogApp', [
             when("/AddBlogEntry", {templateUrl: "partials/admin/createBlogEntry.html"}).
             //when("/blog/:id", {templateUrl: "partials/blogEntry.html"}).
             when("/angel/:id", {templateUrl: "partials/blogEntry.html"}).
-
             when("/StartGroup", {templateUrl: "partials/admin/createGroup.html"}).
             when("/group/:id", {templateUrl: "partials/groupHome.html"}).
             when("/groupPreview/:id", {templateUrl: "partials/groupHomePublic.html"}).
@@ -23,24 +22,24 @@ var app = angular.module('blogApp', [
             when("/petition/:title", {templateUrl: "partials/petition.html"}).
             when("/registration", {templateUrl: "partials/registration.html"}).
             when("/profile/:username", {templateUrl: "partials/userprofile.html"}).
-            when("/AddBlogEntry/uploadportrait/:id",{templateUrl:"partials/admin/addportrait.html"}).
-            when("/AddBlogEntry/uploadspread/:id",{templateUrl:"partials/admin/addspread.html"}).
-            when("/inviteblock/:wall",{templateUrl:"partials/inviteblock.html"}).
-            when("/deletewall/:wall",{templateUrl:"partials/deletewall.html"}).
-            when("/rules",{templateUrl:"partials/rules.html"}).
-            when("/addworkshop",{templateUrl:"partials/addWorkshop.html"}).
-            when("/editworkshop",{templateUrl:"partials/editWorkshop.html"}).
-            when("/deleteworkshop",{templateUrl:"partials/deleteWorkshop.html"}).
-            when("/workshops",{templateUrl:"partials/workshops.html"}).
-            when("/pets",{templateUrl:"partials/pets.html"}).
-            when("/editwall/:wall",{templateUrl:"partials/editwall.html"}).
-            when("/passwordrecovery",{templateUrl:"partials/forgotpassword.html"}).
-            when("/updatepass",{templateUrl:"partials/updatepass.html"}).
-            when("/editprofile",{templateUrl:"partials/editprofile.html"})
+            when("/AddBlogEntry/uploadportrait/:id", {templateUrl: "partials/admin/addportrait.html"}).
+            when("/AddBlogEntry/uploadspread/:id", {templateUrl: "partials/admin/addspread.html"}).
+            when("/inviteblock/:wall", {templateUrl: "partials/inviteblock.html"}).
+            when("/deletewall/:wall", {templateUrl: "partials/deletewall.html"}).
+            when("/rules", {templateUrl: "partials/rules.html"}).
+            when("/addworkshop", {templateUrl: "partials/addWorkshop.html"}).
+            when("/editworkshop", {templateUrl: "partials/editWorkshop.html"}).
+            when("/deleteworkshop", {templateUrl: "partials/deleteWorkshop.html"}).
+            when("/workshops", {templateUrl: "partials/workshops.html"}).
+            when("/pets", {templateUrl: "partials/pets.html"}).
+            when("/editwall/:wall", {templateUrl: "partials/editwall.html"}).
+            when("/passwordrecovery", {templateUrl: "partials/forgotpassword.html"}).
+            when("/updatepass", {templateUrl: "partials/updatepass.html"}).
+            when("/editprofile", {templateUrl: "partials/editprofile.html"})
     });
-app.directive('fdatepicker',function(){
+app.directive('fdatepicker', function () {
     return{
-        link:function(scopee,ele,attr){
+        link: function (scopee, ele, attr) {
             ele.fdatepicker();
             ele.fdatepicker('hide')
         }
@@ -49,7 +48,7 @@ app.directive('fdatepicker',function(){
 app.directive('closeparent', function () {
     return {
         link: function (scope, ele, attr) {
-            ele.click(function(){
+            ele.click(function () {
                 ele.parent().slideUp();
             });
         }
@@ -74,11 +73,10 @@ app.directive('becomeMainContent', function () {
     }
 });
 
-app.directive('reflow',function(){
+app.directive('reflow', function () {
     return{
-        link:function(scope,ele)
-        {
-            console.log("reflowing a "+ele);
+        link: function (scope, ele) {
+            console.log("reflowing a " + ele);
             ele.foundation('section', 'reflow');
         }
     }
@@ -92,11 +90,6 @@ app.directive('nivogallery', function () {
         }
     }
 })
-
-
-
-
-
 
 
 app.directive('fixedMenu', function () {
@@ -142,23 +135,23 @@ app.directive('revealModal', function () {
             scope.$on('event:auth-registered', function () {
                 console.log("registered event fired in directive");
                 /*
-                if (attrs.revealModal == 'register') {
-                    elm.foundation('reveal', 'close');
-                }
-                */
+                 if (attrs.revealModal == 'register') {
+                 elm.foundation('reveal', 'close');
+                 }
+                 */
                 if (attrs.revealModal == 'login') {
                     scope.message = 'Please fill out your user details';
                     elm.foundation('reveal', 'open');
                 }
             });
-            scope.$on('event:message-sent',function(){
+            scope.$on('event:message-sent', function () {
                 console.log("registered event message sent closing modal view");
-                if(attrs.revealModal =='message'){
+                if (attrs.revealModal == 'message') {
                     console.log("EVENT TRIGGERED" + event);
-                    elm.foundation('reveal','close');
+                    elm.foundation('reveal', 'close');
                 }
             });
-            scope.$on('event:forgot-password',function(){
+            scope.$on('event:forgot-password', function () {
                 if (attrs.revealModal == 'login') {
                     elm.foundation('reveal', 'close');
                 }
@@ -240,7 +233,7 @@ app.directive('autoscroll', function () {
 
 app.directive('dropzone', function (dropzone, $rootScope) {
     return{
-       // scope:{},
+        // scope:{},
         restrict: 'E',
         link: function (scope, elm, attrs) {
 
@@ -248,24 +241,24 @@ app.directive('dropzone', function (dropzone, $rootScope) {
             var maxImages;
             scope.images = 0;
             console.log(attrs.autoupload);
-            if(attrs.autoupload == undefined){
+            if (attrs.autoupload == undefined) {
                 console.log("autoupload == false")
                 attrs.autoupload = true;
             }
             var dropzoneOptions = {
-                url:attrs.url,
+                url: attrs.url,
 
-                autoProcessQueue:(attrs.autoupload == "true" ? true:false),
-                addRemoveLinks:(attrs.addremovelinks == "true" ? true: false)
+                autoProcessQueue: (attrs.autoupload == "true" ? true : false),
+                addRemoveLinks: (attrs.addremovelinks == "true" ? true : false)
             }
             //make a maxsize so can make a dropzone that only accepts
             //a set number of images
             //TODO:TEST ALL THIS STUFF
             console.log(dropzoneOptions)
-            dropzone.createDropzone(elm,attrs.url, dropzoneOptions,attrs.id);
-            if(attrs.maximages != undefined){
+            dropzone.createDropzone(elm, attrs.url, dropzoneOptions, attrs.id);
+            if (attrs.maximages != undefined) {
                 //dropzone.setMaxNoImages(parseInt(attrs.maximages,10)+1)
-                maxImages = parseInt(attrs.maximages,10)+1;
+                maxImages = parseInt(attrs.maximages, 10) + 1;
 
             }
             $rootScope.dropzone = dropzone;
@@ -273,14 +266,14 @@ app.directive('dropzone', function (dropzone, $rootScope) {
                 $rootScope.$broadcast('uploadedFile', {file: file});
             })
             dropzone.registerEvent("addedfile", elm, function (file) {
-                     scope.images++;
-                if(
+                scope.images++;
+                if (
                     maxImages != 0 &&
-                    maxImages <= scope.images
+                        maxImages <= scope.images
 
-                ){
+                    ) {
                     dropzone.removeFile(file);
-                }else{
+                } else {
                     dropzone.setFileLoadedInUi(file);
 
                     $rootScope.$broadcast('addedFile', {file: file});
@@ -290,17 +283,17 @@ app.directive('dropzone', function (dropzone, $rootScope) {
                 //console.log(file);
                 /* Maybe display some more file information on your page */
             });
-            dropzone.registerEvent('removedFile',elm,function(file){
+            dropzone.registerEvent('removedFile', elm, function (file) {
                 scope.images--;
             })
             dropzone.registerEvent("sending", elm, function (file, xhr, formData) {
-                if(scope.$parent.blogId != undefined)
-                    formData.append('blogId',scope.$parent.blogId.blogId);
-                if(scope.entry != undefined)
+                if (scope.$parent.blogId != undefined)
+                    formData.append('blogId', scope.$parent.blogId.blogId);
+                if (scope.entry != undefined)
                     formData.append("memwall", scope.entry._id);
             });
-            scope.$on('uploadit',function(event,data){
-                 dropzone.uploadFile(data.file);
+            scope.$on('uploadit', function (event, data) {
+                dropzone.uploadFile(data.file);
             })
         }
     }
@@ -338,44 +331,44 @@ app.factory('categoryService', function () {
     ];
 });
 
-app.factory('groupsListing',function(){
+app.factory('groupsListing', function () {
     return[
-        {name:"Mother",code:0},
-        {name:"Father",code:1},
-        {name:"Husband",code:2},
-        {name:"Wife",code:3},
-        {name:"Son",code:4},
-        {name:"Daughter",code:5},
-        {name:"Brother",code:6},
-        {name:"Sister",code:7},
-        {name:"Grandfather",code:8},
-        {name:"Grandmother",code:9},
-        {name:"Grandchild",code:10},
-        {name:"Stepmother",code:15},
-        {name:"Stepfather",code:16},
-        {name:"Stepbrother",code:17},
-        {name:"Stepsister",code:18},
-        {name:"Godfather",code:11},
-        {name:"Godmother",code:12},
-        {name:"Godson",code:13},
-        {name:"Goddaughter",code:14},
-        {name:"Aunt",code:19},
-        {name:"Uncle",code:20},
-        {name:"Cousin",code:21},
-        {name:"Niece",code:22},
-        {name:"Nephew",code:23},
-        {name:"Fiance",code:24},
-        {name:"Boyfriend",code:25},
-        {name:"Girlfriend",code:26},
-        {name:"Mother-in-law",code:27},
-        {name:"Father-in-law",code:28},
-        {name:"Brother-in-law",code:29},
-        {name:"Sister-in-law",code:30},
-        {name:"Partner",code:31},
-        {name:"Friend",code:32},
-        {name:"Colleague",code:33},
-        {name:"Teacher",code:34},
-        {name:"Mentor",code:35}
+        {name: "Mother", code: 0},
+        {name: "Father", code: 1},
+        {name: "Husband", code: 2},
+        {name: "Wife", code: 3},
+        {name: "Son", code: 4},
+        {name: "Daughter", code: 5},
+        {name: "Brother", code: 6},
+        {name: "Sister", code: 7},
+        {name: "Grandfather", code: 8},
+        {name: "Grandmother", code: 9},
+        {name: "Grandchild", code: 10},
+        {name: "Stepmother", code: 15},
+        {name: "Stepfather", code: 16},
+        {name: "Stepbrother", code: 17},
+        {name: "Stepsister", code: 18},
+        {name: "Godfather", code: 11},
+        {name: "Godmother", code: 12},
+        {name: "Godson", code: 13},
+        {name: "Goddaughter", code: 14},
+        {name: "Aunt", code: 19},
+        {name: "Uncle", code: 20},
+        {name: "Cousin", code: 21},
+        {name: "Niece", code: 22},
+        {name: "Nephew", code: 23},
+        {name: "Fiance", code: 24},
+        {name: "Boyfriend", code: 25},
+        {name: "Girlfriend", code: 26},
+        {name: "Mother-in-law", code: 27},
+        {name: "Father-in-law", code: 28},
+        {name: "Brother-in-law", code: 29},
+        {name: "Sister-in-law", code: 30},
+        {name: "Partner", code: 31},
+        {name: "Friend", code: 32},
+        {name: "Colleague", code: 33},
+        {name: "Teacher", code: 34},
+        {name: "Mentor", code: 35}
     ];
 })
 
@@ -386,7 +379,7 @@ app.service('userInfoService', function () {
         getUsername: function () {
             return username;
         },
-        setUsername: function (value,id) {
+        setUsername: function (value, id) {
             username = value;
             _id = id;
         }
@@ -404,8 +397,7 @@ app.controller('blogEntryPicCtrl', function ($scope) {
     $scope.test = "TEST RESULT";
 });
 
-app.controller('blogEntryCtrl', function ($scope, $location, show, Blog,
-                                          $routeParams, socket, $rootScope, $http, dropzone,api) {
+app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http, dropzone, api) {
 
 
     $scope.parentObject = {
@@ -459,21 +451,22 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog,
         //TODO:Checkk this
         console.log("submitvideo");
         console.log($scope.entry._id);
-         api.createSubDocResource('Blog',$scope.entry._id,'postText',{
-             embedYouTube:$scope.embedYouTube,embedAnimoto:$scope.embedAnimoto,postType:2
-         },function(){
+        api.createSubDocResource('Blog', $scope.entry._id, 'postText', {
+            embedYouTube: $scope.embedYouTube, embedAnimoto: $scope.embedAnimoto, postType: 2
+        }, function () {
             console.log("video sent");
             $scope.embedYouTube = "";
             $scope.embedAnimoto = "";
-         })
+        })
     }
     $scope.submitEvent = function () {
-        api.createSubDocResource('Blog',$scope.entry._id,'postText',{
-            event:  $scope.event,
-            date:$scope.eventdate,
-            text:$scope.eventdesc,
-            postType:3
-        },function(){})
+        api.createSubDocResource('Blog', $scope.entry._id, 'postText', {
+            event: $scope.event,
+            date: $scope.eventdate,
+            text: $scope.eventdesc,
+            postType: 3
+        }, function () {
+        })
 
     }
 
@@ -581,13 +574,12 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog,
      */
 
 
-    Blog.get({id: $routeParams.id}, function (blog)
-        {
+    Blog.get({id: $routeParams.id}, function (blog) {
             console.log('got blog');
             console.log(blog[0].limited);
             console.log(blog[0]);
             $scope.entry = blog[0];
-            console.log('wall limited? '+blog[0].limited    )
+            console.log('wall limited? ' + blog[0].limited)
             if (blog[0].limited) {
                 $scope.profileMenuViewable = false;
                 $location.path("/public/" + $routeParams.id);
@@ -622,8 +614,7 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog,
     })
 });
 
-app.controller('groupEntryCtrl', function ($scope, $location, show, Blog,
-                                          $routeParams, socket, $rootScope, $http, dropzone,api) {
+app.controller('groupEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http, dropzone, api) {
 
 
     $scope.parentObject = {
@@ -677,21 +668,22 @@ app.controller('groupEntryCtrl', function ($scope, $location, show, Blog,
         //TODO:Checkk this
         console.log("submitvideo");
         console.log($scope.entry._id);
-        api.createSubDocResource('Blog',$scope.entry._id,'postText',{
-            embedYouTube:$scope.embedYouTube,embedAnimoto:$scope.embedAnimoto,postType:2
-        },function(){
+        api.createSubDocResource('Blog', $scope.entry._id, 'postText', {
+            embedYouTube: $scope.embedYouTube, embedAnimoto: $scope.embedAnimoto, postType: 2
+        }, function () {
             console.log("video sent");
             $scope.embedYouTube = "";
             $scope.embedAnimoto = "";
         })
     }
     $scope.submitEvent = function () {
-        api.createSubDocResource('Blog',$scope.entry._id,'postText',{
-            event:  $scope.event,
-            date:$scope.eventdate,
-            text:$scope.eventdesc,
-            postType:3
-        },function(){})
+        api.createSubDocResource('Blog', $scope.entry._id, 'postText', {
+            event: $scope.event,
+            date: $scope.eventdate,
+            text: $scope.eventdesc,
+            postType: 3
+        }, function () {
+        })
 
     }
 
@@ -799,8 +791,7 @@ app.controller('groupEntryCtrl', function ($scope, $location, show, Blog,
      */
 
 
-    Blog.get({id: $routeParams.id}, function (blog)
-        {
+    Blog.get({id: $routeParams.id}, function (blog) {
             console.log('got blog');
             console.log(blog[0].limited);
             console.log(blog[0]);
@@ -882,7 +873,7 @@ app.controller('WelcomeCtrl', function ($scope, $rootScope) {
         if (
             current.templateUrl == "partials/blog.html"
                 ||
-            current.templateUrl == undefined) {
+                current.templateUrl == undefined) {
             $scope.groupingViewable = false;
         } else {
             $scope.groupingViewable = true;
@@ -894,7 +885,7 @@ app.controller('WelcomeCtrl', function ($scope, $rootScope) {
     }
 });
 
-app.controller('LoginController', function ($scope, $http, authService, userInfoService, socket, $rootScope,$location,$window) {
+app.controller('LoginController', function ($scope, $http, authService, userInfoService, socket, $rootScope, $location, $window) {
     $scope.error = "";
     $scope.message = "";
     $scope.loginAttempt = false;
@@ -913,8 +904,8 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
                 $scope.error = "Failed to connect to server please check your connection";
             });
     };
-    $scope.forgot = function(){
-       $rootScope.$broadcast('event:forgot-password');
+    $scope.forgot = function () {
+        $rootScope.$broadcast('event:forgot-password');
     }
 
     socket.on('connect', function () {
@@ -950,7 +941,7 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
 
 });
 
-app.controller('messageController', function ($scope,api, $http, authService, userInfoService, socket, $rootScope,$location,$window,limitToFilter) {
+app.controller('messageController', function ($scope, api, $http, authService, userInfoService, socket, $rootScope, $location, $window, limitToFilter) {
     $scope.error = "";
     $scope.message = "";
     $scope.loginAttempt = false;
@@ -972,20 +963,20 @@ app.controller('messageController', function ($scope,api, $http, authService, us
 
     //$scope.selected = undefined;
     //$scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-    $scope.getPossibles = function(userdata){
+    $scope.getPossibles = function (userdata) {
         console.log(userdata)
-        return $http.get('usersinnetwork/'+$scope.selected).
-            then(function(data){
+        return $http.get('usersinnetwork/' + $scope.selected).
+            then(function (data) {
                 console.log(data);
-                return limitToFilter(data.data,15);
+                return limitToFilter(data.data, 15);
             })
     }
-    $scope.sendMessage = function(){
-        api.createResource('Message',{to:$scope.selected,from:$scope.form.from,message:$scope.form.message},function(data,status){
+    $scope.sendMessage = function () {
+        api.createResource('Message', {to: $scope.selected, from: $scope.form.from, message: $scope.form.message}, function (data, status) {
             console.log(status);
-            if(status == 400){
+            if (status == 400) {
                 $scope.message = data;
-            }else{
+            } else {
                 $scope.message = "message sent!!"
                 $scope.form.message = "";
                 $scope.selected = "";
@@ -1001,7 +992,7 @@ app.controller('messageController', function ($scope,api, $http, authService, us
 
 });
 
-app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket,groupsListing,$timeout) {
+app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket, groupsListing, $timeout) {
     $scope.form = {};
     $scope.subgroup = [];
     $scope.form.groupcode;
@@ -1011,7 +1002,7 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket,group
     $scope.groups = groupsListing;
     $scope.selectedGroup = undefined;
     $scope.form.groupcode = $scope.groups[0].code;
-    $scope.checked = function(){
+    $scope.checked = function () {
         console.log($scope.selectedGroup)
         $scope.form.groupcode = $scope.selectedGroup.code;
     }
@@ -1028,24 +1019,23 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket,group
                 }
             }).
             error(function (err) {
-                if(err){
+                if (err) {
                     $scope.message = {};
                     console.log(err)
-                    for(var error in err)
-                    {
+                    for (var error in err) {
                         console.log(err[error].msg)
-                            $scope.message[error] = err[error].msg;
+                        $scope.message[error] = err[error].msg;
                     }
                     $rootScope.$broadcast('event:reg-error');
                     return;
                 }
-               // $scope.message = "Registration failed please check connection";
+                // $scope.message = "Registration failed please check connection";
             });
 
     }
-    $scope.open = function(no) {
-        $timeout(function() {
-                $scope.opened = true;
+    $scope.open = function (no) {
+        $timeout(function () {
+            $scope.opened = true;
         });
     };
 });
@@ -1194,7 +1184,7 @@ app.controller('GrpLatestCtrl', function ($scope, $http, $routeParams, socket) {
     })
 });
 
-app.controller('PicsCtrl', function ($rootScope,$scope, $http,api) {
+app.controller('PicsCtrl', function ($rootScope, $scope, $http, api) {
     $scope.pics = [];
     $scope.createalbum = [];
     $scope.blogId = "";
@@ -1213,90 +1203,90 @@ app.controller('PicsCtrl', function ($rootScope,$scope, $http,api) {
                 console.log(data);
                 $scope.pics = data;
             })
-        $http.get('/albums/'+$scope.blogId).
-            success(function(data){
+        $http.get('/albums/' + $scope.blogId).
+            success(function (data) {
                 $scope.albums = data;
             })
     });
-    $scope.addpictoalbum = function(){
+    $scope.addpictoalbum = function () {
         console.log(pic);
-        for(var pic in $scope.pics){
+        for (var pic in $scope.pics) {
             console.log($scope.pics[pic][pic])
         }
     }
 
-    $scope.addnewalbum= function(){
+    $scope.addnewalbum = function () {
         $scope.addingNewAlbum = true;
         $scope.updatingAlbum = false;
-       // api.createSubDocResource('album',$scope.blogId,$scope.createalbum,function(){
+        // api.createSubDocResource('album',$scope.blogId,$scope.createalbum,function(){
 
         //})
     }
-    $scope.addtoalbum = function(){
+    $scope.addtoalbum = function () {
         $scope.updatingAlbum = true;
-                   //get list of albums to display
-        $http.get('/albums/'+$scope.blogId).
-            success(function(data){
+        //get list of albums to display
+        $http.get('/albums/' + $scope.blogId).
+            success(function (data) {
                 $scope.albums = data;
             })
     }
     /*
-    $scope.albumAdded = function(id){
-        $scope.createalbum.push(id);
-    }  */
-    $scope.createAlbum = function(){
+     $scope.albumAdded = function(id){
+     $scope.createalbum.push(id);
+     }  */
+    $scope.createAlbum = function () {
         var picstoadd = [];//filter $Scope.pics check
-        for(var pic in $scope.pics){
-                if($scope.pics[pic][pic] == true){
-                    picstoadd.push($scope.pics[pic]);
-                }
-        }
-          $http.post('/createNewAlbum/'+$scope.blogId,{name:$scope.albumName,pics:picstoadd}).
-              success(function(){
-                 console.log("created")
-                  $scope.albumName = "";
-                  for(var pics in $scope.pics){
-                      $scope.pics[pic][pic] = false;
-                  }
-                  $scope.addingNewAlbum = false;
-              }).
-              error(function(){
-                  console.log("error");
-              })
-
-    }
-    $scope.createAlbumCancel = function(){
-        $scope.addingNewAlbum = false;
-        $scope.updatingAlbum = false;
-    }
-    $scope.updateAlbum = function(albumid){
-        var picstoadd = [];
-        for(var pic in $scope.pics){
-            if($scope.pics[pic][pic] == true){
+        for (var pic in $scope.pics) {
+            if ($scope.pics[pic][pic] == true) {
                 picstoadd.push($scope.pics[pic]);
             }
         }
-
-        $http.post('/updateAlbum/'+$scope.blogId,{albumid:albumid, pics:picstoadd}).
-            success(function(){
+        $http.post('/createNewAlbum/' + $scope.blogId, {name: $scope.albumName, pics: picstoadd}).
+            success(function () {
                 console.log("created")
                 $scope.albumName = "";
-                for(var pics in $scope.pics){
+                for (var pics in $scope.pics) {
                     $scope.pics[pic][pic] = false;
                 }
                 $scope.addingNewAlbum = false;
             }).
-            error(function(){
+            error(function () {
+                console.log("error");
+            })
+
+    }
+    $scope.createAlbumCancel = function () {
+        $scope.addingNewAlbum = false;
+        $scope.updatingAlbum = false;
+    }
+    $scope.updateAlbum = function (albumid) {
+        var picstoadd = [];
+        for (var pic in $scope.pics) {
+            if ($scope.pics[pic][pic] == true) {
+                picstoadd.push($scope.pics[pic]);
+            }
+        }
+
+        $http.post('/updateAlbum/' + $scope.blogId, {albumid: albumid, pics: picstoadd}).
+            success(function () {
+                console.log("created")
+                $scope.albumName = "";
+                for (var pics in $scope.pics) {
+                    $scope.pics[pic][pic] = false;
+                }
+                $scope.addingNewAlbum = false;
+            }).
+            error(function () {
                 console.log("error");
             })
     }
 
-    $scope.showAlbum = function(albumid){
-        $http.get('/showAlbum/'+$scope.blogId+'/'+albumid).
-            success(function(data){
+    $scope.showAlbum = function (albumid) {
+        $http.get('/showAlbum/' + $scope.blogId + '/' + albumid).
+            success(function (data) {
                 $scope.pics = data;
             }).
-            error(function(){
+            error(function () {
 
             })
     }
@@ -1328,73 +1318,96 @@ app.controller('PetitionEntryCtrl', function ($scope, api, $routeParams) {
     });
     $scope.signPetition = function () {
         console.log($scope.petition)
-        api.createSubDocResource('Petition', $scope.petition[0]._id, 'signatures',function(){
+        api.createSubDocResource('Petition', $scope.petition[0]._id, 'signatures', function () {
 
         });
     }
 });
-app. controller('UserProfileCtrl', function ($scope, api, $routeParams,$http,userInfoService) {
+app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, userInfoService) {
     $scope.messagedUsers = [];
     $scope.messages = [];
-    $scope.walls =[];
-    api.getResourceByField('User', {field:"username",query:$routeParams.username}, function (user) {
+    $scope.walls = [];
+    $scope.invitedGroups;
+    api.getResourceByField('User', {field: "username", query: $routeParams.username}, function (user) {
         $scope.user = user[0];
         //get all angel profiles(blogs) that this user has in his profile id
     });
     $http.get('/blogdataforuser').
-        success(function(data){
+        success(function (data) {
             console.log(data);
             $scope.angels = data;
         })
     /*
-    api.getResourceByField('User',{field:"username",query:userInfoService.getUsername()},function(users){
-        console.log("messaged users are ");
-        console.log(users);
-        $scope.messagedUsers = users;
-    })*/
+     api.getResourceByField('User',{field:"username",query:userInfoService.getUsername()},function(users){
+     console.log("messaged users are ");
+     console.log(users);
+     $scope.messagedUsers = users;
+     })*/
     $http.get('/getMessagedUsers').
-        success(function(data){
+        success(function (data) {
             $scope.messagedUsers = data;
         })
 
     $http.get('/getGroups').
-        success(function(data){
+        success(function (data) {
             $scope.groups = data;
         })
-    $scope.getFriendsMemorials = function(){
-    $http.get('getFriendsMemorials').
-        success(function(data){
-            $scope.walls = data;
-            console.log(data)
-        }).
-        error(function(err){
-            console.log(err)
-        })
+    $scope.getFriendsMemorials = function () {
+        $http.get('getFriendsMemorials').
+            success(function (data) {
+                $scope.walls = data;
+                console.log(data)
+            }).
+            error(function (err) {
+                console.log(err)
+            })
     }
     $scope.getFriendsMemorials();
-    $scope.getMessages = function(mUser){
-        $http.get('/getMessages/'+mUser).
-            success(function(data){
+    $scope.getMessages = function (mUser) {
+        $http.get('/getMessages/' + mUser).
+            success(function (data) {
                 $scope.messages = data;
             })
     }
 
 
+    $scope.getInvitedGroups = function () {
+        $http.get('getInvitedGroup').
+            success(function (data) {
+                console.log(data)
+                $scope.invitedGroups = data;
+            }).
+            error(function (err) {
+                console.log(data)
 
-    $scope.getRecentMessages = function(){
+            })
+    }
+    $scope.getInvitedGroups();
+    $scope.getRecentMessages = function () {
         $http.get('/getRecentMessages').
-            success(function(data){
+            success(function (data) {
                 console.log(data);
             })
     }
 
-    $scope.removeself = function(wall){
-        $http.get('removeself/'+wall).
-            success(function(data){
+    $scope.removeself = function (wall) {
+        $http.get('removeself/' + wall).
+            success(function (data) {
                 console.log(data)
                 $scope.getFriendsMemorials();
             }).
-            error(function(err){
+            error(function (err) {
+                console.log(err)
+            })
+
+    }
+    $scope.removeselfgroup = function (wall) {
+        $http.get('removeself/' + wall).
+            success(function (data) {
+                console.log(data)
+                $scope.getInvitedGroups();
+            }).
+            error(function (err) {
                 console.log(err)
             })
 
@@ -1402,31 +1415,30 @@ app. controller('UserProfileCtrl', function ($scope, api, $routeParams,$http,use
 
 });
 
-app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog,$rootScope,groupsListing,$timeout) {
+app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing, $timeout) {
     $scope.template = {};
     $scope.hidemainform = false;
-    $scope.blogId = {blogId:""};
+    $scope.blogId = {blogId: ""};
     $scope.addedFile = {};
-    $scope.author = {author:""};
+    $scope.author = {author: ""};
     $scope.groups = groupsListing;
     $scope.message = {};
     $scope.selectedGroup = undefined;
     $scope.form = {};
-    $scope.checked = function(){
+    $scope.checked = function () {
         console.log($scope.selectedGroup)
         $scope.form.subgroup = $scope.selectedGroup.code;
     }
     $scope.submitPost = function () {
 
-        BlogsService.updateBlog($scope.form,function(err,res){
-            if(err){
+        BlogsService.updateBlog($scope.form, function (err, res) {
+            if (err) {
                 $scope.message = {};
-                for(var error in err.data)
-                {
-                    if(error == "author"){
+                for (var error in err.data) {
+                    if (error == "author") {
                         $scope.message.url = err.data.author.msg;
                     }
-                    else{
+                    else {
                         $scope.message[error] = err.data[error].msg;
                     }
                 }
@@ -1442,69 +1454,68 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog,$rootScope,gr
             $scope.hidemainform = true;
         });
     }
-    $rootScope.$on('addedFile',function(event,file){
+    $rootScope.$on('addedFile', function (event, file) {
         console.log("addedfile");
         console.log($scope.addedFile);
         $scope.addedFile = file.file;
     })
-    $scope.submitportrait = function(){
+    $scope.submitportrait = function () {
 
 
-        $rootScope.$broadcast('uploadit',{file:$scope.addedFile});
+        $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
 
-        $rootScope.$on('uploadedFile',function(){
-            console.log("completed now spreadem")  ;
+        $rootScope.$on('uploadedFile', function () {
+            console.log("completed now spreadem");
 
             $scope.$parent.template.url = 'partials/admin/addspread.html';
             $scope.$apply()
         })
     }
-    $scope.submitspread = function(){
+    $scope.submitspread = function () {
 
 
         console.log("addedfile");
         console.log($scope.addedFile);
-        $rootScope.$broadcast('uploadit',{file:$scope.addedFile});
+        $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
 
-        $rootScope.$on('uploadedFile',function(){
+        $rootScope.$on('uploadedFile', function () {
             $scope.$parent.template.url = 'partials/admin/mwregcom.html';
             $scope.$apply()
         })
 
     }
-    $scope.open = function(no) {
-        $timeout(function() {
-            if(no == 1){
+    $scope.open = function (no) {
+        $timeout(function () {
+            if (no == 1) {
                 $scope.opened1 = true;
             }
-            if(no == 2){
+            if (no == 2) {
                 $scope.opened2 = true;
             }
         });
     };
 });
 
-app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog,$rootScope,groupsListing) {
+app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing) {
     $scope.template = {};
     $scope.hidemainform = false;
-    $scope.blogId = {blogId:""};
+    $scope.blogId = {blogId: ""};
     $scope.addedFile = {};
-    $scope.author = {author:""};
+    $scope.author = {author: ""};
     $scope.groups = groupsListing;
     $scope.form = {};
     $scope.message = {};
     $scope.submitPost = function () {
 
         $scope.form.group = true;
-        BlogsService.updateBlog($scope.form,function(err,res){
-            if(err){
+        BlogsService.updateBlog($scope.form, function (err, res) {
+            if (err) {
                 $scope.message = {};
-                for(var error in err.data)
-                {
-                    if(error == "author"){
+                for (var error in err.data) {
+                    if (error == "author") {
                         $scope.message.url = err.data.author.msg;
                     }
-                    else{
+                    else {
                         $scope.message[error] = err.data[error].msg;
                     }
                 }
@@ -1520,31 +1531,31 @@ app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog,$rootScope,g
             $scope.hidemainform = true;
         });
     }
-    $rootScope.$on('addedFile',function(event,file){
+    $rootScope.$on('addedFile', function (event, file) {
         console.log("addedfile");
         console.log($scope.addedFile);
         $scope.addedFile = file.file;
     })
-    $scope.submitportrait = function(){
+    $scope.submitportrait = function () {
 
 
-        $rootScope.$broadcast('uploadit',{file:$scope.addedFile});
+        $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
 
-        $rootScope.$on('uploadedFile',function(){
-            console.log("completed now spreadem")  ;
+        $rootScope.$on('uploadedFile', function () {
+            console.log("completed now spreadem");
 
             $scope.$parent.template.url = 'partials/admin/addGroupBG.html';
             $scope.$apply()
         })
     }
-    $scope.submitspread = function(){
+    $scope.submitspread = function () {
 
 
         console.log("addedfile");
         console.log($scope.addedFile);
-        $rootScope.$broadcast('uploadit',{file:$scope.addedFile});
+        $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
 
-        $rootScope.$on('uploadedFile',function(){
+        $rootScope.$on('uploadedFile', function () {
             $scope.$parent.template.url = 'partials/admin/mwregcom.html';
             $scope.$apply()
         })
@@ -1552,7 +1563,7 @@ app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog,$rootScope,g
     }
 });
 
-app.controller('VideoCtrl', function ($scope, BlogsService, Blog,$rootScope,$http) {
+app.controller('VideoCtrl', function ($scope, BlogsService, Blog, $rootScope, $http) {
     $scope.videos = [];
     $scope.blogId = "";
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
@@ -1573,18 +1584,18 @@ app.controller('VideoCtrl', function ($scope, BlogsService, Blog,$rootScope,$htt
         })
 
 });
-app.controller('AnniCtrl',function($scope,api,$http){
+app.controller('AnniCtrl', function ($scope, api, $http) {
     $scope.anis = [];
     $scope.blogId = "";
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
         /*
-        api.getResourceById('Blog',newVal,function(blogs){
-            console.log(blogs[0]);
-            $scope.anis = blogs[0].anniverssaryDays;
-        })
-        */
+         api.getResourceById('Blog',newVal,function(blogs){
+         console.log(blogs[0]);
+         $scope.anis = blogs[0].anniverssaryDays;
+         })
+         */
         $scope.blogId = newVal;
         $http.get('lastestEvents/' + newVal).
             success(function (data) {
@@ -1599,7 +1610,7 @@ app.controller('AnniCtrl',function($scope,api,$http){
         })
 });
 
-app.controller('groupEvntCtrl',function($scope,api,$http){
+app.controller('groupEvntCtrl', function ($scope, api, $http) {
     $scope.grpEvnt = [];
     $scope.blogId = "";
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
@@ -1624,102 +1635,101 @@ app.controller('groupEvntCtrl',function($scope,api,$http){
             $scope.anis = data;
         })
 });
-app.controller('FriendsFamilyCtrl',function($scope,api,$routeParams,$http){
+app.controller('FriendsFamilyCtrl', function ($scope, api, $routeParams, $http) {
     $scope.subscribers = [];
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
         //TODO:get users that can access this memwall(blog)
-        $http.get('subscribed/'+$routeParams.id).
-            success(function(data){
+        $http.get('subscribed/' + $routeParams.id).
+            success(function (data) {
                 $scope.subscribers = data;
             })
     });
 });
-app.controller('InviteBlockCtrl',function($scope,api,$http,$routeParams){
+app.controller('InviteBlockCtrl', function ($scope, api, $http, $routeParams) {
     $scope.users = [];
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
         //TODO:get users that can access this memwall(blog)
-        api.getResourceById('User','all',function(data){
+        api.getResourceById('User', 'all', function (data) {
             console.log(data);
             $scope.users = data;
 
         })
     });
-    $scope.invite = function(user){
-        $http.get('invite/'+$routeParams.wall+'/'+user).success(function(data){
+    $scope.invite = function (user) {
+        $http.get('invite/' + $routeParams.wall + '/' + user).success(function (data) {
 
         });
     }
-    $scope.block = function(user){
-        $http.get('block/'+$routeParams.wall+'/'+user).
-            success(function(data){
+    $scope.block = function (user) {
+        $http.get('block/' + $routeParams.wall + '/' + user).
+            success(function (data) {
 
             })
     }
 });
 
 
-app.controller('EditWallCtrl',function($rootScope,$http,$scope,api,$routeParams,BlogsService,groupsListing,$timeout){
+app.controller('EditWallCtrl', function ($rootScope, $http, $scope, api, $routeParams, BlogsService, groupsListing, $timeout) {
     $scope.template = {};
-    $scope.portrait ={portrait:""};
-    $scope.spread ={spread:""};
-    $scope.blogId = {blogId:""};
+    $scope.portrait = {portrait: ""};
+    $scope.spread = {spread: ""};
+    $scope.blogId = {blogId: ""};
     $scope.addedFile = {};
     $scope.form = {};
     $scope.groups = groupsListing;
     $scope.selectedGroup = undefined;
 
-    $scope.checked = function(){
+    $scope.checked = function () {
         console.log($scope.selectedGroup)
         $scope.form.subgroup = $scope.selectedGroup.code;
     }
-    api.getResourceByField('Blog',{field:'author',query:$routeParams.wall},function(data){
+    api.getResourceByField('Blog', {field: 'author', query: $routeParams.wall}, function (data) {
         console.log(data);
         $scope.form = data[0];
         $scope.portrait.portrait = data[0].profilePicPortrait;
         $scope.spread.spread = data[0].profilePicWide;
         $scope.blogId.blogId = data[0]._id;
-        console.log("GROUPS ARE "+$scope.groups)
-        for(var group in $scope.groups){
+        console.log("GROUPS ARE " + $scope.groups)
+        for (var group in $scope.groups) {
             console.log(data[0].subgroup)
-            if($scope.groups[group].code == data[0].subgroup){
-                console.log("found subgroup "+$scope.groups[group])
+            if ($scope.groups[group].code == data[0].subgroup) {
+                console.log("found subgroup " + $scope.groups[group])
                 $scope.selectedGroup = $scope.groups[group];
             }
         }
         $scope.checked();
         console.log($scope.selectedGroup)
         console.log($scope.form);
-        console.log("portrait "+$scope.portrait+" spread "+$scope.spread);
+        console.log("portrait " + $scope.portrait + " spread " + $scope.spread);
     })
     $scope.editPost = function () {
         console.log($scope.form._id);
 
-        $http.post('blog/'+$scope.form._id,$scope.form).
-            success(function(data){
-                 $scope.form = data;
+        $http.post('blog/' + $scope.form._id, $scope.form).
+            success(function (data) {
+                $scope.form = data;
 
 
                 $scope.template.url = '/partials/admin/editportrait.html';
                 $scope.hidemainform = true;
 
-            }).error(function(err){
+            }).error(function (err) {
                 console.log("error");
 
-                if(err){
+                if (err) {
                     console.log(err)
 
                     $scope.message = {};
-                    for(var error in err)
-                    {
+                    for (var error in err) {
 
-                        if(error == "author"){
+                        if (error == "author") {
                             $scope.message.url = err.author.msg;
                         }
-                        else{
+                        else {
                             $scope.message[error] = err[error].msg;
                         }
                     }
@@ -1733,19 +1743,19 @@ app.controller('EditWallCtrl',function($rootScope,$http,$scope,api,$routeParams,
     $scope.deletePost = function () {
         //TODO:Properly imlement this function
         $scope.form.$remove();
-        console.log("blog/"+$scope.form._id);
-        $http.delete('/blog/'+$scope.form._id).
-        success(function(){
-            console.log("wall deleted");
-        }).
-        error(function(){
-            console.log("wall not deleted error");
-        })
+        console.log("blog/" + $scope.form._id);
+        $http.delete('/blog/' + $scope.form._id).
+            success(function () {
+                console.log("wall deleted");
+            }).
+            error(function () {
+                console.log("wall not deleted error");
+            })
     };
     $scope.submitPost = function () {
 
-        BlogsService.updateBlog($scope.form,function(err,res){
-            if(err){
+        BlogsService.updateBlog($scope.form, function (err, res) {
+            if (err) {
                 $scope.message = "Blog entry must have a title.";
             }
 
@@ -1758,139 +1768,139 @@ app.controller('EditWallCtrl',function($rootScope,$http,$scope,api,$routeParams,
             $scope.hidemainform = true;
         });
     }
-    $rootScope.$on('addedFile',function(event,file){
+    $rootScope.$on('addedFile', function (event, file) {
         console.log("addedfile");
         console.log($scope.addedFile);
         $scope.addedFile = file.file;
     })
-    $scope.submitportrait = function(){
+    $scope.submitportrait = function () {
 
 
-        $rootScope.$broadcast('uploadit',{file:$scope.addedFile});
+        $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
 
-        $rootScope.$on('uploadedFile',function(){
-            console.log("completed now spreadem")  ;
+        $rootScope.$on('uploadedFile', function () {
+            console.log("completed now spreadem");
 
             $scope.$parent.template.url = 'partials/admin/editspread.html';
             $scope.$apply()
         })
     }
-    $scope.submitspread = function(){
+    $scope.submitspread = function () {
 
 
         console.log("addedfile");
         console.log($scope.addedFile);
-        $rootScope.$broadcast('uploadit',{file:$scope.addedFile});
+        $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
 
-        $rootScope.$on('uploadedFile',function(){
+        $rootScope.$on('uploadedFile', function () {
             $scope.$parent.template.url = 'partials/admin/mwregcom.html';
             $scope.$apply()
         })
 
     }
-       $scope.nochange = function(type){
-            console.log(type);
-           if(type.portrait != undefined)
-                $scope.$parent.template.url = 'partials/admin/editspread.html';
-              // $scope.$apply()
+    $scope.nochange = function (type) {
+        console.log(type);
+        if (type.portrait != undefined)
+            $scope.$parent.template.url = 'partials/admin/editspread.html';
+        // $scope.$apply()
 
-           if(type.spread != undefined)
-               $scope.$parent.template.url = 'partials/admin/mwregcom.html';
-               //$scope.$apply()
+        if (type.spread != undefined)
+            $scope.$parent.template.url = 'partials/admin/mwregcom.html';
+        //$scope.$apply()
 
 
-       }
+    }
 
-    $scope.open = function(no) {
-        $timeout(function() {
-            if(no == 1){
+    $scope.open = function (no) {
+        $timeout(function () {
+            if (no == 1) {
                 $scope.opened1 = true;
             }
-            if(no == 2){
+            if (no == 2) {
                 $scope.opened2 = true;
             }
         });
     };
 })
 
-app.controller('NotificationsCtrl',function($scope,$http,api){
+app.controller('NotificationsCtrl', function ($scope, $http, api) {
     $scope.notifications = [];
 
-       $http.get('notifications').
-           success(function(data){
-               $scope.notifications = data;
-           });
+    $http.get('notifications').
+        success(function (data) {
+            $scope.notifications = data;
+        });
 
-    $scope.notiviewed = function(id){
+    $scope.notiviewed = function (id) {
         console.log("Running this functions notviewed")
-        $http.get('notified/'+id).
-            success(function(data){
+        $http.get('notified/' + id).
+            success(function (data) {
 
             })
     }
 
 });
-app.controller('WorkshopCtrl',function($scope,$http,api){
+app.controller('WorkshopCtrl', function ($scope, $http, api) {
     $scope.workshops = [];
-    $scope.form ;
+    $scope.form;
 
-    api.getResourceById('Workshop','all',function(workshops){
+    api.getResourceById('Workshop', 'all', function (workshops) {
         console.log(workshops);
         console.log("TESTING !#");
-         $scope.workshops = workshops;
+        $scope.workshops = workshops;
     });
 
-    $scope.submit = function(){
-        api.createResource('Workshops',$scope.form);
+    $scope.submit = function () {
+        api.createResource('Workshops', $scope.form);
     }
 
-    $scope.submitedit = function(){
-        $http.post('updateworkshop/'+$scope.workshops._id).
-            success(function(data){
+    $scope.submitedit = function () {
+        $http.post('updateworkshop/' + $scope.workshops._id).
+            success(function (data) {
 
             }).
-            error(function(data){
+            error(function (data) {
 
             })
     }
 
 })
 
-app.controller('PasswordRecoveryCtrl',function($scope,$http,$routeParams){
+app.controller('PasswordRecoveryCtrl', function ($scope, $http, $routeParams) {
     $scope.message = "";
-    $scope.recover = function(){
-        $http.post('passrecover',{email:$scope.email}).
-            success(function(data){
+    $scope.recover = function () {
+        $http.post('passrecover', {email: $scope.email}).
+            success(function (data) {
                 console.log(data);
                 $scope.message = "Email has been sent please check your email.";
             }).
-            error(function(err){
+            error(function (err) {
                 console.log(err);
                 $scope.message = "We could not send you an email.  Please check you have the right email addresss."
             });
     }
-    $scope.updatePass = function(){
-        if($scope.password != $scope.passwordconfirm){
+    $scope.updatePass = function () {
+        if ($scope.password != $scope.passwordconfirm) {
             $scope.message = "Please verify that your password and password confirmation are the same.";
             return;
         }
-        $http.post('updatepass',{password:$scope.password,passwordconfirm:$scope.passwordconfirm,key:$routeParams.key}).
-            success(function(err,data){
+        $http.post('updatepass', {password: $scope.password, passwordconfirm: $scope.passwordconfirm, key: $routeParams.key}).
+            success(function (err, data) {
                 console.log(data);
                 $scope.message = "Your password has been reset please try and login."
             }).
-            error(function(err){
+            error(function (err) {
                 console.log(err);
                 $scope.message = "Your password could not be reset.  Please try again."
             })
     }
 })
 
-app.controller('EditProfileCtrl',function($scope,$http,api,groupsListing){
+app.controller('EditProfileCtrl', function ($scope, $http, api, groupsListing) {
     $scope.messages = {};
     $scope.selectedGroup = undefined;
     $scope.groups = groupsListing;
-    $scope.checked = function(){
+    $scope.checked = function () {
         console.log($scope.selectedGroup)
         $scope.form.groupcode = $scope.selectedGroup.code;
     }
@@ -1898,43 +1908,42 @@ app.controller('EditProfileCtrl',function($scope,$http,api,groupsListing){
         success(function (data) {
             console.log(data)
             $scope.form = data;
-            for(var group in $scope.groups){
+            for (var group in $scope.groups) {
                 console.log(group)
-                console.log(data.lost+" was lost")
-                if($scope.groups[group].code == data.lost){
+                console.log(data.lost + " was lost")
+                if ($scope.groups[group].code == data.lost) {
                     $scope.selectedGroup = $scope.groups[group];
                 }
             }
             $scope.checked();
 
-        console.log($scope.selectedGroup)
+            console.log($scope.selectedGroup)
         }).
         error(function (err) {
             console.log(err)
         })
-    $scope.submitEdits = function(){
+    $scope.submitEdits = function () {
         console.log($scope.form)
-        $http.post( 'updateuserdata', $scope.form)
-            .success(function(data){
+        $http.post('updateuserdata', $scope.form)
+            .success(function (data) {
                 // success
                 $scope.message = "User data updated.";
                 console.log(data)
             }).
-            error(function(err){
+            error(function (err) {
                 $scope.message = "Please check errors."
                 console.log("error response")
                 // error
-                if(err){
+                if (err) {
                     console.log(err)
 
                     $scope.message = {};
-                    for(var error in err)
-                    {
+                    for (var error in err) {
 
-                        if(error == "author"){
+                        if (error == "author") {
                             $scope.message.url = err.author.msg;
                         }
-                        else{
+                        else {
                             $scope.message[error] = err[error].msg;
                         }
                     }

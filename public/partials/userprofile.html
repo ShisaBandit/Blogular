@@ -4,7 +4,7 @@
 
             <div class="section-container auto" reflow data-section>
                 <section>
-                    <p class="title" data-section-title><a href="#panel1">Instructions</a></p>
+                    <p class="title" data-section-title><a href="#paneli">Instructions</a></p>
                     <div class="content" data-section-content>
                         <div id="contentHeader" class="small-12 columns">
                             <h2 class="contentHeaderTitle">Instructions on how to manage your account</h2>
@@ -20,7 +20,7 @@
                     </div>
                 </section>
                 <section>
-                    <p class="title" data-section-title><a href="#panel1">Basic Profile</a></p>
+                    <p class="title" data-section-title><a href="#paneli">Basic Profile</a></p>
                     <div class="content" data-section-content>
                         <div id="contentHeader" class="small-12 columns">
                             <h2 class="contentHeaderTitle">Basic Profile</h2>
@@ -44,7 +44,7 @@
                     </div>
                 </section>
                 <section>
-                    <p class="title" data-section-title><a href="#panel1">My Memorial Walls</a></p>
+                    <p class="title" data-section-title><a href="#paneli">My Memorial Walls</a></p>
                     <div class="content" data-section-content>
                         <div class="row ">
                             <div id="contentHeader" class="small-12 columns">
@@ -65,7 +65,7 @@
                     </div>
                 </section>
                 <section>
-                    <p class="title" data-section-title><a href="#panel1">Friend’s Memorials</a></p>
+                    <p class="title" data-section-title><a href="#paneli">Friend’s Memorials</a></p>
                     <div class="content" data-section-content>
                         <div class="row ">
                             <div id="contentHeader" class="small-12 columns">
@@ -74,9 +74,11 @@
                         </div>
                         <div class="profileGravatar">
                         </div>
+                        <!--
                         <ul class="profile">
                             <li ng-repeat="angelmember in angelmembers">Angel's Name : (Angel's full name)  - <a href="#/angel/{{ angelmember.author }}">View this memorial wall</a> - <a href="#/selfremove/{{ angelmember.author }}">Remove yourself from this memorial wall network</a></li>
                         </ul>
+                        -->
                         <!-- This next UL is for demonstration purposes only. Delete after demo to client -->
                         <ul class="profile" ng-repeat="wall in walls">
                             <li>Angel's Name : {{wall.firstName}} {{wall.lastName}}  - <a href="#/angel/{{wall.author}}">View this memorial wall</a> - <a ng-click="removeself(wall.id)">Remove yourself from this memorial wall network</a></li>
@@ -86,7 +88,7 @@
                     </div>
                 </section>
                 <section>
-                    <p class="title" data-section-title><a href="#panel1">My Groups</a></p>
+                    <p class="title" data-section-title><a href="#paneli">My Groups</a></p>
                     <div class="content" data-section-content>
                         <div id="contentHeader" class="small-12 columns">
                             <h2 class="contentHeaderTitle">My Group's</h2>
@@ -107,28 +109,30 @@
                                     <br />- <a href="#/inviteblock/{{ group.author }}">invite or block other registered members</a><br /><br />
                                 </li>
                                 </ul>
-                                <a href="#/deletewall/{{ angel.author }}" class="button">Delete this group</a>
+                                <a href="#/deletewall/{{ group.author }}" class="button">Delete this group</a>
                             </section>
                         </div>
-
                         <div class="small-4 columns rghtDvd">
-                            <b>Groups I Joined / Group Invites</b>
-                            <br /> <br />
-                            <section>
-                                <b>Group Name: Mothers Mourning</b>
+
+                        <b>Groups I Joined / Group Invites</b>
+                        <br /> <br />
+
+                            <section  ng-repeat="group in invitedGroups" >
+                                <b>Group Name: {{group.name}}</b>
                                 <br />
-                                Group Owner: Lisa Hendricks
-                                Group Moderator(s): Mary Olsen, Me
+                                Group Owner: {{group.owner}}
+                               <!-- Group Moderator(s): Mary Olsen, Me-->
                                 <br />
                                 <ul>
-                                    <li>View this group's page</li>
-                                    <li>Edit Group Details</li>
-                                    <li>View Group Members</li>
-                                    <li>Suggest new members</li>
-                                    <li>Restrict member</li>
-                                    <li>Report group member for misconduct</li>
+                                    <li><a href="#/group/{{group.author}}" >View this group's page</a></li>
+                                    <li><a href="#/group/{{group.author}}" >Edit Group Details</a></li>
+                                    <li><a href="#/group/{{group.author}}" >View Group Members</a></li>
+                                  <!--  <li><a href="#/group/{{group.author}}" >Suggest new members</a></li>
+                                    <li><a href="#/group/{{group.author}}" >Restrict member</a></li>
+                                      <li><a href="#/group/{{group.author}}" >Report group member for misconduct</a></li>
+                                      -->
                                 </ul>
-                                <a class="button">Leave this group</a>
+                                <a ng-click="removeselfgroup(group.id)" class="button">Leave this group</a>
                             </section>
                         </div>
                         <div class="small-4 columns">
@@ -139,7 +143,7 @@
                     </div>
                 </section>
                 <section>
-                    <p class="title" data-section-title><a href="#panel1">My Network</a></p>
+                    <p class="title" data-section-title><a href="#paneli">My Network</a></p>
                     <div class="content" data-section-content>
 
                         <div id="contentHeader" class="small-12 columns">
@@ -151,36 +155,36 @@
                             Quickly find and contact your friends here.
                         </p>
                         <ul>
-                            <l1>
+                            <li>
                                 Anthony Lemrick - Affiliation: Mary Adam’s Memorial Wall - <a class="button" data-reveal-id="messageModal">Send private message</a>
-                            </l1>
+                            </li>
                             <li>
                                 Michael Deidricks - Affiliation: Grieving Family Group - <a class="button" data-reveal-id="messageModal">Send private message</a>
-                            </l1>
+                            </li>
                             <li>
                                 Susan Reno - Affiliation: Mary Adam’s Memorial Wall - <a class="button" data-reveal-id="messageModal">Send private message</a>
-                            </l1>
+                            </li>
                             <li>
                                 Barry Johnson -- Affiliation: Support for friends Group - <a class="button" data-reveal-id="messageModal">Send private message</a>
-                            </l1>
+                            </li>
                             <li>
                                 Marsha Tisdale - Affiliation: Mary Adam’s Memorial Wall - <a class="button" data-reveal-id="messageModal">Send private message</a>
-                            </l1>
+                            </li>
                             <li>
                                 Mark Adams - - Affiliation: Mary Adam’s Memorial Wall - <a class="button" data-reveal-id="messageModal">Send private message</a>
-                            </l1>
+                            </li>
                             <li>
                                 Nancy Adams - - Affiliation: Mary Adam’s Memorial Wall - <a class="button" data-reveal-id="messageModal">Send private message</a>
-                            </l1>
+                            </li>
                             <li>
                                 Jerry Smith - - Affiliation: Mary Adam’s Memorial Wall - <a class="button" data-reveal-id="messageModal">Send private message</a>
-                            </l1>
+                            </li>
                         </ul>
 
                     </div>
                 </section>
                 <section>
-                    <p class="title" data-section-title><a href="#panel1">My Petitions</a></p>
+                    <p class="title" data-section-title><a href="#paneli">My Petitions</a></p>
                     <div class="content" data-section-content>
                         <div id="contentHeader" class="small-12 columns">
                             <h2 class="contentHeaderTitle">My Petitions</h2>
@@ -190,9 +194,9 @@
                             Here are all of the petitions that you have started.
                         </p>
                         <ul>
-                            <l1>
+                            <li>
                                 Petition Name - <a class="button">Edit</a> - <a class="button">Delete</a>
-                            </l1>
+                            </li>
 
                         </ul>
 
@@ -200,7 +204,7 @@
                     </div>
                 </section>
                 <section>
-                    <p class="title" data-section-title><a href="#panel1">Message Center</a></p>
+                    <p class="title" data-section-title><a href="#paneli">Message Center</a></p>
                     <div class="content" data-section-content>
                         <div id="contentHeader" class="small-12 columns">
                             <h2 class="contentHeaderTitle">Message Center</h2>
@@ -213,14 +217,14 @@
                                 <b>Conversation With:</b>
                                 <br />      <br />
                                 <section>
-                                    <!--
+
                                     <div class="row">
                                         <input type="text" ng-model="postText" class="addNewPost small-12 columns" placeholder="Search Messages"/>
                                     </div>
-                                    -->
                                     <div class="row" ng-repeat="messagedUser in messagedUsers">
                                         <a href="" ng-click="getMessages(messagedUser.user)">
-                                            <span class="small-10 columns">{{messagedUser.user}} <a class="button buttonSmall" title="Delete This Message"><img src="img/trash.png"></a></span>
+                                            <span class="small-10 columns">{{messagedUser.user}} <a class="button buttonSmall" title="Delete This Message"><img src="img/trash.png" /></a></span>
+                                        </a>
                                     </div>
                                 </section>
                             </div>

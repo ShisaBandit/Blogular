@@ -455,7 +455,7 @@ exports.sendWallInvite = function (req, res) {
                 inviter.save(function(err){
                     if(err)console.log(err)
                     user.memwalls.push(blog);
-                    user.profiles.push({profile: blog._id});
+                    user.profiles.push({profile: blog._id});//TODO:Remove this in now for backwards compatibility with new style
                     user.save(function (err) {
                         console.log("profile pushed to user" + user.username);
                         res.send(200, 'success');
@@ -473,7 +473,7 @@ exports.getFriendsMemorials = function (req, res) {
         if(!user[0]){
             return res.send(200,'none');
         }else{
-            console.log("getting memwalls references¢")
+            //console.log("getting memwalls references")
             var returndata = [];
             var memwalls = user[0].memwalls;
             //console.log(memwalls)
@@ -502,6 +502,7 @@ exports.selfRemove = function (req, res) {
     var wall = req.params.wall;
     User.findOne({_id: req.session.passport.user}, function (err, user) {
         var walls = user.memwalls;
+        console.log("compare to "+wall)
         console.log(walls)
         for (var x = 0; x < user.memwalls.length; x++) {
             if (walls[x].toString() == wall.toString()) {
@@ -513,7 +514,7 @@ exports.selfRemove = function (req, res) {
         console.log(walls)
         user.memwalls = walls;
         user.save(function (err) {
-            console.log(err);
+            if(err)console.log(err);
             res.send(200, 'works good');
         })
     })
@@ -675,10 +676,34 @@ function getPostText(blog, type, getProp) {
 }
 
 exports.getInvitedGroup = function(req,res){
-    User.findOne({_id:req.session.passport.user}, function (err,usr) {
-        for(var profile in usr.profiles){
-            console.log(usr.profiles[profile])
-        }
+    User.findOne({_id:req.session.passport.user}).populate('memwalls').exec(function (err,usr) {
+        Blog.populate(usr.memwalls,{path:'user'},function(err,walls){
+            var buffer = [];
+            for(var i = 0;i<walls.length;i++){
+               if(walls[i].group == true){
+                   //console.log(walls[i].user)
+                   if(!walls[i].user){
+                       //console.log("null user detected")
+                   }else{
+                       console.log(walls[i].author)
+                       if(walls[i].user == null)walls[i].user = {}
+                       var groupinfo = {
+                           name:walls[i].firstName+" "+walls[i].lastName,
+                           owner:walls[i].user.firstName+" "+walls[i].user.lastName,
+                           moderator:"",
+                           author:walls[i].author,
+                           id:walls[i]._id
+                       }
+                       buffer.push(groupinfo);
+                   }
+
+                }else{
+                   console.log("nota a group")
+               }
+            }
+            res.end(JSON.stringify(buffer));
+        })
+
     })
 }
 
