@@ -237,12 +237,12 @@ h2.dark {
     position:relative;
     left: 20px;
     display: block;
-    width: 524px;
-    height: 64px;
+    width: 275px;
+    height: 65px;
     margin: 0px;
     padding-top: 75px;
     text-indent: -9000px;
-    background: url("/img/memWallLogo.png") center top no-repeat;
+    background: url("/img/memWallLogoSmll2.png") center top no-repeat;
     z-index: 20;
 }
 
@@ -339,14 +339,11 @@ h1.sectionHeader {
 
 .profileGravatar {
     display: block;
-    width: 250px;
-    height: 300px;
-    padding: 20px;
-    margin-top: -20px;
-    margin-right: 10px;
-    margin-left: 10px;
+    width: auto;
+    height: auto;
+
     float: left;
-    background: #f5f5f5 url("/img/AngelIcon2b.jpg") no-repeat center center;
+    background: #f5f5f5 url("/img/AngelIcon2b.jpg") no-repeat bottom right;
     box-shadow: -1px 0px 5px 5px #dcdcdc;
 }
 
@@ -742,12 +739,12 @@ input.addNewPost {
         left: 10px;
         top:25px;
         display: block;
-        width: 524px;
-        height: 64px;
+        width: 275px;
+        height: 65px;
         margin: 0px;
         padding-top: 75px;
         text-indent: -9000px;
-        background: url("/img/memWallLogo.png") center top no-repeat;
+        background: url("/img/memWallLogoSmll2.png") center top no-repeat;
 
     }
 
@@ -829,12 +826,12 @@ input.addNewPost {
         left: 10px;
         top:-5px;
         display: block;
-        width: 524px;
-        height: 64px;
+        width: 275px;
+        height: 65px;
         margin: 0px;
         padding-top: 75px;
         text-indent: -9000px;
-        background: url("/img/memWallLogo.png") center top no-repeat;
+        background: url("/img/memWallLogoSmll2.png") center top no-repeat;
     }
 
     button.small, .button.small {
