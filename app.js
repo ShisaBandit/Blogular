@@ -37,7 +37,7 @@ global.__approot = __dirname;
 var Blog = blogModels.Blog;
 var User = blogModels.User;
 var Update = blogModels.Update;
-
+var SingleCount = blogModels.SingleCount;
 var app = express();
 app.use(expressValidator());
 //noinspection JSValidateTypes
@@ -123,9 +123,27 @@ app.configure('development', function () {
                     }
                 });
         }
+
     });
 })();
-
+(function DataInitialization(){
+    console.log("initialising database data");
+    console.log("checking pic count");
+    SingleCount.count({}, function (err,count) {
+        if(count<1){
+            console.log("no pic count entry detected adding one")
+            var piccount = new SingleCount({totalPicCount:0}).
+                save(function (err) {
+                    if(err){
+                        console.log(err)
+                        console.log("error creating the total pic count entry app pic uploads may not work correctly")
+                    }else{
+                        console.log("total pic created started at 0");
+                    }
+                })
+        }
+    })
+})();
 
 //Blog Routes
 app.get('/blog', blogRoutes.allBlogs);

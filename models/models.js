@@ -211,6 +211,10 @@ var urlSchema = mongoose.Schema({
     profileId: String
 });
 
+var singleCount = mongoose.Schema({
+    totalPicCount:Number
+})
+
 var passwordRecoverySchema = mongoose.Schema({
     user_id:String,
     key:String,
@@ -233,6 +237,7 @@ var Petition = mongoose.model('Petition', petitionSchema);
 var Workshop = mongoose.model('Workshop',workshopSchema);
 var Message = mongoose.model('Message',messageSchema);
 var PasswordRecovery = mongoose.model('PasswordRecovery',passwordRecoverySchema);
+var SingleCount = mongoose.model('SingleCount',singleCount);
 /*
  //set all profiles to administrator as owner
  Blog.find({}, function (err, blogs) {
@@ -305,5 +310,6 @@ module.exports = {
     Petition: Petition,
     Workshop:Workshop,
     Message:Message,
-    PasswordRecovery:PasswordRecovery
+    PasswordRecovery:PasswordRecovery,
+    SingleCount:SingleCount
 }
