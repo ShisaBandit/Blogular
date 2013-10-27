@@ -385,6 +385,13 @@ h1.sectionHeader {
     background-color: #3F77B4;
     margin-bottom: 20px;
 }
+.contentHeader{
+    display:block;
+    width: 100%;
+    clear: both;
+    background-color: #3F77B4;
+    margin-bottom: 20px;
+}
 .contentHeaderTitle{
     display:block;
     width: 100%;

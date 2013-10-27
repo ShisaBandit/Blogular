@@ -1463,6 +1463,9 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
     $scope.message = {};
     $scope.selectedGroup = undefined;
     $scope.form = {};
+    $scope.parentData = {
+        author:""
+    }
     $scope.checked = function () {
         console.log($scope.selectedGroup)
         $scope.form.subgroup = $scope.selectedGroup.code;
@@ -1485,6 +1488,7 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
 
             $scope.blogId.blogId = res.blogId;
             $scope.form.title = "";
+            $scope.parentData.author = $scope.form.author;
             $scope.form.author = "";
             $scope.form.text = "";
             $scope.message = "";
@@ -1498,29 +1502,21 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
         $scope.addedFile = file.file;
     })
     $scope.submitportrait = function () {
-
-
         $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
-
         $rootScope.$on('uploadedFile', function () {
             console.log("completed now spreadem");
-
             $scope.$parent.template.url = 'partials/admin/addspread.html';
             $scope.$apply()
         })
     }
     $scope.submitspread = function () {
-
-
         console.log("addedfile");
         console.log($scope.addedFile);
         $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
-
         $rootScope.$on('uploadedFile', function () {
             $scope.$parent.template.url = 'partials/admin/mwregcom.html';
             $scope.$apply()
         })
-
     }
     $scope.open = function (no) {
         $timeout(function () {
