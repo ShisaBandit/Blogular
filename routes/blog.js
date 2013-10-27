@@ -455,7 +455,9 @@ exports.sendWallInvite = function (req, res) {
                 inviter.save(function(err){
                     if(err)console.log(err)
                     user.memwalls.push(blog);
+                    //TODO:ERROR!!!
                     blog.members.push(user);
+                    blog.save(function(err){if(err)console.log(err);});
                     user.profiles.push({profile: blog._id});//TODO:Remove this in now for backwards compatibility with new style
                     user.save(function (err) {
                         console.log("profile pushed to user" + user.username);

@@ -4,7 +4,9 @@ var blogSchema = mongoose.Schema({
     group:{type: Boolean, default: false},
     owner_id: String, //has relation to the subgroup
     user:{type:mongoose.Schema.Types.ObjectId,ref:'User'},//replacing owner id
-    members:{type:mongoose.Schema.Types.ObjectId,ref:'User'},
+    members:[
+        {type:mongoose.Schema.Types.ObjectId,ref:'User'}
+    ],
     firstName: String,
     lastName: String,
     gender: Boolean,//0=female,1=male
