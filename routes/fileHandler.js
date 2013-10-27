@@ -1,43 +1,82 @@
 var fs = require('fs');
 var models = require('../models/models');
 var Blog = models.Blog;
+var SingleCount = models.SingleCount;
 exports.upload = function (req, res) {
-    var name = req.files.file.name;
+    //var name = req.files.file.name;
+    //read the file in
+    var fileExt;
+    var allowableExtensions = [
+        {type:"image/jpeg",ext:"jpg"},
+        {type:"image/png",ext:"png"},
+        {type:"image/gif",ext:"gif"}
+    ];
+    var maxFileSize = 1000000;//bytes 1mb
+    var allowed = false;
+    for(var x =0;x < allowableExtensions.length;x++){
+        if(allowableExtensions[x].type == req.files.file.type){
+            allowed = true;
+            fileExt = allowableExtensions[x].ext;
+        }
+
+    }
+    if(!allowed){
+        res.send(500,"Only png jpg and gif file types are allowed.");
+        return;
+    }
+    if(req.files.file.size > maxFileSize){
+        allowed = false;
+    }
+    if(!allowed){
+        res.send(500,"Your file is over the allowed size.");
+        return;
+    }
     fs.readFile(req.files.file.path, function (err, data) {
-        var newPath = global.__approot + "/public/uploads/" + name;
-        console.log(req.body);
-        fs.writeFile(newPath, data, function (err) {
-            if (err){
-                console.log(err);
-                res.send(401, 'error');
-                return;
-            }
-            //res.send(200,{'success': 'true'});
-            Blog.findOne({_id: req.body.memwall}, function (err, blog) {
-                //TODO:check and normalize file name ensure no duplicate names
-
-                //1. Put all incoming files into a orphanded files list.    CHECK
-
-                //2. if=> submit is pushed.. move files to proper profilememwall and posttext
-                //3. if=> cancel is pusshed ... find and delete files from the orphaned list
-                //4. will clean all orphaned files every 24 hours or so to ensure no unneeded files stay
-                if(!blog.orphanedphotos == null){
-                    for(var o = 0;o<blog.orphanedphotos.length;o++){
-                        if(blog.orphanedphotos[o].filename == req.files.file.name){
-                            res.send(404,'already file by that name');
-                            return;
-                        }
+        //get the total pic count
+        SingleCount.find({}, function (err,singlecount) {
+            //add one to it
+            singlecount[0].totalPicCount++;
+            singlecount[0].save(function (err,sc) {
+                if(err)console.log(err)
+                console.log(sc)
+                //add the new total pic ass the pic name
+                var newPath = global.__approot + "/public/uploads/" + sc.totalPicCount+"."+fileExt;
+                console.log(req.body);
+                //write to mongo
+                fs.writeFile(newPath, data, function (err) {
+                    if (err){
+                        console.log(err);
+                        res.send(401, 'error');
+                        return;
                     }
-                }
+                    //res.send(200,{'success': 'true'});
+                    var picCount = 0;
+                    Blog.findOne({_id: req.body.memwall}, function (err, blog) {
+                        //1. Put all incoming files into a orphanded files list.    CHECK
+                        //2. if=> submit is pushed.. move files to proper profilememwall and posttext
+                        //3. if=> cancel is pusshed ... find and delete files from the orphaned list
+                        //4. will clean all orphaned files every 24 hours or so to ensure no unneeded files stay
+                        /*
+                        if(!blog.orphanedphotos == null){
+                            for(var o = 0;o<blog.orphanedphotos.length;o++){
+                                if(blog.orphanedphotos[o].filename == req.files.file.name){
+                                    res.send(404,'already file by that name');
+                                    return;
+                                }
+                            }
+                        }
+                        */
+                        blog.orphanedphotos.push({filename: sc.totalPicCount+"."+fileExt, uploader: req.session.passport.user});
+                        blog.save(function () {
+                            console.log('orphanedfiles saved name:' + req.files.file.name +'.'+fileExt+ ' uploaded by : ' + req.session.passport.user);
+                            res.send(200,'OK');
 
-                blog.orphanedphotos.push({filename: req.files.file.name, uploader: req.session.passport.user});
-                blog.save(function () {
-                    console.log('orphanedfiles saved name:' + req.files.file.name + ' uploaded by : ' + req.session.passport.user);
-                    res.send(200,'OK');
-
+                        });
+                    })
                 });
             })
-        });
+        })
+
     });
 };
 exports.uploadportrait = function (req, res) {
