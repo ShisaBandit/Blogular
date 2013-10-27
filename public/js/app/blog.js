@@ -1453,7 +1453,7 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, us
     }
 });
 
-app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing, $timeout) {
+app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing, $timeout,$location) {
     $scope.template = {};
     $scope.hidemainform = false;
     $scope.blogId = {blogId: ""};
@@ -1502,21 +1502,30 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
         $scope.addedFile = file.file;
     })
     $scope.submitportrait = function () {
-        $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
-        $rootScope.$on('uploadedFile', function () {
+       $scope.$parent.parentData.deregPor = $rootScope.$on('uploadedFile', function () {
             console.log("completed now spreadem");
             $scope.$parent.template.url = 'partials/admin/addspread.html';
             $scope.$apply()
         })
+        $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
+
     }
     $scope.submitspread = function () {
+        $scope.$parent.parentData.deregPor();
         console.log("addedfile");
         console.log($scope.addedFile);
-        $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
-        $rootScope.$on('uploadedFile', function () {
-            $scope.$parent.template.url = 'partials/admin/mwregcom.html';
+        $scope.deregSpread = $rootScope.$on('uploadedFile', function () {
+            //$scope.$parent.template.url = 'partials/admin/mwregcom.html';
+            $scope.$parent.template.url = '';
+            console.log("adding portrait file")
+            console.log($scope.parentData)
+            $location.path("/angel/"+$scope.$parent.parentData.author)
             $scope.$apply()
+
         })
+        $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
+
+
     }
     $scope.open = function (no) {
         $timeout(function () {
