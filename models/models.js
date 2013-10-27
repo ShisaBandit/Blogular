@@ -3,7 +3,8 @@ var mongoose = require('mongoose');
 var blogSchema = mongoose.Schema({
     group:{type: Boolean, default: false},
     owner_id: String, //has relation to the subgroup
-    user:{type:mongoose.Schema.Types.ObjectId,ref:'User'},
+    user:{type:mongoose.Schema.Types.ObjectId,ref:'User'},//replacing owner id
+    members:{type:mongoose.Schema.Types.ObjectId,ref:'User'},
     firstName: String,
     lastName: String,
     gender: Boolean,//0=female,1=male
@@ -98,6 +99,7 @@ var blogSchema = mongoose.Schema({
 });
 
 var petitionSchema = mongoose.Schema({
+    owner:{type:mongoose.Schema.Types.ObjectId,ref:'User'},
     title: {type: String, required: true},
     text: {type: String, required: true},
     dateStarted: {type: Date, default: Date.now},
@@ -128,7 +130,9 @@ var userSchema = mongoose.Schema({
     invitessent:[
         {type:mongoose.Schema.Types.ObjectId, ref: 'User'}
     ],
+    sex:Boolean, //female = true,male = false
     address: String,
+    zip:String,
     city: String,
     state: String,
     Age: Number,

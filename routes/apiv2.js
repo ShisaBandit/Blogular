@@ -114,6 +114,7 @@ var dataFilter = function (req, type, subtype, data, callback) {
         }
         case "Petition":
         {
+
             if (subtype == "signatures") {
                 models.User.findOne({_id: req.session.passport.user}, function (err, user) {
                     if (user == null) {
@@ -129,7 +130,6 @@ var dataFilter = function (req, type, subtype, data, callback) {
                         data.gravatar = calcMD5(data.email);
                         data.cityState = user.city;//TODO:add in later+" "+user.State;
                         callback(data);
-
                     }
 
 
@@ -137,7 +137,11 @@ var dataFilter = function (req, type, subtype, data, callback) {
 
 
             } else {
-                callback(data);
+                //not subtype must be regular type
+                models.User.findOne({_id: req.session.passport.user}, function (err, user) {
+                    data.owner = user;
+                    callback(data);
+                });
             }
             break;
         }

@@ -1,0 +1,12 @@
+<div ng-controller="PetitionCtrl">
+    <div class="row offsetHeight100">
+        <h1 class="sectionHeader">Petitions</h1>
+        <div class="small-12 columns">
+            <h2>Create a petition</h2>
+            Give your petition a name. <input type="text" ng-hide="textorphoto" ng-model="title"/>
+            What is your petition for? <input type="text" ng-hide="textorphoto" ng-model="text"/>
+
+            <button ng-click="submitedit()" class="button postfix">Submit</button>
+        </div>
+    </div>
+</div>

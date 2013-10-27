@@ -4,6 +4,29 @@ var Petition = models.Petition;
 var User = models.User;
 var Update = models.Update;
 
+exports.getAllPetitionsForUser = function(req,res){
+        console.log("GETTING PETITIONS")
+    Petition.find({owner:req.session.passport.user},function(err,petitions){
+        res.end(JSON.stringify(petitions));
+        return;
+        console.log(petitions)
+    })
+}
+
+exports.updatePetition = function (req,res) {
+    Petition.findOneAndUpdate({_id:req.body.id},req.body, function (err,updateddoc) {
+        if(err)console.log(err)
+        console.log(updateddoc)
+    })
+}
+
+exports.deletePetition = function (req,res) {
+    Petition.findOneAndRemove({_id:req.params.id}, function (err) {
+        if(err)console.log(err)
+        return res.send(200,'allok');
+    });
+}
+
 exports.allPetitions = function (req, res) {
     // var skip = req.params.skip,
     //   limit = req.params.limit;

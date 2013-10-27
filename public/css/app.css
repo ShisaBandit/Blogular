@@ -12,6 +12,9 @@
 /* -----------------------------------------
    Shared Styles
 ----------------------------------------- */
+.message{
+    color: green;
+}
 #portraitpic {
     position: relative;
     top:350px;
@@ -376,6 +379,13 @@ h1.sectionHeader {
 }
 
 #contentHeader{
+    display:block;
+    width: 100%;
+    clear: both;
+    background-color: #3F77B4;
+    margin-bottom: 20px;
+}
+.contentHeader{
     display:block;
     width: 100%;
     clear: both;

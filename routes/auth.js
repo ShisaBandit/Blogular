@@ -7,10 +7,10 @@ var check = require('validator').check,
     sanitize = require('validator').sanitize;
 var nodemailer = require('nodemailer');
 //var smtpTransport = nodemailer.createTransport("sendmail");
-var smtpTransport = nodemailer.createTransport("SMTP",{
+var smtpTransport = nodemailer.createTransport("SMTP", {
     host: "mail.angelsofeureka.org",
-    port:"465",
-    secureConnection:true,
+    port: "465",
+    secureConnection: true,
     auth: {
         user: "noreply@angelsofeureka.org",
         pass: "regEmail2013"
@@ -28,20 +28,20 @@ exports.checkAuthed = function (req, res) {
     })
 };
 
-exports.checkProfileAuthed = function (req, res,next) {
+exports.checkProfileAuthed = function (req, res, next) {
     User.findOne({_id: req.session.passport.user}, function (err, users) {
         var matchfound = false;
         if (err)console.log(err);
-            for(var x = 0;x < users.profiles.length;x++){
-                console.log(users.profiles[x]._id);
-                if(req.params.id == users.profiles[x]._id){
-                    matchfound = true;
-                }
+        for (var x = 0; x < users.profiles.length; x++) {
+            console.log(users.profiles[x]._id);
+            if (req.params.id == users.profiles[x]._id) {
+                matchfound = true;
             }
-        if(matchfound == true){
+        }
+        if (matchfound == true) {
             return next();
-        }else{
-            return res.send({fail:'noaccess'}, 200);
+        } else {
+            return res.send({fail: 'noaccess'}, 200);
         }
 
     })
@@ -97,15 +97,15 @@ exports.logout = function (req, res) {
 exports.loginAuth = function (req, res) {
     User.findOne({'username': req.body.username, 'password': req.body.password, admin: {$in: ['superuser', 'admin']}},
         function (err, administrator) {
-        if (err)console.log(err);
-        if (administrator) {
-            req.session.loggedIn = true;
-        } else {
-            req.session.loggedIn = false;
-        }
+            if (err)console.log(err);
+            if (administrator) {
+                req.session.loggedIn = true;
+            } else {
+                req.session.loggedIn = false;
+            }
 
-        return res.send(200);
-    });
+            return res.send(200);
+        });
 
 };
 
@@ -126,20 +126,22 @@ exports.register = function (req, res) {
         maxfirstNameLength = 15,
         maxlastNameLength = 15;
 
-
-    req.checkBody('username','Username must be longer than'+minUsernameLength+' and shorther than '+ maxUsernameLength+' characters.')
-        .notNull().len(minUsernameLength,maxUsernameLength);
-    req.checkBody('password','Password must be longer than'+minPasswordLength+' and shorther than '+maxPasswordLength+' characters.')
-        .notNull().len(minPasswordLength,maxPasswordLength);
-    req.checkBody('firstName','Must have a first name.')
-        .notNull().len(1,maxfirstNameLength);
-    req.checkBody('lastName','Must have a last name.')
-        .notNull().len(1,maxlastNameLength);
-    req.checkBody('email','Must have a valid email.')
+    console.log(req.body.groupcode)
+    req.checkBody('username', 'Username must be longer than' + minUsernameLength + ' and shorther than ' + maxUsernameLength + ' characters.')
+        .notNull().len(minUsernameLength, maxUsernameLength);
+    req.checkBody('password', 'Password must be longer than' + minPasswordLength + ' and shorther than ' + maxPasswordLength + ' characters.')
+        .notNull().len(minPasswordLength, maxPasswordLength);
+    req.checkBody('firstName', 'Must have a first name.')
+        .notNull().len(1, maxfirstNameLength);
+    req.checkBody('lastName', 'Must have a last name.')
+        .notNull().len(1, maxlastNameLength);
+    req.checkBody('email', 'Must have a valid email.')
         .notNull().isEmail();
-    req.checkBody('dob','Date of Birth must be a valid date.')
+    req.checkBody('dob', 'Date of Birth must be a valid date.')
         .notNull().isDate();
-    req.checkBody('betacode','Incorrect beta code.')
+    req.checkBody('groupcode', 'Must enter who you lost.')
+        .notNull();
+    req.checkBody('betacode', 'Incorrect beta code.')
         .notNull().equals('hardcoded')
 
     if (password == username) {
@@ -148,159 +150,207 @@ exports.register = function (req, res) {
 
     var errors = req.validationErrors(true);
     if (password == username) {
-        errors.password = {param:'password',msg:'Password can not be the same as username.'};
+        errors.password = {param: 'password', msg: 'Password can not be the same as username.'};
     }
-    if(errors){
-        res.send(errors,500);
+    if (errors) {
+        res.send(errors, 500);
         return;
     }
-        User.count({username: username}, function (err, count) {
+    User.count({username: username}, function (err, count) {
+        if (err)console.log(err);
+        userCount = count;
+        //then get admin count
+        User.count({username: username, admin: {$in: ['superuser', 'admin']}}, function (err, count) {
             if (err)console.log(err);
-            userCount = count;
-            //then get admin count
-            User.count({username: username, admin: {$in: ['superuser', 'admin']}}, function (err, count) {
-                if (err)console.log(err);
-                adminCount = count;
-                //then check count
-                //TODO:redo this section of code in promises
-                //username checks
+            adminCount = count;
+            //then check count
+            //TODO:redo this section of code in promises
+            //username checks
+            if (
+                userCount < 1 && adminCount < 1
+                ) {
+                var user = new User(req.body);
+
+                user.gravatar = calcMD5(user.email);
+                user.lost = req.body.groupcode;
+                console.log(user.lost);
+                console.log(req.body.groupcode)
+                user.save(function (err) {
+                    if (err) {
+                        console.log(err);
+                        console.log(err.path);
+                        return res.end(JSON.stringify({'fail': errorMessage}));
+
+                    }
+                    SendConfirmationMail(email);
+                    return res.end(JSON.stringify({'success': 'true'}));
+                });
+            } else {
+
+                if (!errors) {
+                    errors = {};
+                }
+                if (userCount >= 1 || adminCount >= 1) {
+                    errorMessage.push('username already taken');
+                    errors.username = {param: 'username', msg: 'username already taken.'};
+
+                }
+
+                if (errors) {
+                    res.send(errors, 500);
+                    return;
+                }
+            }
+        });
+    });
+};
+
+exports.updateuserdata = function (req, res) {
+    var errorMessage = [],
+        errors = {};
+    var userCount = 0,
+        adminCount = 0,
+        username = req.body.username,
+        password = req.body.password,
+        firstname = req.body.firstName,
+        lastname = req.body.lastName,
+        email = req.body.email,
+        dob = req.body.dob,
+        minUsernameLength = 5,
+        maxUsernameLength = 16,
+        minPasswordLength = 5,
+        maxPasswordLength = 16,
+        maxfirstNameLength = 15,
+        maxlastNameLength = 15;
+
+    req.checkBody('username', 'Username must be longer than' + minUsernameLength + ' and shorther than ' + maxUsernameLength + ' characters.')
+        .notNull().len(minUsernameLength, maxUsernameLength);
+    req.checkBody('password', 'Password must be longer than' + minPasswordLength + ' and shorther than ' + maxPasswordLength + ' characters.')
+        .notNull().len(minPasswordLength, maxPasswordLength);
+    req.checkBody('firstName', 'Must have a first name.')
+        .notNull().len(1, maxfirstNameLength);
+    req.checkBody('lastName', 'Must have a last name.')
+        .notNull().len(1, maxlastNameLength);
+    req.checkBody('email', 'Must have a valid email.')
+        .notNull().isEmail();
+    req.checkBody('dob', 'Date of Birth must be a valid date.')
+        .notNull().isDate();
+    req.checkBody('groupcode', 'Must enter who you lost.')
+        .notNull();
+
+    if (password == username) {
+        errorMessage.push('Password can not be the same as username');
+    }
+
+    var errors = req.validationErrors(true);
+    if (password == username) {
+        errors.password = {param: 'password', msg: 'Password can not be the same as username.'};
+    }
+    if (errors) {
+        res.send(errors, 500);
+        return;
+    }
+    User.count({username: username}, function (err, count) {
+        if (err)console.log(err);
+        userCount = count;
+        //then get admin count
+        User.count({username: username, admin: {$in: ['superuser', 'admin']}}, function (err, count) {
+            if (err)console.log(err);
+            adminCount = count;
+            //then check count
+            //username checks
+
+            User.findOne({_id: req.session.passport.user}, function (err, user) {
+
                 if (
                     userCount < 1 && adminCount < 1
                     ) {
-                    var user = new User(req.body);
 
-                    user.gravatar = calcMD5(user.email);
-                    user.lost = req.body.groupcode;
-
-                    user.save(function (err) {
-                        if (err){
-                            console.log(err);
-                            console.log(err.path);
-                            return res.end(JSON.stringify({'fail': errorMessage}));
-
-                        }
-                        /*
-                        //register a new wall if one was attached to request
-                        var blog = new Blog({
-                            firstName:req.body.firstName,
-                            lastName:req.body.lastName,
-                            subgroup:req.body.subgroup
-
-                        })
-                        */
-                        SendConfirmationMail(email);
-                        return res.end(JSON.stringify({'success': 'true'}));
-                    });
                 } else {
-                    /*
-                    //uername length check
-                    if (username == undefined || username == "") {
-                        errorMessage.push('Please enter a username');
-                    }else if ( username.length < minUsernameLength) {
-                        errorMessage.push('Username must be longer than ' + minUsernameLength);
-                    }else if (username.length > maxUsernameLength) {
-                        errorMessage.push('Username must be shorter than ' + maxUsernameLength);
-                    }
-                    //password check
-                    if (password == undefined || password == "") {
-                        errorMessage.push('Please enter a password');
-                    }else if ( password.length < minPasswordLength) {
-                        errorMessage.push('Password must be longer than ' + minPasswordLength);
-                    }else if (password.length > maxPasswordLength) {
-                        errorMessage.push('Password must be shorter than ' + maxPasswordLength);
-                    }
 
-                    if (password == username) {
-                        errorMessage.push('Password can not be the same as username');
-                    }
-                    */
-                    if(!errors){
-                        errors = {};
-                    }
-                    if (userCount >= 1 || adminCount >= 1) {
+
+                    if ((userCount >= 1 || adminCount >= 1) && username != user.username) {
                         errorMessage.push('username already taken');
-                        errors.username = {param:'username',msg:'username already taken.'};
-
-                    }
-                    /*
-                    if (firstname == undefined || firstname == "") {
-                        errorMessage.push('Please enter a first name');
-                    }else if (firstname.length < minfirstnameLength) {
-                        errorMessage.push('First name must be longer than ' + minfirstnameLength);
-                    }else if (firstname.length > maxfirstNameLength) {
-                        errorMessage.push('First name must be shorter than ' + maxPasswordLength);
+                        if(!errors)errors = {};
+                        errors.username = {param: 'username', msg: 'username already taken.'};
                     }
 
-                    if (lastname == undefined || lastname == "") {
-                        errorMessage.push('Please enter a last name');
-                    }else if (lastname.length < minlastnameLength) {
-                        errorMessage.push('Last name must be longer than ' + minlastnameLength);
-                    }else if (lastname.length > maxlastNameLength) {
-                        errorMessage.push('Last name must be shorter than ' + maxlastNameLength);
-                    }
-
-                    if(!validEmail)
-                    {
-                        errorMessage.push('Not a valid email')
-                    }
-                    if(!validDob){
-                        errorMessage.push('Not a valid Date')
-                    }
-                    if (errorMessage.length == 0 || errorMessage === undefined) {
-                        errorMessage.push('unknown error');
-                    }
-                    if (password == username) {
-                        errors.password = {param:'password',msg:'Password can not be the same as username.'};
-                    }
-                    */
-                    if(errors){
-                        res.send(errors,500);
+                    if (errors) {
+                        res.send(errors, 500);
                         return;
                     }
                 }
+                user.username = username;
+                user.password = password;
+                user.firstName = firstname;
+                user.lastName = lastname;
+                user.email = email;
+                user.dob = dob;
+                user.address = req.body.address;
+                user.city = req.body.city;
+                user.state = req.body.state;
+                user.about = req.body.about;
+                user.zip = req.body.zip;
+                user.gravatar = calcMD5(user.email);
+                user.lost = req.body.groupcode;
+                console.log(user.lost);
+                console.log(req.body.groupcode)
+                user.save(function (err) {
+                    if (err) {
+                        console.log(err);
+                        console.log(err.path);
+                        return res.end(JSON.stringify({'fail': errorMessage}));
+
+                    }
+                    return res.end(JSON.stringify({'success': 'true'}));
+                });
             });
         });
-};
 
-function SendConfirmationMail(to){
+    })
+
+
+}
+
+function SendConfirmationMail(to) {
     var mailOptions = {
-        from:"noreply@AngelsOfEureka.org",
-        to:to,
-        subject:"Welcome to AngelsOfEureka.org",
-        text:"This is a confirmation email please click this link to confirm you want to register",
-        html:"<p>This is a confirmation email.  You have signed up successfully to angels of eureka.org.</p>" +
+        from: "noreply@AngelsOfEureka.org",
+        to: to,
+        subject: "Welcome to AngelsOfEureka.org",
+        text: "This is a confirmation email please click this link to confirm you want to register",
+        html: "<p>This is a confirmation email.  You have signed up successfully to angels of eureka.org.</p>" +
             "<p>Thank you please enjoy your time on the site.</p> "
     }
-    smtpTransport.sendMail(mailOptions,function(error,response){
-        if(error){
+    smtpTransport.sendMail(mailOptions, function (error, response) {
+        if (error) {
             console.log(error);
             console.log("problems sending mail")
-        }else{
+        } else {
             console.log("message sent")
         }
         console.log(response);
     })
 }
 
-exports.passrecover = function(req,res){
+exports.passrecover = function (req, res) {
     //TODO:First send email with key
     //then if email is successful log the key in the db with a username
 
     var email = req.body.email;
     console.log(email)
-    req.checkBody('email','You must enter a valid email.').
+    req.checkBody('email', 'You must enter a valid email.').
         isEmail().notNull();
     var errors = req.validationErrors(true);
-    if(errors){
+    if (errors) {
         console.log(errors)
-        res.send('Please enter a valid email.',500);
+        res.send('Please enter a valid email.', 500);
         return;
     }
 
-    User.findOne({email:email},function(err,doc){
+    User.findOne({email: email}, function (err, doc) {
         console.log(doc)
-        if(!doc){
-            res.send(500,'This email is not registered with our system');
+        if (!doc) {
+            res.send(500, 'This email is not registered with our system');
             return;
         }
 
@@ -309,36 +359,36 @@ exports.passrecover = function(req,res){
         var hash = crypto.createHash('sha1').update(key).digest('hex');
         //Remove any previous password update attempts
         //TODO: remove is not working found out why
-        PassRec.find({key:hash},function(err,recs){
+        PassRec.find({key: hash}, function (err, recs) {
             console.log(recs)
-            for(rec in recs){
-                console.log(recs[rec]+' has been removed')
+            for (rec in recs) {
+                console.log(recs[rec] + ' has been removed')
                 recs[rec].remove();
             }
         });
-        var passrec = new PassRec({user_id:doc._id,key:hash});
-        passrec.save(function(err){
-            if(err)console.log(err)
+        var passrec = new PassRec({user_id: doc._id, key: hash});
+        passrec.save(function (err) {
+            if (err)console.log(err)
             console.log(key)
-            SendPasswordRecoveryMail(email,key,req);
-            res.send(200,'Mail sent.')
+            SendPasswordRecoveryMail(email, key, req);
+            res.send(200, 'Mail sent.')
         })
         //clean these keys out every 1 hour.
     })
 
 }
 
-exports.updatePass = function(req,res){
+exports.updatePass = function (req, res) {
     var key = req.body.key;
     var password = req.body.password;
-    req.checkBody('password','Must enter a password').
+    req.checkBody('password', 'Must enter a password').
         notNull();
-    req.checkBody('passwordconfirm','Passwords must match').
+    req.checkBody('passwordconfirm', 'Passwords must match').
         equals(password);
     var errors = req.validationErrors(true);
-    if(errors){
+    if (errors) {
         console.log(errors)
-        res.send('Please enter a valid email.',500);
+        res.send('Please enter a valid email.', 500);
         return;
     }
 
@@ -347,44 +397,52 @@ exports.updatePass = function(req,res){
     //check it against the database then
     //if the key matches the request key we then reest the password
     //and respond with a success or error
-    PassRec.findOne({key:hash},function(err,doc){
-        if(!doc){
-            res.send(500,'Token is wrong.');
+    PassRec.findOne({key: hash}, function (err, doc) {
+        if (!doc) {
+            res.send(500, 'Token is wrong.');
             return;
         }
-        User.findOne({_id:doc.user_id},function(err,user){
-            console.log('got user '+user.username);
+        User.findOne({_id: doc.user_id}, function (err, user) {
+            console.log('got user ' + user.username);
             console.log(password)
             user.password = password;
-            user.save(function(err){
-                if(err)console.log(err)
+            user.save(function (err) {
+                if (err)console.log(err)
             })
-            res.send(200,'Password has been updated.  Thank you.')
+            res.send(200, 'Password has been updated.  Thank you.')
         })
     })
 }
 
-function SendPasswordRecoveryMail(to,link,req){
+function SendPasswordRecoveryMail(to, link, req) {
     var mailOptions = {
-        from:"noreply@AngelsOfEureka.org",
-        to:to,
-        subject:"Memorial Wall password recovery",
-        text:"This is a confirmation email please click this link to confirm you want to register",
-        html:"<p>We have received a request to change your password.  <p>" +
+        from: "noreply@AngelsOfEureka.org",
+        to: to,
+        subject: "Memorial Wall password recovery",
+        text: "This is a confirmation email please click this link to confirm you want to register",
+        html: "<p>We have received a request to change your password.  <p>" +
             "<p>Please click this link </p>" +
             "</br>" +
-            "<p>"+req.protocol+"://"+req.host+"/#/updatepass?key="+link.toString()+" </p>" +
+            "<p>" + req.protocol + "://" + req.host + "/#/updatepass?key=" + link.toString() + " </p>" +
             "</br>" +
             "<p>and reset your password.</p> "
     }
-    smtpTransport.sendMail(mailOptions,function(error,response){
-        if(error){
+    smtpTransport.sendMail(mailOptions, function (error, response) {
+        if (error) {
             console.log(error);
             console.log("problems sending mail")
-        }else{
+        } else {
             console.log("message sent")
         }
         console.log(response);
+    })
+}
+
+exports.getRegUserData = function (req, res) {
+    User.findOne({_id: req.session.passport.user}, function (err, data) {
+        if (err)console.log(err)
+        res.end(JSON.stringify(data));
+        return;
     })
 }
 /*
