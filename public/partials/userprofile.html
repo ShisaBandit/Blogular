@@ -29,41 +29,33 @@
 <section>
     <p class="title" data-section-title><a href="#paneli">Basic Profile</a></p>
 
-    <div class="content" data-section-content>
+    <div class="content profileGravatar" data-section-content>
         <div class="contentHeader" class="small-12 columns">
             <h2 class="contentHeaderTitle">Basic Profile</h2>
         </div>
-
-        <div class="profileGravatar">
-            <img src="http://www.gravatar.com/avatar/{{user.gravatar}}"/>
-        </div>
         <ul class="profile">
-
-            <li>First Name : {{user.firstName}}</li>
+            <li><img src="http://www.gravatar.com/avatar/{{user.gravatar}}"/> First Name : {{user.firstName}}</li>
             <li>Last Name: {{user.lastName}}</li>
             <li>email : {{user.email}}</li>
             <li>City : {{user.city}}</li>
             <li>Age : {{user.age}}</li>
             <li>About you : {{user.about}}</li>
             <li>You have lost a {{user.lost}}</li>
+            <a href="#/editprofile" class="button">Edit Your profile</a>
         </ul>
-
-        <a href="#/editprofile" class="button">Edit Your profile</a>
     </div>
 </section>
 <section>
     <p class="title" data-section-title><a href="#paneli">My Memorial Walls</a></p>
 
-    <div class="content" data-section-content>
+    <div class="content profileGravatar" data-section-content>
         <div class="row ">
             <div class="contentHeader" class="small-12 columns">
                 <h2 class="contentHeaderTitle">My Memorial Walls</h2>
             </div>
         </div>
-        <div class="profileGravatar">
-            <a href="#/AddBlogEntry" class="button"><b>Create a new memorial wall profile here!</b></a> <br/><br/>
-        </div>
         <ul class="profile">
+            <a href="#/AddBlogEntry" class="button"><b>Create a new memorial wall profile here!</b></a> <br/><br/>
             <li ng-repeat="angel in angels">Angel's Name : {{ angel.firstName }} {{ angel.lastName }} - {{ angel.title
                 }}
                 <br/>
@@ -87,8 +79,6 @@
             <div class="contentHeader" class="small-12 columns">
                 <h2 class="contentHeaderTitle">Memorial Walls of My Friends and Acquaintances </h2>
             </div>
-        </div>
-        <div class="profileGravatar">
         </div>
         <!--
         <ul class="profile">
@@ -237,44 +227,36 @@
             <h2 class="contentHeaderTitle">Message Center</h2>
         </div>
 
-        <p>Welcome to the Message Center. From here you can create, manage and view messages from your network members,
-            administrators and other registered users..</p>
-        <a href="#" class="button" data-reveal-id="messageModal">
-            <img src="img/mail_2.png"> Send a New Message</a>
-        </a>
-        <br/>
-
-        <div class="small-4 columns rghtDvd">
-            <b>Conversation With:</b>
-            <br/> <br/>
-            <section>
-
-                <div class="row">
-                    <input type="text" ng-model="postText" class="addNewPost small-12 columns"
-                           placeholder="Search Messages"/>
-                </div>
-                <div class="row" ng-repeat="messagedUser in messagedUsers">
-                    <a href="" ng-click="getMessages(messagedUser.user)">
-                        <span class="small-10 columns">{{messagedUser.user}} <a class="button buttonSmall"
-                                                                                title="Delete This Message"><img
-                                src="img/trash.png"/></a></span>
-                    </a>
-                </div>
-            </section>
-        </div>
-        <div class="small-8 columns rghtDvd">
-            <b>Conversation History</b>
-            <br/> <br/>
-            <section>
-                <div class="row">
-                    <span class="small-3 columns"><b>Sent By:</b></span>
-                    <!--
-                    <span class="small-2 columns"><b>Date:</b></span>
-                    -->
-                </div>
-                <br/>
-
-                <div class="row" ng-repeat="message in messages">
+                        <p>Welcome to the Message Center. From here you can create, manage and view messages from your network members, administrators and other registered users..</p>
+                        <a class="button" data-reveal-id="messageModal"><img src="img/mail_2.png"> Send a New Message</a>
+                        <br />
+                            <div class="small-4 columns rghtDvd">
+                                <b>Conversation With:</b>
+                                <br />      <br />
+                                <section>
+                                    <!--
+                                    <div class="row">
+                                        <input type="text" ng-model="postText" class="addNewPost small-12 columns" placeholder="Search Messages"/>
+                                    </div>
+                                    -->
+                                    <div class="row" ng-repeat="messagedUser in messagedUsers">
+                                        <a href="" ng-click="getMessages(messagedUser.user)">
+                                            <span class="small-10 columns">{{messagedUser.user}} <a class="button buttonSmall" title="Archive This Conversation"><img src="img/trash.png"></a></span>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="small-8 columns rghtDvd">
+                                <b>Conversation History</b>
+                                <br /> <br />
+                                <section>
+                                    <div class="row">
+                                        <span class="small-3 columns"><b>Sent By:</b></span>
+                                        <!--
+                                        <span class="small-2 columns"><b>Date:</b></span>
+                                        -->
+                                    </div>
+                                    <br />
+                                    <div class="row" ng-repeat="message in messages">
 
                                         <span class="small-30 columns"
                                               style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>{{message.from}}</b>  <i
