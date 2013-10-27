@@ -294,6 +294,12 @@ app.post('/updatepass',authRoutes.updatePass);
 app.get('/getPetitionsForUser',passport.ensureAuthenticated,petitionRoutes.getAllPetitionsForUser);
 app.post('/updatePetition',passport.ensureAuthenticated,petitionRoutes.updatePetition);
 app.get('/deletePetition/:id',passport.ensureAuthenticated,petitionRoutes.deletePetition);
+
+app.get('/getInviteBlogUserData/:wallid',passport.ensureAuthenticated,blogRoutes.getInviteBlogUserData);
+
+
+
+
 var server = http.createServer(app).listen(app.get('port'), app.get('ip'), function () {
     console.log("server listening " + app.get('ip') + ':' + app.get('port'));
 });

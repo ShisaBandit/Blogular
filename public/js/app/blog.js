@@ -26,6 +26,7 @@ var app = angular.module('blogApp', [
             when("/AddBlogEntry/uploadportrait/:id", {templateUrl: "partials/admin/addportrait.html"}).
             when("/AddBlogEntry/uploadspread/:id", {templateUrl: "partials/admin/addspread.html"}).
             when("/inviteblock/:wall", {templateUrl: "partials/inviteblock.html"}).
+            when("/findenewmembers/:wall",{templateUrl: "partials/findnewmembers.html"}).
             when("/deletewall/:wall", {templateUrl: "partials/deletewall.html"}).
             when("/rules", {templateUrl: "partials/rules.html"}).
             when("/addworkshop", {templateUrl: "partials/addWorkshop.html"}).
@@ -1344,10 +1345,13 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, us
     $scope.messages = [];
     $scope.walls = [];
     $scope.invitedGroups;
+
     api.getResourceByField('User', {field: "username", query: $routeParams.username}, function (user) {
         $scope.user = user[0];
         //get all angel profiles(blogs) that this user has in his profile id
     });
+
+
     $http.get('/blogdataforuser').
         success(function (data) {
             console.log(data);
@@ -1695,12 +1699,40 @@ app.controller('InviteBlockCtrl', function ($scope, api, $http, $routeParams) {
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
-        //TODO:get users that can access this memwall(blog)
-        api.getResourceById('User', 'all', function (data) {
-            console.log(data);
-            $scope.users = data;
 
-        })
+        $http.get('getInviteBlogUserData/'+$routeParams.wall).
+            success(function (data) {
+                console.log(data)
+                $scope.members = data;
+            }).
+            error(function (err) {
+
+            })
+    });
+    $scope.invite = function (user) {
+        $http.get('invite/' + $routeParams.wall + '/' + user).success(function (data) {
+
+        });
+    }
+    $scope.block = function (user) {
+        $http.get('block/' + $routeParams.wall + '/' + user).
+            success(function (data) {
+
+            })
+    }
+});
+
+app.controller('FindNewMembersBlockCtrl', function ($scope, api, $http, $routeParams) {
+    $scope.users = [];
+    $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
+        console.log(oldVal);
+        console.log(newVal);
+
+         api.getResourceById('User', 'all', function (data) {
+         console.log(data);
+         $scope.users = data;
+
+         })
     });
     $scope.invite = function (user) {
         $http.get('invite/' + $routeParams.wall + '/' + user).success(function (data) {

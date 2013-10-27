@@ -107,7 +107,6 @@ exports.getABlog = function (req, res) {
 
                 }
             }
-            //if (true) {//TODO:Remove commented line this should not always be true!"!!!//
             if (process.env.NODE_ENV == "production") {
                 console.log("WE are in production so setting privacy on mem walls");
             } else {
@@ -455,7 +454,6 @@ exports.sendWallInvite = function (req, res) {
                 inviter.save(function(err){
                     if(err)console.log(err)
                     user.memwalls.push(blog);
-                    //TODO:ERROR!!!
                     blog.members.push(user);
                     blog.save(function(err){if(err)console.log(err);});
                     user.profiles.push({profile: blog._id});//TODO:Remove this in now for backwards compatibility with new style
@@ -748,6 +746,54 @@ exports.getInvitedGroup = function(req,res){
 
     })
 }
+
+exports.getInviteBlogUserData = function (req,res) {
+    var id = req.params.wallid;
+    User.findOne({_id: req.session.passport.user}, function (err, user) {
+        //ensure the user is authorised to see this blog data
+        Blog.find({'author': id}).populate('members').exec(function (err, post) {
+            if (post === undefined)return res.send(404);
+            if (user != null) {
+                if (post[0].owner_id == req.session.passport.user) {
+                    matchfound = true
+                } else {
+                    for (var x = 0; x < user.profiles.length; x++) {
+                        console.log(user.profiles[x].profile);
+
+                        if (user.profiles[x].profile == null) {
+
+                        } else {
+                            console.log(user.profiles[x].profile);
+                            if (post[0]._id == user.profiles[x].profile) {
+                                matchfound = true;
+                            }
+                        }
+                    }
+
+
+                }
+            }
+            if (process.env.NODE_ENV == "production") {
+                console.log("WE are in production so setting privacy on mem walls");
+            } else {
+                console.log("not production so all walls are public for convinience");
+                // matchfound = true;
+            }
+
+            if (post == undefined) {
+                return res.send(200);
+            }
+
+            if (matchfound == true) {
+                post.limited = false;
+                return res.end(JSON.stringify(post[0].members));
+            } else {
+            }
+        });
+    })
+}
+
+
 
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
