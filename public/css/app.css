@@ -25,7 +25,23 @@
     color: #fff;
     font-weight: bold;
     font-size: large;
+    margin: 0px;
     z-index: 400;
+}
+
+#portraitpic #profile-menu nav section h2 {
+    width:100%;
+    padding:10px;
+    text-align: center;
+    color: #fff;
+    background: #0D1F30;
+}
+
+#portraitpic #profile-menu nav section ul {
+    width:300px;
+    list-style: none;
+    padding: 10px;
+    font-size: medium;
 }
 
 #widepic {
@@ -870,10 +886,23 @@ input.addNewPost {
         margin-right: 0px;
         margin-left: 10px;
     }
+
+    #gallery {
+        display: none;
+        visibility: hidden;
+    }
+
+    .postEntry {
+        margin-top: 410px;
+    }
 }
 
 #rulesModal {
     display:block;
     width: 100%;
     float: left;
+}
+
+#drop1 {
+    z-index: 99999;
 }
