@@ -160,6 +160,7 @@ app.get('/blogdataforuser', blogRoutes.blogdataforuser);
 app.get('/lastestPosts/:id', blogRoutes.lastestPosts);
 
 app.get('/lastestPics/:id', blogRoutes.latestPics);
+app.get('/deletepic/:pic/:blog',passport.ensureAuthenticated,blogRoutes.deletepic);
 
 app.get('/lastestVideos/:id', blogRoutes.latestVideos);
 app.get('/lastestEvents/:id', blogRoutes.latestEvents);

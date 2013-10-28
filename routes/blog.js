@@ -419,7 +419,39 @@ exports.latestPics = function (req, res) {
         return res.end(JSON.stringify(postPics.reverse()));
     });
 }
+exports.deletepic = function (req,res) {
+    Blog.findOne({_id:req.params.blog},function (err,blog) {
+        var blogdoc = blog.orphanedphotos.id(req.params.pic);
+        var pic;
+        if(!blogdoc){
 
+        }else{
+            blog.orphanedphotos.id(req.params.pic).remove();
+            pic = blogdoc.filename;
+        }
+        var albums = blog.albums;
+        for(var a = 0;a<albums.length;a++){
+            if(!pic){
+                var subdoc = albums[a].photos.id(req.params.pic);
+                if(!subdoc){
+
+                }else{
+                    albums[a].photos.id(req.params.pic).remove();
+                }
+            }else{
+                for(var p = 0;p<albums[a].photos.length;p++){
+                    if(albums[a].photos[p].filename == pic){
+                        albums[a].photos.splice(p,1);
+                    }
+                }
+            }
+
+        }
+        blog.save(function () {
+            res.send(200);
+        });
+    })
+}
 exports.latestVideos = function (req, res) {
     Blog.findOne({_id: req.params.id}).lean().exec(function (err, blog) {
         return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.video, "embedYouTube")));

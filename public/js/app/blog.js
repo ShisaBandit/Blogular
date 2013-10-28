@@ -124,7 +124,7 @@ app.directive('offsetHeight', function () {
     }
 });
 
-app.directive('revealModal', function () {
+app.directive('revealModal', function (DeletePicsFactory) {
     return {
         link: function (scope, elm, attrs) {
             scope.$on('event:auth-loginConfirmed', function (event) {
@@ -141,6 +141,7 @@ app.directive('revealModal', function () {
                  elm.foundation('reveal', 'close');
                  }
                  */
+
                 if (attrs.revealModal == 'login') {
                     scope.message = 'Please fill out your user details';
                     elm.foundation('reveal', 'open');
@@ -156,6 +157,18 @@ app.directive('revealModal', function () {
             scope.$on('event:forgot-password', function () {
                 if (attrs.revealModal == 'login') {
                     elm.foundation('reveal', 'close');
+                }
+            })
+            scope.$on('event:pic-deleted', function () {
+                if(attrs.revealModal == 'deletepic'){
+                    elm.foundation('reveal','close');
+                }
+            })
+            scope.$on('event:pic-delete-request', function (event,data) {
+                if(attrs.revealModal == 'deletepic'){
+                    scope.message = data.message;
+                    console.log("to users "+data.message)
+                    elm.foundation('reveal','open');
                 }
             })
 
@@ -1186,7 +1199,8 @@ app.controller('GrpLatestCtrl', function ($scope, $http, $routeParams, socket) {
     })
 });
 
-app.controller('PicsCtrl', function ($rootScope, $scope, $http, api) {
+
+app.controller('PicsCtrl', function ($rootScope, $scope, $http, api,$modal,DeletePicsFactory) {
     $scope.pics = [];
     $scope.createalbum = [];
     $scope.blogId = "";
@@ -1194,6 +1208,10 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api) {
     $scope.albums = [];
     $scope.albumName = "";
     $scope.updatingAlbum = false;
+    $scope.showingAlbum = false;
+    $scope.picParentObject = {
+        picToDelete:""
+    };
     $rootScope.groupingViewable = true;
 
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
@@ -1210,19 +1228,19 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api) {
                 $scope.albums = data;
             })
     });
+    $scope.$watch('picParentObject.picToDelete', function (newVal, oldVal) {
+        console.log(oldVal);
+        console.log(newVal);
+        $scope.picParentObject.picToDelete = newVal;
+    });
     $scope.addpictoalbum = function () {
         console.log(pic);
         for (var pic in $scope.pics) {
             console.log($scope.pics[pic][pic])
         }
     }
-
-    $scope.addnewalbum = function () {
-        $scope.addingNewAlbum = true;
-        $scope.updatingAlbum = false;
-        // api.createSubDocResource('album',$scope.blogId,$scope.createalbum,function(){
-
-        //})
+    $scope.delete = function () {
+        //TODO:FInish this implementation
     }
     $scope.addtoalbum = function () {
         $scope.updatingAlbum = true;
@@ -1257,10 +1275,7 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api) {
             })
 
     }
-    $scope.createAlbumCancel = function () {
-        $scope.addingNewAlbum = false;
-        $scope.updatingAlbum = false;
-    }
+
     $scope.updateAlbum = function (albumid) {
         var picstoadd = [];
         for (var pic in $scope.pics) {
@@ -1277,6 +1292,7 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api) {
                     $scope.pics[pic][pic] = false;
                 }
                 $scope.addingNewAlbum = false;
+                $scope.updatingAlbum = false;
             }).
             error(function () {
                 console.log("error");
@@ -1284,6 +1300,7 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api) {
     }
 
     $scope.showAlbum = function (albumid) {
+        $scope.showingAlbum = true;
         $http.get('/showAlbum/' + $scope.blogId + '/' + albumid).
             success(function (data) {
                 $scope.pics = data;
@@ -1293,8 +1310,62 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api) {
             })
     }
 
-});
+    $scope.showallpics = function () {
+        console.log("showallpics")
+        $scope.showingAlbum = false;
+        $http.get('getPicsForBlog/' + $scope.blogId).
+            success(function (data) {
+                console.log(data);
+                $scope.pics = data;
+            })
+    }
+    $scope.setDeletedPic = function (id) {
+        DeletePicsFactory.picToDelete = id;
+        DeletePicsFactory.fromBlog = $scope.blogId;
+        if($scope.showingAlbum){
+           // DeletePicsFactory.setMessageToShowUsers("Are you sure want to delete this pic from this album?");
+            $rootScope.$broadcast('event:pic-delete-request',{message:"Are you sure want to delete this pic from this album?"})
 
+        }else{
+            //DeletePicsFactory.setMessageToShowUsers("Are you sure you want to permantly delete this photo from our site forever?");
+            $rootScope.$broadcast('event:pic-delete-request',{message:"Are you sure you want to permantly delete this photo from our site forever?"})
+
+        }
+        console.log(DeletePicsFactory);
+    }
+    $rootScope.$on('event:pic-deleted', function () {
+        $scope.showallpics();
+    })
+});
+//used to keep data between the deletepics ctrl modal and pics ctrl in sync
+app.factory('DeletePicsFactory',function(){
+    var messageToShowUsers = "";
+    return {
+        picToDelete:"",
+        fromBlog:"",
+        getMessageToShowUsers: function () {
+            return messageToShowUsers;
+        },
+        setMessageToShowUsers:function(value){
+            messageToShowUsers = value;
+        }
+    }
+})
+
+app.controller('DeletePicsCtrl', function ($rootScope,$scope,$http, DeletePicsFactory) {
+    $scope.deletepic = function () {
+        console.log(DeletePicsFactory)
+        $http.get('deletepic/' + DeletePicsFactory.picToDelete+'/'+DeletePicsFactory.fromBlog).
+            success(function (data) {
+                $rootScope.$broadcast('event:pic-deleted');
+                $scope.message = data;
+
+            }).
+            error(function () {
+                $scope.message = "Pic could not be deleted.";
+            })
+    }
+})
 app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams) {
     $scope.petitions = [];
     //$scope.edittitle = "";

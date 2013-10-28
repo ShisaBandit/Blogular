@@ -1,3 +1,6 @@
 Search params are limited to 1000chars
 Limit Tagegories to same 1000chars
 Add ability to have multiple blogs
+
+file sizes limits can be spoofed?
+extension can easily be spoofed changed? require better checking on the backend

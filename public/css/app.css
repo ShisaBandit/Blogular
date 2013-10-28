@@ -49,6 +49,10 @@
     height: 300px;
 }
 
+.piccontainer{
+    border: 1px solid #000000;
+}
+
 #tagTest {
     width: 300px;
     height: 300px;

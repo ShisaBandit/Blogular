@@ -1,16 +1,20 @@
 <div ng-controller="PicsCtrl">
     <div class="small-12 columns contentContainer">
         <div class="row">
-            <a ng-click="addnewalbum()" class="button">Create a new album</a>
+            <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+
+            <a ng-click="addingNewAlbum = true; updatingAlbum = false" class="button">Create a new album</a>
+            <a ng-click="updatingAlbum = true; addingNewAlbum = false"  class="button">Add To album</a>
+
             <input type="text" ng-show="addingNewAlbum" ng-model="albumName"/>
             <a class="button" ng-show="addingNewAlbum" ng-click="createAlbum()">Submit</a>
-            <a class="button" ng-show="addingNewAlbum" ng-click="createAlbumCancel()">Cancel</a>
-            <a ng-click="addtoalbum()" ng-hide="addingNewAlbum" class="button">Add To album</a>
+            <a class="button" ng-show="addingNewAlbum" ng-click="addingNewAlbum = false">Cancel</a>
 
             <div ng-show="updatingAlbum" class="row">
-                <ul  class="small-block-grid-2">
-                    <li ng-repeat="album in albums"><a class="button"
-                                                       ng-click="updateAlbum(album._id)">{{album.name}}</a>
+                <a ng-click="updatingAlbum = false; addingNewAlbum = false" class="button">Cancel</a>
+                <ul  class="small-block-grid-6">
+                    <li ng-repeat="album in albums">
+                        <a class="button" ng-click="updateAlbum(album._id)">{{album.name}}</a>
                     </li>
                 </ul>
             </div>
@@ -26,23 +30,30 @@
         <div class="row">
             <div class="row">
                 <h3>View Pics by album</h3>
-                <ul>
-                    <li ng-repeat="album in albums"><a class="button" ng-click="showAlbum(album._id)">{{album.name}}</a></li>
+                <a class="button" ng-click="showallpics()">Show all</a>
+                <ul class="small-block-grid-6">
+                    <li ng-repeat="album in albums">
+                        <a class="button" ng-click="showAlbum(album._id)">{{album.name}}</a>
+                    </li>
                 </ul>
             </div>
-            <ul class="small-block-grid-2">
-                <div ng-repeat="pic in pics">
-                    <li>
+            <ul class="small-block-grid-4">
+                    <li class="piccontainer" ng-repeat="pic in pics">
                         <div>
                             <input
                                 type="checkbox"
+                                ng-show="updatingAlbum"
                                 ng-model="pic[$index]"
                                 ng-change="addpictoalbum()"
                                 ng-checked="false"/>
                         </div>
-                        <img src="uploads/{{pic.filename}}"/></li>
-                </div>
-
+                        <img width="200" src="uploads/{{pic.filename}}"/>
+                        <div>
+                            <a ng-click="setDeletedPic(pic._id)">
+                                x
+                            </a>
+                        </div>
+                    </li>
             </ul>
         </div>
 

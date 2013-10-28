@@ -187,7 +187,7 @@ exports.submitphotodata = function (req, res) {
 exports.getPicsForBlog = function(req,res){
     var pics = [];
     Blog.findOne({_id:req.params.id},function(err,blog){
-        console.log(blog.postText);
+        //console.log(blog.postText);
         /*
         console.log(blog.orphanedphotos);
              for(var i  = 0;i<blog.postText.length;i++){

@@ -59,16 +59,16 @@
             <li ng-repeat="angel in angels">Angel's Name : {{ angel.firstName }} {{ angel.lastName }} - {{ angel.title
                 }}
                 <br/>
+
                 - <a href="#/angel/{{angel.author}}">View this memorial wall</a>
+                <br/>
+                - <a href="#/findenewmembers/{{ angel.author }}">Find and invite new members to this wall</a>
+                <br/>
+                - <a href="#/inviteblock/{{ angel.author }}">Remove members from this wall</a>
                 <br/>
                 - <a href="#/editwall/{{ angel.author }}">Edit this memorial wall</a>
                 <br/>
                 - <a href="#/deletewall/{{ angel.author }}">Delete this memorial wall</a>
-                <br/>
-                - <a href="#/findenewmembers/{{ angel.author }}">Find and invite new members</a>
-
-                <br/>
-                - <a href="#/inviteblock/{{ angel.author }}">block other registered members</a>
                 <br/><br/>
             </li>
         </ul>
