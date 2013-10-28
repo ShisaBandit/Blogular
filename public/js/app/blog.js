@@ -1328,7 +1328,8 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api,$modal,Delet
 
         }else{
             //DeletePicsFactory.setMessageToShowUsers("Are you sure you want to permantly delete this photo from our site forever?");
-            $rootScope.$broadcast('event:pic-delete-request',{message:"Are you sure you want to permantly delete this photo from our site forever?"})
+            $rootScope.$broadcast('event:pic-delete-request',{message:"Are you sure you want to permantly delete this photo from our site forever?<br /> (view " +
+                "by album if you only wanted to remove a pic by album."})
 
         }
         console.log(DeletePicsFactory);
