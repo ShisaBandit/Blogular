@@ -43,7 +43,6 @@ exports.notified = function (req, res) {
         } else {
             var notis = user.notifications;
             var i = 0;
-
             for (var noti in notis) {
                 if (notis[noti]._id == req.params.id) {
                     notis[noti].viewed = true;
@@ -54,8 +53,6 @@ exports.notified = function (req, res) {
                 res.send(200, "success");
             })
         }
-
-
     })
 }
 
@@ -366,17 +363,16 @@ exports.addVideoPost = function (req, res) {
     console.log(req.body);
     Blog.findOne({_id: req.body.id}, function (err, blog) {
         console.log("Found Blog");
-        var user = req.session
+        var user = req.session;
         User.findOne({_id: req.session.passport.user}, function (err, user) {
-            req.body.username = user.username;
-            req.body.gravatar = calcMD5(user.email);
+                req.body.username = user.username;
+                req.body.gravatar = calcMD5(user.email);
 
-            req.body.user_id = user._id;
-            blog.postText.push(req.body);
-            blog.save(function (err, doc) {
+                req.body.user_id = user._id;
+                blog.postText.push(req.body);
+                blog.save(function (err, doc) {
                 console.log(err);
             })
-
         });
 
         return res.end(JSON.stringify({'success': 'true'}));
@@ -457,6 +453,42 @@ exports.latestVideos = function (req, res) {
         return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.video, "embedYouTube")));
     });
 }
+
+function getPostText(blog, type, getProp) {
+    if (getProp == undefined)getProp = false;
+    var buffer = [];
+    for (var p = 0; p < blog.postText.length; p++) {
+        if (blog.postText[p].postType == type) {
+            var prop;
+            if (getProp) {
+                prop = getProp;
+                var pushdata;
+                if (prop = "embedYouTube") {
+                    pushdata = blog.postText[p][getProp];
+                    //pushdata.str.slice(0, -1);
+                    console.log(pushdata)
+                } else {
+                    pushdata = blog.postText[p][getProp];
+                }
+                buffer.push(pushdata);
+            } else {
+                var pushdata;
+                //TODO:Verify this code is ok?
+                if (getProp == "embedYouTube") {
+                    if (blog.postText[p][getProp] == undefined)return buffer;
+                    pushdata = blog.postText[p][getProp].slice(0, blog.postText[p][getProp].length);
+                    pushdata.slice(0, -1);
+                    console.log(pushdata)
+                    buffer.push(pushdata);
+                } else {
+                    buffer.push(blog.postText[p]);
+                }
+            }
+        }
+    }
+    return buffer;
+}
+
 exports.latestEvents = function (req, res) {
     Blog.findOne({_id: req.params.id}).lean().exec(function (err, blog) {
         return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.event)));
@@ -711,40 +743,6 @@ exports.subscribedto = function (req, res) {
     Blog.findOne({author: blogId}, function (err, blog) {
         console.log(blog._id);
     })
-}
-
-function getPostText(blog, type, getProp) {
-    if (getProp == undefined)getProp = false;
-    var buffer = [];
-    for (var p = 0; p < blog.postText.length; p++) {
-        if (blog.postText[p].postType == type) {
-            var prop;
-            if (getProp == true) {
-                prop = getProp;
-                var pushdata;
-                if (prop = "embedYouTube") {
-                    pushdata = blog.postText[p][getProp].str.slice(0, 1);
-                    pushdata.str.slice(0, -1);
-                    console.log(pushdata)
-                } else {
-                    pushdata = blog.postText[p][getProp];
-                }
-                buffer.push(pushdata);
-            } else {
-                var pushdata;
-                if (getProp == "embedYouTube") {
-                    if (blog.postText[p][getProp] == undefined)return buffer;
-                    pushdata = blog.postText[p][getProp].slice(0, blog.postText[p][getProp].length);
-                    pushdata.slice(0, -1);
-                    console.log(pushdata)
-                    buffer.push(pushdata);
-                } else {
-                    buffer.push(blog.postText[p]);
-                }
-            }
-        }
-    }
-    return buffer;
 }
 
 exports.getInvitedGroup = function(req,res){

@@ -467,7 +467,7 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         console.log("submitvideo");
         console.log($scope.entry._id);
         api.createSubDocResource('Blog', $scope.entry._id, 'postText', {
-            embedYouTube: $scope.embedYouTube, embedAnimoto: $scope.embedAnimoto, postType: 2
+            embedYouTube: youtube_embed(youtube_parser($scope.embedYouTube)), embedAnimoto: $scope.embedAnimoto, postType: 2
         }, function () {
             console.log("video sent");
             $scope.embedYouTube = "";
@@ -684,7 +684,7 @@ app.controller('groupEntryCtrl', function ($scope, $location, show, Blog, $route
         console.log("submitvideo");
         console.log($scope.entry._id);
         api.createSubDocResource('Blog', $scope.entry._id, 'postText', {
-            embedYouTube: $scope.embedYouTube, embedAnimoto: $scope.embedAnimoto, postType: 2
+            embedYouTube: youtube_embed(youtube_parser($scope.embedYouTube)), embedAnimoto: $scope.embedAnimoto, postType: 2
         }, function () {
             console.log("video sent");
             $scope.embedYouTube = "";
@@ -1212,6 +1212,10 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api,$modal,Delet
     $scope.picParentObject = {
         picToDelete:""
     };
+    $scope.albuminfo={
+        name:"default name"
+    }
+
     $rootScope.groupingViewable = true;
 
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
@@ -1298,7 +1302,11 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api,$modal,Delet
                 console.log("error");
             })
     }
-
+    $scope.setAlbumName = function (n) {
+        console.log("set albuminfo to "+n)
+        $scope.albuminfo.name = n;
+        console.log($scope.albuminfo)
+    }
     $scope.showAlbum = function (albumid) {
         $scope.showingAlbum = true;
         $http.get('/showAlbum/' + $scope.blogId + '/' + albumid).
@@ -1306,7 +1314,6 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api,$modal,Delet
                 $scope.pics = data;
             }).
             error(function () {
-
             })
     }
 
@@ -2100,17 +2107,20 @@ app.controller('EditProfileCtrl', function ($scope, $http, api, groupsListing) {
             });
     }
 })
+console.log(youtube_embed(youtube_parser("http://www.youtube.com/watch?v=Pu1PPMaoArE")) );
+function youtube_parser(url){
+    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    if (match&&match[7].length==11){
+        return match[7];
+    }else{
+        alert("Url incorrecta");
+    }
+}
 
-/*
- function youtube($string,$autoplay=0,$width=480,$height=390)
+ function youtube_embed(string)
  {
- preg_match('#(?:http://)?(?:www\.)?(?:youtube\.com/(?:v/|watch\?v=)|youtu\.be/)([\w-]+)(?:\S+)?#', $string, $match);
- $embed = <<<YOUTUBE
- <div align="center">
- <iframe title="YouTube video player" width="$width" height="$height" src="http://www.youtube.com/embed/$match[1]?autoplay=$autoplay" frameborder="0" allowfullscreen></iframe>
- </div>
- YOUTUBE;
-
- return str_replace($match[0], $embed, $string);
+ var iframestring = "<iframe title='YouTube video player' width='480' height='390' src='http://www.youtube.com/embed/"+string+"?autoplay=0' frameborder='0' allowfullscreen></iframe>";
+     return iframestring;
  }
- */
+

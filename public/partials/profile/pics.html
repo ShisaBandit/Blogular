@@ -13,7 +13,7 @@
                 <ul class="small-block-grid-6">
                     <b>View Photos By Album</b><br />
                     <li ng-repeat="album in albums">
-                        <a class="button" ng-click="showAlbum(album._id)">{{album.name}}</a>
+                        <a class="button" ng-click="showAlbum(album._id); albuminfo.name = album.name;">{{album.name}}</a><!--setAlbumName(album.name)-->
                     </li>
                 </ul>
             </div>
@@ -34,13 +34,13 @@
                 <br />
                 <ul  class="small-block-grid-6">
                     <li ng-repeat="album in albums">
-                        <a class="button" ng-click="updateAlbum(album._id)">{{album.name}}</a>
+                        <a class="button" ng-click="updateAlbum(album._id); ">{{album.name}}</a>
                     </li>
                 </ul>
                 <a ng-click="updatingAlbum = false; addingNewAlbum = false" class="button">Cancel</a>
             </div>
             <ul class="small-block-grid-4">
-                {{album.name}}
+                <h3>{{albuminfo.name}}</h3>
                     <li class="piccontainer" ng-repeat="pic in pics">
                         <div>
                             <input
