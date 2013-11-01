@@ -11,6 +11,7 @@
                 <a ng-click="addingNewAlbum = true; updatingAlbum = false" class="button">Create a new album</a>
                 <a ng-click="updatingAlbum = true; addingNewAlbum = false"  class="button">Add photo to existing album</a>
                 <ul class="small-block-grid-6">
+                    <b>View Photos By Album</b><br />
                     <li ng-repeat="album in albums">
                         <a class="button" ng-click="showAlbum(album._id)">{{album.name}}</a>
                     </li>
@@ -25,9 +26,12 @@
 
             <div ng-show="updatingAlbum" class="row add2Album">
                 <h4>Add Photo to Album</h4>
-                Please select a photo from the library, or click an existing album to open it and choose a photo from within there to add to another album.
-                To add your desired photo to the new gallery, after you have selected the check box in the upper left corner, then click on the album name
-                from the list within this box.
+                Please select a photo or photos from the library, or click an existing album to open it and choose a photo from within there to add to another album.
+                To add your desired photo(s) to the new gallery, after you have selected the check box in the upper left corner of the white picture frame, click on the album name
+                from the list within this box. That's it!
+                <br /><br />
+                <b>Which album do you want to add a photo too?</b>
+                <br />
                 <ul  class="small-block-grid-6">
                     <li ng-repeat="album in albums">
                         <a class="button" ng-click="updateAlbum(album._id)">{{album.name}}</a>
