@@ -2,42 +2,41 @@
     <div class="small-12 columns contentContainer">
         <div class="row">
             <div ng-show="selected">Selection from a modal: {{ selected }}</div>
-
-            <a ng-click="addingNewAlbum = true; updatingAlbum = false" class="button">Create a new album</a>
-            <a ng-click="updatingAlbum = true; addingNewAlbum = false"  class="button">Add To album</a>
-
-            <input type="text" ng-show="addingNewAlbum" ng-model="albumName"/>
-            <a class="button" ng-show="addingNewAlbum" ng-click="createAlbum()">Submit</a>
-            <a class="button" ng-show="addingNewAlbum" ng-click="addingNewAlbum = false">Cancel</a>
-
-            <div ng-show="updatingAlbum" class="row">
-                <a ng-click="updatingAlbum = false; addingNewAlbum = false" class="button">Cancel</a>
-                <ul  class="small-block-grid-6">
-                    <li ng-repeat="album in albums">
-                        <a class="button" ng-click="updateAlbum(album._id)">{{album.name}}</a>
-                    </li>
-                </ul>
-            </div>
+            <br />Here you can view pictures that are in your photo library, organize them into albums and share with your network members!<br /><br />
         </div>
-        <!--
-        <div ng-show="addingNewAlbum" class="row">
-            <h1>TEST</h1>
-            <ul class="small-block-grid-6">
-                <li ng-repeat="album in albums">{{album.name}}</li>
-            </ul>
-        </div>-->
-
         <div class="row">
             <div class="row">
-                <h3>View Pics by album</h3>
-                <a class="button" ng-click="showallpics()">Show all</a>
+                <h2>{{ entry.firstName }}'s Life in Pictures</h2>
+                <a class="button" ng-click="showallpics(); updatingAlbum = false; addingNewAlbum = false">View Master Photo Library</a>
+                <a ng-click="addingNewAlbum = true; updatingAlbum = false" class="button">Create a new album</a>
+                <a ng-click="updatingAlbum = true; addingNewAlbum = false"  class="button">Add photo to existing album</a>
                 <ul class="small-block-grid-6">
                     <li ng-repeat="album in albums">
                         <a class="button" ng-click="showAlbum(album._id)">{{album.name}}</a>
                     </li>
                 </ul>
             </div>
+            <section ng-show="addingNewAlbum" class="add2Album">
+                <b ng-show="addingNewAlbum">Create a New Album:</b><br />
+                <input type="text" ng-show="addingNewAlbum" ng-model="albumName" placeholder="Give your new album a name here." />
+                <a class="button" ng-show="addingNewAlbum" ng-click="createAlbum()">Create New Album</a>
+                <a class="button" ng-show="addingNewAlbum" ng-click="addingNewAlbum = false">Cancel</a>
+            </section>
+
+            <div ng-show="updatingAlbum" class="row add2Album">
+                <h4>Add Photo to Album</h4>
+                Please select a photo from the library, or click an existing album to open it and choose a photo from within there to add to another album.
+                To add your desired photo to the new gallery, after you have selected the check box in the upper left corner, then click on the album name
+                from the list within this box.
+                <ul  class="small-block-grid-6">
+                    <li ng-repeat="album in albums">
+                        <a class="button" ng-click="updateAlbum(album._id)">{{album.name}}</a>
+                    </li>
+                </ul>
+                <a ng-click="updatingAlbum = false; addingNewAlbum = false" class="button">Cancel</a>
+            </div>
             <ul class="small-block-grid-4">
+                {{album.name}}
                     <li class="piccontainer" ng-repeat="pic in pics">
                         <div>
                             <input

@@ -122,8 +122,8 @@ select {
 
 .row .row {
     width: auto;
-    margin-left: -0.9375em;
-    margin-right: -0.9375em;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 0;
     margin-bottom: 0;
     max-width: none;
@@ -153,6 +153,14 @@ select {
 
 .row .row.collapse:after {
     clear: both
+}
+
+.row .row h2, .row .row h3, .row .row h4 {
+    color: #3F77B4;
+}
+
+#contentHeader .contentHeaderTitle h2 {
+    color: #ffffff;
 }
 
 @media only screen {
@@ -2635,6 +2643,10 @@ form.custom .custom.disabled {
     border-top: none
 }
 
+.section-container h2, .section-container.auto h2, .section-container h3, .section-container.auto h3, .section-container h4, .section-container.auto h4 {
+    color: #3F77B4;
+}
+
 .section-container section, .section-container .section, .section-container.auto section, .section-container.auto .section {
     border-top: 1px solid #ccc;
     position: relative
@@ -4956,3 +4968,4 @@ table thead tr th, table tfoot tr th, table tbody tr td, table tr td, table tfoo
     padding: 10px;
     margin-left: 20px;
 }
+

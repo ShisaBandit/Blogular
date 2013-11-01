@@ -910,3 +910,15 @@ input.addNewPost {
 #drop1 {
     z-index: 99999;
 }
+
+.add2Album {
+    display: block;
+    padding: 20px;
+    background-color: lightskyblue;
+    border: 1px solid black;
+    border-radius: 7px;
+}
+
+#contentHeader .contentHeaderTitle {
+    color: #ffffff;
+}
