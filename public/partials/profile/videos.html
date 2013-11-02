@@ -10,7 +10,10 @@
                                 frameborder="0"
                                 allowfullscreen>
                         </iframe>-->
-                        <div ng-repeat="video in videos">
+                        <div ng-repeat="video in videosyt">
+                            <p ng-bind-html-unsafe="video" ></p>
+                        </div>
+                        <div ng-repeat="video in videosa">
                             <p ng-bind-html-unsafe="video" ></p>
                         </div>
                     </li>

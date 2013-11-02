@@ -465,9 +465,10 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
     $scope.submitVideo = function () {
         //TODO:Checkk this
         console.log("submitvideo");
-        console.log($scope.entry._id);
+        console.log("eani "+$scope.embedAnimoto )
+        console.log(($scope.embedAnimoto));
         api.createSubDocResource('Blog', $scope.entry._id, 'postText', {
-            embedYouTube: youtube_embed(youtube_parser($scope.embedYouTube)), embedAnimoto: $scope.embedAnimoto, postType: 2
+            embedYouTube: youtube_embed(youtube_parser($scope.embedYouTube)), embedAnimoto: animoto_embed(animoto_parser($scope.embedAnimoto)) , postType: 2
         }, function () {
             console.log("video sent");
             $scope.embedYouTube = "";
@@ -682,7 +683,6 @@ app.controller('groupEntryCtrl', function ($scope, $location, show, Blog, $route
     $scope.submitVideo = function () {
         //TODO:Checkk this
         console.log("submitvideo");
-        console.log($scope.entry._id);
         api.createSubDocResource('Blog', $scope.entry._id, 'postText', {
             embedYouTube: youtube_embed(youtube_parser($scope.embedYouTube)), embedAnimoto: $scope.embedAnimoto, postType: 2
         }, function () {
@@ -1690,23 +1690,34 @@ app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog, $rootScope,
 });
 
 app.controller('VideoCtrl', function ($scope, BlogsService, Blog, $rootScope, $http) {
-    $scope.videos = [];
+    $scope.videosyt = [];
+    $scope.videosa = [];
     $scope.blogId = "";
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
         $scope.blogId = newVal;
-        $http.get('lastestVideos/' + newVal).
+        $http.get('lastestVideosYoutube/' + newVal).
             success(function (data) {
                 console.log(data);
-                $scope.videos = data;
+                $scope.videosyt = data;
+            })
+        $http.get('lastestVideosAnimoto/' + newVal).
+            success(function (data) {
+                console.log(data);
+                $scope.videosa = data;
             })
 
     });
-    $http.get('lastestVideos/' + $scope.blogId).
+    $http.get('lastestVideosYoutube/' + $scope.blogId).
         success(function (data) {
             console.log(data);
-            $scope.videos = data;
+            $scope.videosyt = data;
+        })
+    $http.get('lastestVideosAnimoto/' + $scope.blogId).
+        success(function (data) {
+            console.log(data);
+            $scope.videosa = data;
         })
 
 });
@@ -2107,20 +2118,48 @@ app.controller('EditProfileCtrl', function ($scope, $http, api, groupsListing) {
             });
     }
 })
-console.log(youtube_embed(youtube_parser("http://www.youtube.com/watch?v=Pu1PPMaoArE")) );
+//console.log(youtube_embed(youtube_parser("http://www.youtube.com/watch?v=Pu1PPMaoArE")) );
 function youtube_parser(url){
-    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    //var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    if(!url)return;
+    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     var match = url.match(regExp);
     if (match&&match[7].length==11){
         return match[7];
     }else{
-        alert("Url incorrecta");
+        alert("Probably not a youtube url please try again.");
     }
 }
+//<iframe id="vp1d9hMl" title="Video Player" width="432" height="243" frameborder="0" src="http://embed.animoto.com/play.html?w=swf/production/vp1&e=1383358396&f=d9hMlHCZJLbDtchmtVdo7g&d=0&m=b&r=360p&volume=100&start_res=360p&i=m&asset_domain=s3-p.animoto.com&animoto_domain=animoto.com&options=" allowfullscreen></iframe><p><a href="http://animoto.com/play/d9hMlHCZJLbDtchmtVdo7g">Emila</a></p>
+function youtube_embed(string)
+{
+    if(!string)return;
 
- function youtube_embed(string)
- {
- var iframestring = "<iframe title='YouTube video player' width='480' height='390' src='http://www.youtube.com/embed/"+string+"?autoplay=0' frameborder='0' allowfullscreen></iframe>";
-     return iframestring;
- }
+    var iframestring = "<iframe title='YouTube video player' width='480' height='390' src='http://www.youtube.com/embed/"+string+"?autoplay=0' frameborder='0' allowfullscreen></iframe>";
+    return iframestring;
+}
+
+function animoto_parser (url){
+    if(!url)return;
+
+    console.log(url)
+    //url = 'animoto.com/play/d9hMlHCZJLbDtchmtVdo7g';
+    var regExp = /^.*((play\/))\??v?=?([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    console.log("parsing animoto")
+    console.log(match)
+    if (match&&match[3]){
+        return match[3];
+    }else{
+        alert("Probably not a animoto url please enter a url with this form animoto.com/play/xxxkjxlkjxx");
+    }
+}
+//<iframe id="vp1d9hMl" title="Video Player" width="432" height="243" frameborder="0" src="http://embed.animoto.com/play.html?w=swf/production/vp1&e=1383358396&f=d9hMlHCZJLbDtchmtVdo7g&d=0&m=b&r=360p&volume=100&start_res=360p&i=m&asset_domain=s3-p.animoto.com&animoto_domain=animoto.com&options=" allowfullscreen></iframe><p><a href="http://animoto.com/play/d9hMlHCZJLbDtchmtVdo7g">Emila</a></p>
+function animoto_embed(string)
+{
+    if(!string)return;
+
+    var iframestring = "<iframe id='vp1d9hMl' title='Video Player' width='432' height='243' frameborder='0' src='https://s3.amazonaws.com/embed.animoto.com/play.html?w=swf/production/vp1&e=1383394463&f="+string+"&d=0&m=b&r=360p&volume=100&start_res=360p&i=m&asset_domain=s3-p.animoto.com&animoto_domain=animoto.com&options=' allowfullscreen></iframe>";
+    return iframestring;
+}
 

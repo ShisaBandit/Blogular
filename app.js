@@ -163,6 +163,8 @@ app.get('/lastestPics/:id', blogRoutes.latestPics);
 app.get('/deletepic/:pic/:blog',passport.ensureAuthenticated,blogRoutes.deletepic);
 
 app.get('/lastestVideos/:id', blogRoutes.latestVideos);
+app.get('/lastestVideosYoutube/:id', blogRoutes.latestVideosYouTube);
+app.get('/lastestVideosAnimoto/:id', blogRoutes.latestVideosAnimoto);
 app.get('/lastestEvents/:id', blogRoutes.latestEvents);
 
 app.post('/blog', passport.ensureAuthenticated, blogRoutes.createBlog);

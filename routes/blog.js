@@ -453,6 +453,17 @@ exports.latestVideos = function (req, res) {
         return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.video, "embedYouTube")));
     });
 }
+exports.latestVideosYouTube = function (req, res) {
+    Blog.findOne({_id: req.params.id}).lean().exec(function (err, blog) {
+        return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.video, "embedYouTube")));
+    });
+}
+exports.latestVideosAnimoto = function (req, res) {
+    Blog.findOne({_id: req.params.id}).lean().exec(function (err, blog) {
+        return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.video, "embedAnimoto")));
+    });
+}
+
 
 function getPostText(blog, type, getProp) {
     if (getProp == undefined)getProp = false;
