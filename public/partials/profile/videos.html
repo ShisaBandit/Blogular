@@ -10,11 +10,11 @@
                                 frameborder="0"
                                 allowfullscreen>
                         </iframe>-->
-                        <div ng-repeat="video in videosyt">
-                            <p ng-bind-html-unsafe="video" ></p>
+                        <div ng-repeat="video in videosyt track by $index">
+                            <p ng-bind-html="video" ></p>
                         </div>
-                        <div ng-repeat="video in videosa">
-                            <p ng-bind-html-unsafe="video" ></p>
+                        <div ng-repeat="video in videosa track by $index">
+                            <p ng-bind-html="video"></p>
                         </div>
                     </li>
 

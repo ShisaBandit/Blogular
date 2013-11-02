@@ -24,6 +24,8 @@
 
     <!-- Included CSS Files (Compressed) -->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <!--<link href="css/animate.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="css/foundation.min.css">
     <link rel="stylesheet" type="text/css" href="css/normalize.css" media="all"/>
     <link rel="stylesheet" href="stylesheets/general_foundicons.css">
@@ -40,32 +42,39 @@
     <!-- Included JS Files (Compressed) -->
     <script src="js/foundation.min.js"></script>
     <!--<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>-->
-    <script src="js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular/rc1.2/angular.js"></script>
+    <script type="text/javascript" src="js/angular/rc1.2/angular-animate.js"></script>
+    <script type="text/javascript" src="js/angular/rc1.2/angular-route.js"></script>
+
+    <script type="text/javascript" src="js/angular/rc1.2/angular-resource.js"></script>
     <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>-->
-    <script type="text/javascript" src="js/angular/angular-resource.js"></script>
-    <script type="text/javascript" src="js/angular/ui-bootstrap-tpls-0.6.0.min.js"></script>
-    <script type="text/javascript" src="js/external/socketmodule.js"></script>
-    <script src="js/app/blog.js"></script>
-    <script type="text/javascript" src="js/external/resources/blogService.js"></script>
-    <script type="text/javascript" src="js/external/resources/userService.js"></script>
-    <script type="text/javascript" src="js/external/services/BlogService.js"></script>
-    <script type="text/javascript" src="js/external/services/updateService.js"></script>
-    <script type="text/javascript" src="js/external/filters/byTag.js"></script>
-    <script type="text/javascript" src="js/external/GlobalCtrls/TitleCtrl.js"></script>
-    <script type="text/javascript" src="js/external/GlobalCtrls/BlogListCtrl.js"></script>
-    <script type="text/javascript" src="js/external/GlobalCtrls/GroupListCtrl.js"></script>
-    <script type="text/javascript" src="js/external/resources/twitterService.js"></script>
-    <script type="text/javascript" src="js/external/directives/loader.js"></script>
-    <script type="text/javascript" src="js/external/directives/ng-infinite-scroll.js"></script>
-    <script type="text/javascript" src="js/external/scope.onready.js"></script>
-    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="js/external/resources/apiV2.js"></script>
-    <script type="text/javascript" src="js/external/angular-http-auth.js"></script>
-    <script type="text/javascript" src="js/external/directives/login.js"></script>
-    <script type="text/javascript" src="js/jqAutoscroller.js"></script>
-    <script type="text/javascript" src="js/vendor/dropzone.js"></script>
-    <script type="text/javascript" src="js/external/dropzonemodule.js"></script>
-    <!-- foundation datepicker start -->
+
+    <!-- <script src="js/angular/angular.min.js"></script>
+
+     <script type="text/javascript" src="js/angular/angular-resource.js"></script>-->
+     <script type="text/javascript" src="js/angular/ui-bootstrap-tpls-0.6.0.min.js"></script>
+     <script type="text/javascript" src="js/external/socketmodule.js"></script>
+     <script src="js/app/blog.js"></script>
+     <script type="text/javascript" src="js/external/resources/blogService.js"></script>
+     <script type="text/javascript" src="js/external/resources/userService.js"></script>
+     <script type="text/javascript" src="js/external/services/BlogService.js"></script>
+     <script type="text/javascript" src="js/external/services/updateService.js"></script>
+     <script type="text/javascript" src="js/external/filters/byTag.js"></script>
+     <script type="text/javascript" src="js/external/GlobalCtrls/TitleCtrl.js"></script>
+     <script type="text/javascript" src="js/external/GlobalCtrls/BlogListCtrl.js"></script>
+     <script type="text/javascript" src="js/external/GlobalCtrls/GroupListCtrl.js"></script>
+     <script type="text/javascript" src="js/external/resources/twitterService.js"></script>
+     <script type="text/javascript" src="js/external/directives/loader.js"></script>
+     <script type="text/javascript" src="js/external/directives/ng-infinite-scroll.js"></script>
+     <script type="text/javascript" src="js/external/scope.onready.js"></script>
+     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+     <script type="text/javascript" src="js/external/resources/apiV2.js"></script>
+     <script type="text/javascript" src="js/external/angular-http-auth.js"></script>
+     <script type="text/javascript" src="js/external/directives/login.js"></script>
+     <script type="text/javascript" src="js/jqAutoscroller.js"></script>
+     <script type="text/javascript" src="js/vendor/dropzone.js"></script>
+     <script type="text/javascript" src="js/external/dropzonemodule.js"></script>
+     <!-- foundation datepicker start -->
     <script src="js/foundation/foundation-datepicker.js"></script>
     <!-- foundation datepicker end -->
     <link rel="stylesheet" href="css/nivo-gallery.css" type="text/css" media="screen"/>
@@ -172,7 +181,7 @@
     </div>
 </div>
 <!-- Main  Content -->
-<div ng-view class="mainBG">
+<div ng-view class="mainBG" >
 
 </div>
 <!-- End  Content -->

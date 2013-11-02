@@ -6,7 +6,7 @@
                     <div class="large-12 columns" offset-height="-300">
                         <div id="portraitpic">
                             <!-- Begin new mem wall nav -->
-                            <div class="row" ng-show="profileMenuViewable" ng-animate="fade" id="profile-menu">
+                            <div class="row" ng-show="profileMenuViewable"   id="profile-menu">
                                 <div class="small-8 small-offset-2">
                                     <nav>
                                         <section>
@@ -54,7 +54,7 @@
                     </section>
                     <div class="section-container auto" data-section data-section-resized>
                         <section class="section">
-                            <p class="title" data-section-title><a href="#panel2" ng-click="loadPage('Latest')">Start
+                            <p class="title" data-section-title><a  ng-click="loadPage('Latest')">Start
                                 Topic</a></p>
 
                             <div class="content" data-section-content>
@@ -74,7 +74,7 @@
                             </div>
                         </section>
                         <section class="section">
-                            <p class="title" data-section-title><a href="#panel3"
+                            <p class="title" data-section-title><a
                                                                    ng-click="flipEntry(); loadPage('Pics')">Add Pics</a>
                             </p>
 
@@ -106,7 +106,7 @@
                             </div>
                         </section>
                         <section class="section">
-                            <p class="title" data-section-title><a href="#panel4"
+                            <p class="title" data-section-title><a
                                                                    ng-click="toogleVideoEntry(); loadPage('Videos')">Add
                                 Videos</a></p>
 
@@ -128,7 +128,7 @@
                                         <a class="button" ng-click="youtube = false;animoto = true;">Animoto</a>
 
 
-                                        <div class="youtube" ng-show="youtube">
+                                        <div class="my-show-hide-animation" ng-show="youtube">
                                             <h4 class="dark">YouTube Link</h4>
                                             <b class="dark">Past or type a YouTube url here.</b>
                                             <input type="text" name="youtube" ng-model="embedYouTube" id="youtube"
@@ -156,7 +156,7 @@
                             </div>
                         </section>
                         <section class="section">
-                            <p class="title" data-section-title><a href="#panel1"
+                            <p class="title" data-section-title><a
                                                                    ng-click="toogleEventEntry(); loadPage('anniversaries')">Add
                                 Anniversary</a></p>
 

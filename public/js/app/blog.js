@@ -1,7 +1,7 @@
 var app = angular.module('blogApp', [
         'twitterService', 'userService', 'http-auth-interceptor', 'login', 'socketio', 'updateService',
         'Scope.onReady', 'blogResource', 'loaderModule', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries', 'Plugin.Controller.GroupEntries',
-        'blogFilter', 'blogService', 'infinite-scroll', 'dropzone', 'apiResource', 'ui.bootstrap'
+        'blogFilter', 'blogService', 'infinite-scroll', 'dropzone', 'apiResource', 'ui.bootstrap','ngAnimate','ngRoute'
     ]).
     config(function ($routeProvider) {
         $routeProvider.
@@ -1098,6 +1098,7 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
             });
     })
     $scope.showcommentbox = function (index) {
+        console.log(index)
         $scope.commentbox[index] = true;
     }
     $scope.submitComment = function (index) {
@@ -1689,10 +1690,11 @@ app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog, $rootScope,
     }
 });
 
-app.controller('VideoCtrl', function ($scope, BlogsService, Blog, $rootScope, $http) {
+app.controller('VideoCtrl', function ($scope, BlogsService, Blog, $rootScope, $http,$sce) {
     $scope.videosyt = [];
     $scope.videosa = [];
     $scope.blogId = "";
+
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
@@ -1700,26 +1702,38 @@ app.controller('VideoCtrl', function ($scope, BlogsService, Blog, $rootScope, $h
         $http.get('lastestVideosYoutube/' + newVal).
             success(function (data) {
                 console.log(data);
-                $scope.videosyt = data;
+
+                $scope.videosyt =   $scope.trustAsHtmlArray( data);
             })
         $http.get('lastestVideosAnimoto/' + newVal).
             success(function (data) {
                 console.log(data);
-                $scope.videosa = data;
+                $scope.videosa =$scope.trustAsHtmlArray( data);
             })
 
     });
+
     $http.get('lastestVideosYoutube/' + $scope.blogId).
         success(function (data) {
             console.log(data);
-            $scope.videosyt = data;
+            $scope.videosyt =  $scope.trustAsHtmlArray(data);
+            console.log($scope.videosyt)
         })
+
     $http.get('lastestVideosAnimoto/' + $scope.blogId).
         success(function (data) {
             console.log(data);
-            $scope.videosa = data;
+            $scope.videosa =  $scope.trustAsHtmlArray(data);
         })
 
+    $scope.trustAsHtmlArray = function(arrayToPass){
+        var buffer = [];
+        for(var i = 0;i<arrayToPass.length;i++){
+            console.log(arrayToPass[i])
+            buffer[i] = $sce.trustAsHtml(arrayToPass[i]);
+        }
+        return buffer;
+    }
 });
 app.controller('AnniCtrl', function ($scope, api, $http) {
     $scope.anis = [];
