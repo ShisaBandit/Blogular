@@ -168,11 +168,14 @@
                                 </div>
                                 <div ng-show="eventbox" id="eventbox">
                                     <div>
-                                        <h4 class="dark">Add a New Event</h4>
-                                        <h5>Title</h5>
-                                        <input type="text" name="eventheader" ng-model="event" id=""/>
+                                        <h4 class="dark">Add a New Angel Anniversary</h4>
                                         <h5>Details</h5>
-                                        <input type="text" name="eventdetails" ng-model="eventdesc" id="event"/>
+                                        <input type="text" name="eventheader" ng-model="event" id=""/>
+                                        <h5>Date</h5>
+                                        <div class="form-horizontal">
+                                            <input type="text" name="eventdate" datepicker-popup="yyyy/MMMM/dd" ng-model="form.eventdate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+                                            <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
+                                        </div>
                                         <a ng-click="submitEvent()" class="button">Submit Angel Anniversary</a>
                                     </div>
                                 </div>
