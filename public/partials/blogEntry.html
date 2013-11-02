@@ -101,7 +101,6 @@
                                 <div ng-show="videobox" id="videobox">
                                     <div>
                                         <h4 class="dark">YouTube Link</h4>
-                                        <b class="dark">You have to use the embed code from youtube for now</b>
                                         <input type="text" name="youtube" ng-model="embedYouTube" id="youtube" placeholder="Enter your youtube embed code here!" />
                                         <h4 class="dark">Animoto Link</h4>
                                         <p>*Turn your photos and music into stunning video slideshows. You provide the photos, you pick the song, and we'll add the magic. Give it a try — it's fast, free and shockingly easy. <a href="http://animoto.com" target="_blank">http://animoto.com</a>
@@ -123,11 +122,14 @@
                                 </div>
                                 <div ng-show="eventbox" id="eventbox">
                                     <div>
-                                        <h4 class="dark">Add a New Event</h4>
-                                        <h5>Title</h5>
-                                        <input type="text" name="eventheader" ng-model="event" id=""/>
+                                        <h4 class="dark">Add a New Angel Anniversary</h4>
                                         <h5>Details</h5>
-                                        <input type="text" name="eventdetails" ng-model="eventdesc" id="event"/>
+                                        <input type="text" name="eventheader" ng-model="event" id=""/>
+                                        <h5>Date</h5>
+                                        <div class="form-horizontal">
+                                            <input type="text" name="eventdate" datepicker-popup="yyyy/MMMM/dd" ng-model="form.eventdate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+                                            <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
+                                        </div>
                                         <a ng-click="submitEvent()" class="button">Submit Angel Anniversary</a>
                                     </div>
                                 </div>

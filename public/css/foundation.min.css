@@ -2695,7 +2695,7 @@ form.custom .custom.disabled {
     display: block;
     width: 100%;
     min-height: 100%; /* Set to minimum height so overflow doesn't get hidden */
-    overflow-y: hidden; /* HIDE overflow; I know, it doesn't make much sense */
+    /*overflow-y: hidden; /* HIDE overflow; I know, it doesn't make much sense */
     padding-bottom: 10px;
     margin-bottom: 10px;
     float: none;
