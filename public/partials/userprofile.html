@@ -47,7 +47,6 @@
 </section>
 <section>
     <p class="title" data-section-title><a >My Memorial Walls</a></p>
-
     <div class="content profileGravatar" data-section-content>
         <div class="row ">
             <div class="contentHeader" class="small-12 columns">
@@ -76,7 +75,6 @@
 </section>
 <section>
     <p class="title" data-section-title><a >Friend’s Memorials</a></p>
-
     <div class="content" data-section-content>
         <div class="row ">
             <div class="contentHeader" class="small-12 columns">
@@ -94,7 +92,6 @@
                 memorial wall</a> - <a ng-click="removeself(wall.id)">Remove yourself from this memorial wall
                 network</a></li>
         </ul>
-
         <!-- Delete above UL after demo -->
     </div>
 </section>
@@ -128,10 +125,8 @@
             </section>
         </div>
         <div class="small-4 columns rghtDvd">
-
             <b>Groups I Joined / Group Invites</b>
             <br/> <br/>
-
             <section ng-repeat="group in invitedGroups">
                 <b>Group Name: {{group.name}}</b>
                 <br/>
@@ -153,53 +148,9 @@
         <div class="small-4 columns">
             <a href="#/StartGroup" class="button">Create a new group here!</a>
         </div>
-
-
     </div>
 </section>
-<!--
-<section>
-    <p class="title" data-section-title><a >My Network</a></p>
-    <div class="content" data-section-content>
 
-        <div class="contentHeader" class="small-12 columns">
-            <h2 class="contentHeaderTitle">My Network</h2>
-        </div>
-
-        <p>
-            My Network is where all contacts from the memorial walls and groups that you are a part of are listed.<br />
-            Quickly find and contact your friends here.
-        </p>
-        <ul>
-            <li ng-repeat="user in newtworkedusersall">
-                {{user.firstName}} {{user.lastName}} - Affiliation: Mary Adam’s Memorial Wall - <a class="button" data-reveal-id="messageModal">Send private message</a>
-            </li>
-            <li>
-                Michael Deidricks - Affiliation: Grieving Family Group - <a class="button" data-reveal-id="messageModal">Send private message</a>
-            </li>
-            <li>
-                Susan Reno - Affiliation: Mary Adam’s Memorial Wall - <a class="button" data-reveal-id="messageModal">Send private message</a>
-            </li>
-            <li>
-                Barry Johnson -- Affiliation: Support for friends Group - <a class="button" data-reveal-id="messageModal">Send private message</a>
-            </li>
-            <li>
-                Marsha Tisdale - Affiliation: Mary Adam’s Memorial Wall - <a class="button" data-reveal-id="messageModal">Send private message</a>
-            </li>
-            <li>
-                Mark Adams - - Affiliation: Mary Adam’s Memorial Wall - <a class="button" data-reveal-id="messageModal">Send private message</a>
-            </li>
-            <li>
-                Nancy Adams - - Affiliation: Mary Adam’s Memorial Wall - <a class="button" data-reveal-id="messageModal">Send private message</a>
-            </li>
-            <li>
-                Jerry Smith - - Affiliation: Mary Adam’s Memorial Wall - <a class="button" data-reveal-id="messageModal">Send private message</a>
-            </li>
-        </ul>
-
-    </div>
-</section>
--->
 <section>
     <p class="title" data-section-title><a >My Petitions</a></p>
 
@@ -207,7 +158,6 @@
         <div class="contentHeader" class="small-12 columns">
             <h2 class="contentHeaderTitle">My Petitions</h2>
         </div>
-
         <p>
             Here are all of the petitions that you have started.
         </p>
@@ -216,10 +166,7 @@
                 {{petition.title}}- <a href="#/editpetition/{{petition._id}}" class="button">Edit</a> - <a
                     ng-click="deletePetition(petition._id)" class="button">Delete</a>
             </li>
-
         </ul>
-
-
     </div>
 </section>
 <section>
@@ -229,7 +176,6 @@
         <div class="contentHeader" class="small-12 columns">
             <h2 class="contentHeaderTitle">Message Center</h2>
         </div>
-
                         <p>Welcome to the Message Center. From here you can create, manage and view messages from your network members, administrators and other registered users..</p>
                         <a class="button" data-reveal-id="messageModal"><img src="img/mail_2.png"> Send a New Message</a>
                         <br />
@@ -242,9 +188,10 @@
                                         <input type="text" ng-model="postText" class="addNewPost small-12 columns" placeholder="Search Messages"/>
                                     </div>
                                     -->
-                                    <div class="row" ng-repeat="messagedUser in messagedUsers">
+                                    <div class="row my-repeat-animation"  ng-repeat="messagedUser in messagedUsers">
                                         <a href="" ng-click="getMessages(messagedUser.user)">
                                             <span class="small-10 columns">{{messagedUser.user}} <a class="button buttonSmall" title="Archive This Conversation"><img src="img/trash.png"></a></span>
+                                            </a>
                                     </div>
                                 </section>
                             </div>
@@ -259,7 +206,7 @@
                                         -->
                                     </div>
                                     <br />
-                                    <div class="row" ng-repeat="message in messages">
+                                    <div class="row my-repeat-animation" ng-repeat="message in messages">
 
                                         <span class="small-30 columns"
                                               style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>{{message.from}}</b>  <i
