@@ -2002,7 +2002,7 @@ app.controller('EditWallCtrl', function ($rootScope, $http, $scope, api, $routeP
     };
 })
 
-app.controller('NotificationsCtrl', function ($scope, $http, api) {
+app.controller('NotificationsCtrl', function ($scope, $http, api,socket) {
     $scope.notifications = [];
 
     $http.get('notifications').
@@ -2017,6 +2017,10 @@ app.controller('NotificationsCtrl', function ($scope, $http, api) {
 
             })
     }
+    socket.emit()
+    socket.on('newnotifications', function (data) {
+        $scope.notifications = data;
+    });
 
 });
 app.controller('WorkshopCtrl', function ($scope, $http, api) {

@@ -31,6 +31,7 @@ var express = require('express')
     , passport = require('./auth/local').passport_local
     , Constants = require('./constants/constants.js');
 
+
 console.log(expressValidator)
 global.__approot = __dirname;
 //set up database models to mongoose
@@ -336,29 +337,38 @@ io.sockets.on('connection', function (socket) {
         console.log('subscribed');
 
         socket.handshake.room = data.room;
-        var duplicateUserForRoom = false;
-        var usersForThisRoom = [];
+        var duplicateUserForRoom = false;//TODO:check to make sure not alread in room??
+        var usersForThisRoom = [];//hold a list of all users in the currently subscribed room
         for (var a = 0; a < connectedusers.length; a++) {
+            /*
             if (connectedusers[a].id == socket.handshake.user[0]._id && connectedusers[a].room == data.room) {
             }
+            */
+            //if this user is in the room
             if (connectedusers[a].room == data.room) {
                 usersForThisRoom.push(connectedusers[a]);
             }
         }
+        /*
         var clients = io.sockets.clients(data.room);
         for (var i = 0; i < clients.length; i++) {
             console.log("================================================================next client loading....");
         }
+        */
+        //if we didnt have any duplicates
         if (duplicateUserForRoom == false) {
             socket.join(data.room);
-            connectedusers.push({room: data.room, id: socket.handshake.user[0]._id, username: socket.handshake.user[0].username});
+            connectedusers.push({room: data.room, id: socket.handshake.user[0]._id, username: socket.handshake.user[0].username,socket:socket});
 
             usersForThisRoom.push({room: data.room, id: socket.handshake.user[0]._id, username: socket.handshake.user[0].username});
 
 
-            socket.emit('initialuserlist', usersForThisRoom);
-            io.sockets.in(data.room).emit('updateusers', usersForThisRoom);
+            socket.emit('initialuserlist', usersForThisRoom);//send to the subscribing user
+            io.sockets.in(data.room).emit('updateusers', usersForThisRoom);//send to everyone else already in the room
         }
+        console.log("User subscribed")
+        console.log(connectedusers.length)
+        return;
 
 
     });
@@ -422,7 +432,30 @@ io.sockets.on('connection', function (socket) {
         console.log(socket.handshake.user[0].username);
         io.sockets.to(socket.room).emit('updateusers', usersForThisRoom);
     });
+
+    socket.on('notification_messagereceived',function(username,message){
+        console.log("NOTIFICATION MESSAGE RECEIVED_______-------- SOCKET")
+
+        for (var i = 0; i < connectedusers.length; i++) {
+            var conUsers = connectedusers[i];
+            if(conUsers[i]._id == userid){
+                conUsers[i].socket.emit('notification',message);
+            }
+        }
+    })
+
 });
+
+apiv2.messageEmitter.on('notification_messagereceived',function(username,message){
+    console.log("NOTIFICATION MESSAGE RECEIVED_______--------"+ connectedusers.length)
+    for (var i = 0; i < connectedusers.length; i++) {
+        console.log(connectedusers[i])
+        var conUsers = connectedusers[i];
+        if(conUsers[i]._id == userid){
+            conUsers[i].socket.emit('notification_messagereceived',message);
+        }
+    }
+})
 
 
 
