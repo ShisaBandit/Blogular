@@ -454,10 +454,12 @@ io.sockets.on('connection', function (socket) {
 
 apiv2.messageEmitter.on('notification_messagereceived',function(username,message){
     console.log("NOTIFICATION MESSAGE RECEIVED_______--------"+ notificationSubscribers.length)
-    for (var i = 0; i < connectedusers.length; i++) {
+    console.log(username)
+    console.log(message)
+    for (var i = 0; i < notificationSubscribers.length; i++) {
         console.log(notificationSubscribers[i])
         var conUsers = notificationSubscribers[i];
-        if(conUsers[i]._id == userid){
+        if(conUsers[i].id == userid){
             conUsers[i].socket.emit('notification_messagereceived',message);
         }
     }
