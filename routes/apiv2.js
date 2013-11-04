@@ -1,5 +1,6 @@
 var models = require('../models/models');
-
+var EventEmitter = require('events').EventEmitter;
+exports.messageEmitter = messageEmitter = new EventEmitter();
 exports.createData = function (req, res) {
     var subdoc = req.params.subdoc;
     var subdocid = req.params.subdocid;
@@ -150,11 +151,9 @@ var dataFilter = function (req, type, subtype, data, callback) {
             var to = data.to;
             console.log("sending message")
             var index = to.indexOf(':');
-            console.log(index)
             if(index>0){
                 to = data.to.substring(0,index);
             }
-            console.log(to)
             data.to = to;
             var from;
             var message = data.message;
@@ -165,7 +164,6 @@ var dataFilter = function (req, type, subtype, data, callback) {
                 from = data.from = fromdoc.username;
                 //find the user we are sending amessage to
                 models.User.findOne({username:to},function(err,todoc){
-                    console.log("TODOC IS "+todoc)
                     if(err)console.log(err);
                     //if we didnt find one ent this callback a error and end this func
                     if(todoc == undefined){
@@ -183,7 +181,7 @@ var dataFilter = function (req, type, subtype, data, callback) {
                         }
                     }
                     todoc.notifications.push({text:"You have a new message from "+from});
-
+                    messageEmitter.emit('notification_messagereceived',todoc._id,data.message);
                     if(!added){
                         todoc.messagedUsers.push({user:from});
                     }

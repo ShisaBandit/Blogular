@@ -82,49 +82,8 @@
         $(document).foundation();
 
         $(document).ready(function () {
-            var vidWidth = 425;
-            var vidHeight = 344;
 
-            var obj = '<object width="' + vidWidth + '" height="' + vidHeight + '">' +
-                    '<param name="movie" value="http://www.youtube.com/v/[vid]&hl=en&fs=1">' +
-                    '</param><param name="allowFullScreen" value="true"></param><param ' +
-                    'name="allowscriptaccess" value="always"></param><em' +
-                    'bed src="http://www.youtube.com/v/[vid]&hl=en&fs=1" ' +
-                    'type="application/x-shockwave-flash" allowscriptaccess="always" ' +
-                    'allowfullscreen="true" width="' + vidWidth + '" ' + 'height="' +
-                    vidHeight + '"></embed></object> ';
 
-            $('.content:contains("youtube.com/watch")').each(function () {
-                var that = $(this);
-                var vid = that.html().match(/(?:v=)([\w\-]+)/g); // end up with v=oHg5SJYRHA0
-                if (vid.length) {
-                    $.each(vid, function () {
-                        that.append(obj.replace(/\[vid\]/g, this.replace('v=', '')));
-                    });
-                }
-            });
-            var meny = Meny.create({
-                // The element that will be animated in from off screen
-                menuElement: document.querySelector( '.meny' ),
-
-                // The contents that gets pushed aside while Meny is active
-                contentsElement: document.querySelector( '.contents' ),
-
-                // The alignment of the menu (top/right/bottom/left)
-                position: 'left',
-
-                // The height of the menu (when using top/bottom position)
-                height: 200,
-
-                // The width of the menu (when using left/right position)
-                width: 260,
-
-                // Use mouse movement to automatically open/close
-                mouse: true,
-
-                // Use touch swipe events to open/close
-                touch: true
-            });
 
         })
     </script>
@@ -155,7 +114,8 @@
                 <a href="#/rules" class="small button" >Rules</a>
                 <a href="#" ng-click="logout()" if-authed="show" class="small button">logout</a>
                 <a href="#/registration" if-authed="hide" class="small button">Register</a>
-                <a href="#" if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
+                <a href="#/login" if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
+                <!--<a ng-click="#/login" if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>-->
             </div>
         </div>
     </div>
