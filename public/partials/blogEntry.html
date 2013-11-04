@@ -30,7 +30,7 @@
             <div if-authed="show" class="row collapse">
                 <div class="postEntry small-12 columns">
                     <!-- Begin new mem wall nav -->
-                    <section class="section memNav" style="padding: 10px; font-size: small;margin-bottom: 0px;" if-authed="show">
+                    <section class="section memNav" if-authed="show">
                         <h2 style="padding-top: 5px;margin-bottom: -5px;">Welcome to {{ entry.firstName }}'s Wall. Interact with your network</h2>
                         <nav class="wallGroup">
                             <ul>
@@ -45,9 +45,6 @@
                     <!-- End new mem wal nav -->
                 </div>
             </div>
-            <div class="small-offset-8 columns"></div>
-            <br/><br/>
-
             <div class="row">
                 <div id="contentHeader" class="small-12 columns">
                     <h2 class="contentHeaderTitle">{{contentHeaderTitle}}</h2>
