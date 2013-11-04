@@ -611,15 +611,6 @@ datepickercss
     font-size: 0.8125em;
 }
 
-.memNav {
-width: 665px;
-    height: 50px;
-    left: 325px;
-    position: fixed;
-    top: 146px;
-    z-index: 99;
-}
-
 #loginMessage {
     position:relative;
     top:140px;
@@ -1015,3 +1006,37 @@ input.addNewPost {
     opacity:1;
 }
 
+.memNav {
+    width: 100%;
+    height: 70px;
+    left: 0px;
+    position: fixed;
+    top: 100px;
+    background-color: #ffffff;
+    z-index: 990;
+}
+
+.wallGroup {
+    display: block;
+    clear: both;
+    text-align: center;
+}
+
+.wallGroup ul {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+}
+
+.wallGroup ul li {
+    display: inline-block;
+    font-weight: bold;
+    height: 20px;
+    padding: 5px;
+    margin: 2px;
+    list-style: none;
+    line-height: 8px;
+    background-color: #26619D;
+    color: #f0f0f0;
+    border-radius: 4px;
+}

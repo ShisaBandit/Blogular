@@ -1,4 +1,41 @@
 <div ng-controller="VideoCtrl">
+    <div class="row ">
+        <div id="contentHeader" class="small-12 columns">
+            <h2 class="contentHeaderTitle">Upload Videos</h2>
+        </div>
+    </div>
+    <p>
+        <b>*You can upload you video memories from youtube or animoto here on this panel!</b>
+    </p>
+    <div ng-show="videobox" id="videobox">
+        <div>
+            <h3>Select which type of video you would like to show.</h3>
+            <a class="button" ng-click="youtube = true;animoto = false;">YouTube</a>
+            <a class="button" ng-click="youtube = false;animoto = true;">Animoto</a>
+            <div class="my-show-hide-animation" ng-show="youtube">
+                <h4 class="dark">YouTube Link</h4>
+                <b class="dark">Past or type a YouTube url here.</b>
+                <input type="text" name="youtube" ng-model="embedYouTube" id="youtube"placeholder="Enter your youtube embed code here!"/>
+                <a ng-click="submitVideo()" class="button">Submit video links</a>
+
+            </div>
+            <div class="animoto" ng-show="animoto">
+                <h4 class="dark">Animoto Link</h4>
+
+                <p>*Turn your photos and music into stunning video slideshows. You provide
+                    the photos, you pick the song, and we'll add the magic. Give it a try —
+                    it's fast, free and shockingly easy. <a href="http://animoto.com"
+                                                            target="_blank">http://animoto.com</a>
+                    Once you create your Animoto video there, use your "share" link to
+                    upload them to your video gallery on this panel!</p>
+                <input type="text" name="animoto" ng-model="embedAnimoto" id="animoto"
+                       placeholder="Enter your animoto embed code here!"/>
+                <a ng-click="submitVideo()" class="button">Submit video links</a>
+
+            </div>
+        </div>
+
+    </div>
     <div class="row">
         <div class="small-12 columns contentContainer">
             <div class="row">

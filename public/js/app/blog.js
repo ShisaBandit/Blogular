@@ -37,7 +37,9 @@ var app = angular.module('blogApp', [
             when("/editwall/:wall", {templateUrl: "partials/editwall.html"}).
             when("/passwordrecovery", {templateUrl: "partials/forgotpassword.html"}).
             when("/updatepass", {templateUrl: "partials/updatepass.html"}).
-            when("/editprofile", {templateUrl: "partials/editprofile.html"})
+            when("/editprofile", {templateUrl: "partials/editprofile.html"}).
+            when("/login", {templateUrl: "partials/login.html"})
+
     });
 app.directive('fdatepicker', function () {
     return{
@@ -171,7 +173,11 @@ app.directive('revealModal', function (DeletePicsFactory) {
                     elm.foundation('reveal','open');
                 }
             })
-
+            scope.$on('showlogin', function () {
+                if(attrs.revealModal == 'login'){
+                    elm.foundation('reveal','open');
+                }
+            })
         }
     }
 });
@@ -210,6 +216,8 @@ app.directive('ifAuthed', function ($http) {
                     elm.show();
                 }
             });
+
+
         }
     }
 });
@@ -1071,6 +1079,10 @@ app.controller('UserInfoCtrl', function ($scope, userInfoService, $http) {
         window.location.reload();
 
     })
+
+    $scope.showLogin = function () {
+        $scope.$broadcast('showlogin');
+    }
 
 });
 
