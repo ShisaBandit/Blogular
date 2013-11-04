@@ -5,18 +5,6 @@
                 <div class="row">
                     <div class="large-12 columns" offset-height="-300">
                         <div id="portraitpic">
-                            <!-- Begin new mem wall nav -->
-                            <div class="row" ng-show="profileMenuViewable"   id="profile-menu">
-                                <div class="small-8 small-offset-2">
-                                    <nav>
-                                        <section>
-                                            <h2><a data-dropdown="drop1">View Menu</a></h2>
-
-                                        </section>
-                                    </nav>
-                                </div>
-                            </div>
-                            <!-- End new mem wal nav -->
                             <img id="portrait" src="/uploads/{{ entry.profilePicPortrait }}"><br/>
                             {{ entry.firstName }} {{ entry.lastName }}
                         </div>
@@ -37,154 +25,26 @@
             </div>
         </div>
     </div>
-    <div class="row" style="margin-top: 30px;">
+    <div class="row">
         <div class="small-12 columns">
             <div if-authed="show" class="row collapse">
                 <div class="postEntry small-12 columns">
-                    <section class="section" style="padding: 10px; font-size: small;margin-bottom: -20px;">
-                        <h2>Interact with your network</h2>
-
-                        <p>
-                            Use the tabs below to interact with the visitors and members of your memorial wall. You can
-                            begin or add to conversations by clicking
-                            the "Begin Conversation" tab, upload photos in the "Add Pics" tab, upload videos in the "Add
-                            Videos" tab, or announce days
-                            to celebrate the legacy of your Angel in the "Angel Anniversary" tab.
-                        </p>
+                    <!-- Begin new mem wall nav -->
+                    <section class="section memNav" style="padding: 10px; font-size: small;margin-bottom: 0px;" if-authed="show">
+                        <h2 style="padding-top: 5px;margin-bottom: -5px;">Welcome to {{ entry.firstName }}'s Wall. Interact with your network</h2>
+                        <nav class="wallGroup">
+                            <ul>
+                                <li ng-click="loadPage('Latest')">Start a Topic</li>
+                                <li if-authed="show" ng-click="flipEntry(); loadPage('Pics')">Add Photos</li>
+                                <li if-authed="show" ng-click="toogleVideoEntry(); loadPage('Videos')">Add Videos</li>
+                                <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')">Add Anniversaries</li>
+                                <li if-authed="show" ng-click="loadPage('friendsandfamily')">Friends & Family</li>
+                            </ul>
+                        </nav>
                     </section>
-                    <div class="section-container auto" data-section data-section-resized>
-                        <section class="section">
-                            <p class="title" data-section-title><a  ng-click="loadPage('Latest')">Start
-                                Topic</a></p>
-
-                            <div class="content" data-section-content>
-                                <div id="contentHeader" class="small-12 columns">
-                                    <h2 class="contentHeaderTitle">Start a New Conversation</h2>
-                                </div>
-                                <br/>
-
-                                <div class="small-12 columns">
-                                    <input type="text" ng-model="postText" class="addNewPost small-10 columns"
-                                           placeholder="Begin a new conversation here"/>
-
-                                    <div class="small-2 columns"><br/>
-                                        <button ng-click="submit()" class="button postfix">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="section">
-                            <p class="title" data-section-title><a
-                                                                   ng-click="flipEntry(); loadPage('Pics')">Add Pics</a>
-                            </p>
-
-                            <div class="content" data-section-content>
-                                <div id="contentHeader" class="small-12 columns">
-                                    <h2 class="contentHeaderTitle">Upload Photos</h2>
-                                </div>
-                                <p>
-                                    <b>*You can create beautiful photo montages of your Angel and family at <a
-                                            href="http://imikimi.com" target="_blank">imikimi.com</a>. Once you create
-                                        them there, upload them to your gallery on this panel!</b>
-                                </p>
-
-                                <div ng-show="photobox" id="UploadBox">
-                                    <h2 class="dark">Photo Uploader: Drag and drop image files on the box</h2>
-
-                                    <div id='UploadArea'>
-                                        <dropzone url="/upload"
-                                                  class="dropzone"
-                                                  id="my-awesome-dropzone"
-                                                >
-                                        </dropzone>
-
-                                    </div>
-                                    <!--<a ng-click="submitphotodata()" class="button">Save</a> -->
-                                    <a ng-click="flipEntry()" class="button">Finished</a>
-                                </div>
-
-                            </div>
-                        </section>
-                        <section class="section">
-                            <p class="title" data-section-title><a
-                                                                   ng-click="toogleVideoEntry(); loadPage('Videos')">Add
-                                Videos</a></p>
-
-                            <div class="content" data-section-content>
-                                <div class="row ">
-                                    <div id="contentHeader" class="small-12 columns">
-                                        <h2 class="contentHeaderTitle">Upload Videos</h2>
-                                    </div>
-                                </div>
-                                <p>
-                                    <b>*You can upload you video memories from youtube or animoto here on this
-                                        panel!</b>
-                                </p>
-
-                                <div ng-show="videobox" id="videobox">
-                                    <div>
-                                        <h3>Select which type of video you would like to show.</h3>
-                                        <a class="button" ng-click="youtube = true;animoto = false;">YouTube</a>
-                                        <a class="button" ng-click="youtube = false;animoto = true;">Animoto</a>
-
-
-                                        <div class="my-show-hide-animation" ng-show="youtube">
-                                            <h4 class="dark">YouTube Link</h4>
-                                            <b class="dark">Past or type a YouTube url here.</b>
-                                            <input type="text" name="youtube" ng-model="embedYouTube" id="youtube"
-                                                   placeholder="Enter your youtube embed code here!"/>
-                                            <a ng-click="submitVideo()" class="button">Submit video links</a>
-
-                                        </div>
-                                        <div class="animoto" ng-show="animoto">
-                                            <h4 class="dark">Animoto Link</h4>
-
-                                            <p>*Turn your photos and music into stunning video slideshows. You provide
-                                                the photos, you pick the song, and we'll add the magic. Give it a try —
-                                                it's fast, free and shockingly easy. <a href="http://animoto.com"
-                                                                                        target="_blank">http://animoto.com</a>
-                                                Once you create your Animoto video there, use your "share" link to
-                                                upload them to your video gallery on this panel!</p>
-                                            <input type="text" name="animoto" ng-model="embedAnimoto" id="animoto"
-                                                   placeholder="Enter your animoto embed code here!"/>
-                                            <a ng-click="submitVideo()" class="button">Submit video links</a>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </section>
-                        <section class="section">
-                            <p class="title" data-section-title><a
-                                                                   ng-click="toogleEventEntry(); loadPage('anniversaries')">Add
-                                Anniversary</a></p>
-
-                            <div class="content" data-section-content>
-                                <div class="row ">
-                                    <div id="contentHeader" class="small-12 columns">
-                                        <h2 class="contentHeaderTitle">Add Angel Anniversary</h2>
-                                    </div>
-                                </div>
-                                <div ng-show="eventbox" id="eventbox">
-                                    <div>
-                                        <h4 class="dark">Add a New Angel Anniversary</h4>
-                                        <h5>Details</h5>
-                                        <input type="text" name="eventheader" ng-model="event" id=""/>
-                                        <h5>Date</h5>
-                                        <div class="form-horizontal">
-                                            <input type="text" name="eventdate" datepicker-popup="yyyy/MMMM/dd" ng-model="form.eventdate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
-                                            <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
-                                        </div>
-                                        <a ng-click="submitEvent()" class="button">Submit Angel Anniversary</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
+                    <!-- End new mem wal nav -->
                 </div>
             </div>
-
             <div class="small-offset-8 columns"></div>
             <br/><br/>
 
@@ -198,13 +58,6 @@
             </div>
         </div>
     </div>
-    <ul id="drop1" class="f-dropdown" data-dropdown-content>
-        <li class="active" ng-click="loadPage('Latest')"><a>Home</a></li>
-        <li class="active" if-authed="show" ng-click="loadPage('Pics')"><a>Pics</a></li>
-        <li class="active" if-authed="show" ng-click="loadPage('Videos')"><a>Videos</a></li>
-        <li class="active" ng-click="loadPage('anniversaries')"><a>Angels Anniversaries</a></li>
-        <li class="active" if-authed="show" ng-click="loadPage('friendsandfamily')"><a>Friends and Family</a></li>
-    </ul>
 </div>
 
 <script type="text/javascript">
