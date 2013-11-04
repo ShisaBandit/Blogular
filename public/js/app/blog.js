@@ -2029,7 +2029,7 @@ app.controller('NotificationsCtrl', function ($scope, $http, api,socket) {
 
             })
     }
-    socket.emit()
+    socket.emit('subscribe_notifications');
     socket.on('newnotifications', function (data) {
         $scope.notifications = data;
     });

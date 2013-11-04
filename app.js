@@ -325,6 +325,7 @@ io.configure(function () {
         }
     }));
 });
+var notificationSubscribers = [];
 var connectedusers = [];
 
 io.sockets.on('connection', function (socket) {
@@ -372,6 +373,11 @@ io.sockets.on('connection', function (socket) {
 
 
     });
+    socket.on('subscribe_notifications', function (data) {
+        console.log("trying to subscribe to notifications")
+        notificationSubscribers.push({ id: socket.handshake.user[0]._id, username: socket.handshake.user[0].username,socket:socket});
+    });
+
     socket.on('sentcomment', function (data) {
         console.log("sentcomment");
         //socket.emit('commentsupdated',"updateNow");
@@ -447,10 +453,10 @@ io.sockets.on('connection', function (socket) {
 });
 
 apiv2.messageEmitter.on('notification_messagereceived',function(username,message){
-    console.log("NOTIFICATION MESSAGE RECEIVED_______--------"+ connectedusers.length)
+    console.log("NOTIFICATION MESSAGE RECEIVED_______--------"+ notificationSubscribers.length)
     for (var i = 0; i < connectedusers.length; i++) {
-        console.log(connectedusers[i])
-        var conUsers = connectedusers[i];
+        console.log(notificationSubscribers[i])
+        var conUsers = notificationSubscribers[i];
         if(conUsers[i]._id == userid){
             conUsers[i].socket.emit('notification_messagereceived',message);
         }
