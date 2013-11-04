@@ -154,9 +154,10 @@
         <a class="closeButton" closeparent title="Hide this box by clicking here">X</a>
     </div>
 <div ng-controller="NotificationsCtrl">
-    <div ng-repeat="noti in notifications" id="notifications">
+    <div class="my-repeat-animation" ng-repeat="noti in notifications" id="notifications">
 
             {{ noti.text }}
+        <div>{{noti.count}}</div>
         <a class="closeButton" ng-click="notiviewed( noti._id )" closeparent title="Hide this box by clicking here">X</a>
     </div>
 </div>

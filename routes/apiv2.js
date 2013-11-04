@@ -181,7 +181,6 @@ var dataFilter = function (req, type, subtype, data, callback) {
                         }
                     }
                     todoc.notifications.push({text:"You have a new message from "+from});
-                    messageEmitter.emit('notification_messagereceived',todoc._id,data.message);
                     if(!added){
                         todoc.messagedUsers.push({user:from});
                     }
@@ -207,8 +206,10 @@ var dataFilter = function (req, type, subtype, data, callback) {
                     fromdoc.save(function(err){
                         if(err)console.log(err)
                     })
-                    todoc.save(function(err){
+                    todoc.save(function(err,saveddoc){
                         if(err)console.log(err)
+
+                        messageEmitter.emit('notification_messagereceived',todoc._id,"You have a new message from "+from,saveddoc.notifications[saveddoc.notifications.length-1]._id);
                     })
                     callback(data);
                 });

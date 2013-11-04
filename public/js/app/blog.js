@@ -2030,8 +2030,29 @@ app.controller('NotificationsCtrl', function ($scope, $http, api,socket) {
             })
     }
     socket.emit('subscribe_notifications');
-    socket.on('newnotifications', function (data) {
-        $scope.notifications = data;
+
+    //TODO:add all the notifications to the array but only display the single ones with a count
+    socket.on('newnotification', function (data) {
+        console.log("new notification received")
+        console.log(data)
+        /*
+        for(var noti in $scope.notifications){
+            console.log($scope.notifications[noti])
+            if($scope.notifications[noti].text == data.text){
+                if(!$scope.notifications[noti].count){
+                    $scope.notifications[noti].count = 2;
+                    return;
+
+                }else{
+                    $scope.notifications[noti].count++;
+                    return;
+
+                }
+            }
+        }
+        */
+        $scope.notifications.push(data);
+
     });
 
 });

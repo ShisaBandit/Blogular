@@ -438,8 +438,8 @@ io.sockets.on('connection', function (socket) {
         console.log(socket.handshake.user[0].username);
         io.sockets.to(socket.room).emit('updateusers', usersForThisRoom);
     });
-
-    socket.on('notification_messagereceived',function(username,message){
+/*
+    socket.on('notification_messagereceived',function(username,message,notiid){
         console.log("NOTIFICATION MESSAGE RECEIVED_______-------- SOCKET")
 
         for (var i = 0; i < connectedusers.length; i++) {
@@ -449,18 +449,20 @@ io.sockets.on('connection', function (socket) {
             }
         }
     })
-
+*/
 });
 
-apiv2.messageEmitter.on('notification_messagereceived',function(username,message){
+apiv2.messageEmitter.on('notification_messagereceived',function(userid,message,notiid){
     console.log("NOTIFICATION MESSAGE RECEIVED_______--------"+ notificationSubscribers.length)
-    console.log(username)
+    console.log(userid)
     console.log(message)
+    var conUsers = notificationSubscribers;
+
     for (var i = 0; i < notificationSubscribers.length; i++) {
-        console.log(notificationSubscribers[i])
-        var conUsers = notificationSubscribers[i];
-        if(conUsers[i].id == userid){
-            conUsers[i].socket.emit('notification_messagereceived',message);
+        console.log(conUsers[i].id +" = "+userid)
+        if(conUsers[i].id.toString() == userid.toString()){
+            console.log("trying to emit to a user with message "+message);
+            conUsers[i].socket.emit('newnotification',{text:message,viewed:false,_id:notiid});
         }
     }
 })
