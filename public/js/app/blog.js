@@ -421,11 +421,13 @@ app.controller('blogEntryPicCtrl', function ($scope) {
 });
 
 app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http, dropzone, api) {
-
-
     $scope.parentObject = {
         routeParamId: $routeParams.id,
         entryId: ""
+    }
+    $scope.embedVideos = {
+        youtube:"",
+        animoto:""
     }
     socket.connect();
     $scope.entry = "";
@@ -470,19 +472,7 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         }
     }
 
-    $scope.submitVideo = function () {
-        //TODO:Checkk this
-        console.log("submitvideo");
-        console.log("eani "+$scope.embedAnimoto )
-        console.log(($scope.embedAnimoto));
-        api.createSubDocResource('Blog', $scope.entry._id, 'postText', {
-            embedYouTube: youtube_embed(youtube_parser($scope.embedYouTube)), embedAnimoto: animoto_embed(animoto_parser($scope.embedAnimoto)) , postType: 2
-        }, function () {
-            console.log("video sent");
-            $scope.embedYouTube = "";
-            $scope.embedAnimoto = "";
-        })
-    }
+
     $scope.submitEvent = function () {
         api.createSubDocResource('Blog', $scope.entry._id, 'postText', {
             event: $scope.event,
@@ -508,18 +498,7 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
 
     }
 
-    $scope.submit = function () {
-        console.log("button fired");
-        $http.post('/addtextpost', {text: $scope.postText, id: $scope.entry._id}).
-            success(function (data, status) {
-                console.log(data);
-                console.log("emited socket events");
-                socket.emit('postText', {room: $scope.entry._id});
-                $scope.postText = "";
-            }).error(function (err) {
-                console.log(err);
-            });
-    }
+
     socket.on('testrec', function (data) {
         console.log(data);
         console.log("rece socket event");
@@ -1098,9 +1077,11 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
     console.log($scope.routeParamId);
     $scope.commentbox = [];
     $scope.newcomment = [];
+    $scope.blogId;
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
+        $scope.blogId = newVal;
         $http.get('/lastestPosts/' + newVal).
             success(function (data, err) {
                 $scope.posts = data;
@@ -1109,6 +1090,18 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
                 console.log(err + code + status);
             });
     })
+    $scope.submit = function () {
+        console.log("button fired");
+        $http.post('/addtextpost', {text: $scope.postText, id: $scope.blogId}).
+            success(function (data, status) {
+                console.log(data);
+                console.log("emited socket events");
+                socket.emit('postText', {room: $scope.blogId});
+                $scope.postText = "";
+            }).error(function (err) {
+                console.log(err);
+            });
+    }
     $scope.showcommentbox = function (index) {
         console.log(index)
         $scope.commentbox[index] = true;
@@ -1255,6 +1248,7 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api,$modal,Delet
         for (var pic in $scope.pics) {
             console.log($scope.pics[pic][pic])
         }
+
     }
     $scope.delete = function () {
         //TODO:FInish this implementation
@@ -1286,6 +1280,7 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api,$modal,Delet
                     $scope.pics[pic][pic] = false;
                 }
                 $scope.addingNewAlbum = false;
+                $scope.getAlbums();
             }).
             error(function () {
                 console.log("error");
@@ -1310,6 +1305,12 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api,$modal,Delet
                 }
                 $scope.addingNewAlbum = false;
                 $scope.updatingAlbum = false;
+                $http.get('/showAlbum/' + $scope.blogId + '/' + albumid).
+                    success(function (data) {
+                        $scope.pics = data;
+                    }).
+                    error(function () {
+                    })
             }).
             error(function () {
                 console.log("error");
@@ -1329,7 +1330,12 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api,$modal,Delet
             error(function () {
             })
     }
-
+    $scope.getAlbums = function () {
+        $http.get('/albums/' + $scope.blogId).
+            success(function (data) {
+                $scope.albums = data;
+            })
+    }
     $scope.showallpics = function () {
         console.log("showallpics")
         $scope.showingAlbum = false;
@@ -1702,11 +1708,14 @@ app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog, $rootScope,
     }
 });
 
-app.controller('VideoCtrl', function ($scope, BlogsService, Blog, $rootScope, $http,$sce) {
+app.controller('VideoCtrl', function ($scope, BlogsService, Blog, $rootScope, $http,$sce,api) {
     $scope.videosyt = [];
     $scope.videosa = [];
     $scope.blogId = "";
-
+    $scope.embedVideos = {
+        youtube:"",
+        animoto:""
+    }
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
@@ -1724,7 +1733,31 @@ app.controller('VideoCtrl', function ($scope, BlogsService, Blog, $rootScope, $h
             })
 
     });
+    $scope.submitVideo = function () {
+        //TODO:Checkk this
+        console.log("submitvideo");
+        console.log("eani "+$scope.embedVideos.animoto )
+        console.log(($scope.embedVideos.youtube));
+        api.createSubDocResource('Blog', $scope.blogId, 'postText', {
+            embedYouTube: youtube_embed(youtube_parser($scope.embedVideos.youtube)),
+            embedAnimoto: animoto_embed(animoto_parser($scope.embedVideos.animoto)) ,
+            postType: 2
+        }, function () {
+            console.log("video sent");
+            $scope.embedVideos = {};
+            $http.get('lastestVideosYoutube/' + $scope.blogId).
+                success(function (data) {
+                    console.log(data);
 
+                    $scope.videosyt =   $scope.trustAsHtmlArray( data);
+                })
+            $http.get('lastestVideosAnimoto/' + $scope.blogId).
+                success(function (data) {
+                    console.log(data);
+                    $scope.videosa =$scope.trustAsHtmlArray( data);
+                })
+        })
+    }
     $http.get('lastestVideosYoutube/' + $scope.blogId).
         success(function (data) {
             console.log(data);
@@ -1771,6 +1804,27 @@ app.controller('AnniCtrl', function ($scope, api, $http) {
             console.log(data);
             $scope.anis = data;
         })
+
+    $scope.submitEvent = function () {
+        api.createSubDocResource('Blog', $scope.blogId, 'postText', {
+            event: $scope.event,
+            date: $scope.eventdate,
+            text: $scope.eventdesc,
+            postType: 3
+        }, function () {
+            $http.get('lastestEvents/' + $scope.blogId).
+                success(function (data) {
+                    console.log(data);
+                    $scope.anis = data;
+                })
+            $scope.$digest();
+            $scope.event = "";
+            $scope.eventdate ="";
+
+        })
+
+    }
+
 });
 
 app.controller('groupEvntCtrl', function ($scope, api, $http) {
@@ -2175,8 +2229,8 @@ function youtube_parser(url){
     if(!url)return;
     var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     var match = url.match(regExp);
-    if (match&&match[7].length==11){
-        return match[7];
+    if (match&&match[2].length==11){
+        return match[2];
     }else{
         alert("Probably not a youtube url please try again.");
     }

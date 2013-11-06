@@ -11,7 +11,7 @@
             <input type="text" name="eventheader" ng-model="event" id=""/>
             <h5>Date</h5>
             <div class="form-horizontal">
-                <input type="text" name="eventdate" datepicker-popup="yyyy/MMMM/dd" ng-model="form.eventdate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+                <input type="text" name="eventdate" datepicker-popup="yyyy/MMMM/dd" ng-model="eventdate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
                 <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
             </div>
             <a ng-click="submitEvent()" class="button">Submit Angel Anniversary</a>
@@ -20,7 +20,7 @@
     <div class="small-12 columns ">
         <div class="row">
             <h1>Angel Anniversaries</h1>
-            <div ng-repeat="ani in anis" class="row ">
+            <div class="my-repeat-animation" ng-repeat="ani in anis" class="row ">
                 <div class="row">
 
                     <div class="small-2 columns ">
