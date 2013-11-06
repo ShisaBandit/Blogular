@@ -9,7 +9,7 @@
     <div ng-show="photobox" id="UploadBox">
         <h2 class="dark">Photo Uploader: Drag and drop image files on the box</h2>
         <div id='UploadArea'>
-            <dropzone url="/upload" class="dropzone" id="my-awesome-dropzone" ></dropzone>
+            <dropzone url="/upload" class="dropzone" autoupload="false" addRemoveLinks="true" id="my-awesome-dropzone" ></dropzone>
         </div>
         <a ng-click="flipEntry()" class="button">Finished</a>
     </div>

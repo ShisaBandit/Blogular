@@ -277,7 +277,6 @@ app.directive('dropzone', function (dropzone, $rootScope) {
             //make a maxsize so can make a dropzone that only accepts
             //a set number of images
             //TODO:TEST ALL THIS STUFF
-            console.log(dropzoneOptions)
             dropzone.createDropzone(elm, attrs.url, dropzoneOptions, attrs.id);
             if (attrs.maximages != undefined) {
                 //dropzone.setMaxNoImages(parseInt(attrs.maximages,10)+1)
@@ -285,7 +284,9 @@ app.directive('dropzone', function (dropzone, $rootScope) {
 
             }
             $rootScope.dropzone = dropzone;
+
             dropzone.registerEvent('complete', elm, function (file) {
+                console.log('complete event start broadcasting')
                 $rootScope.$broadcast('uploadedFile', {file: file});
             })
             dropzone.registerEvent("addedfile", elm, function (file) {
@@ -610,11 +611,7 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         socket.removeAllListeners('commentsupdated');
         socket.removeAllListeners('updateusers');
     });
-    $scope.$on('uploadedFile', function (data) {
-        console.log("uploaded scope event called");
-        //$http.post('/uploadeddata',{file:data.file,memwall:$routeParams.id})
-        console.log(data);
-    })
+
 });
 
 app.controller('groupEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http, dropzone, api) {
@@ -826,11 +823,7 @@ app.controller('groupEntryCtrl', function ($scope, $location, show, Blog, $route
         socket.removeAllListeners('commentsupdated');
         socket.removeAllListeners('updateusers');
     });
-    $scope.$on('uploadedFile', function (data) {
-        console.log("uploaded scope event called");
-        //$http.post('/uploadeddata',{file:data.file,memwall:$routeParams.id})
-        console.log(data);
-    })
+
 });
 
 app.controller('SearchBarCtrl', function ($scope, $filter, $rootScope) {
@@ -1363,6 +1356,15 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api,$modal,Delet
     $rootScope.$on('event:pic-deleted', function () {
         $scope.showallpics();
     })
+    $rootScope.$on('uploadedFile', function (data) {
+        console.log("PICSCTRL UPloaded file")
+        $http.get('getPicsForBlog/' + $scope.blogId).
+            success(function (data) {
+                console.log(data);
+                $scope.pics = data;
+            })
+    })
+
 });
 //used to keep data between the deletepics ctrl modal and pics ctrl in sync
 app.factory('DeletePicsFactory',function(){
