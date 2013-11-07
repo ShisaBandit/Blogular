@@ -1,5 +1,7 @@
 var models = require('../models/models');
 var Common = require('../constants/constants.js');
+var mongoose = require('mongoose');
+var Q = require('q');
 var util = require('util');
 var Blog = models.Blog;
 var User = models.User;
@@ -219,19 +221,25 @@ exports.createBlog = function (req, res) {
      req.checkBody('author','The '+charsNotAllowed[i]+' character is not allowed').notContains(charsNotAllowed[i])
      }
      */
-    var errors = BlogGroupValidation(req);
-    if (errors) {
-        console.log(errors)
-        res.send(errors, 500);
-        return;
-    }
-    var newBlogEntry = new Blog(req.body);
-    newBlogEntry.owner_id = req.session.passport.user;
-    newBlogEntry.user = req.session.passport.user;
-    newBlogEntry.save(function (err, newblog) {
-        if (err)console.log(err);
-        return res.end(JSON.stringify({'success': 'true', blogId: newblog._id}));
-    });
+    BlogGroupValidation(req).
+    then(function (walls) {//if NO errors
+
+            var newBlogEntry = new Blog(req.body);
+            newBlogEntry.owner_id = req.session.passport.user;
+            newBlogEntry.user = req.session.passport.user;
+            newBlogEntry.save(function (err, newblog) {
+                if (err)console.log(err);
+                res.end(JSON.stringify({'success': 'true', blogId: newblog._id}));
+            });
+        },
+        function (errors) {//if  errors
+           console.log(errors);
+            if (errors) {
+                console.log(errors)
+                res.send(errors, 500);
+            }
+        });
+    return;
 }
 
 exports.updateBlog = function (req, res) {
@@ -278,6 +286,8 @@ exports.updateBlog = function (req, res) {
 
 }
 function BlogGroupValidation(req) {
+    //TODO:convert this method to return a promise
+    var promise = new mongoose.Promise;
     if (req.body.group == undefined || !req.body.group) {
         req.checkBody('dob', 'Must be a valid data').notNull().isDate();
         req.checkBody('memorialDate', 'Must be a valid date').notNull().isDate();
@@ -298,6 +308,7 @@ function BlogGroupValidation(req) {
     var errors = req.validationErrors(true);
     var myRe = /^(\w*[-_]?\w*){1,100}$/;
     var myArray = myRe.exec(req.body.author);
+
     if (myArray == null) {
         console.log("not a valid url")
         if (!errors) {
@@ -305,8 +316,41 @@ function BlogGroupValidation(req) {
         }
         errors.author = {param: 'author', msg: 'Please enter a valid url. Only characters A-Z or numbers 1-9 and "-" or "_" allowed.'};
     }
-    return errors;
+    //if(!errors){}else{return deferred.reject(errors);}
+    /*
+    Blog.find({}, function (err,walls) {
+        for(var i = 0;i<walls.length;i++){
+            if(req.body.author == walls[i].author){
+                if (!errors) {
+                    errors = {};
+                }
+                errors.author = {param: 'author', msg: 'This url is already taken please try with a differnt url.'};
+                return deferred.reject(errors);
+            }
+        }
+        return deferred.resolve();
+    })
+    return deferred.promise();
+    */
+    Blog.find({}).exec(function (err,walls) {
+        console.log(walls)
+        if(!walls)promise.reject(0);//nowalls error code
+        for(var i = 0;i<walls.length;i++){
+            if(req.body.author == walls[i].author){
+                if (!errors) {
+                    errors = {};
+                }
+                errors.author = {param: 'author', msg: 'This url is already taken please try with a differnt url.'};
+            }
+        }
+        if(!errors){
+            promise.fulfill();
+        }else{
+            promise.reject(errors);
+        }
+    });
 
+    return promise;
 }
 exports.deleteBlog = function (req, res) {
     console.log("trying to remove " + req.params.id);
