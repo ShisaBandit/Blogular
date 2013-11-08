@@ -1,173 +1,61 @@
 <div ng-controller="groupEntryCtrl">
-    <div class="fixed">
-        <div class="row" offset-height="90" ng-show="profileMenuViewable" ng-animate="fade" id="profile-menu">
-            <div class="small-8 small-offset-4">
-                <nav class="top-bar">
-                    <section class="top-bar-section">
-                        <ul class="left">
-                            <li class="active" ng-click="loadPage('LatestGroups')"><a>Group Home</a></li>
-                            <li class="divider"></li>
-                            <li class="active" if-authed="show"  ng-click="loadPage('Pics')"><a>Pics</a></li>
-                            <li class="divider" if-authed="show" ></li>
-                            <li class="active" if-authed="show"  ng-click="loadPage('Videos')"><a>Videos</a></li>
-                            <li class="divider" if-authed="show" ></li>
-                            <li class="active" ng-click="loadPage('groupEvents')"><a>Group Events & Dates</a></li>
-                            <li class="divider"></li>
-                            <li class="active" if-authed="show"  ng-click="loadPage('friendsandfamily')"><a>Group Members</a></li>
-                        </ul>
-                    </section>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="twelve columns" offset-height="100" role="content">
-            <div id="picheader">
-                <div class="row">
-                    <div class="large-12 columns" offset-height="-300">
-                        <div id="portraitpic">
-                            <img id="portrait" src="/uploads/{{ entry.profilePicPortrait }}">
-                        </div>
-                        <div id="gallery" class="nivoGallery" nivogallery>
-                            <ul>
-                                <li data-title="{{ entry.title }}" data-caption="Group Owner: {{ entry.firstName }} {{ entry.lastName }}">
-                                    <img id="widepic" width="1000" height="300" src="/uploads/{{ entry.profilePicWide }}">
-                                </li>
-                                <li data-type="html" data-title="{{ entry.title }}">
-                                    {{ entry.text }}
-
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-    <div class="row">
-        <div class="small-12 columns">
-            <div class="row collapse">
-                <div class="postEntry small-10 columns">
-                    <div class="section-container auto" reflow data-section>
-                        <section>
-                            <p class="title" data-section-title><a href="#panel1">Begin Conversation</a></p>
-                            <div class="content" data-section-content>
-                                <div id="contentHeader" class="small-12 columns">
-                                    <h2 class="contentHeaderTitle">Start a New Conversation</h2>
-                                </div>
-                                <br />
-                                <div class="small-12 columns">
-                                    <input type="text" ng-model="postText" class="addNewPost small-10 columns" placeholder="Begin a new conversation here"/>
-                                    <div class="small-2 columns"><br /><button ng-click="submit()" class="button postfix">Submit</button>
-                                    </div>
-                                </div>
-                        </section>
-                        <section>
-                            <p class="title" data-section-title><a href="#panel1" ng-click="flipEntry()">Add Pics</a></p>
-                            <div class="content" data-section-content>
-                                <div id="contentHeader" class="small-12 columns">
-                                    <h2 class="contentHeaderTitle">Upload Photos</h2>
-                                </div>
-                                <div ng-show="photobox" id="UploadBox">
-                                    <h2 class="dark">Photo Uploader</h2>
-
-                                    <div id='UploadArea'>
-                                        <dropzone url="/upload"
-                                                  class="dropzone"
-                                                  id="my-awesome-dropzone"
-                                                >
-                                        </dropzone>
-
-                                    </div>
-                                    <!--<a ng-click="submitphotodata()" class="button">Save</a> -->
-                                    <a ng-click="flipEntry()" class="button">Finished</a>
-                                </div>
-
-                            </div>
-                        </section>
-                        <section>
-                            <p class="title" data-section-title><a href="#panel1" ng-click="toogleVideoEntry()">Add Videos</a></p>
-                            <div class="content" data-section-content>
-                                <div class="row ">
-                                    <div id="contentHeader" class="small-12 columns">
-                                        <h2 class="contentHeaderTitle">Upload Videos</h2>
-                                    </div>
-                                </div>
-                                <div ng-show="videobox" id="videobox">
-                                    <h2 class="dark">Video Uploader</h2>
-
-                                    <div>
-                                        <h4 class="dark">You Tube Link</h4>
-                                        <b class="dark">You have to use the embed code from youtube for now</b>
-                                        <input type="text" name="youtube" ng-model="embedYouTube" id="youtube"/>
-                                        <h4 class="dark">Animoto Link</h4>
-                                        <input type="text" name="animoto" ng-model="embedAnimoto" id="animoto"/>
-                                        <a ng-click="submitVideo()" class="button">Submit video links</a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </section>
-                        <section>
-                            <p class="title" data-section-title><a href="#panel1" ng-click="toogleEventEntry()">Add Group Events</a></p>
-                            <div class="content" data-section-content>
-                                <div class="row ">
-                                    <div id="contentHeader" class="small-12 columns">
-                                        <h2 class="contentHeaderTitle">Add Group Events</h2>
-                                    </div>
-                                </div>
-                                <div ng-show="eventbox" id="eventbox">
-                                    <div>
-                                        <h4 class="dark">Add a New Event</h4>
-                                        <h5>Title</h5>
-                                        <input type="text" name="eventheader" ng-model="event" id=""/>
-                                        <h5>Details</h5>
-                                        <input type="text" name="eventdetails" ng-model="eventdesc" id="event"/>
-                                        <a ng-click="submitEvent()" class="button">Submit Group Event</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-            </div>
+<div class="row">
+    <div class="twelve columns" offset-height="100" role="content">
+        <div id="picheader">
             <div class="row">
-                <div id="contentHeader" class="small-12 columns">
-                    <h2 class="contentHeaderTitle">{{contentHeaderTitle}}</h2>
+                <div class="large-12 columns" offset-height="-300">
+                    <div id="portraitpic">
+                        <img id="portrait" src="/uploads/{{ entry.profilePicPortrait }}"><br/>
+                        {{ entry.firstName }} {{ entry.lastName }}
+                    </div>
+                    <div id="gallery" class="nivoGallery" nivogallery>
+                        <ul>
+                            <li data-title="{{ entry.firstName }} {{ entry.lastName }}"
+                                data-caption="{{ entry.memorialDate }}">
+                                <img id="widepic" width="1000" height="300"
+                                     src="/uploads/{{ entry.profilePicWide }}">
+                            </li>
+                            <li data-type="html" data-title="{{ entry.firstName }} {{ entry.lastName }}">
+                                {{ entry.text }}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div ng-include="template">
-
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 columns">
+        <div if-authed="show" class="row collapse">
+            <div class="postEntry small-12 columns">
+                <!-- Begin new mem wall nav -->
+                <section class="section memNav" if-authed="show">
+                    <h2 style="padding-top: 5px;margin-bottom: -5px;">Welcome to {{ entry.firstName }}'s Wall. Interact with your network</h2>
+                    <nav class="wallGroup">
+                        <ul>
+                            <li ng-click="loadPage('Latest')">Start a Topic</li>
+                            <li if-authed="show" ng-click="flipEntry(); loadPage('Pics')">Add Photos</li>
+                            <li if-authed="show" ng-click="toogleVideoEntry(); loadPage('Videos')">Add Videos</li>
+                            <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')">Group Events</li>
+                            <li if-authed="show" ng-click="loadPage('friendsandfamily')">Group Members</li>
+                        </ul>
+                    </nav>
+                </section>
+                <!-- End new mem wal nav -->
             </div>
         </div>
-        <!--
-     <div class="small-3 columns small-offset-1">
-         <div class="row">
-             <div id="chat" class="small-12 columns">
-                 <h2 class="contentHeaderTitle">Chat</h2>
-             </div>
-         </div>
-         <div class="contentContainer row">
-             <div id="submitComment">
-                 <textarea ng-model="body"></textarea>
+        <div class="row">
+            <div id="contentHeader" class="small-12 columns">
+                <h2 class="contentHeaderTitle">{{contentHeaderTitle}}</h2>
+            </div>
+        </div>
+        <div ng-include="template">
 
-                 <p>
-                     <a ng-click="submitComment()" class="button" resetOnSubmit="true"></a>
-                 </p>
-             </div>
-             <div ng-repeat="comment in comments" class="row">
-                 <div class="small-12 columns">
-                     <p><b>{{comment.username}}</b></p>
-
-                     <p>{{comment.body}}</p>
-                 </div>
-             </div>
-         </div>
-     </div>
-     -->
-
+        </div>
     </div>
+</div>
+
 </div>
 
 <script type="text/javascript">

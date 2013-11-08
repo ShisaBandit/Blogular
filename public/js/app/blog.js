@@ -475,12 +475,20 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
 
 
     $scope.submitEvent = function () {
-        api.createSubDocResource('Blog', $scope.entry._id, 'postText', {
+        api.createSubDocResource('Blog', $scope.blogId, 'postText', {
             event: $scope.event,
             date: $scope.eventdate,
             text: $scope.eventdesc,
             postType: 3
         }, function () {
+            $http.get('lastestEvents/' + $scope.blogId).
+                success(function (data) {
+                    console.log(data);
+                    $scope.anis = data;
+                })
+            $scope.event = "";
+            $scope.eventdate ="";
+
         })
 
     }
@@ -676,12 +684,21 @@ app.controller('groupEntryCtrl', function ($scope, $location, show, Blog, $route
         })
     }
     $scope.submitEvent = function () {
-        api.createSubDocResource('Blog', $scope.entry._id, 'postText', {
+        api.createSubDocResource('Blog', $scope.blogId, 'postText', {
             event: $scope.event,
             date: $scope.eventdate,
             text: $scope.eventdesc,
             postType: 3
         }, function () {
+            $http.get('lastestEvents/' + $scope.blogId).
+                success(function (data) {
+                    console.log(data);
+                    $scope.anis = data;
+                })
+            $scope.$digest();
+            $scope.event = "";
+            $scope.eventdate ="";
+
         })
 
     }
@@ -1819,7 +1836,6 @@ app.controller('AnniCtrl', function ($scope, api, $http) {
                     console.log(data);
                     $scope.anis = data;
                 })
-            $scope.$digest();
             $scope.event = "";
             $scope.eventdate ="";
 
