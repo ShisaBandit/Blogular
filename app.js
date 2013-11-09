@@ -75,7 +75,7 @@ app.configure('production', function () {
 app.configure('development', function () {
     app.use(express.compress());
 
-    app.set('port', process.env.PORT || 3000);
+    app.set('port', process.env.PORT || 80);
     app.set('ip', 'localhost');
     //noinspection JSUnresolvedVariable
     app.set('views', __dirname + '/views');
@@ -98,7 +98,6 @@ app.configure('development', function () {
     app.use(require('less-middleware')({ src: __dirname + '/public' }));
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.errorHandler());
-
 
 });
 

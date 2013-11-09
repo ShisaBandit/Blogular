@@ -1040,3 +1040,10 @@ input.addNewPost {
     color: #f0f0f0;
     border-radius: 4px;
 }
+
+#toolbar {
+    position: absolute;
+    top: 115px;
+    left: 20px;
+    z-index: 30000;
+}
