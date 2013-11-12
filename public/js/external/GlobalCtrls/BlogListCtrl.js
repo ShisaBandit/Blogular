@@ -6,9 +6,10 @@
  * To change this template use File | Settings | File Templates.
  */
 angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService', 'Scope.onReady'])
-    .controller('ContentCtrl', function ($scope, show, Blog, BlogsService, $q, $routeParams, UpdateService) {
+    .controller('ContentCtrl', function ($scope, show, Blog, BlogsService, $q, $routeParams, UpdateService,$location) {
         $scope.entries = [];
         $scope.$prepareForReady();
+        $scope.type = "";
 
         $scope.filtersubgroup = $scope.subgroup;
         //check if user wants to see blogs by categories or not
@@ -42,14 +43,16 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
         } else {
             show.state = false;
             $scope.show = show;
-            $scope.getEntries = function () {
-                BlogsService.getAllBlogs(function (blogs) {
-                    $scope.entries = blogs;
-                    $scope.categories = BlogsService.getCategories();
-                    $scope.$onReady("success");
-                    chopBlogText();
-                });
-            }
+                $scope.getEntries = function () {
+                    BlogsService.getAllBlogs(function (blogs) {
+                        $scope.entries = blogs;
+                        $scope.categories = BlogsService.getCategories();
+                        $scope.$onReady("success");
+                        chopBlogText();
+                    });
+                }
+
+
 
             $scope.getBackImg = function (_id) {
                 angular.forEach($scope.entries, function (value, key) {
@@ -67,25 +70,34 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
          }
 
         function chopText(txt,no){return txt == undefined ? null : txt.substring(0,no);}
-
         $scope.busy = false;
         $scope.skip = 0;
         $scope.limit = 8;
 
         $scope.nextPage = function(){
-                if($scope.busy)return;
+            console.log("getting busy!!")
+
+            if($scope.busy)return;
+                console.log("getting groups")
                 $scope.busy = true;
                 BlogsService.paginatedBlogs($scope.skip,$scope.limit,function(blogs){
                     for(var i = 0;i<blogs.length;i++){
-                        if(blogs[i].group == false || blogs[i].group == undefined)
-                            $scope.entries.push(blogs[i]);
+                        console.log("getting groups and looping")
+
+                        if(blogs[i].group == false || blogs[i].group == undefined){
+                            if("/pets" == $location.path() && blogs[i].pet == true){
+                                $scope.entries.push(blogs[i]);
+                            }
+                            if("/pets" != $location.path()){
+                                $scope.entries.push(blogs[i]);
+                            }
+
+
+                        }
+
                     }
                     $scope.skip += $scope.limit;
-
-
                     $scope.busy = false;
-
                 })
-        }
-
+           }
     });

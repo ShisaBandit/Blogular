@@ -8,7 +8,15 @@
                 <h2 class="subHeader">Create Memorial Profile</h2>
                     <div class="small-12 columns">
                         <br />
+                        <p>Create as a pet memorial?</p>
+                        <p>
+                            <input type="checkbox"
+                                   ng-model="pet"
+                            ng-true-value="true"
+                            ng-false-value="false"
+                            ng-change="petchecked()">
 
+                        </p>
                         <label for="title">Memorial Wall Title: </label>
                         <input type="text" id="title" ng-model="form.title" name="title" placeholder="This is seen as the name of your memorial wall, usually the full name of your Angel. Please enter a title here.">
                         <p class="validation-error">{{message.title}}</p>
