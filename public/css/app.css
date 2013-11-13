@@ -646,6 +646,10 @@ datepickercss
     margin-top: 100px;
 }
 
+#musicModal {
+    margin-top: 100px;
+}
+
 .editMemWall label {
     color: #000000;
 }
