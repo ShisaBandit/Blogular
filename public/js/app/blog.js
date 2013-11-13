@@ -13,10 +13,12 @@ var app = angular.module('blogApp', [
             when("/AddBlogEntry", {templateUrl: "partials/admin/createBlogEntry.html"}).
             //when("/blog/:id", {templateUrl: "partials/blogEntry.html"}).
             when("/angel/:id", {templateUrl: "partials/blogEntry.html"}).
+           // when("/petangel/:id", {templateUrl: "partials/blogEntry.html"}).
             when("/StartGroup", {templateUrl: "partials/admin/createGroup.html"}).
             when("/group/:id", {templateUrl: "partials/groupHome.html"}).
             when("/groupPreview/:id", {templateUrl: "partials/groupHomePublic.html"}).
             when("/public/:id", {templateUrl: "partials/publicAngelProfile.html"}).
+            when("/petpublic/:id", {templateUrl: "partials/publicAngelProfile.html"}).
             when("/listByTag/:name", {templateUrl: "partials/blog.html"}).
             when("/petitions", {templateUrl: "partials/petitions.html"}).
             when("/petition/:title", {templateUrl: "partials/petition.html"}).
@@ -33,7 +35,7 @@ var app = angular.module('blogApp', [
             when("/editworkshop", {templateUrl: "partials/editWorkshop.html"}).
             when("/deleteworkshop", {templateUrl: "partials/deleteWorkshop.html"}).
             when("/workshops", {templateUrl: "partials/workshops.html"}).
-            when("/pets", {templateUrl: "partials/pets.html"}).
+            when("/pets", {templateUrl: "partials/blog.html"}).
             when("/editwall/:wall", {templateUrl: "partials/editwall.html"}).
             when("/passwordrecovery", {templateUrl: "partials/forgotpassword.html"}).
             when("/updatepass", {templateUrl: "partials/updatepass.html"}).
@@ -1587,12 +1589,16 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
     $scope.parentData = {
         author:""
     }
+    $scope.pet = false;
     $scope.checked = function () {
         console.log($scope.selectedGroup)
         $scope.form.subgroup = $scope.selectedGroup.code;
     }
+    $scope.petchecked = function(){
+        console.log($scope.pet)
+    }
     $scope.submitPost = function () {
-
+        $scope.form.pet = $scope.pet;
         BlogsService.updateBlog($scope.form, function (err, res) {
             if (err) {
                 $scope.message = {};
@@ -1669,6 +1675,9 @@ app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog, $rootScope,
     $scope.groups = groupsListing;
     $scope.form = {};
     $scope.message = {};
+    $scope.parentData = {
+        author:""
+    }
     $scope.submitPost = function () {
 
         $scope.form.group = true;
@@ -1687,6 +1696,8 @@ app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog, $rootScope,
             }
 
             $scope.blogId.blogId = res.blogId;
+            $scope.parentData.author = $scope.form.author;
+
             $scope.form.title = "";
             $scope.form.author = "";
             $scope.form.text = "";
@@ -1700,31 +1711,46 @@ app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog, $rootScope,
         console.log($scope.addedFile);
         $scope.addedFile = file.file;
     })
-    $scope.submitportrait = function () {
-
-
-        $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
-
-        $rootScope.$on('uploadedFile', function () {
-            console.log("completed now spreadem");
-
-            $scope.$parent.template.url = 'partials/admin/addGroupBG.html';
-            $scope.$apply()
-        })
-    }
-    $scope.submitspread = function () {
-
-
+    $rootScope.$on('addedFile', function (event, file) {
         console.log("addedfile");
         console.log($scope.addedFile);
-        $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
-
-        $rootScope.$on('uploadedFile', function () {
-            $scope.$parent.template.url = 'partials/admin/mwregcom.html';
+        $scope.addedFile = file.file;
+    })
+    $scope.submitportrait = function () {
+        $scope.$parent.parentData.deregPor = $rootScope.$on('uploadedFile', function () {
+            console.log("completed now spreadem");
+            $scope.$parent.template.url = 'partials/admin/addspread.html';
             $scope.$apply()
         })
+        $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
 
     }
+    $scope.submitspread = function () {
+        $scope.$parent.parentData.deregPor();
+        console.log("addedfile");
+        console.log($scope.addedFile);
+        $scope.deregSpread = $rootScope.$on('uploadedFile', function () {
+            //$scope.$parent.template.url = 'partials/admin/mwregcom.html';
+            $scope.$parent.template.url = '';
+            console.log("adding portrait file")
+            console.log($scope.parentData)
+            $location.path("/group/"+$scope.$parent.parentData.author)
+            $scope.$apply()
+        })
+        $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
+
+
+    }
+    $scope.open = function (no) {
+        $timeout(function () {
+            if (no == 1) {
+                $scope.opened1 = true;
+            }
+            if (no == 2) {
+                $scope.opened2 = true;
+            }
+        });
+    };
 });
 
 app.controller('VideoCtrl', function ($scope, BlogsService, Blog, $rootScope, $http,$sce,api) {
