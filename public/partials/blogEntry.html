@@ -34,10 +34,10 @@
                         <h2 style="padding-top: 5px;margin-bottom: -5px;">Welcome to {{ entry.firstName }}'s Wall. Interact with your network</h2>
                         <nav class="wallGroup">
                             <ul>
-                                <li ng-click="loadPage('Latest')">Start a Topic</li>
-                                <li if-authed="show" ng-click="flipEntry(); loadPage('Pics')">Add Photos</li>
-                                <li if-authed="show" ng-click="toogleVideoEntry(); loadPage('Videos')">Add Videos</li>
-                                <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')">Add Anniversaries</li>
+                                <li ng-click="loadPage('Latest')">Chat</li>
+                                <li if-authed="show" ng-click="flipEntry(); loadPage('Pics')">Photos</li>
+                                <li if-authed="show" ng-click="toogleVideoEntry(); loadPage('Videos')">Videos</li>
+                                <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')">Anniversaries</li>
                                 <li if-authed="show" ng-click="loadPage('friendsandfamily')">Friends & Family</li>
                             </ul>
                         </nav>
