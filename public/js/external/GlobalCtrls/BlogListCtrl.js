@@ -88,7 +88,7 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
                             if("/pets" == $location.path() && blogs[i].pet == true){
                                 $scope.entries.push(blogs[i]);
                             }
-                            if("/pets" != $location.path()){
+                            if("/pets" != $location.path() && blogs[i].pet == false){
                                 $scope.entries.push(blogs[i]);
                             }
 

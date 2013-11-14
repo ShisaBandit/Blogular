@@ -13,7 +13,7 @@ var app = angular.module('blogApp', [
             when("/AddBlogEntry", {templateUrl: "partials/admin/createBlogEntry.html"}).
             //when("/blog/:id", {templateUrl: "partials/blogEntry.html"}).
             when("/angel/:id", {templateUrl: "partials/blogEntry.html"}).
-           // when("/petangel/:id", {templateUrl: "partials/blogEntry.html"}).
+            //when("/petangel/:id", {templateUrl: "partials/blogEntry.html"}).
             when("/StartGroup", {templateUrl: "partials/admin/createGroup.html"}).
             when("/group/:id", {templateUrl: "partials/groupHome.html"}).
             when("/groupPreview/:id", {templateUrl: "partials/groupHomePublic.html"}).
@@ -40,7 +40,8 @@ var app = angular.module('blogApp', [
             when("/passwordrecovery", {templateUrl: "partials/forgotpassword.html"}).
             when("/updatepass", {templateUrl: "partials/updatepass.html"}).
             when("/editprofile", {templateUrl: "partials/editprofile.html"}).
-            when("/login", {templateUrl: "partials/login.html"})
+            when("/login", {templateUrl: "partials/login.html"}).
+            otherwise("/oops",{templateUrl:"404.html"});
 
     });
 app.directive('fdatepicker', function () {
