@@ -1051,3 +1051,66 @@ input.addNewPost {
     left: 20px;
     z-index: 30000;
 }
+
+#toc {
+    position: absolute;
+    top:250px;
+    left: 0px;
+ }
+
+#toc.status-on {
+    font-weight:bold;
+    color: brown;
+}
+
+#tocToggle.status-off {
+    display: block;
+    width: 300px;
+    height: 30px;
+    text-align: center;
+    /*white-space: nowrap;*/
+    margin-top: 0px;
+    margin-left: 0px;
+    transform:rotate(90deg);
+    -ms-transform:rotate(90deg); /* IE 9 */
+    /*-moz-transform:rotate(90deg); /* Firefox */
+    /*-webkit-transform:rotate(90deg); /* Safari and Chrome */
+    /*-o-transform:rotate(90deg); /* Opera */
+    float: left;
+    /* background: url(../images/toc.png) no-repeat; */
+}
+
+#tocToggle.status-on {
+    display: block;
+    width: 300px;
+    height: 30px;
+    text-align: center;
+    /*white-space: nowrap;*/
+    margin-top: -150px;
+    margin-left:150px;
+    transform:rotate(90deg);
+    -ms-transform:rotate(90deg); /* IE 9 */
+    /*-moz-transform:rotate(90deg); /* Firefox */
+    /*-webkit-transform:rotate(90deg); /* Safari and Chrome */
+    /*-o-transform:rotate(90deg); /* Opera */
+    float: left;
+    /* background: url(../images/toc.png) no-repeat -37px; */
+}
+
+#tocToggle a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    /* text-indent: -50000px; */
+}
+
+#tableOfContents {
+    background: #EEE;
+    border: 1px solid #fff;
+    height: 250px;
+    width: 250px;
+    visibility: hidden;
+    border-radius: 7px;
+}
