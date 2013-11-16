@@ -75,7 +75,7 @@
 </section>
 <section>
     <p class="title" data-section-title><a >Friend’s Memorials</a></p>
-    <div class="content" data-section-content>
+    <div class="content profileGravatar" data-section-content>
         <div class="row ">
             <div class="contentHeader" class="small-12 columns">
                 <h2 class="contentHeaderTitle">Memorial Walls of My Friends and Acquaintances </h2>
@@ -98,7 +98,7 @@
 <section>
     <p class="title" data-section-title><a >My Groups</a></p>
 
-    <div class="content" data-section-content>
+    <div class="content profileGravatar" data-section-content>
         <div class="contentHeader" class="small-12 columns">
             <h2 class="contentHeaderTitle#">My Group's</h2>
         </div>
@@ -152,8 +152,7 @@
 </section>
 <section>
     <p class="title" data-section-title><a >My Petitions</a></p>
-
-    <div class="content" data-section-content>
+    <div class="content profileGravatar" data-section-content>
         <div class="contentHeader" class="small-12 columns">
             <h2 class="contentHeaderTitle">My Petitions</h2>
         </div>
@@ -170,63 +169,51 @@
 </section>
 <section>
     <p class="title" data-section-title><a >Message Center</a></p>
-
-    <div class="content" data-section-content>
+    <div class="content profileGravatar" data-section-content>
         <div class="contentHeader" class="small-12 columns">
             <h2 class="contentHeaderTitle">Message Center</h2>
         </div>
-                        <p>Welcome to the Message Center. From here you can create, manage and view messages from your network members, administrators and other registered users..</p>
-                        <a class="button" data-reveal-id="messageModal"><img src="img/mail_2.png"> Send a New Message</a>
-                        <br />
-                            <div class="small-4 columns rghtDvd">
-                                <b>Conversation With:</b>
-                                <br />      <br />
-                                <section>
-                                    <!--
-                                    <div class="row">
-                                        <input type="text" ng-model="postText" class="addNewPost small-12 columns" placeholder="Search Messages"/>
-                                    </div>
-                                    -->
-                                    <div class="row my-repeat-animation"  ng-repeat="messagedUser in messagedUsers">
-                                        <a href="" ng-click="getMessages(messagedUser.user)">
-                                            <span class="small-10 columns">{{messagedUser.user}} <a class="button buttonSmall" title="Archive This Conversation"><img src="img/trash.png"></a></span>
-                                            </a>
-                                    </div>
-                                </section>
-                            </div>
-                            <div class="small-8 columns rghtDvd">
-                                <b>Conversation History</b>
-                                <br /> <br />
-                                <section>
-                                    <div class="row">
-                                        <span class="small-3 columns"><b>Sent By:</b></span>
-                                        <!--
-                                        <span class="small-2 columns"><b>Date:</b></span>
-                                        -->
-                                    </div>
-                                    <br />
-                                    <div class="row my-repeat-animation" ng-repeat="message in messages">
-
-                                        <span class="small-30 columns"
-                                              style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>{{message.from}}</b>  <i
-                                                style="font: x-small serif; color: steelblue;float: right">{{message.date}}</i>
-                                            <br/>
-                                            <span class="small-9 columns">{{message.message}}</span>
-                                            <br/>
-                                        </span>
-
-                    <!-- <span class="small-2 columns">{{message.date}}</span> -->
-                </div>
+        <p>Welcome to the Message Center. From here you can create, manage and view messages from your network members, administrators and other registered users..</p>
+        <a class="button" data-reveal-id="messageModal"><img src="img/mail_2.png"> Send a New Message</a>
+        <br />
+        <div class="small-4 columns rghtDvd">
+            <b>Conversation With:</b>
+            <br />      <br />
+            <section>
                 <!--
                 <div class="row">
-                    <br />
-                    <input type="text" ng-model="postText" class="addNewPost small-12 columns" placeholder="Add to this conversation"/>
+                    <input type="text" ng-model="postText" class="addNewPost small-12 columns" placeholder="Search Messages"/>
                 </div>
                 -->
+                <div class="row my-repeat-animation"  ng-repeat="messagedUser in messagedUsers">
+                    <a href="" ng-click="getMessages(messagedUser.user)">
+                        <span class="small-10 columns">{{messagedUser.user}} <a class="button buttonSmall" title="Archive This Conversation"><img src="img/trash.png"></a></span>
+                    </a>
+                </div>
             </section>
         </div>
-
-
+        <div class="small-8 columns rghtDvd">
+            <b>Conversation History</b>
+            <br /> <br />
+            <section>
+                <div class="row">
+                    <span class="small-3 columns"><b>Sent By:</b></span>
+                    <!--
+                    <span class="small-2 columns"><b>Date:</b></span>
+                    -->
+                </div>
+                <br />
+                <div class="row my-repeat-animation" ng-repeat="message in messages">
+                    <span class="small-30 columns"
+                          style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>{{message.from}}</b>  <i
+                            style="font: x-small serif; color: steelblue;float: right">{{message.date}}</i>
+                        <br/>
+                        <span class="small-9 columns">{{message.message}}</span>
+                        <br/>
+                    </span>
+                </div>
+            </section>
+        </div>
     </div>
 </section>
 </div>
