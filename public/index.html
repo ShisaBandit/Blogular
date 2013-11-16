@@ -183,12 +183,9 @@
             </footer>
             <!-- End Footer -->
         </section>
-        <div ng-controller="MusicPlayerCtrl">
-            <div ng-hide="iosshow" id="tocbutton">
-            <h2 ng-click="flip()" id="tocToggle" class="toc navTab status-off"><a>View Music Player</a></h2>
-            </div>
-            <div>
-            <aside id="toc" ng-show="showmusicplayer">
+        <div id="toc" ng-controller="MusicPlayerCtrl">
+            <h2 ng-hide="iosshow"  ng-click="flip()" id="tocToggle" class="toc navTab status-off"><a>View Music Player</a></h2>
+            <aside ng-show="showmusicplayer">
             <figure id="tableOfContents">
                 <object width="250" height="250" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="gsPlaylist9229298428" name="gsPlaylist9229298428" >
                     <param name="movie" value="http://grooveshark.com/widget.swf" />
@@ -199,18 +196,10 @@
                         <param name="wmode" value="window" />
                         <param name="allowScriptAccess" value="always" />
                         <param name="flashvars" value="hostname=grooveshark.com&playlistID=92292984&p=1&bbg=2163A9&bth=000000&pfg=000000&lfg=000000&bt=FFFFFF&pbg=FFFFFF&pfgh=FFFFFF&si=FFFFFF&lbg=FFFFFF&lfgh=FFFFFF&sb=FFFFFF&bfg=25517A&pbgh=25517A&lbgh=25517A&sbh=25517A" />
-                      <!--
-                      <span>
-                          <a href="http://grooveshark.com/search/playlist?q=Angels%20of%20Eureka%20Rodney%20Little" title="Angels of Eureka on Grooveshark">
-                              Angels of Eureka on Grooveshark
-                          </a>
-                      </span>
-                      -->
                     </object>
                 </object>
             </figure>
-        </aside>
-            </div>
+            </aside>
     </div>
     </section>
     <!-- Sitewide Modals -->

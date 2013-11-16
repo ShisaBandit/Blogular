@@ -1056,7 +1056,7 @@ input.addNewPost {
 
 #toc {
     position: fixed;
-    top:350px;
+    top:120px;
     left: 0px;
     z-index: 8000;
  }
@@ -1087,8 +1087,12 @@ input.addNewPost {
     height: 20px;
     text-align: center;
     /*white-space: nowrap;*/
+    margin-top: 50px;
+    margin-left: -50px;
+    /*
     margin-top: -200px;
     margin-left: -55px;
+    */
     transform:rotate(90deg);
     -webkit-transform:rotate(90deg);
     -ms-transform:rotate(90deg); /* IE 9 */
@@ -1107,6 +1111,10 @@ input.addNewPost {
     /*white-space: nowrap;*/
     margin-top: -200px;
     margin-left:200px;
+    /*
+    margin-top: -200px;
+    margin-left:200px;
+    */
     transform:rotate(90deg);
     -webkit-transform:rotate(90deg);
     -ms-transform:rotate(90deg); /* IE 9 */
@@ -1129,12 +1137,18 @@ input.addNewPost {
 }
 
 #tableOfContents {
+    position: relative;
+    top:-130px;
+    left: 50px;
     background: #EEE;
     border: 1px solid #fff;
-    height: 250px;
+    height: 160px;
     width: 250px;
     border-radius: 7px;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px rgb(19, 45, 72);
 }
+
 #tocbutton{
     background: #EEE;
     border: 1px solid #fff;
