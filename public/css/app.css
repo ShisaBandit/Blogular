@@ -1056,7 +1056,7 @@ input.addNewPost {
 
 #toc {
     position: fixed;
-    top:120px;
+    top:350px;
     left: 0px;
     z-index: 8000;
  }
