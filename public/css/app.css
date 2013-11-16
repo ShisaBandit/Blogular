@@ -1053,9 +1053,10 @@ input.addNewPost {
 }
 
 #toc {
-    position: absolute;
-    top:250px;
+    position: fixed;
+    top:150px;
     left: 0px;
+    z-index: 8000;
  }
 
 #toc.status-on {
@@ -1063,14 +1064,29 @@ input.addNewPost {
     color: brown;
 }
 
+#tocToggle {
+    border-radius: 0px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    background: #2163A9;
+    opacity: 0.75;
+    padding-top: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 0px;
+    box-shadow: 2px 2px 5px rgb(19, 45, 72);
+    font-size: small;
+    white-space: nowrap;
+}
+
 #tocToggle.status-off {
     display: block;
-    width: 300px;
-    height: 30px;
+    width: auto;
+    height: 20px;
     text-align: center;
     /*white-space: nowrap;*/
-    margin-top: 0px;
-    margin-left: 0px;
+    margin-top: -200px;
+    margin-left: -55px;
     transform:rotate(90deg);
     -ms-transform:rotate(90deg); /* IE 9 */
     /*-moz-transform:rotate(90deg); /* Firefox */
@@ -1082,12 +1098,12 @@ input.addNewPost {
 
 #tocToggle.status-on {
     display: block;
-    width: 300px;
-    height: 30px;
+    width: auto;
+    height: 20px;
     text-align: center;
     /*white-space: nowrap;*/
-    margin-top: -150px;
-    margin-left:150px;
+    margin-top: -200px;
+    margin-left:200px;
     transform:rotate(90deg);
     -ms-transform:rotate(90deg); /* IE 9 */
     /*-moz-transform:rotate(90deg); /* Firefox */
@@ -1103,6 +1119,8 @@ input.addNewPost {
     height: 100%;
     border: none;
     outline: none;
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgb(19, 45, 72);
     /* text-indent: -50000px; */
 }
 
