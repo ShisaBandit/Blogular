@@ -1054,7 +1054,7 @@ input.addNewPost {
 
 #toc {
     position: fixed;
-    top:150px;
+    top:120px;
     left: 0px;
     z-index: 8000;
  }
@@ -1129,6 +1129,12 @@ input.addNewPost {
     border: 1px solid #fff;
     height: 250px;
     width: 250px;
-    visibility: hidden;
+    border-radius: 7px;
+}
+#tocbutton{
+    background: #EEE;
+    border: 1px solid #fff;
+    height: 30px;
+    width: 250px;
     border-radius: 7px;
 }

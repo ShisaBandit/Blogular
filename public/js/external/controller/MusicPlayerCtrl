@@ -1,0 +1,13 @@
+angular.module('MusicPlayer.Controller',[]).
+    controller('MusicPlayerCtrl',function($scope,$detection){
+        if($detection.isiOS()){
+            $scope.showios = false;
+        }else if($detection.isAndroid()){
+            $scope.showios = false;
+        }else{
+            $scope.showios = true;
+        }
+        $scope.flip = function(){
+            $scope.showmusicplayer = ~$scope.showmusicplayer;
+        }
+    })
