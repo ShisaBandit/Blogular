@@ -119,7 +119,7 @@
         </div>
     </div>
     <section class="primaryContent">
-       <section>
+       <section class="shelf" id="shelf">
            This is the main visible content, not including music player
             <div id="loginMessage" if-authed="hide">
                 <p>
@@ -181,15 +181,15 @@
         </section>
         <aside id="toc">
             <figure id="tableOfContents">
-                <object width="250" height="250" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="gsPlaylist9229298428" name="gsPlaylist9229298428" style="visibility: visible; display: block; width: 250px; height: 250px; border-radius: 7px;">
+                <object width="250" height="250" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="gsPlaylist9229298428" name="gsPlaylist9229298428" style="visibility: hidden; display: block; width: 250px; height: 250px; border-radius: 7px;">
                     <param name="movie" value="http://grooveshark.com/widget.swf" />
                     <param name="wmode" value="window" />
                     <param name="allowScriptAccess" value="always" />
-                    <param name="flashvars" value="hostname=grooveshark.com&playlistID=92292984&p=1&bbg=000000&bth=000000&pfg=000000&lfg=000000&bt=FFFFFF&pbg=FFFFFF&pfgh=FFFFFF&si=FFFFFF&lbg=FFFFFF&lfgh=FFFFFF&sb=FFFFFF&bfg=666666&pbgh=666666&lbgh=666666&sbh=666666" />
+                    <param name="flashvars" value="hostname=grooveshark.com&playlistID=92292984&p=1&bbg=2163A9&bth=000000&pfg=000000&lfg=000000&bt=FFFFFF&pbg=FFFFFF&pfgh=FFFFFF&si=FFFFFF&lbg=FFFFFF&lfgh=FFFFFF&sb=FFFFFF&bfg=25517A&pbgh=25517A&lbgh=25517A&sbh=25517A" />
                     <object type="application/x-shockwave-flash" data="http://grooveshark.com/widget.swf" width="250" height="250">
                         <param name="wmode" value="window" />
                         <param name="allowScriptAccess" value="always" />
-                        <param name="flashvars" value="hostname=grooveshark.com&playlistID=92292984&p=1&bbg=000000&bth=000000&pfg=000000&lfg=000000&bt=FFFFFF&pbg=FFFFFF&pfgh=FFFFFF&si=FFFFFF&lbg=FFFFFF&lfgh=FFFFFF&sb=FFFFFF&bfg=666666&pbgh=666666&lbgh=666666&sbh=666666" />
+                        <param name="flashvars" value="hostname=grooveshark.com&playlistID=92292984&p=1&bbg=2163A9&bth=000000&pfg=000000&lfg=000000&bt=FFFFFF&pbg=FFFFFF&pfgh=FFFFFF&si=FFFFFF&lbg=FFFFFF&lfgh=FFFFFF&sb=FFFFFF&bfg=25517A&pbgh=25517A&lbgh=25517A&sbh=25517A" />
                       <!--
                       <span>
                           <a href="http://grooveshark.com/search/playlist?q=Angels%20of%20Eureka%20Rodney%20Little" title="Angels of Eureka on Grooveshark">
@@ -288,6 +288,8 @@
             $('#toc.status-on').removeClass('status-on');
             $('#tocToggle.status-on').removeClass('status-on');
             $('#tocToggle').addClass('status-off');
+            $("#tocToggle").text('View Music Player');
+            $("#shelf").css( { 'margin-left' : "0px" } );
         }
         function openBox(){
             $('#gsPlaylist9229298428').fadeIn('slow', function() {
@@ -297,6 +299,8 @@
             $('#toc').addClass('status-on');
             $('#tocToggle').addClass('status-on');
             $('#tocToggle.status-off').removeClass('status-off');
+            $("#tocToggle").text('Hide Music Player');
+            $("#shelf").css( { 'margin-left' : "250px" } );
         }
 
 
@@ -310,6 +314,7 @@
                 openBox();
                 $('#tocToggle').addClass('status-on');
                 $('#tocToggle.status-off').removeClass('status-off');
+                $("#tocToggle").text('Hide Music Player');
             }
 
         });
@@ -322,6 +327,7 @@
             $('#toc.status-on').removeClass('status-on');
             $('#tocToggle.status-on').removeClass('status-on');
             $('#tocToggle').addClass('status-off');
+            $("#tocToggle").text('Hide Music Player');
             return false;
         });
     });//]]>
