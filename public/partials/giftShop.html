@@ -1,3 +1,4 @@
+<div ng-controller="GiftShopCtrl">
     <div class="row offsetHeight100">
         <div class="small-12 columns">
             <div id="rulesModal">
@@ -11,10 +12,12 @@
                 <section class="section">
                         <p class="title" data-section-title><a >Gift Shop Items</a></p>
                         <div class="content" data-section-content>
-                            <b>Angels's of Ereka Gift SHop Catalog to Go Here.</b>
-                            <p></p>
+                            <ul>
+                                <li ng-repeat="category in categories"><a href="{{category.url}}?user={{user}}&wall={{wall}}" target="_blank">{{category.name}}</a></li>
+                            </ul>
                 </section>
                 </div>
             </div>
         </div>
     </div>
+</div>

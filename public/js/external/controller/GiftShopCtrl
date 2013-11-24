@@ -1,0 +1,12 @@
+angular.module('controller.GiftShop',[]).
+    controller('GiftShopCtrl',function($scope,$http){
+        console.log("alls well")
+        $http.get('http://localhost/magento/memwallconn/index/categories').
+            success(function (data) {
+                console.log("succ")
+                $scope.categories = data;
+            }).
+                error(function () {
+                console.log("error");
+            })
+    })
