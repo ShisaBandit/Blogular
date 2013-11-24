@@ -6,8 +6,8 @@
     </div>
     <div class="row" ng-model="petition">
         <div class="small-12 columns">
-            <h3>{{petition[0].title}}</h3>
-            <h3>{{petition[0].text}}</h3>
+            <h3 style="color: #2164AA;">Petion Name: {{petition[0].title}}</h3>
+            <h3 style="color: #2164AA;">Petition Details: {{petition[0].text}}</h3>
             <div class="row" ng-repeat="signature in petition[0].signatures">
                 <div class="small-12 columns">
                     <p>{{signature.initals}}</p>

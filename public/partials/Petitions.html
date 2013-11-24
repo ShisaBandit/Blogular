@@ -3,7 +3,7 @@
     <div class="row offsetHeight100">
         <h1 class="sectionHeader">Petitions</h1>
         <div class="small-12 columns">
-            <h2>Create a petition</h2>
+            <h2 style="color: #2164AA;">Create a petition</h2>
             Give your petition a name. <input type="text" ng-hide="textorphoto" ng-model="title"/>
             What is your petition for? <input type="text" ng-hide="textorphoto" ng-model="text"/>
 
@@ -13,7 +13,7 @@
     <div class="row" ng-repeat="petition in petitions">
         <div class="small-12 columns">
             <h2 class="dark">Sitewide petitions</h2>
-            <h3><a href="#/petition/{{petition.title}}">{{petition.title}}</a> </h3>
+            <h3 style="color: #2164AA;"><a href="#/petition/{{petition.title}}">{{petition.title}}</a> </h3>
 
         </div>
 

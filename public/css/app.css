@@ -417,6 +417,12 @@ h1.sectionHeader {
     clear: both;
     color: #ffffff;
 }
+
+body .primaryContent .shelf .mainBG .row .small-12 .section-container .active .content .contentHeaderTitle {
+    padding: 10px;
+    color: #ffffff;
+}
+
 .contentContainer{
     border: 2px solid black;
     background: #ffffff;
@@ -1155,4 +1161,20 @@ input.addNewPost {
     height: 30px;
     width: 250px;
     border-radius: 7px;
+}
+
+.base-class {
+    visibility:hidden;
+    opacity: 0;
+    width: 0%;
+    height: 0%;
+    -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+.base-class.my-class {
+    visibility: visible;
+    opacity: 1;
+    width: 100%;
+    height: 100%;
 }

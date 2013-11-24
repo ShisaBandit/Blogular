@@ -1,12 +1,17 @@
 <div ng-controller="WorkshopCtrl">
+    <div class="row offsetHeight100">
+        <h1 class="sectionHeader">Workshops</h1>
+    </div>
     <div class="row">
-        <div class="twelve columns offsetHeight" role="content">
-                       <div ng-repeat="workshop in workshops">
-                           <p>test</p>{{ workshop._id }}
-
-                       </div>
+        <div class="small-12 columns">
+            <h2 class="dark">Scheduled Workshops</h2>
+            <div class="row">
+                <div class="twelve columns offsetHeight" role="content">
+                    <div ng-repeat="workshop in workshops">
+                        <p style="color: #2164AA;">{{ workshop._id }}</p>
+                    </div>
+                </div>
             </div>
         </div>
-
-
+    </div>
 </div>
