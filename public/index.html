@@ -184,8 +184,8 @@
             <!-- End Footer -->
         </section>
         <div id="toc" ng-controller="MusicPlayerCtrl">
-            <h2 ng-hide="iosshow"  ng-click="flip()" id="tocToggle" class="toc navTab status-off"><a>View Music Player</a></h2>
-            <aside ng-show="showmusicplayer">
+            <h2 ng-hide="iosshow"  ng-click="myVar='my-class'" id="tocToggle" class="toc navTab status-off"><a>View Music Player</a></h2>
+            <aside class="base-class" ng-class="myVar">
             <figure id="tableOfContents">
                 <object width="250" height="250" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="gsPlaylist9229298428" name="gsPlaylist9229298428" >
                     <param name="movie" value="http://grooveshark.com/widget.swf" />

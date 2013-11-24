@@ -8,6 +8,6 @@ angular.module('MusicPlayer.Controller',[]).
             $scope.showios = true;
         }
         $scope.flip = function(){
-            $scope.showmusicplayer = ~$scope.showmusicplayer;
+            $scope.ngAnimate = ~$scope.ngAnimate;
         }
     })
