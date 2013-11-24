@@ -417,6 +417,12 @@ h1.sectionHeader {
     clear: both;
     color: #ffffff;
 }
+
+body .primaryContent .shelf .mainBG .row .small-12 .section-container .active .content .contentHeaderTitle {
+    padding: 10px;
+    color: #ffffff;
+}
+
 .contentContainer{
     border: 2px solid black;
     background: #ffffff;

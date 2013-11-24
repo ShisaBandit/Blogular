@@ -97,56 +97,54 @@
 </section>
 <section>
     <p class="title" data-section-title><a >My Groups</a></p>
-
     <div class="content profileGravatar" data-section-content>
-        <div class="contentHeader" class="small-12 columns">
-            <h2 class="contentHeaderTitle#">My Group's</h2>
-        </div>
+        <div class="row ">
+            <div class="contentHeader" class="small-12 columns">
+                <h2 class="contentHeaderTitle">My Group's</h2>
+            </div>
+            <p>Welcome to the My Groups dashboard. From here you can create, manage and view groups that you own, or view
+                groups that you have joined, or been invited to.</p>
 
-        <p>Welcome to the My Groups dashboard. From here you can create, manage and view groups that you own, or view
-            groups that you have joined, or been invited to.</p>
-
-        <div class="small-4 columns rghtDvd">
-            <b>Groups I Own</b>
-            <br/> <br/>
-            <section ng-repeat="group in groups">
-                <b>Group Name: {{group.title}}</b>
-                <br/>
-                Group Moderator: {{group.author}}
-                <br/>
-                <ul>
-                    <br/>- <a href="#/group/{{group.author}}">View this memorial group</a>
-                    <br/>- <a href="#/editwall/{{ group.author }}">Edit this memorial group</a>
-                    <br/>- <a href="#/inviteblock/{{ group.author }}">invite or block other registered
-                    members</a><br/><br/>
-                    </li>
-                </ul>
-                <a href="#/deletewall/{{ group.author }}" class="button">Delete this group</a>
-            </section>
-        </div>
-        <div class="small-4 columns rghtDvd">
-            <b>Groups I Joined / Group Invites</b>
-            <br/> <br/>
-            <section ng-repeat="group in invitedGroups">
-                <b>Group Name: {{group.name}}</b>
-                <br/>
-                Group Owner: {{group.owner}}
-                <!-- Group Moderator(s): Mary Olsen, Me-->
-                <br/>
-                <ul>
-                    <li><a href="#/group/{{group.author}}">View this group's page</a></li>
-                    <li><a href="#/group/{{group.author}}">Edit Group Details</a></li>
-                    <li><a href="#/group/{{group.author}}">View Group Members</a></li>
-                    <!--  <li><a href="#/group/{{group.author}}" >Suggest new members</a></li>
-                      <li><a href="#/group/{{group.author}}" >Restrict member</a></li>
-                        <li><a href="#/group/{{group.author}}" >Report group member for misconduct</a></li>
-                        -->
-                </ul>
-                <a ng-click="removeselfgroup(group.id)" class="button">Leave this group</a>
-            </section>
-        </div>
-        <div class="small-4 columns">
-            <a href="#/StartGroup" class="button">Create a new group here!</a>
+            <div class="small-4 columns rghtDvd">
+                <b>Groups I Own</b>
+                <br/> <br/>
+                <section ng-repeat="group in groups">
+                    <b>Group Name: {{group.title}}</b>
+                    <br/>
+                    Group Moderator: {{group.author}}
+                    <br/>
+                    <ul>
+                        <li><a href="#/group/{{group.author}}">View this memorial group</a></li>
+                        <li><a href="#/editwall/{{ group.author }}">Edit this memorial group</a></li>
+                        <li><a href="#/inviteblock/{{ group.author }}">invite or block other registered members</a></li>
+                    </ul>
+                    <a href="#/deletewall/{{ group.author }}" class="button">Delete this group</a>
+                </section>
+            </div>
+            <div class="small-4 columns rghtDvd">
+                <b>Groups I Joined / Group Invites</b>
+                <br/> <br/>
+                <section ng-repeat="group in invitedGroups">
+                    <b>Group Name: {{group.name}}</b>
+                    <br/>
+                    Group Owner: {{group.owner}}
+                    <!-- Group Moderator(s): Mary Olsen, Me-->
+                    <br/>
+                    <ul>
+                        <li><a href="#/group/{{group.author}}">View this group's page</a></li>
+                        <li><a href="#/group/{{group.author}}">Edit Group Details</a></li>
+                        <li><a href="#/group/{{group.author}}">View Group Members</a></li>
+                        <!--  <li><a href="#/group/{{group.author}}" >Suggest new members</a></li>
+                          <li><a href="#/group/{{group.author}}" >Restrict member</a></li>
+                            <li><a href="#/group/{{group.author}}" >Report group member for misconduct</a></li>
+                            -->
+                    </ul>
+                    <a ng-click="removeselfgroup(group.id)" class="button">Leave this group</a>
+                </section>
+            </div>
+            <div class="small-4 columns">
+                <a href="#/StartGroup" class="button">Create a new group here!</a>
+            </div>
         </div>
     </div>
 </section>
