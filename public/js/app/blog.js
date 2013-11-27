@@ -349,6 +349,15 @@ app.directive('onKeyup', function () {
     };
 });
 
+app.directive("click", function () {
+    return function(scope, element, attrs) {
+        element.bind("click", function() {
+            scope.boolChangeClass = !scope.boolChangeClass;
+            scope.$apply();
+        });
+    };
+});
+
 app.factory('show', function () {
     return {state: false};
 });

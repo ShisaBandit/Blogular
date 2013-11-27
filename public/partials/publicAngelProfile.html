@@ -1,5 +1,5 @@
 <div ng-controller="blogEntryCtrl">
-    <div class="memNav">
+    <div class="memNav" if-authed="show">
         <div class="row" offset-height="90" ng-show="profileMenuViewable" ng-animate="fade" id="profile-menu">
             <div class="small-8 small-offset-4">
                 <nav class="top-bar">
@@ -70,7 +70,6 @@
             <ul>
                 <li>First Name : {{entry.firstName}}</li>
                 <li>Last Name: {{entry.lastName}}     </li>
-                <li>Sex : {{entry.gender}}     </li>
                 <li>Memorial Date: {{entry.memorialDate}}     </li>
             </ul>
         </div>
