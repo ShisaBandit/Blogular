@@ -878,6 +878,12 @@ exports.getInviteBlogUserData = function (req,res) {
     })
 }
 
+exports.shopToWall = function (req,res) {
+    var wall = req.params.wall;
+    var user = req.params.user;
+
+    console.log(wall+" "+user);
+}
 
 
 /*

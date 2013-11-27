@@ -300,6 +300,8 @@ app.get('/deletePetition/:id',passport.ensureAuthenticated,petitionRoutes.delete
 
 app.get('/getInviteBlogUserData/:wallid',passport.ensureAuthenticated,blogRoutes.getInviteBlogUserData);
 
+//shopwall connection
+app.get('/shoptowall',blogRoutes.shopToWall);
 
 
 
