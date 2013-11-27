@@ -84,6 +84,11 @@
         }
     </style>
     <![endif]-->
+    <style type="text/css">
+        .my-class {
+            visibility: visible;
+        }
+    </style>
 
 </head>
 <!-- TODO:Rename app instance to mwApp -->
@@ -182,27 +187,27 @@
                 </div>
             </footer>
             <!-- End Footer -->
-        </section>
+       </section>
         <div id="toc" ng-controller="MusicPlayerCtrl">
-            <h2 ng-hide="iosshow"  ng-click="myVar='my-class'" id="tocToggle" class="toc navTab status-off"><a>View Music Player</a></h2>
-            <aside class="base-class" ng-class="myVar">
-            <figure id="tableOfContents">
-                <object width="250" height="250" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="gsPlaylist9229298428" name="gsPlaylist9229298428" >
-                    <param name="movie" value="http://grooveshark.com/widget.swf" />
-                    <param name="wmode" value="window" />
-                    <param name="allowScriptAccess" value="always" />
-                    <param name="flashvars" value="hostname=grooveshark.com&playlistID=92292984&p=1&bbg=2163A9&bth=000000&pfg=000000&lfg=000000&bt=FFFFFF&pbg=FFFFFF&pfgh=FFFFFF&si=FFFFFF&lbg=FFFFFF&lfgh=FFFFFF&sb=FFFFFF&bfg=25517A&pbgh=25517A&lbgh=25517A&sbh=25517A" />
-                    <object type="application/x-shockwave-flash" data="http://grooveshark.com/widget.swf" width="250" height="250">
+            <h2 ng-hide="iosshow" id="tocToggle" class="toc navTab status-off" ><a click>View Music Player</a></h2>
+            <aside class="base-class" ng-class="{'my-class':boolChangeClass}">
+                <figure id="tableOfContents">
+                    <object width="250" height="250" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="gsPlaylist9229298428" name="gsPlaylist9229298428" >
+                        <param name="movie" value="http://grooveshark.com/widget.swf" />
                         <param name="wmode" value="window" />
                         <param name="allowScriptAccess" value="always" />
                         <param name="flashvars" value="hostname=grooveshark.com&playlistID=92292984&p=1&bbg=2163A9&bth=000000&pfg=000000&lfg=000000&bt=FFFFFF&pbg=FFFFFF&pfgh=FFFFFF&si=FFFFFF&lbg=FFFFFF&lfgh=FFFFFF&sb=FFFFFF&bfg=25517A&pbgh=25517A&lbgh=25517A&sbh=25517A" />
+                        <object type="application/x-shockwave-flash" data="http://grooveshark.com/widget.swf" width="250" height="250">
+                            <param name="wmode" value="window" />
+                            <param name="allowScriptAccess" value="always" />
+                            <param name="flashvars" value="hostname=grooveshark.com&playlistID=92292984&p=1&bbg=2163A9&bth=000000&pfg=000000&lfg=000000&bt=FFFFFF&pbg=FFFFFF&pfgh=FFFFFF&si=FFFFFF&lbg=FFFFFF&lfgh=FFFFFF&sb=FFFFFF&bfg=25517A&pbgh=25517A&lbgh=25517A&sbh=25517A" />
+                            Sorry, the flash player for this service is not supported by your device.
+                        </object>
                         Sorry, the flash player for this service is not supported by your device.
                     </object>
-                    Sorry, the flash player for this service is not supported by your device.
-                </object>
-            </figure>
+                </figure>
             </aside>
-    </div>
+        </div>
     </section>
     <!-- Sitewide Modals -->
     <div id="login-inner" ng-controller="LoginController">

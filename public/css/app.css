@@ -1143,12 +1143,12 @@ input.addNewPost {
 }
 
 #tableOfContents {
-    position: relative;
-    top:-130px;
-    left: 50px;
+    position: absolute;
+    top:10%;
+    left: 50%;
     background: #EEE;
     border: 1px solid #fff;
-    height: 160px;
+    height: 300px;
     width: 250px;
     border-radius: 7px;
     overflow: hidden;
