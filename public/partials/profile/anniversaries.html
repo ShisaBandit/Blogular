@@ -21,14 +21,20 @@
     <div class="small-12 columns ">
         <div class="row">
             <h1>Angel Anniversaries</h1>
-            <a href="" class="button">Send Well Wishes</a>
-            <a href="" class="button">Send a Gift</a>
+
             <div class="my-repeat-animation" ng-repeat="ani in anis" class="row " style="background: #CDDFEF;margin-bottom: 20px;">
                 <div class="row">
                     <div class="small-10 columns">
                         <h4>{{ ani.event }}</h4>
                         <p>{{ ani.date }}</p>
-                        <p>{{ ani.eventdesc }}</p>
+                        <p>{{ ani.text }}</p>
+                        <br />
+                        <a href="" class="button">Send Well Wishes</a>
+                        <!--
+                        <input class="addNewPost small-10 columns ng-pristine ng-valid" type="text" placeholder="Begin a new conversation here" ng-model="postText"></input>
+                        <div class="small-2 columns"> <button class="button postfix" ng-click="submit()"> … </button> </div>
+                        -->
+                        <a href="" class="button">Send a Gift</a>
                     </div>
                 </div>
             </div>
