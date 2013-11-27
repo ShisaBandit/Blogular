@@ -41,7 +41,7 @@ var app = angular.module('blogApp', [
             when("/updatepass", {templateUrl: "partials/updatepass.html"}).
             when("/editprofile", {templateUrl: "partials/editprofile.html"}).
             when("/login", {templateUrl: "partials/login.html"}).
-            when("/gifts", {templateUrl: "partials/giftShop.html"}).
+            when("/gifts/:user/:wall", {templateUrl: "partials/giftShop.html"}).
             otherwise("/oops",{templateUrl:"404.html"});
 
     });

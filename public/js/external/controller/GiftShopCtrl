@@ -1,6 +1,10 @@
 angular.module('controller.GiftShop',[]).
-    controller('GiftShopCtrl',function($scope,$http){
-        console.log("alls well")
+    controller('GiftShopCtrl',function($scope,$http,$routeParams){
+        console.log("alls well");
+
+        $scope.wall = $routeParams.wall;
+        $scope.user = $routeParams.user;
+
         $http.get('http://localhost/magento/memwallconn/index/categories').
             success(function (data) {
                 console.log("succ")
@@ -9,4 +13,4 @@ angular.module('controller.GiftShop',[]).
                 error(function () {
                 console.log("error");
             })
-    })
+    });
