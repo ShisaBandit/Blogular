@@ -5,7 +5,7 @@ angular.module('controller.GiftShop',[]).
         $scope.wall = $routeParams.wall;
         $scope.user = $routeParams.user;
 
-        $http.get('http://localhost/shop/memwallconn/index/categories').
+        $http.get('http://angelsofeureka.com/shop/memwallconn/index/categories').
             success(function (data) {
                 console.log("succ")
                 $scope.categories = data;
