@@ -1877,7 +1877,7 @@ app.controller('AnniCtrl', function ($scope, api, $http) {
                 })
             $scope.event = "";
             $scope.eventdate ="";
-
+            $scope.eventdesc ="";
         })
 
     }
