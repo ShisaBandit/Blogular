@@ -1978,7 +1978,8 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
     box-sizing: border-box;
     -webkit-transition: all 0.15s linear;
     -moz-transition: all 0.15s linear;
-    transition: all 0.15s linear
+    transition: all 0.15s linear;
+    clear: both;
 }
 
 input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="week"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="time"]:focus, input[type="url"]:focus, textarea:focus {
