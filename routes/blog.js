@@ -9,6 +9,19 @@ var Update = models.Update;
 var Workshop = models.Workshop;
 var PICTYPE = 1;
 var VIDEOTYPE = 2;
+var nodemailer = require('nodemailer');
+//var smtpTransport = nodemailer.createTransport("sendmail");
+var smtpTransport = nodemailer.createTransport("SMTP", {
+    host: "mail.angelsofeureka.org",
+    port: "465",
+    secureConnection: true,
+    auth: {
+        user: "noreply@angelsofeureka.org",
+        pass: "regEmail2013"
+    }
+});
+var EventEmitter = require('events').EventEmitter;
+exports.messageEmitter = messageEmitter = new EventEmitter();
 
 
 exports.notifications = function (req, res) {
@@ -879,12 +892,110 @@ exports.getInviteBlogUserData = function (req,res) {
 }
 
 exports.shopToWall = function (req,res) {
-    var wall = req.params.wall;
-    var user = req.params.user;
+    console.log("testing shopt to wall");
+    var wall = req.params.wall;//receiving wall and user
+    var user = req.params.user;//person sending
+    var name = [3];
+    var qty = [3];
+    var more;
+    name[0] = req.params.iname;
+    name[1] = req.params.i2name;
+    name[2] = req.params.i3name;
 
-    console.log(wall+" "+user);
+    qty[0] = req.params.iqty;
+    qty[1] = req.params.i2qty;
+    qty[2] = req.params.i3qty;
+
+    more = req.params.more;
+
+
+    var gifts = "";
+    for(var n in name){
+        console.log(qty[n]);
+        if(name[n] == 0)break;
+        gifts += qty[n]+' of '+name[n];
+    }
+
+    console.log(gifts);
+    //email the wall owner that someone bought them a gift
+    User.findOne({_id:user}, function (err,theuser) {
+
+        Blog.findOne({_id:wall}, function (err,theblog) {
+            if(err)console.log(err);
+            //console.log(theblog.postText)
+            SendGiftNotice(theuser.email,theuser.firstName+" "+theuser.lastName,theblog.firstName+" "+theblog.lastName);
+            //add entry in anniversary area and latestpost
+            theblog.postText.push({
+                user_id:theuser._id,
+                username:theuser.username,
+                event:"GiftSent",
+                gravatar:theuser.email,
+                text:theuser.username+" bought "+gifts+" for the angel "+theblog.firstName+" "+theblog.lastName,
+                postType:0
+            });
+            theblog.anniverssaryDays.push({description:"Gifted",event:"Gifted",data:Date.now()});
+            User.findOne({_id:theblog.owner_id}, function (err,receivingUser) {
+                receivingUser.notifications.push({text:"Your angel "+theblog.firstName+" "+theblog.lastName +"has received a gift."});
+                SendEmail(receivingUser.email,receivingUser.firstName+" "+receivingUser.lastName, "<p>"+theuser.username+" has bought you a gift.  Go to your angels <a href='localhost:3000/#/angel'"+theblog.author+" to find out what it was.</p>");
+
+                //add entry in anniversary area and latestpost
+
+                receivingUser.save(function (err,saveddoc) {
+                    if(err)console.log(err);
+                    messageEmitter.emit('notification_messagereceived',theblog.owner_id,"Your angel "+theblog.firstName+" "+theblog.lastName +"has received a gift.",saveddoc.notifications[saveddoc.notifications.length-1]._id);
+                })
+            })
+            theblog.save(function (err) {
+                if(err)console.log(err);
+                theuser.notifications.push({text:"Thank you for purchasing a gift(s) at Angels Of Eureka.com."});
+                theuser.save(function (err,saveddoc) {
+                    if(err)console.log(err);
+                    //console.log(saveddoc)
+                    messageEmitter.emit('notification_messagereceived',theuser._id,"Thank you for purchasing a gift(s)s at Angels Of Eureka.com.",saveddoc.notifications[saveddoc.notifications.length-1]._id);
+                    messageEmitter.emit('shoptowall_giftreceived',wall);
+                })
+             })
+        })
+        return res.send(200,"return this");
+
+    })
+    //add data max 3 items that someone bought something for someone on the site
+
 }
-
+function SendGiftNotice(to,user,wall,gifts) {
+    var mailOptions = {
+        from: "noreply@AngelsOfEureka.org",
+        to: to,
+        subject: "Someone sent you a gift",
+        html: "<p>"+user+" has bought you a gift.  Go your wall to find out what it was {url}.</p>"
+    }
+    smtpTransport.sendMail(mailOptions, function (error, response) {
+        if (error) {
+            console.log(error);
+            console.log("problems sending mail")
+        } else {
+            console.log("message sent")
+        }
+        console.log(response);
+    })
+}
+function SendEmail(to,user,htmlMessage) {
+    var mailOptions = {
+        from: "noreply@AngelsOfEureka.org",
+        to: to,
+        subject: "Someone sent you a gift",
+        html:htmlMessage
+    }
+    smtpTransport.sendMail(mailOptions, function (error, response) {
+        if (error) {
+            console.log(error);
+            console.log("problems sending mail")
+        } else {
+            console.log("message sent")
+        }
+        console.log(response);
+    })
+}
 
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message

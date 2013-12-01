@@ -17,6 +17,7 @@ var express = require('express')
     , messageRoutes = require('./routes/messageRoutes')
     , petitionRoutes = require('./routes/petitions')
     , apiv2 = require('./routes/apiv2')
+    //, blog = require('./routes/blog')
     , path = require('path')
     , fs = require('fs')
     , cookie = require('cookie')
@@ -194,11 +195,10 @@ app.post('/logout', authRoutes.logout);
 app.post('/login',
     passport.authenticate('local'),
     function (req, res) {
-
+        var user;
         //TODO:check user relationship
         //find other users with same relationship
         //add notification to database
-        //notifications are real time but still poll every 10 mins just in case
         User.findOne({username: req.body.username}, function (err, loggeduser) {
             if (loggeduser.firstAccess == true) {
 
@@ -225,11 +225,10 @@ app.post('/login',
                 loggeduser.firstAccess = false;
                 loggeduser.save(function(err){
                     if(err)console.log(err);
-
                 })
             }
+            res.send(JSON.stringify(loggeduser._id), 200);
         })
-        res.send('authed', 200);
     });
 
 app.post('/auth/login', authRoutes.loginAuth);
@@ -301,7 +300,7 @@ app.get('/deletePetition/:id',passport.ensureAuthenticated,petitionRoutes.delete
 app.get('/getInviteBlogUserData/:wallid',passport.ensureAuthenticated,blogRoutes.getInviteBlogUserData);
 
 //shopwall connection
-app.get('/shoptowall',blogRoutes.shopToWall);
+app.get('/shoptowall/:wall/:user/:iname/:iqty/:i2name/:i2qty/:i3name/:i3qty/:more',blogRoutes.shopToWall);
 
 
 
@@ -348,7 +347,14 @@ io.sockets.on('connection', function (socket) {
             */
             //if this user is in the room
             if (connectedusers[a].room == data.room) {
-                usersForThisRoom.push(connectedusers[a]);
+               /*
+                for(var u = 0;u < usersForThisRoom.length;u++){
+                    if(usersForThisRoom[u].room == connectedusers[a].room){
+                      //  duplicateUserForRoom = true;
+                    }
+                }
+                */
+               // usersForThisRoom.push(connectedusers[a]);
             }
         }
         /*
@@ -362,11 +368,11 @@ io.sockets.on('connection', function (socket) {
             socket.join(data.room);
             connectedusers.push({room: data.room, id: socket.handshake.user[0]._id, username: socket.handshake.user[0].username,socket:socket});
 
-            usersForThisRoom.push({room: data.room, id: socket.handshake.user[0]._id, username: socket.handshake.user[0].username});
+            //usersForThisRoom.push({room: data.room, id: socket.handshake.user[0]._id, username: socket.handshake.user[0].username});
 
 
-            socket.emit('initialuserlist', usersForThisRoom);//send to the subscribing user
-            io.sockets.in(data.room).emit('updateusers', usersForThisRoom);//send to everyone else already in the room
+            //socket.emit('initialuserlist', usersForThisRoom);//send to the subscribing user
+            //io.sockets.in(data.room).emit('updateusers', usersForThisRoom);//send to everyone else already in the room
         }
         console.log("User subscribed")
         console.log(connectedusers.length)
@@ -403,15 +409,17 @@ io.sockets.on('connection', function (socket) {
     })
     socket.on('unsubscribe', function (data) {
         console.log('unsubscribe');
+        console.log(notificationSubscribers)
+
         socket.leave(data.room);
-        var usersForThisRoom = [];
+        //var usersForThisRoom = [];
         var buffer = connectedusers;
         for (var a = 0; a < connectedusers.length; a++) {
             if (connectedusers[a].id == socket.handshake.user[0]._id) {
                 buffer.splice(a, 1);
             }
             if (connectedusers[a] != undefined && connectedusers[a].room == data.room) {
-                usersForThisRoom.push(connectedusers[a]);
+                //usersForThisRoom.push(connectedusers[a]);
             }
         }
         connectedusers = buffer;
@@ -420,11 +428,12 @@ io.sockets.on('connection', function (socket) {
         for (var i = 0; i < clients.length; i++) {
             console.log("================================================================next client loading....");
         }
-        io.sockets.to(data.room).emit('updateusers', usersForThisRoom);
+        console.log(notificationSubscribers)
+        //io.sockets.to(data.room).emit('updateusers', usersForThisRoom);
     });
     socket.on('disconnect', function () {
         socket.leave(socket.room);
-        var usersForThisRoom = [];
+        //var usersForThisRoom = [];
         console.log('disconnect');
         var buffer = connectedusers;
         for (var i = 0; i < connectedusers.length; i++) {
@@ -432,12 +441,12 @@ io.sockets.on('connection', function (socket) {
                 buffer.splice(i, 1);
             }
             if (connectedusers[i] != undefined && connectedusers[i].room == socket.room) {
-                usersForThisRoom.push(connectedusers[i]);
+                //usersForThisRoom.push(connectedusers[i]);
             }
         }
         connectedusers = buffer;
         console.log(socket.handshake.user[0].username);
-        io.sockets.to(socket.room).emit('updateusers', usersForThisRoom);
+        //io.sockets.to(socket.room).emit('updateusers', usersForThisRoom);
     });
 /*
     socket.on('notification_messagereceived',function(username,message,notiid){
@@ -452,9 +461,10 @@ io.sockets.on('connection', function (socket) {
     })
 */
 });
-
+//notifications for apiv2 routes
 apiv2.messageEmitter.on('notification_messagereceived',function(userid,message,notiid){
     console.log("NOTIFICATION MESSAGE RECEIVED_______--------"+ notificationSubscribers.length)
+    console.log(notificationSubscribers)
     console.log(userid)
     console.log(message)
     var conUsers = notificationSubscribers;
@@ -467,7 +477,28 @@ apiv2.messageEmitter.on('notification_messagereceived',function(userid,message,n
         }
     }
 })
+//event for when a gift is received
+apiv2.messageEmitter.on('shoptowall_giftreceived',function(wall){
+    console.log("shop to wall NOTIFICATION MESSAGE RECEIVED_______--------"+ notificationSubscribers.length)
+    var conUsers = notificationSubscribers;
+    Blog.findOne({_id: wall}, function (err, blog) {
+/*
+    for (var i = 0; i < notificationSubscribers.length; i++) {
+            console.log("trying to emit an update to the wall "+wall);
+           // conUsers[i].socket.emit('newnotification',{text:message,viewed:false,_id:notiid});
+            //    if (err)console.log(err);
+                console.log(blog.postText[blog.postText.length - 1]);
+                console.log(conUsers[i].socket.room+" "+wall);
+                if(conUsers[i].socket.room == wall){
+                    conUsers.socket.emit('newPostText', blog.postText[blog.postText.length - 1]);
+                }
+    }
+    */
+        io.sockets.in(wall).emit('newPostText', blog.postText[blog.postText.length - 1]);
 
+    })
+
+    })
 
 
 //TODO:REMOVE THIS CODE

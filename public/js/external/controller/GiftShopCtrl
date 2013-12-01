@@ -4,8 +4,8 @@ angular.module('controller.GiftShop',[]).
 
         $scope.wall = $routeParams.wall;
         $scope.user = $routeParams.user;
-
-        $http.get('http://angelsofeureka.com/shop/memwallconn/index/categories').
+        //$http.get('http://angelsofeureka.com/shop/memwallconn/index/categories').
+        $http.get('http://localhost/magento/memwallconn/index/categories?user='+$scope.user+'&wall='+$scope.wall,{ withCredentials: true}).
             success(function (data) {
                 console.log("succ")
                 $scope.categories = data;

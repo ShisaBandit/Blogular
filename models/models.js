@@ -76,7 +76,7 @@ var blogSchema = mongoose.Schema({
             embedAnimoto: String
 
         }
-    ],//postType 0=text,1=pic,2=video
+    ],//postType 0=text,1=pic,2=video,3=anniversary
     orphanedphotos: [
         {             //TODO:Upon upload of photo generate thumbnails by other process not node
             filename: String,

@@ -186,12 +186,14 @@ app.directive('revealModal', function (DeletePicsFactory) {
     }
 });
 
-app.directive('ifAuthed', function ($http) {
+app.directive('ifAuthed', function ($http,userInfoService) {
     return {
         //TODO:autoscroll being called to early in the link process????
         link: function (scope, elm, attrs) {
             $http.get('/checkauthed').then(function (data) {
-                scope.username = data.data;
+                scope.username = data.data.username;
+                scope.userid = data.data.userid;
+                userInfoService.setUsername(scope.username,scope.userid);
                 if (attrs.ifAuthed == 'show') {
                     elm.show();
                 } else {
@@ -211,6 +213,8 @@ app.directive('ifAuthed', function ($http) {
                 } else {
                     elm.show();
                 }
+
+
             });
             scope.$on('event:auth-loginRequired', function () {
 
@@ -415,6 +419,9 @@ app.service('userInfoService', function () {
     return {
         getUsername: function () {
             return username;
+        },
+        getId: function () {
+            return _id;
         },
         setUsername: function (value, id) {
             username = value;
@@ -922,7 +929,8 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
         $scope.error = "";
         $http.post('/login', $scope.form)
             .success(function (data, status) {
-                userInfoService.setUsername($scope.form.username);
+                console.log("trying to set id"+data)
+                userInfoService.setUsername($scope.form.username,data._id);
                 $scope.form.username = "";
                 $scope.form.password = "";
                 authService.loginConfirmed();
@@ -1838,9 +1846,12 @@ app.controller('VideoCtrl', function ($scope, BlogsService, Blog, $rootScope, $h
         return buffer;
     }
 });
-app.controller('AnniCtrl', function ($scope, api, $http) {
+app.controller('AnniCtrl', function ($scope, api, $http,userInfoService) {
     $scope.anis = [];
     $scope.blogId = "";
+    $scope.user = userInfoService.getId();
+
+
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
