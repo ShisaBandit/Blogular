@@ -304,7 +304,6 @@ exports.updateBlog = function (req, res) {
 
 }
 function BlogGroupValidation(req){
-    if(!update)update = false;
     console.log("Begin Group validation");
     //TODO:convert this method to return a promise
     var promise = new mongoose.Promise;
