@@ -256,49 +256,56 @@ exports.createBlog = function (req, res) {
 }
 
 exports.updateBlog = function (req, res) {
-    var errors = BlogGroupValidation(req);
-    if (errors) {
-        res.send(errors, 500);
-        return;
-    }
-    //Updates whatever blog is sent to it
-    //break this up into updateBlog and updateComment/addComment
-    delete req.body._id;
-    User.findOne({username: req.user[0]._doc.username}, function (err, user) {
-        loggedInUser = user;
-        if (user === null) {
-            res.send('error:not an admin account', 401);
-        } else {
-            //take the blog and update it with the new comment
-            //TODO:Highly ineffecient!!! for the network rework this to only have the comment that needs be updated sent and
-            //sorted
-            Blog.findOneAndUpdate({'_id': req.params.id}, req.body, function (err, doc) {
-                if (err) {
-                    console.log(err);
-                    res.end(JSON.stringify({result: 'error'}));
-                }
-                if (doc.comments == undefined || doc.comments.length < 1) {
-                    //do nothing for now
-                    doc.updateDate = Date.now();
-                } else {
-                    doc.comments[0].username = user.username;
-                }
+    BlogGroupValidation(req).then(function () {
+        console.log("resolved")
+        //Updates whatever blog is sent to it
+        //break this up into updateBlog and updateComment/addComment
+        delete req.body._id;
+        User.findOne({username: req.user[0]._doc.username}, function (err, user) {
+            loggedInUser = user;
+            if (user === null) {
+                res.send('error:not an admin account', 401);
+            } else {
+                //take the blog and update it with the new comment
+                //TODO:Highly ineffecient!!! for the network rework this to only have the comment that needs be updated sent and
+                //sorted
+                Blog.findOneAndUpdate({'_id': req.params.id}, req.body, function (err, doc) {
+                    if (err) {
+                        console.log(err);
+                        res.end(JSON.stringify({result: 'error'}));
+                    }
+                    if (doc.comments == undefined || doc.comments.length < 1) {
+                        //do nothing for now
+                        doc.updateDate = Date.now();
+                    } else {
+                        doc.comments[0].username = user.username;
+                    }
 
-                doc.save(function (err, doc) {
-                    if (err)console.log(err);
-                    res.end(JSON.stringify(doc));
+                    doc.save(function (err, doc) {
+                        if (err)console.log(err);
+                        res.end(JSON.stringify(doc));
+                    });
+                    var update = new Update();
+                    update.save(function (err, update) {
+                        if (err)console.log(err);
+                    });
                 });
-                var update = new Update();
-                update.save(function (err, update) {
-                    if (err)console.log(err);
-                });
-            });
+            }
+
+        });
+    }, function (errors) {
+        console.log("rejected")
+        if (errors) {
+            console.log(errors);
+            res.send(errors, 500);
+            return;
         }
-
     });
 
 }
-function BlogGroupValidation(req) {
+function BlogGroupValidation(req){
+    if(!update)update = false;
+    console.log("Begin Group validation");
     //TODO:convert this method to return a promise
     var promise = new mongoose.Promise;
     if (req.body.group == undefined || !req.body.group) {
@@ -329,36 +336,31 @@ function BlogGroupValidation(req) {
         }
         errors.author = {param: 'author', msg: 'Please enter a valid url. Only characters A-Z or numbers 1-9 and "-" or "_" allowed.'};
     }
-    //if(!errors){}else{return deferred.reject(errors);}
-    /*
-    Blog.find({}, function (err,walls) {
-        for(var i = 0;i<walls.length;i++){
-            if(req.body.author == walls[i].author){
-                if (!errors) {
-                    errors = {};
-                }
-                errors.author = {param: 'author', msg: 'This url is already taken please try with a differnt url.'};
-                return deferred.reject(errors);
-            }
-        }
-        return deferred.resolve();
-    })
-    return deferred.promise();
-    */
+
     Blog.find({}).exec(function (err,walls) {
-        console.log(walls)
+       // console.log(walls)
         if(!walls)promise.reject(0);//nowalls error code
         for(var i = 0;i<walls.length;i++){
             if(req.body.author == walls[i].author){
-                if (!errors) {
-                    errors = {};
+                console.log("same author error");
+
+                if(walls[i].owner_id != req.session.passport.user){
+                    console.log("set sam author error");
+                    if (!errors) {
+                        errors = {};
+                    }
+                    errors.author = {param: 'author', msg: 'This url is already taken please try with a differnt url.'};
                 }
-                errors.author = {param: 'author', msg: 'This url is already taken please try with a differnt url.'};
             }
         }
-        if(!errors){
+        console.log(errors)
+        if(errors == null){
+            console.log("fullfill");
+            console.log(errors)
             promise.fulfill();
         }else{
+            console.log("reject");
+            console.log(errors)
             promise.reject(errors);
         }
     });

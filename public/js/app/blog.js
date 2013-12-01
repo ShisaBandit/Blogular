@@ -374,42 +374,42 @@ app.factory('categoryService', function () {
 
 app.factory('groupsListing', function () {
     return[
-        {name: "Mother", code: 0},
-        {name: "Father", code: 1},
-        {name: "Husband", code: 2},
-        {name: "Wife", code: 3},
-        {name: "Son", code: 4},
-        {name: "Daughter", code: 5},
-        {name: "Brother", code: 6},
-        {name: "Sister", code: 7},
-        {name: "Grandfather", code: 8},
-        {name: "Grandmother", code: 9},
-        {name: "Grandchild", code: 10},
-        {name: "Stepmother", code: 15},
-        {name: "Stepfather", code: 16},
-        {name: "Stepbrother", code: 17},
-        {name: "Stepsister", code: 18},
-        {name: "Godfather", code: 11},
-        {name: "Godmother", code: 12},
-        {name: "Godson", code: 13},
-        {name: "Goddaughter", code: 14},
-        {name: "Aunt", code: 19},
-        {name: "Uncle", code: 20},
-        {name: "Cousin", code: 21},
-        {name: "Niece", code: 22},
-        {name: "Nephew", code: 23},
-        {name: "Fiance", code: 24},
-        {name: "Boyfriend", code: 25},
-        {name: "Girlfriend", code: 26},
-        {name: "Mother-in-law", code: 27},
-        {name: "Father-in-law", code: 28},
-        {name: "Brother-in-law", code: 29},
-        {name: "Sister-in-law", code: 30},
-        {name: "Partner", code: 31},
-        {name: "Friend", code: 32},
-        {name: "Colleague", code: 33},
-        {name: "Teacher", code: 34},
-        {name: "Mentor", code: 35}
+        {name:  "Mother",code: 0},
+        {name:     "Father",code: 1},
+        {name:     "Husband",code: 2},
+        {name:     "Wife",        code: 3},
+        {name:     "Son",code: 4},
+        {name:     "Daughter",    code: 5},
+        {name:     "Brother", code: 6},
+        {name:     "Sister",code: 7},
+        {name:     "Grandfather",code: 8},
+        {name:     "Grandmother",code: 9},
+        {name:     "Grandchild",code: 10},
+        {name:     "Stepmother",code: 11},
+        {name:     "Stepfather",code: 12},
+        {name:     "Stepbrother",code: 13},
+        {name:     "Stepsister",code: 14},
+        {name:     "Godfather",code: 15},
+        {name:     "Godmother",code: 16},
+        {name:     "Godson",code: 17},
+        {name:     "Goddaughter",code: 18},
+        {name:     "Aunt",code: 19},
+        {name:     "Uncle",code: 20},
+        {name:     "Cousin",code: 21},
+        {name:     "Niece",code: 22},
+        {name:     "Nephew",code: 23},
+        {name:     "Fiance",code: 24},
+        {name:     "Boyfriend",    code: 25},
+        {name:     "Girlfriend",code: 26},
+        {name:     "Mother-in-law",code: 27},
+        {name:     "Father-in-law",code: 28},
+        {name:     "Brother-in-law", code: 29},
+        {name:     "Sister-in-law",code: 30},
+        {name:     "Partner",code: 31},
+        {name:     "Friend",code: 32},
+        {name:     "Colleague",    code: 33},
+        {name:     "Teacher",code: 34},
+        {name:     "Mentor",code: 35}
     ];
 })
 
@@ -1605,7 +1605,7 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
     $scope.author = {author: ""};
     $scope.groups = groupsListing;
     $scope.message = {};
-    $scope.selectedGroup = undefined;
+    $scope.selectedGroup = $scope.groups[0];
     $scope.form = {};
     $scope.parentData = {
         author:""
@@ -1994,7 +1994,7 @@ app.controller('EditWallCtrl', function ($rootScope, $http, $scope, api, $routeP
     $scope.addedFile = {};
     $scope.form = {};
     $scope.groups = groupsListing;
-    $scope.selectedGroup = undefined;
+    $scope.selectedGroup = $scope.groups[0];
 
     $scope.checked = function () {
         console.log($scope.selectedGroup)
@@ -2025,11 +2025,8 @@ app.controller('EditWallCtrl', function ($rootScope, $http, $scope, api, $routeP
         $http.post('blog/' + $scope.form._id, $scope.form).
             success(function (data) {
                 $scope.form = data;
-
-
                 $scope.template.url = '/partials/admin/editportrait.html';
                 $scope.hidemainform = true;
-
             }).error(function (err) {
                 console.log("error");
 

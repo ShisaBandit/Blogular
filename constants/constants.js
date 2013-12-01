@@ -6,42 +6,42 @@ Common = {
 
 }
 LostTypes = [
-    "Mother",
+    "Mother",//0
     "Father",
     "Husband",
     "Wife",
-    "Son",
+    "Son",//4
     "Daughter",
     "Brother",
     "Sister",
     "Grandfather",
     "Grandmother",
-    "Grandchild",
+    "Grandchild",//10
     "Stepmother",
     "Stepfather",
     "Stepbrother",
     "Stepsister",
-    "Godfather",
+    "Godfather",//15
     "Godmother",
     "Godson",
     "Goddaughter",
     "Aunt",
-    "Uncle",
+    "Uncle",//20
     "Cousin",
     "Niece",
     "Nephew",
     "Fiance",
-    "Boyfriend",
+    "Boyfriend",//25
     "Girlfriend",
     "Mother-in-law",
     "Father-in-law",
     "Brother-in-law",
-    "Sister-in-law",
+    "Sister-in-law",//30
     "Partner",
     "Friend",
     "Colleague",
     "Teacher",
-    "Mentor"
+    "Mentor"//35
 ]
 module.exports = {
     postTextTypes:Common,
