@@ -486,7 +486,7 @@ label {
     font-weight: 500;
     margin-bottom: 0.1875em;
     float: left;
-    clear: left;
+    clear: both;
 }
 
 .small-6 input[type=text],.small-6 input[type=password],.small-6 input[type=email] {
