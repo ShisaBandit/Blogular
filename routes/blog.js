@@ -899,9 +899,9 @@ exports.shopToWall = function (req,res) {
     var name = [3];
     var qty = [3];
     var more;
-    name[0] = req.params.iname;
-    name[1] = req.params.i2name;
-    name[2] = req.params.i3name;
+    name[0] = unescape(req.params.iname);
+    name[1] = unescape(req.params.i2name);
+    name[2] = unescape(req.params.i3name);
 
     qty[0] = req.params.iqty;
     qty[1] = req.params.i2qty;
