@@ -1,101 +1,59 @@
 <div ng-controller="EditWallCtrl">
     <div class="row offsetHeight100">
         <div ng-hide="hidemainform" class="small-12 columns">
-            <h2>Edit Your Angel's Memorial Profile:</h2>
+            <h2 style="color: #122C5E;font-size: large">Edit Your Angel's Memorial Profile:</h2>
             <div id="log"></div>
-            <form class="editMemWall">
-                <label for="title">Title: </label>
-                <input id="title" ng-model="form.title" name="title">
-                <p class="validation-error">{{message.title}}</p>
+                <form class="editMemWall">
+                    <label for="title">Title: </label><br class=""clear" />
+                    <input type="text" id="title" ng-model="form.title" name="title" />
+                    <p class="validation-error">{{message.title}}</p>
+                    <br />
+                    <label for="author">Short Address: </label>
+                    <input type="text" name="author" id="author" ng-model="form.author" />
+                    <p class="validation-error">{{message.url}}</p>
 
+                    <label for="content"><b>Edit the Contents of the memorial wall below</b></label>
+                    <br />
+                    <label>Name of Angel</label>
+                    <input type="text" class="login-inp" ng-model="form.firstName" placeholder="First Name" />
+                    <p class="validation-error">{{message.firstName}}</p>
 
-                <br />
-                <label for="author">Short Address: </label>
-                <input type="text" name="author" id="author" ng-model="form.author">
-                <p class="validation-error">{{message.url}}</p>
+                    <input type="text" class="login-inp" ng-model="form.lastName" placeholder="Last Name" />
+                    <p class="validation-error">{{message.lastName}}</p>
 
-                <label for="content">Content: </label>
-                <label>Name of Angel</label>
-                <input type="text" class="login-inp" ng-model="form.firstName" placeholder="First Name"/>
-                <p class="validation-error">{{message.firstName}}</p>
+                    <label for="content">Tell your Angel's story here: </label>
 
-                <input type="text" class="login-inp" ng-model="form.lastName" placeholder="Last Name"/>
-                <p class="validation-error">{{message.lastName}}</p>
+                    <textarea id="content" placeholder="Enter text ..." ng-model="form.text" cols="50" rows="15"></textarea>
+                    <br/>
+                    <label>Date of Birth</label>
+                    <!--TODO:Make this an uploadable file-->
 
-                <label for="content">Tell your Angel's story here: </label>
-
-                <!-- add on to later for now just use regular text area
-                 <div id="toolbar" style="display: none;">
-                     <a data-wysihtml5-command="bold" title="CTRL+B">bold</a> |
-                     <a data-wysihtml5-command="italic" title="CTRL+I">italic</a>
-                     <a data-wysihtml5-action="change_view">switch to html view</a>
-                 </div>
-                 -->
-                <textarea id="content" placeholder="Enter text ..." ng-model="form.text" cols="50" rows="15"></textarea>
-                <br/>
-                <label ng-hide="form.group">Date of Birth</label>
-                <!--TODO:Make this an uploadable file-->
-
-                <div ng-hide="form.group" class="form-horizontal">
-                    <input type="text" datepicker-popup="yyyy/MMMM/dd" ng-model="form.dob" is-open="opened1" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
-                    <button class="btn" ng-click="open(1)"><i class="general foundicon-calendar"></i></button>
-                </div>
-                <p class="validation-error">{{message.dob }}</p>
-                <!--<input type="text" class="login-inp" fdatepicker ng-model="form.dob"/>
-                <p class="validation-error">{{message.dob }}</p>
--->
-                <br/>
-               <!--
-                 <label>This is my</label>
-
-               <div class="row regColl2">
-                    <label>I have lost my: </label> <br /> <br />
-                    <div ng-repeat="group in groups">{{group.name}}<input type="checkbox" ng-change="checked()"
-                                                                          ng-model="groups[$index].checked"
-                                                                          class="login-inp" name="{{group.name}}"/></div>
-                    <p class="validation-error">{{message.subgroup}}</p>
-
-                </div>
-                -->
-                <div ng-hide="form.group">
-                    <label>I have lost my: </label> <br />
-                    <select class="login-inp"
-                            name="lostAngel"
-                            ng-change="checked()"
-                            ng-model="selectedGroup"
-                            ng-options="group.name for group in groups">
-
-                        <!--<option
-                                ng-change="checked()"
-                                ng-repeat="group in groups"
-                                ng-model="groups[$index].checked"
-                                class="login-inp"
-                                value="{{group.name}}">
-                        {{group.name}}-->
-                        </option>
-                    </select>
-                    <p class="validation-error">{{message.subgroup}}</p>
-</div>
-                <div ng-hide="form.group">
-                <label>Day your angel got wings</label>
-
-                <div class="form-horizontal">
-                    <input type="text" datepicker-popup="yyyy/MMMM/dd" ng-model="form.memorialDate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
-                    <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
-                </div>
-
-                <p class="validation-error">{{message.memorialDate}}</p>
-</div>
-               <!-- <input type="date" class="login-inp" ng-model="form.memorialDate"/>-->
-
-
-                <br/>
-
-                <p>
-                    <button ng-click="editPost()" resetOnSubmit="true">Submit Changes</button>
-                </p>
-            </form>
-
+                    <div class="form-horizontal">
+                        <input type="text" datepicker-popup="yyyy/MMMM/dd" ng-model="form.dob" is-open="opened1" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+                        <button class="btn" ng-click="open(1)"><i class="general foundicon-calendar"></i></button>
+                    </div>
+                    <p class="validation-error">{{message.dob }}</p>
+                    <br/>
+                    <div>
+                        <label>I have lost my: </label> <br />
+                        <select class="login-inp" name="lostAngel" ng-change="checked()" ng-model="selectedGroup" ng-options="group.name for group in groups">
+                            </option>
+                        </select>
+                        <p class="validation-error">{{message.subgroup}}</p>
+                    </div>
+                    <div>
+                    <label>Day your angel got wings</label>
+                    <div class="form-horizontal">
+                        <input type="text" datepicker-popup="yyyy/MMMM/dd" ng-model="form.memorialDate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+                        <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
+                    </div>
+                    <p class="validation-error">{{message.memorialDate}}</p>
+                    <br/>
+                    <p>
+                        <button ng-click="editPost()" resetOnSubmit="true">Submit Changes</button>
+                    </p>
+                </form>
+            </div>
         </div>
         <div class="offsetHeight" ng-include src="template.url">
 

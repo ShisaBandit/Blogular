@@ -424,7 +424,7 @@ body .primaryContent .shelf .mainBG .row .small-12 .section-container .active .c
 }
 
 .contentContainer{
-    border: 2px solid black;
+    border: 2px solid #fff;
     background: #ffffff;
     overflow: hidden;
 }
@@ -686,7 +686,7 @@ datepickercss
     font-weight: bolder;
     font-size: large;
     background: #B3C7DB;
-    box-shadow: 5px 5px 5px #132D48;
+    box-shadow: 2px 2px 2px #132D48;
 }
 
 .postComment input{

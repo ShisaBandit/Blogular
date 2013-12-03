@@ -1,8 +1,14 @@
 <div ng-controller="FriendsFamilyCtrl">
-    <h1>Friends & Family</h1>
-    <ul>
-        <li ng-repeat="subscriber in subscribers">
-            <p>{{ subscriber.firstName }} {{ subscriber.lastName }}</p>
-        </li>
-    </ul>
+    <div id="contentHeader" class="small-12 columns">
+        <h2 class="contentHeaderTitle">Friends & Family</h2>
+    </div>
+    <div class="small-12 columns ">
+        <div class="row">
+            <ul>
+                <li ng-repeat="subscriber in subscribers">
+                    <p>{{ subscriber.firstName }} {{ subscriber.lastName }}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

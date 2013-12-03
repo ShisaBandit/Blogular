@@ -4977,12 +4977,17 @@ table thead tr th, table tfoot tr th, table tbody tr td, table tr td, table tfoo
         position: absolute;
         top: 0.5em;
         right: 0.6875em;
-        color: #aaa;
+        color: #122C5E;
         font-weight: bold;
         cursor: pointer;
         margin-bottom: 50px;
         display: block;
     }
+
+    .reveal-modal:hover .close-reveal-modal:hover, .reveal-modal:active .close-reveal-modal:active {
+        color: #fff;
+    }
+
     table {
         display:block;
         width: 300px;
