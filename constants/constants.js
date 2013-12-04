@@ -43,6 +43,17 @@ LostTypes = [
     "Teacher",
     "Mentor"//35
 ]
+LostTypesPets = [
+    "Dog",
+    "Cat",
+    "Bird",
+    "Horse",
+    "Fish",
+    "Cow",
+    "Pig",
+    "Mouse",
+    "Spider"
+]
 module.exports = {
     postTextTypes:Common,
     lostTypes:LostTypes

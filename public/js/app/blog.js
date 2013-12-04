@@ -412,6 +412,19 @@ app.factory('groupsListing', function () {
         {name:     "Mentor",code: 35}
     ];
 })
+app.factory('petgroupsListing', function () {
+    return[
+        {name: "Dog", code: 0},
+        {name: "Cat", code: 1},
+        {name: "Bird", code: 2},
+        {name: "Horse", code: 3},
+        {name: "Fish", code: 4},
+        {name: "Cow", code: 5},
+        {name: "Pig", code: 6},
+        {name: "Mouse", code: 7},
+        {name: "Spider", code: 8},
+    ];
+})
 
 app.service('userInfoService', function () {
     var username = "Guest";
@@ -1597,7 +1610,7 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, us
     }
 });
 
-app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing, $timeout,$location) {
+app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing, petgroupsListing, $timeout, $location) {
     $scope.template = {};
     $scope.hidemainform = false;
     $scope.blogId = {blogId: ""};
@@ -1611,12 +1624,31 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
         author:""
     }
     $scope.pet = false;
+    $scope.createTypeTitle = "";
+    $scope.createType = "Angel";
+
     $scope.checked = function () {
         console.log($scope.selectedGroup)
         $scope.form.subgroup = $scope.selectedGroup.code;
     }
-    $scope.petchecked = function(){
+
+    $scope.petMemorialCreate = function () {
         console.log($scope.pet)
+        $scope.groups = [];
+        if ($scope.pet == 'true') {
+            var petword = "Pet";
+            $scope.createTypeTitle = petword;
+            $scope.createType = petword;
+            $scope.groups = petgroupsListing;
+        } else {
+            console.log($scope.pet)
+            var angelWord = "Angel";
+            $scope.createTypeTitle = "";
+            $scope.createType = angelWord;
+            $scope.groups = groupsListing;
+        }
+        $scope.selectedGroup = $scope.groups[0];
+        $scope.form.subgroup = $scope.selectedGroup.code;
     }
     $scope.submitPost = function () {
         $scope.form.pet = $scope.pet;
