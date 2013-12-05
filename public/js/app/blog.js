@@ -1504,7 +1504,6 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, us
         //get all angel profiles(blogs) that this user has in his profile id
     });
 
-
     $http.get('/blogdataforuser').
         success(function (data) {
             console.log(data);
