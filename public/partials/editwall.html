@@ -1,7 +1,7 @@
 <div ng-controller="EditWallCtrl">
     <div class="row offsetHeight100">
         <div ng-hide="hidemainform" class="small-12 columns">
-            <h2 style="color: #122C5E;font-size: large">Edit Your Angel's Memorial Profile:</h2>
+            <h2 style="color: #122C5E;font-size: large">Edit Your {{titleText}}'s Memorial Profile:</h2>
             <div id="log"></div>
                 <form class="editMemWall">
                     <label for="title">Title: </label><br class=""clear" />
@@ -12,7 +12,7 @@
                     <input type="text" name="author" id="author" ng-model="form.author" />
                     <p class="validation-error">{{message.url}}</p>
 
-                    <label for="content"><b>Edit the Contents of the memorial wall below</b></label>
+                    <label for="content"><b>Edit the Contents of your {{titleText}}'s wall below</b></label>
                     <br />
                     <label>Name of Angel</label>
                     <input type="text" class="login-inp" ng-model="form.firstName" placeholder="First Name" />
@@ -21,10 +21,11 @@
                     <input type="text" class="login-inp" ng-model="form.lastName" placeholder="Last Name" />
                     <p class="validation-error">{{message.lastName}}</p>
 
-                    <label for="content">Tell your Angel's story here: </label>
+                    <label for="content">Tell your {{titleText}}'s story here: </label>
 
                     <textarea id="content" placeholder="Enter text ..." ng-model="form.text" cols="50" rows="15"></textarea>
                     <br/>
+                    <div ng-hide="isGroup">
                     <label>Date of Birth</label>
                     <!--TODO:Make this an uploadable file-->
 
@@ -32,22 +33,29 @@
                         <input type="text" datepicker-popup="yyyy/MMMM/dd" ng-model="form.dob" is-open="opened1" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
                         <button class="btn" ng-click="open(1)"><i class="general foundicon-calendar"></i></button>
                     </div>
+
                     <p class="validation-error">{{message.dob }}</p>
+                    </div>
                     <br/>
-                    <div>
+                    <div ng-hide="isGroup">
                         <label>I have lost my: </label> <br />
-                        <select class="login-inp" name="lostAngel" ng-change="checked()" ng-model="selectedGroup" ng-options="group.name for group in groups">
+                        <select class="login-inp"
+                                name="lostAngel"
+                                ng-change="checked()"
+                                ng-model="selectedGroup"
+                                ng-options="group.name for group in groups">
                             </option>
                         </select>
                         <p class="validation-error">{{message.subgroup}}</p>
                     </div>
-                    <div>
+                    <div ng-hide="isGroup">
                     <label>Day your angel got wings</label>
                     <div class="form-horizontal">
                         <input type="text" datepicker-popup="yyyy/MMMM/dd" ng-model="form.memorialDate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
                         <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
                     </div>
                     <p class="validation-error">{{message.memorialDate}}</p>
+                        </div>
                     <br/>
                     <p>
                         <button ng-click="editPost()" resetOnSubmit="true">Submit Changes</button>

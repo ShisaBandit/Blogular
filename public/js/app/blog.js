@@ -2027,7 +2027,8 @@ app.controller('EditWallCtrl', function ($rootScope, $http, $scope, api, $routeP
     $scope.form = {};
     $scope.groups = groupsListing;
     $scope.selectedGroup = $scope.groups[0];
-
+    $scope.isGroup = false;
+    $scope.titleText = "Angel";
     $scope.checked = function () {
         console.log($scope.selectedGroup)
         $scope.form.subgroup = $scope.selectedGroup.code;
@@ -2038,6 +2039,13 @@ app.controller('EditWallCtrl', function ($rootScope, $http, $scope, api, $routeP
         $scope.portrait.portrait = data[0].profilePicPortrait;
         $scope.spread.spread = data[0].profilePicWide;
         $scope.blogId.blogId = data[0]._id;
+        $scope.isGroup = data[0].group;
+
+        if($scope.isGroup){
+            $scope.titleText = "Group";
+        }else{
+            $scope.titleText = "Angel";
+        }
         console.log("GROUPS ARE " + $scope.groups)
         for (var group in $scope.groups) {
             console.log(data[0].subgroup)
