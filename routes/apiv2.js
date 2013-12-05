@@ -20,7 +20,7 @@ exports.createData = function (req, res) {
         //set datamodifiers
         //TODO:make a class that decides which chain to delegate to
         //based on request.
-        dataFilter(req, type, null, modelInstance, function (data,err) {
+        dataFilter(req, type, null, modelInstance,null, function (data,err) {
             console.log(" the error is "+err);
             if (err != undefined){
                 console.log(err);
@@ -44,12 +44,16 @@ exports.createData = function (req, res) {
             //TODO:make a class that decides which chain to delegate to
             //based on request.
             //doc[subdoc].push(req.body);
-            dataFilter(req, type, subdoc, req.body, function (data) {
-                doc[subdoc].push(data);
-                doc.save(function (err) {
-                    console.log(err);
-                    return sendSuccess(res);
-                })
+            dataFilter(req, type, subdoc, req.body,doc, function (data,skip,reason) {
+                if(!skip){
+                    doc[subdoc].push(data);
+                    doc.save(function (err) {
+                        console.log(err);
+                        return sendSuccess(res);
+                    });
+                }else{
+                    return sendError(res,reason);
+                }
             });
         })
     } else {
@@ -62,7 +66,7 @@ exports.createData = function (req, res) {
             //TODO:make a class that decides which chain to delegate to
             //based on request.
             //doc[subdoc].push(req.body);
-            dataFilter(req, type, subdoc, req.body, function (data) {
+            dataFilter(req, type, subdoc, req.body,doc, function (data) {
                 var doc = doc[subdoc].id(subdocid);
                 doc.push[subsubdoc] = subsubdoc;
 
@@ -88,7 +92,7 @@ exports.createData = function (req, res) {
 };
 
 var setFirstName = {register: "postText"};
-var dataFilter = function (req, type, subtype, data, callback) {
+var dataFilter = function (req, type, subtype, data,doc, callback) {
 
     switch (type) {
         case"Blog":
@@ -117,20 +121,34 @@ var dataFilter = function (req, type, subtype, data, callback) {
         {
 
             if (subtype == "signatures") {
+                var duplicate = false;
                 models.User.findOne({_id: req.session.passport.user}, function (err, user) {
-                    if (user == null) {
-                        data.initals = "testing";
-                        data.cityState = "testplace";
-                        callback(data);
-                    } else {
-                        if (user.firstName === undefined) {
-                            data.initals = "ANON";
-                        } else {
-                            data.initals = user.firstName.charAt(0).toUpperCase() + "." + user.lastName.charAt(0).toUpperCase() + ".";
+                    for(var s = 0;s<doc.signatures.length;s++){
+                        if(doc.signatures[s].user_id == user._id){
+                            duplicate = true;
+                            break;
                         }
-                        data.gravatar = calcMD5(data.email);
-                        data.cityState = user.city;//TODO:add in later+" "+user.State;
-                        callback(data);
+                    }
+                    if(duplicate == false){
+                        if (user == null) {
+                            data.initals = "testing";
+                            data.cityState = "testplace";
+                            callback(data);
+                        } else {
+                            if (user.firstName === undefined) {
+                                data.initals = "ANON";
+                            } else {
+                                data.initals = user.firstName.charAt(0).toUpperCase() + "." + user.lastName.charAt(0).toUpperCase() + ".";
+                            }
+                            data.user_id = user._id.toString();
+                            if(data.email)
+                                data.gravatar = calcMD5(data.email);
+                            if(data.cityState)
+                                data.cityState = user.city;//TODO:add in later+" "+user.State;
+                            callback(data,false);
+                        }
+                    }else{
+                        callback(data,true,"You have already signed this petition");
                     }
 
 
@@ -282,6 +300,9 @@ exports.getData = function (req, res) {
 function sendSuccess(res) {
     return res.end(JSON.stringify({'success': 'true'}));
 
+}
+function sendError(res,reason){
+    return res.end(JSON.stringify({'error': reason}));
 }
 
 exports.editData = function (req, res) {

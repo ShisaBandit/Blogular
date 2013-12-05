@@ -1478,7 +1478,7 @@ app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams) {
         $scope.text = "";
     }
 });
-app.controller('PetitionEntryCtrl', function ($scope, api, $routeParams) {
+app.controller('PetitionEntryCtrl', function ($scope, api, $routeParams,$http) {
     $scope.petition = [];
 
     api.getResourceByField('Petition', {field: "title", query: $routeParams.title}, function (petitions) {
@@ -1488,9 +1488,17 @@ app.controller('PetitionEntryCtrl', function ($scope, api, $routeParams) {
     });
     $scope.signPetition = function () {
         console.log($scope.petition)
-        api.createSubDocResource('Petition', $scope.petition[0]._id, 'signatures', function () {
+        /*
+        api.createSubDocResource('Petition',$scope.petition[0]._id, 'signatures', function () {
 
         });
+        */
+        $http.get('create/Petition/'+$scope.petition[0]._id+'/signatures').
+            success(function(data,status,headers,config){
+                callback(data);
+            }).error(function(data,status,headers,config){
+                callback(data);
+            })
     }
 });
 app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, userInfoService) {
