@@ -895,21 +895,24 @@ exports.getInviteBlogUserData = function (req,res) {
 exports.shopToWall = function (req,res) {
     console.log("testing shopt to wall");
     var wall = req.params.wall;//receiving wall and user
-    var user = req.params.user;//person sending
+    var anni = req.params.user;//person sending
     var name = [3];
     var qty = [3];
     var more;
+    //get the gift name paramters and unescape them from raw url form into human readable form
     name[0] = unescape(req.params.iname);
     name[1] = unescape(req.params.i2name);
     name[2] = unescape(req.params.i3name);
-
+//gift quantities
     qty[0] = req.params.iqty;
     qty[1] = req.params.i2qty;
     qty[2] = req.params.i3qty;
 
     more = req.params.more;
 
-
+//int and concatenate the gifts string which is the string with all the gift data
+    //format of qty of giftname ex: 3 of candy boxes
+    //TODO:Needs better formating
     var gifts = "";
     for(var n in name){
         console.log(qty[n]);
@@ -919,9 +922,12 @@ exports.shopToWall = function (req,res) {
 
     console.log(gifts);
     //email the wall owner that someone bought them a gift
-    User.findOne({_id:user}, function (err,theuser) {
-
+    //the user who sent the gift
+    User.findOne({_id:req.session.passport.user}, function (err,theuser) {
+        if(!theuser)return;
+        //find the wall to send the gift too and update latest text and angel annivesaries
         Blog.findOne({_id:wall}, function (err,theblog) {
+            if(!theblog)return;
             if(err)console.log(err);
             //console.log(theblog.postText)
             SendGiftNotice(theuser.email,theuser.firstName+" "+theuser.lastName,theblog.firstName+" "+theblog.lastName);
@@ -934,7 +940,18 @@ exports.shopToWall = function (req,res) {
                 text:theuser.username+" bought "+gifts+" for the angel "+theblog.firstName+" "+theblog.lastName,
                 postType:0
             });
-            theblog.anniverssaryDays.push({description:"Gifted",event:"Gifted",data:Date.now()});
+            theblog.postText.id(anni).gifts.push({
+                postText:theuser.username+" bought "+gifts+" for the angel "+theblog.firstName+" "+theblog.lastName,
+                fromUser:theuser.username
+            })
+            console.log(theblog._id);
+            console.log(theblog)
+           /* var annidoc = theblog.anniverssaryDays.id(anni);
+            console.log(annidoc);
+            annidoc.gifts.create({postText:theuser.username+" bought "+gifts+" for the angel "+theblog.firstName+" "+theblog.lastName,fromUser:theuser.username});
+            if(!annidoc.gifts)return;
+            //theblog.anniverssaryDays.push({description:"Gifted",event:"Gifted",data:Date.now()});
+*/
             User.findOne({_id:theblog.owner_id}, function (err,receivingUser) {
                 receivingUser.notifications.push({text:"Your angel "+theblog.firstName+" "+theblog.lastName +"has received a gift."});
                 SendEmail(receivingUser.email,receivingUser.firstName+" "+receivingUser.lastName, "<p>"+theuser.username+" has bought you a gift.  Go to your angels <a href='localhost:3000/#/angel'"+theblog.author+" to find out what it was.</p>");

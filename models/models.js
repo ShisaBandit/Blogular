@@ -18,6 +18,8 @@ var blogSchema = mongoose.Schema({
             description: String,
             event: String,
             date: Date
+
+
         }
     ],
     profilePicWide: String,
@@ -73,7 +75,12 @@ var blogSchema = mongoose.Schema({
                 }
             ],
             embedYouTube: String,
-            embedAnimoto: String
+            embedAnimoto: String,
+            gifts:[{
+                date:{type:Date,default:Date.now},
+                postText:String,
+                fromUser:String
+            }]
 
         }
     ],//postType 0=text,1=pic,2=video,3=anniversary

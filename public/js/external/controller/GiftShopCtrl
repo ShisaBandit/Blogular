@@ -7,10 +7,10 @@ angular.module('controller.GiftShop',[]).
     $http.get('http://angelsofeureka.com/shop/memwallconn/index/categories?user='+$scope.user+'&wall='+$scope.wall,{ withCredentials: true}).
     //  $http.get('http://localhost/magento/memwallconn/index/categories?user='+$scope.user+'&wall='+$scope.wall,{ withCredentials: true}).
             success(function (data) {
-                console.log("succ")
+                console.log("got categories")
                 $scope.categories = data;
             }).
             error(function () {
-                console.log("error");
+                console.log("failed to get shope categories");
             })
     });

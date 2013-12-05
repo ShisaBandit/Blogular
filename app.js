@@ -77,7 +77,7 @@ app.configure('development', function () {
     app.use(express.compress());
 
     app.set('port', process.env.PORT || 3000);
-    app.set('ip', 'localhost');
+    app.set('ip', '0.0.0.0');
     //noinspection JSUnresolvedVariable
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
@@ -300,7 +300,7 @@ app.get('/deletePetition/:id',passport.ensureAuthenticated,petitionRoutes.delete
 app.get('/getInviteBlogUserData/:wallid',passport.ensureAuthenticated,blogRoutes.getInviteBlogUserData);
 
 //shopwall connection
-app.get('/shoptowall/:wall/:user/:iname/:iqty/:i2name/:i2qty/:i3name/:i3qty/:more',blogRoutes.shopToWall);
+app.get('/shoptowall/:user/:wall/:iname/:iqty/:i2name/:i2qty/:i3name/:i3qty/:more',blogRoutes.shopToWall);
 
 
 

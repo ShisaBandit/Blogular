@@ -28,13 +28,18 @@
                         <h4>{{ ani.event }}</h4>
                         <p>{{ ani.date }}</p>
                         <p>{{ ani.text }}</p>
+
                         <br />
+                        <div class="my-repeat-animation" ng-repeat="gift in ani.gifts" class="row" style="background: #CDDFEF;margin-bottom: 20px;">
+                            <p>{{gift.from}} has gifted {{gift.postText}}</p>
+
+                        </div>
                        <!-- <a href="" class="button">Send Well Wishes</a>-->
                         <!--
                         <input class="addNewPost small-10 columns ng-pristine ng-valid" type="text" placeholder="Begin a new conversation here" ng-model="postText"></input>
                         <div class="small-2 columns"> <button class="button postfix" ng-click="submit()"> … </button> </div>
                         -->
-                        <a href="#/gifts/{{user}}/{{blogId}}" class="button">Send a Gift</a>
+                        <a href="#/gifts/{{ani._id}}/{{blogId}}" class="button">Send a Gift</a>
                     </div>
                 </div>
             </div>
