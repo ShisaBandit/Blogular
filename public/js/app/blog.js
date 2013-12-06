@@ -898,7 +898,8 @@ app.controller('SearchBarCtrl', function ($scope, $filter, $rootScope) {
 
 });
 
-app.controller('GroupingCtrl', function ($scope, $rootScope) {
+app.controller('GroupingCtrl', function ($scope, $rootScope, groupsListing) {
+    $scope.groups = groupsListing;
     $rootScope.subgroup = undefined;
     $scope.$on('$routeChangeSuccess', function (next, current) {
         console.log(current);
@@ -908,9 +909,20 @@ app.controller('GroupingCtrl', function ($scope, $rootScope) {
             $scope.groupingViewable = true;
         }
     });
+
+    $scope.changedSubGroup = function (showall) {
+        if (showall) {
+            $scope.selectedFilter = undefined;
+            $rootScope.subgroup = null;
+        } else {
+            $rootScope.subgroup = $scope.selectedFilter.code;
+            ;
+        }
+    }
     $scope.changeSubgroup = function (subgroup) {
         console.log(subgroup);
         $rootScope.subgroup = subgroup;
+
     }
 });
 app.controller('WelcomeCtrl', function ($scope, $rootScope) {

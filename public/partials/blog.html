@@ -1,14 +1,25 @@
-<div ng-controller="ContentCtrl">
+<div ng-controller="ContentCtrl" xmlns="http://www.w3.org/1999/html">
     <div class="nine columns offsetHeight" role="content" >
         <div ng-controller="GroupingCtrl">
             <div ng-hide="groupingViewable" ng-animate="'fade'" class="grouping">
                 <div class="row">
                       <b>View by Groupings</b>
+                    <!--
                     <a ng-click="changeSubgroup(0)" class="button small success radius">Mothers</a>
                     <a ng-click="changeSubgroup(1)" class="button small success radius">Family</a>
                     <a ng-click="changeSubgroup(2)" class="button small success radius">Friends</a>
                     <a ng-click="changeSubgroup(undefined)" class="button small success radius">View All</a>
+                    -->
+                    <select class="login-inp"
+                            name="selectedFilter"
+                            ng-change="changedSubGroup()"
+                            ng-model="selectedFilter"
+                            ng-options="group.name for group in groups">
+                        </option>
+                    </select>
+                    <br/>
                     <br class="clear" />
+                    <a ng-click="changedSubGroup(true)" class="button small success radius">Remove Filter</a>
                     <input ng-model="search.search" type="text" class="searchBar" placeholder="Search Memorials">
                 </div>
             </div>
