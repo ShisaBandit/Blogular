@@ -11,8 +11,9 @@
         <div id='UploadArea'>
             <dropzone url="/upload" class="dropzone" autoupload="false" addRemoveLinks="true" id="my-awesome-dropzone" ></dropzone>
         </div>
-        <a ng-click="flipEntry()" class="button">Finished</a>
     </div>
+    <a ng-click="flipEntry()" class="button">{{state}}</a>
+
     <div class="small-12 columns contentContainer">
         <div class="row">
             <div ng-show="selected">Selection from a modal: {{ selected }}</div>

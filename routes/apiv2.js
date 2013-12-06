@@ -123,6 +123,8 @@ var dataFilter = function (req, type, subtype, data,doc, callback) {
             if (subtype == "signatures") {
                 var duplicate = false;
                 models.User.findOne({_id: req.session.passport.user}, function (err, user) {
+                    console.log(user)
+                    if(!user._id)callback(data,true,"Please sign in to sign this petition.");
                     for(var s = 0;s<doc.signatures.length;s++){
                         if(doc.signatures[s].user_id == user._id){
                             duplicate = true;

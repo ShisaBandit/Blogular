@@ -476,6 +476,11 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
     $scope.flipEntry = function () {
 
         $scope.textorphoto = !$scope.textorphoto;
+        if($scope.textorphoto){
+            $scope.state = "Open";
+        }else{
+            $scope.state = "Close";
+        }
         $scope.photobox = !$scope.photobox;
         $scope.videobox = false;
         $scope.eventbox = false;
@@ -485,6 +490,11 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
     $scope.toogleVideoEntry = function () {
 
         $scope.videobox = !$scope.videobox;
+        if($scope.videobox){
+            $scope.state = "Close";
+        }else{
+            $scope.state = "Open";
+        }
         $scope.photobox = false;
         $scope.eventbox = false;
         switchCheckFromPhotoToVideo();
@@ -492,6 +502,11 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
     $scope.toogleEventEntry = function () {
         console.log("eetest")
         $scope.eventbox = !$scope.eventbox;
+        if($scope.eventbox){
+            $scope.state = "Close";
+        }else{
+            $scope.state = "Open";
+        }
         $scope.videobox = false;
         $scope.photobox = false;
         switchCheckFromPhotoToVideo();
