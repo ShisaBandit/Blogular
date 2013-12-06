@@ -457,7 +457,8 @@ app.controller('blogEntryPicCtrl', function ($scope) {
 app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http, dropzone, api) {
     $scope.parentObject = {
         routeParamId: $routeParams.id,
-        entryId: ""
+        entryId: "",
+        group: false
     }
     $scope.embedVideos = {
         youtube:"",
@@ -661,7 +662,8 @@ app.controller('groupEntryCtrl', function ($scope, $location, show, Blog, $route
 
     $scope.parentObject = {
         routeParamId: $routeParams.id,
-        entryId: ""
+        entryId: "",
+        group: true
     }
     socket.connect();
     $scope.entry = "";
@@ -1973,14 +1975,26 @@ app.controller('groupEvntCtrl', function ($scope, api, $http) {
 });
 app.controller('FriendsFamilyCtrl', function ($scope, api, $routeParams, $http) {
     $scope.subscribers = [];
+    $scope.title = "Friends And Family";
+
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
+
         //TODO:get users that can access this memwall(blog)
         $http.get('subscribed/' + $routeParams.id).
             success(function (data) {
                 $scope.subscribers = data;
             })
+    });
+    $scope.$watch('parentObject', function (newVal, oldVal) {
+        console.log(oldVal);
+        console.log(newVal);
+        console.log("THIS IS SUPPOSED TO BE A G ROUP")
+        console.log(newVal.group)
+        if (newVal.group) {
+            $scope.title = "Group members";
+        }
     });
 });
 app.controller('InviteBlockCtrl', function ($scope, api, $http, $routeParams) {
