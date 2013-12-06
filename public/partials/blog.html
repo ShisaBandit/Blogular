@@ -1,36 +1,53 @@
 <div ng-controller="ContentCtrl" xmlns="http://www.w3.org/1999/html">
-    <div class="nine columns offsetHeight" role="content" >
+    <div class="nine columns offsetHeight" role="content">
         <div ng-controller="GroupingCtrl">
             <div ng-hide="groupingViewable" ng-animate="'fade'" class="grouping">
                 <div class="row">
-                      <b>View by Groupings</b>
+                    <div class="small-3 columns small-centered">
+                        <b>View by Groupings</b>
+                    </div>
+                </div>
+                <div class="row">
+
+
                     <!--
                     <a ng-click="changeSubgroup(0)" class="button small success radius">Mothers</a>
                     <a ng-click="changeSubgroup(1)" class="button small success radius">Family</a>
                     <a ng-click="changeSubgroup(2)" class="button small success radius">Friends</a>
                     <a ng-click="changeSubgroup(undefined)" class="button small success radius">View All</a>
                     -->
-                    <select class="login-inp"
-                            name="selectedFilter"
-                            ng-change="changedSubGroup()"
-                            ng-model="selectedFilter"
-                            ng-options="group.name for group in groups">
-                        </option>
-                    </select>
-                    <br/>
-                    <br class="clear" />
-                    <a ng-click="changedSubGroup(true)" class="button small success radius">Remove Filter</a>
-                    <input ng-model="search.search" type="text" class="searchBar" placeholder="Search Memorials">
+                    <div class="small-9 columns">
+                        <select class="login-inp"
+                                name="selectedFilter"
+                                ng-change="changedSubGroup()"
+                                ng-model="selectedFilter"
+                                ng-options="group.name for group in groups">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="small-3 columns">
+                        <a ng-click="changedSubGroup(true)" class="button small success radius">Remove Filter</a>
+                    </div>
+                    <div class="row">
+                        <div class="small-11 columns">
+                            <input ng-model="search.search" type="text" class="searchBar"
+                                   placeholder="Search Memorials">
+                        </div>
+                    </div>
                 </div>
+
+
             </div>
         </div>
         <!--<div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' autoscroll>-->
-        <div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' >
+        <div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1'>
             <ul class="small-block-grid-4">
                 <li ng-repeat="entry in entries | filter:search.search | bySubgroup:subgroup">
-                    <div style="background-image: url({{entry.titleImage}})" ng-style="getBackImg(entry._id)" class="memProfilePreview">
+                    <div style="background-image: url({{entry.titleImage}})" ng-style="getBackImg(entry._id)"
+                         class="memProfilePreview">
                         <h6><a href="#/angel/{{entry.author}}">{{entry.lastName}}, {{entry.firstName}}</a></h6>
-                        <a href="#/angel/{{entry.author}}"><img src="/uploads/{{ entry.profilePicPortrait }}" alt="child pick"/></a>
+                        <a href="#/angel/{{entry.author}}"><img src="/uploads/{{ entry.profilePicPortrait }}"
+                                                                alt="child pick"/></a>
                     </div>
                 </li>
             </ul>
