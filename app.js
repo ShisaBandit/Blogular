@@ -250,6 +250,7 @@ app.post('/subcomment', passport.ensureAuthenticated, commentRoutes.subcomment);
 //file handler routes
 
 app.post('/upload', passport.ensureAuthenticated, fileHandlerRoutes.upload);
+app.post('/upload/:type', passport.ensureAuthenticated, fileHandlerRoutes.upload);
 app.post('/uploadspread', passport.ensureAuthenticated, fileHandlerRoutes.uploadspread);
 app.post('/uploadportrait', passport.ensureAuthenticated, fileHandlerRoutes.uploadportrait);
 app.post('/submitphotodata', passport.ensureAuthenticated, fileHandlerRoutes.submitphotodata);
@@ -264,7 +265,7 @@ app.get('/showAlbum/:id/:albumid',passport.ensureAuthenticated,fileHandlerRoutes
 //apiv2 : EXPERIMENTAL
 
 app.post('/create/:type',passport.ensureAuthenticated,apiv2.createData);
-app.get('/create/:type/:id/:subdoc',passport.ensureAuthenticated,apiv2.createData);
+app.post('/create/:type/:id/:subdoc',passport.ensureAuthenticated,apiv2.createData);
 app.get('/get/:type/:id',passport.ensureAuthenticated,apiv2.getData);//id:ALL = get all blogs anythings else must be an id
 app.get('/get/:type/:field/:query',passport.ensureAuthenticated,apiv2.getData);
 app.post('/edit/:type/:id',passport.ensureAuthenticated,apiv2.editData);//simple edit only

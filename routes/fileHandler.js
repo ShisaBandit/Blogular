@@ -5,6 +5,11 @@ var SingleCount = models.SingleCount;
 exports.upload = function (req, res) {
     //var name = req.files.file.name;
     //read the file in
+    var filetype = "";
+    console.log(req.params.type)
+    if(req.params.type)filetype = req.params.type;
+    console.log(filetype)
+
     var fileExt;
     var allowableExtensions = [
         {type:"image/jpeg",ext:"jpg"},
@@ -51,7 +56,13 @@ exports.upload = function (req, res) {
                     }
                     //res.send(200,{'success': 'true'});
                     var picCount = 0;
-                    Blog.findOne({_id: req.body.memwall}, function (err, blog) {
+                    var memwall = "";
+                    if(req.body.memwall){
+                        memwall = req.body.memwall;
+                    }else{
+                        memwall = req.body.blogId;
+                    }
+                    Blog.findOne({_id: memwall}, function (err, blog) {
                         //1. Put all incoming files into a orphanded files list.    CHECK
                         //2. if=> submit is pushed.. move files to proper profilememwall and posttext
                         //3. if=> cancel is pusshed ... find and delete files from the orphaned list
@@ -66,10 +77,16 @@ exports.upload = function (req, res) {
                             }
                         }
                         */
-                        blog.orphanedphotos.push({filename: sc.totalPicCount+"."+fileExt, uploader: req.session.passport.user});
+                        console.log(blog)
+                        if(blog == null){
+                            return res.send(400);
+                        }
+                        if(filetype == 1)blog.profilePicPortrait = sc.totalPicCount+"."+fileExt;
+                        if(filetype == 2)blog.profilePicWide = sc.totalPicCount+"."+fileExt;
+                        if(!filetype)blog.orphanedphotos.push({filename: sc.totalPicCount+"."+fileExt, uploader: req.session.passport.user});
                         blog.save(function () {
                             console.log('orphanedfiles saved name:' + req.files.file.name +'.'+fileExt+ ' uploaded by : ' + req.session.passport.user);
-                            res.send(200,'OK');
+                           return res.send(200,'OK');
 
                         });
                     })
