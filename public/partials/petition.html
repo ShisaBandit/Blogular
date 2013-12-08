@@ -3,6 +3,8 @@
               <div class="small-twelve columns offsetHeight">
     <div class="row">
         <a class="button" ng-click="signPetition()">Sign this petition</a>
+        <div ng-class="{spinner:spinner}"></div>
+        <div ng-class="{error:error}">{{resultMessage}}</div>
     </div>
     <div class="row" ng-model="petition">
         <div class="small-12 columns">

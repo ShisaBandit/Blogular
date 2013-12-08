@@ -3,14 +3,13 @@
  * User: Ray Garner
  * Date: 13/02/08
  * Time: 0:45
- * To change this template use File | Settings | File Templates.
+ * To \ this template use File | Settings | File Templates.
  */
 angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService', 'Scope.onReady'])
     .controller('ContentCtrl', function ($scope, show, Blog, BlogsService, $q, $routeParams, UpdateService,$location) {
         $scope.entries = [];
         $scope.$prepareForReady();
         $scope.type = "";
-
         $scope.filtersubgroup = $scope.subgroup;
         //check if user wants to see blogs by categories or not
         if ($routeParams.name) {

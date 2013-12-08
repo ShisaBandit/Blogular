@@ -49,7 +49,7 @@ exports.createData = function (req, res) {
                     doc[subdoc].push(data);
                     doc.save(function (err) {
                         console.log(err);
-                        return sendSuccess(res);
+                        return sendSuccess(res,reason);
                     });
                 }else{
                     return sendError(res,reason);
@@ -147,7 +147,7 @@ var dataFilter = function (req, type, subtype, data,doc, callback) {
                                 data.gravatar = calcMD5(data.email);
                             if(data.cityState)
                                 data.cityState = user.city;//TODO:add in later+" "+user.State;
-                            callback(data,false);
+                            callback(data,false,"You have successfully signed this petition.");
                         }
                     }else{
                         callback(data,true,"You have already signed this petition");
@@ -299,12 +299,12 @@ exports.getData = function (req, res) {
     })
 };
 
-function sendSuccess(res) {
-    return res.end(JSON.stringify({'success': 'true'}));
+function sendSuccess(res,message) {
+    return res.end(JSON.stringify({'success': message}));
 
 }
 function sendError(res,reason){
-    return res.end(JSON.stringify({'error': reason}));
+    return res.send(400,JSON.stringify({'error': reason}));
 }
 
 exports.editData = function (req, res) {

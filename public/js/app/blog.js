@@ -1479,17 +1479,12 @@ app.controller('DeletePicsCtrl', function ($rootScope,$scope,$http, DeletePicsFa
 })
 app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams) {
     $scope.petitions = [];
-    //$scope.edittitle = "";
-    //$scope.edittext = "";
-    api.getResourceById('Petition', 'all', function (petitions) {
-        $scope.petitions = petitions;
+    $scope.spinner = true;
+        api.getResourceById('Petition', 'all', function (petitions) {
+            $scope.petitions = petitions;
+            $scope.spinner = false;
+        });
 
-    });
-
-    api.getResourceByField('Petition',{field:'_id',query:$routeParams.id}, function (petition) {
-        $scope.title = petition[0].title;
-        $scope.text = petition[0].text;
-    })
     $scope.submitedit = function () {
         $http.post('updatePetition',{id:$routeParams.id, title: $scope.title , text:$scope.text}).
             success(function (data) {
@@ -1502,32 +1497,40 @@ app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams) {
     $scope.submit = function () {
         var text = $scope.text;
         var title = $scope.title;
-        api.createResource('Petition', {text: text, title: title});
+        api.createResource('Petition', {text: text, title: title}, function () {
+        });
         $scope.title = "";
         $scope.text = "";
     }
 });
 app.controller('PetitionEntryCtrl', function ($scope, api, $routeParams,$http) {
     $scope.petition = [];
-
-    api.getResourceByField('Petition', {field: "title", query: $routeParams.title}, function (petitions) {
-        $scope.petition = petitions;
-        $scope.signatures = $scope.petition[0].signatures;
-
-    });
-    $scope.signPetition = function () {
-        console.log($scope.petition)
-        /*
-        api.createSubDocResource('Petition',$scope.petition[0]._id, 'signatures', function () {
+    $scope.spinner = true;
+    $scope.getPetition = function () {
+        api.getResourceByField('Petition', {field: "title", query: $routeParams.title}, function (petitions) {
+            $scope.spinner = false;
+            $scope.petition = petitions;
+            $scope.signatures = $scope.petition[0].signatures;
 
         });
-        */
-        $http.get('create/Petition/'+$scope.petition[0]._id+'/signatures').
-            success(function(data,status,headers,config){
-                callback(data);
-            }).error(function(data,status,headers,config){
-                callback(data);
-            })
+    }
+    $scope.getPetition();
+    $scope.signPetition = function () {
+        console.log($scope.petition)
+            $scope.spinner = true;
+            $http.get('create/Petition/'+$scope.petition[0]._id+'/signatures').
+                success(function(data,status,headers,config){
+                    $scope.spinner = false;
+                    console.log(data)
+                    $scope.resultMessage = data.success;
+                    $scope.getPetition();
+
+                }).error(function(data,status,headers,config){
+                    $scope.spinner = false;
+                    $scope.resultMessage = data.error;
+                    $scope.error = true;
+                })
+
     }
 });
 app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, userInfoService) {

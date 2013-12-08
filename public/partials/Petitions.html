@@ -2,6 +2,7 @@
 
     <div class="row offsetHeight100">
         <h1 class="sectionHeader">Petitions</h1>
+        <div ng-class="{spinner:spinner}"></div>
         <div class="small-12 columns">
             <h2 style="color: #2164AA;">Create a petition</h2>
             Give your petition a name. <input type="text" ng-hide="textorphoto" ng-model="title"/>
@@ -10,6 +11,7 @@
             <button ng-click="submit()" class="button postfix">Submit</button>
         </div>
     </div>
+
     <div class="row" ng-repeat="petition in petitions">
         <div class="small-12 columns">
             <h2 class="dark">Sitewide petitions</h2>

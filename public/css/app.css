@@ -12,6 +12,15 @@
 /* -----------------------------------------
    Shared Styles
 ----------------------------------------- */
+.error{
+    color: red;
+}
+.spinner {
+    background-image: url("loading.gif");
+    background-repeat: no-repeat;
+    height: 100px;
+}
+
 .message{
     color: green;
 }
