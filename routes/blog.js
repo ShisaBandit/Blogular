@@ -816,6 +816,7 @@ exports.subscribedto = function (req, res) {
 
 exports.getInvitedGroup = function(req,res){
     User.findOne({_id:req.session.passport.user}).populate('memwalls').exec(function (err,usr) {
+        if(!usr)return;
         Blog.populate(usr.memwalls,{path:'user'},function(err,walls){
             var buffer = [];
             for(var i = 0;i<walls.length;i++){

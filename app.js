@@ -149,7 +149,7 @@ app.configure('development', function () {
 //Blog Routes
 app.get('/blog', blogRoutes.allBlogs);
 app.get('/getGroups',blogRoutes.getGroups);
-app.get('/getInvitedGroup',blogRoutes.getInvitedGroup);
+app.get('/getInvitedGroup',passport.ensureAuthenticated,blogRoutes.getInvitedGroup);
 app.get('/blog/:id', blogRoutes.getABlog);
 
 app.get('/blog/:skip/:limit', blogRoutes.getPaginatedBlogs);
@@ -158,21 +158,21 @@ app.get('/blogLastUpdate/:id', blogRoutes.getLastBlogUpdateDate);
 
 app.get('/blogdataforuser', blogRoutes.blogdataforuser);
 
-app.get('/lastestPosts/:id', blogRoutes.lastestPosts);
+app.get('/lastestPosts/:id',passport.ensureAuthenticated, blogRoutes.lastestPosts);
 
-app.get('/lastestPics/:id', blogRoutes.latestPics);
+app.get('/lastestPics/:id',passport.ensureAuthenticated ,blogRoutes.latestPics);
 app.get('/deletepic/:pic/:blog',passport.ensureAuthenticated,blogRoutes.deletepic);
 
-app.get('/lastestVideos/:id', blogRoutes.latestVideos);
-app.get('/lastestVideosYoutube/:id', blogRoutes.latestVideosYouTube);
-app.get('/lastestVideosAnimoto/:id', blogRoutes.latestVideosAnimoto);
-app.get('/lastestEvents/:id', blogRoutes.latestEvents);
+app.get('/lastestVideos/:id',passport.ensureAuthenticated, blogRoutes.latestVideos);
+app.get('/lastestVideosYoutube/:id',passport.ensureAuthenticated, blogRoutes.latestVideosYouTube);
+app.get('/lastestVideosAnimoto/:id',passport.ensureAuthenticated, blogRoutes.latestVideosAnimoto);
+app.get('/lastestEvents/:id',passport.ensureAuthenticated, blogRoutes.latestEvents);
 
 app.post('/blog', passport.ensureAuthenticated, blogRoutes.createBlog);
 //edit
 app.post('/blog/:id', passport.ensureAuthenticated, blogRoutes.updateBlog);
 
-app.post('/addtextpost', blogRoutes.addTextPost);
+app.post('/addtextpost',passport.ensureAuthenticated, blogRoutes.addTextPost);
 
 
 app.delete('/blog/:id', passport.ensureAuthenticated, blogRoutes.deleteBlog);
@@ -190,7 +190,7 @@ app.get('/lastUpdateSame/:date', authRoutes.lastUpdateSameId);
 
 //Logging in and Registration routes
 
-app.post('/logout', authRoutes.logout);
+app.post('/logout',passport.ensureAuthenticated, authRoutes.logout);
 
 app.post('/login',
     passport.authenticate('local'),
@@ -256,37 +256,37 @@ app.post('/submitphotodata', passport.ensureAuthenticated, fileHandlerRoutes.sub
 //app.post('/addAlbum',fileHandlerRoutes.addAlbum);
 app.post('/submitphotodata', passport.ensureAuthenticated, fileHandlerRoutes.cancelphotodata);
 app.get('/getPicsForBlog/:id', passport.ensureAuthenticated, fileHandlerRoutes.getPicsForBlog);
-app.get('/albums/:id',fileHandlerRoutes.albums);
-app.post('/createNewAlbum/:id',fileHandlerRoutes.createNewAlbum);
-app.post('/updateAlbum/:id',fileHandlerRoutes.updateAlbum);
-app.get('/showAlbum/:id/:albumid',fileHandlerRoutes.showAlbum);
+app.get('/albums/:id',passport.ensureAuthenticated,fileHandlerRoutes.albums);
+app.post('/createNewAlbum/:id',passport.ensureAuthenticated,fileHandlerRoutes.createNewAlbum);
+app.post('/updateAlbum/:id',passport.ensureAuthenticated,fileHandlerRoutes.updateAlbum);
+app.get('/showAlbum/:id/:albumid',passport.ensureAuthenticated,fileHandlerRoutes.showAlbum);
 
 //apiv2 : EXPERIMENTAL
 
-app.post('/create/:type',apiv2.createData);
-app.get('/create/:type/:id/:subdoc',apiv2.createData);
-app.get('/get/:type/:id',apiv2.getData);//id:ALL = get all blogs anythings else must be an id
-app.get('/get/:type/:field/:query',apiv2.getData);
-app.post('/edit/:type/:id',apiv2.editData);//simple edit only
+app.post('/create/:type',passport.ensureAuthenticated,apiv2.createData);
+app.get('/create/:type/:id/:subdoc',passport.ensureAuthenticated,apiv2.createData);
+app.get('/get/:type/:id',passport.ensureAuthenticated,apiv2.getData);//id:ALL = get all blogs anythings else must be an id
+app.get('/get/:type/:field/:query',passport.ensureAuthenticated,apiv2.getData);
+app.post('/edit/:type/:id',passport.ensureAuthenticated,apiv2.editData);//simple edit only
 
-app.get('/invite/:wallid/:user',blogRoutes.sendWallInvite);
-app.get('/block/:wallid/:user',blogRoutes.block);
-app.get('/getFriendsMemorials',blogRoutes.getFriendsMemorials);
-app.get('/removeself/:wall',blogRoutes.selfRemove);
-app.get('/usersinnetwork/:search',blogRoutes.usersInNetwork);
+app.get('/invite/:wallid/:user',passport.ensureAuthenticated,blogRoutes.sendWallInvite);
+app.get('/block/:wallid/:user',passport.ensureAuthenticated,blogRoutes.block);
+app.get('/getFriendsMemorials',passport.ensureAuthenticated,blogRoutes.getFriendsMemorials);
+app.get('/removeself/:wall',passport.ensureAuthenticated,blogRoutes.selfRemove);
+app.get('/usersinnetwork/:search',passport.ensureAuthenticated,blogRoutes.usersInNetwork);
 //app.get('/usersinnetworkAll',blogRoutes.usersInNetworkAll);
 
-app.get('/subscribed/:id',blogRoutes.subscribed);///TODO:THE NAMES HERE ARE WRONG"!!!! FIX THESE
-app.get('/selfremove/:id',blogRoutes.selfremove);
-app.get('/selfremove/:id',blogRoutes.subscribedto);
-app.get('/notifications',blogRoutes.notifications);
-app.get('/notified/:id',blogRoutes.notified);
+app.get('/subscribed/:id',passport.ensureAuthenticated,blogRoutes.subscribed);///TODO:THE NAMES HERE ARE WRONG"!!!! FIX THESE
+app.get('/selfremove/:id',passport.ensureAuthenticated,blogRoutes.selfremove);
+app.get('/selfremove/:id',passport.ensureAuthenticated,blogRoutes.subscribedto);
+app.get('/notifications',passport.ensureAuthenticated,blogRoutes.notifications);
+app.get('/notified/:id',passport.ensureAuthenticated,blogRoutes.notified);
 
-app.post('/updateworkshop/:id',blogRoutes.editworkshop);
+app.post('/updateworkshop/:id',passport.ensureAuthenticated,blogRoutes.editworkshop);
 
 //message center api
-app.get('/getMessagedUsers',messageRoutes.getMessagedUsers);
-app.get('/getMessages/:username',messageRoutes.getMessagesForUser);
+app.get('/getMessagedUsers',passport.ensureAuthenticated,messageRoutes.getMessagedUsers);
+app.get('/getMessages/:username',passport.ensureAuthenticated,messageRoutes.getMessagesForUser);
 
 //password recover
 app.post('/passrecover',authRoutes.passrecover);
@@ -301,8 +301,6 @@ app.get('/getInviteBlogUserData/:wallid',passport.ensureAuthenticated,blogRoutes
 
 //shopwall connection
 app.get('/shoptowall/:user/:wall/:iname/:iqty/:i2name/:i2qty/:i3name/:i3qty/:more',blogRoutes.shopToWall);
-
-
 
 var server = http.createServer(app).listen(app.get('port'), app.get('ip'), function () {
     console.log("server listening " + app.get('ip') + ':' + app.get('port'));
