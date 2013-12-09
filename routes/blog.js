@@ -450,13 +450,14 @@ exports.lastestPosts = function (req, res) {
         }
         if (blog === undefined) return res.send(200);
         if (blog.postText === undefined)return res.send(200);
-        /*
-         for(var post in blog.postText){
-         User.findOne({_id:post.user_id},function(err,user){
-         post.name = user.firstName + " "+user.lastName;
-         })
-         }
-         */
+        var posts = blog.postText;
+
+        for(var b = 0;b<blog.postText.length;b++){
+            //var startDate = post[b].date;
+            //var threeDaysForward =
+            //var dt = (new Date( 2011, 7, 30, 0, 0, 0, 0 )).getTime();
+            //if(posts[b].date)
+        }
         return res.end(JSON.stringify(blog.postText.reverse()));
     });
 };
