@@ -40,8 +40,8 @@
             </div>
         </div>
         <!--<div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' autoscroll>-->
-        <div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1'>
-            <ul class="small-block-grid-4">
+        <div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' ng-class="{error:pets}">
+            <ul class="small-block-grid-4" >
                 <li ng-repeat="entry in entries | filter:search.search | bySubgroup:subgroup">
                     <div style="background-image: url({{entry.titleImage}})" ng-style="getBackImg(entry._id)"
                          class="memProfilePreview">

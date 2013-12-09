@@ -11,6 +11,10 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
         $scope.$prepareForReady();
         $scope.type = "";
         $scope.filtersubgroup = $scope.subgroup;
+        if("/pets" == $location.path()){
+            $scope.pets = true;
+            console.log("We are in pets");
+        }
         //check if user wants to see blogs by categories or not
         if ($routeParams.name) {
             UpdateService.checkIfUpdate(function (result) {
@@ -80,6 +84,7 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
                 console.log("getting groups")
                 $scope.busy = true;
                 BlogsService.paginatedBlogs($scope.skip,$scope.limit,function(blogs){
+
                     for(var i = 0;i<blogs.length;i++){
                         console.log("getting groups and looping")
 

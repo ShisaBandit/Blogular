@@ -1520,6 +1520,7 @@ app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams) {
         $scope.text = "";
     }
 });
+
 app.controller('PetitionEntryCtrl', function ($scope, api, $routeParams,$http) {
     $scope.petition = [];
     $scope.spinner = true;
@@ -1550,6 +1551,7 @@ app.controller('PetitionEntryCtrl', function ($scope, api, $routeParams,$http) {
 
     }
 });
+
 app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, groupsListing) {
     $scope.messagedUsers = [];
     $scope.messages = [];
