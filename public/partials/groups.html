@@ -1,11 +1,11 @@
 <div ng-controller="ContentGroupsCtrl">
 
-    <div class="nine columns offsetHeight" role="content" >
+    <div class="nine columns offsetHeight groupsList" role="content" >
         <div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' autoscroll>
             <ul class="small-block-grid-4">
                 <li ng-repeat="entry in entries | filter:search.search | bySubgroup:subgroup">
-                    <div style="background-image: url({{entry.titleImage}})" ng-style="getBackImg(entry._id)" class="memProfilePreview">
-                        <h6><a href="#/group/{{entry.author}}">{{entry.title}}</a></h6>
+                    <div style="background-image: url({{entry.titleImage}})" ng-style="getBackImg(entry._id)" class="memProfilePreview group">
+                        <h6 class="groupTitle"><a href="#/group/{{entry.author}}">{{entry.title}}</a></h6>
                         <a href="#/group/{{entry.author}}"><img src="/uploads/{{ entry.profilePicPortrait }}" alt="Group pick"/></a>
                     </div>
                 </li>
