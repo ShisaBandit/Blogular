@@ -29,8 +29,9 @@
                 <h4 class="dark">YouTube Link</h4>
                 <b class="dark">Past or type a YouTube url here.</b>
                 <input type="text" name="youtube" ng-model="embedVideos.youtube" id="youtube" placeholder="Enter your youtube embed code here!"/>
-                <a ng-click="submitVideo()" class="button">Submit video links</a>
-
+                <a ng-click="submitVideo()" class="button">Add Video to your stream</a>
+                <input type="text" ng-model="photoAdded.photoPostText" class="addNewPost small-10 columns"
+                       placeholder="Tell us about this video"/>
             </div>
             <div class="animoto" ng-show="animoto">
                 <h4 class="dark">Animoto Link</h4>
@@ -43,7 +44,7 @@
                     upload them to your video gallery on this panel!</p>
                 <input type="text" name="animoto" ng-model="embedVideos.animoto" id="animoto"
                        placeholder="Enter your animoto video url here!"/>
-                <a ng-click="submitVideo()" class="button">Submit video links</a>
+                <a ng-click="submitVideo()" class="button">Add Video to your stream</a>
 
             </div>
         </div>
@@ -53,11 +54,11 @@
         <div>
             <h4 class="dark">Add a New Angel Anniversary</h4>
             <h5>Details</h5>
-            <input type="text" name="eventheader" ng-model="event" id="" placeholder="Give your event a name"/>
-            <input type="text" name="eventdesc" ng-model="eventdesc" id="" placeholder="Tell us more about why this day is special"/>
+            <input type="text" name="eventheader" ng-model="eventData.event"  placeholder="Give your event a name"/>
+            <input type="text" name="eventdesc" ng-model="eventData.eventdesc" placeholder="Tell us more about why this day is special"/>
             <h5>Date</h5>
             <div class="form-horizontal">
-                <input type="text" name="eventdate" datepicker-popup="yyyy/MMMM/dd" ng-model="eventdate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" placeholder="Pick a Date FOR YOUR Anniversary or Event" />
+                <input type="text" name="eventdate" datepicker-popup="yyyy/MMMM/dd" ng-model="eventData.eventdate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" placeholder="Pick a Date FOR YOUR Anniversary or Event" />
                 <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
             </div>
             <a ng-click="submitEvent()" class="button">Submit Angel Anniversary</a>
@@ -76,14 +77,17 @@
             <div class="small-12 columns postcontainer">
                 <div><img src="http://www.gravatar.com/avatar/{{post.gravatar}}" /> </div>
                 <h6>Posted by <a href="#/profile/{{post.username}}">{{post.username}} </a> on {{post.date}}.</h6>
-                <div ng-bind-html-unsafe="post.embedYouTube"></div>
-                <div ng-bind-html-unsafe="post.embedAnimoto"></div>
+
                 <div>
                     {{post.text}}{{post.event}}
                 </div>
+
                 <div ng-if="post.photos">
                     <h1>Pics posted</h1>
                 </div>
+                <div ng-bind-html="post.embedYouTube | unsafe"></div>
+                <div ng-bind-html="post.embedAnimoto | unsafe"></div>
+                <br />
                 <div ng-repeat="photo in post.photos">
                     <img width="200" src="uploads/{{photo.filename}}" />
                 </div>

@@ -3,7 +3,8 @@ var app = angular.module('blogApp', [
         'Scope.onReady', 'blogResource', 'loaderModule', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries', 'Plugin.Controller.GroupEntries',
         'blogFilter', 'blogService', 'infinite-scroll', 'dropzone', 'apiResource', 'ui.bootstrap','ngAnimate','ngRoute','adaptive.detection','MusicPlayer.Controller','controller.GiftShop'
     ]).
-    config(function ($routeProvider) {
+    config(function ($routeProvider,$sceProvider) {
+       // $sceProvider.enabled(false);
         $routeProvider.
             when("/", {templateUrl: "partials/blog.html"}).
             when("/groups", {templateUrl: "partials/groups.html"}).
@@ -51,6 +52,11 @@ var formatDate = function (ogDate) {
     //var day = ogDate.getDay();
     return dateFormat(ogDate,"dddd, mmmm dS, yyyy, h:MM:ss TT");
 }
+app.filter('unsafe', function($sce) {
+    return function(val) {
+        return $sce.trustAsHtml(val);
+    };
+});
 app.directive('fdatepicker', function () {
     return{
         link: function (scopee, ele, attr) {
@@ -493,6 +499,13 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         show:false,
         photoPostText:""
     };
+
+    $scope.eventData = {
+        event:"",
+        date:"",
+        text:""
+    }
+    $scope.embedVideos = {youtube:"",animoto:""};
     //the subnav methods
     $rootScope.$on('uploadedFile', function (data) {
         console.log("PICSCTRL UPloaded file")
@@ -514,6 +527,23 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         }, function () {
             $rootScope.$broadcast('updateStream');
 
+        })
+    }
+
+    $scope.submitVideo = function () {
+        //TODO:Checkk this
+        console.log("submitvideo");
+        console.log("eani "+$scope.embedVideos.animoto )
+        console.log(($scope.embedVideos.youtube));
+        api.createSubDocResource('Blog', $scope.parentObject.entryId, 'postText', {
+            text: $scope.photoAdded.photoPostText,
+            embedYouTube: youtube_embed(youtube_parser($scope.embedVideos.youtube)),
+            embedAnimoto: animoto_embed(animoto_parser($scope.embedVideos.animoto)) ,
+            postType: 2
+        }, function () {
+            console.log("video sent");
+            $scope.embedVideos = {};
+            $rootScope.$broadcast('updateStream');
         })
     }
 
@@ -568,21 +598,14 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
 
 
     $scope.submitEvent = function () {
-        api.createSubDocResource('Blog', $scope.blogId, 'postText', {
-            event: $scope.event,
-            date: $scope.eventdate,
-            text: $scope.eventdesc,
+        api.createSubDocResource('Blog', $scope.parentObject.entryId, 'postText', {
+            event: $scope.eventData.event,
+            date: $scope.eventData.eventdate,
+            text: $scope.eventData.eventdesc,
             postType: 3
         }, function () {
-            $http.get('lastestEvents/' + $scope.blogId).
-                success(function (data) {
-                    console.log(data);
-                    $scope.anis = data;
-                })
-            $scope.event = "";
-            $scope.eventdate ="";
-            $scope.eventdesc ="";
-
+            $rootScope.$broadcast('updateStream');
+            $scope.eventData = {};
         })
 
     }
