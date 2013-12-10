@@ -3,7 +3,63 @@
         <h2 class="contentHeaderTitle">Start a New Conversation</h2>
     </div>
     <br/>
-    <div class="small-12 columns"  if-authed="show">
+    <div>
+        <div ng-click="photo = true;video = false;" class="button">Submit a Photo</div>
+        <div ng-click="video = true;photo = false;" class="button">Submit a Video</div>
+        <div ng-click="event = true;video = false; photo = false;" class="button">Submit a Video</div>
+    </div>
+    <div ng-show="photo" id="UploadBox">
+        <h2 class="dark">Photo Uploader: Drag and drop image files on the box</h2>
+        <div id='UploadArea'>
+            <dropzone url="/upload" class="dropzone" autoupload="false" addRemoveLinks="true" id="my-awesome-dropzone" ></dropzone>
+        </div>
+        <div ng-click="photo=false" class="button">Finished</div>
+    </div>
+    <div ng-show="video" id="videobox">
+        <div>
+            <h3 style="color:#3F77BC;">Select which type of video you would like to show.</h3>
+            <a class="button" ng-click="youtube = true;animoto = false;">YouTube</a>
+            <a class="button" ng-click="youtube = false;animoto = true;">Animoto</a>
+            <div class="my-show-hide-animation" ng-show="youtube">
+                <h4 class="dark">YouTube Link</h4>
+                <b class="dark">Past or type a YouTube url here.</b>
+                <input type="text" name="youtube" ng-model="embedVideos.youtube" id="youtube" placeholder="Enter your youtube embed code here!"/>
+                <a ng-click="submitVideo()" class="button">Submit video links</a>
+
+            </div>
+            <div class="animoto" ng-show="animoto">
+                <h4 class="dark">Animoto Link</h4>
+
+                <p>*Turn your photos and music into stunning video slideshows. You provide
+                    the photos, you pick the song, and we'll add the magic. Give it a try —
+                    it's fast, free and shockingly easy. <a href="http://animoto.com"
+                                                            target="_blank">http://animoto.com</a>
+                    Once you create your Animoto video there, use your "share" link to
+                    upload them to your video gallery on this panel!</p>
+                <input type="text" name="animoto" ng-model="embedVideos.animoto" id="animoto"
+                       placeholder="Enter your animoto video url here!"/>
+                <a ng-click="submitVideo()" class="button">Submit video links</a>
+
+            </div>
+        </div>
+        <div ng-click="video=false" class="button">Finished</div>
+    </div>
+    <div ng-show="event" id="eventbox">
+        <div>
+            <h4 class="dark">Add a New Angel Anniversary</h4>
+            <h5>Details</h5>
+            <input type="text" name="eventheader" ng-model="event" id="" placeholder="Give your event a name"/>
+            <input type="text" name="eventdesc" ng-model="eventdesc" id="" placeholder="Tell us more about why this day is special"/>
+            <h5>Date</h5>
+            <div class="form-horizontal">
+                <input type="text" name="eventdate" datepicker-popup="yyyy/MMMM/dd" ng-model="eventdate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" placeholder="Pick a Date FOR YOUR Anniversary or Event" />
+                <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
+            </div>
+            <a ng-click="submitEvent()" class="button">Submit Angel Anniversary</a>
+        </div>
+        <div ng-click="event=false" class="button">Finished</div>
+    </div>
+    <div class="small-12 columns" ng-hide="photo || video || event"  if-authed="show">
         <input type="text" ng-model="postText" class="addNewPost small-10 columns"
                placeholder="Begin a new conversation here"/>
         <div class="small-2 columns"><br/>
