@@ -301,7 +301,13 @@ app.directive('dropzone', function (dropzone, $rootScope) {
 
             dropzone.registerEvent('complete', elm, function (file) {
                 console.log('complete event start broadcasting')
+                console.log(file)
                 $rootScope.$broadcast('uploadedFile', {file: file});
+            })
+            dropzone.registerEvent('success',elm, function (event,response) {
+                console.log(response);
+                console.log("Respose success for dropzone upload");
+                $rootScope.$broadcast('uploadSuccess',{res:response});
             })
             dropzone.registerEvent("addedfile", elm, function (file) {
                 scope.images++;
@@ -460,7 +466,7 @@ app.controller('blogEntryPicCtrl', function ($scope) {
     $scope.test = "TEST RESULT";
 });
 
-app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http, dropzone, api) {
+app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http, dropzone, api,userInfoService) {
     $scope.parentObject = {
         routeParamId: $routeParams.id,
         entryId: "",
@@ -479,6 +485,38 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
     $scope.event;
     $scope.eventdate;
     $scope.eventdesc;
+
+    $scope.photoPostText = "";
+    $scope.photos = [];
+    $scope.text = "";
+    $scope.photoAdded= {
+        show:false,
+        photoPostText:""
+    };
+    //the subnav methods
+    $rootScope.$on('uploadedFile', function (data) {
+        console.log("PICSCTRL UPloaded file")
+        console.log(data);
+    })
+    $rootScope.$on('uploadSuccess', function (e,res) {
+        console.log("PICSCTRL UPloaded success")
+        console.log(res);
+        $scope.photoAdded.show = true;
+        console.log($scope.photoAdded);
+        $scope.photos.push({filename:res.res,uploader:userInfoService.getId()});
+        $scope.$apply();
+    })
+    $scope.addPhotoToStream = function () {
+        api.createSubDocResource('Blog', $scope.parentObject.entryId, 'postText', {
+            text: $scope.photoAdded.photoPostText,
+            photos:$scope.photos,
+            postType: 1
+        }, function () {
+            $rootScope.$broadcast('updateStream');
+
+        })
+    }
+
     $scope.flipEntry = function () {
 
         $scope.textorphoto = !$scope.textorphoto;
@@ -1152,7 +1190,7 @@ app.controller('TwitterCtrl', function ($scope, Blog, Twitter, $routeParams) {
 });
 
 //Child of BlogEntry
-app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
+app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$rootScope) {
     console.log('LatestCtrl started');
     console.log($scope);
     console.log($scope.routeParamId);
@@ -1228,6 +1266,19 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket) {
             }
         }
     })
+    $rootScope.$on('updateStream', function (event) {
+        console.log('Update latest event received');
+        $http.get('/lastestPosts/' + $scope.parentObject.entryId).
+            success(function (data, err) {
+                for(var p = 0;p<data.length;p++){
+                    data[p].date = formatDate(data[p].date);
+                }
+                $scope.posts = data;
+            }).
+            error(function (err, code, status) {
+                console.log(err + code + status);
+            });
+    });
 });
 
 

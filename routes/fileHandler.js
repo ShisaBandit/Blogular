@@ -86,7 +86,7 @@ exports.upload = function (req, res) {
                         if(!filetype)blog.orphanedphotos.push({filename: sc.totalPicCount+"."+fileExt, uploader: req.session.passport.user});
                         blog.save(function () {
                             console.log('orphanedfiles saved name:' + req.files.file.name +'.'+fileExt+ ' uploaded by : ' + req.session.passport.user);
-                           return res.send(200,'OK');
+                           return res.send(200,sc.totalPicCount+"."+fileExt);
 
                         });
                     })

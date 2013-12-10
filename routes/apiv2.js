@@ -45,7 +45,10 @@ exports.createData = function (req, res) {
             //based on request.
             //doc[subdoc].push(req.body);
             dataFilter(req, type, subdoc, req.body,doc, function (data,skip,reason) {
+                console.log(doc)
+                if(doc == undefined)return sendError(res,"Erronous data");
                 if(!skip){
+
                     doc[subdoc].push(data);
                     doc.save(function (err) {
                         console.log(err);
