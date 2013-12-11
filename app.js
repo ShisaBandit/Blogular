@@ -164,9 +164,12 @@ app.get('/lastestPics/:id',passport.ensureAuthenticated ,blogRoutes.latestPics);
 app.get('/deletepic/:pic/:blog',passport.ensureAuthenticated,blogRoutes.deletepic);
 
 app.get('/lastestVideos/:id',passport.ensureAuthenticated, blogRoutes.latestVideos);
+app.get('/lastestVideosAll/:id',passport.ensureAuthenticated, blogRoutes.latestVideosAll);
 app.get('/lastestVideosYoutube/:id',passport.ensureAuthenticated, blogRoutes.latestVideosYouTube);
 app.get('/lastestVideosAnimoto/:id',passport.ensureAuthenticated, blogRoutes.latestVideosAnimoto);
 app.get('/lastestEvents/:id',passport.ensureAuthenticated, blogRoutes.latestEvents);
+
+app.get('/addToStream/:wallId/:postId',passport.ensureAuthenticated,blogRoutes.addToStream)
 
 app.post('/blog', passport.ensureAuthenticated, blogRoutes.createBlog);
 //edit

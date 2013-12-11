@@ -451,13 +451,17 @@ exports.lastestPosts = function (req, res) {
         if (blog === undefined) return res.send(200);
         if (blog.postText === undefined)return res.send(200);
         var posts = blog.postText;
-
+        var postTexts = blog.postText;
         for(var b = 0;b<blog.postText.length;b++){
             //var startDate = post[b].date;
             //var threeDaysForward =
             //var dt = (new Date( 2011, 7, 30, 0, 0, 0, 0 )).getTime();
             //if(posts[b].date)
+            if(blog.postText[b].inStream == false){
+                postTexts.splice(b,1);
+            }
         }
+        blog.postText = postTexts;
         return res.end(JSON.stringify(blog.postText.reverse()));
     });
 };
@@ -522,18 +526,78 @@ exports.latestVideosAnimoto = function (req, res) {
         return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.video, "embedAnimoto")));
     });
 }
+exports.latestVideosAll = function (req, res) {
+    /*
+    Blog.findOne({_id: req.params.id}).select({'postText':{$elemMatch:{'type':Common.postTextTypes.video}}}).exec(function (err, blog) {
+        //return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.video,['isStream','embedYouTube','embedAnimoto','_id'])));
+        //for(var p = 0;p<blog.postText;)
+        return res.end(JSON.stringify(blog));
+    });
+    */
+    Blog.findOne({_id:req.params.id}).lean().exec(function (err,blog) {
+        //console.log(blog);
 
+        return res.end(JSON.stringify(getPostTextValues(blog,Common.postTextTypes.video,['_id','embedYouTube','embedAnimoto','inStream','date'])));
+    })
+}
+
+exports.addToStream = function (req,res) {
+    var wallid = req.params.wallId;
+    var postTextId = req.params.postId;
+
+    Blog.findOne({_id:wallid}, function (err,blog) {
+        var postTexts = blog.postText;
+        for(var post in postTexts){
+            if(postTexts[post]._id == postTextId){
+                blog.postText[post].inStream = !blog.postText[post].inStream;
+                blog.save(function (err,doc) {
+                    if(err)console.log(err);
+                    res.send(200,"success");
+                })
+                break;
+            }
+        }
+    })
+}
+function getPostTextValues(blog,type,getProperties){
+    var buffer = [];
+    var postTexts = blog.postText;
+    var i = 0;
+        for(var postText in postTexts){
+            console.log(postTexts[postText].type);
+            if(postTexts[postText].postType != type){
+                continue;
+            }
+            for(var proptoGet in getProperties){
+                if(!buffer[i])
+                    buffer[i] = {};
+                //console.log(getProperties[proptoGet]+" "+postTexts[postText]['embedYouTube']);
+                buffer[i][getProperties[proptoGet]] = postTexts[postText][getProperties[proptoGet]];
+            }
+            i++;
+        }
+    console.log(buffer);
+    return buffer;
+}
 
 function getPostText(blog, type, getProp) {
-    if (getProp == undefined)getProp = false;
+        if (getProp == undefined)getProp = false;
     var buffer = [];
     for (var p = 0; p < blog.postText.length; p++) {
         if (blog.postText[p].postType == type) {
             var prop;
             if (getProp) {
-                prop = getProp;
+                if(getProp instanceof Array){
+                    var pushdata;
+                    for(var pr in getProp){
+                        if(blog.postText[p][getProp[pr]]){
+                            buffer.push(blog.postText[p][getProp[pr]]);
+                        }
+                    }
+                }else{
+                    prop = getProp;
                 var pushdata;
-                if (prop = "embedYouTube") {
+                if (prop == "embedYouTube") {
                     pushdata = blog.postText[p][getProp];
                     //pushdata.str.slice(0, -1);
                     console.log(pushdata)
@@ -541,6 +605,7 @@ function getPostText(blog, type, getProp) {
                     pushdata = blog.postText[p][getProp];
                 }
                 buffer.push(pushdata);
+                }
             } else {
                 var pushdata;
                 //TODO:Verify this code is ok?

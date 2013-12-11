@@ -537,6 +537,7 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         console.log(($scope.embedVideos.youtube));
         api.createSubDocResource('Blog', $scope.parentObject.entryId, 'postText', {
             text: $scope.photoAdded.photoPostText,
+            inStream:true,
             embedYouTube: youtube_embed(youtube_parser($scope.embedVideos.youtube)),
             embedAnimoto: animoto_embed(animoto_parser($scope.embedVideos.animoto)) ,
             postType: 2
@@ -623,7 +624,6 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         console.log($scope.template);
 
     }
-
 
     socket.on('testrec', function (data) {
         console.log(data);
@@ -1205,11 +1205,6 @@ app.controller('UserInfoCtrl', function ($scope, userInfoService, $http) {
         $scope.$broadcast('showlogin');
     }
 
-});
-
-//TODO:add a simple twitter feed here
-app.controller('TwitterCtrl', function ($scope, Blog, Twitter, $routeParams) {
-    $scope.twitterResult = Twitter.get();
 });
 
 //Child of BlogEntry
@@ -1951,44 +1946,46 @@ app.controller('VideoCtrl', function ($scope, BlogsService, Blog, $rootScope, $h
         console.log(oldVal);
         console.log(newVal);
         $scope.blogId = newVal;
-        $http.get('lastestVideosYoutube/' + newVal).
-            success(function (data) {
-                console.log(data);
-
-                $scope.videosyt =   $scope.trustAsHtmlArray( data);
-            })
-        $http.get('lastestVideosAnimoto/' + newVal).
-            success(function (data) {
-                console.log(data);
-                $scope.videosa =$scope.trustAsHtmlArray( data);
-            })
+        $scope.refreshVideoList(newVal);
 
     });
+    $scope.addToStream = function (vidPostId) {
+
+        console.log("Trying to add a video to stream");
+        console.log(vidPostId);
+        $http.get('addToStream/'+$scope.blogId+'/'+vidPostId).
+            success(function (data) {
+                console.log(data);
+            }).
+            error(function () {
+
+            })
+    }
+    $scope.refreshVideoList = function (blogId) {
+        if(!blogId)blogId = $scope.blogId;
+        $http.get('lastestVideosAll/'+blogId).
+            success(function (data) {
+                console.log(data);
+                $scope.videoPosts = data;
+            })
+    }
     $scope.submitVideo = function () {
         //TODO:Checkk this
         console.log("submitvideo");
         console.log("eani "+$scope.embedVideos.animoto )
         console.log(($scope.embedVideos.youtube));
         api.createSubDocResource('Blog', $scope.blogId, 'postText', {
+            inStream:false,
             embedYouTube: youtube_embed(youtube_parser($scope.embedVideos.youtube)),
             embedAnimoto: animoto_embed(animoto_parser($scope.embedVideos.animoto)) ,
             postType: 2
         }, function () {
             console.log("video sent");
             $scope.embedVideos = {};
-            $http.get('lastestVideosYoutube/' + $scope.blogId).
-                success(function (data) {
-                    console.log(data);
-
-                    $scope.videosyt =   $scope.trustAsHtmlArray( data);
-                })
-            $http.get('lastestVideosAnimoto/' + $scope.blogId).
-                success(function (data) {
-                    console.log(data);
-                    $scope.videosa =$scope.trustAsHtmlArray( data);
-                })
+            $scope.refreshVideoList($scope.blogId);
         })
     }
+    /*
     $http.get('lastestVideosYoutube/' + $scope.blogId).
         success(function (data) {
             console.log(data);
@@ -2001,7 +1998,7 @@ app.controller('VideoCtrl', function ($scope, BlogsService, Blog, $rootScope, $h
             console.log(data);
             $scope.videosa =  $scope.trustAsHtmlArray(data);
         })
-
+*/
     $scope.trustAsHtmlArray = function(arrayToPass){
         var buffer = [];
         for(var i = 0;i<arrayToPass.length;i++){
