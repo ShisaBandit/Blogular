@@ -131,6 +131,7 @@ app.configure('development', function () {
     console.log("initialising database data");
     console.log("checking pic count");
     SingleCount.count({}, function (err,count) {
+        console.log("Pic count is "+count);
         if(count<1){
             console.log("no pic count entry detected adding one")
             var piccount = new SingleCount({totalPicCount:0}).
