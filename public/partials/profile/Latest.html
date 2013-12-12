@@ -4,9 +4,9 @@
     </div>
     <br/>
     <div>
-        <div ng-click="photo = true;video = false;" class="button">Submit a Photo</div>
-        <div ng-click="video = true;photo = false;" class="button">Submit a Video</div>
-        <div ng-click="event = true;video = false; photo = false;" class="button">Submit a Video</div>
+        <div ng-click="photo = true;video = false;" class="button">Share a Photo</div>
+        <div ng-click="video = true;photo = false;" class="button">Share a Video</div>
+        <div ng-click="event = true;video = false; photo = false;" class="button">Share an Anniversary</div>
     </div>
     <div ng-show="photo" id="UploadBox">
         <h2 class="dark">Photo Uploader: Drag and drop image files on the box</h2>
@@ -70,20 +70,39 @@
                placeholder="Begin a new conversation here"/>
         <div class="small-2 columns"><br/>
             <button ng-click="submit()" class="button postfix">Submit</button>
+            <a ng-show="parentObject.admin" ng-click="modStream = true;" class="button">Remove posts from your stream</a>
+            <a ng-show="modStream;" class="button" ng-click="refreshVideoList(); modStream = false">Done editing</a>
+
         </div>
+
     </div>
+
     <div class="small-12 columns row2 contentContainer my-repeat-animation" ng-repeat="post in posts">
         <div class="row">
             <div class="small-12 columns postcontainer">
-                <div><img src="http://www.gravatar.com/avatar/{{post.gravatar}}" /> </div>
+                <div>
+                    <img src="http://www.gravatar.com/avatar/{{post.gravatar}}" />
+                </div>
                 <h6>Posted by <a href="#/profile/{{post.username}}">{{post.username}} </a> on {{post.date}}.</h6>
-
+                <i class="fi-check" ng-show="post.inStream"></i>
                 <div>
                     {{post.text}}{{post.event}}
+                </div>
+                <li class="dropdown">
+                    <a class="dropdown-toggle">
+                        <i class="fi-list"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="choice in items">
+                            <a ng-click="SelectedChoice($index,post._id)">{{choice}}</a>
+                        </li>
+                    </ul>
+                </li>
                 </div>
 
                 <div ng-if="post.photos">
                     <h1>Pics posted</h1>
+
                 </div>
                 <div ng-bind-html="post.embedYouTube | unsafe"></div>
                 <div ng-bind-html="post.embedAnimoto | unsafe"></div>
@@ -92,28 +111,35 @@
                     <img width="200" src="uploads/{{photo.filename}}" />
                 </div>
             </div>
+            <div ng-switch on="post.canComment">
+                <div ng-switch-when="true">
+                <div ng-repeat="comment in post.comments" class="row replycontainer my-repeat-animation">
+                        <div class="small-1 columns avatarcontainer">
+                            <img src="http://www.gravatar.com/avatar/{{comment.gravatar}}"/>
+                        </div>
 
-            <div ng-repeat="comment in post.comments" class="row replycontainer my-repeat-animation">
-                    <div class="small-1 columns avatarcontainer">
-                        <img src="http://www.gravatar.com/avatar/{{comment.gravatar}}"/>
-                    </div>
-
-                    <div class="small-11 columns">
-                        <a href="#/profile/{{comment.username}}"><b>{{comment.username}}</b></a>
-                        <p>{{comment.text}}</p>
-
-                    </div>
-            </div>
-            <div class="row">
-                <div class="columns postComment">
-                    <!-- <a ng-click="showcommentbox($index)" class="button tiny">Join the conversation</a>
-                   <div ng-show="commentbox[$index]">-->
-                    <a class="button tiny">Join the conversation</a>
-                    <div>
-                        <input type="text" on-keyup="submitComment($index)" keys="[27,13]" ng-model="newcomment[$index]" placeholder="Add your thoughts here! (Click enter to submit)" />
+                        <div class="small-11 columns">
+                            <a href="#/profile/{{comment.username}}">
+                            <b>{{comment.username}}</b></a>
+                            <p>{{comment.text}}</p>
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="columns postComment">
+                        <!-- <a ng-click="showcommentbox($index)" class="button tiny">Join the conversation</a>
+                       <div ng-show="commentbox[$index]">-->
+                        <a class="button tiny">Join the conversation</a>
+                        <div>
+                            <input type="text" on-keyup="submitComment($index)" keys="[27,13]" ng-model="newcomment[$index]" placeholder="Add your thoughts here! (Click enter to submit)" />
+                        </div>
                     </div>
                 </div>
+                </div>
+                <div ng-switch-when="false">
+                    <div class="offsetHeight"> Commenting turned off</div>
+                </div>
             </div>
+
         </div>
 
     </div>

@@ -170,6 +170,8 @@ app.get('/lastestVideosAnimoto/:id',passport.ensureAuthenticated, blogRoutes.lat
 app.get('/lastestEvents/:id',passport.ensureAuthenticated, blogRoutes.latestEvents);
 
 app.get('/addToStream/:wallId/:postId',passport.ensureAuthenticated,blogRoutes.addToStream)
+app.get('/commentsAllowed/:wallId/:postId',passport.ensureAuthenticated,blogRoutes.commentsAllowed)
+app.get('/resetComments/:wallId/:postId',passport.ensureAuthenticated,blogRoutes.resetComments)
 
 app.post('/blog', passport.ensureAuthenticated, blogRoutes.createBlog);
 //edit
@@ -230,7 +232,7 @@ app.post('/login',
                     if(err)console.log(err);
                 })
             }
-            res.send(JSON.stringify(loggeduser._id), 200);
+            res.send(JSON.stringify({id:loggeduser._id,gravatar:loggeduser.gravatar,username:loggeduser.username}), 200);
         })
     });
 

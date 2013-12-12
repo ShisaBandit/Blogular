@@ -205,7 +205,8 @@ app.directive('ifAuthed', function ($http,userInfoService) {
             $http.get('/checkauthed').then(function (data) {
                 scope.username = data.data.username;
                 scope.userid = data.data.userid;
-                userInfoService.setUsername(scope.username,scope.userid);
+                scope.gravatar = data.data.gravatar;
+                userInfoService.setUsername(scope.username,scope.userid,data.data.gravatar);
                 if (attrs.ifAuthed == 'show') {
                     elm.show();
                 } else {
@@ -447,6 +448,7 @@ app.factory('petgroupsListing', function () {
 app.service('userInfoService', function () {
     var username = "Guest";
     var _id = "";
+    var gravatar = "";
     return {
         getUsername: function () {
             return username;
@@ -454,9 +456,13 @@ app.service('userInfoService', function () {
         getId: function () {
             return _id;
         },
-        setUsername: function (value, id) {
+        getGravatar: function () {
+            return gravatar;
+        },
+        setUsername: function (value, id,uGravatar) {
             username = value;
             _id = id;
+            gravatar = uGravatar;
         }
     }
 });
@@ -476,8 +482,10 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
     $scope.parentObject = {
         routeParamId: $routeParams.id,
         entryId: "",
-        group: false
+        group: false,
+        admin:false
     }
+    $scope.admin = false;
     $scope.embedVideos = {
         youtube:"",
         animoto:""
@@ -505,6 +513,8 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         date:"",
         text:""
     }
+
+
     $scope.embedVideos = {youtube:"",animoto:""};
     //the subnav methods
     $rootScope.$on('uploadedFile', function (data) {
@@ -539,7 +549,7 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
             text: $scope.photoAdded.photoPostText,
             inStream:true,
             embedYouTube: youtube_embed(youtube_parser($scope.embedVideos.youtube)),
-            embedAnimoto: animoto_embed(animoto_parser($scope.embedVideos.animoto)) ,
+            embedAnimoto: animoto_embed(animoto_parser($scope.embedVideos.animoto)),
             postType: 2
         }, function () {
             console.log("video sent");
@@ -714,6 +724,12 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
                 $location.path("/public/" + $routeParams.id);
             } else {
                 $scope.parentObject.entryId = blog[0]._id;
+                console.log(userInfoService.getId()+" "+blog[0].owner_id);
+
+                if(userInfoService.getId() == blog[0].owner_id){
+                    console.log("We are an admin");
+                    $scope.parentObject.admin = true;
+                }
                 $scope.text = blog[0].text;
                 $scope.comments = blog[0].comments;
                 socket.emit('subscribe', {room: blog[0]._id});
@@ -937,6 +953,7 @@ app.controller('groupEntryCtrl', function ($scope, $location, show, Blog, $route
                 $location.path("/public/" + $routeParams.id);
             } else {
                 $scope.parentObject.entryId = blog[0]._id;
+
                 $scope.text = blog[0].text;
                 $scope.comments = blog[0].comments;
                 socket.emit('subscribe', {room: blog[0]._id});
@@ -1039,7 +1056,8 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
         $http.post('/login', $scope.form)
             .success(function (data, status) {
                 console.log("trying to set id"+data)
-                userInfoService.setUsername($scope.form.username,data._id);
+                userInfoService.setUsername(data.username,data.id,data.gravatar);
+
                 $scope.form.username = "";
                 $scope.form.password = "";
                 authService.loginConfirmed();
@@ -1208,13 +1226,56 @@ app.controller('UserInfoCtrl', function ($scope, userInfoService, $http) {
 });
 
 //Child of BlogEntry
-app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$rootScope) {
+app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$rootScope,userInfoService) {
     console.log('LatestCtrl started');
     console.log($scope);
     console.log($scope.routeParamId);
     $scope.commentbox = [];
     $scope.newcomment = [];
     $scope.blogId;
+    $scope.items = [
+        "Show/Hide post",
+        "Block/Allow commenting",
+        "Reset comments"
+    ];
+    $scope.SelectedChoice = function (index,postId) {
+           console.log(index);
+        if(index == 0)$scope.flipStream(postId);
+        if(index == 1)$scope.blockComments(postId);
+        if(index == 2)$scope.resetComments(postId);
+    }
+    $scope.flipStream = function (postId) {
+        console.log("Trying to add a video to stream");
+        console.log(postId);
+        $http.get('addToStream/'+$scope.parentObject.entryId+'/'+postId).
+            success(function (data) {
+                console.log(data);
+                $scope.refreshStream();
+            }).
+            error(function () {
+
+            })
+    }
+    $scope.blockComments = function (postId) {
+        $http.get('commentsAllowed/'+$scope.parentObject.entryId+'/'+postId).
+            success(function (data) {
+                console.log(data);
+                $scope.refreshStream();
+            }).
+            error(function () {
+
+            })
+    }
+    $scope.resetComments = function (postId) {
+        $http.get('resetComments/'+$scope.parentObject.entryId+'/'+postId).
+            success(function (data) {
+                console.log(data);
+                $scope.refreshStream();
+            }).
+            error(function () {
+
+            })
+    }
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
@@ -1238,6 +1299,7 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
                 console.log("emited socket events");
                 socket.emit('postText', {room: $scope.blogId});
                 $scope.postText = "";
+                $scope.refreshStream();
 
             }).error(function (err) {
                 console.log(err);
@@ -1276,16 +1338,15 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
                 console.log($scope.posts[x]);
                 if ($scope.posts[x].comments == undefined) {
                     $scope.posts[x].comments = [];
-                    $scope.posts[x].comments.push({text: data.text})
+                    $scope.posts[x].comments.push({username:userInfoService.getUsername(),text: data.text,gravatar:userInfoService.getGravatar()})
                 } else {
-                    $scope.posts[x].comments.unshift({text: data.text});
+                    $scope.posts[x].comments.push({username:userInfoService.getUsername(),text: data.text,gravatar:userInfoService.getGravatar()});
 
                 }
             }
         }
     })
-    $rootScope.$on('updateStream', function (event) {
-        console.log('Update latest event received');
+    $scope.refreshStream = function () {
         $http.get('/lastestPosts/' + $scope.parentObject.entryId).
             success(function (data, err) {
                 for(var p = 0;p<data.length;p++){
@@ -1296,6 +1357,10 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
             error(function (err, code, status) {
                 console.log(err + code + status);
             });
+    }
+    $rootScope.$on('updateStream', function (event) {
+        console.log('Update latest event received');
+        $scope.refreshStream();
     });
 });
 

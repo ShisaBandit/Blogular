@@ -18,7 +18,8 @@
 
     <!-- Included CSS Files (Uncompressed) -->
     <!-- Included CSS Files (Compressed) -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+   <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <!--<link href="css/animate.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="css/foundation.min.css">
@@ -43,7 +44,7 @@
     <script type="text/javascript" src="js/angular/1.2.4/angular-route.js"></script>
     <script type="text/javascript" src="js/angular/1.2.4/angular-resource.js"></script>
     <script type="text/javascript" src="js/angular/angular-resource.js"></script>
-    <script type="text/javascript" src="js/angular/ui-bootstrap-tpls-0.6.0.min.js"></script>
+    <script type="text/javascript" src="js/angular/ui-bootstrap-tpls-0.7.0.min.js"></script>
     <script type="text/javascript" src="js/external/socketmodule.js"></script>
     <script src="js/app/blog.js"></script>
     <script type="text/javascript" src="js/external/resources/blogService.js"></script>
@@ -105,6 +106,7 @@
             </div>
             <div ng-controller="UserInfoCtrl" class="loginBlock">
                 <div id="username">
+                    <img width="50" src="http://www.gravatar.com/avatar/{{gravatar}}"/>
                     <b>{{username}}</b>
                     <a href="#/profile/{{username}}" if-authed="show" class="small button">My Account</a>
                     <a href="#/rules" class="small button">Rules</a>
@@ -280,7 +282,7 @@
             $('#gallery').nivoGallery();
         });
     </script>
-    <script type='text/javascript' src='http://code.jquery.com/jquery-1.6.2.js'></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.js"></script>
+   <!-- <script type='text/javascript' src='http://code.jquery.com/jquery-1.6.2.js'></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.js"></script>-->
 </body>
 </html>
