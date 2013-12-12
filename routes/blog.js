@@ -548,7 +548,7 @@ exports.addToStream = function (req,res) {
     Blog.findOne({_id:wallid}, function (err,blog) {
         var postTexts = blog.postText;
         for(var post in postTexts){
-            if(postTexts[post]._id == postTextId){
+            if(postTexts[post]._id == postTextId && blog.owner_id == req.session.passport.user){
                 blog.postText[post].inStream = !blog.postText[post].inStream;
                 blog.save(function (err,doc) {
                     if(err)console.log(err);
@@ -568,7 +568,7 @@ exports.commentsAllowed = function (req,res) {
     Blog.findOne({_id:wallid}, function (err,blog) {
         var postTexts = blog.postText;
         for(var post in postTexts){
-            if(postTexts[post]._id == postTextId){
+            if(postTexts[post]._id == postTextId && blog.owner_id == req.session.passport.user){
                 blog.postText[post].canComment = !blog.postText[post].canComment;
                 blog.save(function (err,doc) {
                     if(err)console.log(err);
@@ -588,7 +588,7 @@ exports.resetComments = function (req,res) {
     Blog.findOne({_id:wallid}, function (err,blog) {
         var postTexts = blog.postText;
         for(var post in postTexts){
-            if(postTexts[post]._id == postTextId){
+            if(postTexts[post]._id == postTextId && blog.owner_id == req.session.passport.user){
                 blog.postText[post].comments = [];
                 blog.save(function (err,doc) {
                     if(err)console.log(err);

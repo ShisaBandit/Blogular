@@ -80,15 +80,7 @@
     <div class="small-12 columns row2 contentContainer my-repeat-animation" ng-repeat="post in posts">
         <div class="row">
             <div class="small-12 columns postcontainer">
-                <div>
-                    <img src="http://www.gravatar.com/avatar/{{post.gravatar}}" />
-                </div>
-                <h6>Posted by <a href="#/profile/{{post.username}}">{{post.username}} </a> on {{post.date}}.</h6>
-                <i class="fi-check" ng-show="post.inStream"></i>
-                <div>
-                    {{post.text}}{{post.event}}
-                </div>
-                <li class="dropdown">
+                <li ng-show="parentObject.admin" class="dropdown">
                     <a class="dropdown-toggle">
                         <i class="fi-list"></i>
                     </a>
@@ -98,6 +90,15 @@
                         </li>
                     </ul>
                 </li>
+                <div>
+                    <img src="http://www.gravatar.com/avatar/{{post.gravatar}}" />
+                </div>
+                <h6>Posted by <a href="#/profile/{{post.username}}">{{post.username}} </a> on {{post.date}}.</h6>
+                <i class="fi-check" ng-show="post.inStream"></i>
+                <div>
+                    {{post.text}}{{post.event}}
+                </div>
+
                 </div>
 
                 <div ng-if="post.photos">
@@ -136,7 +137,7 @@
                 </div>
                 </div>
                 <div ng-switch-when="false">
-                    <div class="offsetHeight"> Commenting turned off</div>
+                    <div> Commenting turned off</div>
                 </div>
             </div>
 
