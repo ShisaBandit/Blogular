@@ -1441,7 +1441,7 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api,$modal,Delet
         picToDelete:""
     };
     $scope.albuminfo={
-        name:"default name"
+        name:"All Photos"
     }
 
     $rootScope.groupingViewable = true;
@@ -1561,6 +1561,7 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api,$modal,Delet
     $scope.showallpics = function () {
         console.log("showallpics")
         $scope.showingAlbum = false;
+        $scope.albuminfo.name = "Showing All Photos"
         $http.get('getPicsForBlog/' + $scope.blogId).
             success(function (data) {
                 console.log(data);
@@ -1625,12 +1626,9 @@ app.controller('DeletePicsCtrl', function ($rootScope,$scope,$http, DeletePicsFa
     }
 })
 app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams) {
-    $scope.petitions = [];
+   // $scope.petitions = [];
     $scope.spinner = true;
-        api.getResourceById('Petition', 'all', function (petitions) {
-            $scope.petitions = petitions;
-            $scope.spinner = false;
-        });
+
 
     $scope.submitedit = function () {
         $http.post('updatePetition',{id:$routeParams.id, title: $scope.title , text:$scope.text}).
@@ -1653,6 +1651,28 @@ app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams) {
         $scope.title = "";
         $scope.text = "";
     }
+    console.log($routeParams.id);
+    $scope.getPetition = function () {
+        api.getResourceByField('Petition', {field: "_id", query: $routeParams.id}, function (petitions) {
+            $scope.spinner = false;
+            $scope.title = petitions[0].title;
+            $scope.text = petitions[0].text;
+
+            $scope.signaturecount = petitions[0].signatures.length;
+
+        });
+    }
+    if($routeParams.id){
+        $scope.getPetition();
+    }else{
+        api.getResourceById('Petition', 'all', function (petitions) {
+            console.log(petitions)
+            $scope.petitions = petitions;
+
+            $scope.spinner = false;
+        });
+    }
+
 });
 
 app.controller('PetitionEntryCtrl', function ($scope, api, $routeParams,$http) {
@@ -1663,6 +1683,7 @@ app.controller('PetitionEntryCtrl', function ($scope, api, $routeParams,$http) {
             $scope.spinner = false;
             $scope.petition = petitions;
             $scope.signatures = $scope.petition[0].signatures;
+            $scope.signaturelength = $scope.petition[0].signatures.length;
 
         });
     }
