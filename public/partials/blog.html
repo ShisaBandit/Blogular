@@ -8,8 +8,6 @@
                     </div>
                 </div>
                 <div class="row">
-
-
                     <!--
                     <a ng-click="changeSubgroup(0)" class="button small success radius">Mothers</a>
                     <a ng-click="changeSubgroup(1)" class="button small success radius">Family</a>
@@ -35,27 +33,21 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
         <!--<div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' autoscroll>-->
         <div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' ng-class="{error:pets, petsList:pets}" class="scrollerBlock">
-            <div class="row">
-                <div ng-switch on=“pets”>
-                <img src="./img/muralPets.png" class="muralPets" ng-switch-when="pets"ng-switch-when=“true”>
-                <img src="./img/mural1.png" class="mural"  ng-switch-default="memorials">
-                </div>
-                <ul class="small-block-grid-4" >
-                    <li ng-repeat="entry in entries | filter:search.search | bySubgroup:subgroup">
-                        <div style="background-image: url({{entry.titleImage}})" ng-style="getBackImg(entry._id)" class="memProfilePreview"  ng-class="{error:pets, pets:pets}">
-                            <h6   ng-class="{error:pets, petsTitle:pets}"><a href="#/angel/{{entry.author}}">{{entry.lastName}}, {{entry.firstName}}</a></h6>
-                            <a href="#/angel/{{entry.author}}"><img src="/uploads/{{ entry.profilePicPortrait }}"
-                                                                    alt="child pick"/></a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+                <img src="./img/muralPets.png" class="muralPets" ng-show="pets">
+                <img src="./img/mural1.png" class="mural"  ng-hide="pets">
+            <ul class="small-block-grid-4" >
+                <li ng-repeat="entry in entries | filter:search.search | bySubgroup:subgroup">
+                    <div style="background-image: url({{entry.titleImage}})" ng-style="getBackImg(entry._id)" class="memProfilePreview"  ng-class="{error:pets, pets:pets}">
+                        <h6   ng-class="{error:pets, petsTitle:pets}"><a href="#/angel/{{entry.author}}">{{entry.lastName}}, {{entry.firstName}}</a></h6>
+                        <a href="#/angel/{{entry.author}}"><img src="/uploads/{{ entry.profilePicPortrait }}"
+                                                                alt="child pick"/></a>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

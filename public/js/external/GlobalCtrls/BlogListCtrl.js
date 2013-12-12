@@ -10,10 +10,13 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
         $scope.entries = [];
         $scope.$prepareForReady();
         $scope.type = "";
+        $scope.pets = false;
         $scope.filtersubgroup = $scope.subgroup;
         if("/pets" == $location.path()){
             $scope.pets = true;
             console.log("We are in pets");
+        }else{
+            $scope.pets = false;
         }
         //check if user wants to see blogs by categories or not
         if ($routeParams.name) {
