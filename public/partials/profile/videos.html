@@ -37,7 +37,8 @@
 
     </div>
     <a ng-click="toogleVideoEntry()" class="button">{{state}}</a>
-
+    <a ng-click="modStream = true" class="button">Add or Remove photos from your stream</a>
+    <a ng-show="modStream" class="button" ng-click="refreshVideoList(); modStream = false">Done editing</a>
     <div class="row">
         <div class="small-12 columns contentContainer">
             <div class="row">
@@ -49,12 +50,42 @@
                                 frameborder="0"
                                 allowfullscreen>
                         </iframe>-->
+                        <div class="my-repeat-animation" ng-repeat="video in videoPosts track by $index">
+
+                           <div class="videoContainer">
+                               <div>
+                                     <input
+                                       type="checkbox"
+                                       ng-show="modStream"
+                                       ng-model="video[$index]"
+                                       ng-change="addToStream(video._id)"
+                                       ng-checked="video.inStream"/>
+                                 </div>
+                               <i class="fi-check" ng-show="video.inStream"></i>
+                               <p ng-bind-html="video.embedYouTube | unsafe" ></p>
+                           </div>
+                        </div>
+                        <div class="my-repeat-animation" ng-repeat="video in videoPosts track by $index">
+                            <div class="videoContainer">
+                                <div>
+                                    <input
+                                            type="checkbox"
+                                            ng-show="addToStream"
+                                            ng-model="video[$index]"
+                                            ng-change="addVideoToStream(video[$index]._id)"
+                                            ng-checked="video.inStream"/>
+                                </div>
+                                <p ng-bind-html="video.embedAnimoto | unsafe" ></p>
+                            </div>
+                        </div>
+                        <!--
                         <div class="my-repeat-animation" ng-repeat="video in videosyt track by $index">
-                            <p ng-bind-html="video" ></p>
+                              <p ng-bind-html="video" ></p>
                         </div>
                         <div class="my-repeat-animation" ng-repeat="video in videosa track by $index">
                             <p ng-bind-html="video"></p>
                         </div>
+                        -->
                     </li>
 
 

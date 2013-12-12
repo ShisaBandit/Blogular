@@ -55,6 +55,7 @@ var blogSchema = mongoose.Schema({
             text: String,
             date: {type: Date, default: Date.now},
             postType: Number,
+            inStream:{type:Boolean,default:true},
             saved: Boolean,
             comments: [
                 {
