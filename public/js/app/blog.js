@@ -1318,7 +1318,7 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
                 console.log("Successfully sent data");
                 console.log(data);
                 socket.emit('subcomment', {room: $scope.parentObject.entryId, text: $scope.newcomment[index], comment_id: $scope.posts[index]._id})
-                // $scope.posts[index].comments.unshift({text:$scope.newcomment.text});
+                $scope.posts[index].comments.push({text: $scope.newcomment[index],username:userInfoService.getUsername(),gravatar:userInfoService.getGravatar()});
                 $scope.newcomment[index] = "";
                 console.log($scope.newcomment[index])
                 $scope.commentbox[index] = false;
@@ -1338,7 +1338,7 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
                 console.log($scope.posts[x]);
                 if ($scope.posts[x].comments == undefined) {
                     $scope.posts[x].comments = [];
-                    $scope.posts[x].comments.push({username:userInfoService.getUsername(),text: data.text,gravatar:userInfoService.getGravatar()})
+                    $scope.posts[x].comments.push({username:userInfoService.getUsername(),text: data.text,gravatar:userInfoService.getGravatar()});
                 } else {
                     $scope.posts[x].comments.push({username:userInfoService.getUsername(),text: data.text,gravatar:userInfoService.getGravatar()});
 
