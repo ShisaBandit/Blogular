@@ -65,9 +65,9 @@ html {
     font-family: sans-serif; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */
     -ms-text-size-adjust: 100%; /* 2 */
-    background: url("/img/background/3.jpg") no-repeat center center fixed #A19790;
+    /*background: url("/img/background/3.jpg") no-repeat center center fixed #A19790;
     background-size: cover;
-    
+    */
 }
 
 /**
