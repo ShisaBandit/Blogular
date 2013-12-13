@@ -457,7 +457,7 @@ exports.lastestPosts = function (req, res) {
             //var threeDaysForward =
             //var dt = (new Date( 2011, 7, 30, 0, 0, 0, 0 )).getTime();
             //if(posts[b].date)
-            if(blog.postText[b].inStream == false){
+            if(blog.postText[b].inStream == false && blog.owner_id != req.session.passport.user){
                 postTexts.splice(b,1);
             }
         }
@@ -548,7 +548,7 @@ exports.addToStream = function (req,res) {
     Blog.findOne({_id:wallid}, function (err,blog) {
         var postTexts = blog.postText;
         for(var post in postTexts){
-            if(postTexts[post]._id == postTextId){
+            if(postTexts[post]._id == postTextId && blog.owner_id == req.session.passport.user){
                 blog.postText[post].inStream = !blog.postText[post].inStream;
                 blog.save(function (err,doc) {
                     if(err)console.log(err);
@@ -559,6 +559,49 @@ exports.addToStream = function (req,res) {
         }
     })
 }
+
+
+exports.commentsAllowed = function (req,res) {
+    var wallid = req.params.wallId;
+    var postTextId = req.params.postId;
+
+    Blog.findOne({_id:wallid}, function (err,blog) {
+        var postTexts = blog.postText;
+        for(var post in postTexts){
+            if(postTexts[post]._id == postTextId && blog.owner_id == req.session.passport.user){
+                blog.postText[post].canComment = !blog.postText[post].canComment;
+                blog.save(function (err,doc) {
+                    if(err)console.log(err);
+                    res.send(200,"success");
+                })
+                break;
+            }
+        }
+    })
+}
+
+
+exports.resetComments = function (req,res) {
+    var wallid = req.params.wallId;
+    var postTextId = req.params.postId;
+
+    Blog.findOne({_id:wallid}, function (err,blog) {
+        var postTexts = blog.postText;
+        for(var post in postTexts){
+            if(postTexts[post]._id == postTextId && blog.owner_id == req.session.passport.user){
+                blog.postText[post].comments = [];
+                blog.save(function (err,doc) {
+                    if(err)console.log(err);
+                    res.send(200,"success");
+                })
+                break;
+            }
+        }
+
+    })
+}
+exports
+
 function getPostTextValues(blog,type,getProperties){
     var buffer = [];
     var postTexts = blog.postText;
@@ -718,7 +761,6 @@ exports.selfRemove = function (req, res) {
             res.send(200, 'works good');
         })
     })
-
 }
 
 exports.block = function (req, res) {

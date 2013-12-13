@@ -17,26 +17,30 @@ exports.comments = function (req) {
 };
 exports.subcomment = function (req, res) {
     Blog.findOne({_id: req.body.id}, function (err, blog) {
-        var doc = blog.postText.id(req.body.comment_id);
-        var userid = req.session.passport.user;
-        User.findOne({_id: userid}, function (err, user) {
-            req.body.username = user.username;
-            req.body.gravatar = calcMD5(user.email);
+            var doc = blog.postText.id(req.body.comment_id);
+            if(doc.canComment){
+                var userid = req.session.passport.user;
+                User.findOne({_id: userid}, function (err, user) {
+                    req.body.username = user.username;
+                    req.body.gravatar = calcMD5(user.email);
 
-            req.body.user_id = user;
-            doc.comments.unshift(
-                {
-                    text: req.body.text,
-                    date: Date.now(),
-                    username:req.body.username,
-                    gravatar:req.body.gravatar
+                    req.body.user_id = user;
+                    doc.comments.push(
+                        {
+                            text: req.body.text,
+                            date: Date.now(),
+                            username:req.body.username,
+                            gravatar:req.body.gravatar
 
+                        });
+                    blog.save(function (err, blog) {
+                        if (err)console.log(err);
+                        res.send(200);
+                    })
                 });
-            blog.save(function (err, blog) {
-                if (err)console.log(err);
-                res.send(200);
-            })
-        });
+            }else{
+                res.send(200,'commentsoff');
+            }
     })
 };
 

@@ -24,7 +24,7 @@ exports.checkAuthed = function (req, res) {
         if (err)console.log(err);
         console.log(user[0].username);
         //noinspection MagicNumberJS
-        return res.send(JSON.stringify({username:user[0].username,userid:user[0]._id}), 200);
+        return res.send(JSON.stringify({username:user[0].username,userid:user[0]._id,gravatar:user[0].gravatar}), 200);
     })
 };
 

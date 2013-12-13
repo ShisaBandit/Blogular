@@ -131,6 +131,7 @@ app.configure('development', function () {
     console.log("initialising database data");
     console.log("checking pic count");
     SingleCount.count({}, function (err,count) {
+        console.log("Pic count is "+count);
         if(count<1){
             console.log("no pic count entry detected adding one")
             var piccount = new SingleCount({totalPicCount:0}).
@@ -170,6 +171,8 @@ app.get('/lastestVideosAnimoto/:id',passport.ensureAuthenticated, blogRoutes.lat
 app.get('/lastestEvents/:id',passport.ensureAuthenticated, blogRoutes.latestEvents);
 
 app.get('/addToStream/:wallId/:postId',passport.ensureAuthenticated,blogRoutes.addToStream)
+app.get('/commentsAllowed/:wallId/:postId',passport.ensureAuthenticated,blogRoutes.commentsAllowed)
+app.get('/resetComments/:wallId/:postId',passport.ensureAuthenticated,blogRoutes.resetComments)
 
 app.post('/blog', passport.ensureAuthenticated, blogRoutes.createBlog);
 //edit
@@ -230,7 +233,7 @@ app.post('/login',
                     if(err)console.log(err);
                 })
             }
-            res.send(JSON.stringify(loggeduser._id), 200);
+            res.send(JSON.stringify({id:loggeduser._id,gravatar:loggeduser.gravatar,username:loggeduser.username}), 200);
         })
     });
 
