@@ -2872,10 +2872,6 @@ form.custom .custom.disabled {
     }
 }
 
-.contain-to-grid {
-    width: 100%;
-    background: #111
-}
 
 .fixed {
     width: 100%;
@@ -2890,8 +2886,8 @@ form.custom .custom.disabled {
     height: 45px;
     line-height: 45px;
     position: relative;
-    top:30px;
-    background: #26619D;
+    top:140px;
+    background: transparent;
     margin-bottom: 1.875em
 }
 
@@ -3160,9 +3156,11 @@ form.custom .custom.disabled {
 
 @media only screen and (min-width: 58.75em) {
     .top-bar {
-        background: #111;
+        background: rgba(138, 153, 72, 0.5);
         *zoom: 1;
-        overflow: visible
+        overflow: visible;
+        border-radius:7px;
+
     }
 
     .top-bar:before, .top-bar:after {
@@ -3228,11 +3226,12 @@ form.custom .custom.disabled {
     .top-bar-section li a:not(.button) {
         padding: 0 15px;
         line-height: 45px;
-        background: #111
+        background: #8A9948;
     }
 
     .top-bar-section li a:not(.button):hover {
-        background: #000
+        background: #71706b;
+        color: #9db2cc;
     }
 
     .top-bar-section .has-dropdown>a {

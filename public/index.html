@@ -96,7 +96,72 @@
 <!-- TODO:Rename app instance to mwApp -->
 
 <body class="ng-app:blogApp" id="ng-app" ng-app="blogApp">
-    <div class="fixed titleHdr z-index-1000">
+<div class="contain-to-grid sticky">
+    <nav class="top-bar" data-topbar data-options="is_hover: false">
+        <ul class="title-area">
+            <li class="name">
+                <div ng-controller="TitleCtrl">
+                    <a href="#/" ng-bind="title" class="logo"></a>
+                </div>
+            </li>
+            <li class="toggle-topbar menu-icon active"><a href="#"><span>Menu</span></a></li>
+        </ul>
+        <section class="top-bar-section">
+            <!-- Right Nav Section -->
+            <ul class="right">
+
+                <li class="has-dropdown">
+
+                </li>
+            </ul>
+            <!-- Left Nav Section -->
+            <ul class="left" ng-controller="SearchBarCtrl">
+                <li class="has-dropdown">
+                    <a href="#">Memorials</a>
+                    <ul class="dropdown" id="workpets">
+                        <li>
+                            <a href="/" id="homebutton" class="small">Angel Memorials</a>
+                        </li>
+                        <li>
+                            <a href="#/pets" id="petbutton" class="small">Pets</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#/groups" id="groupsbutton" class="small">Groups</a>
+                </li>
+                <li>
+                    <a href="#/workshops" id="workshopbutton" class="small">Workshops</a>
+                </li>
+                <li>
+                    <a href="#/petitions" id="pettionbutton" class="small">Petitions</a>
+                </li>
+                <li>
+                    <a href="#" id="webstorebutton" class="small">Web Store</a>
+                </li>
+                <li class="has-dropdown">
+                    <a href="#">My Account</a>
+                    <ul class="dropdown">
+                        <li>
+                            <div ng-controller="UserInfoCtrl" class="loginBlock">
+                                <div id="username">
+                                    <b>{{username}}</b>
+                                    <a href="#/profile/{{username}}" if-authed="show" class="small button">My Account</a>
+                                    <a href="#/rules" class="small button">Rules</a>
+                                    <a href="#" ng-click="logout()" if-authed="show" class="small button">logout</a>
+                                    <a href="#/registration" if-authed="hide" class="small button">Register</a>
+                                    <a if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </nav>
+</div>
+<!--
+<div class="titleHdr">
         <div class="row gradient-main">
             <div class="headerCol">
                 <div ng-controller="TitleCtrl">
@@ -125,9 +190,9 @@
             </div>
         </div>
     </div>
+-->
     <section class="primaryContent">
        <section class="shelf" id="shelf">
-           This is the main visible content, not including music player
             <div id="loginMessage" if-authed="hide">
                 <p>
                 <h1>Welcome to Angels of Eureka's Circle of Life </h1>
