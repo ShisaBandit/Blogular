@@ -66,10 +66,12 @@
         <div ng-click="event=false" class="button">Finished</div>
     </div>
     <div class="small-12 columns" ng-hide="photo || video || event"  if-authed="show">
+        <div ng-class="{spinner:spinner}"></div>
         <input type="text" ng-model="postText" class="addNewPost small-10 columns"
                placeholder="Begin a new conversation here"/>
+        <div ng-class="{spinner:spinner}"></div>
         <div class="small-2 columns"><br/>
-            <button ng-click="submit()" class="button postfix">Submit</button>
+            <a ng-click="submit()" class="button postfix">Submit</a>
         </div>
 
     </div>
@@ -127,6 +129,8 @@
                         <!-- <a ng-click="showcommentbox($index)" class="button tiny">Join the conversation</a>
                        <div ng-show="commentbox[$index]">-->
                         <a class="button tiny">Join the conversation</a>
+                        <div ng-class="{spinner:spinner}"></div>
+
                         <div>
                             <input type="text" on-keyup="submitComment($index)" keys="[27,13]" ng-model="newcomment[$index]" placeholder="Add your thoughts here! (Click enter to submit)" />
                         </div>

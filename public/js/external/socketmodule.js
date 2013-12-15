@@ -11,13 +11,19 @@ angular.module('socketio', []).
         });
         return {
             connect: function () {
-               io.connect('', {
+                if(socket.socket.connected){
 
-                    'reconnect': true,
-                    'reconnection delay': 500,
-                    'reopen delay': 3000,
-                    'max reconnection attempts': 10
-                });
+                }else{
+                    io.connect('', {
+
+                        'reconnect': true,
+                        'reconnection delay': 500,
+                        'reopen delay': 3000,
+                        'max reconnection attempts': 10
+                    });
+                }
+
+
 
             },
             reconnect: function () {

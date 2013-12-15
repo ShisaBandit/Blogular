@@ -999,8 +999,13 @@ app.controller('SearchBarCtrl', function ($scope, $filter, $rootScope) {
 
 });
 
-app.controller('GroupingCtrl', function ($scope, $rootScope, groupsListing) {
-    $scope.groups = groupsListing;
+app.controller('GroupingCtrl', function ($scope, $rootScope, groupsListing,$location,petgroupsListing) {
+    if("/pets" == $location.path()){
+        $scope.groups = petgroupsListing;
+    }else{
+        $scope.groups = groupsListing;
+
+    }
     $rootScope.subgroup = undefined;
     $scope.$on('$routeChangeSuccess', function (next, current) {
         console.log(current);
@@ -1233,6 +1238,7 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
     $scope.commentbox = [];
     $scope.newcomment = [];
     $scope.blogId;
+    $scope.spinner = false;
     $scope.items = [
         "Show/Hide post",
         "Block/Allow commenting",
@@ -1293,13 +1299,15 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
     })
     $scope.submit = function () {
         console.log("button fired");
+        $scope.spinner = true;
         $http.post('/addtextpost', {text: $scope.postText, id: $scope.blogId}).
             success(function (data, status) {
+                $scope.spinner = false;
                 console.log(data);
                 console.log("emited socket events");
                 socket.emit('postText', {room: $scope.blogId});
                 $scope.postText = "";
-                $scope.refreshStream();
+               // $scope.refreshStream();
 
             }).error(function (err) {
                 console.log(err);
@@ -1310,11 +1318,13 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
         $scope.commentbox[index] = true;
     }
     $scope.submitComment = function (index) {
+        $scope.spinner = true;
         console.log("Submitted");
         console.log($scope.posts);
         console.log($scope.newcomment[index]);
         $http.post('/subcomment', {text: $scope.newcomment[index], comment_id: $scope.posts[index]._id, id: $scope.parentObject.entryId}).
             success(function (data) {
+                $scope.spinner = false;
                 console.log("Successfully sent data");
                 console.log(data);
                 socket.emit('subcomment', {room: $scope.parentObject.entryId, text: $scope.newcomment[index], comment_id: $scope.posts[index]._id})
@@ -1332,27 +1342,28 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
         console.log(data);
         $scope.posts.unshift(data);
     });
+
     socket.on('subcommentupdated', function (data) {
         for (var x = 0; x < $scope.posts.length; x++) {
             if ($scope.posts[x]._id == data.comment_id) {
                 console.log($scope.posts[x]);
                 if ($scope.posts[x].comments == undefined) {
                     $scope.posts[x].comments = [];
-                    $scope.posts[x].comments.push({username:userInfoService.getUsername(),text: data.text,gravatar:userInfoService.getGravatar()});
-                } else {
-                    $scope.posts[x].comments.push({username:userInfoService.getUsername(),text: data.text,gravatar:userInfoService.getGravatar()});
-
                 }
+                $scope.posts[x].comments.push({username:userInfoService.getUsername(),text: data.text,gravatar:userInfoService.getGravatar()});
             }
         }
     })
+
     $scope.refreshStream = function () {
+        $scope.spinner = true;
         $http.get('/lastestPosts/' + $scope.parentObject.entryId).
             success(function (data, err) {
                 for(var p = 0;p<data.length;p++){
                     data[p].date = formatDate(data[p].date);
                 }
                 $scope.posts = data;
+                $scope.spinner = false;
             }).
             error(function (err, code, status) {
                 console.log(err + code + status);

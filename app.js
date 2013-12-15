@@ -397,7 +397,9 @@ io.sockets.on('connection', function (socket) {
         io.sockets.in(data.room).emit('commentsupdated', "YEAH");
     });
     socket.on('subcomment', function (data) {
-        io.sockets.in(data.room).emit('subcommentupdated', data)
+        console.log(socket.broadcast);
+        //io.sockets.in(data.room).broadcast('subcommentupdated', data)
+        socket.broadcast.to(data.room).emit(    'subcommentupdated', data)
     })
     socket.on('postText', function (data) {
         console.log('posttext event received');
