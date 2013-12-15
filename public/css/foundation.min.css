@@ -230,8 +230,6 @@ select {
     .row .small-12 {
         position: relative;
         width: 100%;
-        background: #fff;
-        box-shadow: 10px 10px 20px rgb(0, 52, 85);
     }
 
     .row .small-offset-1 {
