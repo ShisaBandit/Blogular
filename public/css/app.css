@@ -472,7 +472,7 @@ body .primaryContent .shelf .mainBG .row .small-12 .section-container .active .c
     color: #ffffff;
 }
 .postcontainer{
-    background-color: #ffffff;
+    background-color: #FFFADE;
     margin-top: 0px;
     padding-bottom: 10px;
 }
@@ -737,7 +737,7 @@ body .button {
     margin-right: auto;
     font-weight: bolder;
     font-size: large;
-    background: #B3C7DB;
+    background: #D9E9FD;
     box-shadow: 2px 2px 2px #132D48;
 }
 
