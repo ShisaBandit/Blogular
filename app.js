@@ -35,6 +35,7 @@ var express = require('express')
 
 console.log(expressValidator)
 global.__approot = __dirname;
+
 //set up database models to mongoose
 var Blog = blogModels.Blog;
 var User = blogModels.User;
@@ -44,6 +45,7 @@ var app = express();
 app.use(expressValidator());
 //noinspection JSValidateTypes
 app.configure('production', function () {
+    global.__uploads = 'dist';
     app.use(express.compress());
 
     //noinspection JSUnresolvedVariable,JSValidateTypes,MagicNumberJS
@@ -74,6 +76,7 @@ app.configure('production', function () {
 });
 
 app.configure('development', function () {
+    global.__uploads = 'app';
     app.use(express.compress());
 
     app.set('port', process.env.PORT || 3000);
@@ -96,8 +99,8 @@ app.configure('development', function () {
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(app.router);
-    app.use(require('less-middleware')({ src: __dirname + '/public' }));
-    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(require('less-middleware')({ src: __dirname + '/app' }));
+    app.use(express.static(path.join(__dirname, 'app')));
     app.use(express.errorHandler());
 
 });

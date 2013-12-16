@@ -45,7 +45,7 @@ exports.upload = function (req, res) {
                 if(err)console.log(err)
                 console.log(sc)
                 //add the new total pic ass the pic name
-                var newPath = global.__approot + "/public/uploads/" + sc.totalPicCount+"."+fileExt;
+                var newPath = global.__approot + "/"+global.__uploads+"/uploads/" + sc.totalPicCount+"."+fileExt;
                 console.log(req.body);
                 //write to mongo
                 fs.writeFile(newPath, data, function (err) {
@@ -99,7 +99,7 @@ exports.upload = function (req, res) {
 exports.uploadportrait = function (req, res) {
     var name = req.files.file.name;
     fs.readFile(req.files.file.path, function (err, data) {
-        var newPath = global.__approot  + "/public/uploads/" + name;
+        var newPath = global.__approot + "/"+global.__uploads+"/uploads/" + name;
         fs.writeFile(newPath, data, function (err) {
             if(err)res.send(401,'error');
             Blog.findOne({_id:req.body.blogId},function(err,blog){
@@ -115,7 +115,7 @@ exports.uploadportrait = function (req, res) {
 exports.uploadspread= function (req, res) {
     var name = req.files.file.name;
     fs.readFile(req.files.file.path, function (err, data) {
-        var newPath = global.__approot  + "/public/uploads/" + name;
+        var newPath = global.__approot + "/"+global.__uploads+"/uploads/" + name;
         fs.writeFile(newPath, data, function (err) {
             if(err)res.send(401,'error');
             Blog.findOne({_id:req.body.blogId},function(err,blog){
