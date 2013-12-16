@@ -10,7 +10,6 @@ html, body {
 
 body {
     background: none;
-    color: #222;
     padding: 0;
     margin: 0;
     font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
@@ -156,7 +155,7 @@ select {
 }
 
 .row .row h2, .row .row h3, .row .row h4 {
-    color: #3F77B4;
+    color: #9eafff;
 }
 
 #contentHeader .contentHeaderTitle h2 {
@@ -219,19 +218,18 @@ select {
 
     .row .small-10 {
         position: relative;
-        width: 83.33333%
+        width: 83.33333%;
     }
 
     .row .small-11 {
         position: relative;
-        width: 91.66667%
+        width: 91.66667%;
+        top:-110px;
     }
 
     .row .small-12 {
         position: relative;
         width: 100%;
-        background: #fff;
-        box-shadow: 10px 10px 20px rgb(0, 52, 85);
     }
 
     .row .small-offset-1 {
@@ -1501,9 +1499,9 @@ button, .button {
      padding-bottom: 0.8125em;
      padding-left: 1.5em;
      font-size: 1em;
-     background-color: #afc5dc;
-     border-color: #6590bd;
-     color: #132c48
+     background-color: #9EAFFF;
+     border-color: #b9c4ff;
+     color: #47569B;
  }
 
 .buttonSmall {
@@ -1523,13 +1521,13 @@ button, .button {
     padding-bottom: 0.25em;
     padding-left: 0.25em;
     font-size: 0.7em;
-    background-color: #afc5dc;
+    background-color: #b9c4ff;
     border-color: #6590bd;
     color: #132c48
 }
 
 button:hover, button:focus, .button:hover, .button:focus {
-    background-color: #132c48
+    background-color: #47569B;
 }
 
 button:hover, button:focus, .button:hover, .button:focus {
@@ -1537,21 +1535,21 @@ button:hover, button:focus, .button:hover, .button:focus {
 }
 
 button.secondary, .button.secondary {
-    background-color: #e9e9e9;
+    background-color: #b9c4ff;
     border-color: #d0d0d0;
-    color: #333
+    color: #47569B;
 }
 
 button.secondary:hover, button.secondary:focus, .button.secondary:hover, .button.secondary:focus {
-    background-color: #d0d0d0
+    background-color: #b9c4ff
 }
 
 button.secondary:hover, button.secondary:focus, .button.secondary:hover, .button.secondary:focus {
-    color: #333
+    color: #7E91E5
 }
 
 button.success, .button.success {
-    background-color: #afc5dc;
+    background-color: #b8c4ff;
     border-color: #6590bd;
     color: #132c48
 }
@@ -2645,7 +2643,7 @@ form.custom .custom.disabled {
 }
 
 .section-container h2, .section-container.auto h2, .section-container h3, .section-container.auto h3, .section-container h4, .section-container.auto h4 {
-    color: #3F77B4;
+    color: #9eafff;
 }
 
 .section-container section, .section-container .section, .section-container.auto section, .section-container.auto .section {
@@ -3118,7 +3116,7 @@ form.custom .custom.disabled {
 }
 
 .top-bar-section .dropdown li {
-    width: 100%
+    width: 100%;
 }
 
 .top-bar-section .dropdown li a {
@@ -3231,7 +3229,7 @@ form.custom .custom.disabled {
 
     .top-bar-section li a:not(.button):hover {
         background: #71706b;
-        color: #9db2cc;
+        color: #fff;
     }
 
     .top-bar-section .has-dropdown>a {
@@ -3276,10 +3274,11 @@ form.custom .custom.disabled {
 
     .top-bar-section .dropdown li a {
         color: #fff;
-        line-height: 1;
+        text-align: center;
+        line-height: 15px;
         white-space: nowrap;
-        padding: 7px 15px;
-        background: #1e1e1e
+        padding: 10px;
+        background: #8A9948;
     }
 
     .top-bar-section .dropdown li label {

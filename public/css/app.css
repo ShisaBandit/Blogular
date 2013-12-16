@@ -25,16 +25,18 @@
     color: green;
 }
 #portraitpic {
-    position: relative;
-    top:350px;
-    left: 50px;
+    position: absolute;
+    top:20px;
+    left: 0px;
     width: 200px;
-    height: 300px;
-    background: #132D48;
+    height: auto;
+    background: #47569B;
     color: #fff;
     font-weight: bold;
     font-size: large;
     margin: 0px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
     z-index: 400;
 }
 
@@ -84,7 +86,7 @@
 .titleHdr {
     height: 118px;
     overflow: hidden;
-    background: #0072BC url("/img/background/cloudBG.jpg")no-repeat center -195px;
+    background: #9eafff url("/img/background/cloudBG.jpg")no-repeat center -195px;
 }
 
 body .contain-to-grid {
@@ -92,10 +94,11 @@ body .contain-to-grid {
     width: 100%;
     height: 226px !important;
     min-height: 226px;
-    background: #0072BC url("/img/background/headerBG.png")repeat-x center top;
+    background: #9eafff url("/img/background/headerFooterBG.png")repeat-x center -140px;
+    -webkit-box-shadow: 0px 2px 5px 2px #A3A1A1;
+    -moz-box-shadow: 0px 2px 5px 2px #A3A1A1;
+    box-shadow: 0px 2px 5px 2px #A3A1A1;
 }
-
-
 
 .headerCol {
     display: block;
@@ -110,9 +113,19 @@ body .contain-to-grid {
 }
 
 #workpets{
-    margin-top: -60px;
+   width:288px;
+    margin-top: 0px;
     margin-right: 0px;
-    margin-left: 10px;
+    margin-left: 0px;
+    vertical-align: top;
+    border-bottom-left-radius: 2em;
+    border-bottom-right-radius: 2em;
+    border-width: medium 4px 2px;
+    border-style: none solid solid;
+    border-color: rgb(138, 153, 72);
+    box-shadow: 2px 2px 2px rgba(113, 112, 107, 0.5);
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .workpetsbuttons{
@@ -124,6 +137,10 @@ body .contain-to-grid {
     color: #ffffff;
 }
 
+.top-bar-section .dropdown li.memWall {
+    display:inline-block;
+    width: 140px;
+}
 
 #workshopbutton{
     color: #ffffff;
@@ -154,29 +171,18 @@ body .contain-to-grid {
     margin-left: auto;
     margin-right: auto;
     padding-top: 10px;
-    background: #9db2cc;
+    background: #FFFADE;
     border-top-left-radius: 2em;
     border-top-right-radius: 2em;
-    -webkit-box-shadow: 2px 2px 5px rgb(19, 45, 72);
-    -moz-box-shadow: 2px 2px 5px rgb(19, 45, 72);
-    box-shadow: 2px 2px 5px rgb(19, 45, 72);
-}
-
-.offsetHeight100 {
-    margin-top: 150px;
-    background: #0072BC;
-    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzFlNTc5OSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzI5ODlkOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUxJSIgc3RvcC1jb2xvcj0iIzIwN2NjYSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM3ZGI5ZTgiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-    background: linear-gradient(to bottom,  #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); /* W3C */
-    border-top-left-radius: 2em;
-    border-top-right-radius: 2em;
-    box-shadow: 10px 10px 20px rgb(0, 52, 85);
+    -webkit-box-shadow: 2px 2px 5px #A3A1A1;
+    -moz-box-shadow: 2px 2px 5px #A3A1A1;
+    box-shadow: 2px 2px 5px #A3A1A1;
 }
 
 
-.offsetHeight100 h1,h2,h3,h4 {
-    color: #f5f5f5;
-    text-shadow: 2px 20x 5px navy;
+.offsetHeight h1,h2,h3,h4 {
+    color: #47569B;
+    text-shadow: 2px 2px 5px rgb(71, 86, 155);
 }
 
 h2.dark {
@@ -198,7 +204,7 @@ h2.dark {
     font-weight: bold;
     color: #fff;
     border-radius: 20px;
-    background: #3F77B4;
+    background: #9eafff;
     box-shadow: 2px 2px 5px rgb(19, 45, 72);
 }
 
@@ -217,23 +223,23 @@ h2.dark {
 
 .loginBlock {
     position:relative;
-    top:-75px;
-    left:0px;
+    top:-93px;
+    left:-170px;
     display: block;
     width: 100%;
-    height: 75px;
+    height: 50px;
     margin-top: 0px;
     padding-right: 20px;
     text-align: right;
     float: right;
-    background: rgba(7.8%,22.7%,37.3%, 0.6);
-    border-bottom-left-radius:2em;
-    border-bottom-right-radius:2em;
+    background: rgba(189, 203, 128, 0.6);
+    border-top-left-radius:2em;
+    border-top-right-radius:2em;
     border-top: none;
-    border-right: 4px solid #143A5F;
-    border-left: 4px solid #143A5F;
-    border-bottom: 4px solid #143A5F;
-    box-shadow: 2px 2px 5px rgb(19, 45, 72);
+    border-right: 4px solid #8a9948;
+    border-left: 4px solid #8a9948;
+    border-bottom: 2px solid #8a9948;
+    box-shadow: -2px -2px 2px rgb(113, 112, 107);
     z-index: 2;
 }
 
@@ -248,7 +254,7 @@ h2.dark {
     padding: 10px;
     padding-bottom: 0px;
     /* background: #26619D; */
-    color: #fff;
+    color: #71706b;
     white-space: nowrap;
     -webkit-border-radius: 3px;
     border-radius: 3px;
@@ -279,11 +285,11 @@ h2.dark {
     left: 20px;
     display: block;
     width: 343px;
-    height: 120px;
+    height: 125px;
     margin: 0px;
     padding-top: 0px;
     text-indent: -9000px;
-    background: url("/img/logo.png") center top no-repeat;
+    background: url("/img/logo.png") left top no-repeat;
     z-index: 20;
 }
 
@@ -312,7 +318,7 @@ h2.dark {
     top: 0px;
     display:block;
     width:100%;
-    height:95px;
+    height:55px;
     margin-top: -20px;
     background-color: #bdcb80;
     border-top-left-radius: 2em;
@@ -324,9 +330,16 @@ h2.dark {
 
 .border-footer{
     padding: 20px;
-    background: #E7DDDB ;
+    background: url("/img/background/headerFooterBG.png") repeat-x scroll center -480px rgb(158, 175, 255);
     border-bottom: 1px solid #000000;
     box-shadow: 2px 2px 5px rgb(19, 45, 72);
+    height: 121px;
+}
+
+.border-footer p {
+    margin-top: 50px;
+    margin-left: 100px;
+
 }
 .footer-child{
     height: 50px;
@@ -355,18 +368,18 @@ h2 {
 .memProfilePreview {
     color: #fff;
     padding: 10px;
-    background: #0059A3;
+    background: #fff;
     border-radius: 4px;
 }
 
 .memProfilePreview h6 {
     padding: 10px;
-    background: #143A5F;
+    background: #fff;
 }
 
 .memProfilePreview h6 a {
     display:block;
-    color: #fff;
+    color: #F08678;
     width: 100%;
 }
 
@@ -401,11 +414,19 @@ h1.sectionHeader {
 .mainBG {
 	background: none;
 }
-#picheader{
 
+#picheader{
+    position:relative;
+    display: block;
+    width: 967px;
+    height: auto;
+    margin-bottom: 20px;
 }
+
 #portrait{
-    border: 4px solid #132D48;
+    border: 4px solid #47569B;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
     z-index: 100;
 }
 
@@ -422,14 +443,14 @@ h1.sectionHeader {
     display:block;
     width: 100%;
     clear: both;
-    background-color: #3F77B4;
+    background-color: #9eafff;
     margin-bottom: 20px;
 }
 .contentHeader{
     display:block;
     width: 100%;
     clear: both;
-    background-color: #3F77B4;
+    background-color: #9eafff;
     margin-bottom: 20px;
 }
 .contentHeaderTitle{
@@ -454,7 +475,7 @@ body .primaryContent .shelf .mainBG .row .small-12 .section-container .active .c
     color: #ffffff;
 }
 .postcontainer{
-    background-color: #ffffff;
+    background-color: #FFFADE;
     margin-top: 0px;
     padding-bottom: 10px;
 }
@@ -477,16 +498,12 @@ body .primaryContent .shelf .mainBG .row .small-12 .section-container .active .c
 .row .small-12 {
     position: relative;
     width: 100%;
-    background: none repeat scroll 0% 0% rgb(255, 255, 255);
     /*box-shadow: 5px 5px 5px #132D48; */
-    box-shadow: 2px 2px 5px #132D48;
 }
 
 .row2 {
     position: relative;
     width: 100%;
-    background: none repeat scroll 0% 0% rgb(255, 255, 255);
-    box-shadow: 2px 2px 5px #132D48;
     margin-bottom: 20px;
 }
 
@@ -509,6 +526,15 @@ label {
     float: left;
     clear: both;
 }
+
+.row .row .stream {
+    position: relative;
+    top:20px;
+    left:200px;
+    width: 750px;
+    height: auto;
+    margin: 0px 0px 10px 0px;
+ }
 
 .small-6 input[type=text],.small-6 input[type=password],.small-6 input[type=email] {
     width: 250px;
@@ -648,8 +674,9 @@ body .button {
 
 
 #loginMessage {
-    position:relative;
-    top:140px;
+    position:fixed;
+    top:5%;
+    left: 20%;
     display:block;
     width: 80%;
     max-width: 980px;
@@ -713,7 +740,7 @@ body .button {
     margin-right: auto;
     font-weight: bolder;
     font-size: large;
-    background: #B3C7DB;
+    background: #D9E9FD;
     box-shadow: 2px 2px 2px #132D48;
 }
 
@@ -1047,19 +1074,18 @@ input.addNewPost {
 }
 
 .memNav {
-    width: 100%;
+    width: 700px;
     height: 70px;
     left: 0px;
-    position: fixed;
-    top: 100px;
-    background-color: #ffffff;
-    z-index: 990;
+    position: relative;
+    top: 0px;
 }
 
 .wallGroup {
     display: block;
     clear: both;
-    text-align: center;
+    text-align: left;
+    margin-top: 10px;
 }
 
 .wallGroup ul {
@@ -1073,12 +1099,11 @@ input.addNewPost {
     font-weight: bold;
     height: 20px;
     padding: 5px;
-    margin: 2px;
+    margin: 0px;
     list-style: none;
     line-height: 8px;
-    background-color: #26619D;
+    background-color: #71706B;
     color: #f0f0f0;
-    border-radius: 4px;
 }
 
 #toolbar {
@@ -1240,9 +1265,9 @@ h6.petsTitle {
 }
 
 .mural {
-    margin-top: -25px;
+    margin-top: -65px;
 }
 
 .muralPets {
-    margin-top: -25px;
+    margin-top: -65px;
 }
