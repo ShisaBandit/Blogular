@@ -406,7 +406,7 @@ io.sockets.on('connection', function (socket) {
         Blog.findOne({_id: data.room}, function (err, blog) {
             if (err)console.log(err);
             console.log(blog.postText[blog.postText.length - 1]);
-            io.sockets.in(data.room).emit('newPostText', blog.postText[blog.postText.length - 1]);
+            socket.broadcast.to(data.room).emit('newPostText', blog.postText[blog.postText.length - 1]);
         })
 
     });

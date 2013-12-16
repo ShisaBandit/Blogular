@@ -400,7 +400,7 @@ exports.addTextPost = function (req, res) {
                 if (err)console.log(err);
                 console.log("saved textpost");
 
-                return res.end(JSON.stringify({'success': 'true'}));
+                return res.end(JSON.stringify({'success': 'true','postText':doc.postText[doc.postText.length-1]}));
 
             });
         })

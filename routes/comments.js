@@ -18,6 +18,7 @@ exports.comments = function (req) {
 exports.subcomment = function (req, res) {
     Blog.findOne({_id: req.body.id}, function (err, blog) {
             var doc = blog.postText.id(req.body.comment_id);
+            if(!doc)return res.send(200,'error');
             if(doc.canComment){
                 var userid = req.session.passport.user;
                 User.findOne({_id: userid}, function (err, user) {

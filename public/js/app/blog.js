@@ -1286,12 +1286,14 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
         console.log(oldVal);
         console.log(newVal);
         $scope.blogId = newVal;
+        $scope.spinner = true;
         $http.get('/lastestPosts/' + newVal).
             success(function (data, err) {
                 for(var p = 0;p<data.length;p++){
                     data[p].date = formatDate(data[p].date);
                 }
                 $scope.posts = data;
+                $scope.spinner = false;
             }).
             error(function (err, code, status) {
                 console.log(err + code + status);
@@ -1304,10 +1306,16 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
             success(function (data, status) {
                 $scope.spinner = false;
                 console.log(data);
+                console.log($scope.postText);
+                console.log("POST TEXT ");
                 console.log("emited socket events");
                 socket.emit('postText', {room: $scope.blogId});
                 $scope.postText = "";
-               // $scope.refreshStream();
+               //$scope.refreshStream();
+
+              // TODO:Delay admin rights till id is fetched
+
+                $scope.posts.unshift(data.postText);
 
             }).error(function (err) {
                 console.log(err);
@@ -1342,8 +1350,7 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
         console.log(data);
         $scope.posts.unshift(data);
     });
-
-    socket.on('subcommentupdated', function (data) {
+    $scope.addSubComment = function (data) {
         for (var x = 0; x < $scope.posts.length; x++) {
             if ($scope.posts[x]._id == data.comment_id) {
                 console.log($scope.posts[x]);
@@ -1353,6 +1360,9 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
                 $scope.posts[x].comments.push({username:userInfoService.getUsername(),text: data.text,gravatar:userInfoService.getGravatar()});
             }
         }
+    }
+    socket.on('subcommentupdated', function (data) {
+        $scope.addSubComment(data);
     })
 
     $scope.refreshStream = function () {
