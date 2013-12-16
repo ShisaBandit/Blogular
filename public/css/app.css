@@ -30,11 +30,13 @@
     left: 0px;
     width: 200px;
     height: auto;
-    background: #9EAFFF;
+    background: #47569B;
     color: #fff;
     font-weight: bold;
     font-size: large;
     margin: 0px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
     z-index: 400;
 }
 
@@ -419,7 +421,9 @@ h1.sectionHeader {
 }
 
 #portrait{
-    border: 4px solid #132D48;
+    border: 4px solid #47569B;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
     z-index: 100;
 }
 
@@ -520,11 +524,11 @@ label {
     clear: both;
 }
 
-.stream {
+.row .row .stream {
     position: relative;
     top:20px;
     left:200px;
-    width: 700px;
+    width: 750px;
     height: auto;
     margin: 0px 0px 10px 0px;
  }
@@ -1072,13 +1076,13 @@ input.addNewPost {
     left: 0px;
     position: relative;
     top: 0px;
-    background-color: #ffffff;
 }
 
 .wallGroup {
     display: block;
     clear: both;
-    text-align: center;
+    text-align: left;
+    margin-top: 10px;
 }
 
 .wallGroup ul {
@@ -1092,12 +1096,11 @@ input.addNewPost {
     font-weight: bold;
     height: 20px;
     padding: 5px;
-    margin: 2px;
+    margin: 0px;
     list-style: none;
     line-height: 8px;
-    background-color: #26619D;
+    background-color: #71706B;
     color: #f0f0f0;
-    border-radius: 4px;
 }
 
 #toolbar {
