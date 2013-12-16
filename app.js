@@ -71,8 +71,8 @@ app.configure('production', function () {
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(app.router);
-    app.use(require('less-middleware')({ src: __dirname + '/public' }));
-    app.use(express.static(path.join(__dirname, 'public'), { maxAge: 86400000 /* 1d */ }));
+    app.use(require('less-middleware')({ src: __dirname + '/dist' }));
+    app.use(express.static(path.join(__dirname, 'dist'), { maxAge: 86400000 /* 1d */ }));
 });
 
 app.configure('development', function () {
