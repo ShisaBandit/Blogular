@@ -38,6 +38,7 @@
 
 <!-- Add your site or application content here -->
 <div ng-controller="HeaderCtrl">
+    Angels of Eureka Proudly Presents:
     <div ng-class="[constyle,constyle2]" >
         <nav ng-class="[topstyle,topstyle2]"  data-topbar data-options="is_hover: false">
             <ul class="title-area">
@@ -81,7 +82,7 @@
                     <li>
                         <a href="#" id="webstorebutton" class="small">Web Store</a>
                     </li>
-                    <li class="has-dropdown">
+                    <li class="has-dropdown loggedOut">
                         <a href="#">My Account</a>
                         <ul class="dropdown">
                             <li>
@@ -98,6 +99,16 @@
                                 </div>
                             </li>
                         </ul>
+                    </li>
+                    <li ng-controller="UserInfoCtrl" class="loggedBlock" id="username2">
+                            <img width="34" src="http://www.gravatar.com/avatar/{{post.gravatar}}" />
+                            <b>{{username}}</b>
+                            <a href="#/profile/{{username}}" if-authed="show" class="small button">My Account</a>
+                            <a href="#/rules" class="small button">Rules</a>
+                            <a href="#" ng-click="logout()" if-authed="show" class="small button">logout</a>
+                            <a href="#/registration" if-authed="hide" class="small button">Register</a>
+                            <a if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
+                        </div>
                     </li>
                 </ul>
             </section>
@@ -141,8 +152,9 @@
     <section class="shelf" id="shelf">
         <div id="loginMessage" if-authed="hide">
             <p>
+            <img src="" style="background: url('/img/logo.png') no-repeat left top; width: 342px; height: 125px; overflow: hidden;" />
             <h1>Welcome to Angels of Eureka's Circle of Life </h1>
-            <h2 style="color: #000000;font-size: large;font-weight: bold">Celebrate life...Cherish Lagacies</h2>
+            <h2 style="color: #000000;font-size: large;font-weight: bold">Celebrate life...Cherish Legacies</h2>
             <h3 style="color: #000000;font-size: small;font-weight: normal">Angels of Eureka is about Love, Hope and Life with People and Pets.</h3>
             <!--[if lte IE 8]>
             <b style="red; font-weight: bold;">

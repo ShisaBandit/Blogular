@@ -26,12 +26,6 @@
                     <div class="small-3 columns">
                         <a ng-click="changedSubGroup(true)" class="button small success radius">Remove Filter</a>
                     </div>
-                    <div class="row">
-                        <div class="small-11 columns">
-                            <input ng-model="search.search" type="text" class="searchBar"
-                                   placeholder="Search Memorials">
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -40,6 +34,12 @@
                 <img src="./img/muralPets.png" class="muralPets" ng-show="pets">
                 <img src="./img/mural1.png" class="mural"  ng-hide="pets">
             <ul class="small-block-grid-4" >
+                <div class="row">
+                    <div class="small-11 columns">
+                        <input ng-model="search.search" type="text" class="searchBar"
+                               placeholder="Search Memorials">
+                    </div>
+                </div>
                 <li ng-repeat="entry in entries | filter:search.search | bySubgroup:subgroup">
                     <div style="background-image: url({{entry.titleImage}})" ng-style="getBackImg(entry._id)" class="memProfilePreview"  ng-class="{error:pets, pets:pets}">
                         <h6   ng-class="{error:pets, petsTitle:pets}"><a href="#/angel/{{entry.author}}">{{entry.lastName}}, {{entry.firstName}}</a></h6>
