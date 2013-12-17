@@ -1703,6 +1703,10 @@ app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams) {
     }else{
         api.getResourceById('Petition', 'all', function (petitions) {
             console.log(petitions)
+            for(var petition in petitions){
+                if(petitions[petition].signatures)
+                    petitions[petition].signaturecount = petitions[petition].signatures.length;
+            }
             $scope.petitions = petitions;
 
             $scope.spinner = false;

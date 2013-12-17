@@ -9,6 +9,8 @@
 */
 
 
+
+
 /* -----------------------------------------
    Shared Styles
 ----------------------------------------- */
@@ -37,7 +39,7 @@
     margin: 0px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    z-index: 10;
+    z-index: 400;
 }
 
 #portraitpic #profile-menu nav section h2 {
@@ -102,37 +104,15 @@ body .contain-to-grid {
  body .contain-to-grid-logged-in {
     display:block;
     width: 100%;
-    height: 55px !important;
-    min-height: 55px;
+    height: 106px !important;
+    min-height: 106px;
     background: #9eafff url("/img/background/headerFooterBG.png")repeat-x center -140px;
     -webkit-box-shadow: 0px 2px 5px 2px #A3A1A1;
     -moz-box-shadow: 0px 2px 5px 2px #A3A1A1;
     box-shadow: 0px 2px 5px 2px #A3A1A1;
 }
-
- body .contain-to-grid nav.top-bar .loggedBlock, #username2 {
-     display: none;
- }
-
-body .contain-to-grid-logged-in nav.top-bar-logged-in .loggedBlock {
-    display: block !important;
-}
-
- body .contain-to-grid nav.top-bar .loggedBlock {
-     display: none;
- }
-
- body .contain-to-grid .loggedOut {
-     display:block;
- }
-
- body .contain-to-grid-logged-in .loggedOut {
-     display:none;
- }
-
 .top-bar-logged-in{
     position: inherit;
-    background: #9eafff url("/img/background/headerFooterBG.png")repeat-x -80px -540px;
 }
 .headerCol {
     display: block;
@@ -255,76 +235,27 @@ h2.dark {
     background-color: dodgerblue;
 }
 
- body .contain-to-grid-logged-in .loginBlock {
-     display: block;
-     width: auto;
-     height: 50px;
-     margin-top: 0px;
-     margin-left: -400px;
-     padding-right: 20px;
-     text-align: right;
-     float: right;
-     background: rgba(189, 203, 128, 0.6);
-     border-top-left-radius: 0;
-     border-top-right-radius: 0;
-     border-bottom-left-radius:2em;
-     border-bottom-right-radius:2em;
-     border-bottom: none;
-     border-right: 4px solid #8a9948;
-     border-left: 4px solid #8a9948;
-     border-bottom: 2px solid #8a9948;
-     box-shadow: -2px -2px 2px rgb(113, 112, 107);
-     z-index: 2;
- }
-
-
 .loginBlock {
     /*position:relative;*/
+    top:-93px;
+    left:-170px;
     display: block;
-    width: auto;
+    width: 100%;
     height: 50px;
     margin-top: 0px;
-    margin-left: -210px;
     padding-right: 20px;
     text-align: right;
+    float: right;
     background: rgba(189, 203, 128, 0.6);
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-left-radius:2em;
-    border-bottom-right-radius:2em;
-    border-bottom: none;
+    border-top-left-radius:2em;
+    border-top-right-radius:2em;
+    border-top: none;
     border-right: 4px solid #8a9948;
     border-left: 4px solid #8a9948;
     border-bottom: 2px solid #8a9948;
     box-shadow: -2px -2px 2px rgb(113, 112, 107);
     z-index: 2;
 }
-
-body .contain-to-grid-logged-in #username2 {
-    display: block;
-    width: auto;
-    height: 45px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    margin-right: 0px;
-    padding: 10px 0px 0px 5px;
-    padding-bottom: 0px;
-    /* background: #26619D; */
-    color: #47569B;
-    white-space: nowrap;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    background: #BDCB80;
-}
-
- body .contain-to-grid-logged-in #username2 a.small.button {
-     display: inline;
-     color: #47569B;
-     border: none;
-     outline: none;
-     background: none;
- }
 
 #username{
     display: block;
@@ -359,20 +290,6 @@ body .contain-to-grid-logged-in #username2 {
     width: 40px;
     padding-left:3px;
 
-}
-
-.top-bar-logged-in .logo {
-    position:relative;
-    top:0px;
-    left: 20px;
-    display: block;
-    width: 100px;
-    height: 125px;
-    margin: 0px;
-    padding-top: 0px;
-    text-indent: -9000px;
-    background: url("/img/miniLogo.png") left top no-repeat;
-    z-index: 20;
 }
 
 
@@ -415,7 +332,7 @@ body .contain-to-grid-logged-in #username2 {
     top: 0px;
     display:block;
     width:100%;
-    height:125px;
+    height:55px;
     margin-top: -20px;
     background-color: #bdcb80;
     border-top-left-radius: 2em;
@@ -434,7 +351,7 @@ body .contain-to-grid-logged-in #username2 {
 }
 
 .border-footer p {
-    margin-top: 35px;
+    margin-top: 50px;
     margin-left: 100px;
 
 }
@@ -443,6 +360,7 @@ body .contain-to-grid-logged-in #username2 {
 }
 
 .right-separator{
+    border-right: 1px solid #0000ff;
 }
 .gradient-main{
     position: relative;
@@ -540,7 +458,6 @@ h1.sectionHeader {
     width: 100%;
     clear: both;
     background-color: #9eafff;
-    background: url('/img/headerCircleBG.png') repeat-x left top;
     margin-bottom: 20px;
 }
 .contentHeader{
@@ -633,8 +550,8 @@ label {
     top:20px;
     left:200px;
     width: 750px;
-    height: 400px\9;
-    min-height: 300px;
+    height: auto;
+    min-height: 600px;
     margin: 0px 0px 10px 0px;
  }
 
@@ -1063,9 +980,6 @@ input.addNewPost {
     .postEntry {
         margin-top: 410px;
     }
-    .border-footer{
-
-    }
 }
 
 #rulesModal {
@@ -1184,9 +1098,8 @@ input.addNewPost {
 
 .memNav {
     width: 700px;
-    height: 30px;
+    height: 70px;
     left: 0px;
-    padding-left: 20px;
     position: relative;
     top: 0px;
 }
@@ -1195,28 +1108,38 @@ input.addNewPost {
     display: block;
     clear: both;
     text-align: left;
-    margin-top: 0px;
-    background: #fff;
+    margin-top: 10px;
+    font-size: small;
+    font-weight: normal;
 }
 
 .wallGroup ul {
     padding: 0px;
-    margin: 10px 0 0 0;
+    margin: 0px;
     list-style: none;
+    width: 100%;
+    border: 1px solid #47569B;
 }
 .noStyleList{
     list-style-type: none;
     float: right;
 }
+<<<<<<< HEAD:app/css/app.css
+=======
+.noStyleList{
+    list-style-type: none;
+    float: right;
+}
+>>>>>>> 19e8e418c5e606b3dbe269a6fd851ac89357b660:app/css/app.css
 .wallGroup ul li {
-    display: inline-block;
-    width: 100%;
-    font-weight: bold;
+    display: block;
     height: 20px;
     padding: 5px;
     margin: 0px;
+    width: 100%;
     list-style: none;
     line-height: 8px;
+    background-color: #fff;
     color: #47569B;
 }
 
@@ -1347,11 +1270,11 @@ input.addNewPost {
 }
 
 .groupsList {
-    background: url("/img/background/colbg2.png")repeat #8A9948;
+    background: url("/img/background/colbg2.png")repeat #007575;
 }
 
 .group {
-    background: #fff;
+    background: #008282;
 }
 
 .group a {
@@ -1359,11 +1282,11 @@ input.addNewPost {
 }
 
 h6.groupTitle {
-    background: #fff;
+    background: #034F4F;
 }
 
 div.scrollerBlock.petsList {
-    background: url("/img/background/colbg2.png")repeat #f28678;
+    background: url("/img/background/colbg2.png")repeat #D58FEA;
 }
 
 div.scrollerBlock {
@@ -1371,47 +1294,17 @@ div.scrollerBlock {
 }
 
 .pets {
-    background: #fff;
+    background: #C562E1;
 }
 
 h6.petsTitle {
-    background: #fff;
+    background: #9F06CE;
 }
 
 .mural {
-    margin-top: -18px;
+    margin-top: -65px;
 }
 
 .muralPets {
-    margin-top: -18px;
+    margin-top: -65px;
 }
-
- /* Small screens*/
- @media only screen { } /* Define mobile styles */
-
- @media only screen and (max-width: 40em) {
-     .border-footer p{
-         font-size: 75%;
-         margin-left: 0px;
-         margin-top: 25px;
-     }
- } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
-
- /*Medium screens*/
- @media only screen and (min-width: 40.063em) { } /* min-width 641px, medium screens */
-
- @media only screen and (min-width: 40.063em) and (max-width: 64em) { } /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
-
- /* Large screens*/
- @media only screen and (min-width: 64.063em) { } /* min-width 1025px, large screens */
-
- @media only screen and (min-width: 64.063em) and (max-width: 90em) { } /* min-width 1024px and max-width 1440px, use when QAing large screen-only issues */
-
- /* XLarge screens*/
- @media only screen and (min-width: 90.063em) { } /* min-width 1441px, xlarge screens */
-
- @media only screen and (min-width: 90.063em) and (max-width: 120em) { } /* min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues */
-
- /* XXLarge screens*/
- @media only screen and (min-width: 120.063em) { } /* min-width 1921px, xlarge screens */
-

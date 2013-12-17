@@ -68,7 +68,6 @@
             </div>
         </section></tab>
     <tab heading="My Memorial Walls">
-
         <section>
             <p class="title" data-section-title><a >My Memorial Walls</a></p>
             <div class="content profileGravatar" data-section-content>
@@ -80,11 +79,9 @@
                     </div>
                     <ul class="profile">
                         <a href="#/AddBlogEntry" class="button"><b>Create a new memorial wall profile here!</b></a> <br/><br/>
-                        <li ng-repeat="angel in angels">Angel's Name : {{ angel.firstName }} {{ angel.lastName }} - {{ angel.title
-                            }}
+                        <li ng-repeat="angel in angels">Angel's Name : {{ angel.firstName }} {{ angel.lastName }} - {{ angel.title }}
                             <br/>
-
-                            - <a href="#/angel/{{angel.author}}">View this memorial wall</a>
+                            <img id="portrait" src="/uploads/{{ angel.profilePicPortrait }}"> - <a href="#/angel/{{angel.author}}">View this memorial wall</a>
                             <br/>
                             - <a href="#/findenewmembers/{{ angel.author }}">Find and invite new members to this wall</a>
                             <br/>
@@ -96,7 +93,8 @@
                             <br/><br/>
                         </li>
                     </ul>
-                </div>
+
+                 </div>
             </div>
         </section>
     </tab>
@@ -124,7 +122,8 @@
                     <!-- Delete above UL after demo -->
                 </div>
             </div>
-        </section></tab>
+        </section>
+    </tab>
     <tab heading="My Groups">
         <section>
             <p class="title" data-section-title><a >My Groups</a></p>
@@ -178,7 +177,8 @@
                     </div>
                 </div>
             </div>
-        </section></tab>
+        </section>
+    </tab>
     <tab heading="My Petitions">
 
         <section>
@@ -199,7 +199,8 @@
                     </ul>
                 </div>
             </div>
-        </section></tab>
+        </section>
+    </tab>
     <tab heading="Static title">
         <section>
             <p class="title" data-section-title><a >Message Center</a></p>
@@ -251,7 +252,8 @@
                     </div>
                 </div>
             </div>
-        </section></tab>
+        </section>
+    </tab>
 </tabset>
 
 <hr />

@@ -223,8 +223,8 @@ select {
 
     .row .small-11 {
         position: relative;
-        width: 91.66667%;
-        top:-110px;
+        width: 100%;
+        top:10px;
     }
 
     .row .small-12 {
