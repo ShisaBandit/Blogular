@@ -16,26 +16,19 @@
         <h2 class="dark">Sitewide petitions</h2>
         <p>Do you have a cause that you are passionate about bringing a change to? Create your petition here and get the support you need to make a change!</p>
         <p>After you get enough people to sign your petition, take your voices to Washington here! <a href="http://www.house.gov/representatives/find/" target="_blank"><b>Find Your Representative</b></a></p>
+
+        <ul class="large-block-grid-5">
+            <li class="panel row collapse" ng-repeat="petition in petitions">
+                            <div class="title small-11 columns">
+                                <a rel="nofollow" href="#/petition/{{petition.title}}">{{petition.title}}</a>
+                            </div>
+                            <span class="subheader small-11 columns">{{petition.signaturecount}}: Signatures</span>
+                                <!--
+                                <div class="find-out">
+                                    <a href="/petition/petition-retroactively-abrogate-illegal-elections-constitutionally-ineligible-individual-presidency/Pr5W1x1q"> … </a>
+                                </div>
+                                -->
+            </li>
+        </ul>
     </div>
-    <div class="row" ng-repeat="petition in petitions">
-        <div class="small-12 columns">
-            <div id="petition-52a8fe877043012d04000002" class="col-2 float-left add-margin">
-                <div class="entry ">
-                    <div class="title">
-                        <a rel="nofollow" href="#/petition/{{petition.title}}">{{petition.title}}</a>
-                    </div>
-                    <div class="action-bar clearfix">
-                        <div class="num-sig">
-                            <span class="num"> … </span>
-
-                            Signatures
-
-                        </div>
-                        <div class="find-out">
-                            <a href="/petition/petition-retroactively-abrogate-illegal-elections-constitutionally-ineligible-individual-presidency/Pr5W1x1q"> … </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 </div>
