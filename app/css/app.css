@@ -39,7 +39,7 @@
     margin: 0px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    z-index: 400;
+    z-index: 10;
 }
 
 #portraitpic #profile-menu nav section h2 {
@@ -635,7 +635,8 @@ label {
     top:20px;
     left:200px;
     width: 750px;
-    height: auto;
+    height: 400px\9;
+    min-height: 300px;
     margin: 0px 0px 10px 0px;
  }
 
@@ -1182,8 +1183,9 @@ input.addNewPost {
 
 .memNav {
     width: 700px;
-    height: 70px;
+    height: 30px;
     left: 0px;
+    padding-left: 20px;
     position: relative;
     top: 0px;
 }
@@ -1192,12 +1194,13 @@ input.addNewPost {
     display: block;
     clear: both;
     text-align: left;
-    margin-top: 10px;
+    margin-top: 0px;
+    background: #fff;
 }
 
 .wallGroup ul {
     padding: 0px;
-    margin: 0px;
+    margin: 10px 0 0 0;
     list-style: none;
 }
 .noStyleList{
@@ -1206,14 +1209,14 @@ input.addNewPost {
 }
 .wallGroup ul li {
     display: inline-block;
+    width: 100%;
     font-weight: bold;
     height: 20px;
     padding: 5px;
     margin: 0px;
     list-style: none;
     line-height: 8px;
-    background-color: #71706B;
-    color: #f0f0f0;
+    color: #47569B;
 }
 
 #toolbar {
