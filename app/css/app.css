@@ -1346,11 +1346,11 @@ input.addNewPost {
 }
 
 .groupsList {
-    background: url("/img/background/colbg2.png")repeat #007575;
+    background: url("/img/background/colbg2.png")repeat #8A9948;
 }
 
 .group {
-    background: #008282;
+    background: #fff;
 }
 
 .group a {
@@ -1358,11 +1358,11 @@ input.addNewPost {
 }
 
 h6.groupTitle {
-    background: #034F4F;
+    background: #fff;
 }
 
 div.scrollerBlock.petsList {
-    background: url("/img/background/colbg2.png")repeat #D58FEA;
+    background: url("/img/background/colbg2.png")repeat #f28678;
 }
 
 div.scrollerBlock {
@@ -1370,17 +1370,17 @@ div.scrollerBlock {
 }
 
 .pets {
-    background: #C562E1;
+    background: #fff;
 }
 
 h6.petsTitle {
-    background: #9F06CE;
+    background: #fff;
 }
 
 .mural {
-    margin-top: -65px;
+    margin-top: -18px;
 }
 
 .muralPets {
-    margin-top: -65px;
+    margin-top: -18px;
 }
