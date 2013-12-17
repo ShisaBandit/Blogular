@@ -14,8 +14,8 @@
 
     <!-- build:css({.tmp,app}) css/main.css -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/foundation.min.css">
-    <!--<link rel="stylesheet" href="bower_components/foundation/css/foundation.min.css">-->
+    <!--<link rel="stylesheet" href="css/foundation.min.css">-->
+    <link rel="stylesheet" href="bower_components/foundation/css/foundation.min.css">
     <link rel="stylesheet" href="css/app.css">
     <link href="css/animate.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/normalize.css" media="all"/>
@@ -226,7 +226,7 @@
 </section>
 <!-- Sitewide Modals -->
 <div id="login-inner" ng-controller="LoginController">
-    <div reveal-modal="login" id="loginModal" class="reveal-modal [expand, xlarge, large, medium, small]">
+    <div reveal-modal="login" id="loginModal" class="reveal-modal medium" data-reveal>
         <p><b>{{error}}</b></p>
 
         <p><b>{{message}}</b></p>
@@ -311,8 +311,8 @@
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
-<script src="scripts/foundation/foundation.min.js"></script>
-<!--<script src="bower_components/foundation/js/foundation.min.js"></script>-->
+<!--<script src="scripts/foundation/foundation.min.js"></script>-->
+<script src="bower_components/foundation/js/foundation.min.js"></script>
 <script type="text/javascript" src="scripts/external/app.js"></script>
 <script type="text/javascript" src="scripts/external/ui-bootstrap-tpls-0.7.0.min.js"></script>
 <script type="text/javascript" src="scripts/external/socketmodule.js"></script>
@@ -341,10 +341,10 @@
 <script type="text/javascript" src="scripts/external/provider/angular-adaptive-detection.js"></script>
 <!-- endbuild -->
 <script>
-    $(document).foundation();
+
 
     $(document).ready(function () {
-
+        $(document).foundation();
     })
 </script>
 </body>
