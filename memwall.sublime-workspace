@@ -1,0 +1,701 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"seld",
+				"$scope.selectedSubgroup"
+			],
+			[
+				"conso",
+				"console.log();"
+			],
+			[
+				"$scop",
+				"$scope"
+			],
+			[
+				"log",
+				"console.log();"
+			],
+			[
+				"$htt",
+				"$http	AngularJS"
+			],
+			[
+				"Hor",
+				"HorseInspector"
+			],
+			[
+				"stamina",
+				"stamina"
+			],
+			[
+				"float",
+				"float"
+			],
+			[
+				"p",
+				"panel"
+			],
+			[
+				"pal",
+				"panel"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "public/js/app/blog.js",
+			"settings":
+			{
+				"buffer_size": 79325,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Package Control Messages\n========================\n\nSublimeGit:\n----------\n\n  SublimeGit 1.0.26\n  =================\n  \n  Bug Fixes:\n  ----------\n   - Try to fix memory leak regarding git_commit_pedantic. This involves:\n       1. Turning it off by default.\n       2. Making sure that only git commit buffers are affected.\n       3. Making sure that the EventListener does as little work as possible.\n      (Issue #76)\n  \n  \n  Documentation\n  -------------\n   - Corrected examples in documentation for git_merge_flags. (Issue #77)\n  \n",
+			"settings":
+			{
+				"buffer_size": 531,
+				"line_ending": "Unix",
+				"name": "Package Control Messages",
+				"scratch": true
+			}
+		},
+		{
+			"file": "public/partials/giftShop.html",
+			"settings":
+			{
+				"buffer_size": 1208,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/js/external/controller/GiftShopCtrl",
+			"settings":
+			{
+				"buffer_size": 732,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 181.0,
+		"selected_items":
+		[
+			[
+				"git push",
+				"Git: Push Current Branch"
+			],
+			[
+				"git:comma",
+				"Git: Commit All…"
+			],
+			[
+				"lint",
+				"SublimeLint: Show All Errors"
+			],
+			[
+				"git commital",
+				"Git: Commit All…"
+			],
+			[
+				"git:comm",
+				"Git: Commit All…"
+			],
+			[
+				"an",
+				"AngularJS: Rebuild Search Index"
+			],
+			[
+				"js",
+				"AngularJS: Rebuild Search Index"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"remv",
+				"Package Control: Remove Package"
+			]
+		],
+		"width": 435.0
+	},
+	"console":
+	{
+		"height": 128.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/app.js",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/partials/editprofile.html",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/partials/editwall.html",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/index.html",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/routes/auth.js",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/partials/registration.html",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/models/models.js",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/routes/blog.js",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/js/external/resources/apiV2.js",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/partials/rules.html",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/js/tabcontent.js",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/js/app/blog.js",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/partials/blogEntry.html",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/partials/profile/videos.html",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/partials/profile/pics.html",
+		"/Users/raygarner/keibaAlpha/Assets/RI/Editor/HorseData/HorseInspector.cs",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/routes/comments.js",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/routes/apiv2.js",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/partials/deletewall.html",
+		"/Users/raygarner/keibaAlpha/Assets/RI/Race/scripts/racemanager.cs",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/js/vendor/jquery.js",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/partials/profile/latest.html",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/constants/constants.js",
+		"/Users/raygarner/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/raygarner/keibaAlpha/Assets/RI/Editor/HorseData.meta",
+		"/Users/raygarner/Library/Application Support/Sublime Text 3/Packages/User/pagingupdown.py",
+		"/Users/raygarner/keibaAlpha/Assets/RI/Race/scripts/Horse.cs",
+		"/Users/raygarner/keibaAlpha/Assets/RI/Race/scripts/HorseBehavior.cs",
+		"/Users/raygarner/keibaAlpha/Assets/RI/scenes/dashboard.unity",
+		"/Users/onkawa/keiba_alpha/onk.sublime-project",
+		"/untitled"
+	],
+	"find":
+	{
+		"height": 37.0
+	},
+	"find_in_files":
+	{
+		"height": 95.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"registra",
+			"EditWallCtrl",
+			"tabs",
+			"mongoose",
+			"Blog",
+			"ensureAuthenticated",
+			"createSubDocResource",
+			"video",
+			"vidoe",
+			"VideoCtrl",
+			"delete",
+			"nivo",
+			"Mother",
+			"mothers",
+			"latest",
+			"lastest",
+			"Latest",
+			"maxSpeedPenalty",
+			"fa",
+			"gacha"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "public/js/app/blog.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 79325,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"easy_motion_mode": false,
+							"highlight_line": false,
+							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"vintage":
+							{
+								"action": null,
+								"action_digits":
+								[
+								],
+								"cancel_action": false,
+								"expecting_register": false,
+								"expecting_user_input": false,
+								"mode": 2,
+								"motion": null,
+								"motion_digits":
+								[
+								],
+								"next_mode": 2,
+								"next_mode_command": null,
+								"register": null,
+								"stashed_action": null,
+								"user_action_input": null,
+								"user_input": null,
+								"user_motion_input": null,
+								"xpos": 0
+							},
+							"word_separators": "./\\\\()\\\"\\'-:,.;<>~!@#%^&*|+=[]{}`~?"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 531,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								531,
+								531
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true,
+							"vintage":
+							{
+								"action": null,
+								"action_digits":
+								[
+								],
+								"cancel_action": false,
+								"expecting_register": false,
+								"expecting_user_input": false,
+								"mode": 2,
+								"motion": null,
+								"motion_digits":
+								[
+								],
+								"next_mode": 2,
+								"next_mode_command": null,
+								"register": null,
+								"stashed_action": null,
+								"user_action_input": null,
+								"user_input": null,
+								"user_motion_input": null,
+								"xpos": 0
+							},
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/partials/giftShop.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1208,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"vintage":
+							{
+								"action": null,
+								"action_digits":
+								[
+								],
+								"cancel_action": false,
+								"expecting_register": false,
+								"expecting_user_input": false,
+								"mode": 2,
+								"motion": null,
+								"motion_digits":
+								[
+								],
+								"next_mode": 2,
+								"next_mode_command": null,
+								"register": null,
+								"stashed_action": null,
+								"user_action_input": null,
+								"user_input": null,
+								"user_motion_input": null,
+								"xpos": 0
+							}
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "public/js/external/controller/GiftShopCtrl",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 732,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								230,
+								230
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"vintage":
+							{
+								"_bottom_top": false,
+								"action": null,
+								"action_digits":
+								[
+								],
+								"cancel_action": false,
+								"expecting_register": false,
+								"expecting_user_input": false,
+								"mode": 1,
+								"motion": null,
+								"motion_digits":
+								[
+								],
+								"next_mode": 2,
+								"next_mode_command": null,
+								"register": null,
+								"stashed_action": null,
+								"user_action_input": null,
+								"user_input": null,
+								"user_motion_input": null,
+								"xpos": 0
+							}
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 36.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 246.0
+	},
+	"output.git-push":
+	{
+		"height": 102.0
+	},
+	"project": "memwall.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"gifts",
+				"public/partials/giftShop.html"
+			],
+			[
+				"gift",
+				"public/js/external/controller/GiftShopCtrl"
+			],
+			[
+				"regi",
+				"public/partials/registration.html"
+			],
+			[
+				"auth",
+				"routes/auth.js"
+			],
+			[
+				"mode",
+				"models/models.js"
+			],
+			[
+				"inde",
+				"public/index.html"
+			],
+			[
+				"editpro",
+				"public/partials/editprofile.html"
+			],
+			[
+				"blog.js",
+				"public/js/app/blog.js"
+			],
+			[
+				"blog",
+				"routes/blog.js"
+			],
+			[
+				"in",
+				"public/index.html"
+			],
+			[
+				"models",
+				"models/models.js"
+			],
+			[
+				"apiv",
+				"public/js/external/resources/apiV2.js"
+			],
+			[
+				"blog.h",
+				"public/partials/blogEntry.html"
+			],
+			[
+				"video",
+				"public/partials/profile/videos.html"
+			],
+			[
+				"pics",
+				"public/partials/profile/pics.html"
+			],
+			[
+				"app.",
+				"app.js"
+			],
+			[
+				"delete",
+				"public/partials/deletewall.html"
+			],
+			[
+				"jquer",
+				"public/js/vendor/jquery.js"
+			],
+			[
+				"index",
+				"public/index.html"
+			],
+			[
+				"model",
+				"models/models.js"
+			],
+			[
+				"blogen",
+				"public/partials/blogEntry.html"
+			],
+			[
+				"latest",
+				"public/partials/profile/Latest.html"
+			],
+			[
+				"blog.j",
+				"public/js/app/blog.js"
+			],
+			[
+				"app",
+				"app.js"
+			],
+			[
+				"public/blog.js",
+				"public/js/app/blog.js"
+			],
+			[
+				"horsedata",
+				"Assets/RI/Editor/HorseData/HorseData.cs"
+			],
+			[
+				"horsed",
+				"Assets/RI/Editor/HorseData.meta"
+			],
+			[
+				"",
+				"Assets/RI/Editor/HorseData/HorseInspector.cs"
+			],
+			[
+				"horesins",
+				"Assets/RI/Editor/HorseData/HorseInspector.cs"
+			],
+			[
+				"horseb",
+				"Assets/RI/Race/scripts/HorseBehavior.cs"
+			],
+			[
+				"raceman",
+				"Assets/RI/Race/scripts/racemanager.cs"
+			],
+			[
+				"horse",
+				"Assets/RI/Race/scripts/Horse.cs"
+			],
+			[
+				"horsebeh",
+				"Assets/RI/Race/scripts/HorseBehavior.cs"
+			],
+			[
+				"das",
+				"Assets/RI/scenes/dashboard.unity"
+			],
+			[
+				"show",
+				"Assets/RI/Menus/Scripts/ShowPanel.cs"
+			],
+			[
+				"me",
+				"Assets/RI/Menus/Scripts/menumanager.cs"
+			],
+			[
+				"menuma",
+				"Assets/RI/Menus/Scripts/menumanager.cs"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/keibaAlpha/Assets/keibaalpha.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+		"vintage":
+		{
+			"_cmdline_cd": "/Users/raygarner/Library/Application Support/Sublime Text 3/Packages"
+		}
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 326.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
