@@ -1,0 +1,10 @@
+<div ng-controller="AdmMembersCtrl">
+    <div ng-repeat="member in members">
+        {{ member.gravatar }}
+         <h2>{{ member.lastName}} {{ member.firstName }}</h2>
+        email:{{ member.email }}
+        address:{{ member.address }} {{ member.city }} {{ member.state }}
+        age:{{ member.age }}
+        <a ng-click="delete(member._id)" class="button">Delete</a>
+    </div>
+</div>

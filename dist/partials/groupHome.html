@@ -1,0 +1,44 @@
+<div ng-controller="groupEntryCtrl">
+    <div class="row">
+        <div class="twelve columns" role="content">
+            <div id="picheader">
+                <div class="row">
+                    <div class="large-12 columns">
+                        <div id="portraitpic">
+                            <img id="portrait" src="/uploads/{{ entry.profilePicPortrait }}"><br/>
+                            {{ entry.title }} - Moderator: {{ entry.firstName }}
+                            <nav class="wallGroup animate-show" if-authed="show" style="padding-top: 0px;margin-top: -5px;">
+                                <ul>
+                                    <li ng-click="loadPage('Latest')">Stream</li>
+                                    <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')">Anniversaries</li>
+                                    <li if-authed="show" ng-click="loadPage('friendsandfamily')">Friends & Family</li>
+                                    <li if-authed="show" ng-click="flipEntry(); loadPage('Pics')">Photos Control</li>
+                                    <li if-authed="show" ng-click="toogleVideoEntry(); loadPage('Videos')">Videos Control</li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="row stream">
+                            <!-- Begin new mem wall nav -->
+                            <section class="section memNav" if-authed="show">
+                                <h2 style="padding-top: 0px; color: #47569B;margin-bottom: -3px;">Welcome to the {{ entry.title }} Group.</h2>
+                            </section>
+                            <!-- End new mem wal nav -->
+                            <div class="small-12 columns">
+                                <div if-authed="show" class="row collapse">
+                                    <div class="postEntry small-12 columns">
+
+                                    </div>
+                                </div>
+
+                                <div ng-include="template">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

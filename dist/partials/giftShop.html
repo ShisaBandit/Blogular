@@ -1,0 +1,24 @@
+<div ng-controller="GiftShopCtrl">
+    <div class="row offsetHeight">
+        <div class="small-12 columns">
+            <div id="rulesModal">
+                <div class="row ">
+                    <div id="contentHeader" class="small-12 columns">
+                        <img src="img/angelsofeurekalogo-bw.jpg" alt="Angel's of Eureka Logo" />
+                        <h2 class="contentHeaderTitle">Purchase a gift for [Angle Name Goes Here]'s Memorial Wall From Our Gift Shop!</h2>
+                    </div>
+                </div>
+                <div class="section-container auto" reflow data-section>
+                    <section class="section">
+                            <p class="title" data-section-title><a >Gift Shop Items</a></p>
+                            <div class="content" data-section-content>
+                                <ul>
+                                    <li ng-repeat="category in categories"><a href="{{category.url}}?user={{user}}&wall={{wall}}" target="_blank">{{category.name}}</a></li>
+                                </ul>
+                            </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div ng-controller="PasswordRecoveryCtrl">
+    <div class="nine columns offsetHeight">
+        <div class="row">
+            <p>Please enter you new password.</p>
+            <p>Password:</p>
+            <input
+                    ng-model="password"
+                    />
+            <p>Password Confirmation:</p>
+            <input
+                    ng-model="passwordconfirm"
+                    />
+            <button ng-click="updatePass()">Recover</button>
+            <p>{{message}}</p>
+        </div>
+
+    </div>
+</div>

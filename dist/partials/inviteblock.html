@@ -1,0 +1,23 @@
+<div ng-controller="UserProfileCtrl">
+    <div class="row offsetHeight">
+        <div class="small-12 columns">
+            <div ng-controller="InviteBlockCtrl">
+                <div id="contentHeader" class="small-12 columns">
+                    <h2 class="contentHeaderTitle">Invite or Block Users to Your Memorial Wall Profile: {{ wallname}} </h2>
+                </div>
+                <br />
+                <div>
+                    <input ng-model="searchText"/>
+                </div>
+                <ul class="profile">
+                    <li class="wallViewers" ng-repeat="member in members | filter:searchText">
+                        <h3><img src="http://www.gravatar.com/avatar/{{member.gravatar}}" /> {{ member.firstName }} {{ member.lastName }}</h3>
+                        <b>Username:{{ member.username }}</b>
+                        <!--<a ng-click="invite(member._id )" class="small radius button workpetsbuttons">Invite</a>-->
+                        <a ng-click="block(member._id )" class="small radius button workpetsbuttons">Block</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

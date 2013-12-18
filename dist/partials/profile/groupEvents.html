@@ -1,0 +1,74 @@
+<div ng-controller="AnniCtrl">
+    <div class="row ">
+        <div id="contentHeader" class="small-12 columns">
+            <h2 class="contentHeaderTitle">Group Events</h2>
+        </div>
+    </div>
+    <div ng-show="eventbox" id="eventbox">
+        <div>
+            <h4 class="dark">Add a New Group Event</h4>
+            <h5>Details</h5>
+            <input type="text" name="eventheader" ng-model="event" id="" placeholder="Give your event a name"/>
+            <input type="text" name="eventdesc" ng-model="eventdesc" id="" placeholder="Tell us more about this special event here"/>
+            <h5>Date</h5>
+            <div class="form-horizontal">
+                <input type="text" name="eventdate" datepicker-popup="yyyy/MMMM/dd" ng-model="eventdate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" placeholder="Pick a Date For Your  Event" />
+                <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
+            </div>
+            <a ng-click="submitEvent()" class="button">Submit Group Event</a>
+        </div>
+    </div>
+    <div class="small-12 columns ">
+        <div class="row">
+            <h1>Group Events</h1>
+
+            <div class="my-repeat-animation" ng-repeat="ani in anis" class="row " style="background: #CDDFEF;margin-bottom: 20px;">
+                <div class="row">
+                    <div class="small-10 columns">
+                        <h4>{{ ani.event }}</h4>
+                        <p>{{ ani.date }}</p>
+                        <p>{{ ani.text }}</p>
+                        <br />
+                        <!-- <a href="" class="button">Send Well Wishes</a>-->
+                        <!--
+                        <input class="addNewPost small-10 columns ng-pristine ng-valid" type="text" placeholder="Begin a new conversation here" ng-model="postText"></input>
+                        <div class="small-2 columns"> <button class="button postfix" ng-click="submit()"> … </button> </div>
+                        -->
+                        <!--
+                            This only needs to work on the Anniversaries page for a personal memorial
+                            <a href="#/gifts/{{user}}/{{blogId}}" class="button">Send a Gift</a>
+                        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--
+
+
+<div ng-controller="groupEvntCtrl">
+    <div class="small-12 columns ">
+        <div class="row">
+            <h1>TEST</h1>
+            <div ng-repeat="grpEvnt in grpEvnt" class="row ">
+                <div class="row">
+
+                    <div class="small-2 columns ">
+                        <h2>{{grpEvnt.event}}</h2>
+
+                    </div>
+                    <div class="small-10 columns">
+                        <h4>{{ grpEvnt.date }}</h4>
+                        <p>{{ grpEvnt.text }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--
+
+       -->

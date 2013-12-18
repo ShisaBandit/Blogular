@@ -1,0 +1,138 @@
+<div ng-controller="PicsCtrl">
+    <div id="contentHeader" class="small-12 columns">
+        <h2 class="contentHeaderTitle">Upload Photos</h2>
+    </div>
+    <p>
+        <b>*You can create beautiful photo montages of your Angel and family at <a href="http://imikimi.com" target="_blank">imikimi.com</a>. Once you create
+            them there, upload them to your gallery on this panel!</b>
+    </p>
+    <div ng-show="photobox" id="UploadBox">
+        <h2 class="dark">Photo Uploader: Drag and drop image files on the box</h2>
+        <div id='UploadArea'>
+            <dropzone url="/upload" class="dropzone" autoupload="false" addRemoveLinks="true" id="my-awesome-dropzone" ></dropzone>
+        </div>
+    </div>
+    <a ng-click="flipEntry()" class="button">{{state}}</a>
+
+    <div class="small-12 columns contentContainer">
+        <div class="row">
+            <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+            <br />Here you can view pictures that are in your photo library, organize them into albums and share with your network members!<br /><br />
+        </div>
+        <div class="row">
+            <div class="row">
+                <h2>{{ entry.firstName }}'s Life in Pictures</h2>
+                <a class="button" ng-click="showallpics(); updatingAlbum = false; addingNewAlbum = false">View Master Photo Library</a>
+                <a ng-click="addingNewAlbum = true; updatingAlbum = false" class="button">Create a new album</a>
+                <a ng-click="updatingAlbum = true; addingNewAlbum = false; getAlbums();"  class="button">Add photo to existing album</a>
+                <ul class="small-block-grid-6">
+                    <b>View Photos By Album</b><br />
+                    <li class="my-repeat-animation" ng-repeat="album in albums">
+                        <a class="button" ng-click="showAlbum(album._id); albuminfo.name = album.name;">{{album.name}}</a><!--setAlbumName(album.name)-->
+                    </li>
+                </ul>
+            </div>
+            <section class="my-show-hide-animation" ng-show="addingNewAlbum" class="add2Album">
+                <b ng-show="addingNewAlbum">Create a New Album:</b><br />
+                <input type="text"  ng-model="albumName" placeholder="Give your new album a name here." />
+                <a class="button"  ng-click="createAlbum()">Create New Album</a>
+                <a class="button"  ng-click="addingNewAlbum = false">Cancel</a>
+            </section>
+
+            <div class="my-show-hide-animation" ng-show="updatingAlbum" class="row add2Album">
+                <h4>Add Photo to Album</h4>
+                Please select a photo or photos from the library, or click an existing album to open it and choose a photo from within there to add to another album.
+                To add your desired photo(s) to the new gallery, after you have selected the check box in the upper left corner of the white picture frame, click on the album name
+                from the list within this box. That's it!
+                <br /><br />
+                <b>Which album do you want to add a photo too?</b>
+                <br />
+                <ul  class="small-block-grid-6">
+                    <li class="my-repeat-animation" ng-repeat="album in albums">
+                        <a class="button" ng-click="updateAlbum(album._id); ">{{album.name}}</a>
+                    </li>
+                </ul>
+                <a ng-click="updatingAlbum = false; addingNewAlbum = false" class="button">Cancel</a>
+            </div>
+            <ul class="small-block-grid-4">
+                <h3>{{albuminfo.name}}</h3>
+                    <li class="piccontainer my-repeat-animation" ng-repeat="pic in pics">
+                        <div>
+                            <input
+                                type="checkbox"
+                                ng-show="updatingAlbum"
+                                ng-model="pic[$index]"
+                                ng-change="addpictoalbum()"
+                                ng-checked="false"/>
+                        </div>
+                        <img width="200" src="uploads/{{pic.filename}}"/>
+                        <div>
+                            <a ng-click="setDeletedPic(pic._id)">
+                                x
+                            </a>
+                        </div>
+                    </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<!--
+<h3><b>{{entry.title}}</b></h3>
+<h6>Posted by <a href="#">{{entry.author}}</a> on {{entry.date}}.</h6>
+<div class="row">
+    <div class="ten columns">
+        <div ng-bind-html-unsafe="text"></div>
+    </div>
+    <div class="two columns">
+
+    </div>
+</div>
+<hr/>
+<br/>
+</article>
+<div login>
+<div id="login-inner" ng-controller="LoginController">
+    <i class="foundicon-error">You must login to submit comments.</i>
+    <i class="foundicon-error">{{error}}</i>
+    <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <th>Username</th>
+            <td><input type="text" class="login-inp" ng-model="form.username"/></td>
+        </tr>
+        <tr>
+            <th>Password</th>
+            <td><input type="password" class="login-inp" ng-model="form.password"/></td>
+        </tr>
+        <tr>
+            <th></th>
+            <td><a class="button" ng-click="submitAuth()">Login</a></td>
+        </tr>
+    </table>
+</div>
+</div>
+<div id="comments" class="row">
+<div class="six columns">
+    <div id="submitComment">
+        <textarea ng-model="body"></textarea>
+
+        <p>
+            <a ng-click="submitComment()" class="button" resetOnSubmit="true"></a>
+        </p>
+    </div>
+
+    <div class="comment" ng-repeat="comment in comments">
+        <p><b>{{comment.username}}</b></p>
+
+        <p>{{comment.body}}</p>
+    </div>
+</div>
+<div class="six columns">
+    <div ng-repeat="viewer in viewers">
+        <p>{{viewer.username}}</p>
+    </div>
+</div>
+
+</div>
+       -->
