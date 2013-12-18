@@ -1,153 +1,159 @@
 <div ng-controller="LatestCtrl" class="row">
-    <div id="contentHeader" class="small-12 columns">
-        <h2 class="contentHeaderTitle">Start a New Conversation</h2>
-    </div>
-    <br/>
-    <div>
-        <div ng-click="photo = true;video = false;" class="button">Share a Photo</div>
-        <div ng-click="video = true;photo = false;" class="button">Share a Video</div>
-        <div ng-click="event = true;video = false; photo = false;" class="button">Share an Anniversary</div>
-    </div>
-    <div ng-show="photo" id="UploadBox">
-        <h2 class="dark">Photo Uploader: Drag and drop image files on the box</h2>
-        <div id='UploadArea'>
-            <dropzone url="/upload" class="dropzone" autoupload="false" addRemoveLinks="true" id="my-awesome-dropzone" ></dropzone>
+  <div class="small-11 large-8 columns">
+      <div class="row">
+        <div id="contentHeader" class="small-12 columns show-for-medium-up">
+            <h2 class="contentHeaderTitle">Start a New Conversation</h2>
         </div>
-        <input type="text" ng-model="photoAdded.photoPostText" class="addNewPost small-10 columns"
-               placeholder="Tell us about these photos"/>
-        <div ng-show="photoAdded.show" ng-click="photo=false;addPhotoToStream()" class="button">You have added a photo Click here to add to Stream.</div>
-        <div ng-show="photoAdded.show" ng-click="photo=false;clearPhotoFromQueue()" class="button">Finished</div>
-        <div ng-hide="photoAdded.show" ng-click="photo=false" class="button">Finished</div>
-
-    </div>
-    <div ng-show="video" id="videobox">
-        <div>
-            <h3 style="color:#3F77BC;">Select which type of video you would like to show.</h3>
-            <a class="button" ng-click="youtube = true;animoto = false;">YouTube</a>
-            <a class="button" ng-click="youtube = false;animoto = true;">Animoto</a>
-            <div class="my-show-hide-animation" ng-show="youtube">
-                <h4 class="dark">YouTube Link</h4>
-                <b class="dark">Past or type a YouTube url here.</b>
-                <input type="text" name="youtube" ng-model="embedVideos.youtube" id="youtube" placeholder="Enter your youtube embed code here!"/>
-                <input type="text" ng-model="photoAdded.photoPostText" class="addNewPost small-10 columns"
-                       placeholder="Tell us about this video"/>
-                <a ng-click="submitVideo()" class="button">Add Video to your stream</a>
+        <br/>
+        <div class="small-12 columns">
+            <div ng-click="photo = true;video = false;" class="button">Share a Photo</div>
+            <div ng-click="video = true;photo = false;" class="button">Share a Video</div>
+            <div ng-click="event = true;video = false; photo = false;" class="button">Share an Anniversary</div>
+        </div>
+        <div ng-show="photo" id="UploadBox">
+            <h2 class="dark">Photo Uploader: Drag and drop image files on the box</h2>
+            <div id='UploadArea'>
+                <dropzone url="/upload" class="dropzone" autoupload="false" addRemoveLinks="true" id="my-awesome-dropzone" ></dropzone>
             </div>
-            <div class="animoto" ng-show="animoto">
-                <h4 class="dark">Animoto Link</h4>
+            <input type="text" ng-model="photoAdded.photoPostText" class="addNewPost small-10 columns"
+                   placeholder="Tell us about these photos"/>
+            <div ng-show="photoAdded.show" ng-click="photo=false;addPhotoToStream()" class="button">You have added a photo Click here to add to Stream.</div>
+            <div ng-show="photoAdded.show" ng-click="photo=false;clearPhotoFromQueue()" class="button">Finished</div>
+            <div ng-hide="photoAdded.show" ng-click="photo=false" class="button">Finished</div>
 
-                <p>*Turn your photos and music into stunning video slideshows. You provide
-                    the photos, you pick the song, and we'll add the magic. Give it a try —
-                    it's fast, free and shockingly easy. <a href="http://animoto.com"
-                                                            target="_blank">http://animoto.com</a>
-                    Once you create your Animoto video there, use your "share" link to
-                    upload them to your video gallery on this panel!</p>
-                <input type="text" name="animoto" ng-model="embedVideos.animoto" id="animoto"
-                       placeholder="Enter your animoto video url here!"/>
-                <input type="text" ng-model="photoAdded.photoPostText" class="addNewPost small-10 columns"
-                       placeholder="Tell us about this video"/>
-                <a ng-click="submitVideo()" class="button">Add Video to your stream</a>
-
-            </div>
         </div>
-        <div ng-click="video=false" class="button">Finished</div>
-    </div>
-    <div ng-show="event" id="eventbox">
-        <div>
-            <h4 class="dark">Add a New Angel Anniversary</h4>
-            <h5>Details</h5>
-            <input type="text" name="eventheader" ng-model="eventData.event"  placeholder="Give your event a name"/>
-            <input type="text" name="eventdesc" ng-model="eventData.eventdesc" placeholder="Tell us more about why this day is special"/>
-            <h5>Date</h5>
-            <div class="form-horizontal">
-                <input type="text" name="eventdate" datepicker-popup="yyyy/MMMM/dd" ng-model="eventData.eventdate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" placeholder="Pick a Date FOR YOUR Anniversary or Event" />
-                <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
-            </div>
-            <a ng-click="submitEvent()" class="button">Submit Angel Anniversary</a>
-        </div>
-        <div ng-click="event=false" class="button">Finished</div>
-    </div>
-    <div class="small-12 columns" ng-hide="photo || video || event">
-        <div ng-class="{spinner:spinner}"></div>
-        <input type="text" ng-model="postText" class="addNewPost small-10 columns"
-               placeholder="Begin a new conversation here"/>
-        <div ng-class="{spinner:spinner}"></div>
-        <div class="small-2 columns"><br/>
-            <a ng-click="submit()" class="button postfix">Submit</a>
-        </div>
-
-    </div>
-
-    <div class="small-12 columns row2 contentContainer my-repeat-animation" ng-repeat="post in posts">
-        <div class="row">
-            <div class="small-12 columns postcontainer">
-                <div ng-show="parentObject.admin">
-                    <i class="fi-check" ng-show="post.inStream"></i>
+        <div ng-show="video" id="videobox">
+            <div>
+                <h3 style="color:#3F77BC;">Select which type of video you would like to show.</h3>
+                <a class="button" ng-click="youtube = true;animoto = false;">YouTube</a>
+                <a class="button" ng-click="youtube = false;animoto = true;">Animoto</a>
+                <div class="my-show-hide-animation" ng-show="youtube">
+                    <h4 class="dark">YouTube Link</h4>
+                    <b class="dark">Past or type a YouTube url here.</b>
+                    <input type="text" name="youtube" ng-model="embedVideos.youtube" id="youtube" placeholder="Enter your youtube embed code here!"/>
+                    <input type="text" ng-model="photoAdded.photoPostText" class="addNewPost small-10 columns"
+                           placeholder="Tell us about this video"/>
+                    <a ng-click="submitVideo()" class="button">Add Video to your stream</a>
                 </div>
-                <div>
-                    <li ng-show="parentObject.admin" class="dropdown noStyleList">
-                        <a class="dropdown-toggle">
-                            <i class="fi-list"></i>
-                        </a>
-                        <ul class="dropdown-menu comment-dropdown-menu">
-                            <li ng-repeat="choice in items">
-                                <a ng-click="SelectedChoice($index,post._id)">{{choice}}</a>
-                            </li>
-                        </ul>
-                    </li>
+                <div class="animoto" ng-show="animoto">
+                    <h4 class="dark">Animoto Link</h4>
 
-                    <img src="http://www.gravatar.com/avatar/{{post.gravatar}}" />
+                    <p>*Turn your photos and music into stunning video slideshows. You provide
+                        the photos, you pick the song, and we'll add the magic. Give it a try —
+                        it's fast, free and shockingly easy. <a href="http://animoto.com"
+                                                                target="_blank">http://animoto.com</a>
+                        Once you create your Animoto video there, use your "share" link to
+                        upload them to your video gallery on this panel!</p>
+                    <input type="text" name="animoto" ng-model="embedVideos.animoto" id="animoto"
+                           placeholder="Enter your animoto video url here!"/>
+                    <input type="text" ng-model="photoAdded.photoPostText" class="addNewPost small-10 columns"
+                           placeholder="Tell us about this video"/>
+                    <a ng-click="submitVideo()" class="button">Add Video to your stream</a>
 
-                </div>
-                <h6>Posted by <a href="#/profile/{{post.username}}">{{post.username}} </a> on {{post.date}}.</h6>
-                <div>
-                    {{post.text}}{{post.event}}
-                </div>
-
-                </div>
-
-                <div ng-if="post.photos">
-                    <h1>Pics posted</h1>
-
-                </div>
-                <div ng-bind-html="post.embedYouTube | unsafe"></div>
-                <div ng-bind-html="post.embedAnimoto | unsafe"></div>
-                <br />
-                <div ng-repeat="photo in post.photos">
-                    <img width="200" src="uploads/{{photo.filename}}" />
                 </div>
             </div>
-            <div ng-switch on="post.canComment">
-                <div ng-switch-when="true">
-                <div ng-repeat="comment in post.comments" class="row replycontainer my-repeat-animation">
-                        <div class="small-1 columns avatarcontainer">
-                            <img src="http://www.gravatar.com/avatar/{{comment.gravatar}}"/>
-                        </div>
-
-                        <div class="small-10 columns">
-                            <a href="#/profile/{{comment.username}}">
-                            <b>{{comment.username}}</b></a>
-                            <p>{{comment.text}}</p>
-                        </div>
+            <div ng-click="video=false" class="button">Finished</div>
+        </div>
+        <div ng-show="event" id="eventbox">
+            <div>
+                <h4 class="dark">Add a New Angel Anniversary</h4>
+                <h5>Details</h5>
+                <input type="text" name="eventheader" ng-model="eventData.event"  placeholder="Give your event a name"/>
+                <input type="text" name="eventdesc" ng-model="eventData.eventdesc" placeholder="Tell us more about why this day is special"/>
+                <h5>Date</h5>
+                <div class="form-horizontal">
+                    <input type="text" name="eventdate" datepicker-popup="yyyy/MMMM/dd" ng-model="eventData.eventdate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" placeholder="Pick a Date FOR YOUR Anniversary or Event" />
+                    <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
                 </div>
-                <div class="row">
-                    <div class="columns postComment">
-                        <!-- <a ng-click="showcommentbox($index)" class="button tiny">Join the conversation</a>
-                       <div ng-show="commentbox[$index]">-->
-                        <b style="text-align: left; font-size: small;font-weight: normal;">Join the conversation</b>
-                        <div ng-class="{spinner:spinner}"></div>
+                <a ng-click="submitEvent()" class="button">Submit Angel Anniversary</a>
+            </div>
+            <div ng-click="event=false" class="button">Finished</div>
+        </div>
+        <div class="small-12 columns" ng-hide="photo || video || event">
+            <div ng-class="{spinner:spinner}"></div>
+            <input type="text" ng-model="postText" class="addNewPost small-10 columns"
+                   placeholder="Begin a new conversation here"/>
+            <div ng-class="{spinner:spinner}"></div>
+            <div class="small-2 columns"><br/>
+                <a ng-click="submit()" class="button postfix">Submit</a>
+            </div>
 
-                        <div>
-                            <input type="text" on-keyup="submitComment($index)" keys="[27,13]" ng-model="newcomment[$index]" placeholder="Add your thoughts here! (Click enter to submit)" />
-                        </div>
+        </div>
+
+        <div class="small-12 columns row2 contentContainer my-repeat-animation" ng-repeat="post in posts">
+            <div class="row">
+                <div class="small-12 columns postcontainer">
+                    <div ng-show="parentObject.admin">
+                        <i class="fi-check" ng-show="post.inStream"></i>
+                    </div>
+                    <div>
+                        <li ng-show="parentObject.admin" class="dropdown noStyleList">
+                            <a class="dropdown-toggle">
+                                <i class="fi-list"></i>
+                            </a>
+                            <ul class="dropdown-menu comment-dropdown-menu">
+                                <li ng-repeat="choice in items">
+                                    <a ng-click="SelectedChoice($index,post._id)">{{choice}}</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <img src="http://www.gravatar.com/avatar/{{post.gravatar}}" />
+
+                    </div>
+                    <h6>Posted by <a href="#/profile/{{post.username}}">{{post.username}} </a> on {{post.date}}.</h6>
+                    <div>
+                        {{post.text}}{{post.event}}
+                    </div>
+
+                    </div>
+
+                    <div ng-if="post.photos">
+                        <h1>Pics posted</h1>
+
+                    </div>
+                    <div ng-bind-html="post.embedYouTube | unsafe"></div>
+                    <div ng-bind-html="post.embedAnimoto | unsafe"></div>
+                    <br />
+                    <div ng-repeat="photo in post.photos">
+                        <img width="200" src="uploads/{{photo.filename}}" />
                     </div>
                 </div>
+                <div ng-switch on="post.canComment">
+                    <div ng-switch-when="true">
+                    <div ng-repeat="comment in post.comments" class="row replycontainer my-repeat-animation">
+                            <div class="small-1 columns avatarcontainer">
+                                <img src="http://www.gravatar.com/avatar/{{comment.gravatar}}"/>
+                            </div>
+
+                            <div class="small-10 columns">
+                                <a href="#/profile/{{comment.username}}">
+                                <b>{{comment.username}}</b></a>
+                                <p>{{comment.text}}</p>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="columns postComment">
+                            <!-- <a ng-click="showcommentbox($index)" class="button tiny">Join the conversation</a>
+                           <div ng-show="commentbox[$index]">-->
+                            <b style="text-align: left; font-size: small;font-weight: normal;">Join the conversation</b>
+                            <div ng-class="{spinner:spinner}"></div>
+
+                            <div>
+                                <input type="text" on-keyup="submitComment($index)" keys="[27,13]" ng-model="newcomment[$index]" placeholder="Add your thoughts here! (Click enter to submit)" />
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div ng-switch-when="false">
+                        <div> Commenting turned off</div>
+                    </div>
                 </div>
-                <div ng-switch-when="false">
-                    <div> Commenting turned off</div>
-                </div>
+
             </div>
-
-        </div>
-
+      </div>
+    </div>
+    <div class="small-1 large-4 columns">
+        ADSPACE
+    </div>
 </div>

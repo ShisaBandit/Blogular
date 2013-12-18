@@ -7,7 +7,6 @@ var app = angular.module('YoMemorialApp', [
        // $sceProvider.enabled(false);
         $routeProvider.
             when("/", {templateUrl: "partials/blog.html"}).
-            when("/groups", {templateUrl: "partials/groups.html"}).
             when("/about", {templateUrl: "partials/about.html"}).
             when("/projects", {templateUrl: "partials/projects.html"}).
             when("/shoutouts", {templateUrl: "partials/shoutouts.html"}).
@@ -16,7 +15,8 @@ var app = angular.module('YoMemorialApp', [
             when("/angel/:id", {templateUrl: "partials/blogEntry.html"}).
             //when("/petangel/:id", {templateUrl: "partials/blogEntry.html"}).
             when("/StartGroup", {templateUrl: "partials/admin/createGroup.html"}).
-            when("/group/:id", {templateUrl: "partials/groupHome.html"}).
+            when("/group/:id", {templateUrl: "partials/blogEntry.html"}).
+            //when("/group/:id", {templateUrl: "partials/groupHome.html"}).
             when("/groupPreview/:id", {templateUrl: "partials/groupHomePublic.html"}).
             when("/public/:id", {templateUrl: "partials/publicAngelProfile.html"}).
             when("/petpublic/:id", {templateUrl: "partials/publicAngelProfile.html"}).
@@ -36,6 +36,7 @@ var app = angular.module('YoMemorialApp', [
             when("/editworkshop", {templateUrl: "partials/editWorkshop.html"}).
             when("/deleteworkshop", {templateUrl: "partials/deleteWorkshop.html"}).
             when("/workshops", {templateUrl: "partials/workshops.html"}).
+            when("/groups", {templateUrl: "partials/blog.html"}).
             when("/pets", {templateUrl: "partials/blog.html"}).
             when("/editwall/:wall", {templateUrl: "partials/editwall.html"}).
             when("/passwordrecovery", {templateUrl: "partials/forgotpassword.html"}).

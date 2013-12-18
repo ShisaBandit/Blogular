@@ -11,12 +11,21 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
         $scope.$prepareForReady();
         $scope.type = "";
         $scope.pets = false;
+        $scope.groups = false;
         $scope.filtersubgroup = $scope.subgroup;
         if("/pets" == $location.path()){
+            $scope.type = "angel"
             $scope.pets = true;
+            $scope.groups = false;
             console.log("We are in pets");
-        }else{
+        }if("/groups" == $location.path()){
+            $scope.type = "group";
             $scope.pets = false;
+            $scope.groups = true;
+        }else{
+            $scope.type = "angel";
+            $scope.pets = false;
+            $scope.groups = false;
         }
         //check if user wants to see blogs by categories or not
         if ($routeParams.name) {
@@ -85,22 +94,21 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
 
             if($scope.busy)return;
                 console.log("getting groups")
+            console.log($location.path())
                 $scope.busy = true;
                 BlogsService.paginatedBlogs($scope.skip,$scope.limit,function(blogs){
 
                     for(var i = 0;i<blogs.length;i++){
                         console.log("getting groups and looping")
 
-                        if(blogs[i].group == false || blogs[i].group == undefined){
+//                        if(blogs[i].group == false || blogs[i].group == undefined){
                             if("/pets" == $location.path() && blogs[i].pet == true){
                                 $scope.entries.push(blogs[i]);
-                            }
-                            if("/pets" != $location.path() && blogs[i].pet == false){
+                            }else if("/groups" == $location.path() && blogs[i].group == true){
+                                $scope.entries.push(blogs[i]);
+                            }else if($location.path() == "/" && blogs[i].group != true && blogs[i].pet != true){
                                 $scope.entries.push(blogs[i]);
                             }
-
-
-                        }
 
                     }
                     $scope.skip += $scope.limit;

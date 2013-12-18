@@ -1,9 +1,9 @@
 <div ng-controller="blogEntryCtrl" >
     <div class="row">
         <div class="small-12 columns" role="content">
-            <div id="picheader">
+
                 <div class="row">
-                        <div class="small-12 large-4">
+                        <div class="small-12 large-12">
                             <!--<div id="portraitpic">-->
                                 <img id="portrait" src="/uploads/{{ entry.profilePicPortrait }}"><br/>
                                 {{ entry.firstName }} {{ entry.lastName }}
@@ -14,8 +14,8 @@
                                     <div ng-include="template">
 
                                     </div>
-                                <nav class="wallGroup animate-show show-for-medium-up" style="padding-top: 0px;margin-top: -5px;">
 
+                                <nav class="wallGroup animate-show show-for-medium-up" style="padding-top: 0px;margin-top: -5px;">
                                     <ul>
                                         <li ng-click="loadPage('Latest')">Stream</li>
                                         <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')">Anniversaries</li>
@@ -33,7 +33,6 @@
 
                         </div>
                 </div>
-            </div>
 
         </div>
     </div>
