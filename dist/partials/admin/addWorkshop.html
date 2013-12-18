@@ -1,0 +1,78 @@
+<div ng-controller="WorkshopCtrl">
+    <div class="row">
+        <div class="twelve columns offsetHeight" role="content">
+            <div id="mainform" ng-hide="hidemainform">
+                <h1><span ng-bind="message"></span></h1>
+
+                <div id="log"></div>
+                <h2 class="subHeader">Add A Workshop</h2>
+
+                <label for="title">Name of Event: </label>
+                <input id="title" ng-model="form.eventName" name="eventName">
+                <br />
+                <br />
+                <label>Event Key Person</label>
+                <input type="text" class="login-inp" ng-model="form.keyfirstname" placeholder="First Name" />
+                <input type="text" class="login-inp" ng-model="form.keylastname" placeholder="Last Name" />
+                <br />
+                <label>Day your workshop/event will take place</label>
+                <input type="date" class="login-inp" ng-model="time.eventdate"/>
+                <br />
+                <label>Time your workshop/event will take place</label>
+                <input type="time" class="login-inp" ng-model="time.eventtime"/>
+                <br />
+                <label>Location of Event</label>
+                <input type="text" class="login-inp" ng-model="form.eventLocaction"/>
+                <br />
+                <label>Event Organizer</label>
+                <input type="text" class="login-inp" ng-model="form.eventOrganizer"/>
+                <br />
+                <label>Organizer Phone Number</label>
+                <input type="text" class="login-inp" ng-model="form.eventOrganizerPhone"/>
+                <label>Organizer Fax Number</label>
+                <input type="text" class="login-inp" ng-model="form.eventOrganizerFax"/>
+                <label>Organizer Email</label>
+                <input type="text" class="login-inp" ng-model="form.eventOrganizerEmail"/>
+                <label>Organizer Website</label>
+                <input type="text" class="login-inp" ng-model="form.eventOrganizerWebsite"/>
+                <label>Organizer Addressr</label>
+                <input type="text" class="login-inp" ng-model="form.eventOrganizerAddress"/>
+                <br />
+                <label for="eventDetails">Tell Us About Your Event Here: </label>
+
+                <!-- add on to later for now just use regular text area
+                 <div id="toolbar" style="display: none;">
+                     <a data-wysihtml5-command="bold" title="CTRL+B">bold</a> |
+                     <a data-wysihtml5-command="italic" title="CTRL+I">italic</a>
+                     <a data-wysihtml5-action="change_view">switch to html view</a>
+                 </div>
+                 -->
+                <textarea id="eventDetails" placeholder="Enter text ..." ng-model="form.eventDetails" cols="50" rows="15"></textarea>
+                <br />
+                <label for="googleHangoutURL">Please specify a Google Hangout Address for Your Event: </label>
+                <input type="text" name="googleHangoutURL" id="googleHangoutURL" ng-model="form.googleHangoutURL">
+                <br />
+
+                <!--
+                <h4>Tagegories</h4>
+                    <p>These will show up as categories on the main screen and be used to filter aritcles on the main page.</p>
+                    <p>These are to be comma seperated values ONLY!</p>
+                    <label for="categories">Categories/Tags:</label>
+                    <input type="text" name="categories" id="categories" ng-model="form.categories">
+                    <p>Comma seperated values ONLY!! Be aware no validation here is added yet!</p>
+                    -->
+                <br />
+                <br />
+                <p>
+                    <a ng-click="submit()" class="button" resetOnSubmit="true">On to the Next Step</a>
+
+                </p>
+            </div>
+            <div class="offsetHeight" ng-include src="template.url">
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

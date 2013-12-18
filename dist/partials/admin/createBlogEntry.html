@@ -1,0 +1,117 @@
+<div ng-controller="AddBlogCtrl">
+    <div class="row">
+        <div class="twelve columns offsetHeight" role="content">
+            <div id="mainform" ng-hide="hidemainform">
+                <!--<h1><span ng-bind="message"></span></h1>-->
+
+                <div id="log"></div>
+                <h2 class="subHeader">Create Memorial Profile</h2>
+                    <div class="small-12 columns">
+                        <br />
+                        <p>Here you can create a memorial for your loved one, or for your pet.</p>
+                        <p>
+                            Create as a pet memorial? <input type="checkbox"
+                                   ng-model="pet"
+                            ng-true-value="true"
+                            ng-false-value="false"
+                            ng-change="petMemorialCreate()">
+
+                        </p>
+                        <span>
+                            <label for="title">{{createTypeTitle}} Memorial Wall Title: </label>
+                         </span>
+                        <input type="text" id="title" ng-model="form.title" name="title" placeholder="This is seen as the name of your memorial wall, usually the full name of your Angel. Please enter a title here.">
+                        <p class="validation-error">{{message.title}}</p>
+                        <br />
+                        <br />
+                        <label for="author">Please specify a short address for your profile : </label>
+                        <input type="text" name="author" id="author" ng-model="form.author" placeholder="(Less than 100 characters, including underscores and dashes with no spaces)">
+                        <p class="validation-error">{{message.url}}</p>
+                        <br />
+                        <span>
+                            <label for="content">Tell your {{createType}}'s story here: </label>
+                         </span>
+
+                        <!-- add on to later for now just use regular text area
+                         <div id="toolbar" style="display: none;">
+                             <a data-wysihtml5-command="bold" title="CTRL+B">bold</a> |
+                             <a data-wysihtml5-command="italic" title="CTRL+I">italic</a>
+                             <a data-wysihtml5-action="change_view">switch to html view</a>
+                         </div>
+                         -->
+                        <textarea id="content" placeholder="Enter your Angel's legacy here..." ng-model="form.text" cols="50" rows="25"></textarea>
+                        <br />
+
+
+                        <span>
+                            <label>What is your {{createType}}'s name?</label>
+                         </span>
+                        <input type="text" class="login-inp" ng-model="form.firstName" placeholder="First Name" />
+                        <p class="validation-error">{{message.firstName}}</p>
+
+                        <input type="text" class="login-inp" ng-model="form.lastName" placeholder="Last Name" />
+                        <p class="validation-error">{{message.lastName}}</p>
+
+                        <br />
+                        <label>Date of Birth:</label>
+                        <br />
+                        <!--TODO:Make this a n uploadable file-->
+                        <div ng-hide="form.group" class="form-horizontal">
+                            <input type="text" datepicker-popup="yyyy/MMMM/dd" ng-model="form.dob" is-open="opened1" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+                            <button class="btn" ng-click="open(1)"><i class="general foundicon-calendar"></i></button>
+                        </div>
+                        <!--<input type="date" class="login-inp" ng-model="form.dob" placeholder="12-02-2012"/>
+                        -->
+                        <p class="validation-error">{{message.dob}}</p>
+
+                        <br />
+                        <span>
+                            <label>Day your {{createType}} got it's wings:</label><br class="clear"/>
+                         </span>
+                        <div class="form-horizontal">
+                            <input type="text" datepicker-popup="yyyy/MMMM/dd" ng-model="form.memorialDate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+                            <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
+                        </div>
+                        <p class="validation-error">{{message.memorialDate}}</p>
+
+                        <!--
+                        <input type="date" class="login-inp" ng-model="form.memorialDate" placeholder="12-02-2012"/>
+                        <p class="validation-error">{{message.memorialDate}}</p>
+                        -->
+
+                        <div class="row regColl2">
+
+                               <label>This {{createType}} is my: </label> <br />
+                             <select class="login-inp"
+                                     name="lostAngel"
+                                     ng-change="checked()"
+                                     ng-model="selectedGroup"
+                                     ng-options="group.name for group in groups">
+                             </select>
+                            <p class="validation-error">{{message.subgroup}}</p>
+                        </div>
+
+                        <!--
+                        <h4>Tagegories</h4>
+                            <p>These will show up as categories on the main screen and be used to filter aritcles on the main page.</p>
+                            <p>These are to be comma seperated values ONLY!</p>
+                            <label for="categories">Categories/Tags:</label>
+                            <input type="text" name="categories" id="categories" ng-model="form.categories">
+                            <p>Comma seperated values ONLY!! Be aware no validation here is added yet!</p>
+                            -->
+                        <br />
+                        <br />
+                        <p>
+                            <a ng-click="submitPost()" class="button" resetOnSubmit="true">On to the Next Step</a>
+
+                        </p>
+                    </div>
+            </div>
+            <div class="" ng-include src="template.url">
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

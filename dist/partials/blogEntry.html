@@ -1,0 +1,40 @@
+<div ng-controller="blogEntryCtrl" >
+    <div class="row">
+        <div class="small-12 columns" role="content">
+
+                <div class="row">
+                        <div class="small-12 large-12">
+                            <!--<div id="portraitpic">-->
+                                <img id="portrait" src="/uploads/{{ entry.profilePicPortrait }}"><br/>
+                                {{ entry.firstName }} {{ entry.lastName }}
+                                    <section class="section memNav" if-authed="show">
+                                        <h2 style="padding-top: 0px; color: #47569B;margin-bottom: -3px;">Welcome to {{ entry.firstName }}'s Wall.</h2>
+                                    </section>
+                                    <!-- End new mem wal nav -->
+                                    <div ng-include="template">
+
+                                    </div>
+
+                                <nav class="wallGroup animate-show show-for-medium-up" style="padding-top: 0px;margin-top: -5px;">
+                                    <ul>
+                                        <li ng-click="loadPage('Latest')">Stream</li>
+                                        <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')">Anniversaries</li>
+                                        <li if-authed="show" ng-click="loadPage('friendsandfamily')">Friends & Family</li>
+                                        <li if-authed="show" ng-click="flipEntry(); loadPage('Pics')">Photos Control</li>
+                                        <li if-authed="show" ng-click="toogleVideoEntry(); loadPage('Videos')">Videos Control</li>
+                                    </ul>
+                                </nav>
+
+                           <!-- </div>-->
+                        </div>
+
+                        <div class="small-11 large-8 stream">
+                            <!-- Begin new mem wall nav -->
+
+                        </div>
+                </div>
+
+        </div>
+    </div>
+</div>
+

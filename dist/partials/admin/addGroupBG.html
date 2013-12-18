@@ -1,0 +1,17 @@
+<div ng-controller="AddGroupCtrl">
+    <h2>
+        Thank you for uploading a group logo.
+        Now upload a background photo for your group page.
+    </h2>
+    <h3>Upload an image to use as the background of your group page</h3>
+    <dropzone url="/uploadspread"
+                  class="dropzone"
+                  id="spreadDropzone"
+                  autoupload="false"
+                  maximages="1"
+                  addRemoveLinks="true"
+                >
+        </dropzone>
+        <a ng-click="submitspread()" class="button">Upload</a>
+
+</div>

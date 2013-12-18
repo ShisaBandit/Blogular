@@ -1,0 +1,335 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" xmlns="http://www.w3.org/1999/html"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Angels of Eureka's Circle of Life. Memorial walls and celebrations for your lost loved ones.</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!--<link href="css/animate.min.css" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="css/main.css" media="all">
+
+</head>
+<body ng-app="YoMemorialApp">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!--[if lt IE 9]>
+<script src="bower_components/es5-shim/es5-shim.js"></script>
+<script src="bower_components/json3/lib/json3.min.js"></script>
+<![endif]-->
+<div ng-controller="HeaderCtrl" class="show-for-medium-up">
+    <!-- Angels of Eureka Proudly Presents:-->
+    <div ng-class="[constyle,constyle2]">
+        <nav ng-class="[topstyle,topstyle2]" data-topbar="" data-options="is_hover: false">
+            <ul class="title-area">
+                <li class="name">
+                    <div ng-controller="TitleCtrl">
+                        <a href="#/" ng-bind="title" class="logo"></a>
+                    </div>
+                </li>
+                <li class="toggle-topbar menu-icon active"><a><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <!-- Right Nav Section -->
+                <ul class="right">
+
+                    <li class="has-dropdown">
+
+                    </li>
+                </ul>
+                <!-- Left Nav Section -->
+                <ul class="left" ng-controller="SearchBarCtrl">
+                    <li class="has-dropdown">
+                        <a>Memorials</a>
+                        <ul class="dropdown" id="workpets">
+                            <li>
+                                <a href="/" id="homebutton" class="small">Angel Memorials</a>
+                            </li>
+                            <li>
+                                <a href="#/pets" id="petbutton" class="small">Pets</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#/groups" id="groupsbutton" class="small">Groups</a>
+                    </li>
+                    <li>
+                        <a href="#/workshops" id="workshopbutton" class="small">Workshops</a>
+                    </li>
+                    <li>
+                        <a href="#/petitions" id="pettionbutton" class="small">Petitions</a>
+                    </li>
+                    <li>
+                        <a href="#" id="webstorebutton" class="small">Web Store</a>
+                    </li>
+                    <li class="has-dropdown loggedOut">
+                        <a href="#">My Account</a>
+                        <ul class="dropdown">
+                            <li>
+                                <div ng-controller="UserInfoCtrl" class="loginBlock">
+                                    <div id="username">
+                                        <img width="34" src="http://www.gravatar.com/avatar/{{post.gravatar}}">
+                                        <b>{{username}}</b>
+                                        <a href="#/profile/{{username}}" if-authed="show" class="small button">My Account</a>
+                                        <a href="#/rules" class="small button">Rules</a>
+                                        <a href="#" ng-click="logout()" if-authed="show" class="small button">logout</a>
+                                        <a href="#/registration" if-authed="hide" class="small button">Register</a>
+                                        <a if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li ng-controller="UserInfoCtrl" class="loggedBlock" id="username2">
+                        <img width="34" src="http://www.gravatar.com/avatar/{{post.gravatar}}">
+                        <b>{{username}}</b>
+                        <a href="#/profile/{{username}}" if-authed="show" class="small button">My Account</a>
+                        <a href="#/rules" class="small button">Rules</a>
+                        <a href="#" ng-click="logout()" if-authed="show" class="small button">logout</a>
+                        <a href="#/registration" if-authed="hide" class="small button">Register</a>
+                        <a if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+    </div>
+</div>
+<div class="off-canvas-wrap">
+    <div class="inner-wrap">
+
+        <nav class="tab-bar show-for-small-only">
+            <section class="left-small">
+                <a class="left-off-canvas-toggle menu-icon"><span></span></a>
+            </section>
+            <section class="middle tab-bar-section">
+                <!--<h1 class="title">Memorial Wall</h1>-->
+            </section>
+            <!--
+            <section class="right-small">
+                <a class="right-off-canvas-toggle menu-icon" ><span></span></a>
+            </section>
+            -->
+        </nav>
+
+        <!-- Off Canvas Menu -->
+        <aside class="left-off-canvas-menu">
+            <ul class="off-canvas-list">
+                <li><label>Site Nav</label></li>
+                <li><a href="#">My Account</a></li>
+            </ul>
+        </aside>
+        <aside ng-controller="UserInfoCtrl" class="left-off-canvas-menu">
+            <ul class="off-canvas-list">
+                    <li><label>Memorials</label></li>
+                        <li>
+                            <a href="/">Angel Memorials</a>
+                        </li>
+                        <li>
+                            <a href="#/pets">Pets</a>
+                        </li>
+                <li>
+                    <a href="#/groups">Groups</a>
+                </li>
+                <li>
+                    <a href="#/workshops">Workshops</a>
+                </li>
+                <li>
+                    <a href="#/petitions">Petitions</a>
+                </li>
+                <li>
+                    <a href="#">Web Store</a>
+                </li>
+                <li><label>{{username}} Account</label></li>
+                <li><a href="#/profile/{{username}}" if-authed="show">My Account</a></li>
+                <li><a href="#/rules">Rules</a></li>
+                <li><a href="#" ng-click="logout()" if-authed="show">logout</a></li>
+                <li><a href="#/registration" if-authed="hide">Register</a></li>
+                <li><a if-authed="hide" data-reveal-id="loginModal">Login</a></li>
+            </ul>
+        </aside>
+
+
+        <!-- main content goes here -->
+        <section class="main-section">
+        <!-- Add your site or application content here -->
+
+
+    <section class="primaryContent">
+        <section class="shelf" id="shelf">
+            <div id="loginMessage" if-authed="hide">
+                <p>
+                    <img src="" style="background: url('/img/logo.png') no-repeat left top; width: 342px; height: 125px; overflow: hidden">
+                <h1>Welcome to Angels of Eureka's Circle of Life </h1>
+                <h2 style="color: #000000;font-size: large;font-weight: bold">Celebrate life...Cherish Legacies</h2>
+                <h3 style="color: #000000;font-size: small;font-weight: normal">Angels of Eureka is about Love, Hope and Life with People and Pets.</h3>
+                <!--[if lte IE 8]>
+                <b style="red; font-weight: bold;">
+                    We noticed that you are using an old version of Internet Explorer on Windows XP. This browder does not support the technology that the Circle of Life web site employs.
+                    We recommend a modern browser that will be both secure and allow you to enjoy the site to the fullest! Here are the browsers we suggest:<br />
+                    <a href="https://download.mozilla.org/?product=firefox-25.0&os=win&lang=en-US" target="_blank">Mozilla Firefox</a>
+                    <br />
+                    <a href="https://www.google.com/intl/en/chrome/browser/?platform=win" target="_blank">Google Chrome</a>
+                    <br />
+                    If you want to continue using Internet Explorer on our site, you will need to upgrade your computer to at least <a href="https://http://windows.microsoft.com/en-us/windows7/products/upgrade" target="_blank">Windows 7</a>.<br />
+                    Thank you for you understanding.
+                </b>
+                <![endif]-->
+                Your loved one can be celebrated and remembered here by creating a memorial wall for them. Signing up is easy.
+                Once you sign-up for your free personal profile, you can create a memorial wall for your lost loved one, we call
+                them your "Angel". On the memorial page you can share memories via photos, videos and celebrate their memory
+                with Angel anniversaries. You can invite your friends to join your private network as well as meet people with
+                experience
+                similar to yours
+                and find and give much needed support and comfort!
+                </p>
+                It looks like you are not a member yet. Sign up Here!
+                <a href="#/registration" class="small button">Register</a><br>
+                Already a member? Log-in to your account here!
+                <a href="#" class="small button" data-reveal-id="loginModal" data-hide-id="loginMessage">Login</a>
+                <a class="closeButton" closeparent="" title="Hide this box by clicking here">X</a>
+            </div>
+            <div ng-controller="NotificationsCtrl">
+                <div class="my-repeat-animation" ng-repeat="noti in notifications" id="notifications">
+
+                    {{ noti.text }}
+                    <div>{{noti.count}}</div>
+                    <a class="closeButton" ng-click="notiviewed( noti._id )" closeparent="" title="Hide this box by clicking here">X</a>
+                </div>
+            </div>
+            <!-- Main  Content -->
+
+            <div ng-view="" class="mainBG my-slide-animation">
+
+            </div>
+            <!-- End  Main Content -->
+            <!-- Begin  Footer -->
+            <footer class="row border-footer">
+                <div class="small-12 large-12 columns right-separator footer-child">
+                    <p>The Circle of Life by Angels of Eureka. © 2013 Angels of Eureka</p>
+                </div>
+            </footer>
+            <!-- End Footer -->
+        </section>
+        <!--
+        <div id="toc" ng-controller="MusicPlayerCtrl">
+            <h2 ng-hide="iosshow" id="tocToggle" class="toc navTab status-off" ><a click>View Music Player</a></h2>
+            <aside class="base-class" ng-class="{'my-class':boolChangeClass}">
+                <figure id="tableOfContents">
+                    <object width="250" height="250" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="gsPlaylist9229298428" name="gsPlaylist9229298428" >
+                        <param name="movie" value="http://grooveshark.com/widget.swf" />
+                        <param name="wmode" value="window" />
+                        <param name="allowScriptAccess" value="always" />
+                        <param name="flashvars" value="hostname=grooveshark.com&playlistID=92292984&p=1&bbg=2163A9&bth=000000&pfg=000000&lfg=000000&bt=FFFFFF&pbg=FFFFFF&pfgh=FFFFFF&si=FFFFFF&lbg=FFFFFF&lfgh=FFFFFF&sb=FFFFFF&bfg=25517A&pbgh=25517A&lbgh=25517A&sbh=25517A" />
+                        <object type="application/x-shockwave-flash" data="http://grooveshark.com/widget.swf" width="250" height="250">
+                            <param name="wmode" value="window" />
+                            <param name="allowScriptAccess" value="always" />
+                            <param name="flashvars" value="hostname=grooveshark.com&playlistID=92292984&p=1&bbg=2163A9&bth=000000&pfg=000000&lfg=000000&bt=FFFFFF&pbg=FFFFFF&pfgh=FFFFFF&si=FFFFFF&lbg=FFFFFF&lfgh=FFFFFF&sb=FFFFFF&bfg=25517A&pbgh=25517A&lbgh=25517A&sbh=25517A" />
+                            Sorry, the flash player for this service is not supported by your device.
+                        </object>
+                        Sorry, the flash player for this service is not supported by your device.
+                    </object>
+                </figure>
+            </aside>
+        </div>
+        -->
+    </section>
+    </section>
+        <!-- close the off-canvas menu -->
+        <a class="exit-off-canvas"></a>
+    </div>
+</div>
+<!-- Sitewide Modals -->
+<div id="login-inner" ng-controller="LoginController">
+    <div reveal-modal="login" id="loginModal" class="reveal-modal medium" data-reveal="">
+        <p><b>{{error}}</b></p>
+
+        <p><b>{{message}}</b></p>
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>Username</th>
+                <td><input type="text" class="login-inp" ng-model="form.username"></td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td><input type="password" class="login-inp" ng-model="form.password"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><a class="button" ng-click="submitAuth()">Login</a></td>
+                <td><a class="close-reveal-modal button">Close</a></td>
+                <td><a ng-click="forgot()" href="#/passwordrecovery">forgot password??</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div id="message-inner" ng-controller="messageController">
+    <div reveal-modal="message" id="messageModal" class="reveal-modal [expand, xlarge, large, medium, small]">
+        <p><b>{{error}}</b></p>
+
+        <p><b>{{message}}</b></p>
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>Send Message to:</th>
+                <td>
+                    <input type="text" ng-model="selected" typeahead="user for user in getPossibles($viewValue) | filter:$viewValue | limitTo:8">
+                </td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td>
+                    <textarea class="login-inp ng-pristine ng-valid" ng-model="form.message"></textarea>
+                </td>
+            </tr>
+            <tr>
+
+            </tr>
+            <tr>
+                <th></th>
+                <td><a class="button" ng-click="sendMessage()">Send Message</a></td>
+                <td><a class="close-reveal-modal button">Cancel</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div id="pic-inner" ng-controller="DeletePicsCtrl">
+    <div reveal-modal="deletepic" id="confirmDeletePics" class="reveal-modal [expand, xlarge, large, medium, small]">
+        <p><b>{{message}}</b></p>
+
+        <p class="close-reveal-modal button" ng-href="#">Cancel</p>
+        <a class="button" ng-click="deletepic()">Yes I am sure</a>
+    </div>
+</div>
+<!-- End Sitewide Modals -->
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXX-X');
+    ga('send', 'pageview');
+</script>
+
+<script src="scripts/5944d8a2.modules.js"></script>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+<script src="scripts/3341395f.scripts.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+        $(document).foundation();
+    })
+</script>
+</body>
+</html>

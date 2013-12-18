@@ -1,0 +1,14 @@
+<div ng-controller="AddBlogCtrl">
+       <h3>Upload Image for your Angel's Portrait</h3>
+        <dropzone
+             url="/upload/1"
+                  class="dropzone"
+                  id="portraitDropzone"
+                  autoupload="false"
+                  maximages="1"
+                  addRemoveLinks="true"
+                >
+        </dropzone>
+
+    <a ng-click="submitportrait()" class="button">Next step</a>
+</div>
