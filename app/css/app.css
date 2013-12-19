@@ -175,7 +175,9 @@ body .contain-to-grid-logged-in nav.top-bar-logged-in .loggedBlock {
     display:inline-block;
     width: 140px;
 }
-
+.top-bar-section ul > li>a{
+    background: transparent;
+}
 #workshopbutton{
     color: #ffffff;
     border: none;
@@ -298,6 +300,13 @@ h2.dark {
     border-bottom: 2px solid #8a9948;
     box-shadow: -2px -2px 2px rgb(113, 112, 107);
     z-index: 2;
+}
+.invisble{
+    background: transparent;
+}
+
+.top-bar-section ul>a{
+    background: transparent;
 }
 
 body .contain-to-grid-logged-in #username2 {
@@ -1415,3 +1424,7 @@ h6.petsTitle {
  /* XXLarge screens*/
  @media only screen and (min-width: 120.063em) { } /* min-width 1921px, xlarge screens */
 
+ .automargins{
+     margin-left: auto !important;;
+     margin-right: auto !important;
+ }

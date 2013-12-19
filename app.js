@@ -99,8 +99,8 @@ app.configure('development', function () {
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(app.router);
-    app.use(require('less-middleware')({ src: __dirname + '/dist' }));
-    app.use(express.static(path.join(__dirname, 'dist')));
+    app.use(require('less-middleware')({ src: __dirname + '/app' }));
+    app.use(express.static(path.join(__dirname, 'app')));
     app.use(express.errorHandler());
 
 });
