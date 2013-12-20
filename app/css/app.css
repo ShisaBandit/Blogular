@@ -578,8 +578,9 @@ body .primaryContent .shelf .mainBG .row .small-12 .section-container .active .c
 }
 
 .contentContainer{
+    padding: 50px 20px 20px 50px;
     border: 2px solid #fff;
-    background: #ffffff;
+    background: url("/img/background/postTopBg.png") no-repeat 0px 0px;
     overflow: hidden;
 }
 #chat{
@@ -587,21 +588,36 @@ body .primaryContent .shelf .mainBG .row .small-12 .section-container .active .c
     color: #ffffff;
 }
 .postcontainer{
-    background-color: #FFFADE;
     margin-top: 0px;
     padding-bottom: 10px;
+    background-color: #FFFADE;
 }
 
-.replycontainer{
-    display:block;
-    background: #f0f9ff;
-    padding: 5px;
-    padding-top:15px;
-    margin: 10px;
-    height: 80px;
-    clear: both;
-    border: lightslategrey 1px dotted;
+ body .postcontainer div.postContent {
+     font-family: "Open Sans";
+         font-style: normal;
+         font-weight: 300;
+         src: local("Open Sans Light"), local("OpenSans-Light"), url("http://themes.googleusercontent.com/static/fonts/opensans/v6/DXI1ORHCpsQm3Vp6mXoaTaRDOzjiPcYnFooOUGCOsRk.woff") format("woff") !imp;
+     line-height: 30px;
+ }
+
+body .replycontainer div p {
+    font-family: "Open Sans";
+        font-style: normal;
+        font-weight: 300;
+        src: local("Open Sans Light"), local("OpenSans-Light"), url("http://themes.googleusercontent.com/static/fonts/opensans/v6/DXI1ORHCpsQm3Vp6mXoaTaRDOzjiPcYnFooOUGCOsRk.woff") format("woff");
 }
+
+ .replycontainer{
+     display:block;
+     background: #f0f9ff url("/img/background/commentTopBg.png")no-repeat center top;
+     padding: 5px;
+     padding-top:15px;
+     margin: 10px;
+     min-height: 80px;
+     clear: both;
+     border: #f0f9ff 1px dotted;
+ }
 
 .avatarcontainer{
     border-right: 1px solid #808080;
@@ -872,9 +888,9 @@ body .button {
     padding:10px;
     width: 75%;
     color: #132D48;
-    -webkit-box-shadow:inset 0 0 5px #132D48;
-    -moz-box-shadow:inset 0 0 5px #132D48;
-    box-shadow:inset 0 0 5px #132D48;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px inset;
+    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px inset;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px inset;
 }
 
 input.addNewPost {
@@ -882,9 +898,9 @@ input.addNewPost {
     padding:10px;
     width: 100%;
     color: #132D48;
-    -webkit-box-shadow:inset 0 0 5px #132D48;
-    -moz-box-shadow:inset 0 0 5px #132D48;
-    box-shadow:inset 0 0 5px #132D48;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px inset;
+    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px inset;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px inset;
 }
 
 .rghtDvd {
@@ -1206,7 +1222,7 @@ input.addNewPost {
 }
 
 .memNav {
-    width: 700px;
+    width: 500px;
     height: 30px;
     padding-left: 20px;
     display: block;
@@ -1470,6 +1486,27 @@ h6.petsTitle {
      margin-right: auto;
      margin-bottom: 10px;
  }
+
  .blogContent {
      position: relative;
+ }
+
+ .buttons {
+     display: inline-block;
+     width: 32%;
+     height: 20px;
+     background: linear-gradient(to bottom, rgb(239, 242, 255) 0%, rgb(144, 191, 250) 0%, rgb(165, 180, 255) 44%, rgb(103, 118, 181) 86%) repeat scroll 0% 0% transparent;
+     color: rgb(255, 255, 255);
+     vertical-align: top;
+     margin: 0px;
+     padding: 5px;
+     font-size: small;
+     line-height: 6px;
+     text-align: center;
+     border: 1px solid #71706b;
+ }
+ 
+ .adSpace {
+     display: block;
+     min-height: 300px;
  }

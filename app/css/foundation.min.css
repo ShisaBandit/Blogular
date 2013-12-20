@@ -12,7 +12,6 @@ body {
     background: none;
     padding: 0;
     margin: 0;
-    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-style: normal;
     line-height: 1;
@@ -1482,7 +1481,7 @@ blockquote, blockquote p {
     }
 }
 
-button, .button {
+body button, body .button {
      border-style: solid;
      border-width: 1px;
      cursor: pointer;
@@ -1499,7 +1498,7 @@ button, .button {
      padding-bottom: 0.8125em;
      padding-left: 1.5em;
      font-size: 1em;
-     background-color: #9EAFFF;
+     background-color: #bdcb80;
      border-color: #b9c4ff;
      color: #47569B;
  }
@@ -1521,7 +1520,7 @@ button, .button {
     padding-bottom: 0.25em;
     padding-left: 0.25em;
     font-size: 0.7em;
-    background-color: #b9c4ff;
+    background-color: #bdcb80;
     border-color: #6590bd;
     color: #132c48
 }
