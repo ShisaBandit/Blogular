@@ -12,7 +12,12 @@
 /* -----------------------------------------
    Shared Styles
 ----------------------------------------- */
-.error{
+body {
+    background: url("/img/background/baloons.png")no-repeat top center;
+    background-size: cover;
+}
+
+ .error{
     color: red;
 }
 .spinner {
@@ -177,7 +182,7 @@ body .contain-to-grid-logged-in nav.top-bar-logged-in .loggedBlock {
 
 #petbutton{
     border: none;
-    color: #ffffff;
+    color: #8a9948;
 }
 
 .top-bar-section .dropdown li.memWall {
@@ -188,25 +193,25 @@ body .contain-to-grid-logged-in nav.top-bar-logged-in .loggedBlock {
     background: transparent;
 }
 #workshopbutton{
-    color: #ffffff;
+    color: #8a9948;
     border: none;
 }
 
 #groupsbutton{
-    color: #ffffff;
+    color: #8a9948;
     border: none;
 }
 
 #webstorebutton {
-    color: #ffffff;
+    color: #8a9948;
     border: none;
 }
 #homebutton {
-    color: #ffffff;
+    color: #8a9948;
     border: none;
 }
 #pettionbutton{
-    color: #ffffff;
+    color: #8a9948;
     border: none;
 }
 
@@ -1494,6 +1499,8 @@ h6.petsTitle {
  .petitionFont{
      font-size: 3em;
      text-shadow: 0 1px 0 white;
+ }
+
  .buttons {
      display: inline-block;
      width: 32%;
@@ -1512,4 +1519,12 @@ h6.petsTitle {
  .adSpace {
      display: block;
      min-height: 300px;
+ }
+
+body nav.top-bar.top-bar-logged-in {
+    background: url("/img/background/headerFooterBG.png") repeat-x scroll -456px -521px rgb(158, 175, 255);
+ }
+
+ body nav.top-bar.top-bar-logged-in section.top-bar-section ul.left li a, body nav.top-bar.top-bar-logged-in section.top-bar-section ul.left li a.small {
+     color: #8a9948;
  }

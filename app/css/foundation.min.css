@@ -9,13 +9,12 @@ html, body {
 }
 
 body {
-    background: none;
     padding: 0;
     margin: 0;
     font-weight: normal;
     font-style: normal;
     line-height: 1;
-    position: relative
+    position: relative;
 }
 
 a:focus {
