@@ -14,11 +14,11 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
         $scope.groups = false;
         $scope.filtersubgroup = $scope.subgroup;
         if("/pets" == $location.path()){
-            $scope.type = "angel"
+            $scope.type = "pet"
             $scope.pets = true;
             $scope.groups = false;
             console.log("We are in pets");
-        }if("/groups" == $location.path()){
+        }else if("/groups" == $location.path()){
             $scope.type = "group";
             $scope.pets = false;
             $scope.groups = true;

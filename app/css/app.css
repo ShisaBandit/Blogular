@@ -1269,7 +1269,7 @@ body.ng-scope div.row div.small-12.columns div.row div.small-12.large-12.ng-bind
     border-radius: 0px;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
-    background: #2163A9;
+    background: #BDCB80;
     opacity: 0.75;
     padding-top: 0px;
     padding-left: 5px;
@@ -1473,4 +1473,9 @@ h6.petsTitle {
  }
  .blogContent {
      position: relative;
+ }
+
+ .petitionFont{
+     font-size: 3em;
+     text-shadow: 0 1px 0 white;
  }

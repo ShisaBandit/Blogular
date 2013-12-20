@@ -6,6 +6,14 @@
 "../bower_components/foundation/scss/foundation",
 "app";
 
+.button{
+  background: linear-gradient(to bottom, rgb(239, 242, 255) 0%, rgb(144, 191, 250) 0%, rgb(165, 180, 255) 44%, rgb(103, 118, 181) 86%) repeat scroll 0% 0% transparent;
+  @include button-base(
+    $style:true,
+    $display:true
+  );
+}
+
 .custom-sidenav-class {
   @include side-nav(
     // Border color of divider

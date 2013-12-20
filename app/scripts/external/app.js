@@ -16,6 +16,7 @@ var app = angular.module('YoMemorialApp', [
             //when("/petangel/:id", {templateUrl: "partials/blogEntry.html"}).
             when("/StartGroup", {templateUrl: "partials/admin/createGroup.html"}).
             when("/group/:id", {templateUrl: "partials/blogEntry.html"}).
+            when("/pet/:id", {templateUrl: "partials/blogEntry.html"}).
             //when("/group/:id", {templateUrl: "partials/groupHome.html"}).
             when("/groupPreview/:id", {templateUrl: "partials/groupHomePublic.html"}).
             when("/public/:id", {templateUrl: "partials/publicAngelProfile.html"}).
@@ -498,13 +499,16 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         routeParamId: $routeParams.id,
         entryId: "",
         group: false,
-        admin:false
+        admin:false,
+        type:""
     }
+
     $scope.admin = false;
     $scope.embedVideos = {
         youtube:"",
         animoto:""
     }
+
     socket.connect();
     $scope.entry = "";
     $scope.viewers = [];
@@ -716,19 +720,10 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
                 //TODO:if canceled show user message and clear queue and ui
             })
     }
+
     show.state = true;
     $scope.show = show;
     $scope.$prepareForReady();
-    /*
-     BlogsService.getBlogFromLocal($routeParams.id,function(blog){
-
-     $scope.entry = blog;
-     $scope.text = blog.text;
-     $scope.comments = blog.comments;
-     $scope.$onReady("success");
-     });
-     */
-
 
     Blog.get({id: $routeParams.id}, function (blog) {
             console.log('got blog');
@@ -750,9 +745,8 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
                 $scope.text = blog[0].text;
                 $scope.comments = blog[0].comments;
                 socket.emit('subscribe', {room: blog[0]._id});
-
+                $scope.parentObject.type = $location.path().split("/")[1];
                 $scope.$onReady("success");
-                $location.path("/angel/" + $routeParams.id);
             }
 
         },
@@ -1125,31 +1119,6 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
 
 });
 
-app.controller('ModalDemoCtrl',function ($scope, $modal, $log) {
-
-    $scope.items = ['item1', 'item2', 'item3'];
-
-    $scope.open = function () {
-
-        var modalInstance = $modal.open({
-            templateUrl: 'partials/messageModal.html',
-            controller: 'ModalInstanceCtrl',
-            resolve: {
-                items: function () {
-                    return $scope.items;
-                }
-            }
-        });
-
-        modalInstance.result.then(function (selectedItem) {
-            $scope.selected = selectedItem;
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-        });
-    };
-});
-
-
 app.controller('ModalInstanceCtrl',function ($scope, $modalInstance,error,message) {
 
     $scope.ok = function () {
@@ -1183,8 +1152,8 @@ app.controller('messageController', function ($scope, api, $http, authService, u
     };
 
 
-    $scope.error = "test";
-    $scope.message = "test";
+    $scope.error = "";
+    $scope.message = "";
     $scope.loginAttempt = false;
     $scope.submitAuth = function () {
         $rootScope.$broadcast('event:auth-loginAttempt');

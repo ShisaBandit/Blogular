@@ -8,7 +8,12 @@
         <div class="small-12 columns">
             <div ng-click="photo = true;video = false;" class="button">Share a Photo</div>
             <div ng-click="video = true;photo = false;" class="button">Share a Video</div>
-            <div ng-click="event = true;video = false; photo = false;" class="button">Share an Anniversary</div>
+            <div ng-switch on="parentObject.type">
+
+                <div ng-switch-when="pet" ng-click="event = true;video = false; photo = false;" class="button">Share an Anniversary</div>
+                <div ng-switch-when="angel" ng-click="event = true;video = false; photo = false;" class="button">Share an Anniversary</div>
+                <div ng-switch-when="group" ng-click="event = true;video = false; photo = false;" class="button">Share an Event</div>
+            </div>
         </div>
         <div ng-show="photo" id="UploadBox">
             <h2 class="dark">Photo Uploader: Drag and drop image files on the box</h2>
