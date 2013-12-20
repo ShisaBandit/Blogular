@@ -32,7 +32,7 @@ exports.getMessagesForUser = function(req,res){
                             {to:thisUser}
                         ]}
                     ]
-            }).sort({_id:-1}).execFind(function(err,docs){
+            }).sort({_id:-1}).exec(function(err,docs){
                 console.log("found docs");
                 console.log(doc);
                 return res.send(JSON.stringify(docs),200);

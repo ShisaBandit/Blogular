@@ -56,7 +56,6 @@
                         <li>Last Name: {{user.lastName}}</li>
                         <li>email : {{user.email}}</li>
                         <li>City : {{user.city}}</li>
-                        <!--  <li>Age : {{user.age}}</li>-->
                         <li>About you : {{user.about}}</li>
                         <li>You have lost a {{user.lost}}</li>
                         <a href="#/editprofile" class="button">Edit Your profile</a>
@@ -194,7 +193,7 @@
             </div>
         </section>
     </tab>
-    <tab heading="Static title">
+    <tab heading="Messages">
         <section>
             <div class="content automargins" data-section-content>
                 <div class="row ">
@@ -202,7 +201,10 @@
                         <h2 class="contentHeaderTitle">Message Center</h2>
                     </div>
                     <p>Welcome to the Message Center. From here you can create, manage and view messages from your network members, administrators and other registered users..</p>
-                    <a class="button" data-reveal-id="messageModal"><img src="img/mail_2.png"> Send a New Message</a>
+                    <div ng-controller="messageController">
+
+                        <a class="button" ng-click="open()"><img src="img/mail_2.png"> Send a New Message</a>
+                    </div>
                     <br />
                     <div class="small-4 columns rghtDvd">
                         <b>Conversation With:</b>
