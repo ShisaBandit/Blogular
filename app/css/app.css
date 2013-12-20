@@ -1502,8 +1502,8 @@ h6.petsTitle {
  }
 
  .buttons {
-     display: inline-block;
-     width: 32%;
+     display: block;
+     width: 31%;
      height: 20px;
      background: linear-gradient(to bottom, rgb(239, 242, 255) 0%, rgb(144, 191, 250) 0%, rgb(165, 180, 255) 44%, rgb(103, 118, 181) 86%) repeat scroll 0% 0% transparent;
      color: rgb(255, 255, 255);
@@ -1514,6 +1514,7 @@ h6.petsTitle {
      line-height: 6px;
      text-align: center;
      border: 1px solid #71706b;
+     float: left;
  }
  
  .adSpace {

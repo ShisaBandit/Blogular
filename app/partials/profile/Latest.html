@@ -1,13 +1,13 @@
 <div ng-controller="LatestCtrl" class="row">
-  <div class="small-7 large-7 columns">
+  <div class="small-7 large-8 columns">
       <div class="row">
         <div id="contentHeader" class="small-12 columns show-for-medium-up">
             <h2 class="contentHeaderTitle">Start a New Conversation</h2>
         </div>
         <br/>
         <div class="small-12 columns" style="vertical-align: top; margin-top:-10px;margin-bottom:10px;">
-            <div ng-click="photo = true;video = false;" class="button">Share a Photo</div>
-            <div ng-click="video = true;photo = false;" class="button">Share a Video</div>
+            <div ng-click="photo = true;video = false;" class="buttons">Share a Photo</div>
+            <div ng-click="video = true;photo = false;" class="buttons">Share a Video</div>
             <div ng-switch on="parentObject.type">
 
                 <div ng-switch-when="pet" ng-click="event = true;video = false; photo = false;" class="buttons">Share an Anniversary</div>
