@@ -181,12 +181,21 @@
 
     <section class="primaryContent">
         <section class="shelf" id="shelf">
+            <div ng-controller="NotificationsCtrl">
+                <div class="my-repeat-animation" ng-repeat="noti in notifications" id="notifications">
+
+                    {{ noti.text }}
+                    <div>{{noti.count}}</div>
+                    <a class="closeButton" ng-click="notiviewed( noti._id )" closeparent
+                       title="Hide this box by clicking here">X</a>
+                </div>
+            </div>
+            <!-- Main  Content -->
             <div id="loginMessage" if-authed="hide">
-                <p>
-                    <img src="" style="background: url('/img/logo.png') no-repeat left top; width: 342px; height: 125px; overflow: hidden;" />
                 <h1>Welcome to Angels of Eureka's Circle of Life </h1>
                 <h2 style="color: #000000;font-size: large;font-weight: bold">Celebrate life...Cherish Legacies</h2>
                 <h3 style="color: #000000;font-size: small;font-weight: normal">Angels of Eureka is about Love, Hope and Life with People and Pets.</h3>
+                <p>
                 <!--[if lte IE 8]>
                 <b style="red; font-weight: bold;">
                     We noticed that you are using an old version of Internet Explorer on Windows XP. This browder does not support the technology that the Circle of Life web site employs.
@@ -213,17 +222,6 @@
                 <a href="#" class="small button" data-reveal-id="loginModal" data-hide-id="loginMessage">Login</a>
                 <a class="closeButton" closeparent title="Hide this box by clicking here">X</a>
             </div>
-            <div ng-controller="NotificationsCtrl">
-                <div class="my-repeat-animation" ng-repeat="noti in notifications" id="notifications">
-
-                    {{ noti.text }}
-                    <div>{{noti.count}}</div>
-                    <a class="closeButton" ng-click="notiviewed( noti._id )" closeparent
-                       title="Hide this box by clicking here">X</a>
-                </div>
-            </div>
-            <!-- Main  Content -->
-
             <div ng-view class="mainBG my-slide-animation">
 
             </div>
@@ -291,11 +289,13 @@
             <tr>
                 <th></th>
                 <td><a class="button" ng-click="submitAuth()">Login</a></td>
-                <td><a class="close-reveal-modal button">Close</a></td>
+                <!--<td><a class="close-reveal-modal button">Close</a></td>-->
                 <td><a ng-click="forgot()" href="#/passwordrecovery">forgot password??</a></td>
             </tr>
         </table>
+        <a class="closeButton" closeparent title="Hide this box by clicking here">X</a>
     </div>
+
 </div>
 
 

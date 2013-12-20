@@ -130,6 +130,15 @@ body .contain-to-grid-logged-in nav.top-bar-logged-in .loggedBlock {
      display:none;
  }
 
+ nav.top-bar {
+    top:130px;
+    background:#bdcb80 ;
+     -webkit-border-radius: 7px;
+     -moz-border-radius: 7px;
+     border-radius: 7px;
+
+ }
+
 .top-bar-logged-in{
     position: inherit;
     background: #9eafff url("/img/background/headerFooterBG.png")repeat-x -80px -540px;
@@ -376,7 +385,7 @@ body .contain-to-grid-logged-in #username2 {
     left: 20px;
     display: block;
     width: 100px;
-    height: 125px;
+    height: 45px;
     margin: 0px;
     padding-top: 0px;
     text-indent: -9000px;
@@ -410,21 +419,17 @@ body .contain-to-grid-logged-in #username2 {
 }
 
 .searchBar{
-    position:relative;
-    top:-10px;
-    width: 70%;
-    height:35px;
+    height:20px;
     background-color: #143A5F;
     padding-top: 5px;
-    z-index: 10;
 }
 
 .grouping{
     position:relative;
-    top: 0px;
+    top: 10px;
     display:block;
     width:100%;
-    height:125px;
+    height:60px;
     margin-top: -20px;
     background-color: #bdcb80;
     border-top-left-radius: 2em;
@@ -532,6 +537,8 @@ h1.sectionHeader {
     border: 4px solid #47569B;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
+    width: 150px;
+    height: 200px;
     z-index: 100;
 }
 
@@ -638,10 +645,8 @@ label {
 }
 
 .row .row .stream {
-    position: relative;
-    top:20px;
-    left:200px;
-    width: 750px;
+    display:block;
+    width: 770px;
     height: 400px\9;
     min-height: 300px;
     margin: 0px 0px 10px 0px;
@@ -789,22 +794,19 @@ body .button {
 
 
 #loginMessage {
-    position:fixed;
-    top:5%;
-    left: 20%;
+    position:relative;
     display:block;
-    width: 80%;
-    max-width: 980px;
+    max-width: 960px;
     height: auto;
     background: #f5f5f5;
     margin: auto;
-    padding: 20px;
+    padding: 0px 20px 0px 20px;
     color: darkslategrey;
-    border-radius: 7px;
+    border-radius: 2em;
     box-shadow: 2px 2px 5px rgb(19, 45, 72);
-    z-index: 100;
 }
-#notifications {
+
+ #notifications {
     position:relative;
     top:140px;
     display:block;
@@ -821,7 +823,14 @@ body .button {
 }
 
 #loginModal {
-    margin-top: 100px;
+    position: fixed;
+    top: 50%;
+    margin-top: 0px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+    left: 40%;
 }
 
 #musicModal {
@@ -1010,7 +1019,13 @@ input.addNewPost {
 @media only screen and (max-width: 451px) {
     /* Makes the responsive menu fit in the navigation container and change its background to black */
     html {
-        font-family: sans-serif;
+    @font-face {
+    font-family: "Open Sans";
+        font-style: normal;
+        font-weight: 300;
+        src: local("Open Sans Light"), local("OpenSans-Light"), url("http://themes.googleusercontent.com/static/fonts/opensans/v6/DXI1ORHCpsQm3Vp6mXoaTaRDOzjiPcYnFooOUGCOsRk.woff") format("woff");
+    }
+
         background: url("/img/background/Gobi-rainbow-2b.jpg") no-repeat scroll center -150px / cover rgb(39, 92, 149);
     }
 
@@ -1194,18 +1209,19 @@ input.addNewPost {
 .memNav {
     width: 700px;
     height: 30px;
-    left: 0px;
     padding-left: 20px;
-    position: relative;
-    top: 0px;
+    display: block;
 }
 
-.wallGroup {
+body.ng-scope div.row div.small-12.columns div.row div.small-12.large-12.ng-binding nav.wallGroup {
     display: block;
-    clear: both;
     text-align: left;
     margin-top: 0px;
     background: #fff;
+    width: 150px;
+    position: relative;
+    top:-1000px;
+    border: 1px red solid;
 }
 
 .wallGroup ul {
@@ -1227,6 +1243,7 @@ input.addNewPost {
     list-style: none;
     line-height: 8px;
     color: #47569B;
+    font-size: small;
 }
 
 #toolbar {
@@ -1376,6 +1393,7 @@ div.scrollerBlock.petsList {
 }
 
 div.scrollerBlock {
+    margin-top: 27px;
     background: url("/img/background/colbg2.png")repeat;
 }
 
@@ -1427,4 +1445,32 @@ h6.petsTitle {
  .automargins{
      margin-left: auto !important;;
      margin-right: auto !important;
+ }
+
+ /*
+ body.ng-scope div.off-canvas-wrap div.inner-wrap section.main-section section.primaryContent section#shelf.shelf div.mainBG.my-slide-animation.ng-scope div.ng-scope div.row.offsetHeight div.small-12.columns div.tabbable.ng-isolate-scope div.tab-content div.tab-pane.ng-scope section.ng-scope div.content.automargins div.row {
+     width: auto;
+     max-width: 950px;
+     margin:auto;
+ }
+   */
+
+ body .row .row {
+     width: auto;
+     max-width: 950px;
+     margin:auto;
+ }
+
+ .templatePortal {
+
+ }
+
+ .memWallSearch {
+     margin-top: 10px;
+     margin-left: auto;
+     margin-right: auto;
+     margin-bottom: 10px;
+ }
+ .blogContent {
+     position: relative;
  }
