@@ -44,7 +44,6 @@ var app = angular.module('YoMemorialApp', [
             when("/editprofile", {templateUrl: "partials/editprofile.html"}).
             when("/login", {templateUrl: "partials/login.html"}).
             when("/gifts/:user/:wall", {templateUrl: "partials/giftShop.html"}).
-            when("/panel2-2",{}).
             otherwise("/oops",{templateUrl:"404.html"});
 
     });
@@ -469,6 +468,7 @@ app.service('userInfoService', function () {
     }
 });
 
+
 app.controller('HeaderCtrl',function($scope,userInfoService,$rootScope){
 
     $scope.constyle = "contain-to-grid";
@@ -480,6 +480,7 @@ $rootScope.$on('authed', function (e) {
 })
 
 });
+
 
 app.controller('blogViewCtrl', function ($scope, show, categoryService, BlogsService) {
     $scope.categories = BlogsService.getCategories();
@@ -1124,9 +1125,66 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
 
 });
 
-app.controller('messageController', function ($scope, api, $http, authService, userInfoService, socket, $rootScope, $location, $window, limitToFilter) {
-    $scope.error = "";
-    $scope.message = "";
+app.controller('ModalDemoCtrl',function ($scope, $modal, $log) {
+
+    $scope.items = ['item1', 'item2', 'item3'];
+
+    $scope.open = function () {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'partials/messageModal.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                items: function () {
+                    return $scope.items;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+});
+
+
+app.controller('ModalInstanceCtrl',function ($scope, $modalInstance,error,message) {
+
+    $scope.ok = function () {
+        $modalInstance.close($scope.selected.item);
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+});
+app.controller('messageController', function ($scope, api, $http, authService, userInfoService, socket, $rootScope, $location, $window, limitToFilter,$modal) {
+    var modalInstance;
+    $scope.open = function () {
+
+       modalInstance = $modal.open({
+            templateUrl: 'partials/messageModal.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                error: function () {
+                    return $scope.error;
+                },
+                message:$scope.message
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+
+        }, function () {
+            console.log("modal dismissed")
+        });
+    };
+
+
+    $scope.error = "test";
+    $scope.message = "test";
     $scope.loginAttempt = false;
     $scope.submitAuth = function () {
         $rootScope.$broadcast('event:auth-loginAttempt');
@@ -1165,7 +1223,7 @@ app.controller('messageController', function ($scope, api, $http, authService, u
                 $scope.selected = "";
                 $scope.form.username = "";
                 $scope.form.password = "";
-                $rootScope.$broadcast('event:message-sent');
+                $scope.$close();
             }
         });
 
