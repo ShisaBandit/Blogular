@@ -1,9 +1,9 @@
 <div ng-controller="PetitionEntryCtrl">
 
-   <div class="small-12 columns offsetHeight">
+   <div class="small-12 small-centered columns offsetHeight">
     <div class="row">
         <a class="button" ng-click="signPetition()">Sign this petition</a>
-        <div>Signature count <b>{{signaturelength}}</b></div>
+        <div>Total Sginatures On This Petition <b class="petitionFont">{{signaturelength}}</b></div>
         <div ng-class="{spinner:spinner}"></div>
         <div ng-class="{error:error}">{{resultMessage}}</div>
     </div>

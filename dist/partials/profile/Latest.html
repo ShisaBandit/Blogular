@@ -1,14 +1,19 @@
 <div ng-controller="LatestCtrl" class="row">
-  <div class="small-11 large-8 columns">
+  <div class="small-7 large-7 columns">
       <div class="row">
         <div id="contentHeader" class="small-12 columns show-for-medium-up">
             <h2 class="contentHeaderTitle">Start a New Conversation</h2>
         </div>
         <br/>
-        <div class="small-12 columns">
+        <div class="small-12 columns" style="vertical-align: top; margin-top:-10px;margin-bottom:10px;">
             <div ng-click="photo = true;video = false;" class="button">Share a Photo</div>
             <div ng-click="video = true;photo = false;" class="button">Share a Video</div>
-            <div ng-click="event = true;video = false; photo = false;" class="button">Share an Anniversary</div>
+            <div ng-switch on="parentObject.type">
+
+                <div ng-switch-when="pet" ng-click="event = true;video = false; photo = false;" class="buttons">Share an Anniversary</div>
+                <div ng-switch-when="angel" ng-click="event = true;video = false; photo = false;" class="buttons">Share an Anniversary</div>
+                <div ng-switch-when="group" ng-click="event = true;video = false; photo = false;" class="buttons">Share an Event</div>
+            </div>
         </div>
         <div ng-show="photo" id="UploadBox">
             <h2 class="dark">Photo Uploader: Drag and drop image files on the box</h2>
@@ -71,13 +76,9 @@
         </div>
         <div class="small-12 columns" ng-hide="photo || video || event">
             <div ng-class="{spinner:spinner}"></div>
-            <input type="text" ng-model="postText" class="addNewPost small-10 columns"
-                   placeholder="Begin a new conversation here"/>
+            <input type="text" ng-model="postText" class="addNewPost small-8 columns"
+                   placeholder="Begin a new conversation here"/><a ng-click="submit()" class="button postfix small-4 columns">Submit</a>
             <div ng-class="{spinner:spinner}"></div>
-            <div class="small-2 columns"><br/>
-                <a ng-click="submit()" class="button postfix">Submit</a>
-            </div>
-
         </div>
 
         <div class="small-12 columns row2 contentContainer my-repeat-animation" ng-repeat="post in posts">
@@ -98,11 +99,12 @@
                             </ul>
                         </li>
 
-                        <img src="http://www.gravatar.com/avatar/{{post.gravatar}}" />
+                        <img src="http://www.gravatar.com/avatar/{{post.gravatar}}" style="float:left; max-width: 40px; padding-right:5px;" />
+                        <h6 style="float:left;margin-top: -3px;line-height: 18px;">Posted by <a href="#/profile/{{post.username}}">{{post.username}}</a><br /> on {{post.date}}.</h6>
 
                     </div>
-                    <h6>Posted by <a href="#/profile/{{post.username}}">{{post.username}} </a> on {{post.date}}.</h6>
-                    <div>
+
+                    <div class="postContent" style="display: block; clear:both;">
                         {{post.text}}{{post.event}}
                     </div>
 
@@ -140,7 +142,7 @@
                             <div ng-class="{spinner:spinner}"></div>
 
                             <div>
-                                <input type="text" on-keyup="submitComment($index)" keys="[27,13]" ng-model="newcomment[$index]" placeholder="Add your thoughts here! (Click enter to submit)" />
+                                <input type="text" on-keyup="submitComment($index)" keys="[27,13]" ng-model="newcomment[$index]" placeholder="Add your thoughts here! (Click enter to submit)" maxlength="300" />
                             </div>
                         </div>
                     </div>
@@ -153,7 +155,13 @@
             </div>
       </div>
     </div>
-    <div class="small-1 large-4 columns">
-        ADSPACE
+    <!--<div class="small-2 large-2 columns">-->
+    <div class="small-1 large-4 columns adSpace">
+        <br />
+        <a href="http://angelsofeureka.com" target="_blank"><img src="http://angelsofeureka.com/images/angelsOfeureka.jpg"></a>
+        <br /><br />
+        <a href="https://onsiteworkshops.com/" target="_blank"><img src="http://angelsofeureka.com/shop/media/wysiwyg/OriginalPossibilitiesLogowithOnsiteSmall.jpg"></a>
+        <br /><br />
+        <a href="http://www.shrinershospitalsforchildren.org/" target="_blank"> <img src="http://angelsofeureka.com/shop/media/wysiwyg/Screen_Shot_2013-06-02_at_10.47.31_AM.png"></a>
     </div>
 </div>
