@@ -5,7 +5,7 @@
 <tabset>
     <tab heading="Instructions"><section>
         <div class="content" data-section-content>
-            <div class="row ">
+            <div class="automargins row ">
 
                 <div class="contentHeader" class="small-12 columns">
                     <h2 class="contentHeaderTitle">Instructions on how to manage your account</h2>
@@ -46,7 +46,7 @@
     </section></tab>
     <tab heading="Basic Profile">
         <section>
-            <div class="content profileGravatar" data-section-content>
+            <div class="content automargins" data-section-content>
                 <div class="row ">
                     <div class="contentHeader" class="small-12 columns">
                         <h2 class="contentHeaderTitle">Basic Profile</h2>
@@ -56,7 +56,6 @@
                         <li>Last Name: {{user.lastName}}</li>
                         <li>email : {{user.email}}</li>
                         <li>City : {{user.city}}</li>
-                        <!--  <li>Age : {{user.age}}</li>-->
                         <li>About you : {{user.about}}</li>
                         <li>You have lost a {{user.lost}}</li>
                         <a href="#/editprofile" class="button">Edit Your profile</a>
@@ -66,7 +65,7 @@
         </section></tab>
     <tab heading="My Memorial Walls">
         <section>
-            <div class="content profileGravatar" data-section-content>
+            <div class="automargins content " data-section-content>
                 <div class="row ">
                     <div class="row ">
                         <div class="contentHeader" class="small-12 columns">
@@ -96,7 +95,7 @@
     </tab>
     <tab heading="Friend’s Memorials">
         <section>
-            <div class="content profileGravatar" data-section-content>
+            <div class="content automargins" data-section-content>
                 <div class="row ">
                     <div class="row ">
                         <div class="contentHeader" class="small-12 columns">
@@ -121,7 +120,7 @@
     </tab>
     <tab heading="My Groups">
         <section>
-            <div class="content profileGravatar" data-section-content>
+            <div class="content automargins" data-section-content>
                 <div class="row ">
                     <div class="contentHeader" class="small-12 columns">
                         <h2 class="contentHeaderTitle">My Group's</h2>
@@ -176,7 +175,7 @@
     <tab heading="My Petitions">
 
         <section>
-            <div class="content profileGravatar" data-section-content>
+            <div class="content automargins" data-section-content>
                 <div class="row ">
                     <div class="contentHeader" class="small-12 columns">
                         <h2 class="contentHeaderTitle">My Petitions</h2>
@@ -194,28 +193,26 @@
             </div>
         </section>
     </tab>
-    <tab heading="Static title">
+    <tab heading="Messages">
         <section>
-            <div class="content profileGravatar" data-section-content>
+            <div class="content automargins" data-section-content>
                 <div class="row ">
                     <div class="contentHeader" class="small-12 columns">
                         <h2 class="contentHeaderTitle">Message Center</h2>
                     </div>
                     <p>Welcome to the Message Center. From here you can create, manage and view messages from your network members, administrators and other registered users..</p>
-                    <a class="button" data-reveal-id="messageModal"><img src="img/mail_2.png"> Send a New Message</a>
+                    <div ng-controller="messageController">
+
+                        <a class="button" ng-click="open()"><img src="img/mail_2.png"> Send a New Message</a>
+                    </div>
                     <br />
                     <div class="small-4 columns rghtDvd">
                         <b>Conversation With:</b>
                         <br />      <br />
                         <section>
-                            <!--
-                            <div class="row">
-                                <input type="text" ng-model="postText" class="addNewPost small-12 columns" placeholder="Search Messages"/>
-                            </div>
-                            -->
-                            <div class="row my-repeat-animation"  ng-repeat="messagedUser in messagedUsers">
+                            <div class="row my-repeat-animation panel"  ng-repeat="messagedUser in messagedUsers">
                                 <a href="" ng-click="getMessages(messagedUser.user)">
-                                    <span class="small-10 columns">{{messagedUser.user}} <a class="button buttonSmall" title="Archive This Conversation"><img src="img/trash.png"></a></span>
+                                    <span class="small-10 columns">{{messagedUser.user}} <!--<a class="button buttonSmall" title="Archive This Conversation"><img src="img/trash.png"></a>--></span>
                                 </a>
                             </div>
                         </section>
