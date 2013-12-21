@@ -557,7 +557,9 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
             photos:$scope.photos,
             postType: 1
         }, function () {
-
+            $scope.photos = [];
+            $scope.photoAdded.photoPostText = "";
+            socket.emit('postText', {room: $scope.entry._id});
             $rootScope.$broadcast('updateStream');
 
         })
@@ -578,6 +580,7 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
             $scope.photoAdded.photoPostText = "";
             console.log("video sent");
             $scope.embedVideos = {};
+            socket.emit('postText', {room: $scope.entry._id});
             $rootScope.$broadcast('updateStream');
         })
     }
@@ -639,6 +642,7 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
             text: $scope.eventData.eventdesc,
             postType: 3
         }, function () {
+            socket.emit('postText', {room: $scope.entry._id});
             $rootScope.$broadcast('updateStream');
             $scope.eventData = {};
         })
@@ -1302,9 +1306,7 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
                 console.log(data);
                 $scope.refreshStream();
             }).
-            error(function () {
-
-            })
+            error(function () {})
     }
     $scope.blockComments = function (postId) {
         $http.get('commentsAllowed/'+$scope.parentObject.entryId+'/'+postId).

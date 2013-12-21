@@ -6,33 +6,33 @@
         </div>
         <br/>
         <div class="small-12 columns" style="vertical-align: top; margin-top:-10px;margin-bottom:10px;">
-            <div ng-click="photo = true;video = false;" class="buttons">Share a Photo</div>
-            <div ng-click="video = true;photo = false;" class="buttons">Share a Video</div>
+            <div ng-click="menu.photo = true;menu.video = false;menu.event = false" class="buttons">Share a Photo</div>
+            <div ng-click="menu.video = true;menu.photo = false;menu.event = false" class="buttons">Share a Video</div>
             <div ng-switch on="parentObject.type">
 
-                <div ng-switch-when="pet" ng-click="event = true;video = false; photo = false;" class="buttons">Share an Anniversary</div>
-                <div ng-switch-when="angel" ng-click="event = true;video = false; photo = false;" class="buttons">Share an Anniversary</div>
-                <div ng-switch-when="group" ng-click="event = true;video = false; photo = false;" class="buttons">Share an Event</div>
+                <div ng-switch-when="pet" ng-click="$parent.menu.event = true;$parent.menu.video = false; $parent.menu.photo = false;" class="buttons">Share an Anniversary</div>
+                <div ng-switch-when="angel" ng-click="$parent.menu.event = true;$parent.menu.video = false;$parent.menu.photo = false;" class="buttons">Share an Anniversary</div>
+                <div ng-switch-when="group" ng-click="$parent.menu.event = true;$parent.menu.video = false; $parent.menu.photo = false;" class="buttons">Share an Event</div>
             </div>
         </div>
-        <div ng-show="photo" id="UploadBox">
+        <div ng-show="menu.photo" id="UploadBox">
             <h2 class="dark">Photo Uploader: Drag and drop image files on the box</h2>
             <div id='UploadArea'>
                 <dropzone url="/upload" class="dropzone" autoupload="false" addRemoveLinks="true" id="my-awesome-dropzone" ></dropzone>
             </div>
             <input type="text" ng-model="photoAdded.photoPostText" class="addNewPost small-10 columns"
                    placeholder="Tell us about these photos"/>
-            <div ng-show="photoAdded.show" ng-click="photo=false;addPhotoToStream()" class="button">You have added a photo Click here to add to Stream.</div>
-            <div ng-show="photoAdded.show" ng-click="photo=false;clearPhotoFromQueue()" class="button">Finished</div>
-            <div ng-hide="photoAdded.show" ng-click="photo=false" class="button">Finished</div>
+            <div ng-show="photoAdded.show" ng-click="menu.photo=false;addPhotoToStream()" class="button">You have added a photo Click here to add to Stream.</div>
+            <div ng-show="photoAdded.show" ng-click="menu.photo=false;clearPhotoFromQueue()" class="button">Finished</div>
+            <div ng-hide="photoAdded.show" ng-click="menu.photo=false" class="button">Finished</div>
 
         </div>
-        <div ng-show="video" id="videobox">
+        <div ng-show="menu.video" id="videobox">
             <div>
                 <h3 style="color:#3F77BC;">Select which type of video you would like to show.</h3>
-                <a class="button" ng-click="youtube = true;animoto = false;">YouTube</a>
-                <a class="button" ng-click="youtube = false;animoto = true;">Animoto</a>
-                <div class="my-show-hide-animation" ng-show="youtube">
+                <a class="button" ng-click="menu.youtube = true;menu.animoto = false;">YouTube</a>
+                <a class="button" ng-click="menu.youtube = false;menu.animoto = true;">Animoto</a>
+                <div class="my-show-hide-animation" ng-show="menu.youtube">
                     <h4 class="dark">YouTube Link</h4>
                     <b class="dark">Past or type a YouTube url here.</b>
                     <input type="text" name="youtube" ng-model="embedVideos.youtube" id="youtube" placeholder="Enter your youtube embed code here!"/>
@@ -40,7 +40,7 @@
                            placeholder="Tell us about this video"/>
                     <a ng-click="submitVideo()" class="button">Add Video to your stream</a>
                 </div>
-                <div class="animoto" ng-show="animoto">
+                <div class="animoto" ng-show="menu.animoto">
                     <h4 class="dark">Animoto Link</h4>
 
                     <p>*Turn your photos and music into stunning video slideshows. You provide
@@ -57,9 +57,9 @@
 
                 </div>
             </div>
-            <div ng-click="video=false" class="button">Finished</div>
+            <div ng-click="menu.video=false" class="button">Finished</div>
         </div>
-        <div ng-show="event" id="eventbox">
+        <div ng-show="menu.event" id="eventbox">
             <div>
                 <h4 class="dark">Add a New Angel Anniversary</h4>
                 <h5>Details</h5>
@@ -72,7 +72,7 @@
                 </div>
                 <a ng-click="submitEvent()" class="button">Submit Angel Anniversary</a>
             </div>
-            <div ng-click="event=false" class="button">Finished</div>
+            <div ng-click="menu.event=false" class="button">Finished</div>
         </div>
         <div class="small-12 columns" ng-hide="photo || video || event">
             <div ng-class="{spinner:spinner}"></div>
