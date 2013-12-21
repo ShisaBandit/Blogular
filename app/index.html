@@ -53,15 +53,55 @@
             <section class="top-bar-section">
                 <!-- Right Nav Section -->
                 <ul class="right">
+                    <li class="has-dropdown loggedOut">
+                        <a style="color:#8a9948;">My Account</a>
+                        <ul class="dropdown">
+                            <li>
+                                <div ng-controller="UserInfoCtrl" class="loginBlock">
+                                    <div id="username">
 
-                    <li class="has-dropdown">
-
+                                        <a href="#/profile/{{username}}" if-authed="show" class="small button">My Account</a>
+                                        <a href="#/rules" class="small button">Rules</a>
+                                        <a href="#" ng-click="logout()" if-authed="show" class="small button">logout</a>
+                                        <a href="#/registration" if-authed="hide" class="small button">Register</a>
+                                        <a href="#/login" if-authed="hide" class="small button">Login</a>
+                                        <!-- <a if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>-->
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </li>
+                    <li if-authed="show" class="has-dropdown">
+                        <a>
+                            <img width="34" src="http://www.gravatar.com/avatar/{{post.gravatar}}" />
+                            <b style="color:#8a9948;">{{username}}</b>
+                        </a>
+                        <ul ng-controller="UserInfoCtrl" class="dropdown">
+                            <li><a href="#/profile/{{username}}" if-authed="show">My Account</a>
+                            </li>
+                            <li>
+                                <a href="#/rules">Rules</a>
+
+                            </li>
+                            <li>
+                                <a href="#" ng-click="logout()" if-authed="show">logout</a>
+
+                            </li>
+                            <li>
+                                <a href="#/registration" if-authed="hide">Register</a>
+
+                            </li>
+                            <li>
+                                <a if-authed="hide" data-reveal-id="loginModal">Login</a>
+                            </li>
+                        </ul>
+                    </li>
+
                 </ul>
                 <!-- Left Nav Section -->
-                <ul class="left" ng-controller="SearchBarCtrl">
+                <ul class="" ng-controller="SearchBarCtrl">
                     <li class="has-dropdown">
-                        <a>Memorials</a>
+                        <a style="color:#8a9948;">Memorials</a>
                         <ul class="dropdown" id="workpets">
                             <li>
                                 <a href="/" id="homebutton" class="small">Angel Memorials</a>
@@ -83,25 +123,8 @@
                     <li>
                         <a href="#" id="webstorebutton" class="small">Web Store</a>
                     </li>
-                    <li class="has-dropdown loggedOut">
-                        <a href="#">My Account</a>
-                        <ul class="dropdown">
-                            <li>
-                                <div ng-controller="UserInfoCtrl" class="loginBlock">
-                                    <div id="username">
-                                        <img width="34" src="http://www.gravatar.com/avatar/{{post.gravatar}}" />
-                                        <b>{{username}}</b>
-                                        <a href="#/profile/{{username}}" if-authed="show" class="small button">My Account</a>
-                                        <a href="#/rules" class="small button">Rules</a>
-                                        <a href="#" ng-click="logout()" if-authed="show" class="small button">logout</a>
-                                        <a href="#/registration" if-authed="hide" class="small button">Register</a>
-                                        <a href="#/login" if-authed="hide" class="small button">Login</a>
-                                       <!-- <a if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>-->
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
+
+<!--
                     <li ng-controller="UserInfoCtrl" class="loggedBlock" id="username2">
                         <img width="34" src="http://www.gravatar.com/avatar/{{post.gravatar}}" />
                         <b>{{username}}</b>
@@ -111,6 +134,7 @@
                         <a href="#/registration" if-authed="hide" class="small button">Register</a>
                         <a if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
                     </li>
+    -->
                 </ul>
             </section>
         </nav>
