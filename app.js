@@ -45,7 +45,7 @@ var app = express();
 app.use(expressValidator());
 //noinspection JSValidateTypes
 app.configure('production', function () {
-    global.__uploads = 'dist';
+    global.__uploads = 'app';
     app.use(express.compress());
 
     //noinspection JSUnresolvedVariable,JSValidateTypes,MagicNumberJS
