@@ -95,7 +95,8 @@
                                         <a href="#/rules" class="small button">Rules</a>
                                         <a href="#" ng-click="logout()" if-authed="show" class="small button">logout</a>
                                         <a href="#/registration" if-authed="hide" class="small button">Register</a>
-                                        <a if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
+                                        <a href="#/login" if-authed="hide" class="small button">Login</a>
+                                       <!-- <a if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>-->
                                     </div>
                                 </div>
                             </li>
@@ -200,7 +201,8 @@
                     <br />
                     <a href="https://www.google.com/intl/en/chrome/browser/?platform=win" target="_blank">Google Chrome</a>
                     <br />
-                    If you want to continue using Internet Explorer on our site, you will need to upgrade your computer to at least <a href="https://http://windows.microsoft.com/en-us/windows7/products/upgrade" target="_blank">Windows 7</a>.<br />
+                    If you want to continue using Internet Explorer on our site, you will need to upgrade your computer to at least <a href="https://http://windows.microsoft.com/en-us/windows7/products/upgrade" target="_blank">Windows 7</a>.
+                    <br />
                     Thank you for you understanding.
                 </b>
                 <![endif]-->
@@ -230,7 +232,7 @@
             </footer>
             <!-- End Footer -->
         </section>
-
+<!--
         <div id="toc" ng-controller="MusicPlayerCtrl">
             <h2 ng-hide="iosshow" id="tocToggle" class="toc navTab status-off" ><a click>View Music Player</a></h2>
             <aside class="base-class" ng-class="{'my-class':boolChangeClass}">
@@ -251,22 +253,13 @@
                 </figure>
             </aside>
         </div>
-
+-->
     </section>
     </section>
         <!-- close the off-canvas menu -->
         <a class="exit-off-canvas"></a>
     </div>
 </div>
-<!-- example of a mixin RODNEY CHECK IT OUT
-<ul class="custom-sidenav-class">
-    <li class="active"><a href="#">Link 1</a></li>
-    <li><a href="#">Link 2</a></li>
-    <li class="divider"></li>
-    <li><a href="#">Link 3</a></li>
-    <li><a href="#">Link 4</a></li>
-</ul>
--->
 <!-- Sitewide Modals -->
 <div id="login-inner" ng-controller="LoginController">
     <div reveal-modal="login" id="loginModal" class="reveal-modal medium" data-reveal>
@@ -286,17 +279,17 @@
                 <th></th>
                 <td><a class="button" ng-click="submitAuth()">Login</a></td>
                 <!--<td><a class="close-reveal-modal button">Close</a></td>-->
-                <td><a ng-click="forgot()" href="#/passwordrecovery">forgot password??</a></td>
+                <td ><a ng-click="forgot()" href="#/passwordrecovery">forgot password??</a></td>
             </tr>
         </table>
-        <a class="closeButton" closeparent title="Hide this box by clicking here">X</a>
+        <a class="closeButton close-reveal-modal" closeparent title="Hide this box by clicking here">X</a>
     </div>
 
 </div>
 
 
 <div id="pic-inner" ng-controller="DeletePicsCtrl">
-    <div reveal-modal="deletepic" id="confirmDeletePics" class="reveal-modal small">
+    <div reveal-modal="deletepic" id="confirmDeletePics" class="reveal-modal small" data-reveal>
         <p><b>{{message}}</b></p>
 
         <p class="close-reveal-modal button" ng-href="#">Cancel</p>

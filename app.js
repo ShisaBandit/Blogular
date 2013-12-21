@@ -65,7 +65,7 @@ app.configure('production', function () {
     app.use(express.cookieParser('secret'));
     //TODO:Config: make secrete changable in config
 //    app.use(express.session({store: sessionStore, secret: 'secret', key: 'express.sid'}));
-    app.use(express.session({store: new MongoStore({url:'mongodb://localhost/test'}), secret: 'secret', key: 'express.sid'}));
+    app.use(express.session({store: new MongoStore({url:'mongodb://localhost/test'}), secret: 'secret', key: 'connect.sid'}));
     // Initialize Passport! Also use passport.session() middleware, to support
     // persistent login sessions (recommended).
     app.use(passport.initialize());
@@ -93,7 +93,7 @@ app.configure('development', function () {
     app.use(express.cookieParser('secret'));
     //TODO:Config: make secrete changable in config
    // app.use(express.session({store: sessionStore, secret: 'secret', key: 'express.sid'}));
-    app.use(express.session({store: new MongoStore({url:'mongodb://localhost/test'}), secret: 'secret', key: 'express.sid'}));
+    app.use(express.session({store: new MongoStore({url:'mongodb://localhost/test'}), secret: 'secret', key: 'connect.sid'}));
     // Initialize Passport! Also use passport.session() middleware, to support
     // persistent login sessions (recommended).
     app.use(passport.initialize());
@@ -322,15 +322,21 @@ var io = require('socket.io').listen(server);
 
 io.configure(function () {
     io.set("authorization", passportSocketIo.authorize({
-        key: 'express.sid',       //the cookie where express (or connect) stores its session id.
+        key: 'connect.sid',       //the cookie where express (or connect) stores its session id.
         secret: 'secret', //the session secret to parse the cookie
         store:  new MongoStore({url:'mongodb://localhost/test'}),     //the session store that express uses
-        fail: function (data, accept) {
-            accept(null, false);             // second param takes boolean on whether or not to allow handshake
-        },
+        cookieParser:express.cookieParser,
         success: function (data, accept) {
+            console.log('successful connection to socket.io');
             accept(null, true);
+        },
+        fail: function (data, message, error, accept) {
+            if(error)
+                throw new Error(message);
+            console.log('failed connection to socket.io:', message);
+            accept(null, false);             // second param takes boolean on whether or not to allow handshake
         }
+
     }));
 });
 var notificationSubscribers = [];

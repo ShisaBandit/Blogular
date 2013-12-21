@@ -181,6 +181,9 @@ app.directive('revealModal', function (DeletePicsFactory) {
             })
             scope.$on('event:pic-deleted', function () {
                 if(attrs.revealModal == 'deletepic'){
+                    console.log("DELETE PIC EVENT FIRED RECEIVED IN DIRECTIVE ")
+                    console.log(elm)
+                    console.log(elm.foundation)
                     elm.foundation('reveal','close');
                 }
             })
@@ -1195,14 +1198,10 @@ app.controller('messageController', function ($scope, api, $http, authService, u
                 $scope.$close();
             }
         });
-
-
     }
-
-
 });
 
-app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket, groupsListing, $timeout) {
+app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket, groupsListing, $timeout,$location) {
     $scope.form = {};
     $scope.subgroup = [];
     $scope.form.groupcode;
@@ -1225,7 +1224,8 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket, grou
                     $rootScope.$broadcast('event:reg-error');
                 } else {
                     $scope.form = {};
-                    $rootScope.$broadcast('event:auth-registered');
+                    $location.path("/login");
+                    //$rootScope.$broadcast('event:auth-registered');
                 }
             }).
             error(function (err) {
@@ -1379,7 +1379,7 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
                 $scope.spinner = false;
                 console.log("Successfully sent data");
                 console.log(data);
-                socket.emit('subcomment', {room: $scope.parentObject.entryId, text: $scope.newcomment[index], comment_id: $scope.posts[index]._id})
+                socket.emit('subcomment', {room: $scope.parentObject.entryId, text: $scope.newcomment[index], comment_id: $scope.posts[index]._id,username:userInfoService.getUsername(),gravatar:userInfoService.getGravatar()})
                 $scope.posts[index].comments.push({text: $scope.newcomment[index],username:userInfoService.getUsername(),gravatar:userInfoService.getGravatar()});
                 $scope.newcomment[index] = "";
                 console.log($scope.newcomment[index])
@@ -1397,11 +1397,11 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
     $scope.addSubComment = function (data) {
         for (var x = 0; x < $scope.posts.length; x++) {
             if ($scope.posts[x]._id == data.comment_id) {
-                console.log($scope.posts[x]);
+                console.log(data);
                 if ($scope.posts[x].comments == undefined) {
                     $scope.posts[x].comments = [];
                 }
-                $scope.posts[x].comments.push({username:userInfoService.getUsername(),text: data.text,gravatar:userInfoService.getGravatar()});
+                $scope.posts[x].comments.push({username:data.username,text: data.text,gravatar:data.gravatar});
             }
         }
     }
@@ -1642,8 +1642,7 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api,$modal,Delet
 
         }else{
             //DeletePicsFactory.setMessageToShowUsers("Are you sure you want to permantly delete this photo from our site forever?");
-            $rootScope.$broadcast('event:pic-delete-request',{message:"Are you sure you want to permantly delete this photo from our site forever?<br /> (view " +
-                "by album if you only wanted to remove a pic by album."})
+            $rootScope.$broadcast('event:pic-delete-request',{message:"Are you sure you want to permantly delete this photo from our site forever? (view by album if you only wanted to remove a pic by album."})
 
         }
         console.log(DeletePicsFactory);
