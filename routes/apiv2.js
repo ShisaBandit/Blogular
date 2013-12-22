@@ -34,7 +34,7 @@ exports.createData = function (req, res) {
 
         });
 
-    } else if (subsubdoc == undefined && subdoc != undefined) {
+    } else if (subsubdoc == undefined && subdoc != undefined) {//create a subdoc
         condition._id = req.params.id;
         console.log(condition);
         model.findOne(condition, function (err, doc) {
@@ -50,9 +50,9 @@ exports.createData = function (req, res) {
                 if(!skip){
 
                     doc[subdoc].push(data);
-                    doc.save(function (err) {
+                    doc.save(function (err,doc) {
                         console.log(err);
-                        return sendSuccess(res,reason);
+                        return sendSuccess(res,reason,doc);
                     });
                 }else{
                     return sendError(res,reason);
@@ -110,7 +110,7 @@ var dataFilter = function (req, type, subtype, data,doc, callback) {
                         data.username = user.username;
                         data.gravatar = calcMD5(user.email);
                         data.user_id = user._id;
-                        callback(data);
+                        callback(data,false,data);
                     }
                 });
             } else {
@@ -302,8 +302,8 @@ exports.getData = function (req, res) {
     })
 };
 
-function sendSuccess(res,message) {
-    return res.end(JSON.stringify({'success': message}));
+function sendSuccess(res,message,data) {
+    return res.end(JSON.stringify( {message:message,data:data}));
 
 }
 function sendError(res,reason){

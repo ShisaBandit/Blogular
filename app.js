@@ -157,6 +157,7 @@ app.get('/getInvitedGroup',passport.ensureAuthenticated,blogRoutes.getInvitedGro
 app.get('/blog/:id', blogRoutes.getABlog);
 
 app.get('/blog/:skip/:limit', blogRoutes.getPaginatedBlogs);
+app.get('/stream/:id/:skip/:limit', blogRoutes.getPaginatedStreamPosts);
 
 app.get('/blogLastUpdate/:id', blogRoutes.getLastBlogUpdateDate);
 

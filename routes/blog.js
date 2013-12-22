@@ -89,6 +89,23 @@ exports.getPaginatedBlogs = function (req, res) {
         return res.end(JSON.stringify(posts));
     });
 };
+exports.getPaginatedStreamPosts = function (req, res) {
+    var skip = req.params.skip,
+        limit = req.params.limit;
+    console.log(skip, limit);
+    console.log(req.param.id);
+    Blog.findOne({_id:req.params.id},function (err,blog) {
+        if(!blog)return res.send(200,JSON.stringify([]));
+      var post = blog.postText;
+        var buffer = [];
+      for(var x = 0;x<limit;x++){
+          console.log(post[x+skip]);
+        buffer.push(post[x+skip]);
+      }
+      return res.end(JSON.stringify(buffer));
+
+    });
+};
 
 exports.getABlog = function (req, res) {
     var id = req.params.id;
@@ -135,8 +152,7 @@ exports.getABlog = function (req, res) {
                 return res.end(JSON.stringify(post));
 
             } else {
-
-                var modifiedpost = [];
+                 var modifiedpost = [];
                 var modifiedpostentry = {};
                 modifiedpostentry.limited = true;
                 modifiedpostentry.firstName = post[0].firstName;
@@ -149,9 +165,7 @@ exports.getABlog = function (req, res) {
                 return res.end(JSON.stringify(modifiedpost));
             }
         });
-        //return res.send(user[0].username, 200);
     })
-
 };
 //TODO:verify and test this functionality.
 exports.getLastBlogUpdateDate = function (req, res) {
@@ -189,51 +203,11 @@ exports.friendsMemorials = function (req, res) {
 exports.getGroups = function (req, res) {
     var buffer = [];
     Blog.find({owner_id: req.session.passport.user, group: true}, function (err, docs) {
-        /*
-         for(var doc = 0; doc < docs.length; doc++){
-         console.log("is this a group "+docs[doc].group+" "+docs.length)
-         if(docs[doc].group == true)
-         buffer.push(docs[doc]);
-
-         }
-         */
         return res.send(JSON.stringify(docs));
     })
 }
 
 exports.createBlog = function (req, res) {
-    /*
-     if(req.body.group == undefined){
-     req.checkBody('dob','Must be a valid data').notNull().isDate();
-     req.checkBody('memorialDate','Must be a valid date').notNull().isDate();
-     req.checkBody('subgroup','Must select a group').notNull();
-     }
-     req.checkBody('title','You need a title').notNull();
-     req.checkBody('author','You must assign a url').notNull();
-
-
-     req.checkBody('firstName','Must enter a first name').notNull();
-     req.checkBody('lastName','Must enter a first name').notNull();
-     var errors = req.validationErrors(true);
-     var myRe = /^(\w*[-_]?\w*){1,100}$/;
-     var myArray = myRe.exec(req.body.author);
-     if(myArray == null){
-     console.log("not a valid url")
-     errors.author = {param:'author',msg:'Please enter a valid url. Only characters A-Z or numbers 1-9 and "-" or "_" allowed.'};
-     }
-     console.log(errors);
-     if (errors) {
-     res.send(errors, 500);
-     return;
-     }
-     */
-    /*
-     var charsNotAllowed = [' ','{','}','|','\\','^','~','[',']','`',';','/','?',':','@','=','&'];
-     for(var i = 0;i< charsNotAllowed.length;i++){
-     console.log(charsNotAllowed[i])
-     req.checkBody('author','The '+charsNotAllowed[i]+' character is not allowed').notContains(charsNotAllowed[i])
-     }
-     */
     BlogGroupValidation(req).
     then(function (walls) {//if NO errors
 

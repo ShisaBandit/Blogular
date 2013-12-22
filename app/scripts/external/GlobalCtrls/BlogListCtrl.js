@@ -90,14 +90,9 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
         $scope.limit = 8;
 
         $scope.nextPage = function(){
-            console.log("getting busy!!")
-
             if($scope.busy)return;
-                console.log("getting groups")
-            console.log($location.path())
                 $scope.busy = true;
                 BlogsService.paginatedBlogs($scope.skip,$scope.limit,function(blogs){
-
                     for(var i = 0;i<blogs.length;i++){
                         console.log("getting groups and looping")
 

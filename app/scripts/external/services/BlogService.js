@@ -18,6 +18,10 @@ angular.module('blogService', ['ngResource']).
             {skip:'0',limit:'3'},
             {'get':{method:'GET',isArray:'true'}
             });
+        var streamPagination = $resource('/stream/:id/:skip/:limit',
+            {id:'',skip:'0',limit:'3'},
+            {'get':{method:'GET',isArray:'true'}}
+        );
         var categories = [];
         var allBlogs = [];
         var processBlogs = function(blogs){
@@ -121,6 +125,11 @@ angular.module('blogService', ['ngResource']).
                 blogPagination.get({skip:skip,limit:limit},function(blogs){
                                                     console.log(blogs);
                     callback(processBlogs(blogs));
+                })
+            },
+            paginatedStream: function (id,skip,limit,callback) {
+                var posts = streamPagination.get({id:id,skip:skip,limit:limit}, function () {
+                    callback(posts);
                 })
             }
 
