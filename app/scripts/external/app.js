@@ -557,17 +557,17 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
             photos:$scope.photos,
             postType: 1
         }
-        api.createSubDocResource('Blog', $scope.parentObject.entryId, 'postText',photoPost , function (data) {
+        api.createSubDocResource('Blog', $scope.parentObject.entryId, 'postText',photoPost , function (res) {
             $scope.photos = [];
             $scope.photoAdded.photoPostText = "";
             socket.emit('postText', {room: $scope.entry._id});
             //$rootScope.$broadcast('updateStream');
             console.log("GOT DATA BACK")
-            console.log(data)
-            data.date = formatDate(data.Date);
-            data.canComment = true;
-            data.isStream = true;
-            $rootScope.$broadcast('updatepost',data);
+            console.log(res.data)
+            res.data.date = formatDate(res.data.Date);
+            res.data.canComment = true;
+            res.data.isStream = true;
+            $rootScope.$broadcast('updatepost',res.data);
         })
     }
 
@@ -583,7 +583,7 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
             embedAnimoto: animoto_embed(animoto_parser($scope.embedVideos.animoto)),
             postType: 2
         };
-        api.createSubDocResource('Blog', $scope.parentObject.entryId, 'postText',videoPost, function (data) {
+        api.createSubDocResource('Blog', $scope.parentObject.entryId, 'postText',videoPost, function (res) {
             $scope.photoAdded.photoPostText = "";
             console.log("video sent");
             $scope.embedVideos = {};
@@ -591,11 +591,11 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
             //$rootScope.$broadcast('updateStream');
             //$scope.entry.postText.unshift($scope.videoPost);
             //$scope.$apply();
-            console.log(data)
-            data.canComment = true;
-            data.isStream = true;
-            data.date = formatDate(data.date);
-            $rootScope.$broadcast('updatepost',data);
+            console.log(res.data)
+            res.data.canComment = true;
+            res.data.isStream = true;
+            res.data.date = formatDate(res.data.date);
+            $rootScope.$broadcast('updatepost',res.data);
         })
     }
 
@@ -657,12 +657,12 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
             postType: 3,
             canComment:true
         };
-        api.createSubDocResource('Blog', $scope.parentObject.entryId, 'postText',eventPost , function (data) {
+        api.createSubDocResource('Blog', $scope.parentObject.entryId, 'postText',eventPost , function (res) {
             socket.emit('postText', {room: $scope.entry._id});
            // $rootScope.$broadcast('updateStream');
             $scope.eventData = {};
-            data.date = formatDate(data.date);
-            $rootScope.$broadcast('updatepost',data);
+            res.data.date = formatDate(res.data.date);
+            $rootScope.$broadcast('updatepost',res.data);
 
         })
 
@@ -1311,20 +1311,31 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
         "Block/Allow commenting",
         "Reset comments"
     ];
-    $scope.skip = 0;
     $scope.limit = 10;
+    $scope.skip = $scope.limit;
     $scope.busy = false;
+
+    //thisis initialised in the blogId Watch function
     $scope.nextPage = function(){
         if($scope.busy)return;
         $scope.busy = true;
+        $scope.spinner = true;
         BlogsService.paginatedStream($scope.blogId,$scope.skip,$scope.limit,function(posts){
             console.log(posts);
-            for(var i = 0;i<posts.length;i++){
-                console.log("getting groups and looping")
-                $scope.posts.push(posts[i]);
+            if(posts.length < 1){
+                $scope.busy = true;
+                $scope.spinner = false;
+            }else{
+                for(var i = 0;i<posts.length;i++){
+                    console.log("getting groups and looping")
+                    posts[i].date = formatDate(posts[i].date);
+                    $scope.posts.push(posts[i]);
+                }
+                $scope.skip += $scope.limit;
+                $scope.busy = false;
+                $scope.spinner = false;
             }
-            $scope.skip += $scope.limit;
-            $scope.busy = false;
+
         })
     }
 
@@ -1369,6 +1380,8 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
         console.log(newVal);
         $scope.blogId = newVal;
         $scope.spinner = true;
+        $scope.busy = true;
+        /*
         $http.get('/lastestPosts/' + newVal).
             success(function (data, err) {
                 for(var p = 0;p<data.length;p++){
@@ -1381,6 +1394,20 @@ app.controller('LatestCtrl', function ($scope, $http, $routeParams, socket,$root
             error(function (err, code, status) {
                 console.log(err + code + status);
             });
+            */
+        //initialise stream
+        BlogsService.paginatedStream(newVal,0,$scope.limit,function(posts){
+            console.log(posts);
+            $scope.posts= [];
+            for(var i = 0;i<posts.length;i++){
+                console.log("getting groups and looping")
+                posts[i].date = formatDate(posts[i].date);
+                $scope.posts.push(posts[i]);
+            }
+            $scope.skip += $scope.limit;
+            $scope.busy = false;
+            $scope.spinner = false;
+        })
     })
     $scope.submit = function () {
         console.log("button fired");

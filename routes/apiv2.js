@@ -52,7 +52,7 @@ exports.createData = function (req, res) {
                     doc[subdoc].push(data);
                     doc.save(function (err,doc) {
                         console.log(err);
-                        return sendSuccess(res,reason,doc);
+                        return sendSuccess(res,reason,doc[subdoc][doc[subdoc].length-1]);
                     });
                 }else{
                     return sendError(res,reason);

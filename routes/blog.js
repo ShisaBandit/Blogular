@@ -90,18 +90,27 @@ exports.getPaginatedBlogs = function (req, res) {
     });
 };
 exports.getPaginatedStreamPosts = function (req, res) {
-    var skip = req.params.skip,
-        limit = req.params.limit;
+    var skip = parseInt(req.params.skip),
+        limit = parseInt(req.params.limit);
     console.log(skip, limit);
     console.log(req.param.id);
     Blog.findOne({_id:req.params.id},function (err,blog) {
         if(!blog)return res.send(200,JSON.stringify([]));
-      var post = blog.postText;
+      var post = blog.postText.reverse();
         var buffer = [];
-      for(var x = 0;x<limit;x++){
-          console.log(post[x+skip]);
-        buffer.push(post[x+skip]);
-      }
+        if(skip+limit> post.length){
+            var maxLength = post.length - skip;
+            for(var x = 0;x<maxLength;x++){
+                console.log((x+skip));
+                buffer.push(post[x+skip]);
+            }
+        }else{
+            for(var x = 0;x<limit;x++){
+                console.log((x+skip));
+                buffer.push(post[x+skip]);
+            }
+        }
+
       return res.end(JSON.stringify(buffer));
 
     });
