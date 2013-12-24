@@ -955,18 +955,55 @@ input.addNewPost {
         font-size: 0.5em;
     }
 
+    body .contain-to-grid {
+        display: block;
+        width: 100%;
+        height: 100px !important;
+        min-height: 100px;
+        background: url("/img/background/headerFooterBG.png") repeat-x scroll center -140px rgb(158, 175, 255);
+        box-shadow: 0px 2px 5px 2px rgb(163, 161, 161);
+    }
+
+    nav.top-bar {
+        top: 40px;
+        background: none repeat scroll 0% 0% rgb(189, 203, 128);
+        border-radius: 7px;
+    }
+
     .logo {
         position:relative;
         left: 10px;
-        top:25px;
+        top: -30px;
         display: block;
-        width: 275px;
+        width: 180px;
         height: 65px;
         margin: 0px;
-        padding-top: 75px;
         text-indent: -9000px;
-        background: url("/img/memWallLogoSmll2.png") center top no-repeat;
+        background: url("/img/memWallLogoSmll2.png") left top no-repeat;
 
+    }
+
+    .loginBlock {
+        position: relative;
+        top: -85px;
+        left: -00px;
+        display: block;
+        width: 250px;
+        height: 40px;
+        margin-top: 0px;
+        padding-right: 20px;
+        text-align: right;
+        float: right;
+        background: none repeat scroll 0% 0% #272727;
+        border-top-left-radius: 2em;
+        border-top-right-radius: 2em;
+        border-bottom-left-radius: 0em;
+        border-bottom-right-radius: 0em;
+        border-width: medium 4px 4px;
+        border-style: none solid solid;
+        border-color:  #8A9948;
+        box-shadow: 2px 2px 5px rgb(19, 45, 72);
+        z-index: 2;
     }
 
     #username{
@@ -990,6 +1027,94 @@ input.addNewPost {
         margin-top: -15px;
         margin-right: 0px;
         margin-left: 10px;
+    }
+
+    #loginMessage {
+        position: relative;
+        display: block;
+        max-width: 600px;
+        height: auto;
+        background: none repeat scroll 0% 0% rgb(245, 245, 245);
+        margin: auto;
+        padding: 0px 20px;
+        color: darkslategrey;
+        border-radius: 2em;
+        box-shadow: 2px 2px 5px rgb(19, 45, 72);
+    }
+
+    .grouping {
+        position: relative;
+        top: 10px;
+        display: block;
+        width: 100%;
+        height: 60px;
+        font-size: small;
+        margin-top: -20px;
+        background-color: rgb(189, 203, 128);
+        border-top-left-radius: 2em;
+        border-top-right-radius: 2em;
+        padding: 10px 5px 5px;
+        z-index: 1;
+    }
+
+    .grouping b {
+        white-space: nowrap;
+    }
+
+    .blogContent {
+        position: relative;
+        top: 10px;
+        left: -39px;
+    }
+
+    .buttons {
+        display: block;
+        width: 32%;
+        height: 30px;
+        background: linear-gradient(to bottom, rgb(239, 242, 255) 0%, rgb(144, 191, 250) 0%, rgb(165, 180, 255) 44%, rgb(103, 118, 181) 86%) repeat scroll 0% 0% transparent;
+        color: rgb(255, 255, 255);
+        vertical-align: top;
+        margin: 0px;
+        padding: 5px;
+        font-size: small;
+        line-height: 10px;
+        text-align: center;
+        border: 1px solid rgb(113, 112, 107);
+        float: left;
+    }
+
+    .dropzone .dz-default.dz-message {
+        opacity: 1;
+        filter: none;
+        transition: opacity 0.3s ease-in-out 0s;
+        background-image: url("../img/spritemap.png");
+        background-repeat: no-repeat;
+        background-position: 20px 0px;
+        position: relative;
+        width: 450px;
+        height: 130px;
+        margin-top: -20px;
+        margin-left: -70px;
+        padding: 20px;
+        top: 30%;
+        left: 10%;
+    }
+
+    input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], textarea {
+        border-radius: 0px;
+        background-color: white;
+        font-family: inherit;
+        border: 1px solid rgb(204, 204, 204);
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1) inset;
+        color: rgba(0, 0, 0, 0.75);
+        display: block;
+        font-size: 0.875rem;
+        margin: 0px 0px 1rem;
+        padding: 0.5rem;
+        height: 2.3125rem;
+        width: 80%;
+        -moz-box-sizing: border-box;
+        transition: box-shadow 0.45s ease 0s, border-color 0.45s ease-in-out 0s;
     }
 
 }
