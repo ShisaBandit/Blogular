@@ -1140,7 +1140,7 @@ input.addNewPost {
         width:100%;
         height:70px;
         margin-top: -20px;
-        background-color: #8fb2d7;
+        background-color: #BDCB80;
         border-top-left-radius: 2em;
         border-top-right-radius: 2em;
         padding: 10px;
@@ -1154,9 +1154,13 @@ input.addNewPost {
     .memProfilePreview {
         color: rgb(255, 255, 255);
         padding: 3px;
-        background: none repeat scroll 0% 0% rgb(0, 89, 163);
+        background: none repeat scroll 0% 0% #BDCB80;
         border-radius: 4px 4px 4px 4px;
         font-size: xx-small;
+    }
+    .small-block-grid-4 > li:nth-of-type(n) {
+        clear: none;
+        width: 50%;
     }
 }
 
@@ -1652,4 +1656,26 @@ body nav.top-bar.top-bar-logged-in {
 
  body nav.top-bar.top-bar-logged-in section.top-bar-section ul.left li a, body nav.top-bar.top-bar-logged-in section.top-bar-section ul.left li a.small {
      color: #8a9948;
+ }
+
+ nav.tab-bar {
+     background: url("/img/background/headerFooterBG.png") repeat-x scroll -456px -521px #B4C394;
+     /*background: none repeat scroll 0% 0% ;*/
+     color: white;
+     height: 2.8125rem;
+     line-height: 2.8125rem;
+     position: relative;
+ }
+
+ section.tab-bar-section {
+     padding: 0px 0.625rem;
+     position: absolute;
+     height: 2.8125rem;
+ }
+
+ section.tab-bar-section h1 {
+     text-align: center;
+     height: 2.8125rem;
+     color: #BDCB80;
+     background: url("/img/miniLogo.png") no-repeat scroll left top transparent;
  }
