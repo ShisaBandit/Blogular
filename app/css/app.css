@@ -584,7 +584,6 @@ body .primaryContent .shelf .mainBG .row .small-12 .section-container .active .c
 
 .contentContainer{
     padding: 50px 20px 20px 50px;
-    border: 2px solid #fff;
     background: url("/img/background/postTopBg.png") no-repeat 0px 0px;
     overflow: hidden;
 }
