@@ -233,7 +233,14 @@ var passwordRecoverySchema = mongoose.Schema({
     createdDate:{type:Date,default:Date.now()},
     expired:Boolean
 })
-
+var invitedUserSchema = mongoose.Schema({
+    user_id:String,
+    key:String,
+    email:String,
+    blog:{type:mongoose.Schema.Types.ObjectId, ref: 'Blog'},
+    createdDate:{type:Date,default:Date.now()},
+    expired:{type:Boolean,default:false}
+})
 mongoose.connect('mongodb://localhost/test');
 
 var db = mongoose.connection;
@@ -249,70 +256,8 @@ var Petition = mongoose.model('Petition', petitionSchema);
 var Workshop = mongoose.model('Workshop',workshopSchema);
 var Message = mongoose.model('Message',messageSchema);
 var PasswordRecovery = mongoose.model('PasswordRecovery',passwordRecoverySchema);
+var InvitedUser = mongoose.model('InvitedUser',invitedUserSchema);
 var SingleCount = mongoose.model('SingleCount',singleCount);
-/*
- //set all profiles to administrator as owner
- Blog.find({}, function (err, blogs) {
- _.each(blogs, function (blog, key) {
- if (key % 2 == 0) {
- User.findOne({username: "administrator"}, function (err, user) {
- blogs[key].owner_id = user._id;
- })
- } else {
- User.findOne({username: "projectskillz"}, function (err, user) {
- blogs[key].owner_id = user._id;
- })
- }
- blogs[key].owner_id = users._id;
- console.log(blogs[key]);
- blogs[key].save(function (err) {
- if (err)console.log(err.message);
- })
- })
- })
- //set all profiles basic data
- Blog.find({}, function (err, blogs) {
- _.each(blogs, function (blog, key) {
- blogs[key].firstName = "Johnny";
- blogs[key].lastName = "Angel";
- blogs[key].gender = 0;
- blogs[key].dob = new Date(1997, 05, 15);
- blogs[key].memorialDate = new Date();
- if (key % 2 == 0)
- blogs[key].subgroup = 0;
- else
- blogs[key].subgroup = 1;
- console.log(blogs[key]);
- blogs[key].save(function (err) {
- if (err)console.log(err.message);
- })
- })
- })
-
-
- User.findOne({username: "TestName"}, function (err, users) {
- console.log(users);
-
- users.profiles.push({profile: '516a329362f0af3550000009'});
- users.save(function (err) {
- if (err)console.log(err.message);
-
- })
-
-
- })
- */
-//populate some commments on blog  { "_id" : 516a720562f0af3550000010}
-//post text   { "_id" : 519b4f4a9023298a1500000a}
-/*
- Blog.findOne({_id: '516a720562f0af3550000010'},function(err,blog){
- for(var x = 0;x<10;x++){
- blog.postText[2].comments.push({text:"THIS IS TEXT TEXT", user_id : '51487fc5da6c0dc968000003'});
- }
- blog.save();
-
- })
- */
 
 module.exports = {
     Blog: Blog,
@@ -323,5 +268,6 @@ module.exports = {
     Workshop:Workshop,
     Message:Message,
     PasswordRecovery:PasswordRecovery,
-    SingleCount:SingleCount
+    SingleCount:SingleCount,
+    InvitedUser:InvitedUser
 }

@@ -41,15 +41,55 @@
             <section class="top-bar-section">
                 <!-- Right Nav Section -->
                 <ul class="right">
+                    <li class="has-dropdown loggedOut">
+                        <a style="color:#8a9948">My Account</a>
+                        <ul class="dropdown">
+                            <li>
+                                <div ng-controller="UserInfoCtrl" class="loginBlock">
+                                    <div id="username">
 
-                    <li class="has-dropdown">
-
+                                        <a href="#/profile/{{username}}" if-authed="show" class="small button">My Account</a>
+                                        <a href="#/rules" class="small button">Rules</a>
+                                        <a href="#" ng-click="logout()" if-authed="show" class="small button">logout</a>
+                                        <a href="#/registration" if-authed="hide" class="small button">Register</a>
+                                        <a href="#/login" if-authed="hide" class="small button">Login</a>
+                                        <!-- <a if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>-->
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </li>
+                    <li if-authed="show" class="has-dropdown">
+                        <a>
+                            <img width="34" src="http://www.gravatar.com/avatar/{{post.gravatar}}">
+                            <b style="color:#8a9948">{{username}}</b>
+                        </a>
+                        <ul ng-controller="UserInfoCtrl" class="dropdown">
+                            <li><a href="#/profile/{{username}}" if-authed="show">My Account</a>
+                            </li>
+                            <li>
+                                <a href="#/rules">Rules</a>
+
+                            </li>
+                            <li>
+                                <a href="#" ng-click="logout()" if-authed="show">logout</a>
+
+                            </li>
+                            <li>
+                                <a href="#/registration" if-authed="hide">Register</a>
+
+                            </li>
+                            <li>
+                                <a if-authed="hide" data-reveal-id="loginModal">Login</a>
+                            </li>
+                        </ul>
+                    </li>
+
                 </ul>
                 <!-- Left Nav Section -->
-                <ul class="left" ng-controller="SearchBarCtrl">
+                <ul class="" ng-controller="SearchBarCtrl">
                     <li class="has-dropdown">
-                        <a>Memorials</a>
+                        <a style="color:#8a9948">Memorials</a>
                         <ul class="dropdown" id="workpets">
                             <li>
                                 <a href="/" id="homebutton" class="small">Angel Memorials</a>
@@ -71,26 +111,10 @@
                     <li>
                         <a href="#" id="webstorebutton" class="small">Web Store</a>
                     </li>
-                    <li class="has-dropdown loggedOut">
-                        <a href="#">My Account</a>
-                        <ul class="dropdown">
-                            <li>
-                                <div ng-controller="UserInfoCtrl" class="loginBlock">
-                                    <div id="username">
-                                        <img width="34" src="http://www.gravatar.com/avatar/{{post.gravatar}}">
-                                        <b>{{username}}</b>
-                                        <a href="#/profile/{{username}}" if-authed="show" class="small button">My Account</a>
-                                        <a href="#/rules" class="small button">Rules</a>
-                                        <a href="#" ng-click="logout()" if-authed="show" class="small button">logout</a>
-                                        <a href="#/registration" if-authed="hide" class="small button">Register</a>
-                                        <a if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
+
+<!--
                     <li ng-controller="UserInfoCtrl" class="loggedBlock" id="username2">
-                        <img width="34" src="http://www.gravatar.com/avatar/{{post.gravatar}}">
+                        <img width="34" src="http://www.gravatar.com/avatar/{{post.gravatar}}" />
                         <b>{{username}}</b>
                         <a href="#/profile/{{username}}" if-authed="show" class="small button">My Account</a>
                         <a href="#/rules" class="small button">Rules</a>
@@ -98,6 +122,7 @@
                         <a href="#/registration" if-authed="hide" class="small button">Register</a>
                         <a if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
                     </li>
+    -->
                 </ul>
             </section>
         </nav>
@@ -187,7 +212,8 @@
                     <br />
                     <a href="https://www.google.com/intl/en/chrome/browser/?platform=win" target="_blank">Google Chrome</a>
                     <br />
-                    If you want to continue using Internet Explorer on our site, you will need to upgrade your computer to at least <a href="https://http://windows.microsoft.com/en-us/windows7/products/upgrade" target="_blank">Windows 7</a>.<br />
+                    If you want to continue using Internet Explorer on our site, you will need to upgrade your computer to at least <a href="https://http://windows.microsoft.com/en-us/windows7/products/upgrade" target="_blank">Windows 7</a>.
+                    <br />
                     Thank you for you understanding.
                 </b>
                 <![endif]-->
@@ -217,20 +243,20 @@
             </footer>
             <!-- End Footer -->
         </section>
-
+<!--
         <div id="toc" ng-controller="MusicPlayerCtrl">
-            <h2 ng-hide="iosshow" id="tocToggle" class="toc navTab status-off"><a click="">View Music Player</a></h2>
+            <h2 ng-hide="iosshow" id="tocToggle" class="toc navTab status-off" ><a click>View Music Player</a></h2>
             <aside class="base-class" ng-class="{'my-class':boolChangeClass}">
                 <figure id="tableOfContents">
-                    <object width="250" height="250" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="gsPlaylist9229298428" name="gsPlaylist9229298428">
-                        <param name="movie" value="http://grooveshark.com/widget.swf">
-                        <param name="wmode" value="window">
-                        <param name="allowScriptAccess" value="always">
-                        <param name="flashvars" value="hostname=grooveshark.com&playlistID=92292984&p=1&bbg=2163A9&bth=000000&pfg=000000&lfg=000000&bt=FFFFFF&pbg=FFFFFF&pfgh=FFFFFF&si=FFFFFF&lbg=FFFFFF&lfgh=FFFFFF&sb=FFFFFF&bfg=25517A&pbgh=25517A&lbgh=25517A&sbh=25517A">
+                    <object width="250" height="250" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="gsPlaylist9229298428" name="gsPlaylist9229298428" >
+                        <param name="movie" value="http://grooveshark.com/widget.swf" />
+                        <param name="wmode" value="window" />
+                        <param name="allowScriptAccess" value="always" />
+                        <param name="flashvars" value="hostname=grooveshark.com&playlistID=92292984&p=1&bbg=2163A9&bth=000000&pfg=000000&lfg=000000&bt=FFFFFF&pbg=FFFFFF&pfgh=FFFFFF&si=FFFFFF&lbg=FFFFFF&lfgh=FFFFFF&sb=FFFFFF&bfg=25517A&pbgh=25517A&lbgh=25517A&sbh=25517A" />
                         <object type="application/x-shockwave-flash" data="http://grooveshark.com/widget.swf" width="250" height="250">
-                            <param name="wmode" value="window">
-                            <param name="allowScriptAccess" value="always">
-                            <param name="flashvars" value="hostname=grooveshark.com&playlistID=92292984&p=1&bbg=8A9948&bth=000000&pfg=000000&lfg=000000&bt=FFFFFF&pbg=FFFFFF&pfgh=FFFFFF&si=FFFFFF&lbg=FFFFFF&lfgh=FFFFFF&sb=FFFFFF&bfg=8A9948&pbgh=8A9948&lbgh=25517A&sbh=25517A">
+                            <param name="wmode" value="window" />
+                            <param name="allowScriptAccess" value="always" />
+                            <param name="flashvars" value="hostname=grooveshark.com&playlistID=92292984&p=1&bbg=8A9948&bth=000000&pfg=000000&lfg=000000&bt=FFFFFF&pbg=FFFFFF&pfgh=FFFFFF&si=FFFFFF&lbg=FFFFFF&lfgh=FFFFFF&sb=FFFFFF&bfg=8A9948&pbgh=8A9948&lbgh=25517A&sbh=25517A" />
                             Sorry, the flash player for this service is not supported by your device.
                         </object>
                         Sorry, the flash player for this service is not supported by your device.
@@ -238,22 +264,13 @@
                 </figure>
             </aside>
         </div>
-
+-->
     </section>
     </section>
         <!-- close the off-canvas menu -->
         <a class="exit-off-canvas"></a>
     </div>
 </div>
-<!-- example of a mixin RODNEY CHECK IT OUT
-<ul class="custom-sidenav-class">
-    <li class="active"><a href="#">Link 1</a></li>
-    <li><a href="#">Link 2</a></li>
-    <li class="divider"></li>
-    <li><a href="#">Link 3</a></li>
-    <li><a href="#">Link 4</a></li>
-</ul>
--->
 <!-- Sitewide Modals -->
 <div id="login-inner" ng-controller="LoginController">
     <div reveal-modal="login" id="loginModal" class="reveal-modal medium" data-reveal="">
@@ -276,14 +293,14 @@
                 <td><a ng-click="forgot()" href="#/passwordrecovery">forgot password??</a></td>
             </tr>
         </table>
-        <a class="closeButton" closeparent="" title="Hide this box by clicking here">X</a>
+        <a class="closeButton close-reveal-modal" closeparent="" title="Hide this box by clicking here">X</a>
     </div>
 
 </div>
 
 
 <div id="pic-inner" ng-controller="DeletePicsCtrl">
-    <div reveal-modal="deletepic" id="confirmDeletePics" class="reveal-modal small">
+    <div reveal-modal="deletepic" id="confirmDeletePics" class="reveal-modal small" data-reveal="">
         <p><b>{{message}}</b></p>
 
         <p class="close-reveal-modal button" ng-href="#">Cancel</p>
@@ -305,7 +322,7 @@
 <script src="scripts/5944d8a2.modules.js"></script>
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
-<script src="scripts/5acc895b.scripts.js"></script>
+<script src="scripts/dbbb6ec1.scripts.js"></script>
 <script>
 
 

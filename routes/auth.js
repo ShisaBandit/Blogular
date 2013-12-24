@@ -3,6 +3,7 @@ var Blog = models.Blog;
 var User = models.User;
 var Update = models.Update;
 var PassRec = models.PasswordRecovery;
+var InvitedUser = models.InvitedUser;
 var check = require('validator').check,
     sanitize = require('validator').sanitize;
 var nodemailer = require('nodemailer');
@@ -16,6 +17,8 @@ var smtpTransport = nodemailer.createTransport("SMTP", {
         pass: "regEmail2013"
     }
 });
+var path = require('path');
+var emailTemplates = require('swig-email-templates');
 
 var crypto = require('crypto');
 
@@ -119,6 +122,7 @@ exports.register = function (req, res) {
         lastname = req.body.lastName,
         email = req.body.email,
         dob = req.body.dob,
+        offSiteUserCode = false,
         minUsernameLength = 5,
         maxUsernameLength = 16,
         minPasswordLength = 5,
@@ -126,7 +130,6 @@ exports.register = function (req, res) {
         maxfirstNameLength = 15,
         maxlastNameLength = 15;
 
-    console.log(req.body.groupcode)
     req.checkBody('username', 'Username must be longer than' + minUsernameLength + ' and shorther than ' + maxUsernameLength + ' characters.')
         .notNull().len(minUsernameLength, maxUsernameLength);
     req.checkBody('password', 'Password must be longer than' + minPasswordLength + ' and shorther than ' + maxPasswordLength + ' characters.')
@@ -143,6 +146,12 @@ exports.register = function (req, res) {
         .notNull();
     req.checkBody('betacode', 'Incorrect beta code.')
         .notNull().equals('hardcoded')
+    //if we have a offsite memwall request
+    //add that profile access to that users
+    //
+    if(req.params.offsiteusercode != false){
+        offSiteUserCode = req.params.offsiteusercode;
+    }
 
     if (password == username) {
         errorMessage.push('Password can not be the same as username');
@@ -173,29 +182,36 @@ exports.register = function (req, res) {
 
                 user.gravatar = calcMD5(user.email);
                 user.lost = req.body.groupcode;
-                console.log(user.lost);
-                console.log(req.body.groupcode)
-                user.save(function (err) {
-                    if (err) {
-                        console.log(err);
-                        console.log(err.path);
-                        return res.end(JSON.stringify({'fail': errorMessage}));
-
-                    }
-                    SendConfirmationMail(email);
-                    return res.end(JSON.stringify({'success': 'true'}));
-                });
+                if(offSiteUserCode){
+                    //add
+                    var hash = crypto.createHash('sha1').update(offSiteUserCode).digest('hex');
+                    //TODO: Then if the user click on the link we get the key from the request
+                    //check it against the database then
+                    //if the key matches the request key we then reest the password
+                    //and respond with a success or error
+                    InvitedUser.findOne({key: hash}, function (err, doc) {
+                        if (!doc) {
+                        }else{
+                            user.memwalls.push(doc.blog);
+                            console.log(req.body.groupcode)
+                            user.save(function (err) {
+                                if (err) {
+                                    return res.end(JSON.stringify({'fail': errorMessage}));
+                                }
+                                SendConfirmationMail(email);
+                                return res.end(JSON.stringify({'success': 'true'}));
+                            });
+                        }
+                    })
+                }
             } else {
-
                 if (!errors) {
                     errors = {};
                 }
                 if (userCount >= 1 || adminCount >= 1) {
                     errorMessage.push('username already taken');
                     errors.username = {param: 'username', msg: 'username already taken.'};
-
                 }
-
                 if (errors) {
                     res.send(errors, 500);
                     return;
@@ -377,6 +393,37 @@ exports.passrecover = function (req, res) {
     })
 
 }
+exports.redirectInvitedOffSiteUser = function (req,res) {
+    res.cookie('memwall.invitation', req.params.key, { maxAge: 900000, httpOnly: false});
+    res.redirect('#/registration');
+}
+//TODO:Test and create ui
+exports.inviteOffSiteUser = function (req,res) {
+    User.findOne({email:req.params.email}, function (err,user) {
+        if(!user){
+
+            //generate a key then enter it in the database with the user id
+            var key = crypto.randomBytes(20).toString('hex');
+            var hash = crypto.createHash('sha1').update(key).digest('hex');
+            //Remove any previous password update attempts
+            //TODO: remove is not working found out why
+
+            var inviteduser = new InvitedUser({user_id: req.passport.session.user,blog:req.params.blog, key: hash,email:req.params.email});
+            inviteduser.save(function (err) {
+                if (err)console.log(err)
+                console.log(key)
+                if(SendInviteMail(req.params.email, key, req)){
+                    res.send(200, {message:'Mail sent.'});
+                }else{
+                    res.send(200,{message:'Error sending email try again later.'});
+                }
+            })
+        }else{
+            res.send(200,{message:'There is user with that email already. Username: '+user.username});
+        }
+    })
+
+}
 
 exports.updatePass = function (req, res) {
     var key = req.body.key;
@@ -412,6 +459,45 @@ exports.updatePass = function (req, res) {
             res.send(200, 'Password has been updated.  Thank you.')
         })
     })
+}
+var req = {protocol:'https',host:'localhost'}
+SendInviteMail('raygarner13@gmail.com','teststring',req);
+function SendInviteMail(to, link, req) {
+    console.log("mail sent")
+    var options = {
+        root: path.join(path.resolve('.'), "templates")
+        // any other swig options allowed here
+    };
+
+    emailTemplates(options, function(err, render, generateDummy) {
+        var context = {
+            protocol:req.protocol,
+            host:req.host,
+            link:link.toString()
+        };
+        render('sendinvite.html', context, function(err, html) {
+            // send html email
+            var mailOptions = {
+                from: "noreply@AngelsOfEureka.org",
+                to: to,
+                subject: "You have been INVITED!",
+                text: "",
+                html: html
+            }
+            smtpTransport.sendMail(mailOptions, function (error, response) {
+                if (error) {
+                    console.log(error);
+                    console.log("problems sending mail")
+                    return false;
+                } else {
+                    console.log("message sent")
+                    return true;
+                }
+                console.log(response);
+            })
+        });
+
+    });
 }
 
 function SendPasswordRecoveryMail(to, link, req) {
