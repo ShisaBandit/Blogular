@@ -1180,6 +1180,14 @@ input.addNewPost {
         font-size: 1em;
         margin: 0.67em 0px;
     }
+
+    .row .row .stream {
+        display:block;
+        width: 400px;
+        height: 400px\9;
+        min-height: 300px;
+        margin: 0px 0px 10px 0px;
+    }
 }
 
 @media only screen and (max-width: 451px) {
@@ -1222,6 +1230,43 @@ input.addNewPost {
     #loginMessage  p {
         font-size: 0.8em;
         margin: 0.67em 0px;
+    }
+
+    .row .row .stream {
+        display: block;
+        width: 276px;
+        min-height: 300px;
+        margin: 0px 0px 10px;
+    }
+
+    .small-7 {
+        position: relative;
+        width: auto;
+        left: 9px;
+    }
+
+    .buttons {
+        display: block;
+        width: 33%;
+        height: 23px;
+        background: linear-gradient(to bottom, rgb(239, 242, 255) 0%, rgb(144, 191, 250) 0%, rgb(165, 180, 255) 44%, rgb(103, 118, 181) 86%) repeat scroll 0% 0% transparent;
+        color: rgb(255, 255, 255);
+        vertical-align: top;
+        margin: 0px;
+        padding: 5px;
+        font-size: x-small;
+        line-height: 6px;
+        text-align: center;
+        border: 1px solid rgb(113, 112, 107);
+        float: left;
+    }
+
+    .adSpace {
+        display: block;
+        min-height: 300px;
+        position: relative;
+        left: -226px;
+        top: -16px;
     }
 
     .logo {
