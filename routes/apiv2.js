@@ -95,10 +95,13 @@ exports.createData = function (req, res) {
 };
 
 var setFirstName = {register: "postText"};
+
+//TODO:create a data property that looks at the name and determines the api being called by a property called
+//TODO: apiname...
 var dataFilter = function (req, type, subtype, data,doc, callback) {
 
     switch (type) {
-        case"Blog":
+        case "Blog":
         {
             data = setAllFirstNames(data);
             data = setAllLastNames(data);

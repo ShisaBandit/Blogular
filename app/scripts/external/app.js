@@ -45,6 +45,7 @@ var app = angular.module('YoMemorialApp', [
             when("/editprofile", {templateUrl: "partials/editprofile.html"}).
             when("/login", {templateUrl: "partials/login.html"}).
             when("/gifts/:user/:wall", {templateUrl: "partials/giftShop.html"}).
+            when("/sendoffsiteinvite/:wall",{templateUrl:"partials/sendoffsiteinvite.html"}).
             otherwise("/oops",{templateUrl:"404.html"});
 
     });
@@ -2702,6 +2703,25 @@ app.controller('EditProfileCtrl', function ($scope, $http, api, groupsListing) {
             });
     }
 })
+
+
+app.controller("OffSiteInviteCtrl", function ($scope,$http) {
+    $scope.invitations = [{
+        email:""
+    }];
+$scope.invitations.push({email:""});
+    $scope.sendInvite = function () {
+       // $http.get('')
+    }
+
+    $scope.addInput = function () {
+        console.log("added one");
+        $scope.invitations.push({email:""});
+    }
+})
+
+
+
 //console.log(youtube_embed(youtube_parser("http://www.youtube.com/watch?v=Pu1PPMaoArE")) );
 function youtube_parser(url){
     //var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
