@@ -292,6 +292,7 @@ textarea {
 button,
 input {
     line-height: normal;
+    height: auto;
 }
 
 /**
@@ -304,6 +305,8 @@ input {
 button,
 select {
     text-transform: none;
+    height: auto;
+    min-height: 40px;
 }
 
 /**
