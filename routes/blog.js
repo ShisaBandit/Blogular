@@ -3,6 +3,7 @@ var Common = require('../constants/constants.js');
 var mongoose = require('mongoose');
 var Q = require('q');
 var util = require('util');
+var moment = require('moment');
 var Blog = models.Blog;
 var User = models.User;
 var Update = models.Update;
@@ -23,6 +24,64 @@ var smtpTransport = nodemailer.createTransport("SMTP", {
 var EventEmitter = require('events').EventEmitter;
 exports.messageEmitter = messageEmitter = new EventEmitter();
 
+
+exports.upcomingDates = function (req,res) {
+    User.findOne({_id:'52af0b4f60f809681300000f'}).populate('memwalls').exec(function (err,user) {
+        var nU = user.memwalls;
+        var eventsInNetworkCurrently = [
+
+        ]
+        var oneWeekBefore = moment().subtract('week',1);
+        var oneWeekafter = moment().add('week',1);
+        for(var i  = 0;i<nU.length;i++){
+            console.log(nU[i].postText.length);
+            for(var d = 0;d<nU[i].postText.length;d++){
+                if(nU[i].postText[d].postType == 3){
+
+                    var eventDate = moment(eventsInNetworkCurrently[t].date);
+                    if(eventDate.isAfter(oneWeekBefore) && eventDate.isBefore()){//will happen
+                        //console.log("This event is coming up");
+                        console.log("This event happened "+eventDate.fromNow()+" "+eventDate.format());
+                        eventsInNetworkCurrently.push(
+                            {
+                                event:nU[i].postText[d].event,
+                                date:nU[i].postText[d].date,
+                                blogId:nU[i]._id,
+                                message:"This event happened "+eventDate.fromNow()+" "+eventDate.format()
+                            }
+                        )
+                    }else if(eventDate.isBefore(oneWeekafter) && eventDate.isAfter()){//has happened
+                        console.log("This event will happen "+eventDate.fromNow()+" "+eventDate.format());
+                        eventsInNetworkCurrently.push(
+                            {
+                                event:nU[i].postText[d].event,
+                                date:nU[i].postText[d].date,
+                                blogId:nU[i]._id,
+                                message:"This event will happen "+eventDate.fromNow()+" "+eventDate.format()
+                            }
+                        )
+                    }
+
+                }
+            }
+        }
+        return res.send(JSON.stringify(eventsInNetworkCurrently));
+        /*
+        console.log(oneWeekBefore.format());
+        for(var t = 0;t<eventsInNetworkCurrently.length;t++){
+            //console.log(eventsInNetworkCurrently[t]);
+            var eventDate = moment(eventsInNetworkCurrently[t].date);
+            console.log(eventDate.format())
+            if(eventDate.isAfter(oneWeekBefore) && eventDate.isBefore()){//will happen
+                //console.log("This event is coming up");
+                console.log("This event happened "+eventDate.fromNow()+" "+eventDate.format())
+            }else if(eventDate.isBefore(oneWeekafter) && eventDate.isAfter()){//has happened
+               console.log("This event will happen "+eventDate.fromNow()+" "+eventDate.format())
+            }
+        }
+        */
+    });
+}
 
 exports.notifications = function (req, res) {
 
