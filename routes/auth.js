@@ -18,7 +18,7 @@ var smtpTransport = nodemailer.createTransport("SMTP", {
     }
 });
 var path = require('path');
-var emailTemplates = require('swig-email-templates');
+//var emailTemplates = require('swig-email-templates');
 
 var crypto = require('crypto');
 
@@ -470,7 +470,8 @@ function SendInviteMail(to, link, req) {
         // any other swig options allowed here
     };
 
-    emailTemplates(options, function(err, render, generateDummy) {
+    /*
+    // emailTemplates(options, function(err, render, generateDummy) {
         var context = {
             protocol:req.protocol,
             host:req.host,
@@ -499,6 +500,7 @@ function SendInviteMail(to, link, req) {
         });
 
     });
+    */
 }
 
 function SendPasswordRecoveryMail(to, link, req) {
