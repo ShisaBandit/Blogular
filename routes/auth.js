@@ -462,6 +462,7 @@ exports.updatePass = function (req, res) {
 }
 var req = {protocol:'https',host:'localhost'}
 SendInviteMail('raygarner13@gmail.com','teststring',req);
+
 function SendInviteMail(to, link, req) {
     console.log("mail sent")
     var options = {
