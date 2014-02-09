@@ -45,7 +45,7 @@ var app = angular.module('YoMemorialApp', [
             when("/editprofile", {templateUrl: "partials/editprofile.html"}).
             when("/login", {templateUrl: "partials/login.html"}).
             when("/gifts/:user/:wall", {templateUrl: "partials/giftShop.html"}).
-            when("/sendoffsiteinvite/:wall",{templateUrl:"partials/sendoffsiteinvite.html"}).
+            when("/1/:wall",{templateUrl:"partials/sendoffsiteinvite.html"}).
             otherwise("/oops",{templateUrl:"404.html"});
 
     });
@@ -386,6 +386,16 @@ app.directive("click", function () {
         });
     };
 });
+
+app.directive('rgminilist', function () {
+    return {
+        restrict:'E',
+        scope:{
+           events:'='
+        },
+        template:"<div>html</div>"
+    }
+})
 
 app.factory('show', function () {
     return {state: false};
