@@ -7,16 +7,24 @@
             <h2 class="contentHeaderTitle">Start a New Conversation</h2>
         </div>
         <br/>
-        <div class="small-12 columns" style="vertical-align: top; margin-top:-10px;margin-bottom:10px;">
+        <div class="small-12 columns socialButtons1">
             <div ng-click="menu.photo = true;menu.video = false;menu.event = false" class="buttons">Share a Photo</div>
             <div ng-click="menu.video = true;menu.photo = false;menu.event = false" class="buttons">Share a Video</div>
             <div ng-switch on="parentObject.type">
-
                 <div ng-switch-when="pet" ng-click="$parent.menu.event = true;$parent.menu.video = false; $parent.menu.photo = false;" class="buttons">Share an Anniversary</div>
                 <div ng-switch-when="angel" ng-click="$parent.menu.event = true;$parent.menu.video = false;$parent.menu.photo = false;" class="buttons">Share an Anniversary</div>
                 <div ng-switch-when="group" ng-click="$parent.menu.event = true;$parent.menu.video = false; $parent.menu.photo = false;" class="buttons">Share an Event</div>
             </div>
         </div>
+          <div class="small-12 columns socialButtons2">
+              <div ng-click="menu.photo = true;menu.video = false;menu.event = false" class="buttons">Photo</div>
+              <div ng-click="menu.video = true;menu.photo = false;menu.event = false" class="buttons">Video</div>
+              <div ng-switch on="parentObject.type">
+                  <div ng-switch-when="pet" ng-click="$parent.menu.event = true;$parent.menu.video = false; $parent.menu.photo = false;" class="buttons">Anniversary</div>
+                  <div ng-switch-when="angel" ng-click="$parent.menu.event = true;$parent.menu.video = false;$parent.menu.photo = false;" class="buttons">Anniversary</div>
+                  <div ng-switch-when="group" ng-click="$parent.menu.event = true;$parent.menu.video = false; $parent.menu.photo = false;" class="buttons">Event</div>
+              </div>
+          </div>
         <div ng-show="menu.photo" id="UploadBox">
             <h2 class="dark">Photo Uploader: Drag and drop image files on the box</h2>
             <div id='UploadArea'>

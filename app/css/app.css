@@ -933,6 +933,16 @@ input.addNewPost {
     /*background: red;
     border: 1px solid cadetblue; */
 }
+.socialButtons1 {
+    vertical-align: top;
+    margin-top:-10px;
+    margin-bottom:10px;
+    white-space: nowrap;
+}
+
+ .socialButtons2 {
+     display: none;
+ }
 
 @media only screen and (max-width: 850px) {
     .loginBlock {
@@ -1356,6 +1366,34 @@ input.addNewPost {
     .border-footer{
 
     }
+
+    .socialButtons1 {
+        display: none;
+    }
+
+    .socialButtons2 {
+        vertical-align: top;
+        margin-top:-10px;
+        margin-bottom:10px;
+        white-space: nowrap;
+        display: block;
+    }
+
+    .buttons {
+        display: block;
+        width: 33%;
+        height: 20px;
+        background: #8A9948 !important;
+        color: #FFF;
+        vertical-align: top;
+        margin: 0px;
+        padding: 5px;
+        font-size: 10px !important;
+        line-height: 6px;
+        text-align: center;
+        border: 1px solid #71706B;
+        float: left;
+    }
 }
 
 #rulesModal {
@@ -1749,7 +1787,7 @@ h6.petsTitle {
 
  .buttons {
      display: block;
-     width: 31%;
+     width: 33%;
      height: 20px;
      background: linear-gradient(to bottom, rgb(239, 242, 255) 0%, rgb(144, 191, 250) 0%, rgb(165, 180, 255) 44%, rgb(103, 118, 181) 86%) repeat scroll 0% 0% transparent;
      color: rgb(255, 255, 255);
