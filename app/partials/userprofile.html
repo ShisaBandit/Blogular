@@ -14,16 +14,8 @@
                 <p>
                     Welcome to your user profile on Angel of Eureka's Circle of Life.<br />
                     Your user profile account is divided into six functional sections:<br />
-                <ol style="padding: 20px">
-                    <li>Basic Profile</li>
-                    <li>My Memorial Walls</li>
-                    <li>Friend's Memorial Walls</li>
-                    <li>My Groups</li>
-                    <li>My Petitions</li>
-                    <li>Message Center</li>
-                </ol>
                 <br />
-                1. Basic Profile: From this section you can view and edit your personal information as well as specify your primary grouping.
+                <b>1.</b> Basic Profile: From this section you can view and edit your personal information as well as specify your primary grouping.
                 <br />
                 <blockquote>We use <a href="http://en.gravatar.com/" target="_blank">Gravatar</a> to power Avatar images for your account.
                 Your Gravatar is an image that follows you from site to site appearing beside your name when you do things
@@ -33,18 +25,29 @@
                 <br />
                 Don't have a Gravatar created yet? Create one for <a href="http://en.gravatar.com/" target="_blank">Free!</a> </blockquote>
                 <br />
-                2. My Memorial Walls: From this section you can create memorial walls for your loved one or pet, invite users to join the network for this
+                <b>2.</b> My Memorial Walls: From this section you can create memorial walls for your loved one or pet, invite users to join the network for this
                 memorial wall network, manage users as well as the contents of your memorial wall. You can also view your memorial where you will be able
                 to interact with your memorial network members via chat, photos, videos and Angel Anniversaries.
-                </br /> <br />
-                3. Friend's Memorial Walls: From this section you can see memorial walls that you have been invited to, as well as manage your membership
+                <br /><br />
+                Memorial Wall Features:
+                <ul>
+                    <li>Angel's Timeline: See all the current topics, photos and events about your Angel in one convenient place. Share a memory for all of his/her friends and family to enjoy.</li>
+                    <li>Photos: Share photos, and organize them into galleries. You can also upload your own Imikimi montage creations!</li>
+                    <li>Videos:Share videos of your Angel. You add either youtube or Animoto videos!</li>
+                    <li>Angel Anniversaries: Specify a date that is important to the legacy of your Angel. Share a memory with all his/her loved ones, and celebrate their life and encourage one another!</li>
+
+                </ul>
+                </br />
+                <b>3.</b> Friend's Memorial Walls: From this section you can see memorial walls that you have been invited to, as well as manage your membership
                 to their memorial network.
-                4. My groups: From this section you can create your own private group for any thing you wish. Enjoy all of the features of a memorial wall,
+                </br />
+                </br />
+                <b>4.</b> My groups: From this section you can create your own private group for any thing you wish. Enjoy all of the features of a memorial wall,
                 but in a private group for the cause or mission of your choosing.
                 <br /> <br />
-                5. My Petitions: View petitions that you have created on the main site's petition page.
+                <b> 5.</b> My Petitions: View and manage petitions that you have created on the main site's petition page.
                 <br /> <br />
-                6. Message Center: Send and read messages to and from other members of your network. You network includes all memorial walls and groups that you
+                <b>6.</b> Message Center: Send and read messages to and from other members of your network. You network includes all memorial walls and groups that you
                 participate in.
                 </p>
 
@@ -63,6 +66,7 @@
                         <li><img src="http://www.gravatar.com/avatar/{{user.gravatar}}"/> First Name : {{user.firstName}}</li>
                         <li>Last Name: {{user.lastName}}</li>
                         <li>email : {{user.email}}</li>
+                        <li>Date of Birth : {{user.dob}}</li>
                         <li>City : {{user.city}}</li>
                         <li>About you : {{user.about}}</li>
                         <li>You have lost a {{user.lost}}</li>

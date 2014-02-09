@@ -1,5 +1,5 @@
 <div ng-controller="ContentCtrl" xmlns="http://www.w3.org/1999/html">
-    <div class="small-9 columns small-centered offsetHeight" role="content">
+    <div class="small-9 columns small-centered offsetHeight" role="content" ng-class="{petMem:pets, privGroup:groups}" >
         <div ng-controller="GroupingCtrl">
             <div id="loginMessage" if-authed="hide">
                 <h1>Welcome to Angels of Eureka's Circle of Life </h1>
@@ -19,9 +19,28 @@
                         Thank you for you understanding.
                     </b>
                     <![endif]-->
-                    Your loved one can be celebrated and remembered here by creating a memorial wall for them. Signing up is easy.
-                    Once you sign-up for your free personal profile, you can create a memorial wall for your lost loved one, we call
-                    them your "Angel". On the memorial page you can share memories via photos, videos and celebrate their memory
+                    Your loved one can be celebrated and remembered here on the Cirle of Life, by creating a Memorial Wall for them. Here on the Circle of Life, we call them your "Angel". Preserve and cherish their legacy and share memories and precious details about your Angel with their close family and friends. You choose what to post. You choose who can participate in conversations. You choose who can view the content that you share. <br />
+                    <br />
+                    Memorial Wall Features (Angels or Pets):
+                    <ul>
+                        <li>Angel's Timeline: See all the current topics, photos and events about your Angel in one convenient place. Share a memory for all of his/her friends and family to enjoy.</li>
+                        <li>Photos: Share photos, and organize them into galleries. You can also upload your own Imikimi montage creations!</li>
+                        <li>Videos:Share videos of your Angel. You add either youtube or Animoto videos!</li>
+                        <li>Angel Anniversaries: Specify a date that is important to the legacy of your Angel. Share a memory with all his/her loved ones, and celebrate their life and encourage one another!</li>
+                    </ul>
+                    <br />
+                    We also provide you the ability to create customized, private support groups for whatever cause you may have. Build you network here and grow strong together!<br />
+                    <br />
+                    Private Group Features:<br />
+                    <ul>
+                        <li>Group's Timeline: See all the current topics, photos and events about your group in one convenient place. Share a thought for your group network to discuss.</li>
+                        <li>Photos: Share photos, and organize them into galleries.</li>
+                        <li>Videos:Share videos with your group. You add either youtube or Animoto videos!</li>
+                        <li>Group Events: Create and share events for your group.</li>
+                    </ul>
+                    <br />
+                    Signing up is easy.
+                    Once you sign-up for your free personal profile, you can create a memorial wall for your lost loved one. On the memorial page you can share memories via photos, videos and celebrate their memory
                     with Angel anniversaries. You can invite your friends to join your private network as well as meet people with
                     experience
                     similar to yours
@@ -58,10 +77,14 @@
         <div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' ng-class="{error:pets, petsList:pets}" class="scrollerBlock">
                 <img src="./img/muralPets.png" class="muralPets" ng-show="pets">
                 <span ng-hide="groups"><img src="./img/mural1.png" class="mural" ng-hide="pets"></span>
-                <img src="./img/mural2.png" class="mural" ng-show="groups">
+                <img src="./img/mural2.png" class="mural" ng-class="{privGroup:groups}" ng-show="groups">
             <ul class="small-block-grid-4" >
-                <div class="row">
-                    <div class="small-12 columns memWallSearch">
+                <div class="row" ng-switch on="type">
+                    <div class="small-12 columns memWallSearch" ng-switch-when="group">
+                        <input ng-model="search.search" type="text" class="searchBar"
+                               placeholder="Search Groups">
+                    </div>
+                    <div class="small-12 columns memWallSearch" ng-switch-default ng-hide="groupingViewable">
                         <input ng-model="search.search" type="text" class="searchBar"
                                placeholder="Search Memorials">
                     </div>
@@ -73,7 +96,7 @@
                         </h6>
                         <a href="#/{{type}}/{{entry.author}}">
                             <img src="/uploads/{{ entry.profilePicPortrait }}"
-                                                                alt="child pick"/>
+                                                                alt="Angel Photo"/>
                         </a>
                     </div>
                 </li>

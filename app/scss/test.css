@@ -1471,7 +1471,7 @@ select {
   position: relative;
   padding: 0.875rem 1.5rem 0.875rem 0.875rem;
   font-size: 0.8125rem;
-  background-color: #008cba;
+  background-color: #90BFFA;
   border-color: #0079a1;
   color: white; }
   .alert-box .close {
@@ -1839,7 +1839,7 @@ select {
     .breadcrumbs > * a,
     .breadcrumbs > * span {
       text-transform: uppercase;
-      color: #008cba; }
+      color: #90BFFA; }
     .breadcrumbs > *.current {
       cursor: default;
       color: #333333; }
@@ -1883,7 +1883,7 @@ button, .button {
   padding-left: 2rem;
   font-size: 1rem;
   /*     @else                            { font-size: $padding - rem-calc(2); } */
-  background-color: #008cba;
+  background-color: #90BFFA;
   border-color: #0079a1;
   color: white;
   -webkit-transition: background-color 300ms ease-out;
@@ -1960,7 +1960,7 @@ button, .button {
     -webkit-border-radius: 1000px;
     border-radius: 1000px; }
   button.disabled, button[disabled], .button.disabled, .button[disabled] {
-    background-color: #008cba;
+    background-color: #90BFFA;
     border-color: #0079a1;
     color: white;
     cursor: default;
@@ -1972,7 +1972,7 @@ button, .button {
     button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
       color: white; }
     button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
-      background-color: #008cba; }
+      background-color: #90BFFA; }
     button.disabled.secondary, button[disabled].secondary, .button.disabled.secondary, .button[disabled].secondary {
       background-color: #e7e7e7;
       border-color: #dadada;
@@ -3026,7 +3026,7 @@ kbd {
   margin-bottom: inherit;
   padding: 0.25rem 0.5rem 0.375rem;
   font-size: 0.6875rem;
-  background-color: #008cba;
+  background-color: #90BFFA;
   color: white; }
   .label.radius {
     -webkit-border-radius: 3px;
@@ -3322,12 +3322,12 @@ ul.pagination {
     ul.pagination li.unavailable:hover a, ul.pagination li.unavailable a:focus {
       background: transparent; }
     ul.pagination li.current a {
-      background: #008cba;
+      background: #90BFFA;
       color: white;
       font-weight: bold;
       cursor: default; }
       ul.pagination li.current a:hover, ul.pagination li.current a:focus {
-        background: #008cba; }
+        background: #90BFFA; }
   ul.pagination li {
     float: left;
     display: block; }
@@ -3377,7 +3377,7 @@ ul.pagination {
       .panel.callout h1.subheader, .panel.callout h2.subheader, .panel.callout h3.subheader, .panel.callout h4.subheader, .panel.callout h5.subheader, .panel.callout h6.subheader {
         line-height: 1.4; }
     .panel.callout a {
-      color: #008cba; }
+      color: #90BFFA; }
   .panel.radius {
     -webkit-border-radius: 3px;
     border-radius: 3px; }
@@ -3436,7 +3436,7 @@ ul.pagination {
   padding: 0.125rem;
   margin-bottom: 0.625rem; }
   .progress .meter {
-    background: #008cba;
+    background: #90BFFA;
     height: 100%;
     display: block; }
   .progress.secondary .meter {
@@ -3541,7 +3541,7 @@ ul.pagination {
     font-size: 0.875rem; }
     .side-nav li a {
       display: block;
-      color: #008cba; }
+      color: #90BFFA; }
     .side-nav li.active > a:first-child {
       color: #4d4d4d;
       font-weight: normal;
@@ -3675,7 +3675,7 @@ ul.pagination {
       -webkit-border-radius: 3px;
       border-radius: 3px;
       font-weight: normal;
-      background: #008cba;
+      background: #90BFFA;
       padding: 0.1875rem 1rem;
       cursor: default;
       color: white; }
@@ -3978,7 +3978,7 @@ a.th {
   color: #333333; }
   .has-tip:hover, .has-tip:focus {
     border-bottom: dotted 1px #003f54;
-    color: #008cba; }
+    color: #90BFFA; }
   .has-tip.tip-left, .has-tip.tip-right {
     float: none !important; }
 
@@ -4007,7 +4007,7 @@ a.th {
     border-color: transparent transparent #333333 transparent;
     top: -10px; }
   .tooltip.opened {
-    color: #008cba !important;
+    color: #90BFFA !important;
     border-bottom: dotted 1px #003f54 !important; }
 
 .tap-to-close {
@@ -4075,7 +4075,7 @@ td {
 
 /* Default Link Styles */
 a {
-  color: #008cba;
+  color: #90BFFA;
   text-decoration: none;
   line-height: inherit; }
   a:hover, a:focus {
@@ -4501,7 +4501,7 @@ meta.foundation-mq-topbar {
     font-weight: normal;
     background: rgba(0, 0, 0, 0); }
     .top-bar-section ul li > a.button {
-      background: #008cba;
+      background: #90BFFA;
       font-size: 0.8125rem;
       padding-right: 15px;
       padding-left: 15px; }
@@ -4523,7 +4523,7 @@ meta.foundation-mq-topbar {
     background: #272727;
     color: white; }
   .top-bar-section ul li.active > a {
-    background: #008cba;
+    background: #90BFFA;
     color: white; }
     .top-bar-section ul li.active > a:hover {
       background: #0079a1; }
@@ -4622,14 +4622,14 @@ meta.foundation-mq-topbar {
         .top-bar-section ul li .js-generated {
           display: none; }
     .top-bar-section li.hover > a:not(.button) {
-      background: #272727;
-      color: white; }
+      background: #90BFFA;
+      color: white !important; }
     .top-bar-section li a:not(.button) {
       padding: 0 15px;
       line-height: 45px;
       background: rgba(0, 0, 0, 0); }
       .top-bar-section li a:not(.button):hover {
-        background: #272727; }
+        background: #90BFFA; }
     .top-bar-section .has-dropdown > a {
       padding-right: 35px !important; }
       .top-bar-section .has-dropdown > a:after {
@@ -4664,11 +4664,11 @@ meta.foundation-mq-topbar {
         line-height: 1;
         white-space: nowrap;
         padding: 12px 15px;
-        background: #333333;
+        background: #8A9948;
         margin-top: -10px; }
       .top-bar-section .dropdown li label {
         white-space: nowrap;
-        background: #333333; }
+        background: #8A9948; }
       .top-bar-section .dropdown li .dropdown {
         left: 100%;
         top: 0; }
@@ -4690,10 +4690,10 @@ meta.foundation-mq-topbar {
         right: 100%; }
 
   .no-js .top-bar-section ul li:hover > a {
-    background: #272727;
-    color: white; }
+    background: #90BFFA;
+    color: white !important; }
   .no-js .top-bar-section ul li:active > a {
-    background: #008cba;
+    background: #90BFFA;
     color: white; }
   .no-js .top-bar-section .has-dropdown:hover > .dropdown {
     display: block; } }

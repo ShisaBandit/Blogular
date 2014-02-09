@@ -161,7 +161,7 @@ body .contain-to-grid-logged-in nav.top-bar-logged-in .loggedBlock {
 }
 
 #workpets{
-   width:288px;
+    width:auto;
     margin-top: 0px;
     margin-right: 0px;
     margin-left: 0px;
@@ -182,7 +182,7 @@ body .contain-to-grid-logged-in nav.top-bar-logged-in .loggedBlock {
 
 #petbutton{
     border: none;
-    color: #8a9948;
+    color: #fff;
 }
 
 .top-bar-section .dropdown li.memWall {
@@ -207,7 +207,7 @@ body .contain-to-grid-logged-in nav.top-bar-logged-in .loggedBlock {
     border: none;
 }
 #homebutton {
-    color: #8a9948;
+    color: #fff;
     border: none;
 }
 #pettionbutton{
@@ -229,6 +229,29 @@ body .contain-to-grid-logged-in nav.top-bar-logged-in .loggedBlock {
     box-shadow: 2px 2px 5px #A3A1A1;
 }
 
+ .offsetHeight.petMem {
+     max-width: 980px;
+     margin-top: 20px;
+     margin-left: auto;
+     margin-right: auto;
+     padding-top: 10px;
+     background: none repeat scroll 0% 0% #F28678;
+     border-top-left-radius: 2em;
+     border-top-right-radius: 2em;
+     box-shadow: 2px 2px 5px #A3A1A1;
+ }
+
+ .offsetHeight.privGroup {
+     max-width: 980px;
+     margin-top: 20px;
+     margin-left: auto;
+     margin-right: auto;
+     padding-top: 10px;
+     background: none repeat scroll 0% 0% #90BFFA;
+     border-top-left-radius: 2em;
+     border-top-right-radius: 2em;
+     box-shadow: 2px 2px 5px #A3A1A1;
+ }
 
 .offsetHeight h1,h2,h3,h4 {
     color: #47569B;
@@ -435,10 +458,10 @@ body .contain-to-grid-logged-in #username2 {
     display:block;
     width:100%;
     height:60px;
-    margin-top: -20px;
+    margin-top: -5px;
     background-color: #bdcb80;
-    border-top-left-radius: 2em;
-    border-top-right-radius: 2em;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
     padding: 5px;
     padding-top: 10px;
     z-index: 1;
@@ -453,10 +476,22 @@ body .contain-to-grid-logged-in #username2 {
 }
 
 .border-footer p {
-    margin-top: 35px;
+    margin-top: 25px;
     margin-left: 100px;
-
+    margin-bottom: 0px;
 }
+
+ .border-footer p.toiawase {
+     margin-top: 5px;
+     margin-left: 100px;
+     display: block;
+ }
+
+ .border-footer p.toiawase a {
+     color: red !important;
+     font-size: small;
+ }
+
 .footer-child{
     height: 50px;
 }
@@ -944,6 +979,9 @@ input.addNewPost {
      display: none;
  }
 
+ .form-horizontal2 {
+     display: none;
+ }
 @media only screen and (max-width: 850px) {
     .loginBlock {
         position:relative;
@@ -1394,6 +1432,14 @@ input.addNewPost {
         border: 1px solid #71706B;
         float: left;
     }
+
+    .form-horizontal {
+        display: none;
+    }
+
+    .form-horizontal2 {
+        display: block;
+    }
 }
 
 #rulesModal {
@@ -1712,6 +1758,12 @@ h6.petsTitle {
 .mural {
     margin-top: -18px;
 }
+
+ .mural.privGroup {
+     margin-top: -20px;
+     border-top-left-radius: 1em;
+     border-top-right-radius: 1em;
+ }
 
 .muralPets {
     margin-top: -18px;
