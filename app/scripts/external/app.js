@@ -2732,6 +2732,27 @@ $scope.invitations.push({email:""});
     }
 })
 
+app.controller("ContactFormController", function ($scope,$http) {
+    $scope.message = "";
+    $scope.show = true;
+    $scope.spinner = false;
+    $scope.sendMessage = function(){
+        $scope.spinner = true;
+        $http.post("/sendAbout",$scope.form).
+        success(function (data) {
+               console.log("success");
+               $scope.form = [];
+               $scope.message = "Your message was sent. Thank you.";
+               $scope.show = false;
+               $scope.spinner = false;
+        }).
+        error(function (data) {
+                console.log("failure");
+                $scope.message = "An error occured please try again in a few minutes.";
+                $scope.spinner = false;
+        });
+    }
+});
 
 
 //console.log(youtube_embed(youtube_parser("http://www.youtube.com/watch?v=Pu1PPMaoArE")) );

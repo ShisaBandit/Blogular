@@ -1,3 +1,4 @@
+<div ng-controller="ContactFormController">
     <div class="row offsetHeight">
         <div class="small-12 columns">
             <div id="rulesModal">
@@ -7,141 +8,145 @@
                     </div>
                 </div>
                 <div class="section-container auto" reflow data-section>
-                <section class="section">
+                    <section class="section">
                         <div class="content" data-section-content>
                             <b>Advertise your business</b>
-                            <p>Angels of Eureka is dedicated to providing support to bereaved parents and families who
-                                are suffering as the result of the death of their child, children, mom, dad, sister, brother
-                                grandparent, etc... We welcome organizations that would like to advertise with us. Please fill out the form below for more information,</p>
 
-                            <form>
+                            <p>Angels of Eureka is dedicated to providing support to bereaved parents and families who
+                                are suffering as the result of the death of their child, children, mom, dad, sister,
+                                brother
+                                grandparent, etc... We welcome organizations that would like to advertise with us.
+                                Please fill out the form below for more information,</p>
+                            <h2>{{message}}</h2>
+                            <form name="form" ng-show="show">
                                 <div class="row">
                                     <div class="large-4 columns">
                                         <label>First Name
-                                            <input type="text" placeholder="First Name" />
+                                            <input ng-model="form.name" type="text" placeholder="First Name"/>
                                         </label>
                                     </div>
                                     <div class="large-4 columns">
                                         <label>Last Name
-                                            <input type="text" placeholder="Last Name" />
-                                        </label>
-                                    </div>
-                                    <div class="large-12 columns">
-                                        <label>Company/Organization Name
-                                            <input type="text" placeholder="Last Name" />
+                                            <input ng-model="form.lastname" type="text" placeholder="Last Name"/>
                                         </label>
                                     </div>
                                     <div class="row">
                                         <div class="large-12 columns">
                                             <label>Email Address
-                                                <input type="text" placeholder="Email Address" />
+                                                <input ng-model="form.email" type="text" placeholder="Email Address"/>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="large-12 columns">
                                             <label>Phone Number
-                                                <input type="text" placeholder="Phone Number" />
+                                                <input ng-model="form.pnumber" type="text" placeholder="Phone Number"/>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="large-12 columns">
                                             <label>Street Address
-                                                <input type="text" placeholder="Street Address" />
+                                                <input ng-model="form.address" type="text"
+                                                       placeholder="Street Address"/>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="large-12 columns">
                                             <label>City
-                                                <input type="text" placeholder="City" />
+                                                <input ng-model="form.city" type="text" placeholder="City"/>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
-                        </div>
-                    <div class="row">
-                        <div class="large-12 columns">
-                            <label>State
-                                <select>
-                                    <option value="AL">Alabama</option>
-                                    <option value="AK">Alaska</option>
-                                    <option value="AZ">Arizona</option>
-                                    <option value="AR">Arkansas</option>
-                                    <option value="CA">California</option>
-                                    <option value="CO">Colorado</option>
-                                    <option value="CT">Connecticut</option>
-                                    <option value="DE">Delaware</option>
-                                    <option value="DC">District of Columbia</option>
-                                    <option value="FL">Florida</option>
-                                    <option value="GA">Georgia</option>
-                                    <option value="HI">Hawaii</option>
-                                    <option value="ID">Idaho</option>
-                                    <option value="IL">Illinois</option>
-                                    <option value="IN">Indiana</option>
-                                    <option value="IA">Iowa</option>
-                                    <option value="KS">Kansas</option>
-                                    <option value="KY">Kentucky</option>
-                                    <option value="LA">Louisiana</option>
-                                    <option value="ME">Maine</option>
-                                    <option value="MD">Maryland</option>
-                                    <option value="MA">Massachusetts</option>
-                                    <option value="MI">Michigan</option>
-                                    <option value="MN">Minnesota</option>
-                                    <option value="MS">Mississippi</option>
-                                    <option value="MO">Missouri</option>
-                                    <option value="MT">Montana</option>
-                                    <option value="NE">Nebraska</option>
-                                    <option value="NV">Nevada</option>
-                                    <option value="NH">New Hampshire</option>
-                                    <option value="NJ">New Jersey</option>
-                                    <option value="NM">New Mexico</option>
-                                    <option value="NY">New York</option>
-                                    <option value="NC">North Carolina</option>
-                                    <option value="ND">North Dakota</option>
-                                    <option value="OH">Ohio</option>
-                                    <option value="OK">Oklahoma</option>
-                                    <option value="OR">Oregon</option>
-                                    <option value="PA">Pennsylvania</option>
-                                    <option value="RI">Rhode Island</option>
-                                    <option value="SC">South Carolina</option>
-                                    <option value="SD">South Dakota</option>
-                                    <option value="TN">Tennessee</option>
-                                    <option value="TX">Texas</option>
-                                    <option value="UT">Utah</option>
-                                    <option value="VT">Vermont</option>
-                                    <option value="VA">Virginia</option>
-                                    <option value="WA">Washington</option>
-                                    <option value="WV">West Virginia</option>
-                                    <option value="WI">Wisconsin</option>
-                                    <option value="WY">Wyoming</option>
-                                </select>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="large-12 columns">
-                            <label>Zip Code
-                                <input type="text" placeholder="Zip Code" />
-                            </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="large-12 columns">
-                            <label>What can we help you with?
-                                <textarea placeholder="Please enter your comments or request here...."></textarea>
-                            </label>
-                        </div>
-                    </div>
-                    </form>
-                    <br />
-                    <p>
-                        Thank you for contacting Angels of Eureka! We will get back to you soon!
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <label>State
+                                            <select ng-model="form.state">
+                                                <option value="AL">Alabama</option>
+                                                <option value="AK">Alaska</option>
+                                                <option value="AZ">Arizona</option>
+                                                <option value="AR">Arkansas</option>
+                                                <option value="CA">California</option>
+                                                <option value="CO">Colorado</option>
+                                                <option value="CT">Connecticut</option>
+                                                <option value="DE">Delaware</option>
+                                                <option value="DC">District of Columbia</option>
+                                                <option value="FL">Florida</option>
+                                                <option value="GA">Georgia</option>
+                                                <option value="HI">Hawaii</option>
+                                                <option value="ID">Idaho</option>
+                                                <option value="IL">Illinois</option>
+                                                <option value="IN">Indiana</option>
+                                                <option value="IA">Iowa</option>
+                                                <option value="KS">Kansas</option>
+                                                <option value="KY">Kentucky</option>
+                                                <option value="LA">Louisiana</option>
+                                                <option value="ME">Maine</option>
+                                                <option value="MD">Maryland</option>
+                                                <option value="MA">Massachusetts</option>
+                                                <option value="MI">Michigan</option>
+                                                <option value="MN">Minnesota</option>
+                                                <option value="MS">Mississippi</option>
+                                                <option value="MO">Missouri</option>
+                                                <option value="MT">Montana</option>
+                                                <option value="NE">Nebraska</option>
+                                                <option value="NV">Nevada</option>
+                                                <option value="NH">New Hampshire</option>
+                                                <option value="NJ">New Jersey</option>
+                                                <option value="NM">New Mexico</option>
+                                                <option value="NY">New York</option>
+                                                <option value="NC">North Carolina</option>
+                                                <option value="ND">North Dakota</option>
+                                                <option value="OH">Ohio</option>
+                                                <option value="OK">Oklahoma</option>
+                                                <option value="OR">Oregon</option>
+                                                <option value="PA">Pennsylvania</option>
+                                                <option value="RI">Rhode Island</option>
+                                                <option value="SC">South Carolina</option>
+                                                <option value="SD">South Dakota</option>
+                                                <option value="TN">Tennessee</option>
+                                                <option value="TX">Texas</option>
+                                                <option value="UT">Utah</option>
+                                                <option value="VT">Vermont</option>
+                                                <option value="VA">Virginia</option>
+                                                <option value="WA">Washington</option>
+                                                <option value="WV">West Virginia</option>
+                                                <option value="WI">Wisconsin</option>
+                                                <option value="WY">Wyoming</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <label>Zip Code
+                                            <input ng-model="form.zcode" type="text" placeholder="Zip Code"/>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <label>What can we help you with?
+                                            <textarea ng-model="form.message"
+                                                      placeholder="Please enter your comments or request here...."></textarea>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="medium button" ng-click="sendMessage()"></div>
+                            </form>
+                            <h2 class="success">{{message}}</h2>
+                            <div ng-class="{spinner:spinner}"></div>µ
+                            <br/>
 
-                    </p>
-                </section>
+                            <p>
+                                Thank you for contacting Angels of Eureka! We will get back to you soon!
+
+                            </p>
+                    </section>
                 </div>
             </div>
         </div>
     </div>
+</div>

@@ -22,42 +22,44 @@ var smtpTransport = nodemailer.createTransport("SMTP", {
     }
 });
 var EventEmitter = require('events').EventEmitter;
+var emailTemplates = require('swig-email-templates');
+var path = require('path');
 exports.messageEmitter = messageEmitter = new EventEmitter();
 
 
-exports.upcomingDates = function (req,res) {
-    User.findOne({_id:'52af0b4f60f809681300000f'}).populate('memwalls').exec(function (err,user) {
+exports.upcomingDates = function (req, res) {
+    User.findOne({_id: '52af0b4f60f809681300000f'}).populate('memwalls').exec(function (err, user) {
         var nU = user.memwalls;
         var eventsInNetworkCurrently = [
 
         ]
-        var oneWeekBefore = moment().subtract('week',1);
-        var oneWeekafter = moment().add('week',1);
-        for(var i  = 0;i<nU.length;i++){
+        var oneWeekBefore = moment().subtract('week', 1);
+        var oneWeekafter = moment().add('week', 1);
+        for (var i = 0; i < nU.length; i++) {
             console.log(nU[i].postText.length);
-            for(var d = 0;d<nU[i].postText.length;d++){
-                if(nU[i].postText[d].postType == 3){
+            for (var d = 0; d < nU[i].postText.length; d++) {
+                if (nU[i].postText[d].postType == 3) {
 
                     var eventDate = moment(eventsInNetworkCurrently[t].date);
-                    if(eventDate.isAfter(oneWeekBefore) && eventDate.isBefore()){//will happen
+                    if (eventDate.isAfter(oneWeekBefore) && eventDate.isBefore()) {//will happen
                         //console.log("This event is coming up");
-                        console.log("This event happened "+eventDate.fromNow()+" "+eventDate.format());
+                        console.log("This event happened " + eventDate.fromNow() + " " + eventDate.format());
                         eventsInNetworkCurrently.push(
                             {
-                                event:nU[i].postText[d].event,
-                                date:nU[i].postText[d].date,
-                                blogId:nU[i]._id,
-                                message:"This event happened "+eventDate.fromNow()+" "+eventDate.format()
+                                event: nU[i].postText[d].event,
+                                date: nU[i].postText[d].date,
+                                blogId: nU[i]._id,
+                                message: "This event happened " + eventDate.fromNow() + " " + eventDate.format()
                             }
                         )
-                    }else if(eventDate.isBefore(oneWeekafter) && eventDate.isAfter()){//has happened
-                        console.log("This event will happen "+eventDate.fromNow()+" "+eventDate.format());
+                    } else if (eventDate.isBefore(oneWeekafter) && eventDate.isAfter()) {//has happened
+                        console.log("This event will happen " + eventDate.fromNow() + " " + eventDate.format());
                         eventsInNetworkCurrently.push(
                             {
-                                event:nU[i].postText[d].event,
-                                date:nU[i].postText[d].date,
-                                blogId:nU[i]._id,
-                                message:"This event will happen "+eventDate.fromNow()+" "+eventDate.format()
+                                event: nU[i].postText[d].event,
+                                date: nU[i].postText[d].date,
+                                blogId: nU[i]._id,
+                                message: "This event will happen " + eventDate.fromNow() + " " + eventDate.format()
                             }
                         )
                     }
@@ -67,19 +69,19 @@ exports.upcomingDates = function (req,res) {
         }
         return res.send(JSON.stringify(eventsInNetworkCurrently));
         /*
-        console.log(oneWeekBefore.format());
-        for(var t = 0;t<eventsInNetworkCurrently.length;t++){
-            //console.log(eventsInNetworkCurrently[t]);
-            var eventDate = moment(eventsInNetworkCurrently[t].date);
-            console.log(eventDate.format())
-            if(eventDate.isAfter(oneWeekBefore) && eventDate.isBefore()){//will happen
-                //console.log("This event is coming up");
-                console.log("This event happened "+eventDate.fromNow()+" "+eventDate.format())
-            }else if(eventDate.isBefore(oneWeekafter) && eventDate.isAfter()){//has happened
-               console.log("This event will happen "+eventDate.fromNow()+" "+eventDate.format())
-            }
-        }
-        */
+         console.log(oneWeekBefore.format());
+         for(var t = 0;t<eventsInNetworkCurrently.length;t++){
+         //console.log(eventsInNetworkCurrently[t]);
+         var eventDate = moment(eventsInNetworkCurrently[t].date);
+         console.log(eventDate.format())
+         if(eventDate.isAfter(oneWeekBefore) && eventDate.isBefore()){//will happen
+         //console.log("This event is coming up");
+         console.log("This event happened "+eventDate.fromNow()+" "+eventDate.format())
+         }else if(eventDate.isBefore(oneWeekafter) && eventDate.isAfter()){//has happened
+         console.log("This event will happen "+eventDate.fromNow()+" "+eventDate.format())
+         }
+         }
+         */
     });
 }
 
@@ -153,24 +155,24 @@ exports.getPaginatedStreamPosts = function (req, res) {
         limit = parseInt(req.params.limit);
     console.log(skip, limit);
     console.log(req.param.id);
-    Blog.findOne({_id:req.params.id},function (err,blog) {
-        if(!blog)return res.send(200,JSON.stringify([]));
-      var post = blog.postText.reverse();
+    Blog.findOne({_id: req.params.id}, function (err, blog) {
+        if (!blog)return res.send(200, JSON.stringify([]));
+        var post = blog.postText.reverse();
         var buffer = [];
-        if(skip+limit> post.length){
+        if (skip + limit > post.length) {
             var maxLength = post.length - skip;
-            for(var x = 0;x<maxLength;x++){
-                console.log((x+skip));
-                buffer.push(post[x+skip]);
+            for (var x = 0; x < maxLength; x++) {
+                console.log((x + skip));
+                buffer.push(post[x + skip]);
             }
-        }else{
-            for(var x = 0;x<limit;x++){
-                console.log((x+skip));
-                buffer.push(post[x+skip]);
+        } else {
+            for (var x = 0; x < limit; x++) {
+                console.log((x + skip));
+                buffer.push(post[x + skip]);
             }
         }
 
-      return res.end(JSON.stringify(buffer));
+        return res.end(JSON.stringify(buffer));
 
     });
 };
@@ -220,7 +222,7 @@ exports.getABlog = function (req, res) {
                 return res.end(JSON.stringify(post));
 
             } else {
-                 var modifiedpost = [];
+                var modifiedpost = [];
                 var modifiedpostentry = {};
                 modifiedpostentry.limited = true;
                 modifiedpostentry.firstName = post[0].firstName;
@@ -277,7 +279,7 @@ exports.getGroups = function (req, res) {
 
 exports.createBlog = function (req, res) {
     BlogGroupValidation(req).
-    then(function (walls) {//if NO errors
+        then(function (walls) {//if NO errors
 
             var newBlogEntry = new Blog(req.body);
             newBlogEntry.owner_id = req.session.passport.user;
@@ -288,7 +290,7 @@ exports.createBlog = function (req, res) {
             });
         },
         function (errors) {//if  errors
-           console.log(errors);
+            console.log(errors);
             if (errors) {
                 console.log(errors)
                 res.send(errors, 500);
@@ -345,7 +347,7 @@ exports.updateBlog = function (req, res) {
     });
 
 }
-function BlogGroupValidation(req){
+function BlogGroupValidation(req) {
     console.log("Begin Group validation");
     //TODO:convert this method to return a promise
     var promise = new mongoose.Promise;
@@ -378,14 +380,14 @@ function BlogGroupValidation(req){
         errors.author = {param: 'author', msg: 'Please enter a valid url. Only characters A-Z or numbers 1-9 and "-" or "_" allowed.'};
     }
 
-    Blog.find({}).exec(function (err,walls) {
-       // console.log(walls)
-        if(!walls)promise.reject(0);//nowalls error code
-        for(var i = 0;i<walls.length;i++){
-            if(req.body.author == walls[i].author){
+    Blog.find({}).exec(function (err, walls) {
+        // console.log(walls)
+        if (!walls)promise.reject(0);//nowalls error code
+        for (var i = 0; i < walls.length; i++) {
+            if (req.body.author == walls[i].author) {
                 console.log("same author error");
 
-                if(walls[i].owner_id != req.session.passport.user){
+                if (walls[i].owner_id != req.session.passport.user) {
                     console.log("set sam author error");
                     if (!errors) {
                         errors = {};
@@ -395,11 +397,11 @@ function BlogGroupValidation(req){
             }
         }
         console.log(errors)
-        if(errors == null){
+        if (errors == null) {
             console.log("fullfill");
             console.log(errors)
             promise.fulfill();
-        }else{
+        } else {
             console.log("reject");
             console.log(errors)
             promise.reject(errors);
@@ -442,7 +444,7 @@ exports.addTextPost = function (req, res) {
                 if (err)console.log(err);
                 console.log("saved textpost");
 
-                return res.end(JSON.stringify({'success': 'true','postText':doc.postText[doc.postText.length-1]}));
+                return res.end(JSON.stringify({'success': 'true', 'postText': doc.postText[doc.postText.length - 1]}));
 
             });
         })
@@ -465,12 +467,12 @@ exports.addVideoPost = function (req, res) {
         console.log("Found Blog");
         var user = req.session;
         User.findOne({_id: req.session.passport.user}, function (err, user) {
-                req.body.username = user.username;
-                req.body.gravatar = calcMD5(user.email);
+            req.body.username = user.username;
+            req.body.gravatar = calcMD5(user.email);
 
-                req.body.user_id = user._id;
-                blog.postText.push(req.body);
-                blog.save(function (err, doc) {
+            req.body.user_id = user._id;
+            blog.postText.push(req.body);
+            blog.save(function (err, doc) {
                 console.log(err);
             })
         });
@@ -494,13 +496,13 @@ exports.lastestPosts = function (req, res) {
         if (blog.postText === undefined)return res.send(200);
         var posts = blog.postText;
         var postTexts = blog.postText;
-        for(var b = 0;b<blog.postText.length;b++){
+        for (var b = 0; b < blog.postText.length; b++) {
             //var startDate = post[b].date;
             //var threeDaysForward =
             //var dt = (new Date( 2011, 7, 30, 0, 0, 0, 0 )).getTime();
             //if(posts[b].date)
-            if(blog.postText[b].inStream == false && blog.owner_id != req.session.passport.user){
-                postTexts.splice(b,1);
+            if (blog.postText[b].inStream == false && blog.owner_id != req.session.passport.user) {
+                postTexts.splice(b, 1);
             }
         }
         blog.postText = postTexts;
@@ -520,29 +522,29 @@ exports.latestPics = function (req, res) {
         return res.end(JSON.stringify(postPics.reverse()));
     });
 }
-exports.deletepic = function (req,res) {
-    Blog.findOne({_id:req.params.blog},function (err,blog) {
+exports.deletepic = function (req, res) {
+    Blog.findOne({_id: req.params.blog}, function (err, blog) {
         var blogdoc = blog.orphanedphotos.id(req.params.pic);
         var pic;
-        if(!blogdoc){
+        if (!blogdoc) {
 
-        }else{
+        } else {
             blog.orphanedphotos.id(req.params.pic).remove();
             pic = blogdoc.filename;
         }
         var albums = blog.albums;
-        for(var a = 0;a<albums.length;a++){
-            if(!pic){
+        for (var a = 0; a < albums.length; a++) {
+            if (!pic) {
                 var subdoc = albums[a].photos.id(req.params.pic);
-                if(!subdoc){
+                if (!subdoc) {
 
-                }else{
+                } else {
                     albums[a].photos.id(req.params.pic).remove();
                 }
-            }else{
-                for(var p = 0;p<albums[a].photos.length;p++){
-                    if(albums[a].photos[p].filename == pic){
-                        albums[a].photos.splice(p,1);
+            } else {
+                for (var p = 0; p < albums[a].photos.length; p++) {
+                    if (albums[a].photos[p].filename == pic) {
+                        albums[a].photos.splice(p, 1);
                     }
                 }
             }
@@ -570,31 +572,31 @@ exports.latestVideosAnimoto = function (req, res) {
 }
 exports.latestVideosAll = function (req, res) {
     /*
-    Blog.findOne({_id: req.params.id}).select({'postText':{$elemMatch:{'type':Common.postTextTypes.video}}}).exec(function (err, blog) {
-        //return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.video,['isStream','embedYouTube','embedAnimoto','_id'])));
-        //for(var p = 0;p<blog.postText;)
-        return res.end(JSON.stringify(blog));
-    });
-    */
-    Blog.findOne({_id:req.params.id}).lean().exec(function (err,blog) {
+     Blog.findOne({_id: req.params.id}).select({'postText':{$elemMatch:{'type':Common.postTextTypes.video}}}).exec(function (err, blog) {
+     //return res.end(JSON.stringify(getPostText(blog, Common.postTextTypes.video,['isStream','embedYouTube','embedAnimoto','_id'])));
+     //for(var p = 0;p<blog.postText;)
+     return res.end(JSON.stringify(blog));
+     });
+     */
+    Blog.findOne({_id: req.params.id}).lean().exec(function (err, blog) {
         //console.log(blog);
 
-        return res.end(JSON.stringify(getPostTextValues(blog,Common.postTextTypes.video,['_id','embedYouTube','embedAnimoto','inStream','date'])));
+        return res.end(JSON.stringify(getPostTextValues(blog, Common.postTextTypes.video, ['_id', 'embedYouTube', 'embedAnimoto', 'inStream', 'date'])));
     })
 }
 
-exports.addToStream = function (req,res) {
+exports.addToStream = function (req, res) {
     var wallid = req.params.wallId;
     var postTextId = req.params.postId;
 
-    Blog.findOne({_id:wallid}, function (err,blog) {
+    Blog.findOne({_id: wallid}, function (err, blog) {
         var postTexts = blog.postText;
-        for(var post in postTexts){
-            if(postTexts[post]._id == postTextId && blog.owner_id == req.session.passport.user){
+        for (var post in postTexts) {
+            if (postTexts[post]._id == postTextId && blog.owner_id == req.session.passport.user) {
                 blog.postText[post].inStream = !blog.postText[post].inStream;
-                blog.save(function (err,doc) {
-                    if(err)console.log(err);
-                    res.send(200,"success");
+                blog.save(function (err, doc) {
+                    if (err)console.log(err);
+                    res.send(200, "success");
                 })
                 break;
             }
@@ -603,18 +605,18 @@ exports.addToStream = function (req,res) {
 }
 
 
-exports.commentsAllowed = function (req,res) {
+exports.commentsAllowed = function (req, res) {
     var wallid = req.params.wallId;
     var postTextId = req.params.postId;
 
-    Blog.findOne({_id:wallid}, function (err,blog) {
+    Blog.findOne({_id: wallid}, function (err, blog) {
         var postTexts = blog.postText;
-        for(var post in postTexts){
-            if(postTexts[post]._id == postTextId && blog.owner_id == req.session.passport.user){
+        for (var post in postTexts) {
+            if (postTexts[post]._id == postTextId && blog.owner_id == req.session.passport.user) {
                 blog.postText[post].canComment = !blog.postText[post].canComment;
-                blog.save(function (err,doc) {
-                    if(err)console.log(err);
-                    res.send(200,"success");
+                blog.save(function (err, doc) {
+                    if (err)console.log(err);
+                    res.send(200, "success");
                 })
                 break;
             }
@@ -623,18 +625,18 @@ exports.commentsAllowed = function (req,res) {
 }
 
 
-exports.resetComments = function (req,res) {
+exports.resetComments = function (req, res) {
     var wallid = req.params.wallId;
     var postTextId = req.params.postId;
 
-    Blog.findOne({_id:wallid}, function (err,blog) {
+    Blog.findOne({_id: wallid}, function (err, blog) {
         var postTexts = blog.postText;
-        for(var post in postTexts){
-            if(postTexts[post]._id == postTextId && blog.owner_id == req.session.passport.user){
+        for (var post in postTexts) {
+            if (postTexts[post]._id == postTextId && blog.owner_id == req.session.passport.user) {
                 blog.postText[post].comments = [];
-                blog.save(function (err,doc) {
-                    if(err)console.log(err);
-                    res.send(200,"success");
+                blog.save(function (err, doc) {
+                    if (err)console.log(err);
+                    res.send(200, "success");
                 })
                 break;
             }
@@ -644,52 +646,52 @@ exports.resetComments = function (req,res) {
 }
 exports
 
-function getPostTextValues(blog,type,getProperties){
+function getPostTextValues(blog, type, getProperties) {
     var buffer = [];
     var postTexts = blog.postText;
     var i = 0;
-        for(var postText in postTexts){
-            console.log(postTexts[postText].type);
-            if(postTexts[postText].postType != type){
-                continue;
-            }
-            for(var proptoGet in getProperties){
-                if(!buffer[i])
-                    buffer[i] = {};
-                //console.log(getProperties[proptoGet]+" "+postTexts[postText]['embedYouTube']);
-                buffer[i][getProperties[proptoGet]] = postTexts[postText][getProperties[proptoGet]];
-            }
-            i++;
+    for (var postText in postTexts) {
+        console.log(postTexts[postText].type);
+        if (postTexts[postText].postType != type) {
+            continue;
         }
+        for (var proptoGet in getProperties) {
+            if (!buffer[i])
+                buffer[i] = {};
+            //console.log(getProperties[proptoGet]+" "+postTexts[postText]['embedYouTube']);
+            buffer[i][getProperties[proptoGet]] = postTexts[postText][getProperties[proptoGet]];
+        }
+        i++;
+    }
     console.log(buffer);
     return buffer;
 }
 
 function getPostText(blog, type, getProp) {
-        if (getProp == undefined)getProp = false;
+    if (getProp == undefined)getProp = false;
     var buffer = [];
     for (var p = 0; p < blog.postText.length; p++) {
         if (blog.postText[p].postType == type) {
             var prop;
             if (getProp) {
-                if(getProp instanceof Array){
+                if (getProp instanceof Array) {
                     var pushdata;
-                    for(var pr in getProp){
-                        if(blog.postText[p][getProp[pr]]){
+                    for (var pr in getProp) {
+                        if (blog.postText[p][getProp[pr]]) {
                             buffer.push(blog.postText[p][getProp[pr]]);
                         }
                     }
-                }else{
-                    prop = getProp;
-                var pushdata;
-                if (prop == "embedYouTube") {
-                    pushdata = blog.postText[p][getProp];
-                    //pushdata.str.slice(0, -1);
-                    console.log(pushdata)
                 } else {
-                    pushdata = blog.postText[p][getProp];
-                }
-                buffer.push(pushdata);
+                    prop = getProp;
+                    var pushdata;
+                    if (prop == "embedYouTube") {
+                        pushdata = blog.postText[p][getProp];
+                        //pushdata.str.slice(0, -1);
+                        console.log(pushdata)
+                    } else {
+                        pushdata = blog.postText[p][getProp];
+                    }
+                    buffer.push(pushdata);
                 }
             } else {
                 var pushdata;
@@ -733,13 +735,15 @@ exports.sendWallInvite = function (req, res) {
                 res.send(500, 'duplicate request')
                 return;
             }
-            User.findOne({_id:req.session.passport.user},function(err,inviter){
+            User.findOne({_id: req.session.passport.user}, function (err, inviter) {
                 inviter.invitessent.push(user);
-                inviter.save(function(err){
-                    if(err)console.log(err)
+                inviter.save(function (err) {
+                    if (err)console.log(err)
                     user.memwalls.push(blog);
                     blog.members.push(user);
-                    blog.save(function(err){if(err)console.log(err);});
+                    blog.save(function (err) {
+                        if (err)console.log(err);
+                    });
                     user.profiles.push({profile: blog._id});//TODO:Remove this in now for backwards compatibility with new style
                     user.save(function (err) {
                         console.log("profile pushed to user" + user.username);
@@ -755,9 +759,9 @@ exports.sendWallInvite = function (req, res) {
 exports.getFriendsMemorials = function (req, res) {
     User.find({_id: req.session.passport.user}).populate('memwalls').exec(function (err, user) {
         if (err)console.log(err)
-        if(!user[0]){
-            return res.send(200,'none');
-        }else{
+        if (!user[0]) {
+            return res.send(200, 'none');
+        } else {
             //console.log("getting memwalls references")
             var returndata = [];
             var memwalls = user[0].memwalls;
@@ -779,7 +783,6 @@ exports.getFriendsMemorials = function (req, res) {
         }
 
 
-
     })
 }
 
@@ -787,7 +790,7 @@ exports.selfRemove = function (req, res) {
     var wall = req.params.wall;
     User.findOne({_id: req.session.passport.user}, function (err, user) {
         var walls = user.memwalls;
-        console.log("compare to "+wall)
+        console.log("compare to " + wall)
         console.log(walls)
         for (var x = 0; x < user.memwalls.length; x++) {
             if (walls[x].toString() == wall.toString()) {
@@ -799,7 +802,7 @@ exports.selfRemove = function (req, res) {
         console.log(walls)
         user.memwalls = walls;
         user.save(function (err) {
-            if(err)console.log(err);
+            if (err)console.log(err);
             res.send(200, 'works good');
         })
     })
@@ -855,48 +858,52 @@ exports.usersInNetwork = function (req, res) {
     //invitations sent to us
     User.find({_id: req.session.passport.user}).populate('memwalls').exec(function (err, user) {
         var returnData = [];
-        Blog.populate(user[0].memwalls,{path:'user',match:{username:new RegExp(search,"i")}},function(err,walls){
+        Blog.populate(user[0].memwalls, {path: 'user', match: {username: new RegExp(search, "i")}}, function (err, walls) {
 
-            for(var x = 0;x < walls.length;x++){
-               if(!walls[x].user){
+            for (var x = 0; x < walls.length; x++) {
+                if (!walls[x].user) {
 
-               }else{
-                   //console.log(walls[x].user.email)
-                   /*
-                   var tempObj = {
-                       email:walls[x].user.email,
-                       username:walls[x].user.username,
-                       firstname:walls[x].user.firstName,
-                       lastname:walls[x].user.lastName
+                } else {
+                    //console.log(walls[x].user.email)
+                    /*
+                     var tempObj = {
+                     email:walls[x].user.email,
+                     username:walls[x].user.username,
+                     firstname:walls[x].user.firstName,
+                     lastname:walls[x].user.lastName
 
-                   };
-                    returnData.push(tempObj);
-                    */
-                   //returnData.push(walls[x].user.email);
-                   returnData.push(walls[x].user.username+": "+walls[x].user.firstName+" "+walls[x].user.lastName);
-                   //returnData.push(walls[x].user.firstName);
-                   //returnData.push(walls[x].user.lastName);
+                     };
+                     returnData.push(tempObj);
+                     */
+                    //returnData.push(walls[x].user.email);
+                    returnData.push(walls[x].user.username + ": " + walls[x].user.firstName + " " + walls[x].user.lastName);
+                    //returnData.push(walls[x].user.firstName);
+                    //returnData.push(walls[x].user.lastName);
 
-               }
+                }
 
             }
             //invitations we sent
             console.log(search)
             //User.populate(user[0].invitessent,{path:'invitessent',match:{username:new RegExp(search,'i')}},function(err,invited){
-            User.find({_id:req.session.passport.user}).
-                populate({path:'invitessent',
-                match:{$or:[{firstName:new RegExp(search,"i")},{username:new RegExp(search,"i")},{lastName:new RegExp(search,"i")}]}
-            }).exec(function(err,invited){
-               console.log("Invited")
-              //console.log(invited[0].invitessent.username)
-               for(var y = 0;y < invited[0].invitessent.length;y++){
-                    //returnData.push(invtited[y].username+": "+invited[y].firstName+" "+invited[y].lastName)
-                    console.log(invited[0].invitessent[y].username)
-                    returnData.push(invited[0].invitessent[y].username+': '+invited[0].invitessent[y].firstName+' '+invited[0].invitessent[y].lastName)
-                }
-                //console.log(returnData)
-                res.end(JSON.stringify(returnData));
-            })
+            User.find({_id: req.session.passport.user}).
+                populate({path: 'invitessent',
+                    match: {$or: [
+                        {firstName: new RegExp(search, "i")},
+                        {username: new RegExp(search, "i")},
+                        {lastName: new RegExp(search, "i")}
+                    ]}
+                }).exec(function (err, invited) {
+                    console.log("Invited")
+                    //console.log(invited[0].invitessent.username)
+                    for (var y = 0; y < invited[0].invitessent.length; y++) {
+                        //returnData.push(invtited[y].username+": "+invited[y].firstName+" "+invited[y].lastName)
+                        console.log(invited[0].invitessent[y].username)
+                        returnData.push(invited[0].invitessent[y].username + ': ' + invited[0].invitessent[y].firstName + ' ' + invited[0].invitessent[y].lastName)
+                    }
+                    //console.log(returnData)
+                    res.end(JSON.stringify(returnData));
+                })
 
 
         })
@@ -910,30 +917,30 @@ exports.usersInNetworkAll = function (req, res) {
     //invitations sent to us
     User.find({_id: req.session.passport.user}).populate('memwalls').exec(function (err, user) {
         var returnData = [];
-        Blog.populate(user[0].memwalls,{path:'user'},function(err,walls){
+        Blog.populate(user[0].memwalls, {path: 'user'}, function (err, walls) {
 
-            for(var x = 0;x < walls.length;x++){
-               if(!walls[x].user){
+            for (var x = 0; x < walls.length; x++) {
+                if (!walls[x].user) {
 
-               }else{
-                   returnData.push(walls[x].user);
-               }
+                } else {
+                    returnData.push(walls[x].user);
+                }
             }
             //invitations we sent
             console.log(search)
-            User.find({_id:req.session.passport.user}).
-                populate({path:'invitessent'
-                //match:{$or:[{firstName:new RegExp(search,"i")},{username:new RegExp(search,"i")},{lastName:new RegExp(search,"i")}]}
-            }).exec(function(err,invited){
-               console.log("Invited")
-              //console.log(invited[0].invitessent.username)
-               for(var y = 0;y < invited[0].invitessent.length;y++){
-                    console.log(invited[0].invitessent[y].username)
-                    returnData.push(invited[0].invitessent[y])
-                }
-                //console.log(returnData)
-                res.end(JSON.stringify(returnData));
-            })
+            User.find({_id: req.session.passport.user}).
+                populate({path: 'invitessent'
+                    //match:{$or:[{firstName:new RegExp(search,"i")},{username:new RegExp(search,"i")},{lastName:new RegExp(search,"i")}]}
+                }).exec(function (err, invited) {
+                    console.log("Invited")
+                    //console.log(invited[0].invitessent.username)
+                    for (var y = 0; y < invited[0].invitessent.length; y++) {
+                        console.log(invited[0].invitessent[y].username)
+                        returnData.push(invited[0].invitessent[y])
+                    }
+                    //console.log(returnData)
+                    res.end(JSON.stringify(returnData));
+                })
 
 
         })
@@ -964,32 +971,32 @@ exports.subscribedto = function (req, res) {
     })
 }
 
-exports.getInvitedGroup = function(req,res){
-    User.findOne({_id:req.session.passport.user}).populate('memwalls').exec(function (err,usr) {
-        if(!usr)return;
-        Blog.populate(usr.memwalls,{path:'user'},function(err,walls){
+exports.getInvitedGroup = function (req, res) {
+    User.findOne({_id: req.session.passport.user}).populate('memwalls').exec(function (err, usr) {
+        if (!usr)return;
+        Blog.populate(usr.memwalls, {path: 'user'}, function (err, walls) {
             var buffer = [];
-            for(var i = 0;i<walls.length;i++){
-               if(walls[i].group == true){
-                   //console.log(walls[i].user)
-                   if(!walls[i].user){
-                       //console.log("null user detected")
-                   }else{
-                       console.log(walls[i].author)
-                       if(walls[i].user == null)walls[i].user = {}
-                       var groupinfo = {
-                           name:walls[i].firstName+" "+walls[i].lastName,
-                           owner:walls[i].user.firstName+" "+walls[i].user.lastName,
-                           moderator:"",
-                           author:walls[i].author,
-                           id:walls[i]._id
-                       }
-                       buffer.push(groupinfo);
-                   }
+            for (var i = 0; i < walls.length; i++) {
+                if (walls[i].group == true) {
+                    //console.log(walls[i].user)
+                    if (!walls[i].user) {
+                        //console.log("null user detected")
+                    } else {
+                        console.log(walls[i].author)
+                        if (walls[i].user == null)walls[i].user = {}
+                        var groupinfo = {
+                            name: walls[i].firstName + " " + walls[i].lastName,
+                            owner: walls[i].user.firstName + " " + walls[i].user.lastName,
+                            moderator: "",
+                            author: walls[i].author,
+                            id: walls[i]._id
+                        }
+                        buffer.push(groupinfo);
+                    }
 
-                }else{
-                   console.log("nota a group")
-               }
+                } else {
+                    console.log("nota a group")
+                }
             }
             res.end(JSON.stringify(buffer));
         })
@@ -997,7 +1004,7 @@ exports.getInvitedGroup = function(req,res){
     })
 }
 
-exports.getInviteBlogUserData = function (req,res) {
+exports.getInviteBlogUserData = function (req, res) {
     var id = req.params.wallid;
     User.findOne({_id: req.session.passport.user}, function (err, user) {
         //ensure the user is authorised to see this blog data
@@ -1043,7 +1050,7 @@ exports.getInviteBlogUserData = function (req,res) {
     })
 }
 
-exports.shopToWall = function (req,res) {
+exports.shopToWall = function (req, res) {
     console.log("testing shopt to wall");
     var wall = req.params.wall;//receiving wall and user
     var anni = req.params.user;//person sending
@@ -1065,78 +1072,139 @@ exports.shopToWall = function (req,res) {
     //format of qty of giftname ex: 3 of candy boxes
     //TODO:Needs better formating
     var gifts = "";
-    for(var n in name){
+    for (var n in name) {
         console.log(qty[n]);
-        if(name[n] == 0)break;
-        gifts += qty[n]+' of '+name[n];
+        if (name[n] == 0)break;
+        gifts += qty[n] + ' of ' + name[n];
     }
 
     console.log(gifts);
     //email the wall owner that someone bought them a gift
     //the user who sent the gift
-    User.findOne({_id:req.session.passport.user}, function (err,theuser) {
-        if(!theuser)return;
+    User.findOne({_id: req.session.passport.user}, function (err, theuser) {
+        if (!theuser)return;
         //find the wall to send the gift too and update latest text and angel annivesaries
-        Blog.findOne({_id:wall}, function (err,theblog) {
-            if(!theblog)return;
-            if(err)console.log(err);
+        Blog.findOne({_id: wall}, function (err, theblog) {
+            if (!theblog)return;
+            if (err)console.log(err);
             //console.log(theblog.postText)
-            SendGiftNotice(theuser.email,theuser.firstName+" "+theuser.lastName,theblog.firstName+" "+theblog.lastName);
+            SendGiftNotice(theuser.email, theuser.firstName + " " + theuser.lastName, theblog.firstName + " " + theblog.lastName);
             //add entry in anniversary area and latestpost
             theblog.postText.push({
-                user_id:theuser._id,
-                username:theuser.username,
-                event:"GiftSent",
-                gravatar:theuser.email,
-                text:theuser.username+" bought "+gifts+" for the angel "+theblog.firstName+" "+theblog.lastName,
-                postType:0
+                user_id: theuser._id,
+                username: theuser.username,
+                event: "GiftSent",
+                gravatar: theuser.email,
+                text: theuser.username + " bought " + gifts + " for the angel " + theblog.firstName + " " + theblog.lastName,
+                postType: 0
             });
             theblog.postText.id(anni).gifts.push({
-                postText:theuser.username+" bought "+gifts+" for the angel "+theblog.firstName+" "+theblog.lastName,
-                fromUser:theuser.username
+                postText: theuser.username + " bought " + gifts + " for the angel " + theblog.firstName + " " + theblog.lastName,
+                fromUser: theuser.username
             })
             console.log(theblog._id);
             console.log(theblog)
-           /* var annidoc = theblog.anniverssaryDays.id(anni);
-            console.log(annidoc);
-            annidoc.gifts.create({postText:theuser.username+" bought "+gifts+" for the angel "+theblog.firstName+" "+theblog.lastName,fromUser:theuser.username});
-            if(!annidoc.gifts)return;
-            //theblog.anniverssaryDays.push({description:"Gifted",event:"Gifted",data:Date.now()});
-*/
-            User.findOne({_id:theblog.owner_id}, function (err,receivingUser) {
-                receivingUser.notifications.push({text:"Your angel "+theblog.firstName+" "+theblog.lastName +"has received a gift."});
-                SendEmail(receivingUser.email,receivingUser.firstName+" "+receivingUser.lastName, "<p>"+theuser.username+" has bought you a gift.  Go to your angels <a href='localhost:3000/#/angel'"+theblog.author+" to find out what it was.</p>");
+            /* var annidoc = theblog.anniverssaryDays.id(anni);
+             console.log(annidoc);
+             annidoc.gifts.create({postText:theuser.username+" bought "+gifts+" for the angel "+theblog.firstName+" "+theblog.lastName,fromUser:theuser.username});
+             if(!annidoc.gifts)return;
+             //theblog.anniverssaryDays.push({description:"Gifted",event:"Gifted",data:Date.now()});
+             */
+            User.findOne({_id: theblog.owner_id}, function (err, receivingUser) {
+                receivingUser.notifications.push({text: "Your angel " + theblog.firstName + " " + theblog.lastName + "has received a gift."});
+                SendEmail(receivingUser.email, receivingUser.firstName + " " + receivingUser.lastName, "<p>" + theuser.username + " has bought you a gift.  Go to your angels <a href='localhost:3000/#/angel'" + theblog.author + " to find out what it was.</p>");
 
                 //add entry in anniversary area and latestpost
 
-                receivingUser.save(function (err,saveddoc) {
-                    if(err)console.log(err);
-                    messageEmitter.emit('notification_messagereceived',theblog.owner_id,"Your angel "+theblog.firstName+" "+theblog.lastName +"has received a gift.",saveddoc.notifications[saveddoc.notifications.length-1]._id);
+                receivingUser.save(function (err, saveddoc) {
+                    if (err)console.log(err);
+                    messageEmitter.emit('notification_messagereceived', theblog.owner_id, "Your angel " + theblog.firstName + " " + theblog.lastName + "has received a gift.", saveddoc.notifications[saveddoc.notifications.length - 1]._id);
                 })
             })
             theblog.save(function (err) {
-                if(err)console.log(err);
-                theuser.notifications.push({text:"Thank you for purchasing a gift(s) at Angels Of Eureka.com."});
-                theuser.save(function (err,saveddoc) {
-                    if(err)console.log(err);
+                if (err)console.log(err);
+                theuser.notifications.push({text: "Thank you for purchasing a gift(s) at Angels Of Eureka.com."});
+                theuser.save(function (err, saveddoc) {
+                    if (err)console.log(err);
                     //console.log(saveddoc)
-                    messageEmitter.emit('notification_messagereceived',theuser._id,"Thank you for purchasing a gift(s)s at Angels Of Eureka.com.",saveddoc.notifications[saveddoc.notifications.length-1]._id);
-                    messageEmitter.emit('shoptowall_giftreceived',wall);
+                    messageEmitter.emit('notification_messagereceived', theuser._id, "Thank you for purchasing a gift(s)s at Angels Of Eureka.com.", saveddoc.notifications[saveddoc.notifications.length - 1]._id);
+                    messageEmitter.emit('shoptowall_giftreceived', wall);
                 })
-             })
+            })
         })
-        return res.send(200,"return this");
+        return res.send(200, "return this");
 
     })
     //add data max 3 items that someone bought something for someone on the site
 
 }
-function SendGiftNotice(to,user,wall,gifts) {
+exports.sendAboutMail = function (req, res) {
+    console.log(req.body.name);
+    var post = req.body;
+    var fName = post.name
+        , lName = post.lastname
+        , eMail = post.email
+        , address = post.address
+        , phoneNo = post.pnumber
+        , city = post.city
+        , state = post.state
+        , zCode = post.zcode
+        , message = post.message;
+
+     console.log("mail sent")
+    var options = {
+        root: path.join(path.resolve('.'), "templates")
+        // any other swig options allowed here
+    };
+
+    emailTemplates(options, function (err, render, generateDummy) {
+        var context = {
+              fName : fName
+            , lName : lName
+            , eMail : eMail
+            , address : address
+            , phoneNo : phoneNo
+            , city :city
+            , state : state
+            , zCode : zCode
+            , message : message
+        };
+
+
+        render('sendAbout.html', context, function (err, html) {
+            // send html email
+            var mailOptions = {
+                from: "noreply@AngelsOfEureka.org",
+                to: "raygarner13@gmail.com",
+                subject: "YOU GOT MAIL from a user of angels.",
+                text: "",
+                html: html
+            }
+            smtpTransport.sendMail(mailOptions, function (error, response) {
+                if (error) {
+                    console.log(error);
+                    console.log("problems sending mail");
+                    res.send(200,"failed");
+                    return false;
+                } else {
+                    console.log("message sent");
+                    res.send(200,"success");
+                    return true;
+                }
+                console.log(response);
+            })
+        });
+
+    });
+
+}
+
+function SendGiftNotice(to, user, wall, gifts) {
     var mailOptions = {
         from: "noreply@AngelsOfEureka.org",
         to: to,
         subject: "Someone sent you a gift",
-        html: "<p>"+user+" has bought you a gift.  Go your wall to find out what it was {url}.</p>"
+        html: "<p>" + user + " has bought you a gift.  Go your wall to find out what it was {url}.</p>"
     }
     smtpTransport.sendMail(mailOptions, function (error, response) {
         if (error) {
@@ -1148,12 +1216,12 @@ function SendGiftNotice(to,user,wall,gifts) {
         console.log(response);
     })
 }
-function SendEmail(to,user,htmlMessage) {
+function SendEmail(to, user, htmlMessage) {
     var mailOptions = {
         from: "noreply@AngelsOfEureka.org",
         to: to,
         subject: "Someone sent you a gift",
-        html:htmlMessage
+        html: htmlMessage
     }
     smtpTransport.sendMail(mailOptions, function (error, response) {
         if (error) {
