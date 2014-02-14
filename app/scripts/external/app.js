@@ -1878,12 +1878,12 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, gr
     $http.get('/getMessagedUsers').
         success(function (data) {
             $scope.messagedUsers = data;
-        })
+    })
 
     $http.get('/getGroups').
         success(function (data) {
             $scope.groups = data;
-        })
+    })
     $scope.getFriendsMemorials = function () {
         $http.get('getFriendsMemorials').
             success(function (data) {
@@ -2381,20 +2381,33 @@ app.controller('InviteBlockCtrl', function ($scope, api, $http, $routeParams) {
 
 app.controller('FindNewMembersBlockCtrl', function ($scope, api, $http, $routeParams) {
     $scope.users = [];
+    $scope.spinner = [];
+    $scope.message = [];
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
-
+        //TODO:Exclude users that have been invited
          api.getResourceById('User', 'all', function (data) {
-         console.log(data);
-         $scope.users = data;
-
+             console.log(data);
+             $scope.users = data;
+             //initialize all spinners and messages
+             for(var i = 0;i<data.length;i++){
+                 $scope.spinner[i] = false;
+                 $scope.message[i] = "";
+             }
          })
     });
-    $scope.invite = function (user) {
-        $http.get('invite/' + $routeParams.wall + '/' + user).success(function (data) {
-
-        });
+    $scope.invite = function (user,i) {
+        console.log(i);
+        $scope.spinner[i] = true;
+        $http.get('invite/' + $routeParams.wall + '/' + user).
+            success(function (data) {
+                $scope.message[i] = "This user has been added."
+                $scope.spinner[i] = false;
+            }).error(function (data) {
+                $scope.spinner[i] = false;
+                $scope.message[i] = data;
+            });
     }
     $scope.block = function (user) {
         $http.get('block/' + $routeParams.wall + '/' + user).
