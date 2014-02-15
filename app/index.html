@@ -136,7 +136,7 @@
                     </li>
     -->
                 </ul>
-                <div id="events">
+                <div id="events" ng-controller="EventListController">
                     <img src="/img/eventsIcon.png" title="What's Happening" alt="Upcoming Events" />
                     <div class="event-list">
                         <div class="event-list-header">
@@ -145,29 +145,17 @@
                             </h3>
                         </div>
                         <div class="event-list-body">
-                            <ol class="event-list-content">
+                            <ol ng-repeat="event in events" class="event-list-content">
                                 <li>
-                                    <span class="event-list-date">MO/DY/YR</span>
+                                    <span class="event-list-date">{{event.date}}</span>
+                                    <span class="event-list-date">{{event.message}}</span>
                                     <span class="event-list-photo">Photo Here</span>
                                     <span class="event-list-type">
-                                        <span class="event-list-name">Person or Group Name Here</span>
-                                        <strong>Event Type/Name Here</strong><br />
-                                        Explanatory copy here.
+                                        <span class="event-list-name">{{event.name}}</span>
+                                        <strong>{{event.event}}</strong><br />
+                                        {{event.text}}
+
                                         <div class="event-list-reach-out">
-                                            <a href="#" class="event-list-send-message" title="Send Message">Send Message</a>
-                                            <a href="#" class="event-list-view-event" title="View Event Details">View Event</a>
-                                        </div>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="event-list-date">MO/DY/YR</span>
-                                    <span class="event-list-photo">Photo Here</span>
-                                    <span class="event-list-type">
-                                        <span class="event-list-name">Person or Group Name Here</span>
-                                        <strong>#2 Event Type/Name Here</strong><br />
-                                        Explanatory copy here.
-                                        <div class="event-list-reach-out">
-                                            <a href="#" class="event-list-send-message" title="Send Message">Send Message</a>
                                             <a href="#" class="event-list-view-event" title="View Event Details">View Event</a>
                                         </div>
                                     </span>

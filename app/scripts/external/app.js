@@ -2818,6 +2818,18 @@ app.controller("ContactFormController", function ($scope,$http) {
     }
 });
 
+app.controller('EventListController', function ($scope,$http) {
+   $scope.events;
+    $http.get('/upcomingdates').
+        success(function (data) {
+            console.log("events");
+            console.log(data);
+            $scope.events = data;
+        }).
+        error(function (data) {
+            console.log("could not get list from server for events");
+        });
+});
 
 //console.log(youtube_embed(youtube_parser("http://www.youtube.com/watch?v=Pu1PPMaoArE")) );
 function youtube_parser(url){

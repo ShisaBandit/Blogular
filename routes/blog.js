@@ -27,28 +27,31 @@ var path = require('path');
 exports.messageEmitter = messageEmitter = new EventEmitter();
 
 exports.upcomingDates = function (req, res) {
-    User.findOne({_id: '52af0b4f60f809681300000f'}).populate('memwalls').exec(function (err, user) {
+    User.findOne({_id: req.session.passport.user}).populate('memwalls').exec(function (err, user) {
         var nU = user.memwalls;
         var eventsInNetworkCurrently = [
 
         ]
         var oneWeekBefore = moment().subtract('week', 1);
         var oneWeekafter = moment().add('week', 1);
-        for (var i = 0; i < nU.length; i++) {
+        for (var i = 0; i < nU.length; i++) {//looping through memwalls
             console.log(nU[i].postText.length);
-            for (var d = 0; d < nU[i].postText.length; d++) {
+            for (var d = 0; d < nU[i].postText.length; d++) {//looping through memwalls post text
                 if (nU[i].postText[d].postType == 3) {
 
-                    var eventDate = moment(eventsInNetworkCurrently[t].date);
+                    //var eventDate = moment(eventsInNetworkCurrently[t].date);
+                    var eventDate = moment(nU[i].postText[d].date);
                     if (eventDate.isAfter(oneWeekBefore) && eventDate.isBefore()) {//will happen
-                        //console.log("This event is coming up");
+                        console.log("This event is coming up");
                         console.log("This event happened " + eventDate.fromNow() + " " + eventDate.format());
                         eventsInNetworkCurrently.push(
                             {
                                 event: nU[i].postText[d].event,
-                                date: nU[i].postText[d].date,
+                                date: moment(nU[i].postText[d].date).format("dddd, MMMM Do YYYY"),
                                 blogId: nU[i]._id,
-                                message: "This event happened " + eventDate.fromNow() + " " + eventDate.format()
+                                name:nU[i].firstName+" "+nU[i].lastName,
+                                text:nU[i].postText[d].text,
+                                message: "This event happened " + eventDate.fromNow()// + " " + eventDate.format()
                             }
                         )
                     } else if (eventDate.isBefore(oneWeekafter) && eventDate.isAfter()) {//has happened
@@ -56,9 +59,11 @@ exports.upcomingDates = function (req, res) {
                         eventsInNetworkCurrently.push(
                             {
                                 event: nU[i].postText[d].event,
-                                date: nU[i].postText[d].date,
+                                date: moment(nU[i].postText[d].date).format("dddd, MMMM Do YYYY"),
                                 blogId: nU[i]._id,
-                                message: "This event will happen " + eventDate.fromNow() + " " + eventDate.format()
+                                name:nU[i].firstName+" "+nU[i].lastName,
+                                text:nU[i].postText[d].text,
+                                message: "This event will happen " + eventDate.fromNow()// + " " + eventDate.format()
                             }
                         )
                     }
