@@ -1,7 +1,8 @@
 var app = angular.module('YoMemorialApp', [
         'twitterService', 'userService', 'http-auth-interceptor', 'login', 'socketio', 'updateService',
         'Scope.onReady', 'blogResource', 'loaderModule', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries', 'Plugin.Controller.GroupEntries',
-        'blogFilter', 'blogService', 'infinite-scroll', 'dropzone', 'apiResource', 'ui.bootstrap','ngAnimate','ngRoute','adaptive.detection','MusicPlayer.Controller','controller.GiftShop'
+        'blogFilter', 'blogService', 'infinite-scroll', 'dropzone', 'apiResource', 'ui.bootstrap','ngAnimate','ngRoute','adaptive.detection','MusicPlayer.Controller',
+        'controller.GiftShop','Cache'
     ]).
     config(function ($routeProvider,$sceProvider) {
        // $sceProvider.enabled(false);
@@ -1974,7 +1975,7 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, gr
     }
 });
 
-app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing, petgroupsListing, $timeout, $location) {
+app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing, petgroupsListing, $timeout, $location,formcache) {
     $scope.template = {};
     $scope.hidemainform = false;
     $scope.blogId = {blogId: ""};
@@ -1982,7 +1983,11 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
     $scope.author = {author: ""};
     $scope.groups = groupsListing;
     $scope.message = {};
-    $scope.selectedGroup = $scope.groups[0];
+    if(formcache.getMemWallCreateForm().selectedGroup){
+        $scope.selectedGroup =  formcache.getMemWallCreateForm().selectedGroup;
+    }else{
+        $scope.selectedGroup =  $scope.groups[0];
+    }
     $scope.form = {};
     $scope.parentData = {
         author:""
@@ -1990,12 +1995,23 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
     $scope.pet = false;
     $scope.createTypeTitle = "";
     $scope.createType = "Angel";
-
+    $scope.form = formcache.getMemWallCreateForm();
     $scope.checked = function () {
         console.log($scope.selectedGroup)
         $scope.form.subgroup = $scope.selectedGroup.code;
-    }
+        $scope.form.selectedGroup = $scope.selectedGroup;
+        $scope.save();
 
+    }
+    $scope.reset = function () {
+        $scope.form = formcache.setMemWallCreateForm(null);
+
+    }
+    $scope.save = function(){
+        console.log($scope.form)
+
+        formcache.setMemWallCreateForm($scope.form);
+    }
     $scope.petMemorialCreate = function () {
         console.log($scope.pet)
         $scope.groups = [];
@@ -2015,6 +2031,7 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
         $scope.form.subgroup = $scope.selectedGroup.code;
     }
     $scope.submitPost = function () {
+        $scope.save();
         $scope.form.pet = $scope.pet;
         BlogsService.updateBlog($scope.form, function (err, res) {
             if (err) {
@@ -2038,6 +2055,7 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
             $scope.message = "";
             $scope.template.url = '/partials/admin/addportrait.html';
             $scope.hidemainform = true;
+            formcache.setMemWallCreateForm(null);
         });
     }
     $rootScope.$on('addedFile', function (event, file) {
@@ -2429,6 +2447,9 @@ app.controller('EditWallCtrl', function ($rootScope, $http, $scope, api, $routeP
     $scope.selectedGroup = $scope.groups[0];
     $scope.isGroup = false;
     $scope.titleText = "Angel";
+    $scope.reset = function () {
+
+    }
     $scope.checked = function () {
         console.log($scope.selectedGroup)
         $scope.form.subgroup = $scope.selectedGroup.code;
