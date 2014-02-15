@@ -13,6 +13,25 @@ angular.module('Cache',[]).
             subgroup:"",
             selectedGroup:""
         }
+        var registerCreateForm = {
+            betacode:"",
+            username:"",
+            password:"",
+            firstName:"",
+            lastName:"",
+            male:"",
+            female:"",
+            email:"",
+            address:"",
+            city:"",
+            state:"",
+            zip:"",
+            about:"",
+            dob:"",
+            selectedGroup:"",
+            subgroup:""
+        }
+
         var resetProps = function (object) {
             console.log("clearing props");
             for(var key in object){
@@ -32,6 +51,17 @@ angular.module('Cache',[]).
                     memWallCreateForm = data;
                 }
                 return memWallCreateForm;
+            },
+            getRegisterCreateForm: function () {
+                return registerCreateForm;
+            },
+            setRegisterCreateForm: function (data) {
+                if(data == null){
+                    resetProps(registerCreateForm);
+                }else{
+                    registerCreateForm = data;
+                }
+                return registerCreateForm;
             }
         }
     })

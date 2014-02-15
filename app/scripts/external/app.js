@@ -1238,7 +1238,7 @@ app.controller('messageController', function ($scope, api, $http, authService, u
     }
 });
 
-app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket, groupsListing, $timeout,$location) {
+app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket, groupsListing, $timeout,$location,formcache) {
     $scope.form = {};
     $scope.subgroup = [];
     $scope.form.groupcode;
@@ -1246,13 +1246,30 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket, grou
     $scope.groups = groupsListing;
     $scope.message = {};
     $scope.groups = groupsListing;
-    $scope.selectedGroup = undefined;
-    $scope.form.groupcode = $scope.groups[0].code;
+
+    if(formcache.getRegisterCreateForm().selectedGroup){
+        $scope.selectedGroup = formcache.getRegisterCreateForm().selectedGroup;
+    }else{
+        $scope.selectedGroup = undefined;
+        $scope.form.groupcode = $scope.groups[0].code;
+
+    }
+    $scope.save = function () {
+        formcache.setRegisterCreateForm($scope.form);
+    }
+    $scope.reset = function () {
+        formcache.setRegisterCreateForm(null);
+    }
     $scope.checked = function () {
         console.log($scope.selectedGroup)
         $scope.form.groupcode = $scope.selectedGroup.code;
+        $scope.form.selectedGroup = $scope.selectedGroup;
+        $scope.save();
     }
+    $scope.form = formcache.getRegisterCreateForm();
+
     $scope.submitFinalDetails = function () {
+        $scope.save();
         $http.post('/register', $scope.form).
             success(function (data) {
                 if (data.fail) {
@@ -1264,6 +1281,7 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket, grou
                     $location.path("/login");
                     //$rootScope.$broadcast('event:auth-registered');
                 }
+                $scope.reset();
             }).
             error(function (err) {
                 if (err) {
@@ -1985,6 +2003,7 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
     $scope.message = {};
     if(formcache.getMemWallCreateForm().selectedGroup){
         $scope.selectedGroup =  formcache.getMemWallCreateForm().selectedGroup;
+        $scope.form.subGroup = $scope.selectedGroup.code;
     }else{
         $scope.selectedGroup =  $scope.groups[0];
     }
