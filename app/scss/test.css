@@ -4660,11 +4660,11 @@ meta.foundation-mq-topbar {
       background: transparent;
       min-width: 100%; }
       .top-bar-section .dropdown li a {
-        color: white;
+        color: #8A9948 !important;
         line-height: 1;
         white-space: nowrap;
         padding: 12px 15px;
-        background: #8A9948;
+        background: #DEED91;
         margin-top: -10px; }
       .top-bar-section .dropdown li label {
         white-space: nowrap;

@@ -1887,3 +1887,118 @@ body nav.top-bar.top-bar-logged-in {
      color: #BDCB80;
      background: url("/img/miniLogo.png") no-repeat scroll left top transparent;
  }
+
+ #events {
+     position:relative;
+     display: inline-block;
+     width: 50px;
+     text-align: center;
+     background: none;
+ }
+
+ #events:hover {
+     display: inline-block;
+     width: 50px;
+     text-align: center;
+     background: #90BFFA;
+ }
+
+ #events .event-list {
+     display: none;
+ }
+
+ #events:hover .event-list {
+     position:absolute;
+     display: block;
+     width: 300px;
+     height: auto;
+     background: #FFFBE1;
+     border: 4px solid #DEED91;
+     z-index: 100;
+ }
+
+ #events .event-list .event-list-header {
+     height:30px;
+     margin-top:-2px;
+     background: #DEED91;
+ }
+
+
+ #events .event-list .event-list-header h3{
+     font-size: 18px;
+     font-weight: bold;
+     color: #fff;
+ }
+
+
+ #events .event-list .event-list-body {
+
+ }
+
+
+ #events .event-list .event-list-body ol.event-list-content {
+     display: block;
+     width: 99%;
+     height: auto;
+     margin: 0px;
+     padding: 5px;
+ }
+
+
+ #events .event-list .event-list-body ol.event-list-content li {
+     border-bottom: 1px solid #DDDDDD;
+     display: inline-block;
+     height: auto;
+     list-style: none outside none;
+     margin-bottom: 5px;
+     min-height: 30px;
+     padding: 5px;
+     width: 100%;
+ }
+
+ #events .event-list .event-list-body ol.event-list-content li span.event-list-date {
+    display: block;
+    font-size: small;
+    float: right;
+ }
+
+ #events .event-list .event-list-body ol.event-list-content li span.event-list-photo {
+    display: block;
+    float: left;
+ }
+
+ #events .event-list .event-list-body ol.event-list-content li span.event-list-type {
+     display: block;
+     float: left;
+     clear: both;
+ }
+
+ #events .event-list .event-list-body ol.event-list-content li span.event-list-name {
+    display: block;
+    float: left;
+     clear: both;
+ }
+
+ #events .event-list .event-list-body ol.event-list-content li strong {
+     display: block;
+     float: left;
+     clear: both;
+ }
+
+ #events .event-list .event-list-body ol.event-list-content li div.event-list-reach-out {
+     display: none;
+ }
+
+ #events .event-list .event-list-body ol.event-list-content li:hover div.event-list-reach-out {
+     display: block;
+     padding: 0px;
+     margin: 0px;
+ }
+
+ #events .event-list .event-list-body ol.event-list-content li div.event-list-reach-out a.event-list-send-message {
+
+ }
+
+ #events .event-list .event-list-body ol.event-list-content li div.event-list-reach-out a.event-list-view-event {
+
+ }
