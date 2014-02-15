@@ -354,7 +354,10 @@ app.directive('dropzone', function (dropzone, $rootScope) {
             });
             scope.$on('uploadit', function (event, data) {
                 dropzone.uploadFile(data.file);
-            })
+            });
+            scope.$on('cleardropzone', function () {
+                dropzone.removeAllFiles();
+            });
         }
     }
 })
@@ -582,9 +585,12 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
             res.data.canComment = true;
             res.data.isStream = true;
             $rootScope.$broadcast('updatepost',res.data);
+            $rootScope.$broadcast('cleardropzone');
         })
     }
-
+    $scope.clearPhotosFromDropzone = function () {
+        $rootScope.$broadcast('cleardropzone');
+    }
     $scope.submitVideo = function () {
         //TODO:Checkk this
         console.log("submitvideo");

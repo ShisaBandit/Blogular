@@ -33,7 +33,7 @@
             <input type="text" ng-model="photoAdded.photoPostText" class="addNewPost small-10 columns"
                    placeholder="Tell us about these photos"/>
             <div ng-show="photoAdded.show" ng-click="menu.photo=false;addPhotoToStream()" class="button">You have added a photo Click here to add to Stream.</div>
-            <div ng-show="photoAdded.show" ng-click="menu.photo=false;clearPhotoFromQueue()" class="button">Finished</div>
+            <div ng-show="photoAdded.show" ng-click="menu.photo=false;clearPhotosFromDropzone()" class="button">Finished</div>
             <div ng-hide="photoAdded.show" ng-click="menu.photo=false" class="button">Finished</div>
 
         </div>

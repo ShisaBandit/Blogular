@@ -41,6 +41,9 @@ angular.module('dropzone', []).
             removeFile:function(file){
                 dropzoneInstance.removeFile(file);
             },
+            removeAllFiles:function(){
+                dropzoneInstance.removeAllFiles();
+            },
             getFilesQueue:function(){
                 return dropzoneInstance.filesQueue;
             },
