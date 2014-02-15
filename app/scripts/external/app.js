@@ -2127,7 +2127,7 @@ app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog, $rootScope,
     $scope.addedFile = {};
     $scope.author = {author: ""};
     $scope.groups = groupsListing;
-
+$scope.header = "Create a Group";
     $scope.form = {};
     $scope.message = {};
     $scope.parentData = {
