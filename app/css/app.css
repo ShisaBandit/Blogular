@@ -1938,7 +1938,7 @@ body nav.top-bar.top-bar-logged-in {
 
  #events .event-list .event-list-body ol.event-list-content {
      display: block;
-     width: 99%;
+     width: 100%;
      height: auto;
      margin: 0px;
      padding: 5px;
@@ -1952,8 +1952,20 @@ body nav.top-bar.top-bar-logged-in {
      list-style: none outside none;
      margin-bottom: 5px;
      min-height: 30px;
+     padding: 0px;
+     width: 100%;
+ }
+
+ #events .event-list .event-list-body ol.event-list-content li:hover {
+     border-bottom: 1px solid #DDDDDD;
+     display: inline-block;
+     height: auto;
+     list-style: none outside none;
+     margin-bottom: 5px;
+     min-height: 30px;
      padding: 5px;
      width: 100%;
+     background: #BDCB80;
  }
 
  #events .event-list .event-list-body ol.event-list-content li span.event-list-date {
