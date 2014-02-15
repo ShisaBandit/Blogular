@@ -288,6 +288,8 @@ exports.createBlog = function (req, res) {
             var newBlogEntry = new Blog(req.body);
             newBlogEntry.owner_id = req.session.passport.user;
             newBlogEntry.user = req.session.passport.user;
+            newBlogEntry.profilePicPortrait = "defaultPortrait.jpg";
+            newBlogEntry.profilePicWide = "defaultPicWide.jpg";
             newBlogEntry.save(function (err, newblog) {
                 if (err)console.log(err);
                 res.end(JSON.stringify({'success': 'true', blogId: newblog._id}));
