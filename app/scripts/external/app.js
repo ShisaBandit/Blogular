@@ -2120,20 +2120,31 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
     };
 });
 
-app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing) {
+app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing,formcache) {
     $scope.template = {};
     $scope.hidemainform = false;
     $scope.blogId = {blogId: ""};
     $scope.addedFile = {};
     $scope.author = {author: ""};
     $scope.groups = groupsListing;
+
     $scope.form = {};
     $scope.message = {};
     $scope.parentData = {
         author:""
     }
-    $scope.submitPost = function () {
+    $scope.form = formcache.getMemWallCreateForm();
+    $scope.reset = function () {
+        $scope.form = formcache.setMemWallCreateForm(null);
 
+    }
+    $scope.save = function(){
+        console.log($scope.form)
+
+        formcache.setMemWallCreateForm($scope.form);
+    }
+    $scope.submitPost = function () {
+        $scope.save();
         $scope.form.group = true;
         BlogsService.updateBlog($scope.form, function (err, res) {
             if (err) {
@@ -2148,7 +2159,7 @@ app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog, $rootScope,
                 }
                 return;
             }
-
+            $scope.reset();
             $scope.blogId.blogId = res.blogId;
             $scope.parentData.author = $scope.form.author;
 
