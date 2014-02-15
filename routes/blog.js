@@ -22,7 +22,7 @@ var smtpTransport = nodemailer.createTransport("SMTP", {
     }
 });
 var EventEmitter = require('events').EventEmitter;
-var emailTemplates = require('swig-email-templates');
+//var emailTemplates = require('swig-email-templates');
 var path = require('path');
 exports.messageEmitter = messageEmitter = new EventEmitter();
 
@@ -1138,6 +1138,8 @@ exports.shopToWall = function (req, res) {
     //add data max 3 items that someone bought something for someone on the site
 
 }
+
+/*
 exports.sendAboutMail = function (req, res) {
     console.log(req.body.name);
     var post = req.body;
@@ -1198,7 +1200,7 @@ exports.sendAboutMail = function (req, res) {
     });
 
 }
-
+ */
 function SendGiftNotice(to, user, wall, gifts) {
     var mailOptions = {
         from: "noreply@AngelsOfEureka.org",
