@@ -26,7 +26,6 @@ var EventEmitter = require('events').EventEmitter;
 var path = require('path');
 exports.messageEmitter = messageEmitter = new EventEmitter();
 
-
 exports.upcomingDates = function (req, res) {
     User.findOne({_id: '52af0b4f60f809681300000f'}).populate('memwalls').exec(function (err, user) {
         var nU = user.memwalls;
@@ -719,7 +718,6 @@ exports.latestEvents = function (req, res) {
 //TODO: Add notification when getting invite
 //TODO: create invite acceptance system
 exports.sendWallInvite = function (req, res) {
-
     Blog.findOne({author: req.params.wallid}, function (err, blog) {
         User.findOne({_id: req.params.user}, function (err, user) {
             var duplicate = false;
@@ -732,7 +730,7 @@ exports.sendWallInvite = function (req, res) {
                 }
             }
             if (duplicate) {
-                res.send(500, 'duplicate request')
+                res.send(500, 'This user is already invited.')
                 return;
             }
             User.findOne({_id: req.session.passport.user}, function (err, inviter) {

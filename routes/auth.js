@@ -111,7 +111,102 @@ exports.loginAuth = function (req, res) {
         });
 
 };
+exports.register = function (req, res) {
+    var errorMessage = [];
+    var userCount = 0,
+        adminCount = 0,
+        username = req.body.username,
+        password = req.body.password,
+        firstname = req.body.firstName,
+        lastname = req.body.lastName,
+        email = req.body.email,
+        dob = req.body.dob,
+        minUsernameLength = 5,
+        maxUsernameLength = 16,
+        minPasswordLength = 5,
+        maxPasswordLength = 16,
+        maxfirstNameLength = 15,
+        maxlastNameLength = 15;
 
+    console.log(req.body.groupcode)
+    req.checkBody('username', 'Username must be longer than' + minUsernameLength + ' and shorther than ' + maxUsernameLength + ' characters.')
+        .notNull().len(minUsernameLength, maxUsernameLength);
+    req.checkBody('password', 'Password must be longer than' + minPasswordLength + ' and shorther than ' + maxPasswordLength + ' characters.')
+        .notNull().len(minPasswordLength, maxPasswordLength);
+    req.checkBody('firstName', 'Must have a first name.')
+        .notNull().len(1, maxfirstNameLength);
+    req.checkBody('lastName', 'Must have a last name.')
+        .notNull().len(1, maxlastNameLength);
+    req.checkBody('email', 'Must have a valid email.')
+        .notNull().isEmail();
+    req.checkBody('dob', 'Date of Birth must be a valid date.')
+        .notNull().isDate();
+    req.checkBody('groupcode', 'Must enter who you lost.')
+        .notNull();
+    req.checkBody('betacode', 'Incorrect beta code.')
+        .notNull().equals('hardcoded')
+
+    if (password == username) {
+        errorMessage.push('Password can not be the same as username');
+    }
+
+    var errors = req.validationErrors(true);
+    if (password == username) {
+        errors.password = {param: 'password', msg: 'Password can not be the same as username.'};
+    }
+    if (errors) {
+        res.send(errors, 500);
+        return;
+    }
+    User.count({username: username}, function (err, count) {
+        if (err)console.log(err);
+        userCount = count;
+        //then get admin count
+        User.count({username: username, admin: {$in: ['superuser', 'admin']}}, function (err, count) {
+            if (err)console.log(err);
+            adminCount = count;
+            //then check count
+            //TODO:redo this section of code in promises
+            //username checks
+            if (
+                userCount < 1 && adminCount < 1
+                ) {
+                var user = new User(req.body);
+
+                user.gravatar = calcMD5(user.email);
+                user.lost = req.body.groupcode;
+                console.log(user.lost);
+                console.log(req.body.groupcode)
+                user.save(function (err) {
+                    if (err) {
+                        console.log(err);
+                        console.log(err.path);
+                        return res.end(JSON.stringify({'fail': errorMessage}));
+
+                    }
+                    SendConfirmationMail(email);
+                    return res.end(JSON.stringify({'success': 'true'}));
+                });
+            } else {
+
+                if (!errors) {
+                    errors = {};
+                }
+                if (userCount >= 1 || adminCount >= 1) {
+                    errorMessage.push('username already taken');
+                    errors.username = {param: 'username', msg: 'username already taken.'};
+
+                }
+
+                if (errors) {
+                    res.send(errors, 500);
+                    return;
+                }
+            }
+        });
+    });
+};
+/*
 exports.register = function (req, res) {
     var errorMessage = [];
     var userCount = 0,
@@ -144,15 +239,16 @@ exports.register = function (req, res) {
         .notNull().isDate();
     req.checkBody('groupcode', 'Must enter who you lost.')
         .notNull();
-    req.checkBody('betacode', 'Incorrect beta code.')
-        .notNull().equals('hardcoded')
+    console.log(req.body.betacode)
+    req.checkBody('betacode', 'Beta code is incorrect.')
+        .notNull().equals('hardcoded');
     //if we have a offsite memwall request
     //add that profile access to that users
     //
+
     if(req.params.offsiteusercode != false){
         offSiteUserCode = req.params.offsiteusercode;
     }
-
     if (password == username) {
         errorMessage.push('Password can not be the same as username');
     }
@@ -182,6 +278,7 @@ exports.register = function (req, res) {
 
                 user.gravatar = calcMD5(user.email);
                 user.lost = req.body.groupcode;
+
                 if(offSiteUserCode){
                     //add
                     var hash = crypto.createHash('sha1').update(offSiteUserCode).digest('hex');
@@ -204,6 +301,15 @@ exports.register = function (req, res) {
                         }
                     })
                 }
+                user.memwalls.push(doc.blog);
+                console.log(req.body.groupcode)
+                user.save(function (err) {
+                    if (err) {
+                        return res.end(JSON.stringify({'fail': errorMessage}));
+                    }
+                    SendConfirmationMail(email);
+                    return res.end(JSON.stringify({'success': 'true'}));
+                });
             } else {
                 if (!errors) {
                     errors = {};
@@ -213,13 +319,15 @@ exports.register = function (req, res) {
                     errors.username = {param: 'username', msg: 'username already taken.'};
                 }
                 if (errors) {
-                    res.send(errors, 500);
-                    return;
+                    return res.send(errors, 500);
+                }else{
+                    return res.send("unknown application error",500);
                 }
             }
         });
     });
 };
+*/
 
 exports.updateuserdata = function (req, res) {
     var errorMessage = [],

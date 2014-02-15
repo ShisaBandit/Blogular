@@ -1,7 +1,8 @@
 var app = angular.module('YoMemorialApp', [
         'twitterService', 'userService', 'http-auth-interceptor', 'login', 'socketio', 'updateService',
         'Scope.onReady', 'blogResource', 'loaderModule', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries', 'Plugin.Controller.GroupEntries',
-        'blogFilter', 'blogService', 'infinite-scroll', 'dropzone', 'apiResource', 'ui.bootstrap','ngAnimate','ngRoute','adaptive.detection','MusicPlayer.Controller','controller.GiftShop'
+        'blogFilter', 'blogService', 'infinite-scroll', 'dropzone', 'apiResource', 'ui.bootstrap','ngAnimate','ngRoute','adaptive.detection','MusicPlayer.Controller',
+        'controller.GiftShop','Cache'
     ]).
     config(function ($routeProvider,$sceProvider) {
        // $sceProvider.enabled(false);
@@ -1237,7 +1238,7 @@ app.controller('messageController', function ($scope, api, $http, authService, u
     }
 });
 
-app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket, groupsListing, $timeout,$location) {
+app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket, groupsListing, $timeout,$location,formcache) {
     $scope.form = {};
     $scope.subgroup = [];
     $scope.form.groupcode;
@@ -1245,13 +1246,30 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket, grou
     $scope.groups = groupsListing;
     $scope.message = {};
     $scope.groups = groupsListing;
-    $scope.selectedGroup = undefined;
-    $scope.form.groupcode = $scope.groups[0].code;
+
+    if(formcache.getRegisterCreateForm().selectedGroup){
+        $scope.selectedGroup = formcache.getRegisterCreateForm().selectedGroup;
+    }else{
+        $scope.selectedGroup = undefined;
+        $scope.form.groupcode = $scope.groups[0].code;
+
+    }
+    $scope.save = function () {
+        formcache.setRegisterCreateForm($scope.form);
+    }
+    $scope.reset = function () {
+        formcache.setRegisterCreateForm(null);
+    }
     $scope.checked = function () {
         console.log($scope.selectedGroup)
         $scope.form.groupcode = $scope.selectedGroup.code;
+        $scope.form.selectedGroup = $scope.selectedGroup;
+        $scope.save();
     }
+    $scope.form = formcache.getRegisterCreateForm();
+
     $scope.submitFinalDetails = function () {
+        $scope.save();
         $http.post('/register', $scope.form).
             success(function (data) {
                 if (data.fail) {
@@ -1263,6 +1281,7 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket, grou
                     $location.path("/login");
                     //$rootScope.$broadcast('event:auth-registered');
                 }
+                $scope.reset();
             }).
             error(function (err) {
                 if (err) {
@@ -1878,12 +1897,12 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, gr
     $http.get('/getMessagedUsers').
         success(function (data) {
             $scope.messagedUsers = data;
-        })
+    })
 
     $http.get('/getGroups').
         success(function (data) {
             $scope.groups = data;
-        })
+    })
     $scope.getFriendsMemorials = function () {
         $http.get('getFriendsMemorials').
             success(function (data) {
@@ -1974,7 +1993,7 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, gr
     }
 });
 
-app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing, petgroupsListing, $timeout, $location) {
+app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing, petgroupsListing, $timeout, $location,formcache) {
     $scope.template = {};
     $scope.hidemainform = false;
     $scope.blogId = {blogId: ""};
@@ -1982,7 +2001,12 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
     $scope.author = {author: ""};
     $scope.groups = groupsListing;
     $scope.message = {};
-    $scope.selectedGroup = $scope.groups[0];
+    if(formcache.getMemWallCreateForm().selectedGroup){
+        $scope.selectedGroup =  formcache.getMemWallCreateForm().selectedGroup;
+        $scope.form.subGroup = $scope.selectedGroup.code;
+    }else{
+        $scope.selectedGroup =  $scope.groups[0];
+    }
     $scope.form = {};
     $scope.parentData = {
         author:""
@@ -1990,12 +2014,23 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
     $scope.pet = false;
     $scope.createTypeTitle = "";
     $scope.createType = "Angel";
-
+    $scope.form = formcache.getMemWallCreateForm();
     $scope.checked = function () {
         console.log($scope.selectedGroup)
         $scope.form.subgroup = $scope.selectedGroup.code;
-    }
+        $scope.form.selectedGroup = $scope.selectedGroup;
+        $scope.save();
 
+    }
+    $scope.reset = function () {
+        $scope.form = formcache.setMemWallCreateForm(null);
+
+    }
+    $scope.save = function(){
+        console.log($scope.form)
+
+        formcache.setMemWallCreateForm($scope.form);
+    }
     $scope.petMemorialCreate = function () {
         console.log($scope.pet)
         $scope.groups = [];
@@ -2015,6 +2050,7 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
         $scope.form.subgroup = $scope.selectedGroup.code;
     }
     $scope.submitPost = function () {
+        $scope.save();
         $scope.form.pet = $scope.pet;
         BlogsService.updateBlog($scope.form, function (err, res) {
             if (err) {
@@ -2038,6 +2074,7 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
             $scope.message = "";
             $scope.template.url = '/partials/admin/addportrait.html';
             $scope.hidemainform = true;
+            formcache.setMemWallCreateForm(null);
         });
     }
     $rootScope.$on('addedFile', function (event, file) {
@@ -2083,20 +2120,31 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
     };
 });
 
-app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing) {
+app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing,formcache) {
     $scope.template = {};
     $scope.hidemainform = false;
     $scope.blogId = {blogId: ""};
     $scope.addedFile = {};
     $scope.author = {author: ""};
     $scope.groups = groupsListing;
+$scope.header = "Create a Group";
     $scope.form = {};
     $scope.message = {};
     $scope.parentData = {
         author:""
     }
-    $scope.submitPost = function () {
+    $scope.form = formcache.getMemWallCreateForm();
+    $scope.reset = function () {
+        $scope.form = formcache.setMemWallCreateForm(null);
 
+    }
+    $scope.save = function(){
+        console.log($scope.form)
+
+        formcache.setMemWallCreateForm($scope.form);
+    }
+    $scope.submitPost = function () {
+        $scope.save();
         $scope.form.group = true;
         BlogsService.updateBlog($scope.form, function (err, res) {
             if (err) {
@@ -2111,7 +2159,7 @@ app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog, $rootScope,
                 }
                 return;
             }
-
+            $scope.reset();
             $scope.blogId.blogId = res.blogId;
             $scope.parentData.author = $scope.form.author;
 
@@ -2381,20 +2429,33 @@ app.controller('InviteBlockCtrl', function ($scope, api, $http, $routeParams) {
 
 app.controller('FindNewMembersBlockCtrl', function ($scope, api, $http, $routeParams) {
     $scope.users = [];
+    $scope.spinner = [];
+    $scope.message = [];
     $scope.$watch('parentObject.entryId', function (newVal, oldVal) {
         console.log(oldVal);
         console.log(newVal);
-
+        //TODO:Exclude users that have been invited
          api.getResourceById('User', 'all', function (data) {
-         console.log(data);
-         $scope.users = data;
-
+             console.log(data);
+             $scope.users = data;
+             //initialize all spinners and messages
+             for(var i = 0;i<data.length;i++){
+                 $scope.spinner[i] = false;
+                 $scope.message[i] = "";
+             }
          })
     });
-    $scope.invite = function (user) {
-        $http.get('invite/' + $routeParams.wall + '/' + user).success(function (data) {
-
-        });
+    $scope.invite = function (user,i) {
+        console.log(i);
+        $scope.spinner[i] = true;
+        $http.get('invite/' + $routeParams.wall + '/' + user).
+            success(function (data) {
+                $scope.message[i] = "This user has been added."
+                $scope.spinner[i] = false;
+            }).error(function (data) {
+                $scope.spinner[i] = false;
+                $scope.message[i] = data;
+            });
     }
     $scope.block = function (user) {
         $http.get('block/' + $routeParams.wall + '/' + user).
@@ -2416,6 +2477,9 @@ app.controller('EditWallCtrl', function ($rootScope, $http, $scope, api, $routeP
     $scope.selectedGroup = $scope.groups[0];
     $scope.isGroup = false;
     $scope.titleText = "Angel";
+    $scope.reset = function () {
+
+    }
     $scope.checked = function () {
         console.log($scope.selectedGroup)
         $scope.form.subgroup = $scope.selectedGroup.code;

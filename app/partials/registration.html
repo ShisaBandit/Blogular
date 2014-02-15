@@ -11,33 +11,34 @@
                 </tr>
             </table>
             <div class="small-12 columns">
+                <div class="button" ng-click="reset()"></div>
                <!-- <p style="color:#ee162d" ng-repeat="message in messages"><b>{{message}}</b></p>-->
                   <div class="row ">
                     <div class="small-6 columns regColl">
                     <label>Beta code:</label>
-                    <input type="text" class="login-inp" ng-model="form.betacode"/>
+                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.betacode"/>
                     <p class="validation-error">{{message.betacode}}</p>
 
                         <label>Username:</label>
-                    <input type="text" class="login-inp" ng-model="form.username"/>
+                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.username"/>
                     <p class="validation-error">{{message.username}}</p>
 
                     <label>Password:</label>
-                    <input type="password" class="login-inp" ng-model="form.password"/>
+                    <input type="password" ng-keypress="save()" class="login-inp" ng-model="form.password"/>
                         <p class="validation-error">{{message.password}}</p>
 
                     <label>First Name:</label>
-                    <input type="text" class="login-inp" ng-model="form.firstName"/>
+                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.firstName"/>
                         <p class="validation-error">{{message.firstName}}</p>
 
                     <label>Last Name:</label>
-                    <input type="text" class="login-inp" ng-model="form.lastName"/>
+                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.lastName"/>
                         <p class="validation-error">{{message.lastName}}</p>
 
 
                         <label>Gender:</label>
-                    <input type="checkbox" class="login-inp" ng-model="form.male"/> Male
-                    <input type="checkbox" class="login-inp" ng-model="form.female"/> Female
+                    <input type="checkbox" ng-keypress="save()" class="login-inp" ng-model="form.male"/> Male
+                    <input type="checkbox" ng-keypress="save()" class="login-inp" ng-model="form.female"/> Female
                         <p class="validation-error">{{message.male}}</p>
 
                     <br />
@@ -51,30 +52,30 @@
                     <br />
                         <br />
                     <label>Email:</label>
-                    <input type="email" class="login-inp" ng-model="form.email"/>
+                    <input type="email" ng-keypress="save()" class="login-inp" ng-model="form.email"/>
                         <p class="validation-error">{{message.email}}</p>
 
                     <label>Address:</label>
-                    <input type="text" class="login-inp" ng-model="form.address"/>
+                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.address"/>
                         <p class="validation-error">{{message.address}}</p>
 
                     <label>City:</label>
-                    <input type="text" class="login-inp" ng-model="form.city"/>
+                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.city"/>
                         <p class="validation-error">{{message.city}}</p>
 
                     <label>State/Province:</label>
-                    <input type="text" class="login-inp" ng-model="form.state"/>
+                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.state"/>
                         <p class="validation-error">{{message.state}}</p>
 
                     <label>Postal Address:</label>
-                    <input type="text" class="login-inp" ng-model="form.zip"/>
+                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.zip"/>
                         <p class="validation-error">{{message.zip}}</p>
                         <label>Personal Bio Here:</label>
                     <textarea class="login-inp" ng-model="form.about"></textarea>
 
                     <label>Date of Birth:</label>
                         <div class="form-horizontal">
-                            <input type="text" datepicker-popup="yyyy/MMMM/dd" ng-model="form.dob" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+                            <input type="text"  datepicker-popup="yyyy/MMMM/dd" ng-model="form.dob" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
                             <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
                         </div>
                         <p class="validation-error">{{message.dob}}</p>

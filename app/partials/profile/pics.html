@@ -54,7 +54,7 @@
                 </ul>
                 <a ng-click="updatingAlbum = false; addingNewAlbum = false" class="button">Cancel</a>
             </div>
-            <ul class="small-block-grid-4">
+            <ul class="small-block-grid-4 clearing-thumbs" data-clearing>
                 <h3>{{albuminfo.name}}</h3>
                     <li class="piccontainer my-repeat-animation" ng-repeat="pic in pics">
                         <div>
@@ -65,7 +65,9 @@
                                 ng-change="addpictoalbum()"
                                 ng-checked="false"/>
                         </div>
-                        <img width="200" src="uploads/{{pic.filename}}"/>
+                        <a href="uploads/{{pic.filename}}">
+                            <img width="200" src="uploads/{{pic.filename}}"/>
+                        </a>
                         <div>
                             <a ng-click="setDeletedPic(pic._id)">
                                 x

@@ -3,7 +3,7 @@
         <div class="twelve columns offsetHeight" role="content">
             <div id="mainform" ng-hide="hidemainform">
                 <!--<h1><span ng-bind="message"></span></h1>-->
-
+                <div ng-click="reset()" class="button"></div>
                 <div id="log"></div>
                 <h2 class="subHeader">Create Memorial Profile</h2>
                     <div class="small-12 columns">
@@ -18,14 +18,14 @@
 
                         </p>
                         <span>
-                            <label for="title">{{createTypeTitle}} Memorial Wall Title: </label>
+                            <label  for="title">{{createTypeTitle}} Memorial Wall Title: </label>
                          </span>
-                        <input type="text" id="title" ng-model="form.title" name="title" placeholder="This is seen as the name of your memorial wall, usually the full name of your Angel. Please enter a title here.">
+                        <input type="text" ng-keypress="save()" id="title" ng-model="form.title" name="title" placeholder="This is seen as the name of your memorial wall, usually the full name of your Angel. Please enter a title here.">
                         <p class="validation-error">{{message.title}}</p>
                         <br />
                         <br />
                         <label for="author">Please specify a short address for your profile : </label>
-                        <input type="text" name="author" id="author" ng-model="form.author" placeholder="(Less than 100 characters, including underscores and dashes with no spaces)">
+                        <input type="text" ng-keypress="save()" name="author" id="author" ng-model="form.author" placeholder="(Less than 100 characters, including underscores and dashes with no spaces)">
                         <p class="validation-error">{{message.url}}</p>
                         <br />
                         <span>
@@ -39,17 +39,17 @@
                              <a data-wysihtml5-action="change_view">switch to html view</a>
                          </div>
                          -->
-                        <textarea id="content" placeholder="Enter your Angel's legacy here..." ng-model="form.text" cols="50" rows="25"></textarea>
+                        <textarea ng-keypress="save()" id="content" placeholder="Enter your Angel's legacy here..." ng-model="form.text" cols="50" rows="25"></textarea>
                         <br />
 
 
                         <span>
                             <label>What is your {{createType}}'s name?</label>
                          </span>
-                        <input type="text" class="login-inp" ng-model="form.firstName" placeholder="First Name" />
+                        <input ng-keypress="save()" type="text" class="login-inp" ng-model="form.firstName" placeholder="First Name" />
                         <p class="validation-error">{{message.firstName}}</p>
 
-                        <input type="text" class="login-inp" ng-model="form.lastName" placeholder="Last Name" />
+                        <input ng-keypress="save()" type="text" class="login-inp" ng-model="form.lastName" placeholder="Last Name" />
                         <p class="validation-error">{{message.lastName}}</p>
 
                         <br />
