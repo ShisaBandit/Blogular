@@ -1490,10 +1490,10 @@ input.addNewPost {
     position:relative;
 }
 .my-slide-animation.ng-enter, .my-slide-animation.ng-leave {
-    -webkit-transition:0.5s linear all;
-    -moz-transition:0.5s linear all;
-    -o-transition:0.5s linear all;
-    transition:0.5s linear all;
+    -webkit-transition:0.5s ease-in all;
+    -moz-transition:0.5s ease-in all;
+    -o-transition:0.5s ease-in all;
+    transition:0.5s ease-in all;
 
     position:absolute;
     top:0;
@@ -1553,6 +1553,45 @@ input.addNewPost {
     opacity:0.5;
 }
 .my-repeat-animation.ng-move.ng-move-active {
+    opacity:1;
+}
+
+
+/*-----Page transition-----*/
+
+.my-page-animation.ng-enter,
+.my-page-animation.ng-leave,
+.my-page-animation.ng-move {
+    -webkit-transition: 0.5s linear all;
+    -moz-transition: 0.5s linear all;
+    -o-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+    position:relative;
+}
+
+.my-page-animation.ng-enter {
+    top:-10px;
+    opacity:0;
+}
+
+.my-page-animation.ng-enter.ng-enter-active {
+    top:0;
+    opacity:1;
+}
+
+.my-page-animation.ng-leave {
+    top:0;
+    opacity:1;
+}
+.my-page-animation.ng-leave.ng-leave-active {
+    top:-10px;
+    opacity:0;
+}
+
+.my-page-animation.ng-move {
+    opacity:0.5;
+}
+.my-page-animation.ng-move.ng-move-active {
     opacity:1;
 }
 
