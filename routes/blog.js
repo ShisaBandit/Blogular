@@ -28,6 +28,8 @@ exports.messageEmitter = messageEmitter = new EventEmitter();
 
 exports.upcomingDates = function (req, res) {
     User.findOne({_id: req.session.passport.user}).populate('memwalls').exec(function (err, user) {
+        if(!user)return res.send(200,"none");
+        if(!user.memwalls)return res.send(200,"no walls");
         var nU = user.memwalls;
         var eventsInNetworkCurrently = [
 
