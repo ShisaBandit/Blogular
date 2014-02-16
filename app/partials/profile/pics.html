@@ -65,7 +65,8 @@
                                 ng-change="addpictoalbum()"
                                 ng-checked="false"/>
                         </div>
-                        <a href="uploads/{{pic.filename}}">
+                        <a shadowbox name="image" url="uploads/{{pic.filename}}" href="uploads/{{pic.filename}}"></a>
+                        <a ng-href="uploads/{{pic.filename}}">
                             <img width="200" src="uploads/{{pic.filename}}"/>
                         </a>
                         <div>

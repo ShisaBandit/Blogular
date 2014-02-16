@@ -2,7 +2,7 @@ var app = angular.module('YoMemorialApp', [
         'twitterService', 'userService', 'http-auth-interceptor', 'login', 'socketio', 'updateService',
         'Scope.onReady', 'blogResource', 'loaderModule', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries', 'Plugin.Controller.GroupEntries',
         'blogFilter', 'blogService', 'infinite-scroll', 'dropzone', 'apiResource', 'ui.bootstrap','ngAnimate','ngRoute','adaptive.detection','MusicPlayer.Controller',
-        'controller.GiftShop','Cache'
+        'controller.GiftShop','Cache','ShadowboxModule'
     ]).
     config(function ($routeProvider,$sceProvider) {
        // $sceProvider.enabled(false);
@@ -283,7 +283,19 @@ app.directive('autoscroll', function () {
         }
     }
 })
+/*
+app.directive('shadowbox', function (shadowbox) {
+    return{
+        link:function(scope,elm,attrs){
 
+            console.log("trying to add to shadownbox cache----------"+attrs.ngHref);
+            //
+            shadowbox.addCache('a#test');
+            //shadowbox.setup('')
+        }
+    }
+});
+*/
 app.directive('dropzone', function (dropzone, $rootScope) {
     return{
         // scope:{},
@@ -1626,6 +1638,7 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api,$modal,Delet
             success(function (data) {
                 console.log(data);
                 $scope.pics = data;
+
             })
         $http.get('/albums/' + $scope.blogId).
             success(function (data) {

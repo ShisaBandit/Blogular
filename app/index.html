@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!--<link href="css/animate.min.css" rel="stylesheet"> -->
-
+    
     <!-- build:css({.tmp,app}) css/main.css -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!--<link rel="stylesheet" href="css/foundation.min.css">-->
@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="css/foundation-icons.css">
     <link rel="stylesheet" href="css/basic.css"/>
     <link rel="stylesheet" href="css/dropzone.css"/>
+    <link rel="stylesheet" href="scripts/vendor/shadowbox-3.0.3/shadowbox.css"/>
     <!-- endbuild -->
 
 </head>
@@ -366,14 +367,20 @@
 <script type="text/javascript" src="scripts/external/dropzonemodule.js"></script>
 <script type="text/javascript" src="scripts/foundation/foundation-datepicker.js"></script>
 <script type="text/javascript" src="scripts/external/services/Cache.js"></script>
-
+<script type="text/javascript" src="scripts/vendor/shadowbox-3.0.3/shadowbox.js"></script>
+<script type="text/javascript" src="scripts/external/shadowboxmodule.js"></script>
 <script type="text/javascript" src="scripts/external/provider/angular-adaptive-detection.js"></script>
+
 <!-- endbuild -->
 <script>
 
 
     $(document).ready(function () {
         $(document).foundation();
+        Shadowbox.init({
+            skipSetup: true
+        });
+
     })
 </script>
 </body>

@@ -111,7 +111,7 @@
                             </ul>
                         </li>
 
-                        <img src="http://www.gravatar.com/avatar/{{post.gravatar}}" style="float:left; max-width: 40px; padding-right:5px;" />
+                            <img src="http://www.gravatar.com/avatar/{{post.gravatar}}" style="float:left; max-width: 40px; padding-right:5px;" />
                         <h6 style="float:left;margin-top: -3px;line-height: 18px;">Posted by <a href="#/profile/{{post.username}}">{{post.username}}</a><br /> on {{post.date}}.</h6>
 
                     </div>
@@ -129,8 +129,11 @@
                     <div ng-bind-html="post.embedYouTube | unsafe"></div>
                     <div ng-bind-html="post.embedAnimoto | unsafe"></div>
                     <br />
+
                     <div ng-repeat="photo in post.photos">
-                        <img width="200" src="uploads/{{photo.filename}}" />
+                        <a shadowbox ng-href="uploads/{{photo.filename}}">
+                            <img width="200" src="uploads/{{photo.filename}}" />
+                        </a>
                     </div>
                 </div>
                 <div ng-switch on="post.canComment">
