@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="css/basic.css"/>
     <link rel="stylesheet" href="css/dropzone.css"/>
     <link rel="stylesheet" href="scripts/vendor/shadowbox-3.0.3/shadowbox.css"/>
+    <link rel="stylesheet" href="scripts/vendor/intro.js-0.7.0/introjs.css"/>
     <!-- endbuild -->
 
 </head>
@@ -51,17 +52,17 @@
                 </li>
                 <li class="toggle-topbar menu-icon active"><a><span>Menu</span></a></li>
             </ul>
-            <section class="top-bar-section">
+            <section  class="top-bar-section">
                 <!-- Right Nav Section -->
                 <ul class="right">
-                    <li class="has-dropdown loggedOut">
+                    <li  class="has-dropdown loggedOut">
                         <a style="color:#8a9948;">My Account</a>
-                        <ul class="dropdown">
+                        <ul  class="dropdown">
                             <li>
-                                <div ng-controller="UserInfoCtrl" class="loginBlock">
-                                    <div id="username">
+                                <div  ng-controller="UserInfoCtrl" class="loginBlock">
+                                    <div  id="username">
 
-                                        <a href="#/profile/{{username}}" if-authed="show" class="small button">My Account</a>
+                                        <a href="#/profile/{{username}}" if-authed="show" class="small button">Myss Account</a>
                                         <a href="#/rules" class="small button">Rules</a>
                                         <a href="#" ng-click="logout()" if-authed="show" class="small button">logout</a>
                                         <a href="#/registration" if-authed="hide" class="small button">Register</a>
@@ -77,23 +78,26 @@
                             <img width="34" src="http://www.gravatar.com/avatar/{{post.gravatar}}" />
                             <b style="color:#8a9948;">{{username}}</b>
                         </a>
-                        <ul ng-controller="UserInfoCtrl" class="dropdown">
-                            <li><a href="#/profile/{{username}}" if-authed="show">My Account</a>
+                        <ul ng-controller="UserInfoCtrl" class="dropdown"
+                            ng-intro-options="IntroOptions"
+                            ng-intro-method="CallMe">
+                            <li>
+                                <a id="step1" href="#/profile/{{username}}" if-authed="show">My Account</a>
                             </li>
                             <li>
                                 <a href="#/rules">Rules</a>
-
                             </li>
                             <li>
                                 <a href="#" ng-click="logout()" if-authed="show">logout</a>
-
                             </li>
                             <li>
                                 <a href="#/registration" if-authed="hide">Register</a>
-
                             </li>
                             <li>
                                 <a if-authed="hide" data-reveal-id="loginModal">Login</a>
+                            </li>
+                            <li>
+                                <a  if-authed="show" class="small button" ng-click="CallMe()">CallME</a>
                             </li>
                         </ul>
                     </li>
@@ -370,7 +374,8 @@
 <script type="text/javascript" src="scripts/vendor/shadowbox-3.0.3/shadowbox.js"></script>
 <script type="text/javascript" src="scripts/external/shadowboxmodule.js"></script>
 <script type="text/javascript" src="scripts/external/provider/angular-adaptive-detection.js"></script>
-
+<script type="text/javascript" src="scripts/vendor/intro.js-0.7.0/intro.js"></script>
+<script type="text/javascript" src="scripts/external/directives/angular-intro.js"></script>
 <!-- endbuild -->
 <script>
 
@@ -380,7 +385,6 @@
         Shadowbox.init({
             skipSetup: true
         });
-
     })
 </script>
 </body>

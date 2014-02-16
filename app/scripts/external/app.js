@@ -2,7 +2,7 @@ var app = angular.module('YoMemorialApp', [
         'twitterService', 'userService', 'http-auth-interceptor', 'login', 'socketio', 'updateService',
         'Scope.onReady', 'blogResource', 'loaderModule', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries', 'Plugin.Controller.GroupEntries',
         'blogFilter', 'blogService', 'infinite-scroll', 'dropzone', 'apiResource', 'ui.bootstrap','ngAnimate','ngRoute','adaptive.detection','MusicPlayer.Controller',
-        'controller.GiftShop','Cache','ShadowboxModule'
+        'controller.GiftShop','Cache','ShadowboxModule','angular-intro'
     ]).
     config(function ($routeProvider,$sceProvider) {
        // $sceProvider.enabled(false);
@@ -1326,6 +1326,23 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket, grou
 app.controller('UserInfoCtrl', function ($scope, userInfoService, $http) {
     $scope.username = userInfoService.getUsername();
     $scope.gravatar = userInfoService.getGravatar();
+
+    $scope.IntroOptions = {
+        steps:[
+            {
+                element: document.querySelector('#step1'),
+                intro: "Welcome to angels.  You can create your first memorial here in the <b>My Account</b> button."
+            }
+        ],
+        showStepNumbers: false,
+        exitOnOverlayClick: true,
+        exitOnEsc:true,
+        nextLabel: '<strong>NEXT!</strong>',
+        prevLabel: '<span style="color:green">Previous</span>',
+        skipLabel: 'Exit',
+        doneLabel: 'Thanks'
+    };
+
     $scope.logout = function () {
         $http.post('/logout').
             success(function () {

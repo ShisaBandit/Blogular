@@ -65,10 +65,11 @@
                                 ng-change="addpictoalbum()"
                                 ng-checked="false"/>
                         </div>
-                        <a shadowbox name="image" url="uploads/{{pic.filename}}" href="uploads/{{pic.filename}}"></a>
-                        <a ng-href="uploads/{{pic.filename}}">
-                            <img width="200" src="uploads/{{pic.filename}}"/>
-                        </a>
+                        <!--<a shadowbox name="image" url="uploads/{{pic.filename}}" href="uploads/{{pic.filename}}">  </a>-->
+                            <a shadowbox name="image" url="uploads/{{pic.filename}}" href="uploads/{{pic.filename}}">
+                                <!--<img width="200" src="uploads/{{pic.filename}}"/>-->
+                            </a>
+
                         <div>
                             <a ng-click="setDeletedPic(pic._id)">
                                 x

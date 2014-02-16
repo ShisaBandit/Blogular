@@ -1,13 +1,13 @@
 angular.module('ShadowboxModule',[]).
     directive('shadowbox', function () {
         return{
-            template:'<a ng-click="openShadowBox()">{{imageName}}</a>',
+            template:'<img width="200" src="{{imageUrl}}"/><a ng-click="openShadowBox()"></a>',
             scope:{
                 imageName:'@name',
                 imageUrl:'@url'
             },
             link: function (scope,ele,attrs) {
-
+                console.log(scope.imageUrl)
                 if(scope.imageUrl == "" || scope.imageUrl == null)
                     return;
                 ele.attr('href',scope.imageUrl);
@@ -20,7 +20,7 @@ angular.module('ShadowboxModule',[]).
                 });
             }
         }
-    })
+    });
     /*
     factory('shadowbox', function () {
 

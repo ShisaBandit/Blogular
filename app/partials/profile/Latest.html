@@ -131,8 +131,7 @@
                     <br />
 
                     <div ng-repeat="photo in post.photos">
-                        <a shadowbox ng-href="uploads/{{photo.filename}}">
-                            <img width="200" src="uploads/{{photo.filename}}" />
+                        <a shadowbox name="image" url="uploads/{{photo.filename}}" href="uploads/{{photo.filename}}">
                         </a>
                     </div>
                 </div>
