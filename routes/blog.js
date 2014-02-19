@@ -22,7 +22,7 @@ var smtpTransport = nodemailer.createTransport("SMTP", {
     }
 });
 var EventEmitter = require('events').EventEmitter;
-var emailTemplates = require('swig-email-templates');
+//var emailTemplates = require('swig-email-templates');
 var path = require('path');
 exports.messageEmitter = messageEmitter = new EventEmitter();
 
