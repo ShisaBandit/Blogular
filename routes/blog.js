@@ -11,7 +11,7 @@ var Workshop = models.Workshop;
 var PICTYPE = 1;
 var VIDEOTYPE = 2;
 var nodemailer = require('nodemailer');
-//var smtpTransport = nodemailer.createTransport("sendmail");
+var smtpTransport = nodemailer.createTransport("sendmail");
 var smtpTransport = nodemailer.createTransport("SMTP", {
     host: "mail.angelsofeureka.org",
     port: "465",
@@ -22,7 +22,7 @@ var smtpTransport = nodemailer.createTransport("SMTP", {
     }
 });
 var EventEmitter = require('events').EventEmitter;
-//var emailTemplates = require('swig-email-templates');
+var emailTemplates = require('swig-email-templates');
 var path = require('path');
 exports.messageEmitter = messageEmitter = new EventEmitter();
 
@@ -1146,7 +1146,7 @@ exports.shopToWall = function (req, res) {
 
 }
 
-/*
+
 exports.sendAboutMail = function (req, res) {
     console.log(req.body.name);
     var post = req.body;
@@ -1207,7 +1207,7 @@ exports.sendAboutMail = function (req, res) {
     });
 
 }
- */
+
 function SendGiftNotice(to, user, wall, gifts) {
     var mailOptions = {
         from: "noreply@AngelsOfEureka.org",
