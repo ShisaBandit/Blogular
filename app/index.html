@@ -80,8 +80,8 @@
                         </a>
                         <ul ng-controller="UserInfoCtrl" class="dropdown"
                             ng-intro-options="IntroOptions"
-                            ng-intro-method="CallMe"
-                                ng-intro-autostart="true">
+                            ng-intro-method="CallMe">
+                                <!--ng-intro-autostart="true">-->
                             <li>
                                 <a id="step1" href="#/profile/{{username}}" if-authed="show">My Account</a>
                             </li>
@@ -97,9 +97,9 @@
                             <li>
                                 <a if-authed="hide" data-reveal-id="loginModal">Login</a>
                             </li>
-                            <li>
+                            <!--<li>
                                 <a  if-authed="show" class="small button" ng-click="CallMe()">CallME</a>
-                            </li>
+                            </li>-->
                         </ul>
                     </li>
 
@@ -162,7 +162,7 @@
                                         {{event.text}}
 
                                         <div class="event-list-reach-out">
-                                            <a href="#" class="event-list-view-event" title="View Event Details">View Event</a>
+                                           <!-- <a href="#" class="event-list-view-event" title="View Event Details">View Event</a>-->
                                         </div>
                                     </span>
                                 </li>
