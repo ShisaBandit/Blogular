@@ -11,7 +11,7 @@ var Workshop = models.Workshop;
 var PICTYPE = 1;
 var VIDEOTYPE = 2;
 var nodemailer = require('nodemailer');
-var smtpTransport = nodemailer.createTransport("sendmail");
+//var smtpTransport = nodemailer.createTransport("sendmail");
 var smtpTransport = nodemailer.createTransport("SMTP", {
     host: "mail.angelsofeureka.org",
     port: "465",
@@ -1145,7 +1145,7 @@ exports.shopToWall = function (req, res) {
     //add data max 3 items that someone bought something for someone on the site
 
 }
-
+/*
 
 exports.sendAboutMail = function (req, res) {
     console.log(req.body.name);
@@ -1207,7 +1207,7 @@ exports.sendAboutMail = function (req, res) {
     });
 
 }
-
+*/
 function SendGiftNotice(to, user, wall, gifts) {
     var mailOptions = {
         from: "noreply@AngelsOfEureka.org",
