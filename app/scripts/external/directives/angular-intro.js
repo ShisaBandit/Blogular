@@ -1,33 +1,53 @@
-var ngIntroDirective = angular.module("angular-intro", []);
-ngIntroDirective.directive("ngIntroOptions", [function() {
+var ngIntroDirective = angular.module('angular-intro', []);
+
+// TODO: Use isolate scope, but requires angular 1.2: http://plnkr.co/edit/a2c14O?p=preview
+// See: http://stackoverflow.com/questions/18796023/in-a-directive-handle-calls-to-a-user-defined-method-name
+ngIntroDirective.directive('ngIntroOptions', [function() {
+
     return {
-        restrict: "A",
-        link: function(n, t, e) {
-            n[e.ngIntroMethod] = function(t) {
-                if (typeof t == "string") {
-                    var o = introJs(t)
+        restrict: 'A',
+
+        link: function(scope, element, attrs) {
+
+            scope[attrs.ngIntroMethod] = function(step) {
+
+                if (typeof(step) == "string") {
+                    var intro = introJs(step);
                 } else {
-                    var o = introJs()
+                    var intro = introJs();
                 }
-                o.setOptions(n.$eval(e.ngIntroOptions));
-                if (e.ngIntroOncomplete) {
-                    o.oncomplete(n[e.ngIntroOncomplete])
+
+                intro.setOptions(scope.$eval(attrs.ngIntroOptions));
+
+                if (attrs.ngIntroOncomplete) {
+                    intro.oncomplete(scope[attrs.ngIntroOncomplete]);
                 }
-                if (e.ngIntroOnexit) {
-                    o.onexit(n[e.ngIntroOnexit])
+
+                if (attrs.ngIntroOnexit) {
+                    intro.onexit(scope[attrs.ngIntroOnexit]);
                 }
-                if (e.ngIntroOnchange) {
-                    o.onchange(n[e.ngIntroOnchange])
+
+                if (attrs.ngIntroOnchange) {
+                    intro.onchange(scope[attrs.ngIntroOnchange]);
                 }
-                if (e.ngIntroOnbeforechange) {
-                    o.onbeforechange(n[e.ngIntroOnbeforechange])
+
+                if (attrs.ngIntroOnbeforechange) {
+                    intro.onbeforechange(scope[attrs.ngIntroOnbeforechange]);
                 }
-                if (typeof t == "number") {
-                    o.goToStep(t).start()
+
+                if (typeof(step) == "number") {
+                    intro.goToStep(step).start();
                 } else {
-                    o.start()
+                    intro.start();
+
                 }
+
+            };
+
+            if (attrs.ngIntroAutostart == "true") {
+                scope[attrs.ngIntroMethod]();
             }
+
         }
     }
 }]);

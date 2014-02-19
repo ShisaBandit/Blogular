@@ -80,7 +80,8 @@
                         </a>
                         <ul ng-controller="UserInfoCtrl" class="dropdown"
                             ng-intro-options="IntroOptions"
-                            ng-intro-method="CallMe">
+                            ng-intro-method="CallMe"
+                                ng-intro-autostart="true">
                             <li>
                                 <a id="step1" href="#/profile/{{username}}" if-authed="show">My Account</a>
                             </li>
