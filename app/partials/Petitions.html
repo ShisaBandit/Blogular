@@ -2,39 +2,46 @@
 
     <div class="row offsetHeight">
         <h1 class="sectionHeader">Petitions</h1>
-        <div ng-class="{spinner:spinner}"></div>
-        <div class="small-12 columns">
-            <h2 style="color: #2164AA;">Create a petition</h2>
-            Give your petition a name. <input type="text" ng-hide="textorphoto" ng-model="title"/>
-            What is your petition for? <input type="text" ng-hide="textorphoto" ng-model="text"/>
-
-            <button ng-click="submit()" class="button postfix">Submit</button>
-        </div>
-
     </div>
     <div class="row">
-        <div class="small-12 large-12 columns">
-        <h2 class="dark">Sitewide petitions</h2>
-        <p>Do you have a cause that you are passionate about bringing a change to? Create your petition here and get the support you need to make a change!</p>
-        <p>After you get enough people to sign your petition, take your voices to Washington here! <a href="http://www.house.gov/representatives/find/" target="_blank"><b>Find Your Representative</b></a></p>
+        <div class="small-12 large-12 columns workshops">
+            <tabset>
+                <tab heading="View All Petitions"><section>
+                    <div class="content" data-section-content>
+                        <h2 class="dark">Sitewide petitions</h2>
+                        <p>Do you have a cause that you are passionate about bringing a change to? Create your petition here and get the support you need to make a change!</p>
+                        <p>After you get enough people to sign your petition, take your voices to Washington here! <a href="http://www.house.gov/representatives/find/" target="_blank"><b>Find Your Representative</b></a></p>
 
-        <ul class="small-block-grid-4">
-            <li ng-repeat="petition in petitions">
-                <div class="panel">
-                <div class="row">
-                    <div class="title small-12 columns">
-                        <a rel="nofollow" href="#/petition/{{petition.title}}">{{petition.title}}</a>
+                        <ul class="small-block-grid-4">
+                            <li ng-repeat="petition in petitions">
+                                <div class="panel">
+                                <div class="row">
+                                    <div class="title small-12 columns">
+                                        <a rel="nofollow" href="#/petition/{{petition.title}}">{{petition.title}}</a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="small-12 columns">
+                                         <span class="subheader"><span class="petitionFont"> {{petition.signaturecount}}</span> Signatures</span>
+                                    </div>
+                                </div>
+                                </div>
+                            </li>
+
+                        </ul>
                     </div>
-                </div>
-                <div class="row">
+                </section></tab>
+                <tab heading="Create a Petition"><section>
+                    <div ng-class="{spinner:spinner}"></div>
                     <div class="small-12 columns">
-                         <span class="subheader"><span class="petitionFont"> {{petition.signaturecount}}</span> Signatures</span>
-                    </div>
-                </div>
-                </div>
-            </li>
+                        <h2 style="color: #2164AA;">Create a petition</h2>
+                        Give your petition a name. <input type="text" ng-hide="textorphoto" ng-model="title"/>
+                        What is your petition for? <input type="text" ng-hide="textorphoto" ng-model="text"/>
 
-        </ul>
+                        <button ng-click="submit()" class="button postfix">Submit</button>
+                    </div>
+                </section></tab>
+        </tabset>
     </div>
     </div>
 </div>
