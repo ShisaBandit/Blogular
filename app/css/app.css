@@ -2055,3 +2055,21 @@ body nav.top-bar.top-bar-logged-in {
  }
 
  .workshops { background: #fff;}
+
+ #twitter-widget-0 {
+     float: right !important;
+ }
+
+ .mainNav .helpResc {
+     position: absolute;
+     top:50px;
+     right:200px;
+     display: block;
+     padding: 4px;
+     font-size: xx-small;
+     color: #fff;
+     background: #BC838D;
+     border-radius: 5px;
+     border: 1px solid #f5f5f5;
+     z-index: 9999;
+ }

@@ -28,6 +28,15 @@
     <link rel="stylesheet" href="scripts/vendor/shadowbox-3.0.3/shadowbox.css"/>
     <link rel="stylesheet" href="scripts/vendor/intro.js-0.7.0/introjs.css"/>
     <!-- endbuild -->
+    <script type="text/javascript" src="https://apis.google.com/js/platform.js"></script>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=207720999317465";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 
 </head>
 <body ng-app="YoMemorialApp">
@@ -105,7 +114,7 @@
 
                 </ul>
                 <!-- Left Nav Section -->
-                <ul class="" ng-controller="SearchBarCtrl">
+                <ul class="mainNav" ng-controller="SearchBarCtrl">
                     <li class="has-dropdown">
                         <a style="color:#8a9948;">Memorials</a>
                         <ul class="dropdown" id="workpets">
@@ -130,6 +139,7 @@
                         <a href="#" id="webstorebutton" class="small">Web Store</a>
                     </li>
 
+                    <a href="#/help-resources" class="helpResc">Help Resources</a>
 <!--
                     <li ng-controller="UserInfoCtrl" class="loggedBlock" id="username2">
                         <img width="34" src="http://www.gravatar.com/avatar/{{post.gravatar}}" />
@@ -227,6 +237,7 @@
                 <li><a href="#/registration" if-authed="hide">Register</a></li>
                 <li><a href="#/login" if-authed="hide">Login</a></li>
             </ul>
+            <a href="#/help-resources" class="helpResc">Help Resources</a>
         </aside>
 
 
@@ -255,7 +266,15 @@
             <footer class="row border-footer">
                 <div class="small-12 large-12 columns right-separator footer-child">
                     <p>The Circle of Life by Angels of Eureka. © 2013 Angels of Eureka</p>
-                    <p class="toiawase"><a href="#/contact">Contact Us</a> - <a href="#/advertise">Advertise With Us</a> - <a href="#/help-resources">Help Resources</a></p>
+                    <p class="toiawase">
+                        <a href="#/contact">Contact Us</a> - <a href="#/advertise">Advertise With Us</a> - <a href="#/help-resources">Help Resources</a> -
+                    <div style="float: right;">
+                        <div class="g-follow" data-annotation="none" data-height="15" data-href="https://plus.google.com/101511461747859957015" data-rel="publisher"></div>
+                        <div class="fb-share-button" data-href="https://www.facebook.com/pages/Angels-Of-Eureka/526557840709907" data-width="100" data-type="button_count"></div>
+                    </div>
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-related="angelsofeureka">Tweet</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    </p>
                 </div>
             </footer>
             <!-- End Footer -->
