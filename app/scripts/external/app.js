@@ -8,7 +8,9 @@ var app = angular.module('YoMemorialApp', [
        // $sceProvider.enabled(false);
         $routeProvider.
             when("/", {templateUrl: "partials/blog.html"}).
+
             when("/about", {templateUrl: "partials/about.html"}).
+            when("/pubpro/:username", {templateUrl: "partials/publicprofile.html"}).
             when("/projects", {templateUrl: "partials/projects.html"}).
             when("/shoutouts", {templateUrl: "partials/shoutouts.html"}).
             when("/AddBlogEntry", {templateUrl: "partials/admin/createBlogEntry.html"}).
@@ -50,6 +52,7 @@ var app = angular.module('YoMemorialApp', [
             when("/login", {templateUrl: "partials/login.html"}).
             when("/gifts/:user/:wall", {templateUrl: "partials/giftShop.html"}).
             when("/1/:wall",{templateUrl:"partials/sendoffsiteinvite.html"}).
+            //when("publicprofile/:username",{templateUrl:"partials/publicProfile.html"}).
             otherwise("/oops",{templateUrl:"404.html"});
 
     });
@@ -2870,6 +2873,15 @@ app.controller('EventListController', function ($scope,$http) {
         });
 });
 
+app.controller('PublicProfileCtrl', function ($scope,api,$routeParams,groupsListing) {
+    $scope.user = {};
+    console.log("IN PUBLICK PROFILE CTRL");
+    api.getResourceByField('User', {field: "username", query: $routeParams.username}, function (user) {
+       // user[0].lost = groupsListing[user[0].lost].name;
+        $scope.user = user[0];
+    });
+
+});
 //console.log(youtube_embed(youtube_parser("http://www.youtube.com/watch?v=Pu1PPMaoArE")) );
 function youtube_parser(url){
     //var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
