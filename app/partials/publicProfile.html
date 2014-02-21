@@ -1,0 +1,25 @@
+<div ng-controller="PublicProfileCtrl">
+    <div class="row offsetHeight">
+        <div class="small-12 columns">
+            <section>
+                <div class="content automargins" data-section-content>
+                    <div class="row">
+                        <div class="contentHeader" class="small-12 columns">
+                            <h2 class="contentHeaderTitle">Basic Profile</h2>
+                        </div>
+                        <ul class="profile">
+                            <li><img src="http://www.gravatar.com/avatar/{{user.gravatar}}"/> First Name : {{user.firstName}}</li>
+                            <li>Last Name: {{user.lastName}}</li>
+                            <li>email : {{user.email}}</li>
+                            <li>Date of Birth : {{user.dob}}</li>
+                            <li>City : {{user.city}}</li>
+                            <li>About you : {{user.about}}</li>
+                            <li>You have lost a {{user.lost}}</li>
+                            <a href="#/editprofile" class="button">Edit Your profile</a>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
