@@ -2063,7 +2063,7 @@ body nav.top-bar.top-bar-logged-in {
  .mainNav .helpResc {
      position: absolute;
      top:50px;
-     left:200px;
+     right:200px;
      display: block;
      padding: 4px;
      font-size: xx-small;
