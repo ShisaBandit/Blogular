@@ -1918,7 +1918,9 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, gr
     $scope.messages = [];
     $scope.walls = [];
     $scope.invitedGroups;
-
+    $scope.tab = {
+        userprofile:true
+    }
     api.getResourceByField('User', {field: "username", query: $routeParams.username}, function (user) {
         user[0].lost = groupsListing[user[0].lost].name;
         $scope.user = user[0];
