@@ -1658,7 +1658,7 @@ body.ng-scope div.row div.small-12.columns div.row div.small-12.large-12.ng-bind
     border-radius: 0px;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
-    background: #BDCB80;
+    background: #8A9948;
     opacity: 0.75;
     padding-top: 0px;
     padding-left: 5px;
@@ -2053,3 +2053,5 @@ body nav.top-bar.top-bar-logged-in {
  #events .event-list .event-list-body ol.event-list-content li div.event-list-reach-out a.event-list-view-event {
 
  }
+
+ .workshops { background: #fff;}
