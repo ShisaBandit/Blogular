@@ -1182,29 +1182,27 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
 });
 
 app.controller('ModalInstanceCtrl',function ($scope, $modalInstance,error,message) {
-
     $scope.ok = function () {
         $modalInstance.close($scope.selected.item);
     };
-
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
 });
 app.controller('messageController', function ($scope, api, $http, authService, userInfoService, socket, $rootScope, $location, $window, limitToFilter,$modal) {
     var modalInstance;
-    $scope.open = function () {
-
-       modalInstance = $modal.open({
-            templateUrl: 'partials/messageModal.html',
-            controller: 'ModalInstanceCtrl',
-            resolve: {
-                error: function () {
-                    return $scope.error;
-                },
-                message:$scope.message
-            }
-        });
+    $scope.open = function (messagePerson) {
+        console.log(messagePerson);
+           modalInstance = $modal.open({
+                templateUrl: 'partials/messageModal.html',
+                controller: 'ModalInstanceCtrl',
+                resolve: {
+                    error: function () {
+                        return $scope.error;
+                    },
+                    message:$scope.message
+                }
+            });
 
         modalInstance.result.then(function (selectedItem) {
 

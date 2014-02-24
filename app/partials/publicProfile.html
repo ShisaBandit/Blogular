@@ -15,7 +15,9 @@
                             <li>City : {{user.city}}</li>
                             <li>About you : {{user.about}}</li>
                             <li>You have lost a {{user.lost}}</li>
-                            <a href="#/editprofile" class="button">Edit Your profile</a>
+                            <div ng-controller="messageController">
+                                <a class="button" ng-click="open(user.username)"><img src="img/mail_2.png"> Send a New Message</a>
+                            </div>
                         </ul>
                     </div>
                 </div>
