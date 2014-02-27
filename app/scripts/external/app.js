@@ -1181,7 +1181,8 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
 
 });
 
-app.controller('ModalInstanceCtrl',function ($scope, $modalInstance,error,message) {
+app.controller('ModalInstanceCtrl',function ($scope, $modalInstance,error,sendTo) {
+    $scope.test = sendTo;
     $scope.ok = function () {
         $modalInstance.close($scope.selected.item);
     };
@@ -1191,21 +1192,34 @@ app.controller('ModalInstanceCtrl',function ($scope, $modalInstance,error,messag
 });
 app.controller('messageController', function ($scope, api, $http, authService, userInfoService, socket, $rootScope, $location, $window, limitToFilter,$modal) {
     var modalInstance;
+    $scope.selected="";
+    $scope.test = "test";
+    $scope.pre = false;
     $scope.open = function (messagePerson) {
-        console.log(messagePerson);
+            if(messagePerson){
+                $scope.pre = true;
+                $scope.test.presel = messagePerson;
+                console.log("sedingto "+messagePerson);
+
+            }
            modalInstance = $modal.open({
+               scope:$scope,
                 templateUrl: 'partials/messageModal.html',
-                controller: 'ModalInstanceCtrl',
+              //  controller: 'ModalInstanceCtrl',
                 resolve: {
                     error: function () {
                         return $scope.error;
                     },
-                    message:$scope.message
+                    message:$scope.message,
+                    sendTo: function () {
+                        return $scope.test
+                    }
+                    //selected:messagePerson
                 }
             });
 
         modalInstance.result.then(function (selectedItem) {
-
+                console.log(selectedItem +" this item was selected"   );
         }, function () {
             console.log("modal dismissed")
         });
@@ -1325,7 +1339,7 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket, grou
     };
 });
 
-app.controller('UserInfoCtrl', function ($scope, userInfoService, $http) {
+app.controller('UserInfoCtrl', function ($scope, userInfoService, $http,$timeout) {
     $scope.username = userInfoService.getUsername();
     $scope.gravatar = userInfoService.getGravatar();
 
@@ -1333,6 +1347,10 @@ app.controller('UserInfoCtrl', function ($scope, userInfoService, $http) {
         steps:[
             {
                 element: document.querySelector('#step1'),
+                intro: "Welcome to angels.  You can create your first memorial here in the <b>My Account</b> button."
+            },
+            {
+                element: document.querySelector('#step2'),
                 intro: "Welcome to angels.  You can create your first memorial here in the <b>My Account</b> button."
             }
         ],
@@ -1344,7 +1362,7 @@ app.controller('UserInfoCtrl', function ($scope, userInfoService, $http) {
         skipLabel: 'Exit',
         doneLabel: 'Thanks'
     };
-
+    $timeout(function() { $scope.CallMe();},0);
     $scope.logout = function () {
         $http.post('/logout').
             success(function () {
