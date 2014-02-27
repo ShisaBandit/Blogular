@@ -21,36 +21,25 @@
         </div>
     </div>
     <div class="row">
-        <div class="twelve columns" offset-height="100" role="content">
-            <div id="picheader">
-               <!-- <div class="row">
-                    <div class="large-12 columns">
-                        <img src="http://placehold.it/1000x300&text=[img]">
-
-                        <hr>
-
-                        <div offset-height="-300">
-                            <img id="portrait" src="http://placehold.it/200x300&text=[img]">
-
-                        </div>
-                    </div>
-                </div>-->
+        <div class="twelve columns" offset-height="0" role="content">
+            <div id="picheader" class="publicWall twelve columns">
                 <div class="row">
-                    <div class="large-12 columns" offset-height="-300">
+                    <div class="small-3 columns" offset-height="-10">
                         <div id="portraitpic">
                             <img id="portrait" src="/uploads/{{ entry.profilePicPortrait }}"><br />
                             {{ entry.firstName }} {{ entry.lastName }}
                         </div>
-                        <div id="gallery" class="nivoGallery" nivogallery>
-                            <ul>
-                                <li data-title="{{ entry.firstName }} {{ entry.lastName }}" data-caption="{{ entry.memorialDate }}">
-                                    <img id="widepic" width="1000" height="300" src="/uploads/{{ entry.profilePicWide }}">
-                                </li>
-                                <li data-type="html" data-title="{{ entry.firstName }} {{ entry.lastName }}">
-                                    {{ entry.text }}
-                                </li>
-                            </ul>
+                    </div>
+                    <div class="small-8 columns">
+                        <div id="contentHeader" class="small-12 columns">
+                            <h2 class="contentHeaderTitle">{{entry.firstName}}'s Public Memorial</h2>
                         </div>
+                        <ul class="small-12 columns">
+                            <li>First Name : {{entry.firstName}}</li>
+                            <li>Last Name: {{entry.lastName}} </li>
+                            <li>Memorial Date: {{entry.memorialDate}}</li>
+                        </ul>
+                        <p>You are viewing {{entry.firstName}} {{entry.lastName}}'s public memorial wall. If you are a member of this angel's network, <a href="#/login">login</a> to view the full memorial details.</p>
                     </div>
                 </div>
             </div>
@@ -59,22 +48,6 @@
 
     </div>
     <div class="row">
-        <div class="small-8 columns">
-
-
-            <div class="row">
-                <div id="contentHeader" class="small-12 columns">
-                    <h2 class="contentHeaderTitle">Basic Profile</h2>
-                </div>
-            </div>
-            <ul>
-                <li>First Name : {{entry.firstName}}</li>
-                <li>Last Name: {{entry.lastName}}     </li>
-                <li>Memorial Date: {{entry.memorialDate}}     </li>
-            </ul>
-        </div>
-
-
 
     </div>
 </div>

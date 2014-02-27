@@ -376,6 +376,10 @@ select {
   [class*="column"] + [class*="column"]:last-child {
     float: right; }
 
+  #picheader.publicWall [class*="column"] + [class*="column"]:last-child {
+    float: left;
+  }
+
   [class*="column"] + [class*="column"].end {
     float: left; }
 
@@ -607,6 +611,10 @@ select {
 
   [class*="column"] + [class*="column"]:last-child {
     float: right; }
+
+  #picheader.publicWall [class*="column"] + [class*="column"]:last-child {
+    float: left;
+  }
 
   [class*="column"] + [class*="column"].end {
     float: left; }
@@ -950,7 +958,11 @@ select {
   [class*="column"] + [class*="column"]:last-child {
     float: right; }
 
-  [class*="column"] + [class*="column"].end {
+   #picheader.publicWall [class*="column"] + [class*="column"]:last-child {
+     float: left;
+   }
+
+    [class*="column"] + [class*="column"].end {
     float: left; }
 
   .column.large-centered,
@@ -1182,7 +1194,11 @@ select {
   [class*="column"] + [class*="column"]:last-child {
     float: right; }
 
-  [class*="column"] + [class*="column"].end {
+  #picheader.publicWall [class*="column"] + [class*="column"]:last-child {
+     float: left;
+   }
+
+    [class*="column"] + [class*="column"].end {
     float: left; }
 
   .column.xlarge-centered,
@@ -1413,6 +1429,11 @@ select {
 
   [class*="column"] + [class*="column"]:last-child {
     float: right; }
+
+   #picheader.publicWall [class*="column"] + [class*="column"]:last-child {
+     float: left;
+   }
+
 
   [class*="column"] + [class*="column"].end {
     float: left; }
