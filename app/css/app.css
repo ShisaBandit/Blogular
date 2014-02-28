@@ -1821,7 +1821,7 @@ body.ng-scope div.row div.small-12.columns div.row div.small-12.large-12.ng-bind
     padding: 5px;
     margin: 0px;
     list-style: none;
-    line-height: 8px;
+    line-height: 15px;
     color: #47569B;
     font-size: small;
 }
@@ -1836,7 +1836,7 @@ body.ng-scope div.row div.small-12.columns div.row div.small-12.large-12.ng-bind
 #toc {
     position: fixed;
     top:120px;
-    left: 0px;
+    left: 17px;
     z-index: 8000;
  }
 
@@ -1849,7 +1849,7 @@ body.ng-scope div.row div.small-12.columns div.row div.small-12.large-12.ng-bind
     border-radius: 0px;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
-    background: #8A9948;
+    background: #D65B4A;
     opacity: 0.75;
     padding-top: 0px;
     padding-left: 5px;
@@ -1917,8 +1917,8 @@ body.ng-scope div.row div.small-12.columns div.row div.small-12.large-12.ng-bind
 
 #tableOfContents {
     position: absolute;
-    top:10%;
-    left: 50%;
+    top:18%;
+    left: 25%;
     background: #EEE;
     border: 1px solid #fff;
     height: 300px;
@@ -2289,4 +2289,14 @@ body nav.top-bar.top-bar-logged-in {
 
  ul.profile {
      list-style: none;
+ }
+
+ p.angelStory {
+     display: block;
+     width: auto;
+     height: auto;
+     max-height: 140px !important;
+     padding: 5px;
+     margin: 0px 0px 10px 0px;
+     overflow: auto;
  }

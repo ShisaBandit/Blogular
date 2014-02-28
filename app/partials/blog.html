@@ -91,8 +91,10 @@
                 </div>
                 <li ng-repeat="entry in entries | filter:search.search | bySubgroup:subgroup">
                     <div style="background-image: url({{entry.titleImage}})" ng-style="getBackImg(entry._id)" class="memProfilePreview"  ng-class="{error:pets, pets:pets}">
-                        <h6   ng-class="{error:pets, petsTitle:pets}">
-                            <a href="#/{{type}}/{{entry.author}}">{{entry.lastName}}, {{entry.firstName}}</a>
+                        <h6 ng-class="{error:pets, petsTitle:pets}" ng-switch on="type">
+                                <a href="#/{{type}}/{{entry.author}}" ng-switch-when="pet">{{entry.lastName}}, {{entry.firstName}}</a>
+                                <a href="#/{{type}}/{{entry.author}}" ng-switch-when="angel">{{entry.lastName}}, {{entry.firstName}}</a>
+                                <a href="#/{{type}}/{{entry.author}}" ng-switch-when="group">{{entry.title}}</a>
                         </h6>
                         <a href="#/{{type}}/{{entry.author}}">
                             <img src="/uploads/{{ entry.profilePicPortrait }}"

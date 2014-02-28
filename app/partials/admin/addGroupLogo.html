@@ -1,0 +1,14 @@
+<div ng-controller="AddGroupCtrl">
+       <h3>Upload an image for your group's logo</h3>
+        <dropzone
+             url="/uploadportrait"
+                  class="dropzone"
+                  id="portraitDropzone"
+                  autoupload="false"
+                  maximages="1"
+                  addRemoveLinks="true"
+                >
+        </dropzone>
+
+    <a ng-click="submitspread()" class="button">Upload</a>
+</div>
