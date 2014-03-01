@@ -44,7 +44,7 @@ var app = angular.module('YoMemorialApp', [
             when("/deleteworkshop", {templateUrl: "partials/deleteWorkshop.html"}).
             when("/workshops", {templateUrl: "partials/workshops.html"}).
             when("/groups", {templateUrl: "partials/blog.html"}).
-            when("/pet1s", {templateUrl: "partials/blog.html"}).
+            when("/pets", {templateUrl: "partials/blog.html"}).
             when("/editwall/:wall", {templateUrl: "partials/editwall.html"}).
             when("/passwordrecovery", {templateUrl: "partials/forgotpassword.html"}).
             when("/updatepass", {templateUrl: "partials/updatepass.html"}).
@@ -1056,6 +1056,7 @@ app.controller('SearchBarCtrl', function ($scope, $filter, $rootScope) {
     $rootScope.search = {
         search: ""
     }
+/*
     $scope.$on('$routeChangeSuccess', function (next, current) {
         console.log(current);
         if (current.templateUrl == "partials/blog.html" || current.templateUrl == undefined) {
@@ -1064,7 +1065,7 @@ app.controller('SearchBarCtrl', function ($scope, $filter, $rootScope) {
             $scope.searchViewable = true;
         }
     });
-
+*/
     $scope.clearSearch = function () {
         $rootScope.search.search = "";
     }
@@ -1362,7 +1363,7 @@ app.controller('UserInfoCtrl', function ($scope, userInfoService, $http,$timeout
         skipLabel: 'Exit',
         doneLabel: 'Thanks'
     };
-    $timeout(function() { $scope.CallMe();},0);
+    //$timeout(function() { $scope.CallMe();},0);
     $scope.logout = function () {
         $http.post('/logout').
             success(function () {
