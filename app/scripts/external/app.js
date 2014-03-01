@@ -504,7 +504,17 @@ app.service('userInfoService', function () {
         }
     }
 });
-
+app.service('tempdata', function () {
+    var url = "";
+    return{
+        getUrl: function () {
+            return url;
+        },
+        setUrl: function (value) {
+            url = value;
+        }
+    }
+});
 
 app.controller('HeaderCtrl',function($scope,userInfoService,$rootScope){
 
@@ -2058,7 +2068,7 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, gr
     }
 });
 
-app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing, petgroupsListing, $timeout, $location,formcache) {
+app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing, petgroupsListing, $timeout, $location,formcache,tempdata) {
     $scope.template = {};
     $scope.hidemainform = false;
     $scope.blogId = {blogId: ""};
@@ -2075,6 +2085,9 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
     $scope.form = {};
     $scope.parentData = {
         author:""
+    }
+    $scope.urlget = function () {
+        return tempdata.getUrl();
     }
     $scope.pet = false;
     $scope.createTypeTitle = "";
@@ -2115,6 +2128,7 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
         $scope.form.subgroup = $scope.selectedGroup.code;
     }
     $scope.submitPost = function () {
+
         $scope.save();
         $scope.form.pet = $scope.pet;
         BlogsService.updateBlog($scope.form, function (err, res) {
@@ -2130,7 +2144,8 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
                 }
                 return;
             }
-
+            tempdata.setUrl($scope.form.url);
+            console.log(tempdata.getUrl());
             $scope.blogId.blogId = res.blogId;
             $scope.form.title = "";
             $scope.parentData.author = $scope.form.author;
@@ -2147,7 +2162,10 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
         console.log($scope.addedFile);
         $scope.addedFile = file.file;
     })
+    $scope.parentData.author =  tempdata.getUrl();
+    console.log($scope.parentData.author)
     $scope.submitportrait = function () {
+        console.log($scope.parentData.author);
         /*
         $scope.$parent.parentData.deregPor = $rootScope.$on('uploadedFile', function () {
             console.log("completed now spreadem");
@@ -2155,6 +2173,7 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
             $scope.$apply();
        })
        */
+       $scope.$parent.template.url = 'partials/admin/mwregcom.html';
        $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
 
     }
@@ -2173,6 +2192,7 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
 
         })
         */
+        $scope.$parent.template.url = 'partials/admin/mwregcom.html';
         $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
 
 
@@ -2189,7 +2209,7 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
     };
 });
 
-app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing,formcache) {
+app.controller('AddGroupCtrl', function ($scope, BlogsService, Blog, $rootScope, groupsListing,formcache,tempdata,$location) {
     $scope.template = {};
     $scope.hidemainform = false;
     $scope.blogId = {blogId: ""};
@@ -2228,6 +2248,7 @@ $scope.header = "Create a Group";
                 }
                 return;
             }
+            tempdata.setUrl($scope.form.author);
             $scope.reset();
             $scope.blogId.blogId = res.blogId;
             $scope.parentData.author = $scope.form.author;
@@ -2250,19 +2271,17 @@ $scope.header = "Create a Group";
         console.log($scope.addedFile);
         $scope.addedFile = file.file;
     })
+    $scope.parentData.author = tempdata.getUrl();
     $scope.submitportrait = function () {
-        $scope.$parent.parentData.deregPor = $rootScope.$on('uploadedFile', function () {
-            console.log("adding group logo file");
-            $scope.$parent.template.url = 'partials/admin/addGroupBG.html';
-            $scope.$apply()
-        })
+        $location.path("group/"+$scope.parentData.author)
         $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
 
     }
     $scope.submitspread = function () {
-        $scope.$parent.parentData.deregPor();
+        //$scope.$parent.parentData.deregPor();
         console.log("addedfile");
         console.log($scope.addedFile);
+        /*
         $scope.deregSpread = $rootScope.$on('uploadedFile', function () {
             //$scope.$parent.template.url = 'partials/admin/mwregcom.html';
             $scope.$parent.template.url = '';
@@ -2271,6 +2290,8 @@ $scope.header = "Create a Group";
             $location.path("/group/"+$scope.$parent.parentData.author)
             $scope.$apply()
         })
+        */
+
         $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
 
 
