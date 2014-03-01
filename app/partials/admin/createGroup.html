@@ -3,7 +3,7 @@
         <div class="twelve columns offsetHeight" role="content">
             <div id="mainform" ng-hide="hidemainform">
                 <h1><span ng-bind="header"></span></h1>
-                <div ng-click="reset()" class="button"></div>
+
 
                 <div id="log"></div>
                 <h2 class="subHeader">Create Private Group</h2>
@@ -53,6 +53,7 @@
                     <br />
                     <p>
                         <a ng-click="submitPost()" class="button" resetOnSubmit="true">On to the Next Step</a>
+                        <div ng-click="reset()" class="button">Reset</div>
 
                     </p>
                 </div>

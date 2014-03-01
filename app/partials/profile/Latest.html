@@ -2,7 +2,7 @@
 
   <div class="small-7 large-8 columns">
       <div class="row" infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='0'>
-          <p>{{ entry.text }}</p>
+          <p class="angelStory">{{ entry.text }}</p>
         <div id="contentHeader" class="small-12 columns show-for-medium-up">
             <h2 class="contentHeaderTitle">Start a New Conversation</h2>
         </div>
@@ -27,7 +27,7 @@
           </div>
         <div ng-show="menu.photo" id="UploadBox">
             <p>
-                <b>*You can create beautiful photo montages of your Angel and family at <a href="http://imikimi.com" target="_blank">imikimi.com</a>. Once you create
+                <b>*You can create beautiful photo montages of your Angel and family and create cover photos for your timeline for the holidays, etc at <a href="http://imikimi.com" target="_blank">imikimi.com</a>. Once you create
                     them there, upload them to your gallery on this panel!</b>
             </p>
             <h2 class="dark">Photo Uploader: Drag and drop image files on the box</h2>
@@ -36,7 +36,7 @@
             </div>
             <input type="text" ng-model="photoAdded.photoPostText" class="addNewPost small-10 columns"
                    placeholder="Tell us about these photos"/>
-            <div ng-show="photoAdded.show" ng-click="menu.photo=false;addPhotoToStream()" class="button">You have added a photo Click here to add to Stream.</div>
+            <div ng-show="photoAdded.show" ng-click="menu.photo=false;addPhotoToStream()" class="button">You have added a photo. Click here to post to Stream.</div>
             <div ng-show="photoAdded.show" ng-click="menu.photo=false;clearPhotosFromDropzone()" class="button">Finished</div>
             <div ng-hide="photoAdded.show" ng-click="menu.photo=false" class="button">Finished</div>
 

@@ -5,17 +5,26 @@
                         <div class="small-12 large-12 columns">
                             <div class="small-2 columns"><!--<div id="portraitpic">-->
                                 <img id="portrait" src="/uploads/{{ entry.profilePicPortrait }}"><br/>
+                            <div ng-switch on="parentObject.type">
+                                <span ng-switch-when="group">{{ entry.title }}</span>
+                                <span ng-switch-when="angel">{{ entry.firstName }} {{ entry.lastName }}</span>
+                                <span ng-switch-when="pet">{{ entry.firstName }} {{ entry.lastName }}</span>
+                            </div>
                                 {{ entry.firstName }} {{ entry.lastName }}
                                 <nav class="wallGroup animate-show show-for-medium-up" style="padding-top: 0px;margin-top: -5px;">
                                     <ul>
                                         <li ng-click="loadPage('Latest')">Stream</li>
-                                        <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')">Anniversaries</li>
+                                        <div ng-switch on="parentObject.type">
+                                            <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')" ng-switch-when="group">Events</li>
+                                            <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')" ng-switch-when="angel">Anniversaries</li>
+                                            <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')" ng-switch-when="pet">Anniversaries</li>
 
+                                        </div>
                                         <li if-authed="show" ng-click="loadPage('friendsandfamily')">
                                             <div ng-switch on="parentObject.type">
-                                                <span ng-switch-when="group">Member</span>
-                                                <span ng-switch-when="angel">Family and Friends</span>
-                                                <span ng-switch-when="pet">Family and Friends</span>
+                                                <span ng-switch-when="group">Members</span>
+                                                <span ng-switch-when="angel">Family & Friends</span>
+                                                <span ng-switch-when="pet">Family & Friends</span>
 
                                             </div>
                                         </li>
@@ -26,7 +35,11 @@
                             </div>
                             <div class="small-10 large-10 columns">
                                 <section class="section memNav" if-authed="show">
-                                    <h2 style="padding-top: 0px; color: #47569B;margin-bottom: -3px;">Welcome to {{ entry.firstName }}'s Wall.</h2>
+                                    <div ng-switch on="parentObject.type">
+                                        <h2 style="padding-top: 0px; color: #47569B;margin-bottom: -3px;" ng-switch-when="group"> Welcome to the {{ entry.title }} private group</h2>
+                                        <h2 style="padding-top: 0px; color: #47569B;margin-bottom: -3px;" ng-switch-when="angel">Welcome to {{ entry.firstName }}'s Wall.</h2>
+                                        <h2 style="padding-top: 0px; color: #47569B;margin-bottom: -3px;" ng-switch-when="pet">Welcome to {{ entry.firstName }}'s Wall.</h2>
+                                    </div>
                                 </section>
                                 <div ng-include="template" class="templatePortal large-12 stream"></div>
                             </div>

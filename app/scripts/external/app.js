@@ -2235,7 +2235,7 @@ $scope.header = "Create a Group";
             $scope.form.author = "";
             $scope.form.text = "";
             $scope.message = "";
-            $scope.template.url = '/partials/admin/addGroupLogohtml';
+            $scope.template.url = '/partials/admin/addGroupLogo.html';
             $scope.hidemainform = true;
         });
     }
@@ -2251,8 +2251,8 @@ $scope.header = "Create a Group";
     })
     $scope.submitportrait = function () {
         $scope.$parent.parentData.deregPor = $rootScope.$on('uploadedFile', function () {
-            console.log("completed now spreadem");
-            $scope.$parent.template.url = 'partials/admin/addspread.html';
+            console.log("adding group logo file");
+            $scope.$parent.template.url = 'partials/admin/addGroupBG.html';
             $scope.$apply()
         })
         $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
@@ -2265,7 +2265,7 @@ $scope.header = "Create a Group";
         $scope.deregSpread = $rootScope.$on('uploadedFile', function () {
             //$scope.$parent.template.url = 'partials/admin/mwregcom.html';
             $scope.$parent.template.url = '';
-            console.log("adding portrait file")
+            console.log("completed now spreadem")
             console.log($scope.parentData)
             $location.path("/group/"+$scope.$parent.parentData.author)
             $scope.$apply()
