@@ -191,7 +191,7 @@ exports.getABlog = function (req, res) {
         if (err)console.log(err);
 
         Blog.find({'author': id}).lean().exec(function (err, post) {
-            if (post === undefined)return res.send(404);
+            if (post[0] === undefined)return res.send(404);
             if (user != null) {
                 if (post[0].owner_id == req.session.passport.user) {
                     matchfound = true
@@ -260,6 +260,7 @@ exports.blogdataforuser = function (req, res) {
             data.firstName = blogs[blog].firstName;
             data.lastName = blogs[blog].lastName;
             data.title = blogs[blog].title;
+            data.profilePicPortrait = blogs[blog].profilePicPortrait;
             buffer.push(data);
         }
         res.send(JSON.stringify(buffer));
@@ -321,11 +322,25 @@ exports.updateBlog = function (req, res) {
                 //take the blog and update it with the new comment
                 //TODO:Highly ineffecient!!! for the network rework this to only have the comment that needs be updated sent and
                 //sorted
-                Blog.findOneAndUpdate({'_id': req.params.id}, req.body, function (err, doc) {
+                console.log(req.body.members);
+                var updateObj = {
+                    title:req.body.title,
+                    author:req.body.author,
+                    firstName:req.body.firstName,
+                    lastName:req.body.lastName,
+                    text:req.body.text,
+                    dob:req.body.dob,
+                    subgroup:req.body.subgroup,
+                    memorialDate:req.body.memorialDate
+
+
+                }
+                Blog.findOneAndUpdate({'_id': req.params.id}, updateObj, function (err, doc) {
                     if (err) {
                         console.log(err);
-                        res.end(JSON.stringify({result: 'error'}));
+                        return res.send('error', 500);
                     }
+                    if(!doc)return res.send('error', 500);
                     if (doc.comments == undefined || doc.comments.length < 1) {
                         //do nothing for now
                         doc.updateDate = Date.now();

@@ -14,7 +14,7 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
         $scope.groups = false;
         $scope.filtersubgroup = $scope.subgroup;
         if("/pets" == $location.path()){
-            $scope.type = "pet"
+            $scope.type = "pet";
             $scope.pets = true;
             $scope.groups = false;
             console.log("We are in pets");
@@ -88,26 +88,33 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
         $scope.busy = false;
         $scope.skip = 0;
         $scope.limit = 8;
-
+        //get Some entries as soon as we load the page
+        //get the entries as we scroll down the page
         $scope.nextPage = function(){
+            $scope.getSomeEntries();
+        }
+
+        $scope.getSomeEntries = function () {
             if($scope.busy)return;
-                $scope.busy = true;
-                BlogsService.paginatedBlogs($scope.skip,$scope.limit,function(blogs){
-                    for(var i = 0;i<blogs.length;i++){
-                        console.log("getting groups and looping")
+            $scope.busy = true;
+            BlogsService.paginatedBlogs($scope.skip,$scope.limit,function(blogs){
+                for(var i = 0;i<blogs.length;i++){
+                    console.log("getting groups and looping")
 
 //                        if(blogs[i].group == false || blogs[i].group == undefined){
-                            if("/pets" == $location.path() && blogs[i].pet == true){
-                                $scope.entries.push(blogs[i]);
-                            }else if("/groups" == $location.path() && blogs[i].group == true){
-                                $scope.entries.push(blogs[i]);
-                            }else if($location.path() == "/" && blogs[i].group != true && blogs[i].pet != true){
-                                $scope.entries.push(blogs[i]);
-                            }
-
+                    if("/pets" == $location.path() && blogs[i].pet == true){
+                        $scope.entries.push(blogs[i]);
+                    }else if("/groups" == $location.path() && blogs[i].group == true){
+                        $scope.entries.push(blogs[i]);
+                    }else if($location.path() == "/" && blogs[i].group != true && blogs[i].pet != true){
+                        $scope.entries.push(blogs[i]);
                     }
-                    $scope.skip += $scope.limit;
-                    $scope.busy = false;
-                })
-           }
+
+                }
+                $scope.skip += $scope.limit;
+                $scope.busy = false;
+            })
+        }
+        $scope.getSomeEntries();
+
     });

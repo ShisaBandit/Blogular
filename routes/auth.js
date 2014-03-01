@@ -143,8 +143,8 @@ exports.register = function (req, res) {
         .notNull().isDate();
     req.checkBody('groupcode', 'Must enter who you lost.')
         .notNull();
-    req.checkBody('betacode', 'Incorrect beta code.')
-        .notNull().equals('hardcoded')
+    /*req.checkBody('betacode', 'Incorrect beta code.')
+        .notNull().equals('hardcoded')*/
 
     if (password == username) {
         errorMessage.push('Password can not be the same as username');

@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"ext",
+				"exports.extend"
+			],
+			[
 				"seld",
 				"$scope.selectedSubgroup"
 			],
@@ -48,36 +52,34 @@
 	"buffers":
 	[
 		{
-			"file": "public/js/app/blog.js",
+			"file": "app/index.html",
 			"settings":
 			{
-				"buffer_size": 79325,
+				"buffer_size": 20084,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "Package Control Messages\n========================\n\nSublimeGit:\n----------\n\n  SublimeGit 1.0.26\n  =================\n  \n  Bug Fixes:\n  ----------\n   - Try to fix memory leak regarding git_commit_pedantic. This involves:\n       1. Turning it off by default.\n       2. Making sure that only git commit buffers are affected.\n       3. Making sure that the EventListener does as little work as possible.\n      (Issue #76)\n  \n  \n  Documentation\n  -------------\n   - Corrected examples in documentation for git_merge_flags. (Issue #77)\n  \n",
+			"file": "app/partials/blog.html",
 			"settings":
 			{
-				"buffer_size": 531,
-				"line_ending": "Unix",
-				"name": "Package Control Messages",
-				"scratch": true
-			}
-		},
-		{
-			"file": "public/partials/giftShop.html",
-			"settings":
-			{
-				"buffer_size": 1208,
+				"buffer_size": 8068,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "public/js/external/controller/GiftShopCtrl",
+			"file": "app/scripts/external/GlobalCtrls/BlogListCtrl.js",
 			"settings":
 			{
-				"buffer_size": 732,
+				"buffer_size": 4582,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/raygarner/Documents/NodeApps/Web/CodeWars/app.js",
+			"settings":
+			{
+				"buffer_size": 11264,
 				"line_ending": "Unix"
 			}
 		}
@@ -157,6 +159,9 @@
 	},
 	"file_history":
 	[
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/partials/giftShop.html",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/js/app/blog.js",
+		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/js/external/controller/GiftShopCtrl",
 		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/app.js",
 		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/partials/editprofile.html",
 		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/partials/editwall.html",
@@ -168,7 +173,6 @@
 		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/js/external/resources/apiV2.js",
 		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/partials/rules.html",
 		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/js/tabcontent.js",
-		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/js/app/blog.js",
 		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/partials/blogEntry.html",
 		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/partials/profile/videos.html",
 		"/Users/raygarner/Documents/NodeApps/Web/MemorialWall/public/partials/profile/pics.html",
@@ -206,6 +210,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"ContentCtrl",
 			"registra",
 			"EditWallCtrl",
 			"tabs",
@@ -248,118 +253,11 @@
 			[
 				{
 					"buffer": 0,
-					"file": "public/js/app/blog.js",
+					"file": "app/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 79325,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"easy_motion_mode": false,
-							"highlight_line": false,
-							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true,
-							"vintage":
-							{
-								"action": null,
-								"action_digits":
-								[
-								],
-								"cancel_action": false,
-								"expecting_register": false,
-								"expecting_user_input": false,
-								"mode": 2,
-								"motion": null,
-								"motion_digits":
-								[
-								],
-								"next_mode": 2,
-								"next_mode_command": null,
-								"register": null,
-								"stashed_action": null,
-								"user_action_input": null,
-								"user_input": null,
-								"user_motion_input": null,
-								"xpos": 0
-							},
-							"word_separators": "./\\\\()\\\"\\'-:,.;<>~!@#%^&*|+=[]{}`~?"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 531,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								531,
-								531
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true,
-							"vintage":
-							{
-								"action": null,
-								"action_digits":
-								[
-								],
-								"cancel_action": false,
-								"expecting_register": false,
-								"expecting_user_input": false,
-								"mode": 2,
-								"motion": null,
-								"motion_digits":
-								[
-								],
-								"next_mode": 2,
-								"next_mode_command": null,
-								"register": null,
-								"stashed_action": null,
-								"user_action_input": null,
-								"user_input": null,
-								"user_motion_input": null,
-								"xpos": 0
-							},
-							"word_wrap": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "public/partials/giftShop.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1208,
+						"buffer_size": 20084,
 						"regions":
 						{
 						},
@@ -374,88 +272,104 @@
 						{
 							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 4,
-							"translate_tabs_to_spaces": true,
-							"vintage":
-							{
-								"action": null,
-								"action_digits":
-								[
-								],
-								"cancel_action": false,
-								"expecting_register": false,
-								"expecting_user_input": false,
-								"mode": 2,
-								"motion": null,
-								"motion_digits":
-								[
-								],
-								"next_mode": 2,
-								"next_mode_command": null,
-								"register": null,
-								"stashed_action": null,
-								"user_action_input": null,
-								"user_input": null,
-								"user_motion_input": null,
-								"xpos": 0
-							}
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 4077.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "public/js/external/controller/GiftShopCtrl",
+					"buffer": 1,
+					"file": "app/partials/blog.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 732,
+						"buffer_size": 8068,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								230,
-								230
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 4,
-							"translate_tabs_to_spaces": true,
-							"vintage":
-							{
-								"_bottom_top": false,
-								"action": null,
-								"action_digits":
-								[
-								],
-								"cancel_action": false,
-								"expecting_register": false,
-								"expecting_user_input": false,
-								"mode": 1,
-								"motion": null,
-								"motion_digits":
-								[
-								],
-								"next_mode": 2,
-								"next_mode_command": null,
-								"register": null,
-								"stashed_action": null,
-								"user_action_input": null,
-								"user_input": null,
-								"user_motion_input": null,
-								"xpos": 0
-							}
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 544.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/scripts/external/GlobalCtrls/BlogListCtrl.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4582,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								873,
+								873
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Users/raygarner/Documents/NodeApps/Web/CodeWars/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11264,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8429,
+								8429
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"word_separators": "./\\\\()\\\"\\'-:,.;<>~!@#%^&*|+=[]{}`~?"
+						},
+						"translation.x": -0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -495,6 +409,10 @@
 	"output.exec":
 	{
 		"height": 246.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
 	},
 	"output.git-push":
 	{

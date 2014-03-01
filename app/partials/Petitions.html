@@ -34,11 +34,21 @@
                 <tab heading="Create a Petition"><section>
                     <div ng-class="{spinner:spinner}"></div>
                     <div class="small-12 columns">
-                        <h2 style="color: #2164AA;">Create a petition</h2>
-                        Give your petition a name. <input type="text" ng-hide="textorphoto" ng-model="title"/>
-                        What is your petition for? <input type="text" ng-hide="textorphoto" ng-model="text"/>
+                        <div ng-show="again">
+                            <h2 style="color: #2164AA;">Create a petition</h2>
+                            Give your petition a name. <input type="text" ng-hide="textorphoto" ng-model="title"/>
+                            What is your petition for? <input type="text" ng-hide="textorphoto" ng-model="text"/>
+                            <div ng-class="{spinner:spinner}"></div>
+                            <br />
+                            <div ng-bind="message"></div>
 
-                        <button ng-click="submit()" class="button postfix">Submit</button>
+                            <button ng-click="submit()" class="button postfix">Submit</button>
+                        </div>
+                        <div ng-hide="again">
+                            <div ng-bind="message"></div>
+
+                            <button ng-click="again = true" class="button postfix">Create Another partition??</button>
+                        </div>
                     </div>
                 </section></tab>
         </tabset>

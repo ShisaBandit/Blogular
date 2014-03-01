@@ -44,7 +44,7 @@ var app = angular.module('YoMemorialApp', [
             when("/deleteworkshop", {templateUrl: "partials/deleteWorkshop.html"}).
             when("/workshops", {templateUrl: "partials/workshops.html"}).
             when("/groups", {templateUrl: "partials/blog.html"}).
-            when("/pets", {templateUrl: "partials/blog.html"}).
+            when("/pet1s", {templateUrl: "partials/blog.html"}).
             when("/editwall/:wall", {templateUrl: "partials/editwall.html"}).
             when("/passwordrecovery", {templateUrl: "partials/forgotpassword.html"}).
             when("/updatepass", {templateUrl: "partials/updatepass.html"}).
@@ -1848,13 +1848,16 @@ app.controller('DeletePicsCtrl', function ($rootScope,$scope,$http, DeletePicsFa
 })
 app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams) {
    // $scope.petitions = [];
-    $scope.spinner = true;
-
-
+    $scope.spinner = false;
+    $scope.message = "";
+    $scope.again = true;
     $scope.submitedit = function () {
+        $scope.spinner = true;
         $http.post('updatePetition',{id:$routeParams.id, title: $scope.title , text:$scope.text}).
             success(function (data) {
                 console.log(data)
+                $scope.message = "You have successfully create a partition "+$scope.title;
+                $scope.again = false;
             }).error(function (err) {
                 console.log(err)
             })
@@ -1863,10 +1866,13 @@ app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams) {
     $scope.submit = function () {
         var text = $scope.text;
         var title = $scope.title;
+        $scope.spinner = true;
         api.createResource('Petition', {text: text, title: title}, function () {
             api.getResourceById('Petition', 'all', function (petitions) {
                 $scope.petitions = petitions;
                 $scope.spinner = false;
+                $scope.message = "You have successfully created a partition "+$scope.title;
+                $scope.again = false ;
             });
         });
         $scope.title = "";
@@ -2141,18 +2147,21 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
         $scope.addedFile = file.file;
     })
     $scope.submitportrait = function () {
-       $scope.$parent.parentData.deregPor = $rootScope.$on('uploadedFile', function () {
+        /*
+        $scope.$parent.parentData.deregPor = $rootScope.$on('uploadedFile', function () {
             console.log("completed now spreadem");
             $scope.$parent.template.url = 'partials/admin/addspread.html';
-            $scope.$apply()
-        })
-        $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
+            $scope.$apply();
+       })
+       */
+       $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
 
     }
     $scope.submitspread = function () {
-        $scope.$parent.parentData.deregPor();
+        //$scope.$parent.parentData.deregPor();
         console.log("addedfile");
         console.log($scope.addedFile);
+        /*
         $scope.deregSpread = $rootScope.$on('uploadedFile', function () {
             //$scope.$parent.template.url = 'partials/admin/mwregcom.html';
             $scope.$parent.template.url = '';
@@ -2162,6 +2171,7 @@ app.controller('AddBlogCtrl', function ($scope, BlogsService, Blog, $rootScope, 
             $scope.$apply()
 
         })
+        */
         $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
 
 
@@ -2524,7 +2534,7 @@ app.controller('FindNewMembersBlockCtrl', function ($scope, api, $http, $routePa
 });
 
 
-app.controller('EditWallCtrl', function ($rootScope, $http, $scope, api, $routeParams, BlogsService, groupsListing, $timeout) {
+app.controller('EditWallCtrl', function ($rootScope, $http, $scope, api, $routeParams, BlogsService, groupsListing, $timeout,$location) {
     $scope.template = {};
     $scope.portrait = {portrait: ""};
     $scope.spread = {spread: ""};
@@ -2535,14 +2545,22 @@ app.controller('EditWallCtrl', function ($rootScope, $http, $scope, api, $routeP
     $scope.selectedGroup = $scope.groups[0];
     $scope.isGroup = false;
     $scope.titleText = "Angel";
-    $scope.reset = function () {
 
+    $scope.reset = function () {
     }
+
     $scope.checked = function () {
         console.log($scope.selectedGroup)
         $scope.form.subgroup = $scope.selectedGroup.code;
     }
-    api.getResourceByField('Blog', {field: 'author', query: $routeParams.wall}, function (data) {
+    var qAuthor;
+    if($scope.template.url == '/partials/admin/editportrait.html' || $scope.template.url == 'partials/admin/editspread.html'){
+        qAuthor = $scope.form.author;
+    }else{
+        qAuthor = $routeParams.wall;
+    }
+    console.log(qAuthor);
+    api.getResourceByField('Blog', {field: 'author', query: qAuthor}, function (data) {
         console.log(data);
         $scope.form = data[0];
         $scope.portrait.portrait = data[0].profilePicPortrait;
@@ -2573,6 +2591,7 @@ app.controller('EditWallCtrl', function ($rootScope, $http, $scope, api, $routeP
 
         $http.post('blog/' + $scope.form._id, $scope.form).
             success(function (data) {
+                $routeParams.wall = $scope.form.author;
                 $scope.form = data;
                 $scope.template.url = '/partials/admin/editportrait.html';
                 $scope.hidemainform = true;
@@ -2620,7 +2639,7 @@ app.controller('EditWallCtrl', function ($rootScope, $http, $scope, api, $routeP
 
             $scope.blogId.blogId = res.blogId;
             $scope.form.title = "";
-            $scope.form.author = "";
+            //$scope.form.author = "";
             $scope.form.text = "";
             $scope.message = "";
             $scope.template.url = '/partials/admin/editportrait.html';
@@ -2658,16 +2677,20 @@ app.controller('EditWallCtrl', function ($rootScope, $http, $scope, api, $routeP
 
     }
     $scope.nochange = function (type) {
-        console.log(type);
+        if(type == 'fin'){
+            $location.path('angel/'+$scope.form.author);
+            $scope.form.author = "";
+        }
+        $scope.$parent.template.url = 'partials/admin/'+type+'.html';
+
+        /*
         if (type.portrait != undefined)
             $scope.$parent.template.url = 'partials/admin/editspread.html';
-        // $scope.$apply()
-
+        //$scope.$apply()
         if (type.spread != undefined)
             $scope.$parent.template.url = 'partials/admin/mwregcom.html';
         //$scope.$apply()
-
-
+        */
     }
 
     $scope.open = function (no) {
