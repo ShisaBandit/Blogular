@@ -27,8 +27,7 @@
         "connect-mongo": "0.3.x",
         "validator": "1.x.x",
         "express-validator": "0.8.x",
-        "swig-email-templates":"0.7.0",
-        "request":"2.34.0"
+        "swig-email-templates":"0.7.0"
     },
   "devDependencies": {
     "grunt": "~0.4.1",
