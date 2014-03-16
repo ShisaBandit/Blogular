@@ -32,16 +32,21 @@ exports.join = function (req,res) {
     var requestee;
     var blogId = req.params.blog;
     Blog.findOne({author:blogId}).populate('user').exec(function(err,blog) {
+        if(!blog)return res.send(410,'error');
         requestee = blog.user;
         User.findOne({_id:req.session.passport.user}, function (err,user) {
+            if(!blog)return res.send(410,'error');
             console.log(user);
             requester  = user;
             //send message to allow invitation by clicking on link.
-            var message = 'Hey someone want to joing your wall<b>testhtml</b> '+blog.title+' info click here to let them in <a href="http://' +
+            var message = 'Hey someone wants to join your wall <b>'+blog.title+'</b> info click here to let them in <a href="http://' +
                 'localhost:3000/invite/'+blog.author+'/'+requester._id+'">click to allow</a>';
             SendMessage(requester.username,requestee.username,message,req,res, function () {
                 //send email to allow invitation
-                SendEmail(requestee.email,requester.email,message);
+                message = 'Hey someone wants to join your wall <b>'+blog.title+
+                    '</b> Go to your <b>Message Center</b> in your <b>User profile</b> to give them access';
+
+                SendEmail(requestee.email,requester.email,message,'Wall request!');
             })
         })
 
@@ -1338,11 +1343,12 @@ function SendGiftNotice(to, user, wall, gifts) {
         console.log(response);
     })
 }
-function SendEmail(to, user, htmlMessage) {
+function SendEmail(to, user, htmlMessage,subject) {
+    if(!subject)subject = "Someone sent you a gift";
     var mailOptions = {
         from: "noreply@AngelsOfEureka.org",
         to: to,
-        subject: "Someone sent you a gift",
+        subject:subject,
         html: htmlMessage
     }
     smtpTransport.sendMail(mailOptions, function (error, response) {
