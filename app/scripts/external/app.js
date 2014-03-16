@@ -2,7 +2,7 @@ var app = angular.module('YoMemorialApp', [
         'twitterService', 'userService', 'http-auth-interceptor', 'login', 'socketio', 'updateService',
         'Scope.onReady', 'blogResource', 'loaderModule', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries', 'Plugin.Controller.GroupEntries',
         'blogFilter', 'blogService', 'infinite-scroll', 'dropzone', 'apiResource', 'ui.bootstrap','ngAnimate','ngRoute','adaptive.detection','MusicPlayer.Controller',
-        'controller.GiftShop','Cache','ShadowboxModule','angular-intro'
+        'controller.GiftShop','Cache','ShadowboxModule','angular-intro','ngSanitize'
     ]).
     config(function ($routeProvider,$sceProvider) {
        // $sceProvider.enabled(false);
@@ -554,7 +554,15 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         youtube:"",
         animoto:""
     }
-
+    $scope.join = function () {
+        $http.get('join/'+$routeParams.id).
+            success(function () {
+                console.log('success');
+            }).
+            error(function () {
+                console.log('error');
+            });
+    }
     socket.connect();
     $scope.entry = "";
     $scope.viewers = [];
@@ -694,7 +702,6 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         }
     }
 
-
     $scope.submitEvent = function () {
         var eventPost = {
             event: $scope.eventData.event,
@@ -739,7 +746,6 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
     socket.on('initialuserlist', function (data) {
         $scope.viewers = data;
     });
-
 
     socket.on('commentsupdated', function () {
         console.log("commentsupdated received");
@@ -802,7 +808,12 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
             console.log(blog[0].limited);
             console.log(blog[0]);
             $scope.entry = blog[0];
-            console.log('wall limited? ' + blog[0].limited)
+
+            var d = new Date( blog[0].memorialDate);
+            var curr_date = d.getDate();
+            var curr_month = d.getMonth() + 1; //Months are zero based
+            var curr_year = d.getFullYear();
+            $scope.entry.memorialDate = curr_date+"/"+curr_month+"/"+curr_year;
             if (blog[0].limited) {
                 $scope.profileMenuViewable = false;
                 $location.path("/public/" + $routeParams.id);
@@ -835,7 +846,6 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         socket.removeAllListeners('commentsupdated');
         socket.removeAllListeners('updateusers');
     });
-
 });
 
 app.controller('groupEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http, dropzone, api) {

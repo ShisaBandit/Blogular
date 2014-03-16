@@ -7,6 +7,7 @@ var moment = require('moment');
 var Blog = models.Blog;
 var User = models.User;
 var Update = models.Update;
+var Message = models.Message;
 var Workshop = models.Workshop;
 var PICTYPE = 1;
 var VIDEOTYPE = 2;
@@ -26,6 +27,104 @@ var EventEmitter = require('events').EventEmitter;
 var path = require('path');
 exports.messageEmitter = messageEmitter = new EventEmitter();
 
+exports.join = function (req,res) {
+    var requester;
+    var requestee;
+    var blogId = req.params.blog;
+    Blog.findOne({author:blogId}).populate('user').exec(function(err,blog) {
+        requestee = blog.user;
+        User.findOne({_id:req.session.passport.user}, function (err,user) {
+            console.log(user);
+            requester  = user;
+            //send message to allow invitation by clicking on link.
+            var message = 'Hey someone want to joing your wall<b>testhtml</b> '+blog.title+' info click here to let them in <a href="http://' +
+                'localhost:3000/invite/'+blog.author+'/'+requester._id+'">click to allow</a>';
+            SendMessage(requester.username,requestee.username,message,req,res, function () {
+                //send email to allow invitation
+                SendEmail(requestee.email,requester.email,message);
+            })
+        })
+
+    })
+}
+
+var SendMessage = function (from,to,message,req,res,callback) {//data from to
+    // var to = data.to;
+    console.log("sending message")
+    var index = to.indexOf(':');
+    if(index>0){
+        to = data.to.substring(0,index);
+    }
+    //data.to = to;
+    //var from;
+    // var message = data.message;
+    //TODO:add check for verifying user can receive a message. !!
+    //data.from = req.session.passport.user;
+    //Find the current user
+    models.User.findOne({_id:req.session.passport.user},function(err,fromdoc){
+       // from = data.from = fromdoc.username;
+        //find the user we are sending amessage to
+        models.User.findOne({username:to},function(err,todoc){
+            if(err)console.log(err);
+            //if we didnt find one ent this callback a error and end this func
+            if(todoc == undefined){
+                console.log("not sending message");
+                var messageToUser = "No user by that name";
+                //callback(data,messageToUser);
+                return;
+            }
+            var messagedUsersTo = todoc.messagedUsers;
+            var added = false;
+            //check if we are adding a new messaged user
+            for(var user in messagedUsersTo){
+                if(messagedUsersTo[user].user == from){
+                    added = true;
+                }
+            }
+            todoc.notifications.push({text:"You have a new message from "+from});
+            if(!added){
+                todoc.messagedUsers.push({user:from});
+            }
+            var messagedUsersFrom = fromdoc.messagedUsers;
+            var added = false;
+            var addedTo = false;
+            //check if we are adding a new messaged user
+            for(var user in messagedUsersFrom){
+                if(messagedUsersFrom[user].user == from){
+                    added = true;
+                }
+                if(messagedUsersFrom[user].user == to){
+                    addedTo = true;
+                }
+            }
+
+            if(!added){
+                fromdoc.messagedUsers.push({user:from});
+            }
+            if(!addedTo){
+                fromdoc.messagedUsers.push({user:to});
+            }
+            fromdoc.save(function(err){
+                if(err)console.log(err)
+            })
+            todoc.save(function(err,saveddoc){
+                if(err)console.log(err)
+
+                messageEmitter.emit('notification_messagereceived',todoc._id,"You have a new message from "+from,saveddoc.notifications[saveddoc.notifications.length-1]._id);
+                var messaged = new Message({from:from,to:to,message:message}).
+                    save(function (err) {
+                    if(err)console.log(err);
+                });
+
+            })
+            callback();
+        });
+
+    })
+
+
+
+}
 exports.upcomingDates = function (req, res) {
     User.findOne({_id: req.session.passport.user}).populate('memwalls').exec(function (err, user) {
         if(!user)return res.send(200,"none");
@@ -90,7 +189,6 @@ exports.upcomingDates = function (req, res) {
          */
     });
 }
-
 exports.notifications = function (req, res) {
 
     User.findOne({_id: req.session.passport.user}, function (err, user) {
@@ -364,8 +462,7 @@ exports.updateBlog = function (req, res) {
         console.log("rejected")
         if (errors) {
             console.log(errors);
-            res.send(errors, 500);
-            return;
+            return res.send(errors, 500);
         }
     });
 
@@ -460,6 +557,7 @@ exports.addTextPost = function (req, res) {
             req.body.gravatar = calcMD5(user.email);
 
             req.body.user_id = user;
+            if(blog == null || blog == undefined)return;
             blog.postText.push(req.body);
 
             blog.save(function (err, doc) {

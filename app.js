@@ -314,7 +314,7 @@ app.get('/getInviteBlogUserData/:wallid',passport.ensureAuthenticated,blogRoutes
 app.get('/shoptowall/:user/:wall/:iname/:iqty/:i2name/:i2qty/:i3name/:i3qty/:more',blogRoutes.shopToWall);
 
 app.get('/upcomingdates',blogRoutes.upcomingDates);
-
+app.get('/join/:blog',blogRoutes.join);
 //app.post('/sendAbout',blogRoutes.sendAboutMail);
 
 var server = http.createServer(app).listen(app.get('port'), app.get('ip'), function () {

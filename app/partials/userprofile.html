@@ -239,14 +239,15 @@
                                 -->
                             </div>
                             <br />
-                            <div class="row my-repeat-animation" ng-repeat="message in messages">
-                        <span class="small-30 columns"
-                              style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>{{message.from}}</b>  <i
+                            <div class="row my-repeat-animation" ng-repeat="message in messages" >
+                        <div class="small-30 columns"
+                              style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>{{message.from}}</b>
+                            <i
                                 style="font: x-small serif; color: steelblue;float: right">{{message.date}}</i>
                             <br/>
-                            <span class="small-9 columns">{{message.message}}</span>
+                            <div class="small-9 columns" ng-bind-html="message.message"></div>
                             <br/>
-                        </span>
+                        </div>
                             </div>
                         </section>
                     </div>

@@ -55,7 +55,7 @@
 			"file": "app/index.html",
 			"settings":
 			{
-				"buffer_size": 20084,
+				"buffer_size": 21330,
 				"line_ending": "Unix"
 			}
 		},
@@ -63,7 +63,7 @@
 			"file": "app/partials/blog.html",
 			"settings":
 			{
-				"buffer_size": 8068,
+				"buffer_size": 8361,
 				"line_ending": "Unix"
 			}
 		},
@@ -71,7 +71,7 @@
 			"file": "app/scripts/external/GlobalCtrls/BlogListCtrl.js",
 			"settings":
 			{
-				"buffer_size": 4582,
+				"buffer_size": 4727,
 				"line_ending": "Unix"
 			}
 		},
@@ -210,6 +210,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Web Store",
+			"shop",
 			"ContentCtrl",
 			"registra",
 			"EditWallCtrl",
@@ -248,7 +250,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -257,15 +259,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 20084,
+						"buffer_size": 21330,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								4395,
+								4395
 							]
 						],
 						"settings":
@@ -275,10 +277,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4077.0,
+						"translation.y": 1023.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -287,7 +289,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8068,
+						"buffer_size": 8361,
 						"regions":
 						{
 						},
@@ -308,7 +310,7 @@
 						"translation.y": 544.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -317,15 +319,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4582,
+						"buffer_size": 4727,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								873,
-								873
+								0,
+								0
 							]
 						],
 						"settings":
@@ -338,7 +340,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -361,15 +363,15 @@
 						"settings":
 						{
 							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true,
 							"word_separators": "./\\\\()\\\"\\'-:,.;<>~!@#%^&*|+=[]{}`~?"
 						},
-						"translation.x": -0.0,
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
