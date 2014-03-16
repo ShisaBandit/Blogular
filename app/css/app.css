@@ -623,12 +623,13 @@ h1.sectionHeader {
 }
 
 #contentHeader{
-    display:block;
+    display: block;
     width: 100%;
     clear: both;
-    background-color: #9eafff;
-    background: url('/img/headerCircleBG.png') repeat-x left top;
+    background: url('/img/headerCircleBG.png') repeat-x scroll left top transparent;
     margin-bottom: 20px;
+    height: 26px;
+    line-height: 7px;
 }
 .contentHeader{
     display:block;
@@ -1723,7 +1724,8 @@ input.addNewPost {
 }
 
 #contentHeader .contentHeaderTitle {
-    color: #ffffff;
+    color: #FFF;
+    line-height: 17px;
 }
 
 /*----------------------ANIMATIONS---------------------*/
@@ -2392,8 +2394,10 @@ body nav.top-bar.top-bar-logged-in {
      display: block;
      width: auto;
      height: auto;
-     max-height: 140px !important;
+     max-height: 90px !important;
      padding: 5px;
-     margin: 0px 0px 10px 0px;
+     margin: 0px 0px 10px;
      overflow: auto;
+     font-size: small;
+     border: 2px solid #CCC;
  }
