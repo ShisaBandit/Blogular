@@ -651,8 +651,8 @@ body .primaryContent .shelf .mainBG .row .small-12 .section-container .active .c
 }
 
 .contentContainer{
-    padding: 50px 20px 20px 50px;
-    background: url("/img/background/postTopBg.png") no-repeat 0px 0px;
+    padding: 37px 0px 20px 0px;
+    background: url('/img/background/postTopBg.png') no-repeat scroll 0px 0px transparent;
     overflow: hidden;
 }
 #chat{
@@ -670,7 +670,7 @@ body .primaryContent .shelf .mainBG .row .small-12 .section-container .active .c
          font-style: normal;
          font-weight: 300;
          src: local("Open Sans Light"), local("OpenSans-Light"), url("http://themes.googleusercontent.com/static/fonts/opensans/v6/DXI1ORHCpsQm3Vp6mXoaTaRDOzjiPcYnFooOUGCOsRk.woff") format("woff") !imp;
-     line-height: 30px;
+     line-height: 18px;
  }
 
 body .replycontainer div p {
@@ -953,25 +953,22 @@ body .button {
 }
 
 .postComment {
-    padding: 10px;
-    margin: 0px;
+    padding: 3px;
+    margin: 0px auto;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
     font-weight: bolder;
     font-size: large;
-    background: #D9E9FD;
+    background: none repeat scroll 0% 0% #D9E9FD;
     box-shadow: 2px 2px 2px #132D48;
 }
 
 .postComment input{
-    height: 40px;
-    padding:10px;
-    width: 75%;
+    height: 23px;
+    padding: 2px;
+    width: 99%;
     color: #132D48;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px inset;
-    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px inset;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px inset;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1) inset;
+    margin: 4px;
 }
 
 input.addNewPost {
@@ -2400,4 +2397,30 @@ body nav.top-bar.top-bar-logged-in {
      overflow: auto;
      font-size: small;
      border: 2px solid #CCC;
+ }
+
+ a.sendMsg {
+     width: 220px !important;
+ }
+
+ a.sendMsg img {
+     border: medium none;
+     padding: 0px;
+     margin: -7px 0px 0px -20px;
+ }
+
+ a.button.sendMsg {
+     border: 1px solid #71706B;
+     border-radius: 0px;
+     background: linear-gradient(to bottom, #EFF2FF 0%, #90BFFA 0%, #A5B4FF 44%, #6776B5 86%) repeat scroll 0% 0% transparent;
+     cursor: pointer;
+     font-family: "Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
+     font-weight: normal;
+     line-height: 1px !important;
+     margin: 0px 0px 1rem;
+     position: relative;
+     text-decoration: none;
+     text-align: center;
+     height: 30px !important;
+     padding: 10px !important;
  }
