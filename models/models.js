@@ -165,10 +165,12 @@ var userSchema = mongoose.Schema({
         }
     ]
 });
+
 userSchema.pre('save', function (next) {
     // do stuff
     next();
 });
+
 var messageSchema = mongoose.Schema({
     to:{type:String,required:true},
     from:{type:String,required:true},
