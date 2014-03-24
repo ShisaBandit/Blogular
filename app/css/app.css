@@ -2047,6 +2047,19 @@ div.scrollerBlock {
     background: url("/img/background/colbg2.png")repeat;
 }
 
+ div.scrollerBlock h1 {
+     margin: 0px;
+     font-size: 1.2em;
+     float: left;
+ }
+
+ div.scrollerBlock h2 {
+    margin: 7px 0px 0px 10px;
+    font-size: 0.9em !important;
+    float: left;
+     font-weight: normal !important;
+ }
+
 .pets {
     background: #fff;
 }
@@ -2236,6 +2249,14 @@ body nav.top-bar.top-bar-logged-in {
      text-align: center;
      height: 2.8125rem;
      color: #BDCB80;
+     background: url("/img/miniLogo.png") no-repeat scroll left top transparent;
+ }
+
+ section.tab-bar-section h2 {
+     text-align: center;
+     height: 2.8125rem;
+     color: #8A9948;
+     text-shadow: none;
      background: url("/img/miniLogo.png") no-repeat scroll left top transparent;
  }
 
