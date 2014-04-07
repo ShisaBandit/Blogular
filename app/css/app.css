@@ -875,6 +875,13 @@ datepickercss
     font-size: 0.8125em;
 }
 
+ .button.small.noMrgn {
+     margin-top:0px;
+     margin-bottom: 0px;
+     padding: 0px;
+     font-size: 0.8125em;
+ }
+
 body .button {
     box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5) inset;
     transition: background-color 300ms ease-out 0s;
