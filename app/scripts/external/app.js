@@ -18,6 +18,7 @@ var app = angular.module('YoMemorialApp', [
             when("/angel/:id", {templateUrl: "partials/blogEntry.html"}).
             //when("/petangel/:id", {templateUrl: "partials/blogEntry.html"}).
             when("/StartGroup", {templateUrl: "partials/admin/createGroup.html"}).
+            when("/join/:wallid/:user",{templateUrl:"partials/joined.html"}).
             when("/group/:id", {templateUrl: "partials/blogEntry.html"}).
             when("/pet/:id", {templateUrl: "partials/blogEntry.html"}).
             //when("/group/:id", {templateUrl: "partials/groupHome.html"}).
@@ -56,6 +57,9 @@ var app = angular.module('YoMemorialApp', [
             otherwise("/oops",{templateUrl:"404.html"});
 
     });
+app.controller('JoinCtrl',function($scope){
+
+})
 var formatDate = function (ogDate) {
    // var year = ogDate.getYear();
     //var month = ogDate.getMonth();
@@ -548,19 +552,24 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
         admin:false,
         type:""
     }
-
+    $scope.showJoinRequst = false;
     $scope.admin = false;
     $scope.embedVideos = {
         youtube:"",
         animoto:""
     }
     $scope.join = function () {
+        $scope.spinner = true;
         $http.get('join/'+$routeParams.id).
             success(function () {
+                $scope.showJoinRequst = true;
+                $scope.spinner = false;
                 console.log('success');
             }).
             error(function () {
+                $scope.spinner = false;
                 console.log('error');
+                $scope.showJoinRequst = true;
             });
     }
     socket.connect();
