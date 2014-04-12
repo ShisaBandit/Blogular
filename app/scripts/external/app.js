@@ -53,6 +53,7 @@ var app = angular.module('YoMemorialApp', [
             when("/login", {templateUrl: "partials/login.html"}).
             when("/gifts/:user/:wall", {templateUrl: "partials/giftShop.html"}).
             when("/1/:wall",{templateUrl:"partials/sendoffsiteinvite.html"}).
+            when("/myMemorials",{templateUrl:"partials/myMemorials.html"}).
             //when("publicprofile/:username",{templateUrl:"partials/publicProfile.html"}).
             otherwise("/oops",{templateUrl:"404.html"});
 

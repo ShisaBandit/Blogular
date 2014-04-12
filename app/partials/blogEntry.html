@@ -30,6 +30,7 @@
                                         </li>
                                         <li if-authed="show" ng-click="flipEntry(); loadPage('pics')">Photos Control</li>
                                         <li if-authed="show" ng-click="toogleVideoEntry(); loadPage('videos')">Videos Control</li>
+                                        <li if-authed="show" ><a href="#/editwall/{{ entry.author }}">Edit this page</a></li>
                                     </ul>
                                 </nav>
                             </div>

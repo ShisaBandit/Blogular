@@ -7,8 +7,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Angels of Eureka's Circle of Life. Memorial walls and celebrations for your lost loved ones.</title>
-    <meta name="description" content="">
+    <title>Free online memorials, support groups, petitions & grief seminars.</title>
+    <meta
+    <meta name="description" content="Angels of Eureka's Circle of Life. Free online memorials, private support groups, petitions and much more for grieving friends and family to celebrate and cherish the memory of your lost loved ones.">
+    <meta name="keywords" content="free online memorials, memorial website, memorial network, support groups, petitions, grief seminars"
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!--<link href="css/animate.min.css" rel="stylesheet"> -->
@@ -66,18 +68,24 @@
                 <!-- Left Nav Section -->
                 <ul class="mainNav" ng-controller="SearchBarCtrl">
                     <li class="has-dropdown">
-                        <a style="color:#8a9948;">Memorials</a>
+                        <a href="#/"  style="color:#8a9948;">Memorials</a>
                         <ul class="dropdown" id="workpets">
+                            <li if-authed="show"><a href="#/AddBlogEntry" class="small">Create New Memorial Walls Here</a></li>
+                            <li if-authed="show"><a href="#/myMemorials" class="small">Manage Memorial Walls</a></li>
                             <li>
-                                <a href="/" id="homebutton" class="small">Angel Memorials</a>
+                                <a href="/" id="homebutton" class="small">All Angel Memorials</a>
                             </li>
                             <li>
-                                <a href="#/pets" id="petbutton" class="small">Pets</a>
+                                <a href="#/pets" id="petbutton" class="small">All Pets Memorials</a>
+                            </li>#/StartGroup
+                            <li if-authed="show"><a href="#/StartGroup" class="small">Start Support Group</a></li>
+                            <li>
+                                <a href="#/groups" id="groupsbutton" class="small">Private Support Groups</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#/groups" id="groupsbutton" class="small">Groups</a>
+                        <a href="#/about" id="groupsbutton" class="small">About Us</a>
                     </li>
                     <li>
                         <a href="#/workshops" id="workshopbutton" class="small">Workshops</a>
@@ -108,7 +116,7 @@
                     </li>
                     <li if-authed="show" class="has-dropdown">
                         <a id="step2" href="#/profile/{{username}}">
-                            <img width="34" src="http://www.gravatar.com/avatar/{{post.gravatar}}" />
+                            <img width="20" src="http://www.gravatar.com/avatar/{{post.gravatar}}" />
                             <b style="color:#8a9948;">{{username}}</b>
                         </a>
                         <ul ng-controller="UserInfoCtrl" class="dropdown">
@@ -183,7 +191,7 @@
                 <a class="left-off-canvas-toggle menu-icon"><span></span></a>
             </section>
             <section class="middle tab-bar-section">
-                <h1 class="title">Circle of Life</h1>
+                <h2 class="title">The Circle of Life</h2>
             </section>
             <!--
             <section class="right-small">
