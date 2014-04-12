@@ -39,10 +39,15 @@
                             <li>Last Name: {{entry.lastName}} </li>
                             <li>Memorial Date: {{entry.memorialDate}}</li>
                         </ul>
-                        <p ng-hide="joinsent" if-authed="hide">You are viewing {{entry.firstName}} {{entry.lastName}}'s public memorial wall. If you are a member of this angel's network, <a href="#/login" class="button small noMrgn radius">log-in</a> to view the full memorial details.</p>
-                        <p ng-hide="joinsent" if-authed="show">Not a member of  {{entry.firstName}} {{entry.lastName}}'s network? Send a request to <a ng-click="join()" class="button small noMrgn radius">Join here</a>. </p>
-                        <p ng-hide="joinsent" if-authed="hide">Not a member of  {{entry.firstName}} {{entry.lastName}}'s network? <a href="#/registration" class="button small noMrgn radius">Create a free user account</a> then you will be able to send a request to join {{entry.firstName}}'s network on this page.</a>. </p>
+
+                        <p ng-hide="showJoinRequst" if-authed="show">You are viewing {{entry.firstName}} {{entry.lastName}}'s public memorial wall. If you are a member of this angel's network, <a href="#/login" class="button small radius">log-in</a> to view the full memorial details.</p>
+                        <p ng-hide="showJoinRequst" if-authed="show">Not a member of  {{entry.firstName}} {{entry.lastName}}'s network? Send a request to <a ng-click="join()" class="button small radius">Join here</a>. </p>
+                        <p ng-hide="showJoinRequst" if-authed="hide">You are viewing {{entry.firstName}} {{entry.lastName}}'s public memorial wall. If you are a member of this angel's network, <a href="#/login" class="button small radius">log-in</a> to view the full memorial details.</p>
+                        <p ng-hide="showJoinRequst" if-authed="hide">Not a member of  {{entry.firstName}} {{entry.lastName}}'s network? <a href="#/registration" class="button small radius">Create a free user account</a> then you will be able to send a request to join {{entry.firstName}}'s network on this page.</a>. </p>
                         <div ng-class="{spinner:spinner}"></div>
+                        <div ng-show="showJoinRequst">
+                            <p>Your request has been sent.</p>
+                        </div>
                     </div>
                 </div>
             </div>
