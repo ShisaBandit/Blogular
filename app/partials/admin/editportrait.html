@@ -1,5 +1,5 @@
 <div ng-controller="EditWallCtrl">
-    <h3>Upload A New Image for your Angel's Portrait</h3>
+    <h3>Upload A New Image for your Angel's Portrait (Max size 1mb)</h3>
     <img src="uploads/{{ portrait.portrait }}" />
     <dropzone
             url="/uploadportrait"
@@ -11,7 +11,9 @@
             >
     </dropzone>
 
-    <a ng-click="submitportrait()" class="button">Upload</a>
-    <a ng-click="nochange('editspread')" class="button">No change</a>
+    <a ng-click="submitportrait()" class="button">Upload New Image & Save</a>
+    <a ng-click="nochange('fin')" class="button">Keep this Photo & Save</a>
+    <!--<a ng-click="nochange('editspread')" class="button">Keep this Photo & Continue</a>-->
+
 
 </div>

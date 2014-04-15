@@ -14,12 +14,14 @@
 
                     <label for="content"><b>Edit the Contents of your {{titleText}}'s wall below</b></label>
                     <br />
-                    <label>Name of Angel</label>
-                    <input type="text" class="login-inp" ng-model="form.firstName" placeholder="First Name" />
-                    <p class="validation-error">{{message.firstName}}</p>
 
-                    <input type="text" class="login-inp" ng-model="form.lastName" placeholder="Last Name" />
-                    <p class="validation-error">{{message.lastName}}</p>
+
+                    <label ng-hide="isGroup">Name of Angel</label>
+                    <input type="text" class="login-inp" ng-model="form.firstName" placeholder="First Name" ng-hide="isGroup" />
+                    <p class="validation-error" ng-hide="isGroup">{{message.firstName}}</p>
+
+                    <input type="text" class="login-inp" ng-model="form.lastName" placeholder="Last Name" ng-hide="isGroup" />
+                    <p class="validation-error" ng-hide="isGroup">{{message.lastName}}</p>
 
                     <label for="content">Tell your {{titleText}}'s story here: </label>
 
@@ -58,7 +60,7 @@
                         </div>
                     <br/>
                     <p>
-                        <button ng-click="editPost()" resetOnSubmit="true">Submit Changes</button>
+                        <button ng-click="editPost()" resetOnSubmit="true">Continue to next step</button>
                     </p>
                 </form>
             </div>
