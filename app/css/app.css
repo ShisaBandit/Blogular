@@ -2452,3 +2452,15 @@ body nav.top-bar.top-bar-logged-in {
      height: 30px !important;
      padding: 10px !important;
  }
+
+ #portraitDropzone {
+     margin: 10px 0px;
+ }
+
+ .myMemWallsList {
+     width: 40%;
+     display: block;
+     margin: 10px 0px;
+     float: left;
+     min-height: 300px;
+ }
