@@ -18,7 +18,6 @@
                                             <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')" ng-switch-when="group">Events</li>
                                             <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')" ng-switch-when="angel">Anniversaries</li>
                                             <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')" ng-switch-when="pet">Anniversaries</li>
-
                                         </div>
                                         <li if-authed="show" ng-click="loadPage('friendsandfamily')">
                                             <div ng-switch on="parentObject.type">
@@ -30,7 +29,6 @@
                                         </li>
                                         <li if-authed="show" ng-click="flipEntry(); loadPage('pics')">Photos Control</li>
                                         <li if-authed="show" ng-click="toogleVideoEntry(); loadPage('videos')">Videos Control</li>
-                                        <li if-authed="show" ><a href="#/editwall/{{ entry.author }}">Edit this page</a></li>
                                     </ul>
                                 </nav>
                             </div>

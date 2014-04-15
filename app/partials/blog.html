@@ -31,10 +31,9 @@
                         <div class="small-9 columns">
                             <select class="login-inp"
                                     name="selectedFilter"
-                                    ng-change="changedSubGroup()"
+                                    ng-change="changedSubGroup(false)"
                                     ng-model="selectedFilter"
                                     ng-options="group.name for group in groups">
-                                </option>
                                 <option value="" selected>View By Groupings Here</option>
                             </select>
                         </div>

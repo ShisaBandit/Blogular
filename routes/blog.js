@@ -40,7 +40,7 @@ exports.join = function (req,res) {
             requester  = user;
             //send message to allow invitation by clicking on link.
             var message = 'Hey someone wants to join your wall <b>'+blog.title+'</b> info click here to let them in <a href="http://' +
-                'localhost:3000/#/join/'+blog.author+'/'+requester._id+'">click to allow</a>';
+                'angelsofeureka.org/#/join/'+blog.author+'/'+requester._id+'">click to allow</a>';
             SendMessage('administrator',requestee.username,message,req,res, function () {
                 //send email to allow invitation
                 message = 'Hey someone wants to join your wall <b>'+blog.title+
