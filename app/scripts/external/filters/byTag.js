@@ -2,9 +2,6 @@ angular.module('blogFilter', []).
     filter('bySubgroup', function ($rootScope) {
 
         return function (blogs, tag) {
-            console.log("filter applied");
-            console.log("tag : "+tag);
-            console.log("search :" +$rootScope.search.search);
             if (blogs == undefined && tag == undefined) {
                 return;
             } else if (blogs != undefined && tag == undefined) {

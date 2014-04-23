@@ -39,14 +39,14 @@ exports.join = function (req,res) {
             console.log(user);
             requester  = user;
             //send message to allow invitation by clicking on link.
-            var message = 'Hey '+requester.username+' wants to join your wall <b>'+blog.title+'</b>.  <a href="http://' +
-                'localhost:3000/#/join/'+blog.author+'/'+requester._id+'">Click here to allow them to join</a>';
+            var message = 'Hey someone wants to join your wall <b>'+blog.title+'</b> info click here to let them in <a href="http://' +
+                'angelsofeureka.org/#/join/'+blog.author+'/'+requester._id+'">click to allow</a>';
             SendMessage('administrator',requestee.username,message,req,res, function () {
                 //send email to allow invitation
-                message = 'Hey, '+requester.username+' wants to join your wall <b>'+blog.title+
+                message = 'Hey someone wants to join your wall <b>'+blog.title+
                     '</b> Go to your <b>Message Center</b> in your <b>User profile</b> to give them access';
 
-                SendEmail(requestee.email,requester.email,message,'Request to join '+blog.title+' network!');
+                SendEmail(requestee.email,requester.email,message,'Wall request!');
                 return res.send(200,'success');
             });
         })

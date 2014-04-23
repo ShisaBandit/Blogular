@@ -1104,29 +1104,40 @@ app.controller('SearchBarCtrl', function ($scope, $filter, $rootScope) {
 });
 
 app.controller('GroupingCtrl', function ($scope, $rootScope, groupsListing,$location,petgroupsListing) {
-    if("/pets" == $location.path()){
+
+    if("/pets" == $location.path())
+    {
         $scope.groups = petgroupsListing;
-    }else{
+    }else
+    {
         $scope.groups = groupsListing;
 
     }
+
+    $scope.selectedFilter = {};
     $rootScope.subgroup = undefined;
-    $scope.$on('$routeChangeSuccess', function (next, current) {
+    $scope.$on('$routeChangeSuccess', function (next, current)
+    {
         console.log(current);
-        if (current.templateUrl == "partials/blog.html" || current.templateUrl == undefined) {
+        if (current.templateUrl == "partials/blog.html" || current.templateUrl == undefined)
+        {
             $scope.groupingViewable = false;
-        } else {
+        } else
+        {
             $scope.groupingViewable = true;
         }
     });
 
-    $scope.changedSubGroup = function (showall) {
-        if (showall) {
+    $scope.changedSubGroup = function (showall)
+    {
+        if (showall)
+        {
             $scope.selectedFilter = undefined;
             $rootScope.subgroup = null;
-        } else {
+        } else
+        {
+            console.log($scope.selectedFilter.code);
             $rootScope.subgroup = $scope.selectedFilter.code;
-            ;
         }
     }
     $scope.changeSubgroup = function (subgroup) {

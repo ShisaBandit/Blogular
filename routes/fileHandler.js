@@ -16,7 +16,7 @@ exports.upload = function (req, res) {
         {type:"image/png",ext:"png"},
         {type:"image/gif",ext:"gif"}
     ];
-    var maxFileSize = 1000000;//bytes 1mb
+    var maxFileSize = 3000000;//bytes 1mb
     var allowed = false;
     for(var x =0;x < allowableExtensions.length;x++){
         if(allowableExtensions[x].type == req.files.file.type){
