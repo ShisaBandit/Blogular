@@ -58,8 +58,12 @@ var app = angular.module('YoMemorialApp', [
             otherwise("/oops",{templateUrl:"404.html"});
 
     });
-app.controller('JoinCtrl',function($scope){
+app.controller('JoinCtrl',function($scope,$http,$routeParams){
+        $http.get('invite/' + $routeParams.wallid + '/' + $routeParams.user).
+            success(function (data)
+            {
 
+            });
 })
 var formatDate = function (ogDate) {
    // var year = ogDate.getYear();
