@@ -91,6 +91,7 @@ body {
      border-top-right-radius: 4px;
      width: auto;
      box-shadow: 2px 2px 3px #353C45;
+     margin: 0px 0px 10px 0px;
  }
 
 
@@ -607,11 +608,33 @@ h1.sectionHeader {
     margin-bottom: 20px;
 }
 
+ #picheader #portraitpic {
+     position: static;
+     max-width: 155px;
+     width: auto;
+     height: auto;
+     color: #FFF;
+     font-weight: bold;
+     font-size: 1rem;
+     margin: 0px;
+     border-top-left-radius: 4px;
+     border-top-right-radius: 4px;
+     background: none repeat scroll 0% 0% #90BFFA;
+     padding: 3px;
+ }
+
+
 #portrait{
-    border: 4px solid #47569B;
+    margin:10px 0px 0px 0px;
+    border: 4px solid #90BFFA;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    width: 150px;
+    color: #fff;
+    font-weight: bold;
+    background: none repeat scroll 0% 0% #90BFFA;
+    width: auto;
+    min-width: 155px;
+    box-shadow: 2px 2px 3px #353C45;
     z-index: 100;
 }
 
@@ -1076,6 +1099,10 @@ input.addNewPost {
      .adSpace a img {
          width: 80% !important;
      }
+
+     .angelPicNarrow {
+         display: none;
+     }
  }
 
  /* not logged in */
@@ -1134,11 +1161,19 @@ input.addNewPost {
      .adSpace a img {
          width: 80% !important;
      }
+
+     .angelPicNarrow {
+         display: none;
+     }
  }
 
  @media only screen and (min-width: 850px) and (max-width: 876px) {
      .adSpace a img {
          width: 70% !important;
+     }
+
+     .angelPicNarrow {
+         display: none;
      }
  }
 
@@ -1173,6 +1208,47 @@ input.addNewPost {
 
      .adSpace a img {
          width: 30% !important;
+     }
+
+     .angelPicWide {
+         display: none;
+     }
+
+     .angelPicNarrow {
+         display: block !important;
+     }
+
+     #portrait {
+         position: relative;margin: 10px 0px 0px !important;
+         border: 4px solid #90BFFA !important;
+         border-top-left-radius: 4px !important;
+         border-top-right-radius: 4px !important;
+         color: #FFF;
+         font-weight: bold;
+         background: none repeat scroll 0% 0% #90BFFA;
+         width: auto;
+         min-width: 120px;
+         max-width: 120px;
+         box-shadow: 2px 2px 3px #353C45;
+         clear: both;
+         float: left;
+     }
+
+     .wallGroup2 {
+         margin: 10px;
+         float: left;
+     }
+
+     .wallGroup2 ul {
+         padding: 0px;
+         margin: 0px;
+     }
+
+     .wallGroup2 ul li {
+         list-style: none outside none;
+         padding: 5px;
+         text-decoration: underline;
+         color: #8A9948;
      }
  }
  @media only screen and (max-width: 921px) {
@@ -1386,6 +1462,19 @@ input.addNewPost {
         transition: box-shadow 0.45s ease 0s, border-color 0.45s ease-in-out 0s;
     }
 
+     #portrait {
+         margin: 10px 0px 0px;
+         border: 4px solid #90BFFA;
+         border-top-left-radius: 4px;
+         border-top-right-radius: 4px;
+         color: #FFF;
+         font-weight: bold;
+         background: none repeat scroll 0% 0% #90BFFA;
+         width: auto;
+         min-width: 120px;
+         max-width: 120px;
+         box-shadow: 2px 2px 3px #353C45;
+     }
 
      .adSpace {
          display: block;
@@ -1396,7 +1485,11 @@ input.addNewPost {
          width: 50% !important;
      }
      */
-}
+     .angelPicNarrow {
+         display: none;
+     }
+ }
+
 
 @media only screen and (max-width: 518px) {
     /* Makes the search bar display properly in the groupings section */
@@ -1523,6 +1616,10 @@ input.addNewPost {
         text-align: center;
         border: 1px solid #71706B;
         float: left;
+    }
+
+    .angelPicNarrow {
+        display: block;
     }
 }
 
@@ -1718,6 +1815,10 @@ input.addNewPost {
     .form-horizontal2 {
         display: block;
     }
+
+ .angelPicNarrow {
+     display: block;
+ }
 }
 
 #rulesModal {
@@ -1908,10 +2009,12 @@ body.ng-scope div.row div.small-12.columns div.row div.small-12.large-12.ng-bind
     height: 20px;
     padding: 5px;
     margin: 0px;
-    list-style: none;
+    list-style: none outside none;
     line-height: 15px;
     color: #47569B;
     font-size: small;
+    text-decoration: underline;
+    white-space: nowrap;
 }
 
 #toolbar {
@@ -2139,6 +2242,10 @@ h6.petsTitle {
          text-align: center;
          background: none repeat scroll 0% 0% transparent;
      }
+
+     .angelPicNarrow {
+         display: none;
+     }
  } /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
 
 
@@ -2165,10 +2272,18 @@ h6.petsTitle {
          text-align: center;
          background: none repeat scroll 0% 0% transparent;
      }
+
+     .angelPicNarrow {
+         display: none;
+     }
  } /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
 
  /* Large screens*/
- @media only screen and (min-width: 64.063em) { } /* min-width 1025px, large screens */
+ @media only screen and (min-width: 64.063em) {
+     .angelPicNarrow {
+         display: none;
+     }
+ } /* min-width 1025px, large screens */
 
  @media only screen and (min-width: 64.063em) and (max-width: 90em) { } /* min-width 1024px and max-width 1440px, use when QAing large screen-only issues */
 
@@ -2437,6 +2552,19 @@ body nav.top-bar.top-bar-logged-in {
      font-size: small;
      border: 2px solid #CCC;
  }
+
+
+ p.angelStoryFull {
+     display: block;
+     width: 80%;
+     height: auto;
+     padding: 5px;
+     margin: 0px 0px 10px;
+     overflow: auto;
+     font-size: small;
+     border: 2px solid #CCC;
+ }
+
 
  a.sendMsg {
      width: 220px !important;

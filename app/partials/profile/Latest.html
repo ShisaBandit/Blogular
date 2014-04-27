@@ -2,7 +2,9 @@
 
   <div class="small-7 large-8 columns">
       <div class="row" infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='0'>
-          <p class="angelStory">{{ entry.text }}</p>
+          <p class="angelStory">
+              <a ng-click="toogleEventEntry(); loadPage('angelStory')">Read {{ entry.firstName }}'s story here</a>
+          </p>
         <div id="contentHeader" class="small-12 columns show-for-medium-up">
             <h2 class="contentHeaderTitle">Start a New Conversation</h2>
         </div>
@@ -91,7 +93,7 @@
         <div class="small-12 columns" ng-hide="menu.photo || menu.video || menu.event">
             <div ng-class="{spinner:spinner}"></div>
             <textarea ng-model="postText" class="addNewPost small-8 columns"
-                      placeholder="Begin a new conversation here"></textarea><a ng-click="submit()" class="button postfix small-4 columns">Submit</a>
+                      placeholder="Begin a new conversation here"></textarea><a ng-click="submit()" class="small button postfix small-4 columns">Submit</a>
             <div ng-class="{spinner:spinner}"></div>
         </div>
 

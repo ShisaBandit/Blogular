@@ -3,9 +3,10 @@
         <div class="small-12 columns" role="content">
                 <div class="row">
                         <div class="small-12 large-12 columns">
-                            <div class="small-2 columns"><!--<div id="portraitpic">-->
-                                <img id="portrait" src="/uploads/{{ entry.profilePicPortrait }}"><br/>
-                            <div ng-switch on="parentObject.type">
+                            <div class="small-2 columns angelPicWide"><!--<div id="portraitpic">-->
+
+                            <div ng-switch on="parentObject.type" id="portrait">
+                                <img id="" src="/uploads/{{ entry.profilePicPortrait }}"><br/>
                                 <span ng-switch-when="group">Moderator: {{ entry.firstName }}</span>
                                 <span ng-switch-when="angel">{{ entry.firstName }} {{ entry.lastName }}</span>
                                 <span ng-switch-when="pet">{{ entry.firstName }} {{ entry.lastName }}</span>
@@ -13,6 +14,11 @@
                                 <!--{{ entry.firstName }} {{ entry.lastName }} -->
                                 <nav class="wallGroup animate-show show-for-medium-up" style="padding-top: 0px;margin-top: -5px;">
                                     <ul>
+                                        <div ng-switch on="parentObject.type">
+                                            <li if-authed="show" ng-click="toogleEventEntry(); loadPage('angelStory')" ng-switch-when="angel">About {{ entry.firstName }}</li>
+                                            <li if-authed="show" ng-click="toogleEventEntry(); loadPage('angelStory')" ng-switch-when="pet">About {{ entry.firstName }}</li>
+                                            <li if-authed="show" ng-click="toogleEventEntry(); loadPage('angelStory')" ng-switch-when="group">About Group</li>
+                                        </div>
                                         <li ng-click="loadPage('Latest')">Stream</li>
                                         <div ng-switch on="parentObject.type">
                                             <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')" ng-switch-when="group">Events</li>
@@ -38,6 +44,59 @@
                                         <h2 style="padding-top: 0px; color: #47569B;margin-bottom: -3px;" ng-switch-when="group"> Welcome to the {{ entry.title }} private group</h2>
                                         <h2 style="padding-top: 0px; color: #47569B;margin-bottom: -3px;" ng-switch-when="angel">Welcome to {{ entry.firstName }}'s Wall.</h2>
                                         <h2 style="padding-top: 0px; color: #47569B;margin-bottom: -3px;" ng-switch-when="pet">Welcome to {{ entry.firstName }}'s Wall.</h2>
+                                    </div>
+                                    <div class="columns angelPicNarrow"><!--<div id="portraitpic">-->
+
+                                        <div id="portrait" ng-switch on="parentObject.type">
+                                            <img src="/uploads/{{ entry.profilePicPortrait }}"><br/>
+                                            <span ng-switch-when="group">Moderator: {{ entry.firstName }}</span>
+                                            <span ng-switch-when="angel">{{ entry.firstName }} {{ entry.lastName }}</span>
+                                            <span ng-switch-when="pet">{{ entry.firstName }} {{ entry.lastName }}</span>
+                                        </div>
+                                        <div class="wallGroup2">
+                                            <ul>
+                                                <div ng-switch on="parentObject.type">
+                                                    <li if-authed="show" ng-click="toogleEventEntry(); loadPage('angelStory')" ng-switch-when="angel">About {{ entry.firstName }}</li>
+                                                    <li if-authed="show" ng-click="toogleEventEntry(); loadPage('angelStory')" ng-switch-when="pet">About {{ entry.firstName }}</li>
+                                                    <li if-authed="show" ng-click="toogleEventEntry(); loadPage('angelStory')" ng-switch-when="group">About Group</li>
+                                                </div>
+                                                <li ng-click="loadPage('Latest')">Stream</li>
+                                                <div ng-switch on="parentObject.type">
+                                                    <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')" ng-switch-when="group">Events</li>
+                                                    <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')" ng-switch-when="angel">Anniversaries</li>
+                                                    <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')" ng-switch-when="pet">Anniversaries</li>
+                                                </div>
+                                                <li if-authed="show" ng-click="loadPage('friendsandfamily')">
+                                                    <div ng-switch on="parentObject.type">
+                                                        <span ng-switch-when="group">Members</span>
+                                                        <span ng-switch-when="angel">Family & Friends</span>
+                                                        <span ng-switch-when="pet">Family & Friends</span>
+
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!--{{ entry.firstName }} {{ entry.lastName }} -->
+                                        <nav class="wallGroup animate-show show-for-medium-up" style="padding-top: 0px;margin-top: -5px;">
+                                            <ul>
+                                                <li ng-click="loadPage('Latest')">Stream</li>
+                                                <div ng-switch on="parentObject.type">
+                                                    <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')" ng-switch-when="group">Events</li>
+                                                    <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')" ng-switch-when="angel">Anniversaries</li>
+                                                    <li if-authed="show" ng-click="toogleEventEntry(); loadPage('anniversaries')" ng-switch-when="pet">Anniversaries</li>
+                                                </div>
+                                                <li if-authed="show" ng-click="loadPage('friendsandfamily')">
+                                                    <div ng-switch on="parentObject.type">
+                                                        <span ng-switch-when="group">Members</span>
+                                                        <span ng-switch-when="angel">Family & Friends</span>
+                                                        <span ng-switch-when="pet">Family & Friends</span>
+
+                                                    </div>
+                                                </li>
+                                                <li if-authed="show" ng-click="flipEntry(); loadPage('pics')">Photos Control</li>
+                                                <li if-authed="show" ng-click="toogleVideoEntry(); loadPage('videos')">Videos Control</li>
+                                            </ul>
+                                        </nav>
                                     </div>
                                 </section>
                                 <div ng-include="template" class="templatePortal large-12 stream"></div>
