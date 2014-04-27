@@ -38,9 +38,11 @@ exports.join = function (req,res) {
             if(!blog)return res.send(410,'error');
             console.log(user);
             requester  = user;
-            //send message to allow invitation by clicking on link.
+            /* var message = 'Hey someone wants to join your wall <b>'+blog.title+'</b> info click here to let them in <a href="http://' +
+             'angelsofeureka.org/#/join/'+blog.author+'/'+requester._id+'">click to allow</a>';*/
             var message = 'Hey someone wants to join your wall <b>'+blog.title+'</b> info click here to let them in <a href="http://' +
-                'angelsofeureka.org/#/join/'+blog.author+'/'+requester._id+'">click to allow</a>';
+             'localhost:3000/#/join/'+blog.author+'/'+requester._id+'">click to allow</a>';
+            //send message to allow invitation by clicking on link.
             SendMessage('administrator',requestee.username,message,req,res, function () {
                 //send email to allow invitation
                 message = 'Hey someone wants to join your wall <b>'+blog.title+
