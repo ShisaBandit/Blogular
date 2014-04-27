@@ -290,8 +290,12 @@ select {
     width: 16.66667%; }
 
   .small-3 {
-    position: relative;
-    width: 25%; }
+      position: relative;
+      width: auto;
+      clear: both;
+      float: left;
+      margin: auto;
+      }
 
   .small-4 {
     position: relative;
@@ -5344,12 +5348,12 @@ th.hide-for-touch {
     cursor: pointer;
     font-family: "Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
     font-weight: normal;
-    line-height: 1px !important;
+    line-height: auto;
     margin: 0px 0px 1rem;
     position: relative;
     text-decoration: none;
     text-align: center;
-    width: auto !important;
-    height: 20px !important;
-    padding: 10px !important;
+    width: auto;
+    height: 20px;
+    padding: 10px;
 }

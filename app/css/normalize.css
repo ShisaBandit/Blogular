@@ -306,7 +306,9 @@ button,
 select {
     text-transform: none;
     height: auto;
-    min-height: 40px;
+    min-height: 30px;
+    width: auto;
+    clear: both;
 }
 
 /**
