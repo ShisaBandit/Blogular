@@ -17,7 +17,8 @@ var smtpTransport = nodemailer.createTransport("SMTP", {
     host: "mail.angelsofeureka.org",
     port: "465",
     secureConnection: true,
-    auth: {
+    auth:
+    {
         user: "noreply@angelsofeureka.org",
         pass: "regEmail2013"
     }
@@ -40,9 +41,9 @@ exports.join = function (req,res) {
             requester  = user;
              var message = 'Hey someone wants to join your wall <b>'+blog.title+'</b> info click here to let them in <a href="http://' +
              'angelsofeureka.org/#/join/'+blog.author+'/'+requester._id+'">click to allow</a>';
-            /*var message = 'Hey someone wants to join your wall <b>'+blog.title+'</b> info click here to let them in <a href="http://' +
+             /*var message = 'Hey someone wants to join your wall <b>'+blog.title+'</b> info click here to let them in <a href="http://' +
              'localhost:3000/#/join/'+blog.author+'/'+requester._id+'">click to allow</a>';*/
-            //send message to allow invitation by clicking on link.
+             //send message to allow invitation by clicking on link.
             SendMessage('administrator',requestee.username,message,req,res, function () {
                 //send email to allow invitation
                 message = 'Hey someone wants to join your wall <b>'+blog.title+
