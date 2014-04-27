@@ -8,7 +8,6 @@ var app = angular.module('YoMemorialApp', [
        // $sceProvider.enabled(false);
         $routeProvider.
             when("/", {templateUrl: "partials/blog.html"}).
-
             when("/about", {templateUrl: "partials/about.html"}).
             when("/pubpro/:username", {templateUrl: "partials/publicprofile.html"}).
             when("/projects", {templateUrl: "partials/projects.html"}).
@@ -949,7 +948,6 @@ app.controller('groupEntryCtrl', function ($scope, $location, show, Blog, $route
     if (!$scope.template) {
         $scope.template = '/partials/profile/LatestGroups.html';
         $scope.contentHeaderTitle = 'Latest';
-
     }
     $scope.loadPage = function (page) {
         console.log("loadpage");
@@ -1118,7 +1116,10 @@ app.controller('GroupingCtrl', function ($scope, $rootScope, groupsListing,$loca
 
     }
 
-    $scope.selectedFilter = {};
+    $rootScope.parentOfSelected =
+    {
+        selectedFilter:{}
+    };
     $rootScope.subgroup = undefined;
     $scope.$on('$routeChangeSuccess', function (next, current)
     {
@@ -1134,14 +1135,15 @@ app.controller('GroupingCtrl', function ($scope, $rootScope, groupsListing,$loca
 
     $scope.changedSubGroup = function (showall)
     {
+        console.log($rootScope.parentOfSelected);
         if (showall)
         {
-            $scope.selectedFilter = undefined;
+            $rootScope.parentOfSelected.selectedFilter = undefined;
             $rootScope.subgroup = null;
         } else
         {
-            console.log($scope.selectedFilter.code);
-            $rootScope.subgroup = $scope.selectedFilter.code;
+            console.log($scope.parentOfSelected.selectedFilter.code);
+            $rootScope.subgroup = $rootScope.parentOfSelected.selectedFilter.code;
         }
     }
     $scope.changeSubgroup = function (subgroup) {

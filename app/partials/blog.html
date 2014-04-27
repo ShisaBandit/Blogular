@@ -32,7 +32,7 @@
                             <select class="login-inp"
                                     name="selectedFilter"
                                     ng-change="changedSubGroup(false)"
-                                    ng-model="selectedFilter"
+                                    ng-model="parentOfSelected.selectedFilter"
                                     ng-options="group.name for group in groups">
                                 <option value="" selected>View By Groupings Here</option>
                             </select>
