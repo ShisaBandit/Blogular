@@ -39,7 +39,16 @@
         js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=207720999317465";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
-
+    <script>
+        function fbs_click() {
+            u=location.href;
+        }
+        t=document.title;window.open(
+                        'http://www.facebook.com/sharer.php?u='+
+                        encodeURIComponent(u)+'&t='+encodeURIComponent(t),
+                'sharer','toolbar=0,status=0,width=6
+        26,height=436');return false;}
+    </script>
 </head>
 <body ng-app="YoMemorialApp">
 <!--[if lt IE 7]>

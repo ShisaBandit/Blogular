@@ -1736,6 +1736,12 @@ input.addNewPost {
         line-height: auto !important;
     }
 
+     .filter {
+         position: relative;
+         top: -8px !important;
+         right: 0px !important;;
+     }
+
     .headerCol {
         position:relative;
         top:35px;
@@ -2599,7 +2605,12 @@ body nav.top-bar.top-bar-logged-in {
  .myMemWallsList {
      width: 40%;
      display: block;
-     margin: 10px 0px;
+     margin: 10px 5px;
      float: left;
      min-height: 300px;
+ }
+
+ .filter {
+     position: relative;
+     top: -40px;
  }
