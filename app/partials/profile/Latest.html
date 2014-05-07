@@ -2,10 +2,11 @@
 
   <div class="small-7 large-8 columns">
       <div class="row" infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='0'>
-          <p class="angelStory">
-              <a ng-click="toogleEventEntry(); loadPage('angelStory')">Read {{ entry.firstName }}'s story here.</a> <a href="http://www.facebook.com/share.php?u=<url>" onclick="return fbs_click()" target="_blank" class="fbShare">
-              <img src= "http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif?8:26981" alt="" />
-          </a>
+          <p class="angelStory" ng-switch on="parentObject.type">
+              <a ng-switch-when="angel" ng-click="toogleEventEntry(); loadPage('angelStory')">Read {{ entry.firstName }}'s story here.</a>
+              <a ng-switch-when="pet" ng-click="toogleEventEntry(); loadPage('angelStory')">Read {{ entry.firstName }}'s story here.</a>
+              <a ng-switch-when="group" ng-click="toogleEventEntry(); loadPage('angelStory')">Read the {{ entry.title }} story here.</a>
+              <a href="http://www.facebook.com/share.php?u=<url>" onclick="return fbs_click(u)" target="_blank" class="fbShare"><img src= "http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif?8:26981" alt="" /></a>
           </p>
         <div id="contentHeader" class="small-12 columns show-for-medium-up">
             <h2 class="contentHeaderTitle">Start a New Conversation</h2>
