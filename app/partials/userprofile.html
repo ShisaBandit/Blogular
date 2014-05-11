@@ -70,7 +70,7 @@
                         <li>City : {{user.city}}</li>
                         <li>About you : {{user.about}}</li>
                         <li>You have lost a {{user.lost}}</li>
-                        <a href="#/editprofile" class="button">Edit Your profile</a>
+                        <a href="#/editprofile" class="small button">Edit Your profile</a>
                     </ul>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                             <h2 class="contentHeaderTitle">My Memorial Walls</h2>
                         </div>
                     </div>
-                    <a href="#/AddBlogEntry" class="button"><b>Create a new memorial wall profile here!</b></a> <br/><br/>
+                    <a href="#/AddBlogEntry" class="small button"><b>Create a new memorial wall profile here!</b></a> <br/><br/>
                     <ul class="profile">
                         <h3>Here is a list of your memorial walls</h3>
                         <li ng-repeat="angel in angels" class="myMemWallsList">Angel's Name : {{ angel.firstName }} {{ angel.lastName }} - {{ angel.title }}
@@ -140,7 +140,7 @@
                     </div>
                     <p>Welcome to the My Groups dashboard. From here you can create, manage and view groups that you own, or view
                         groups that you have joined, or been invited to.</p>
-                    <a href="#/StartGroup" class="button">Create a new group here!</a><br/><br/>
+                    <a href="#/StartGroup" class="small button">Create a new group here!</a><br/><br/>
 
                     <div class="small-6 columns rghtDvd">
                         <b>Groups I Own</b>
@@ -157,7 +157,7 @@
                                 <li><a href="#/inviteblock/{{ group.author }}">invite or block other registered members</a></li>
 
                             </ul>
-                            <a href="#/deletewall/{{ group.author }}" class="button">Delete this group</a>
+                            <a href="#/deletewall/{{ group.author }}" class="small button">Delete this group</a>
                         </section>
                     </div>
                     <div class="small-6 columns">
@@ -178,7 +178,7 @@
                                     <li><a href="#/group/{{group.author}}" >Report group member for misconduct</a></li>
                                     -->
                             </ul>
-                            <a ng-click="removeselfgroup(group.id)" class="button">Leave this group</a>
+                            <a ng-click="removeselfgroup(group.id)" class="small button">Leave this group</a>
                         </section>
                     </div>
                 </div>
@@ -198,8 +198,8 @@
                     </p>
                     <ul>
                         <li ng-repeat="petition in petitions">
-                            {{petition.title}}- <a href="#/editpetition/{{petition._id}}" class="button">Edit</a> - <a
-                                ng-click="deletePetition(petition._id)" class="button">Delete</a>
+                            {{petition.title}}- <a href="#/editpetition/{{petition._id}}" class="small button">Edit</a> - <a
+                                ng-click="deletePetition(petition._id)" class="small button">Delete</a>
                         </li>
                     </ul>
                 </div>
@@ -215,7 +215,7 @@
                     </div>
                     <p>Welcome to the Message Center. From here you can create, manage and view messages from your network members, administrators and other registered users..</p>
                     <div ng-controller="messageController">
-                        <a class="button sendMsg" ng-click="open(messagedUser.user)"><img src="img/mail_2.png"> Send a New Message</a>
+                        <a class="small button sendMsg" ng-click="open(messagedUser.user)"><img src="img/mail_2.png"> Send a New Message</a>
                     </div>
                     <br />
                     <div class="small-4 columns rghtDvd">

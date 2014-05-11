@@ -27,13 +27,24 @@
                     <div class="small-3 columns" offset-height="-10">
                         <div id="portraitpic">
                             <img id="portrait" src="/uploads/{{ entry.profilePicPortrait }}"><br />
-                            {{ entry.firstName }} {{ entry.lastName }}
+                            {{ entry.title }} Group<br />Moderator: {{ entry.firstName }} {{ entry.lastName }}
                         </div>
                     </div>
                     <div class="small-8 columns">
-                        <div id="contentHeader" class="small-12 columns">
-                            <h2 class="contentHeaderTitle">{{entry.firstName}}'s Public Memorial</h2>
+                        <div id="contentHeader" class="small-12 columns" ng-switch on="parentObject.type">
+                            <h2 class="contentHeaderTitle" ng-switch-when="angel">{{entry.firstName}}'s Public Memorial</h2>
+                            <h2 class="contentHeaderTitle" ng-switch-when="pet">{{entry.firstName}}'s Public Memorial</h2>
+                            <h2 class="contentHeaderTitle" ng-switch-when="group">{{entry.firstName}}'s {{ entry.title }} Group</h2>
                         </div>
+
+                        <!--
+                        <div ng-switch on="parentObject.type">
+                            <li if-authed="show" ng-click="toogleEventEntry(); loadPage('angelStory')" ng-switch-when="angel">About {{ entry.firstName }}</li>
+                            <li if-authed="show" ng-click="toogleEventEntry(); loadPage('angelStory')" ng-switch-when="pet">About {{ entry.firstName }}</li>
+                            <li if-authed="show" ng-click="toogleEventEntry(); loadPage('angelStory')" ng-switch-when="group">About Group</li>
+                        </div>
+                        -->
+
                         <ul class="small-12 columns">
                             <li>First Name : {{entry.firstName}}</li>
                             <li>Last Name: {{entry.lastName}} </li>
