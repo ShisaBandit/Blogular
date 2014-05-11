@@ -38,6 +38,7 @@
                             <li>First Name : {{entry.firstName}}</li>
                             <li>Last Name: {{entry.lastName}} </li>
                             <li>Memorial Date: {{entry.memorialDate}}</li>
+                            <li>About: {{entry.text}}</li>
                         </ul>
                         <p class="angelStory">{{ entry.text }}</p>
                         <p ng-hide="showJoinRequst" if-authed="show">You are viewing {{entry.firstName}} {{entry.lastName}}'s public memorial wall. If you are a member of this angel's network, <a href="#/login" class="button small radius">log-in</a> to view the full memorial details.</p>
