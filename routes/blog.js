@@ -337,6 +337,7 @@ exports.getABlog = function (req, res) {
             } else {
                 var modifiedpost = [];
                 var modifiedpostentry = {};
+                modifiedpostentry.text = post[0].text;
                 modifiedpostentry.limited = true;
                 modifiedpostentry.firstName = post[0].firstName;
                 modifiedpostentry.lastName = post[0].lastName;
