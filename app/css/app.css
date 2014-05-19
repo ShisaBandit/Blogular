@@ -2614,3 +2614,8 @@ body nav.top-bar.top-bar-logged-in {
      position: relative;
      top: -40px;
  }
+
+ .shortURI {
+     font-weight: bolder;
+     color: red;
+ }
