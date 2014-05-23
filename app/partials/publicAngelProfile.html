@@ -25,9 +25,12 @@
             <div id="picheader" class="publicWall twelve columns">
                 <div class="row">
                     <div class="small-3 columns" offset-height="-10">
-                        <div id="portraitpic">
-                            <img id="portrait" src="/uploads/{{ entry.profilePicPortrait }}"><br />
-                            {{ entry.title }} Group<br />Moderator: {{ entry.firstName }} {{ entry.lastName }}
+
+                        <div ng-switch on="parentObject.type" id="portraitpic">
+                            <img  id="portrait" src="/uploads/{{ entry.profilePicPortrait }}"><br/>
+                            <span ng-switch-when="group">{{ entry.title }} Group<br />Moderator: {{ entry.firstName }} {{ entry.lastName }}</span>
+                            <span ng-switch-when="angel">{{ entry.firstName }} {{ entry.lastName }}</span>
+                            <span ng-switch-when="pet">{{ entry.firstName }} {{ entry.lastName }}</span>
                         </div>
                     </div>
                     <div class="small-8 columns">

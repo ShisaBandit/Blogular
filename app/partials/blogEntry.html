@@ -3,15 +3,13 @@
         <div class="small-12 columns" role="content">
                 <div class="row">
                         <div class="small-12 large-12 columns">
-                            <div class="small-2 columns angelPicWide"><!--<div id="portraitpic">-->
-
+                            <div class="small-2 columns angelPicWide">
                             <div ng-switch on="parentObject.type" id="portrait">
                                 <img id="" src="/uploads/{{ entry.profilePicPortrait }}"><br/>
                                 <span ng-switch-when="group">Moderator: {{ entry.firstName }}</span>
                                 <span ng-switch-when="angel">{{ entry.firstName }} {{ entry.lastName }}</span>
                                 <span ng-switch-when="pet">{{ entry.firstName }} {{ entry.lastName }}</span>
                             </div>
-                                <!--{{ entry.firstName }} {{ entry.lastName }} -->
                                 <nav class="wallGroup animate-show show-for-medium-up" style="padding-top: 0px;margin-top: -5px;">
                                     <ul>
                                         <div ng-switch on="parentObject.type">
