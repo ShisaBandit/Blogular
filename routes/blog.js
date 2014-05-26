@@ -399,7 +399,7 @@ exports.createBlog = function (req, res) {
             var newBlogEntry = new Blog(req.body);
             newBlogEntry.owner_id = req.session.passport.user;
             newBlogEntry.user = req.session.passport.user;
-            newBlogEntry.profilePicPortrait = "defaultPortrait.jpg";
+            newBlogEntry.profilePicPortrait = "defaultPortrait.png";
             newBlogEntry.profilePicWide = "defaultPicWide.jpg";
             newBlogEntry.save(function (err, newblog) {
                 if (err)console.log(err);
@@ -522,7 +522,7 @@ function BlogGroupValidation(req) {
                     if (!errors) {
                         errors = {};
                     }
-                    errors.author = {param: 'author', msg: 'This url is already taken please try with a differnt url.'};
+                    errors.author = {param: 'author', msg: 'This url is already taken please try with a different url.'};
                 }
             }
         }
@@ -862,7 +862,7 @@ exports.sendWallInvite = function (req, res) {
                 }
             }
             if (duplicate) {
-                res.send(500, 'This user is already invited.')
+                res.send(500, 'This user has already been invited.')
                 return;
             }
             User.findOne({_id: req.session.passport.user}, function (err, inviter) {
@@ -877,7 +877,7 @@ exports.sendWallInvite = function (req, res) {
                     user.profiles.push({profile: blog._id});//TODO:Remove this in now for backwards compatibility with new style
                     user.save(function (err) {
                         console.log("profile pushed to user" + user.username);
-                        res.send(200, 'success');
+                        res.send(200, 'Success! The user has been included in your network');
                     })
                 })
             })
@@ -1242,7 +1242,7 @@ exports.shopToWall = function (req, res) {
              */
             User.findOne({_id: theblog.owner_id}, function (err, receivingUser) {
                 receivingUser.notifications.push({text: "Your angel " + theblog.firstName + " " + theblog.lastName + "has received a gift."});
-                SendEmail(receivingUser.email, receivingUser.firstName + " " + receivingUser.lastName, "<p>" + theuser.username + " has bought you a gift.  Go to your angels <a href='localhost:3000/#/angel'" + theblog.author + " to find out what it was.</p>");
+                SendEmail(receivingUser.email, receivingUser.firstName + " " + receivingUser.lastName, "<p>" + theuser.username + " has bought you a gift.  Go to your memorial wall or group page on The Circle of Life at <a href='http://the-circle-of-life.net/#/'" + theblog.author + " to find out what it was.</p>");
 
                 //add entry in anniversary area and latestpost
 
@@ -1253,11 +1253,11 @@ exports.shopToWall = function (req, res) {
             })
             theblog.save(function (err) {
                 if (err)console.log(err);
-                theuser.notifications.push({text: "Thank you for purchasing a gift(s) at Angels Of Eureka.com."});
+                theuser.notifications.push({text: "Thank you for purchasing a gift(s) at AngelsOfEureka.com."});
                 theuser.save(function (err, saveddoc) {
                     if (err)console.log(err);
                     //console.log(saveddoc)
-                    messageEmitter.emit('notification_messagereceived', theuser._id, "Thank you for purchasing a gift(s)s at Angels Of Eureka.com.", saveddoc.notifications[saveddoc.notifications.length - 1]._id);
+                    messageEmitter.emit('notification_messagereceived', theuser._id, "Thank you for purchasing a gift(s)s at AngelsOfEureka.com.", saveddoc.notifications[saveddoc.notifications.length - 1]._id);
                     messageEmitter.emit('shoptowall_giftreceived', wall);
                 })
             })
