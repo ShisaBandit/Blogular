@@ -12,7 +12,7 @@
             <dropzone url="/upload" class="dropzone" autoupload="false" addRemoveLinks="true" id="my-awesome-dropzone" ></dropzone>
         </div>
     </div>
-    <a ng-click="flipEntry()" class="button">{{state}}</a>
+    <a ng-click="flipEntry()" class="button small">{{state}}</a>
 
     <div class="small-12 columns contentContainer">
         <div class="row">
@@ -22,21 +22,21 @@
         <div class="row">
             <div class="row">
                 <h2>{{ entry.firstName }}'s Life in Pictures</h2>
-                <a class="button" ng-click="showallpics(); updatingAlbum = false; addingNewAlbum = false">View Master Photo Library</a>
-                <a ng-click="addingNewAlbum = true; updatingAlbum = false" class="button">Create a new album</a>
-                <a ng-click="updatingAlbum = true; addingNewAlbum = false; getAlbums();"  class="button">Add photo to existing album</a>
+                <a class="button small" ng-click="showallpics(); updatingAlbum = false; addingNewAlbum = false">View Master Photo Library</a>
+                <a ng-click="addingNewAlbum = true; updatingAlbum = false" class="button small">Create a new album</a>
+                <a ng-click="updatingAlbum = true; addingNewAlbum = false; getAlbums();"  class="button small">Add photo to existing album</a>
                 <ul class="small-block-grid-6">
                     <b>View Photos By Album</b><br />
                     <li class="my-repeat-animation" ng-repeat="album in albums">
-                        <a class="button" ng-click="showAlbum(album._id); albuminfo.name = album.name;">{{album.name}}</a><!--setAlbumName(album.name)-->
+                        <a class="button small" ng-click="showAlbum(album._id); albuminfo.name = album.name;">{{album.name}}</a><!--setAlbumName(album.name)-->
                     </li>
                 </ul>
             </div>
             <section class="my-show-hide-animation" ng-show="addingNewAlbum" class="add2Album">
                 <b ng-show="addingNewAlbum">Create a New Album:</b><br />
                 <input type="text"  ng-model="albumName" placeholder="Give your new album a name here." />
-                <a class="button"  ng-click="createAlbum()">Create New Album</a>
-                <a class="button"  ng-click="addingNewAlbum = false">Cancel</a>
+                <a class="button small"  ng-click="createAlbum()">Create New Album</a>
+                <a class="button small"  ng-click="addingNewAlbum = false">Cancel</a>
             </section>
 
             <div class="my-show-hide-animation" ng-show="updatingAlbum" class="row add2Album">
@@ -49,10 +49,10 @@
                 <br />
                 <ul  class="small-block-grid-6">
                     <li class="my-repeat-animation" ng-repeat="album in albums">
-                        <a class="button" ng-click="updateAlbum(album._id); ">{{album.name}}</a>
+                        <a class="button small" ng-click="updateAlbum(album._id); ">{{album.name}}</a>
                     </li>
                 </ul>
-                <a ng-click="updatingAlbum = false; addingNewAlbum = false" class="button">Cancel</a>
+                <a ng-click="updatingAlbum = false; addingNewAlbum = false" class="button small">Cancel</a>
             </div>
             <ul class="small-block-grid-4 clearing-thumbs" data-clearing>
                 <h3>{{albuminfo.name}}</h3>

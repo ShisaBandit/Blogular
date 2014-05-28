@@ -10,13 +10,13 @@
     <div ng-show="videobox" id="videobox">
         <div>
             <h3 style="color:#3F77BC;">Select which type of video you would like to show.</h3>
-            <a class="button" ng-click="youtube = true;animoto = false;">YouTube</a>
-            <a class="button" ng-click="youtube = false;animoto = true;">Animoto</a>
+            <a class="button small" ng-click="youtube = true;animoto = false;">YouTube</a>
+            <a class="button small" ng-click="youtube = false;animoto = true;">Animoto</a>
             <div class="my-show-hide-animation" ng-show="youtube">
                 <h4 class="dark">YouTube Link</h4>
                 <b class="dark">Past or type a YouTube url here.</b>
                 <input type="text" name="youtube" ng-model="embedVideos.youtube" id="youtube" placeholder="Enter your youtube embed code here!"/>
-                <a ng-click="submitVideo()" class="button">Submit video links</a>
+                <a ng-click="submitVideo()" class="button small">Submit video links</a>
 
             </div>
             <div class="animoto" ng-show="animoto">
@@ -30,15 +30,15 @@
                     upload them to your video gallery on this panel!</p>
                 <input type="text" name="animoto" ng-model="embedVideos.animoto" id="animoto"
                        placeholder="Enter your animoto video url here!"/>
-                <a ng-click="submitVideo()" class="button">Submit video links</a>
+                <a ng-click="submitVideo()" class="button small">Submit video links</a>
 
             </div>
         </div>
 
     </div>
-    <a ng-click="toogleVideoEntry()" class="button">{{state}}</a>
-    <a ng-click="modStream = true" class="button">Add or Remove videos from your stream</a>
-    <a ng-show="modStream" class="button" ng-click="refreshVideoList(); modStream = false">Done editing</a>
+    <a ng-click="toogleVideoEntry()" class="button small">{{state}}</a>
+    <a ng-click="modStream = true" class="button small">Add or Remove videos from your stream</a>
+    <a ng-show="modStream" class="button small" ng-click="refreshVideoList(); modStream = false">Done editing</a>
     <div class="row">
         <div class="small-12 columns contentContainer">
             <div class="row">
