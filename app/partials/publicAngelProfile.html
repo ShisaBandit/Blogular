@@ -53,7 +53,7 @@
                             <li>Last Name: {{entry.lastName}} </li>
                             <li>Memorial Date: {{entry.memorialDate}}</li>
                         </ul>
-                        <p class="angelStory">{{ entry.text }}</p>
+                        <p class="angelStoryFull">{{ entry.text }}</p>
                         <p ng-hide="showJoinRequst" if-authed="show">You are viewing {{entry.firstName}} {{entry.lastName}}'s public memorial wall. If you are a member of this angel's network, <a href="#/login" class="button small radius">log-in</a> to view the full memorial details.</p>
                         <p ng-hide="showJoinRequst" if-authed="show">Not a member of  {{entry.firstName}} {{entry.lastName}}'s network? Send a request to <a ng-click="join()" class="button small radius">Join here</a>. </p>
                         <p ng-hide="showJoinRequst" if-authed="hide">You are viewing {{entry.firstName}} {{entry.lastName}}'s public memorial wall. If you are a member of this angel's network, <a href="#/login" class="button small radius">log-in</a> to view the full memorial details.</p>

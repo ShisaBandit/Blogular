@@ -6,7 +6,9 @@
               <a ng-switch-when="angel" ng-click="toogleEventEntry(); loadPage('angelStory')">Read {{ entry.firstName }}'s story here.</a>
               <a ng-switch-when="pet" ng-click="toogleEventEntry(); loadPage('angelStory')">Read {{ entry.firstName }}'s story here.</a>
               <a ng-switch-when="group" ng-click="toogleEventEntry(); loadPage('angelStory')">Read the {{ entry.title }} story here.</a>
-          <div class="fb-like" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-href="http://the-circle-of-life.net/#/angel/{{ entry.author }}"></div>
+              <div ng-switch-when="angel" class="fb-like" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-href="http://the-circle-of-life.net/#/angel/{{ entry.author }}"></div>
+              <div ng-switch-when="pet" class="fb-like" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-href="http://the-circle-of-life.net/#/pet/{{ entry.author }}"></div>
+              <div ng-switch-when="group" class="fb-like" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-href="http://the-circle-of-life.net/#/group/{{ entry.author }}"></div>
           <!--
               <a href="http://www.facebook.com/share.php?u=<url>" onclick="return fbs_click()" target="_blank"> <img src= "http://b.static.ak.fbcdn.net/images/share/
 facebook_share_icon.gif?8:26981" alt="" /></a> -->
@@ -45,23 +47,23 @@ facebook_share_icon.gif?8:26981" alt="" /></a> -->
             </div>
             <textarea ng-model="photoAdded.photoPostText" class="addNewPost small-10 columns"
                       placeholder="Tell us about these photos"></textarea>
-            <div ng-show="photoAdded.show" ng-click="menu.photo=false;addPhotoToStream()" class="button">You have added a photo. Click here to post to Stream.</div>
-            <div ng-show="photoAdded.show" ng-click="menu.photo=false;clearPhotosFromDropzone()" class="button">Finished</div>
-            <div ng-hide="photoAdded.show" ng-click="menu.photo=false" class="button">Finished</div>
+            <div ng-show="photoAdded.show" ng-click="menu.photo=false;addPhotoToStream()" class="button small">You have added a photo. Click here to post to Stream.</div>
+            <div ng-show="photoAdded.show" ng-click="menu.photo=false;clearPhotosFromDropzone()" class="button small">Finished</div>
+            <div ng-hide="photoAdded.show" ng-click="menu.photo=false" class="button small">Finished</div>
 
         </div>
         <div ng-show="menu.video" id="videobox">
             <div>
                 <h3 style="color:#3F77BC;">Select which type of video you would like to show.</h3>
-                <a class="button" ng-click="menu.youtube = true;menu.animoto = false;">YouTube</a>
-                <a class="button" ng-click="menu.youtube = false;menu.animoto = true;">Animoto</a>
+                <a class="button small" ng-click="menu.youtube = true;menu.animoto = false;">YouTube</a>
+                <a class="button small" ng-click="menu.youtube = false;menu.animoto = true;">Animoto</a>
                 <div class="my-show-hide-animation" ng-show="menu.youtube">
                     <h4 class="dark">YouTube Link</h4>
                     <b class="dark">Past or type a YouTube url here.</b>
                     <input type="text" name="youtube" ng-model="embedVideos.youtube" id="youtube" placeholder="Enter your youtube embed code here!"/>
                     <input type="text" ng-model="photoAdded.photoPostText" class="addNewPost small-10 columns"
                            placeholder="Tell us about this video"/>
-                    <a ng-click="submitVideo()" class="button">Add Video to your stream</a>
+                    <a ng-click="submitVideo()" class="button small">Add Video to your stream</a>
                 </div>
                 <div class="animoto" ng-show="menu.animoto">
                     <h4 class="dark">Animoto Link</h4>
@@ -76,11 +78,11 @@ facebook_share_icon.gif?8:26981" alt="" /></a> -->
                            placeholder="Enter your animoto video url here!"/>
                     <input type="text" ng-model="photoAdded.photoPostText" class="addNewPost small-10 columns"
                            placeholder="Tell us about this video"/>
-                    <a ng-click="submitVideo()" class="button">Add Video to your stream</a>
+                    <a ng-click="submitVideo()" class="button small">Add Video to your stream</a>
 
                 </div>
             </div>
-            <div ng-click="menu.video=false" class="button">Finished</div>
+            <div ng-click="menu.video=false" class="button small">Finished</div>
         </div>
         <div ng-show="menu.event" id="eventbox">
             <div>
@@ -93,9 +95,9 @@ facebook_share_icon.gif?8:26981" alt="" /></a> -->
                     <input type="text" name="eventdate" datepicker-popup="yyyy/MMMM/dd" ng-model="eventData.eventdate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" placeholder="Pick a Date FOR YOUR Anniversary or Event" />
                     <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
                 </div>
-                <a ng-click="submitEvent()" class="button">Submit Angel Anniversary</a>
+                <a ng-click="submitEvent()" class="button small">Submit Angel Anniversary</a>
             </div>
-            <div ng-click="menu.event=false" class="button">Finished</div>
+            <div ng-click="menu.event=false" class="button small">Finished</div>
         </div>
         <div class="small-12 columns" ng-hide="menu.photo || menu.video || menu.event">
             <div ng-class="{spinner:spinner}"></div>
