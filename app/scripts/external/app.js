@@ -1320,6 +1320,90 @@ app.controller('messageController', function ($scope, api, $http, authService, u
     }
 });
 
+
+app.controller('directMessageController', function ($scope, api, $http, authService, userInfoService, socket, $rootScope, $location, $window, limitToFilter,$modal) {
+    var modalInstance;
+    $scope.selected="";
+    $scope.test = "test";
+    $scope.pre = false;
+    $scope.open = function (messagePerson) {
+        if(messagePerson){
+            $scope.pre = true;
+            $scope.test.presel = messagePerson;
+            console.log("sedingto "+messagePerson);
+
+        }
+        modalInstance = $modal.open({
+            scope:$scope,
+            templateUrl: 'partials/messageModal2.html',
+            //  controller: 'ModalInstanceCtrl',
+            resolve: {
+                error: function () {
+                    return $scope.error;
+                },
+                message:$scope.message,
+                sendTo: function () {
+                    return $scope.test
+                }
+                //selected:messagePerson
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            console.log(selectedItem +" this item was selected"   );
+        }, function () {
+            console.log("modal dismissed")
+        });
+    };
+
+
+    $scope.error = "";
+    $scope.message = "";
+    $scope.loginAttempt = false;
+    $scope.submitAuth = function () {
+        $rootScope.$broadcast('event:auth-loginAttempt');
+        $scope.loginAttempt = true;
+        $scope.error = "";
+        $http.post('/login', $scope.form)
+            .success(function (data, status) {
+                userInfoService.setUsername($scope.form.username);
+                $scope.form.username = "";
+                $scope.form.password = "";
+                authService.loginConfirmed();
+                $window.location.href = "";
+            }).error(function (data, status) {
+                $scope.error = "Failed to connect to server please check your connection";
+            });
+    };
+
+    //$scope.selected = undefined;
+    //$scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+    $scope.getPossibles = function (userdata) {
+        console.log(userdata)
+        return $http.get('usersinnetwork/' + $scope.selected).
+            then(function (data) {
+                console.log(data);
+                return limitToFilter(data.data, 15);
+            })
+    }
+    $scope.sendMessage = function () {
+        api.createResource('Message', {to: $scope.selected, from: $scope.form.from, message: $scope.form.message}, function (data, status) {
+            console.log(status);
+            if (status == 400) {
+                $scope.message = data;
+            } else {
+                $scope.message = "message sent!!"
+                $scope.form.message = "";
+                $scope.selected = "";
+                $scope.form.username = "";
+                $scope.form.password = "";
+                $scope.$close();
+            }
+        });
+    }
+});
+
+
 app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket, groupsListing, $timeout,$location,formcache) {
     $scope.form = {};
     $scope.subgroup = [];
@@ -1847,7 +1931,7 @@ app.controller('PicsCtrl', function ($rootScope, $scope, $http, api,$modal,Delet
 
         }else{
             //DeletePicsFactory.setMessageToShowUsers("Are you sure you want to permantly delete this photo from our site forever?");
-            $rootScope.$broadcast('event:pic-delete-request',{message:"Are you sure you want to permantly delete this photo from our site forever? (view by album if you only wanted to remove a pic by album."})
+            $rootScope.$broadcast('event:pic-delete-request',{message:"Are you sure you want to permanently delete this photo from our site? (view by album if you only wanted to remove a pic by album."})
 
         }
         console.log(DeletePicsFactory);
@@ -2773,7 +2857,7 @@ app.controller('NotificationsCtrl', function ($scope, $http, api,socket) {
         });
 
     $scope.notiviewed = function (id) {
-        console.log("Running this functions notviewed")
+        console.log("Running this functions not viewed")
         $http.get('notified/' + id).
             success(function (data) {
 
@@ -2838,11 +2922,11 @@ app.controller('PasswordRecoveryCtrl', function ($scope, $http, $routeParams) {
         $http.post('passrecover', {email: $scope.email}).
             success(function (data) {
                 console.log(data);
-                $scope.message = "Email has been sent please check your email.";
+                $scope.message = "An email has been sent. Please check your email.";
             }).
             error(function (err) {
                 console.log(err);
-                $scope.message = "We could not send you an email.  Please check you have the right email addresss."
+                $scope.message = "We could not send you an email.  Please check that you have the right email address."
             });
     }
     $scope.updatePass = function () {
@@ -2952,7 +3036,7 @@ app.controller("ContactFormController", function ($scope,$http) {
         }).
         error(function (data) {
                 console.log("failure");
-                $scope.message = "An error occured please try again in a few minutes.";
+                $scope.message = "An error occurred please try again in a few minutes.";
                 $scope.spinner = false;
         });
     }
@@ -2989,7 +3073,7 @@ function youtube_parser(url){
     if (match&&match[2].length==11){
         return match[2];
     }else{
-        alert("Probably not a youtube url please try again.");
+        alert("This does not look like it is a youtube url, please try again.");
     }
 }
 //<iframe id="vp1d9hMl" title="Video Player" width="432" height="243" frameborder="0" src="http://embed.animoto.com/play.html?w=swf/production/vp1&e=1383358396&f=d9hMlHCZJLbDtchmtVdo7g&d=0&m=b&r=360p&volume=100&start_res=360p&i=m&asset_domain=s3-p.animoto.com&animoto_domain=animoto.com&options=" allowfullscreen></iframe><p><a href="http://animoto.com/play/d9hMlHCZJLbDtchmtVdo7g">Emila</a></p>
@@ -3013,7 +3097,7 @@ function animoto_parser (url){
     if (match&&match[3]){
         return match[3];
     }else{
-        alert("Probably not a animoto url please enter a url with this form animoto.com/play/xxxkjxlkjxx");
+        alert("This does not look like it is an Animoto url, please enter a url similar to this example: animoto.com/play/xxxkjxlkjxx");
     }
 }
 //<iframe id="vp1d9hMl" title="Video Player" width="432" height="243" frameborder="0" src="http://embed.animoto.com/play.html?w=swf/production/vp1&e=1383358396&f=d9hMlHCZJLbDtchmtVdo7g&d=0&m=b&r=360p&volume=100&start_res=360p&i=m&asset_domain=s3-p.animoto.com&animoto_domain=animoto.com&options=" allowfullscreen></iframe><p><a href="http://animoto.com/play/d9hMlHCZJLbDtchmtVdo7g">Emila</a></p>

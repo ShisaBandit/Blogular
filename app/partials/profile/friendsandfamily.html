@@ -6,7 +6,7 @@
         <div class="row">
             <ul>
                 <li ng-repeat="subscriber in subscribers">
-                    <p>{{ subscriber.firstName }} {{ subscriber.lastName }}</p>
+                    <p><a ng-href="#/pubpro/{{ subscriber.username }}" title="User Name: {{ subscriber.username }}">{{ subscriber.firstName }} {{ subscriber.lastName }}</a></p>
                 </li>
             </ul>
         </div>

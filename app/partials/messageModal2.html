@@ -1,4 +1,4 @@
-<div ng-controller="messageController">
+<div ng-controller="directMessageController">
         <p><b>{{error}}</b></p>
 
         <p><b>{{message}}</b></p>
@@ -7,7 +7,7 @@
                 <th>Send Message to: {{user.username}}</th>
                 <td>
                     {{sendTo}}
-                    <input ng-hide="pre" type="text" value="{{user.username}}" ng-model="selected" typeahead="user for user in getPossibles($viewValue) | filter:$viewValue | limitTo:8">
+                    <input type="text" value="{{user.username}}: {{user.firstName}} {{user.lastName}}">
                     <!--<input  type="text" ng-model="test">-->
 
                 </td>

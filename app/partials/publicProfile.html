@@ -8,14 +8,15 @@
                             <h2 class="contentHeaderTitle">Basic Profile</h2>
                         </div>
                         <ul class="profile">
-                            <li><img src="http://www.gravatar.com/avatar/{{user.gravatar}}"/> First Name : {{user.firstName}}</li>
-                            <li>Last Name: {{user.lastName}}</li>
+                            <img src="http://www.gravatar.com/avatar/{{user.gravatar}}"/>
+                            <li>Real Name : {{user.firstName}} {{user.lastName}}</li>
+                            <li>User Name: {{user.username}}</li>
                             <li>email : {{user.email}}</li>
                             <li>Date of Birth : {{user.dob}}</li>
                             <li>City : {{user.city}}</li>
                             <li>About you : {{user.about}}</li>
                             <li>You have lost a {{user.lost}}</li>
-                            <div ng-controller="messageController">
+                            <div ng-controller="directMessageController">
                                 <a class="button small" ng-click="open(user.username)"><img src="img/mail_2.png"> Send a New Message</a>
                             </div>
                         </ul>
