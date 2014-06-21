@@ -347,6 +347,12 @@ io.configure(function () {
 var notificationSubscribers = [];
 var connectedusers = [];
 
+app.get('/connectedusers',passport.ensureAuthenticated,GetConnectedUsers);
+function GetConnectedUsers(req, res)
+{
+    return res.send(JSON.stringify(this.connectedusers));
+}
+
 io.sockets.on('connection', function (socket) {
     socket.emit('connected', {conn: 'true'});
     socket.on('loggedin', function () {
@@ -385,7 +391,7 @@ io.sockets.on('connection', function (socket) {
         //if we didnt have any duplicates
         if (duplicateUserForRoom == false) {
             socket.join(data.room);
-            connectedusers.push({room: data.room, id: socket.handshake.user[0]._id, username: socket.handshake.user[0].username,socket:socket});
+            connectedusers.push({room: data.room, id: socket.handshake.user[0]._id, username: socket.handshake.user[0].username,socket:socket,userdata:socket.handshake.user[0]});
 
             //usersForThisRoom.push({room: data.room, id: socket.handshake.user[0]._id, username: socket.handshake.user[0].username});
 
