@@ -1229,8 +1229,9 @@ app.controller('LoginController', function ($scope, $http, authService, userInfo
 
 });
 
-app.controller('ModalInstanceCtrl',function ($scope, $modalInstance,error,sendTo) {
-    $scope.test = sendTo;
+app.controller('ModalInstanceCtrl',function ($scope, $modalInstance,error,sendTo)
+{
+
     $scope.ok = function () {
         $modalInstance.close($scope.selected.item);
     };
@@ -1326,23 +1327,30 @@ app.controller('directMessageController', function ($scope, api, $http, authServ
     $scope.selected="";
     $scope.test = "test";
     $scope.pre = false;
-    $scope.open = function (messagePerson) {
-        if(messagePerson){
+    $scope.sendToPerson = "";
+    $scope.open = function (messagePerson)
+    {
+        if(messagePerson)
+        {
             $scope.pre = true;
             $scope.test.presel = messagePerson;
-            console.log("sedingto "+messagePerson);
-
+            console.log("sedingto "+$scope.user.username);
+            $scope.sendToPerson.sendToPerson = messagePerson;
         }
-        modalInstance = $modal.open({
+        modalInstance = $modal.open(
+        {
             scope:$scope,
             templateUrl: 'partials/messageModal2.html',
             //  controller: 'ModalInstanceCtrl',
-            resolve: {
-                error: function () {
+            resolve:
+            {
+                error: function ()
+                {
                     return $scope.error;
                 },
                 message:$scope.message,
-                sendTo: function () {
+                sendTo: function ()
+                {
                     return $scope.test
                 }
                 //selected:messagePerson
@@ -1386,8 +1394,11 @@ app.controller('directMessageController', function ($scope, api, $http, authServ
                 return limitToFilter(data.data, 15);
             })
     }
+
     $scope.sendMessage = function () {
-        api.createResource('Message', {to: $scope.selected, from: $scope.form.from, message: $scope.form.message}, function (data, status) {
+        console.log($scope.sendToPerson.sendToPerson);
+        console.log($scope.form.from);
+        api.createResource('Message', {to: $scope.user.username, from: $scope.form.from, message: $scope.form.message}, function (data, status) {
             console.log(status);
             if (status == 400) {
                 $scope.message = data;
