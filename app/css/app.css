@@ -1814,7 +1814,7 @@ input.addNewPost {
         float: left;
     }
 
-    .form-horizontal {
+    .form-horizontal ul.dropdown-menu {
         display: none;
     }
 
