@@ -548,7 +548,8 @@ app.controller('blogEntryPicCtrl', function ($scope) {
     $scope.test = "TEST RESULT";
 });
 
-app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http, dropzone, api,userInfoService) {
+app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http, dropzone, api,userInfoService)
+{
     $scope.parentObject = {
         routeParamId: $routeParams.id,
         entryId: "",
@@ -841,7 +842,9 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
                 $scope.text = blog[0].text;
                 $scope.comments = blog[0].comments;
                 socket.emit('subscribe', {room: blog[0]._id});
+
                 $scope.parentObject.type = $location.path().split("/")[1];
+                console.log("Getting type "+$scope.parentObject.type);
                 $scope.$onReady("success");
             }
 
@@ -1062,7 +1065,7 @@ app.controller('groupEntryCtrl', function ($scope, $location, show, Blog, $route
                 $scope.text = blog[0].text;
                 $scope.comments = blog[0].comments;
                 socket.emit('subscribe', {room: blog[0]._id});
-
+                $scope.parentObject.type = $location.path().split("/")[1];
                 $scope.$onReady("success");
                 $location.path("/group/" + $routeParams.id);
             }

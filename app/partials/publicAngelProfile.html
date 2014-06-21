@@ -1,5 +1,7 @@
 <div ng-controller="blogEntryCtrl">
+    <!--
     <div class="memNav" if-authed="show">
+
         <div class="row" offset-height="90" ng-show="profileMenuViewable" ng-animate="fade" id="profile-menu">
             <div class="small-8 small-offset-4">
                 <nav class="top-bar">
@@ -19,25 +21,28 @@
                 </nav>
             </div>
         </div>
+
     </div>
+     -->
     <div class="row">
-        <div class="twelve columns" offset-height="0" role="content">
+        <div class="twelve columns"  role="content">
             <div id="picheader" class="publicWall twelve columns">
                 <div class="row">
                     <div class="small-3 columns" offset-height="-10">
-
+                            Objecttype:{{parentObject.type}}
                         <div ng-switch on="parentObject.type" id="portraitpic">
+
                             <img  id="portrait" src="/uploads/{{ entry.profilePicPortrait }}"><br/>
-                            <span ng-switch-when="group">{{ entry.title }} Group<br />Moderator: {{ entry.firstName }} {{ entry.lastName }}</span>
-                            <span ng-switch-when="angel">{{ entry.firstName }} {{ entry.lastName }}</span>
-                            <span ng-switch-when="pet">{{ entry.firstName }} {{ entry.lastName }}</span>
+                            <div ng-switch-when="group">{{ entry.title }} Group<br />Moderator: {{ entry.firstName }} {{ entry.lastName }}</div>
+                            <div ng-switch-when="angel">{{ entry.firstName }} {{ entry.lastName }}</div>
+                            <div ng-switch-when="pet">{{ entry.firstName }} {{ entry.lastName }}</div>
                         </div>
                     </div>
                     <div class="small-8 columns">
                         <div id="contentHeader" class="small-12 columns" ng-switch on="parentObject.type">
-                            <h2 class="contentHeaderTitle" ng-switch-when="angel">{{entry.firstName}}'s Public Memorial</h2>
-                            <h2 class="contentHeaderTitle" ng-switch-when="pet">{{entry.firstName}}'s Public Memorial</h2>
-                            <h2 class="contentHeaderTitle" ng-switch-when="group">{{entry.firstName}}'s {{ entry.title }} Group</h2>
+                            <div class="contentHeaderTitle" ng-switch-when="angel">{{entry.firstName}}'s Public Memorial</div>
+                            <div class="contentHeaderTitle" ng-switch-when="pet">{{entry.firstName}}'s Public Memorial</div>
+                            <div class="contentHeaderTitle" ng-switch-when="group">{{entry.firstName}}'s {{ entry.title }} Group</div>
                         </div>
 
                         <!--
@@ -66,10 +71,5 @@
                 </div>
             </div>
         </div>
-
-
-    </div>
-    <div class="row">
-
     </div>
 </div>
