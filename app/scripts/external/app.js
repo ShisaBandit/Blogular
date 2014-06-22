@@ -1353,21 +1353,40 @@ app.controller('messageController', function ($scope, api, $http, authService, u
     }
 });
 
-
-app.controller('directMessageController', function ($scope, api, $http, authService, userInfoService, socket, $rootScope, $location, $window, limitToFilter,$modal) {
+app.service('curerntlyMessagingUser',function()
+{
+    var user = {};
+    return{
+        getUser : function(){
+            return user;
+        },
+        setUser : function(value)
+        {
+            user = value;
+        }
+    }
+});
+app.controller('directMessageController', function ($scope, api, $http, authService, userInfoService, socket, $rootScope, $location, $window, limitToFilter,$modal,curerntlyMessagingUser) {
     var modalInstance;
     $scope.selected="";
     $scope.test = "test";
     $scope.pre = false;
-    $scope.sendToPerson = "";
+    $scope.sendToPerson = curerntlyMessagingUser.getUser();
+    if(!curerntlyMessagingUser.getUser())
+    {
+        curerntlyMessagingUser.setUser($scope.user.username);
+    }
+    $rootScope.$on('selectedUserMessages',function(){
+        $scope.sendToPerson = curerntlyMessagingUser.getUser();
+    })
     $scope.open = function (messagePerson)
     {
         if(messagePerson)
         {
             $scope.pre = true;
             $scope.test.presel = messagePerson;
-            console.log("sedingto "+$scope.user.username);
-            $scope.sendToPerson.sendToPerson = messagePerson;
+            console.log("sedingto "+curerntlyMessagingUser.getUser());
+            $scope.sendToPerson = curerntlyMessagingUser.getUser();
         }
         modalInstance = $modal.open(
         {
@@ -1400,7 +1419,8 @@ app.controller('directMessageController', function ($scope, api, $http, authServ
     $scope.error = "";
     $scope.message = "";
     $scope.loginAttempt = false;
-    $scope.submitAuth = function () {
+    $scope.submitAuth = function (){
+
         $rootScope.$broadcast('event:auth-loginAttempt');
         $scope.loginAttempt = true;
         $scope.error = "";
@@ -1430,9 +1450,8 @@ app.controller('directMessageController', function ($scope, api, $http, authServ
 
     $scope.sendMessage = function ()
     {
-        console.log($scope.sendToPerson.sendToPerson);
-        console.log($scope.form.from);
-        api.createResource('Message', {to: $scope.user.username, from: $scope.form.from, message: $scope.form.message}, function (data, status) {
+        console.log($scope.sendToPerson);
+        api.createResource('Message', {to: curerntlyMessagingUser.getUser().user, from: $scope.form.from, message: $scope.form.message}, function (data, status) {
             console.log(status);
             if (status == 400) {
                 $scope.message = data;
@@ -1442,7 +1461,10 @@ app.controller('directMessageController', function ($scope, api, $http, authServ
                 $scope.selected = "";
                 $scope.form.username = "";
                 $scope.form.password = "";
-                $scope.$close();
+                if(!$scope.$close){}else{
+                    $scope.$close();
+                }
+                $rootScope.$broadcast("directMessageSent");
             }
         });
     }
@@ -2115,7 +2137,8 @@ app.controller('PetitionEntryCtrl', function ($scope, api, $routeParams,$http) {
     }
 });
 
-app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, groupsListing) {
+app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, groupsListing,curerntlyMessagingUser,$rootScope)
+{
     $scope.messagedUsers = [];
     $scope.messages = [];
     $scope.walls = [];
@@ -2154,14 +2177,23 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, gr
                 console.log(err)
             })
     }
+    $scope.currentMessagedUser = {};
+    $scope.userSelected = false;
     $scope.getFriendsMemorials();
     $scope.getMessages = function (mUser) {
-        $http.get('/getMessages/' + mUser).
+        $scope.userSelected = true;
+        curerntlyMessagingUser.setUser(mUser);
+        console.log(curerntlyMessagingUser.getUser());
+        $rootScope.$broadcast('selectedUserMessages');
+        $http.get('/getMessages/' + mUser.user).
             success(function (data) {
                 $scope.messages = data;
             })
     }
+    $rootScope.$on('directMessageSent',function(){
+        $scope.getMessages(curerntlyMessagingUser.getUser());
 
+    })
 
     $scope.getInvitedGroups = function () {
         $http.get('getInvitedGroup').
