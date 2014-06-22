@@ -20,16 +20,18 @@
                             <p style="color: #2164AA;" ng-show="workshops == ''">There are no workshops scheduled at this time</p>
                         </div>
                     </div>
+
                 </section></tab>
-                <tab heading="Submit Your Workshop"><section>
-                    <div class="row">
+
+                <tab  heading="Submit Your Workshop"><section>
+                    <div class="row" >
                         <h2>Submit the details for your workshop</h2>
                         <p>
                             Please submit the details of the workshop that you would like to have listed on our Workshops page using the form below.
                             We will review it and get back to you to confirm a few details. As long as the contents of the workshop adhere to our site guidelines
                             and the spirit of The Circle of Life/Angels of Eureka, we would be more than happy to include it in our list of scheduled workshops.
                         </p>
-                        <!--
+
                         <form name="workshopform">
                             <div class="row">
                                 <div class="large-4 columns">
@@ -193,9 +195,11 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="medium button" ng-click="sendMessage()">Submit Workshop for Listing</div>
+                            <div ng-hide="sent" class="medium button" ng-click="sendMessage()">Submit Workshop for Listing</div>
+                            <div ng-show="sent" class="medium button" ng-click="reset()">Send Another?</div>
+                            {{message}}
                         </form>
-                        -->
+
                        <p>support@angelsofeureka.com</p>
                     </div>
                 </section></tab>

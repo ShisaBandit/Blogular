@@ -294,7 +294,7 @@ app.get('/notifications',passport.ensureAuthenticated,blogRoutes.notifications);
 app.get('/notified/:id',passport.ensureAuthenticated,blogRoutes.notified);
 
 app.post('/updateworkshop/:id',passport.ensureAuthenticated,blogRoutes.editworkshop);
-
+app.post('/workshopinfo',blogRoutes.workshopinfo);
 //message center api
 app.get('/getMessagedUsers',passport.ensureAuthenticated,messageRoutes.getMessagedUsers);
 app.get('/getMessages/:username',passport.ensureAuthenticated,messageRoutes.getMessagesForUser);

@@ -2971,26 +2971,47 @@ app.controller('WorkshopCtrl', function ($scope, $http, api) {
     $scope.workshops = [];
     $scope.form;
 
-    api.getResourceById('Workshop', 'all', function (workshops) {
+    api.getResourceById('Workshop', 'all', function (workshops)
+    {
         console.log(workshops);
         console.log("TESTING !#");
         $scope.workshops = workshops;
     });
 
-    $scope.submit = function () {
+    $scope.submit = function ()
+    {
         api.createResource('Workshops', $scope.form);
     }
 
-    $scope.submitedit = function () {
+    $scope.submitedit = function ()
+    {
         $http.post('updateworkshop/' + $scope.workshops._id).
-            success(function (data) {
-
+            success(function (data)
+            {
             }).
-            error(function (data) {
-
+            error(function (data)
+            {
             })
     }
-
+    $scope.sent = false;
+    $scope.message = "";
+    $scope.sendMessage = function()
+    {
+        $http.post('workshopinfo/',$scope.form).
+            success(function (data)
+            {
+                $scope.sent = true;
+                $scope.message = "Your workshop was submitted.";
+            }).
+            error(function (data)
+            {
+            })
+    }
+    $scope.reset = function()
+    {
+        $scope.sent = false;
+        $scope.message = "";
+    }
 })
 
 app.controller('PasswordRecoveryCtrl', function ($scope, $http, $routeParams) {
