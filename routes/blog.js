@@ -27,7 +27,10 @@ var EventEmitter = require('events').EventEmitter;
 //var emailTemplates = require('swig-email-templates');
 var path = require('path');
 exports.messageEmitter = messageEmitter = new EventEmitter();
-
+exports.GetConnectedUsers = function(req, res)
+{
+    return res.send(JSON.stringify(notificationSubscribers));
+}
 exports.join = function (req,res) {
     var requester;
     var requestee;
