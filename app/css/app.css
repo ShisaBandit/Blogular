@@ -2630,3 +2630,10 @@ body nav.top-bar.top-bar-logged-in {
      font-weight: bolder;
      color: red;
  }
+
+ .memNavTitle {
+     background:#90BFFA;
+     height:40px !important;
+     padding:4px;
+     color:#fff;
+ }
