@@ -27,6 +27,18 @@ var EventEmitter = require('events').EventEmitter;
 //var emailTemplates = require('swig-email-templates');
 var path = require('path');
 exports.messageEmitter = messageEmitter = new EventEmitter();
+
+exports.workshopinfo = function(req,res)
+{
+    //TODO:Get theworkshop datafrom client format and send to pat rod and me
+    var message = 'Here is some workshop info:'+req.body.address;
+    SendEmail('raygarner13@gmail.com','raygarner13@gmail.com',message,'Wall request!');
+    SendEmail('raygarner13@gmail.com','rodney@blackjackproductions.com',message,'Wall request!');
+    SendEmail('raygarner13@gmail.com','AngelsofEureka@aol.com',message,'Wall request!');
+    return res.send(200,'success');
+
+}
+
 exports.GetConnectedUsers = function(req, res)
 {
     return res.send(JSON.stringify(notificationSubscribers));
@@ -42,14 +54,14 @@ exports.join = function (req,res) {
             if(!blog)return res.send(410,'error');
             console.log(user);
             requester  = user;
-             var message = 'Hello {{user}}, {{blog.user}} wants to join your memorial wall or private group, <b>'+blog.title+'</b>. <a href="http://' +
+             var message = 'Hello '+ requestee.username+','+ requester.username+' wants to join your memorial wall or private group, <b>'+blog.title+'</b>. <a href="http://' +
              'the-circle-of-life.net/#/join/'+blog.author+'/'+requester._id+'">Click to give them access</a>';
              /*var message = 'Hey someone wants to join your wall <b>'+blog.title+'</b> info click here to let them in <a href="http://' +
              'localhost:3000/#/join/'+blog.author+'/'+requester._id+'">click to allow</a>';*/
              //send message to allow invitation by clicking on link.
             SendMessage('administrator',requestee.username,message,req,res, function () {
                 //send email to allow invitation
-                message = 'Hello {{user}}, {{blog.user}} wants to join your memorial wall or private group, <b>'+blog.title+
+                message = 'Hello '+ requestee.username+','+ requester.username+' wants to join your memorial wall or private group, <b>'+blog.title+
                     '</b> Go to your <b>Message Center</b> in your <b>User profile</b> on <a href="http://the-circle-of-life.net">The Circle of Life</a>, to give them access';
 
                 SendEmail(requestee.email,requester.email,message,'Wall request!');
