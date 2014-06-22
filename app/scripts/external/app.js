@@ -548,7 +548,7 @@ app.controller('blogEntryPicCtrl', function ($scope) {
     $scope.test = "TEST RESULT";
 });
 
-app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http, dropzone, api,userInfoService)
+app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http, dropzone, api,userInfoService,typestate)
 {
     $scope.parentObject = {
         routeParamId: $routeParams.id,
@@ -828,9 +828,20 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
             var curr_month = d.getMonth() + 1; //Months are zero based
             var curr_year = d.getFullYear();
             $scope.entry.memorialDate = curr_date+"/"+curr_month+"/"+curr_year;
+            console.log($location.path().split("/")[1]);
+            if($location.path().split("/")[1] == "public")
+            {
+                $scope.parentObject.type = typestate.getState();
+            }else
+            {
+                $scope.parentObject.type = $location.path().split("/")[1];
+                typestate.setState($scope.parentObject.type);
+            }
+
+            //$scope.parentObject.type = "group";
             if (blog[0].limited) {
                 $scope.profileMenuViewable = false;
-                $location.path("/public/" + $routeParams.id);
+                $location.path("public/" + $routeParams.id);
             } else {
                 $scope.parentObject.entryId = blog[0]._id;
                 console.log(userInfoService.getId()+" "+blog[0].owner_id);
@@ -843,7 +854,7 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
                 $scope.comments = blog[0].comments;
                 socket.emit('subscribe', {room: blog[0]._id});
 
-                $scope.parentObject.type = $location.path().split("/")[1];
+
                 console.log("Getting type "+$scope.parentObject.type);
                 $scope.$onReady("success");
             }
@@ -864,6 +875,18 @@ app.controller('blogEntryCtrl', function ($scope, $location, show, Blog, $routeP
     });
 });
 
+app.service('typestate',function()
+{
+        var state = "";
+        return{
+            getState: function () {
+                return state;
+            },
+            setState: function (value) {
+                state = value;
+            }
+        }
+})
 app.controller('groupEntryCtrl', function ($scope, $location, show, Blog, $routeParams, socket, $rootScope, $http, dropzone, api) {
 
 
@@ -1055,9 +1078,10 @@ app.controller('groupEntryCtrl', function ($scope, $location, show, Blog, $route
             console.log(blog[0].limited);
             console.log(blog[0]);
             $scope.entry = blog[0];
-
+            $scope.parentObject.type = $location.path().split("/")[1];
             if (blog[0].limited) {
                 $scope.profileMenuViewable = false;
+
                 $location.path("/public/" + $routeParams.id);
             } else {
                 $scope.parentObject.entryId = blog[0]._id;
@@ -1065,7 +1089,6 @@ app.controller('groupEntryCtrl', function ($scope, $location, show, Blog, $route
                 $scope.text = blog[0].text;
                 $scope.comments = blog[0].comments;
                 socket.emit('subscribe', {room: blog[0]._id});
-                $scope.parentObject.type = $location.path().split("/")[1];
                 $scope.$onReady("success");
                 $location.path("/group/" + $routeParams.id);
             }
