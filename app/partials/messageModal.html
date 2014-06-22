@@ -7,7 +7,7 @@
                 <th>Send Message to: {{user.username}}</th>
                 <td>
                     {{sendTo}}
-                    <input ng-hide="pre" type="text" value="{{user.username}}" ng-model="selected" typeahead="user for user in getPossibles($viewValue) | filter:$viewValue | limitTo:8">
+                    <input ng-hide="pre" type="text" ng-model="form.selected" typeahead="user for user in getPossibles($viewValue) | filter:$viewValue | limitTo:8">
                     <!--<input  type="text" ng-model="test">-->
 
                 </td>

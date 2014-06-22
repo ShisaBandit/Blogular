@@ -1270,7 +1270,9 @@ app.controller('messageController', function ($scope, api, $http, authService, u
     $scope.selected="";
     $scope.test = "test";
     $scope.pre = false;
-    $scope.open = function (messagePerson) {
+    $scope.form = {};
+    $scope.open = function (messagePerson)
+    {
             if(messagePerson){
                 $scope.pre = true;
                 $scope.test.presel = messagePerson;
@@ -1322,22 +1324,26 @@ app.controller('messageController', function ($scope, api, $http, authService, u
 
     //$scope.selected = undefined;
     //$scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-    $scope.getPossibles = function (userdata) {
+    $scope.getPossibles = function (userdata)
+    {
         console.log(userdata)
-        return $http.get('usersinnetwork/' + $scope.selected).
+        //$scope.selected = userdata;
+        return $http.get('usersinnetwork/' + userdata).
             then(function (data) {
                 console.log(data);
                 return limitToFilter(data.data, 15);
             })
     }
-    $scope.sendMessage = function () {
-        api.createResource('Message', {to: $scope.selected, from: $scope.form.from, message: $scope.form.message}, function (data, status) {
+    $scope.sendMessage = function ()
+    {
+        api.createResource('Message', {to: $scope.form.selected, from: $scope.form.from, message: $scope.form.message}, function (data, status) {
             console.log(status);
             if (status == 400) {
                 $scope.message = data;
             } else {
                 $scope.message = "message sent!!"
                 $scope.form.message = "";
+                $scope.form.selected = "";
                 $scope.selected = "";
                 $scope.form.username = "";
                 $scope.form.password = "";
@@ -1412,7 +1418,8 @@ app.controller('directMessageController', function ($scope, api, $http, authServ
 
     //$scope.selected = undefined;
     //$scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-    $scope.getPossibles = function (userdata) {
+    $scope.getPossibles = function (userdata)
+    {
         console.log(userdata)
         return $http.get('usersinnetwork/' + $scope.selected).
             then(function (data) {
@@ -1421,7 +1428,8 @@ app.controller('directMessageController', function ($scope, api, $http, authServ
             })
     }
 
-    $scope.sendMessage = function () {
+    $scope.sendMessage = function ()
+    {
         console.log($scope.sendToPerson.sendToPerson);
         console.log($scope.form.from);
         api.createResource('Message', {to: $scope.user.username, from: $scope.form.from, message: $scope.form.message}, function (data, status) {
