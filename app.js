@@ -346,12 +346,13 @@ io.configure(function () {
 });
 var notificationSubscribers = [];
 var connectedusers = [];
-
-app.get('/connectedusers',passport.ensureAuthenticated,GetConnectedUsers);
-function GetConnectedUsers(req, res)
+var connectedUsersData = [];
+app.get('/connectedusers',function(req, res)
 {
-    return res.send(JSON.stringify(this.connectedusers));
-}
+
+    return res.send(JSON.stringify(connectedUsersData));
+});
+
 
 io.sockets.on('connection', function (socket) {
     socket.emit('connected', {conn: 'true'});
@@ -408,6 +409,25 @@ io.sockets.on('connection', function (socket) {
     socket.on('subscribe_notifications', function (data) {
         console.log("trying to subscribe to notifications")
         notificationSubscribers.push({ id: socket.handshake.user[0]._id, username: socket.handshake.user[0].username,socket:socket});
+
+        var dup = false;
+        for(var i = 0; i < connectedUsersData.length;i++)
+        {
+            console.log(connectedUsersData[i]._id.valueOf());
+            console.log(socket.handshake.user[0]._id.valueOf());
+            if(connectedUsersData[i]._id.toString() == socket.handshake.user[0]._id.toString())
+            {
+                console.log("dupped");
+                dup = true;
+            }
+        }
+        console.log(dup);
+        if(!dup)
+        {
+            connectedUsersData.push(socket.handshake.user[0]);
+        }
+
+        //console.log(connectedUsersData.length);
     });
 
     socket.on('sentcomment', function (data) {
@@ -469,6 +489,13 @@ io.sockets.on('connection', function (socket) {
             }
             if (connectedusers[i] != undefined && connectedusers[i].room == socket.room) {
                 //usersForThisRoom.push(connectedusers[i]);
+            }
+        }
+        for(var d = 0 ; d < connectedUsersData.length;d++)
+        {
+            if(connectedUsersData[d]._id.toString() == socket.handshake.user[0]._id.toString())
+            {
+                connectedUsersData.splice(d,1);
             }
         }
         connectedusers = buffer;
