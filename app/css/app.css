@@ -1640,6 +1640,17 @@ input.addNewPost {
         width: 98%;
     }
 
+    div.form-horizontal .dropdown-menu,
+    div.form-horizontal2 .dropdown-menu {
+        display: none !important;
+    }
+
+     div.form-horizontal button.btn,
+     div.form-horizontal2 .button.btn {
+         display: none !important;;
+     }
+
+
     #loginMessage {
         position: relative;
         display: block;
