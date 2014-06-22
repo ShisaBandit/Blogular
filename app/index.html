@@ -204,25 +204,20 @@
         </aside>
         <aside ng-controller="UserInfoCtrl" class="left-off-canvas-menu">
             <ul class="off-canvas-list">
-                    <li><label>Memorials</label></li>
-                        <li>
-                            <a href="/"  >Angel Memorials</a>
-                        </li>
-                        <li>
-                            <a href="#/pets" >Pets</a>
-                        </li>
-                <li>
-                    <a href="#/groups" >Groups</a>
-                </li>
-                <li>
-                    <a href="#/workshops" >Workshops</a>
-                </li>
-                <li>
-                    <a href="#/petitions" >Petitions</a>
-                </li>
-                <li>
-                    <a href="angelsofeureka.com/shop/index.php/" >Web Store</a>
-                </li>
+                <li><label>Memorials</label></li>
+                <li if-authed="show"><a href="#/AddBlogEntry" class="small"> - Create New Memorial Walls Here</a></li>
+                <li if-authed="show"><a href="#/myMemorials" class="small"> - Manage Memorial Walls</a></li>
+                <li><a href="/"  >View Angel Memorials</a></li>
+                <li><a href="#/pets" >View Pets Memorials</a></li>
+                <li><label>Private Groups</label></li>
+                <li if-authed="show"><a href="#/StartGroup" class="small"> - Start Support Group</a></li>
+                <li><a href="#/groups" id="groupsbutton" class="small"> - Private Support Groups</a></li>
+                <li><a href="#/groups" >View All Groups</a></li>
+                <li><label>Other Offerings</label></li>
+                <li><a href="#/workshops" >Workshops</a></li>
+                <li><a href="#/petitions" >Petitions</a></li>
+                <li><a href="#/about" id="groupsbutton" class="small">About Us</a></li>
+                <li><a href="angelsofeureka.com/shop/index.php/" >Web Store</a></li>
                 <li><label>{{username}} Account</label></li>
                 <li><a href="#/profile/{{username}}" if-authed="show" >My Account</a></li>
                 <li><a href="#/rules">Rules</a></li>
