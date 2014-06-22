@@ -265,48 +265,37 @@
                         <b>Conversation History</b>
                         <br /> <br />
                         <section>
-                            <div class="row">
-                                <span class="small-3 columns"><b>Sent By:</b></span>
-                                <!--
-                                <span class="small-2 columns"><b>Date:</b></span>
-                                -->
-                            </div>
-                            <div ng-controller="messageController">
-                                <ul>
-                                    <li>
-                                        <table border="0" cellpadding="0" cellspacing="0">
-                                            <tr>
-                                                <th>Continue Conversation with  {{user.username}} below</th>
-                                                <td>
-                                                    {{sendTo}}
-                                                    <input type="hidden" value="{{user.username}}: {{user.firstName}} {{user.lastName}}">
-                                                    <!--<input  type="text" ng-model="test">-->
+                            <div ng-controller="directMessageController">
+                                <table border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <th>Continue Conversation with  {{sendToPerson.sendToPerson}} below</th>
+                                        <td>
+                                            {{sendTo}}
+                                            <input type="hidden" value="{{sendToPerson.username}}">
+                                            <!--<input  type="text" ng-model="test">-->
 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Message</th>
-                                                <td>
-                                                    <textarea class="login-inp ng-pristine ng-valid" ng-model="form.message"></textarea>
-                                                </td>
-                                            </tr>
-                                            <tr>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Message</th>
+                                        <td>
+                                            <textarea class="login-inp ng-pristine ng-valid" ng-model="form.message"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
 
-                                            </tr>
-                                            <tr>
-                                                <th></th>
-                                                <td><a class="button small" ng-click="sendMessage()">Send Message</a></td>
-                                                <td><a class="button small">Cancel</a></td>
-                                            </tr>
-                                        </table>
-                                    </li>
-                                </ul>
-
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <td><a class="button small" ng-click="sendMessage()">Send Message</a></td>
+                                        <td><a class="button small">Cancel</a></td>
+                                    </tr>
+                                </table>
                             </div>
                             <br />
                             <div class="row my-repeat-animation" ng-repeat="message in messages" >
                                 <div class="small-30 columns"
-                                      style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>{{message.from}}</b>
+                                      style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>Sent By: {{message.from}}</b>
                                     <i
                                         style="font: x-small serif; color: steelblue;float: right">{{message.date}}</i>
                                     <br/>
