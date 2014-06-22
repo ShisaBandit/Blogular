@@ -42,15 +42,15 @@ exports.join = function (req,res) {
             if(!blog)return res.send(410,'error');
             console.log(user);
             requester  = user;
-             var message = 'Hey someone wants to join your wall <b>'+blog.title+'</b> info click here to let them in <a href="http://' +
-             'angelsofeureka.org/#/join/'+blog.author+'/'+requester._id+'">click to allow</a>';
+             var message = 'Hello {{user}}, {{blog.user}} wants to join your memorial wall or private group, <b>'+blog.title+'</b>. <a href="http://' +
+             'the-circle-of-life.net/#/join/'+blog.author+'/'+requester._id+'">Click to give them access</a>';
              /*var message = 'Hey someone wants to join your wall <b>'+blog.title+'</b> info click here to let them in <a href="http://' +
              'localhost:3000/#/join/'+blog.author+'/'+requester._id+'">click to allow</a>';*/
              //send message to allow invitation by clicking on link.
             SendMessage('administrator',requestee.username,message,req,res, function () {
                 //send email to allow invitation
-                message = 'Hey someone wants to join your wall <b>'+blog.title+
-                    '</b> Go to your <b>Message Center</b> in your <b>User profile</b> to give them access';
+                message = 'Hello {{user}}, {{blog.user}} wants to join your memorial wall or private group, <b>'+blog.title+
+                    '</b> Go to your <b>Message Center</b> in your <b>User profile</b> on <a href="http://the-circle-of-life.net">The Circle of Life</a>, to give them access';
 
                 SendEmail(requestee.email,requester.email,message,'Wall request!');
                 return res.send(200,'success');
