@@ -1640,6 +1640,17 @@ input.addNewPost {
         width: 98%;
     }
 
+    div.form-horizontal .dropdown-menu,
+    div.form-horizontal2 .dropdown-menu {
+        display: none !important;
+    }
+
+     div.form-horizontal button.btn,
+     div.form-horizontal2 .button.btn {
+         display: none !important;;
+     }
+
+
     #loginMessage {
         position: relative;
         display: block;
@@ -2618,4 +2629,11 @@ body nav.top-bar.top-bar-logged-in {
  .shortURI {
      font-weight: bolder;
      color: red;
+ }
+
+ .memNavTitle {
+     background:#90BFFA;
+     height:40px !important;
+     padding:4px;
+     color:#fff;
  }

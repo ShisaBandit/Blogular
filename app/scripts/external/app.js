@@ -1476,6 +1476,7 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket, grou
     $scope.subgroup = [];
     $scope.form.groupcode;
     $scope.selectedSubgroup = {};
+    $scope.addedFile = {};
     $scope.groups = groupsListing;
     $scope.message = {};
     $scope.groups = groupsListing;
@@ -1531,6 +1532,13 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket, grou
             });
 
     }
+
+    $rootScope.$on('addedFile', function (event, file) {
+        console.log("addedfile");
+        console.log($scope.addedFile);
+        $scope.addedFile = file.file;
+    })
+
     $scope.open = function (no) {
         $timeout(function () {
             $scope.opened = true;
