@@ -31,10 +31,12 @@ exports.messageEmitter = messageEmitter = new EventEmitter();
 exports.workshopinfo = function(req,res)
 {
     //TODO:Get theworkshop datafrom client format and send to pat rod and me
-    var message = 'Here is some workshop info:'+req.body.address;
-    SendEmail('raygarner13@gmail.com','raygarner13@gmail.com',message,'Wall request!');
-    SendEmail('raygarner13@gmail.com','rodney@blackjackproductions.com',message,'Wall request!');
-    SendEmail('raygarner13@gmail.com','AngelsofEureka@aol.com',message,'Wall request!');
+    var message = 'You have a new workshop submission:'+req.body.address;
+    SendEmail('raygarner13@gmail.com','raygarner13@gmail.com',message,'Circle of Life Workshop Submission! View and approve this submission here: <a href="http://' +
+        'the-circle-of-life.net/#/workshops/'+blog.author+'/'+requester._id+'">Click to review and approve</a>');
+    SendEmail('Rodney','rodney@blackjackproductions.com',message,'Circle of Life Workshop Submission! View and approve this submission here: <a href="http://' +
+        'the-circle-of-life.net/#/workshops/'+blog.author+'/'+requester._id+'">Click to review and approve</a>');
+    //SendEmail('raygarner13@gmail.com','AngelsofEureka@aol.com',message,'Wall request!');
     return res.send(200,'success');
 
 }
@@ -64,7 +66,7 @@ exports.join = function (req,res) {
                 message = 'Hello '+ requestee.username+', '+ requester.username+' wants to join your memorial wall or private group, <b>'+blog.title+
                     '</b> Go to your <b>Message Center</b> in your <b>User profile</b> on <a href="http://the-circle-of-life.net">The Circle of Life</a>, to give them access';
 
-                SendEmail(requestee.email,requester.email,message,'Wall request!');
+                SendEmail(requestee.email,requester.email,message,'Circle of Life Memorial Wall/Group request!');
                 return res.send(200,'success');
             });
         })
