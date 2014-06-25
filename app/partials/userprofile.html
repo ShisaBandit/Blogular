@@ -215,44 +215,36 @@
                     </div>
                     <p>Welcome to the Message Center. From here you can create, manage and view messages from your network members, administrators and other registered users..</p>
                     <div ng-controller="messageController">
-                        <ul class="small-block-grid-1 medium-block-grid-3">
-                            <li>
-                                    <accordion>
-                                        <accordion-group heading="Send a new message to someone" class="small button sendMsg">
-                                            <p><b>{{error}}</b></p>
-                                            <p><b>{{message}}</b></p>
-                                            <table border="0" cellpadding="0" cellspacing="0">
-                                                <tr>
-                                                    <th>Send Message to: </th>
-                                                    <td>
-                                                        {{sendTo}}
-                                                        <input ng-hide="pre" type="text" ng-model="form.selected" typeahead="user for user in getPossibles($viewValue) | filter:$viewValue | limitTo:8">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Message</th>
-                                                    <td>
-                                                        <textarea class="login-inp ng-pristine ng-valid" ng-model="form.message"></textarea>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th></th>
-                                                    <td><a class="button small" ng-click="sendMessage()">Send Message</a></td>
-                                                    <td><a class="button small">Cancel</a></td>
-                                                </tr>
-                                            </table>
-                                        </accordion-group>
-                                    </accordion>
-                            </li>
-                        </ul>
+                        <accordion class="small-block-grid-1 medium-block-grid-3">
+                            <accordion-group heading="Send a new message to someone" class="small button sendMsg">
+                                <p><b>{{error}}</b></p>
+                                <p><b>{{message}}</b></p>
+                                <table border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <th>Send Message to: </th>
+                                        <td>
+                                            {{sendTo}}
+                                            <input ng-hide="pre" type="text" ng-model="form.selected" typeahead="user for user in getPossibles($viewValue) | filter:$viewValue | limitTo:8">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <textarea class="login-inp ng-pristine ng-valid" ng-model="form.message" placeholder="Enter your message here"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a class="button small" ng-click="sendMessage()">Send Message</a></td>
+                                        <td><a class="button small">Cancel</a></td>
+                                    </tr>
+                                </table>
+                            </accordion-group>
+                        </accordion>
 
                     </div>
-                    <br />
 
-                    <br />
                     <div class="small-4 columns rghtDvd">
                         <b>Conversation With:</b>
-                        <br />      <br />
+                        <br /><br />
                         <section>
                             <div class="row my-repeat-animation panel"  ng-repeat="messagedUser in messagedUsers">
                                 <a href="" ng-click="getMessages(messagedUser)">
@@ -266,41 +258,32 @@
                         <br /> <br />
                         <section>
                             <div class="row">
-                                <span class="small-3 columns"><b>Sent By:</b></span>
                                 <!--
                                 <span class="small-2 columns"><b>Date:</b></span>
                                 -->
                             </div>
-                            <button onclick="TogetherJS(this); return false;">Start TogetherJS</button>
                             <div ng-controller="directMessageController" ng-show="userSelected">
-                                <ul>
-                                    <li>
-                                        <table border="0" cellpadding="0" cellspacing="0">
-                                            <tr>
-                                                <th>Continue Conversation with  {{sendToPerson.user}} below</th>
-                                                <td>
-                                                    {{sendTo}}
+                                <table border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <th>Continue Conversation with  {{sendToPerson.user}} below</th>
+                                        <td>
+                                            {{sendTo}}
 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Message</th>
-                                                <td>
-                                                    <textarea class="login-inp ng-pristine ng-valid" ng-model="form.message"></textarea>
-                                                </td>
-                                            </tr>
-                                            <tr>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <textarea class="login-inp ng-pristine ng-valid" ng-model="form.message" placeholder="Enter your message here"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
 
-                                            </tr>
-                                            <tr>
-                                                <th></th>
-                                                <td><a class="button small" ng-click="sendMessage()">Send Message</a></td>
-                                                <td><a class="button small">Cancel</a></td>
-                                            </tr>
-                                        </table>
-                                    </li>
-                                </ul>
-
+                                    </tr>
+                                    <tr>
+                                        <td><a class="button small" ng-click="sendMessage()">Send Message</a></td>
+                                        <td><a class="button small">Cancel</a></td>
+                                    </tr>
+                                </table>
                             </div>
                             <br />
                             <div class="row my-repeat-animation" ng-repeat="message in messages" >

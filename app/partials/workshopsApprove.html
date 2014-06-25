@@ -13,9 +13,50 @@
                 This page will need to check if user is logged in, and if that user is you, me or patricia
             -->
             <tabset>
-                <tab heading="View And Approve Submit Workshops"><section>
+                <tab heading="View Workshops That Await Approval"><section>
                     <div class="row">
                         <div class="twelve columns offsetHeight" role="content">
+
+                            Submitted, but not yet approved workshops
+                            <accordion>
+                                <accordion-group heading="Name of Submitted workshop here" class="small button">
+                                    <p style="color: #2164AA;">{{ workshop._id }}</p>
+                                    <div>
+                                        <ul>
+                                            <li>
+                                                Name of Submitter here
+                                            </li>
+                                            <li>
+                                                Submitter's email address here
+                                            </li>
+                                            <li>
+                                                Submitter's phone number here
+                                            </li>
+                                            <li>
+                                                Submitter street addess here
+                                            </li>
+                                            <li>
+                                                Workshop name here
+                                            </li>
+                                            <li>
+                                                Workshop date, time and location here
+                                            </li>
+                                            <li>
+                                                Workshop speaker/host information here
+                                            </li>
+                                            <li>
+                                                Workshop detail information here
+                                            </li>
+                                        </ul>
+                                        <form name="approveWorkShops">
+                                            <input type="radio" name="publishedState" value="published" />Published (Approve for display) <br />
+                                            <input type="radio" name="publishedState" value="unpublished" checked /> Unpublished (Reject) <br />
+                                            <button name="saveWorkshopState">Save Workshop Approval State</button>
+                                        </form>
+                                        </p>
+                                    </div>
+                                </accordion-group>
+                            </accordion>
                             <accordion>
                                 <accordion-group heading="Name of Submitted workshop here" class="small button">
                                     <p style="color: #2164AA;">{{ workshop._id }}</p>
@@ -60,7 +101,94 @@
                     </div>
 
                 </section></tab>
+                <tab heading="View Approved Submit Workshops"><section>
+                    <div class="row">
+                        <div class="twelve columns offsetHeight" role="content">
 
+                            Approved workshops
+                            <accordion>
+                                <accordion-group heading="Name of Submitted workshop here" class="small button">
+                                    <p style="color: #2164AA;">{{ workshop._id }}</p>
+                                    <div>
+                                        <ul>
+                                            <li>
+                                                Name of Submitter here
+                                            </li>
+                                            <li>
+                                                Submitter's email address here
+                                            </li>
+                                            <li>
+                                                Submitter's phone number here
+                                            </li>
+                                            <li>
+                                                Submitter street addess here
+                                            </li>
+                                            <li>
+                                                Workshop name here
+                                            </li>
+                                            <li>
+                                                Workshop date, time and location here
+                                            </li>
+                                            <li>
+                                                Workshop speaker/host information here
+                                            </li>
+                                            <li>
+                                                Workshop detail information here
+                                            </li>
+                                        </ul>
+                                        <form name="approveWorkShops">
+                                            <input type="radio" name="publishedState" value="published" />Published (Approve for display) <br />
+                                            <input type="radio" name="publishedState" value="unpublished" /> Unpublished (Reject) <br />
+                                            <button name="saveWorkshopState">Save Workshop Approval State</button>
+                                        </form>
+                                        </p>
+                                    </div>
+                                </accordion-group>
+                            </accordion>
+                            <accordion>
+                                <accordion-group heading="Name of Submitted workshop here" class="small button">
+                                    <p style="color: #2164AA;">{{ workshop._id }}</p>
+                                    <div>
+                                        <ul>
+                                            <li>
+                                                Name of Submitter here
+                                            </li>
+                                            <li>
+                                                Submitter's email address here
+                                            </li>
+                                            <li>
+                                                Submitter's phone number here
+                                            </li>
+                                            <li>
+                                                Submitter street addess here
+                                            </li>
+                                            <li>
+                                                Workshop name here
+                                            </li>
+                                            <li>
+                                                Workshop date, time and location here
+                                            </li>
+                                            <li>
+                                                Workshop speaker/host information here
+                                            </li>
+                                            <li>
+                                                Workshop detail information here
+                                            </li>
+                                        </ul>
+                                        <form name="approveWorkShops">
+                                            <input type="radio" name="publishedState" value="published" />Published (Approve for display) <br />
+                                            <input type="radio" name="publishedState" value="unpublished" /> Unpublished (Reject) <br />
+                                            <button name="saveWorkshopState">Save Workshop Approval State</button>
+                                        </form>
+                                        </p>
+                                    </div>
+                                </accordion-group>
+                            </accordion>
+                            <p style="color: #2164AA;" ng-show="workshops == ''">There are no workshops scheduled at this time</p>
+                        </div>
+                    </div>
+
+                </section></tab>
 
             </tabset>
         </div>

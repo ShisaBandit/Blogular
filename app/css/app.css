@@ -2686,3 +2686,16 @@ body nav.top-bar.top-bar-logged-in {
  #slideout:hover #slideout_inner {
      left: 0;
  }
+
+ .accordion-toggle {
+    font-weight: bold;
+    color: #fff;
+ }
+
+ .accordion-inner ul li {
+     display: block;
+     list-style: none;
+     padding: 5px;
+     margin: 0px;
+     text-align: left;
+ }
