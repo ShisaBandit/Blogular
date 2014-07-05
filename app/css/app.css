@@ -2671,14 +2671,23 @@ body nav.top-bar.top-bar-logged-in {
      transition-duration: 0.3s;
      -o-transition-duration: 0.3s;
      text-align: left;
-     -webkit-border-radius: 0 0 5px 0;
-     -moz-border-radius: 0 0 5px 0;
-     border-radius: 0 0 5px 0;
+     max-height: 400px;
+     overflow: scroll;
+     border-radius: 4px;
  }
+
  #slideout_inner textarea {
      width: 190px;
      height: 100px;
      margin-bottom: 6px;
+ }
+
+ #slideout_inner h4 {
+     position: absolute;
+     background: inherit;
+     z-index: 200;
+     width: 150px;
+     top: 2px;
  }
  #slideout:hover {
      right: 250px;
@@ -2699,3 +2708,4 @@ body nav.top-bar.top-bar-logged-in {
      margin: 0px;
      text-align: left;
  }
+
