@@ -192,11 +192,23 @@
                                 <div class="large-12 columns">
                                     <label>Please tell us more about your workshop, and the main speaker(s).
                                         <textarea ng-model="form.message" placeholder="Please enter your workshop details and requests here...."></textarea>
+                                        <input type="hidden" value="unpublished" name="publishState" />
+                                        <!--- note for Ray
+                                            I am thinking we set all workshop submissions to hidden by default.
+                                            With the email i will format we can direct you, me or patricia to a page that displays all submitted workshops.
+                                            This page will check to see if user is logged in, and if it is one of the three of us.
+                                            Each workshop will have a simple form with a radio button for publishState, either publsih or unpublished.
+                                            One of us can click the state we want to set, save and the workshops that are published can be set to be visible
+                                            on the default workshops page.
+                                            What do you think? Simple, and would get the basic admin stuff for this and perhaps petitions done.
+
+
+                                        -->
                                     </label>
                                 </div>
                             </div>
-                            <div ng-hide="sent" class="medium button" ng-click="sendMessage()">Submit Workshop for Listing</div>
-                            <div ng-show="sent" class="medium button" ng-click="reset()">Send Another?</div>
+                            <div ng-hide="sent" class="small button" ng-click="sendMessage()">Submit Workshop for Listing</div>
+                            <div ng-show="sent" class="small button" ng-click="reset()">Clear Form</div>
                             {{message}}
                         </form>
 
