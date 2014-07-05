@@ -3164,6 +3164,36 @@ app.controller('PublicProfileCtrl', function ($scope,api,$routeParams,groupsList
     });
 
 });
+
+
+app.controller('OnlineContacts',function($scope,$http,socket){
+    $scope.contacts = {};
+
+    console.log("Getting online contacts");
+    $http.get('getNetwork').
+        success(function(data)
+        {
+            $scope.contacts = data;
+        });
+
+    socket.on('online',function(data)
+    {
+        console.log('online called');
+
+        for(var c = 0;c < $scope.contacts.length;c++)
+        {
+            console.log($scope.contacts);
+            console.log($scope.contacts[c].userid+" "+data.user);
+            if($scope.contacts[c].userid == data.user)
+            {
+                $scope.contacts[c].online = data.state;
+            }
+        }
+    })
+
+})
+
+
 //console.log(youtube_embed(youtube_parser("http://www.youtube.com/watch?v=Pu1PPMaoArE")) );
 function youtube_parser(url){
     //var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
@@ -3208,6 +3238,9 @@ function animoto_embed(string)
     var iframestring = "<iframe id='vp1d9hMl' title='Video Player' width='432' height='243' frameborder='0' src='https://s3.amazonaws.com/embed.animoto.com/play.html?w=swf/production/vp1&e=1383394463&f="+string+"&d=0&m=b&r=360p&volume=100&start_res=360p&i=m&asset_domain=s3-p.animoto.com&animoto_domain=animoto.com&options=' allowfullscreen></iframe>";
     return iframestring;
 }
+
+
+
 
 /*
  * Date Format 1.2.3

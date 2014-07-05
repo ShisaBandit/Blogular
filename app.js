@@ -283,6 +283,7 @@ app.post('/edit/:type/:id',passport.ensureAuthenticated,apiv2.editData);//simple
 app.get('/invite/:wallid/:user',passport.ensureAuthenticated,blogRoutes.sendWallInvite);
 app.get('/block/:wallid/:user',passport.ensureAuthenticated,blogRoutes.block);
 app.get('/getFriendsMemorials',passport.ensureAuthenticated,blogRoutes.getFriendsMemorials);
+app.get('/getNetwork',passport.ensureAuthenticated,blogRoutes.getNetwork);
 app.get('/removeself/:wall',passport.ensureAuthenticated,blogRoutes.selfRemove);
 app.get('/usersinnetwork/:search',passport.ensureAuthenticated,blogRoutes.usersInNetwork);
 //app.get('/usersinnetworkAll',blogRoutes.usersInNetworkAll);
@@ -366,13 +367,15 @@ io.sockets.on('connection', function (socket) {
         socket.handshake.room = data.room;
         var duplicateUserForRoom = false;//TODO:check to make sure not alread in room??
         var usersForThisRoom = [];//hold a list of all users in the currently subscribed room
-        for (var a = 0; a < connectedusers.length; a++) {
+        for (var a = 0; a < connectedusers.length; a++)
+        {
             /*
             if (connectedusers[a].id == socket.handshake.user[0]._id && connectedusers[a].room == data.room) {
             }
             */
             //if this user is in the room
-            if (connectedusers[a].room == data.room) {
+            if (connectedusers[a].room == data.room)
+            {
                /*
                 for(var u = 0;u < usersForThisRoom.length;u++){
                     if(usersForThisRoom[u].room == connectedusers[a].room){
@@ -390,7 +393,8 @@ io.sockets.on('connection', function (socket) {
         }
         */
         //if we didnt have any duplicates
-        if (duplicateUserForRoom == false) {
+        if (duplicateUserForRoom == false)
+        {
             socket.join(data.room);
             connectedusers.push({room: data.room, id: socket.handshake.user[0]._id, username: socket.handshake.user[0].username,socket:socket,userdata:socket.handshake.user[0]});
 
@@ -406,10 +410,11 @@ io.sockets.on('connection', function (socket) {
 
 
     });
-    socket.on('subscribe_notifications', function (data) {
+    socket.on('subscribe_notifications', function (data)
+    {
         console.log("trying to subscribe to notifications")
         notificationSubscribers.push({ id: socket.handshake.user[0]._id, username: socket.handshake.user[0].username,socket:socket});
-
+        GetUsersInNetwork(socket.handshake.user[0]._id,socket,true);
         var dup = false;
         for(var i = 0; i < connectedUsersData.length;i++)
         {
@@ -417,31 +422,41 @@ io.sockets.on('connection', function (socket) {
             console.log(socket.handshake.user[0]._id.valueOf());
             if(connectedUsersData[i]._id.toString() == socket.handshake.user[0]._id.toString())
             {
-                console.log("dupped");
                 dup = true;
             }
         }
-        console.log(dup);
         if(!dup)
         {
+
             connectedUsersData.push(socket.handshake.user[0]);
+
+
+
+            //check all connected users if this user is in their network if yes
+            //send a message telling them the are onlinej
+            //dont forget to send a message telling them they are online
+            //create an api that sends all users in network to them with data
+
         }
 
         //console.log(connectedUsersData.length);
     });
 
-    socket.on('sentcomment', function (data) {
+    socket.on('sentcomment', function (data)
+    {
         console.log("sentcomment");
         //socket.emit('commentsupdated',"updateNow");
         //socket.broadcast.in(data.room).emit('commentsupdated', '', "updateNow");
         io.sockets.in(data.room).emit('commentsupdated', "YEAH");
     });
-    socket.on('subcomment', function (data) {
+    socket.on('subcomment', function (data)
+    {
         console.log(socket.broadcast);
         //io.sockets.in(data.room).broadcast('subcommentupdated', data)
         socket.broadcast.to(data.room).emit(    'subcommentupdated', data)
     })
-    socket.on('postText', function (data) {
+    socket.on('postText', function (data)
+    {
         console.log('posttext event received');
         Blog.findOne({_id: data.room}, function (err, blog) {
             if (err)console.log(err);
@@ -450,44 +465,55 @@ io.sockets.on('connection', function (socket) {
         })
 
     });
-    socket.on('test', function (data) {
+    socket.on('test', function (data)
+    {
         console.log("post text");
         io.sockets.in(data.room).emit('testrec', {testdata: 'sent'});
     })
-    socket.on('unsubscribe', function (data) {
+    socket.on('unsubscribe', function (data)
+    {
         console.log('unsubscribe');
         console.log(notificationSubscribers)
-
+        GetUsersInNetwork(socket.handshake.user[0]._id,socket,false);
         socket.leave(data.room);
         //var usersForThisRoom = [];
         var buffer = connectedusers;
-        for (var a = 0; a < connectedusers.length; a++) {
-            if (connectedusers[a].id == socket.handshake.user[0]._id) {
+        for (var a = 0; a < connectedusers.length; a++)
+        {
+            if (connectedusers[a].id == socket.handshake.user[0]._id)
+            {
                 buffer.splice(a, 1);
             }
-            if (connectedusers[a] != undefined && connectedusers[a].room == data.room) {
+            if (connectedusers[a] != undefined && connectedusers[a].room == data.room)
+            {
                 //usersForThisRoom.push(connectedusers[a]);
             }
         }
         connectedusers = buffer;
         console.log(io.sockets.manager.rooms);
         var clients = io.sockets.clients(data.room);
-        for (var i = 0; i < clients.length; i++) {
+        for (var i = 0; i < clients.length; i++)
+        {
             console.log("================================================================next client loading....");
         }
         console.log(notificationSubscribers)
         //io.sockets.to(data.room).emit('updateusers', usersForThisRoom);
     });
-    socket.on('disconnect', function () {
+    socket.on('disconnect', function ()
+    {
         socket.leave(socket.room);
         //var usersForThisRoom = [];
         console.log('disconnect');
+        GetUsersInNetwork(socket.handshake.user[0]._id,socket,false);
         var buffer = connectedusers;
-        for (var i = 0; i < connectedusers.length; i++) {
-            if (connectedusers[i].id == socket.handshake.user[0]._id) {
+        for (var i = 0; i < connectedusers.length; i++)
+        {
+            if (connectedusers[i].id == socket.handshake.user[0]._id)
+            {
                 buffer.splice(i, 1);
             }
-            if (connectedusers[i] != undefined && connectedusers[i].room == socket.room) {
+            if (connectedusers[i] != undefined && connectedusers[i].room == socket.room)
+            {
                 //usersForThisRoom.push(connectedusers[i]);
             }
         }
@@ -523,16 +549,19 @@ apiv2.messageEmitter.on('notification_messagereceived',function(userid,message,n
     console.log(message)
     var conUsers = notificationSubscribers;
 
-    for (var i = 0; i < notificationSubscribers.length; i++) {
+    for (var i = 0; i < notificationSubscribers.length; i++)
+    {
         console.log(conUsers[i].id +" = "+userid)
-        if(conUsers[i].id.toString() == userid.toString()){
+        if(conUsers[i].id.toString() == userid.toString())
+        {
             console.log("trying to emit to a user with message "+message);
             conUsers[i].socket.emit('newnotification',{text:message,viewed:false,_id:notiid});
         }
     }
 })
 //event for when a gift is received
-apiv2.messageEmitter.on('shoptowall_giftreceived',function(wall){
+apiv2.messageEmitter.on('shoptowall_giftreceived',function(wall)
+{
     console.log("shop to wall NOTIFICATION MESSAGE RECEIVED_______--------"+ notificationSubscribers.length)
     var conUsers = notificationSubscribers;
     Blog.findOne({_id: wall}, function (err, blog) {
@@ -554,7 +583,78 @@ apiv2.messageEmitter.on('shoptowall_giftreceived',function(wall){
 
     })
 
+GetUsersInNetwork = function (id,socket,state)
+{
+    console.log(id);
+    User.find({_id: id}).populate('memwalls').exec(function (err, user)
+    {
+        // Blog.populate(user[0].memwalls, {path: 'user', match: {username: new RegExp(search, "i")}}, function (err, walls) {
+        User.populate(user[0].memwalls,{path:'user'},function(err,walls)
+        {
+            if (err)console.log(err)
+            if (!user[0])
+            {
+                return res.send(200, 'none');
+            }
+            else
+            {
+                var returndata = [];
+                var memwalls = user[0].memwalls;
 
+                for (var x = 0; x < memwalls.length; x++)
+                {
+                    var memwall = memwalls[x];
+
+                    var dup = false;
+                    for(var r = 0;r < returndata.length;r++)
+                    {
+                        if(returndata[r].userid == memwall.user._id)
+                        {
+                            dup = true;
+                        }
+                    }
+                    if(!dup)
+                    {
+                        var tempObj = {
+                            id: memwall._id,
+                            author: memwall.author,
+                            firstName: memwall.firstName,
+                            lastName: memwall.lastName,
+                            title: memwall.title,
+                            userid:memwall.user._id,
+                            username:memwall.user.username,
+                            online:false
+                        }
+                        returndata.push(tempObj);
+
+                    }
+
+                }
+
+                console.log(returndata);
+
+                    for(var un = 0; un < returndata.length;un++)
+                    {
+                        for(var c = 0;c<notificationSubscribers.length;c++)
+                        {
+                            console.log(notificationSubscribers[c].id+" "+ returndata[un].userid);
+                            if(notificationSubscribers[c].id.toString() == returndata[un].userid.toString())
+                            {
+                                console.log("writing to socket ");
+                                notificationSubscribers[c].socket.emit('online',{user:id,state:state});
+                            }
+                        }
+                        socket.emit('online',{user:returndata[un].userid,state:state});
+
+                    }
+
+
+
+                return returndata;
+            }
+        })
+    })
+}
 //TODO:REMOVE THIS CODE
 //TODO: Javascrip LInked list
 function LinkedList(){
