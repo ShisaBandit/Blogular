@@ -3182,10 +3182,12 @@ app.controller('OnlineContacts',function($scope,$http,socket){
 
         for(var c = 0;c < $scope.contacts.length;c++)
         {
-            console.log($scope.contacts);
+            console.log(data.user);
             console.log($scope.contacts[c].userid+" "+data.user);
             if($scope.contacts[c].userid == data.user)
             {
+                console.log(data.state);
+
                 $scope.contacts[c].online = data.state;
             }
         }

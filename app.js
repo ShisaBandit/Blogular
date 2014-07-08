@@ -504,7 +504,9 @@ io.sockets.on('connection', function (socket) {
         socket.leave(socket.room);
         //var usersForThisRoom = [];
         console.log('disconnect');
-        GetUsersInNetwork(socket.handshake.user[0]._id,socket,false);
+        console.log(socket.handshake.user[0]._id);
+        io.sockets.emit('online',{user:socket.handshake.user[0]._id,state:false});
+        //GetUsersInNetwork(socket.handshake.user[0]._id,socket,false);
         var buffer = connectedusers;
         for (var i = 0; i < connectedusers.length; i++)
         {
@@ -524,6 +526,7 @@ io.sockets.on('connection', function (socket) {
                 connectedUsersData.splice(d,1);
             }
         }
+
         connectedusers = buffer;
         console.log(socket.handshake.user[0].username);
         //io.sockets.to(socket.room).emit('updateusers', usersForThisRoom);
@@ -623,7 +626,7 @@ GetUsersInNetwork = function (id,socket,state)
                             title: memwall.title,
                             userid:memwall.user._id,
                             username:memwall.user.username,
-                            online:false
+                            online:state
                         }
                         returndata.push(tempObj);
 
@@ -644,6 +647,7 @@ GetUsersInNetwork = function (id,socket,state)
                                 notificationSubscribers[c].socket.emit('online',{user:id,state:state});
                             }
                         }
+                        console.log("Emitting");
                         socket.emit('online',{user:returndata[un].userid,state:state});
 
                     }
