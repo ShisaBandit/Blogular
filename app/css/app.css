@@ -2699,3 +2699,26 @@ body nav.top-bar.top-bar-logged-in {
      margin: 0px;
      text-align: left;
  }
+
+ .onlineStatus.true i {
+     display: none;
+ }
+
+ .onlineStatus.true span {
+     width: 10px;
+     height: 10px;
+     background: none repeat scroll 0% 0% #0F9D28;
+     border-radius: 50px;
+ }
+
+ .onlineStatus.false i {
+     display: block;
+     width: 10px;
+     height: 10px;
+     background: none repeat scroll 0% 0% #CACACA;
+     border-radius: 50px;
+ }
+
+ .onlineStatus.false span {
+     display: none;
+ }

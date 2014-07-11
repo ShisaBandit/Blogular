@@ -292,8 +292,15 @@
                 <div class="row my-repeat-animation" ng-repeat="contact in contacts">
                     <div class="small-30 columns" style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000">
                         <!--Link around user names needs to link to their user public user profile -->
-                        <i><a ng-href="#/profile/{{contact.username}}">{{contact.username}}</a></i>
-                        <div class="small-9 columns" style="font: x-small serif; color: steelblue;float: right">({{contact.online}})</div>
+                        <i>
+                            <a ng-href="#/pubpro/{{contact.username}}">{{contact.username}}</a>
+                            <div class="small-9 columns onlineStatus {{contact.online}}" style="font: x-small serif; color: steelblue;float: right">
+                                <i title="Offline">
+                                    <!--({{contact.online}} Offline) -->
+                                </i>
+                                <span title="Online"></span>
+                        </div></i>
+
                         <br/>
                     </div>
                     <!--
