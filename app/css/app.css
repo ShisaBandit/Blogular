@@ -2705,16 +2705,21 @@ body nav.top-bar.top-bar-logged-in {
  }
 
  .onlineStatus.true span {
-     width: 10px;
-     height: 10px;
-     background: none repeat scroll 0% 0% #0F9D28;
+     background: none repeat scroll 0 0 #0f9d28;
      border-radius: 50px;
+     display: block;
+     float: right;
+     height: 10px;
+     margin-top: -12px;
+     width: 10px;
  }
 
  .onlineStatus.false i {
      display: block;
+     margin-top: -12px;
      width: 10px;
      height: 10px;
+     float: right;
      background: none repeat scroll 0% 0% #CACACA;
      border-radius: 50px;
  }
