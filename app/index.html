@@ -299,10 +299,14 @@
                                     <!--({{contact.online}} Offline) -->
                                 </i>
                                 <span title="Online"></span>
-                        </div></i>
+                            </div>
+                            <span ng-show="(contact in contacts).length == 0">No results</span>
+                        </i>
 
                         <br/>
                     </div>
+
+
                     <!--
                     <div class="small-30 columns" style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>{{message.from}}</b>
                         <i><a href="">User Name 2</a></i>
