@@ -922,6 +922,7 @@ body .button {
     height: auto;
     background: #f5f5f5;
     margin: auto;
+    margin-bottom: 10px;
     padding: 0px 20px 0px 20px;
     color: darkslategrey;
     border-top-left-radius: 2em;
@@ -977,7 +978,7 @@ body .button {
 .angelStory {
     width: 100%;
     font-size: large;
-    margin-left: 200px;
+    margin-left: 10px;
 }
 
 .angelStory h1 {
@@ -2671,27 +2672,20 @@ body nav.top-bar.top-bar-logged-in {
      transition-duration: 0.3s;
      -o-transition-duration: 0.3s;
      text-align: left;
-     max-height: 400px;
-     overflow: scroll;
-     border-radius: 4px;
+     -webkit-border-radius: 0 0 5px 0;
+     -moz-border-radius: 0 0 5px 0;
+     border-radius: 0 0 5px 0;
  }
-
  #slideout_inner textarea {
      width: 190px;
      height: 100px;
      margin-bottom: 6px;
  }
-
- #slideout_inner h4 {
-     position: absolute;
-     background: inherit;
-     z-index: 200;
-     width: 150px;
-     top: 2px;
- }
+ #slideout:active,
  #slideout:hover {
      right: 250px;
  }
+ #slideout:active #slideout_inner,
  #slideout:hover #slideout_inner {
      left: 0;
  }
@@ -2709,3 +2703,30 @@ body nav.top-bar.top-bar-logged-in {
      text-align: left;
  }
 
+ .onlineStatus.true i {
+     display: none;
+ }
+
+ .onlineStatus.true span {
+     background: none repeat scroll 0 0 #0f9d28;
+     border-radius: 50px;
+     display: block;
+     float: right;
+     height: 10px;
+     margin-top: -12px;
+     width: 10px;
+ }
+
+ .onlineStatus.false i {
+     display: block;
+     margin-top: -12px;
+     width: 10px;
+     height: 10px;
+     float: right;
+     background: none repeat scroll 0% 0% #CACACA;
+     border-radius: 50px;
+ }
+
+ .onlineStatus.false span {
+     display: none;
+ }

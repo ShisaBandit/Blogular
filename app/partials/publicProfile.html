@@ -9,20 +9,20 @@
                         </div>
                         <ul class="profile">
                             <img src="http://www.gravatar.com/avatar/{{user.gravatar}}"/>
-                            <li>Real Name : {{user.firstName}} {{user.lastName}}</li>
+                            <li>Real Name: {{user.firstName}} {{user.lastName}}</li>
                             <li>User Name: {{user.username}}</li>
-                            <li>email : {{user.email}}</li>
-                            <li>Date of Birth : {{user.dob}}</li>
-                            <li>City : {{user.city}}</li>
+                            <li>Email: {{user.email}}</li>
+                            <li>Date of Birth: {{user.dob}}</li>
+                            <li>City: {{user.city}}</li>
                             <li>About you : {{user.about}}</li>
                             <li>You have lost a {{user.lost}}</li>
                             <div>
                                 <!--<a class="button small" ng-click="open(user.username)"><img src="img/mail_2.png"> Send a New Message</a> -->
                                 <br />
-                                <div ng-controller="directMessageController">
+                                <div ng-controller="directMessageController" if-authed="show">
                                     <table border="0" cellpadding="0" cellspacing="0">
                                         <tr>
-                                            <th>Conversation with  {{user.firstName}} below</th>
+                                            <th>- Conversation with {{user.firstName}} below</th>
                                             <td>
                                                 {{sendTo}}
                                             </td>
@@ -41,7 +41,17 @@
                                         </tr>
                                     </table>
                                 </div>
-                                <div class="row my-repeat-animation">
+                                <div ng-controller="directMessageController" ng-hide="showJoinRequst" if-authed="hide">
+                                    <table border="0" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <th>Start a conversation: {{user.firstName}}</th>
+                                            <td>
+                                                <p>You can start a conversation by simply logging into your account. <a href="#/login" class="button small radius">log-in</a></p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="row my-repeat-animation" if-authed="show">
                                     <!-- messages visible here would only be between the user who is viewing and the person whose page it is -->
                                     <!-- messages here would also appear in the message center in the my account section of both users -->
                                     <div class="small-30 columns"

@@ -2323,7 +2323,72 @@ button, .button {
 @media only screen and (max-width: 40em) {
   .f-dropdown {
     max-width: 100%;
-    left: 0; } }
+    left: 0; }
+    .small-7 {
+        position: relative;
+        width: 310px !important;
+    }
+    .angelStory {
+        width: 259px;
+        font-size: medium;
+        margin-left: 10px;
+        white-space: normal;
+    }
+
+    section.tab-bar-section h2 {
+        text-align: center;
+        height: 2.8125rem;
+        color: #8A9948;
+        text-shadow: none;
+        background: url('/img/miniLogo.png') no-repeat scroll left top transparent;
+        padding-left: 25px;
+    }
+
+    .postComment {
+        padding: 3px;
+        margin: 0px auto;
+        text-align: center;
+        font-weight: bolder;
+        font-size: large;
+        background: none repeat scroll 0% 0% #D9E9FD;
+        box-shadow: 2px 2px 2px #132D48;
+        width: 275px;
+    }
+
+    .postcontainer h6 {
+        font-size: .7rem;
+    }
+    .memProfilePreview h6 a {
+        display: block;
+        color: #F08678;
+        width: 100%;
+        font-size: small;
+    }
+
+    .rghtDvd {
+        display: inline-block;
+        height: auto;
+        border-right: 1px solid #808080;
+        font-size: x-small;
+    }
+
+    .conv {
+        padding: 2px;
+        margin: 0;
+    }
+
+    .border-footer p.toiawase {
+        margin-top: 5px !important;
+        margin-left: 100px !important;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: xx-small !important;
+    }
+    .border-footer {
+        padding: 0px 20px !important;
+    }
+}
 /* Foundation Dropdowns */
 .f-dropdown {
   position: absolute;
@@ -2574,6 +2639,15 @@ select {
   text-align: center;
   line-height: 2.125rem;
   border: none; }
+
+.postfix2.button {
+    padding: 0px 0px 0px 5px;
+    border: medium none;
+    line-height: 1.125rem;
+    text-align: center;
+    border-radius: 0;
+    margin-top: -1px !important;
+}
 
 .prefix.button {
   padding-left: 0;

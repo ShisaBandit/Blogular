@@ -6,8 +6,8 @@ angular.module('socketio', []).
             'reconnect': true,
             'reconnection delay': 500,
             'reopen delay': 3000,
-            'max reconnection attempts': 10
-
+            'max reconnection attempts': 10,
+            'sync disconnect on unload': true
         });
         return {
             connect: function () {
@@ -19,7 +19,8 @@ angular.module('socketio', []).
                         'reconnect': true,
                         'reconnection delay': 500,
                         'reopen delay': 3000,
-                        'max reconnection attempts': 10
+                        'max reconnection attempts': 10,
+                        'sync disconnect on unload': true
                     });
                 }
 

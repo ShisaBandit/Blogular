@@ -905,29 +905,89 @@ exports.sendWallInvite = function (req, res) {
 //TODO:Remove if has been blocked or self remvoed
 exports.getFriendsMemorials = function (req, res) {
     User.find({_id: req.session.passport.user}).populate('memwalls').exec(function (err, user) {
-        if (err)console.log(err)
-        if (!user[0]) {
-            return res.send(200, 'none');
-        } else {
-            //console.log("getting memwalls references")
-            var returndata = [];
-            var memwalls = user[0].memwalls;
-            //console.log(memwalls)
-            for (var x = 0; x < memwalls.length; x++) {
-                var memwall = memwalls[x];
-                //console.log(memwall)
-                var tempObj = {
-                    id: memwall._id,
-                    author: memwall.author,
-                    firstName: memwall.firstName,
-                    lastName: memwall.lastName,
-                    title: memwall.title
-                }
-                returndata.push(tempObj);
+        // Blog.populate(user[0].memwalls, {path: 'user', match: {username: new RegExp(search, "i")}}, function (err, walls) {
+        User.populate(user[0].memwalls,{path:'user'},function(err,walls){
+            if (err)console.log(err)
+            if (!user[0]) {
+                return res.send(200, 'none');
+            } else {
+                //console.log("getting memwalls references")
+                var returndata = [];
+                var memwalls = user[0].memwalls;
 
+                for (var x = 0; x < memwalls.length; x++) {
+
+
+                    var awalluser = {};
+                    var memwall = memwalls[x];
+
+                    var tempObj = {
+                        id: memwall._id,
+                        author: memwall.author,
+                        firstName: memwall.firstName,
+                        lastName: memwall.lastName,
+                        title: memwall.title,
+                        username:memwall.user.username
+                    }
+                    returndata.push(tempObj);
+
+                }
+                return res.end(JSON.stringify(returndata));
             }
-            return res.end(JSON.stringify(returndata));
-        }
+        })
+
+
+
+    })
+}
+exports.getNetwork = function (req, res) {
+    User.find({_id: req.session.passport.user}).populate('memwalls').exec(function (err, user) {
+        // Blog.populate(user[0].memwalls, {path: 'user', match: {username: new RegExp(search, "i")}}, function (err, walls) {
+        User.populate(user[0].memwalls,{path:'user'},function(err,walls)
+        {
+            if (err)console.log(err)
+            if (!user[0])
+            {
+                return res.send(200, 'none');
+            }
+            else
+            {
+                var returndata = [];
+                var memwalls = user[0].memwalls;
+
+                for (var x = 0; x < memwalls.length; x++) {
+
+                    var memwall = memwalls[x];
+
+                    var dup = false;
+                    for(var r = 0;r < returndata.length;r++)
+                    {
+                        if(returndata[r].userid == memwall.user._id)
+                        {
+                            dup = true;
+                        }
+                    }
+                    if(!dup)
+                    {
+                        var tempObj = {
+                            id: memwall._id,
+                            author: memwall.author,
+                            firstName: memwall.firstName,
+                            lastName: memwall.lastName,
+                            title: memwall.title,
+                            userid:memwall.user._id,
+                            username:memwall.user.username,
+                            online:false
+                        }
+                        returndata.push(tempObj);
+
+                    }
+
+                }
+                return res.end(JSON.stringify(returndata));
+            }
+        })
+
 
 
     })
