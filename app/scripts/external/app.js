@@ -1548,11 +1548,11 @@ app.controller('UserInfoCtrl', function ($scope, userInfoService, $http,$timeout
         steps:[
             {
                 element: document.querySelector('#step1'),
-                intro: "Welcome to angels.  You can create your first memorial here in the <b>My Account</b> button."
+                intro: "Welcome to Angels of Eureka's the Circle of Life.  You can create your first memorial here in the <b>My Account</b> button."
             },
             {
                 element: document.querySelector('#step2'),
-                intro: "Welcome to angels.  You can create your first memorial here in the <b>My Account</b> button."
+                intro: "Welcome to Angels of Eureka's the Circle of Life.  You can create your first memorial here in the <b>My Account</b> button."
             }
         ],
         showStepNumbers: false,
@@ -2072,7 +2072,7 @@ app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams) {
             api.getResourceById('Petition', 'all', function (petitions) {
                 $scope.petitions = petitions;
                 $scope.spinner = false;
-                $scope.message = "You have successfully created a partition "+$scope.title;
+                $scope.message = "You have successfully created a petition "+$scope.title;
                 $scope.again = false ;
             });
         });
@@ -3003,7 +3003,7 @@ app.controller('WorkshopCtrl', function ($scope, $http, api) {
             success(function (data)
             {
                 $scope.sent = true;
-                $scope.message = "Your workshop was submitted.";
+                $scope.message = "Your workshop was submitted. We will review and post after determining that it meets our guidelines.";
             }).
             error(function (data)
             {
@@ -3022,11 +3022,11 @@ app.controller('PasswordRecoveryCtrl', function ($scope, $http, $routeParams) {
         $http.post('passrecover', {email: $scope.email}).
             success(function (data) {
                 console.log(data);
-                $scope.message = "An email has been sent. Please check your email.";
+                $scope.message = "An email has been sent. Please check the email address associated with your Circle of Life account.";
             }).
             error(function (err) {
                 console.log(err);
-                $scope.message = "We could not send you an email.  Please check that you have the right email address."
+                $scope.message = "We could not send you an email.  Please check that you have entered the correct email address."
             });
     }
     $scope.updatePass = function () {
@@ -3205,7 +3205,7 @@ function youtube_parser(url){
     if (match&&match[2].length==11){
         return match[2];
     }else{
-        alert("This does not look like it is a youtube url, please try again.");
+        alert("This does not look like it is a valid Youtube url, please try again.");
     }
 }
 //<iframe id="vp1d9hMl" title="Video Player" width="432" height="243" frameborder="0" src="http://embed.animoto.com/play.html?w=swf/production/vp1&e=1383358396&f=d9hMlHCZJLbDtchmtVdo7g&d=0&m=b&r=360p&volume=100&start_res=360p&i=m&asset_domain=s3-p.animoto.com&animoto_domain=animoto.com&options=" allowfullscreen></iframe><p><a href="http://animoto.com/play/d9hMlHCZJLbDtchmtVdo7g">Emila</a></p>

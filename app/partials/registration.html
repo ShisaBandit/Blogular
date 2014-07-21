@@ -34,8 +34,8 @@
 
 
                         <label>Gender:</label>
-                    <input type="checkbox" ng-keypress="save()" class="login-inp" ng-model="form.male"/> Male
-                    <input type="checkbox" ng-keypress="save()" class="login-inp" ng-model="form.female"/> Female
+                    <input type="radio" name="gender" ng-keypress="save()" class="login-inp" ng-model="form.male"/> Male
+                    <input type="radio" name="gender" ng-keypress="save()" class="login-inp" ng-model="form.female"/> Female
                         <p class="validation-error">{{message.male}}</p>
 
                     <br />

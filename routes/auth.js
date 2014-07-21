@@ -440,9 +440,9 @@ function SendConfirmationMail(to) {
     var mailOptions = {
         from: "noreply@AngelsOfEureka.org",
         to: to,
-        subject: "Welcome to AngelsOfEureka.org",
-        text: "This is a confirmation email please click this link to confirm you want to register",
-        html: "<p>This is a confirmation email.  You have signed up successfully to angels of eureka.org.</p>" +
+        subject: "Welcome to AngelsOfEureka.org/The Circle of Life online memorials",
+        text: "This is a confirmation email. You have signed up successfully at the-circle-of-life.net.  <a href='http://the-circle-of-life.net/#/login'>You can login to your account here</a>. Thank you please enjoy your time on the site.",
+        html: "<p>This is a confirmation email.  You have signed up successfully at the-circle-of-life.net. <a href='http://the-circle-of-life.net/#/login'>You can login to your account here</a></p>" +
             "<p>Thank you please enjoy your time on the site.</p> "
     }
     smtpTransport.sendMail(mailOptions, function (error, response) {
@@ -616,7 +616,7 @@ function SendPasswordRecoveryMail(to, link, req) {
         from: "noreply@AngelsOfEureka.org",
         to: to,
         subject: "Memorial Wall password recovery",
-        text: "This is a confirmation email please click this link to confirm you want to register",
+        text: "We have received a request to change your password. You can do so <a href=''>here</a>.",
         html: "<p>We have received a request to change your password.  <p>" +
             "<p>Please click this link </p>" +
             "</br>" +

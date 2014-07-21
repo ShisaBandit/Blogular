@@ -222,7 +222,8 @@ app.post('/login',
                             for (user in users) {
                                 var nUser = users[user];
                                     console.log("pushed noti to "+nUser.username+" ");
-                                    nUser.notifications.push({text: "A new user "+loggeduser.username+" has joined that has lost a " + Constants.lostTypes[loggeduser.lost]});
+                                //<a ng-href="#/pubpro/{{contact.username}}">
+                                    nUser.notifications.push({text: "A new user, <a ng-href='#/pubpro/{{loggeduser.username}}'>"+loggeduser.username+"</a> has joined that has lost a " + Constants.lostTypes[loggeduser.lost]});
                                     //TODO:Save user
                                     nUser.save(function (err, doc) {
                                         if (err)console.log(err);
@@ -365,7 +366,7 @@ io.sockets.on('connection', function (socket) {
         console.log('subscribed');
 
         socket.handshake.room = data.room;
-        var duplicateUserForRoom = false;//TODO:check to make sure not alread in room??
+        var duplicateUserForRoom = false;//TODO:check to make sure not already in room??
         var usersForThisRoom = [];//hold a list of all users in the currently subscribed room
         for (var a = 0; a < connectedusers.length; a++)
         {
