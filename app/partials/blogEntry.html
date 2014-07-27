@@ -1,9 +1,9 @@
 <div ng-controller="blogEntryCtrl" >
     <div class="row blogContent">
-        <div class="small-12 columns" role="content">
-                <div class="row">
-                        <div class="small-12 large-12 columns">
-                            <div class="small-2 columns angelPicWide">
+        <div class="" role="content">
+                <div class="">
+                        <div class="">
+                            <div class=" angelPicWide">
                             <div ng-switch on="parentObject.type" id="portrait">
                                 <img id="" src="/uploads/{{ entry.profilePicPortrait }}"><br/>
                                 <span ng-switch-when="group">Moderator: {{ entry.firstName }}</span>
@@ -36,14 +36,14 @@
                                     </ul>
                                 </nav>
                             </div>
-                            <div class="small-10 large-10 columns">
+                            <div class=" ">
                                 <section class="section memNav" if-authed="show">
                                     <div ng-switch on="parentObject.type">
                                         <h2 style="padding-top: 0px; color: #47569B;margin-bottom: -3px;" ng-switch-when="group"> Welcome to the {{ entry.title }} private group</h2>
                                         <h2 style="padding-top: 0px; color: #47569B;margin-bottom: -3px;" ng-switch-when="angel">Welcome to {{ entry.firstName }}'s Wall.</h2>
                                         <h2 style="padding-top: 0px; color: #47569B;margin-bottom: -3px;" ng-switch-when="pet">Welcome to {{ entry.firstName }}'s Wall.</h2>
                                     </div>
-                                    <div class="columns angelPicNarrow"><!--<div id="portraitpic">-->
+                                    <div class=" angelPicNarrow"><!--<div id="portraitpic">-->
 
                                         <div id="portrait" ng-switch on="parentObject.type">
                                             <img src="/uploads/{{ entry.profilePicPortrait }}"><br/>

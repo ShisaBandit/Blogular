@@ -1,5 +1,5 @@
 <div ng-controller="ContentCtrl" xmlns="http://www.w3.org/1999/html">
-    <div class="small-9 columns small-centered offsetHeight" role="content" ng-class="{petMem:pets, privGroup:groups}" >
+    <div class="" role="content" ng-class="{petMem:pets, privGroup:groups}" >
         <div ng-controller="GroupingCtrl">
             <div id="loginMessage" if-authed="hide">
                 <h3>Angels of Eureka is about Love, Hope and Life with People and Pets.</h3>
@@ -27,8 +27,8 @@
             <div ng-switch on="type">
                 <div ng-switch-when="group"></div>
                 <div ng-switch-default ng-hide="groupingViewable" ng-animate="'fade'" class="grouping">
-                    <div class="row">
-                        <div class="small-9 columns">
+                    <div class="">
+                        <div class=" ">
                             <select class="login-inp"
                                     name="selectedFilter"
                                     ng-change="changedSubGroup(false)"
@@ -37,7 +37,7 @@
                                 <option value="" selected>View By Groupings Here</option>
                             </select>
                         </div>
-                        <div class="small-3 columns">
+                        <div class="small-3 ">
                             <a ng-click="changedSubGroup(true)" class="button small success radius filter">Remove Filter</a>
                         </div>
                     </div>
@@ -52,12 +52,12 @@
                 <h1>Welcome to Angels of Eureka's Circle of Life </h1>
                 <h2 style="color: #000000;font-size: large;font-weight: bold">Celebrate life...Cherish Legacies</h2>
             <ul class="small-block-grid-4" >
-                <div class="row" ng-switch on="type">
-                    <div class="small-12 columns memWallSearch" ng-switch-when="group">
+                <div class="" ng-switch on="type">
+                    <div class=" memWallSearch" ng-switch-when="group">
                         <input ng-model="search.search" type="text" class="searchBar"
                                placeholder="Search Groups">
                     </div>
-                    <div class="small-12 columns memWallSearch" ng-switch-default ng-hide="groupingViewable">
+                    <div class=" memWallSearch" ng-switch-default ng-hide="groupingViewable">
                         <input ng-model="search.search" type="text" class="searchBar"
                                placeholder="Search Memorials">
                     </div>

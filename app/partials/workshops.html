@@ -1,9 +1,9 @@
 <div ng-controller="WorkshopCtrl" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-    <div class="row offsetHeight">
+    <div class="row ">
         <h1 class="sectionHeader">Workshops</h1>
     </div>
-    <div class="row">
-        <div class="small-12 columns workshops">
+    <div class="">
+        <div class=" workshops">
             <h2 class="dark">Scheduled Workshops</h2>
             <p>
                 We will occasionally sponsor workshops throughout the year. From holistic healing to counseling, there will be a workshop that is a fit for you!
@@ -12,8 +12,8 @@
             </p>
             <tabset>
                 <tab heading="View All Scheduled Workshops"><section>
-                    <div class="row">
-                        <div class="twelve columns offsetHeight" role="content">
+                    <div class="">
+                        <div class=" " role="content">
                             <div ng-repeat="workshop in workshops">
                                 <p style="color: #2164AA;">{{ workshop._id }}</p>
                             </div>
@@ -24,7 +24,7 @@
                 </section></tab>
 
                 <tab  heading="Submit Your Workshop"><section>
-                    <div class="row" >
+                    <div class="" >
                         <h2>Submit the details for your workshop</h2>
                         <p>
                             Please submit the details of the workshop that you would like to have listed on our Workshops page using the form below.
@@ -33,48 +33,48 @@
                         </p>
 
                         <form name="workshopform">
-                            <div class="row">
-                                <div class="large-4 columns">
+                            <div class="">
+                                <div class="">
                                     <label>First Name
                                         <input ng-model="form.name" type="text" placeholder="First Name" />
                                     </label>
                                 </div>
-                                <div class="large-4 columns">
+                                <div class="">
                                     <label>Last Name
                                         <input ng-model="form.lastname" type="text" placeholder="Last Name" />
                                     </label>
                                 </div>
-                                <div class="row">
-                                    <div class="large-12 columns">
+                                <div class="">
+                                    <div class="">
                                         <label>Email Address
                                             <input ng-model="form.email" type="text" placeholder="Email Address" />
                                         </label>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="large-12 columns">
+                                <div class="">
+                                    <div class="">
                                         <label>Phone Number
                                             <input ng-model="form.pnumber" type="text" placeholder="Phone Number" />
                                         </label>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="large-12 columns">
+                                <div class="">
+                                    <div class="">
                                         <label>Street Address
                                             <input ng-model="form.address" type="text" placeholder="Street Address" />
                                         </label>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="large-12 columns">
+                                <div class="">
+                                    <div class="">
                                         <label>City
                                             <input ng-model="form.city" type="text" placeholder="City" />
                                         </label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="large-12 columns">
+                            <div class="">
+                                <div class="">
                                     <label>State
                                         <select ng-model="form.state">
                                             <option value="AL">Alabama</option>
@@ -132,64 +132,64 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="large-12 columns">
+                            <div class="">
+                                <div class="">
                                     <label>Zip Code
                                         <input ng-model="form.zcode" type="text" placeholder="Zip Code" />
                                     </label>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="large-12 columns">
+                            <div class="">
+                                <div class="">
                                     <label>Workshop Name
                                         <input ng-model="form.workshopname" type="text" placeholder="Workshop Name" />
                                     </label>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="large-12 columns">
+                            <div class="">
+                                <div class="">
                                     <label>Workshop Subject
                                         <input ng-model="form.workshopsubject" type="text" placeholder="Workshop Subject" />
                                     </label>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="large-12 columns">
+                            <div class="">
+                                <div class="">
                                     <label>Workshop Date
                                         <input ng-model="form.workshopdate" type="text" placeholder="Workshop Date" />
                                     </label>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="large-12 columns">
+                            <div class="">
+                                <div class="">
                                     <label>Workshop Time
                                         <input ng-model="form.workshoptime" type="text" placeholder="Workshop Time" />
                                     </label>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="large-12 columns">
+                            <div class="">
+                                <div class="">
                                     <label>Workshop Location (if applicable)
                                         <input ng-model="form.workshopPlace" type="text" placeholder="Workshop Location" />
                                     </label>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="large-12 columns">
+                            <div class="">
+                                <div class="">
                                     <label>Workshop Speaker/Host(s)
                                         <input ng-model="form.workshopSpeaker" type="text" placeholder="Workshop Speaker/Host(s)" />
                                     </label>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="large-12 columns">
+                            <div class="">
+                                <div class="">
                                     <label>Workshop Participation Information
                                         <input ng-model="form.workshopLink" type="text" placeholder="Please provide the url or phone number that participants need to use to connect to your workshop" />
                                     </label>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="large-12 columns">
+                            <div class="">
+                                <div class="">
                                     <label>Please tell us more about your workshop, and the main speaker(s).
                                         <textarea ng-model="form.message" placeholder="Please enter your workshop details and requests here...."></textarea>
                                         <input type="hidden" value="unpublished" name="publishState" />

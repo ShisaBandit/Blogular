@@ -1,6 +1,6 @@
 <div ng-controller="AnniCtrl">
-    <div class="row ">
-        <div id="contentHeader" class="small-12 columns">
+    <div class="">
+        <div id="contentHeader" class="">
             <h2 class="contentHeaderTitle">Add Angel Anniversary</h2>
         </div>
     </div>
@@ -20,26 +20,26 @@
     </div>
     <a ng-click="toogleEventEntry()" class="small button">{{state}}</a>
 
-    <div class="small-12 columns ">
-        <div class="row">
+    <div class=" ">
+        <div class="">
             <h1>Angel Anniversaries</h1>
 
-            <div class="my-repeat-animation" ng-repeat="ani in anis" class="row " style="background: #CDDFEF;margin-bottom: 20px;">
-                <div class="row">
-                    <div class="small-10 columns">
+            <div class="my-repeat-animation" ng-repeat="ani in anis" class="" style="background: #CDDFEF;margin-bottom: 20px;">
+                <div class="">
+                    <div class="">
                         <h4>{{ ani.event }}</h4>
                         <p>{{ ani.date }}</p>
                         <p>{{ ani.text }}</p>
 
                         <br />
-                        <div class="my-repeat-animation" ng-repeat="gift in ani.gifts" class="row" style="background: #CDDFEF;margin-bottom: 20px;">
+                        <div class="my-repeat-animation" ng-repeat="gift in ani.gifts"class="" style="background: #CDDFEF;margin-bottom: 20px;">
                             <p>{{gift.from}} has gifted {{gift.postText}}</p>
 
                         </div>
                        <!-- <a href="" class="button">Send Well Wishes</a>-->
                         <!--
-                        <input class="addNewPost small-10 columns ng-pristine ng-valid" type="text" placeholder="Begin a new conversation here" ng-model="postText"></input>
-                        <div class="small-2 columns"> <button class="button postfix" ng-click="submit()"> … </button> </div>
+                        <input class="addNewPost  ng-pristine ng-valid" type="text" placeholder="Begin a new conversation here" ng-model="postText"></input>
+                        <div class="small-2 "> <button class="button postfix" ng-click="submit()"> … </button> </div>
                         -->
                         <a href="#/gifts/{{ani._id}}/{{blogId}}" class="small button">Send a Gift</a>
                     </div>
@@ -52,11 +52,11 @@
 <!--
 <h3><b>{{entry.title}}</b></h3>
 <h6>Posted by <a href="#">{{entry.author}}</a> on {{entry.date}}.</h6>
-<div class="row">
-    <div class="ten columns">
+<div class="">
+    <div class="ten ">
         <div ng-bind-html-unsafe="text"></div>
     </div>
-    <div class="two columns">
+    <div class="two ">
 
     </div>
 </div>
@@ -83,8 +83,8 @@
     </table>
 </div>
 </div>
-<div id="comments" class="row">
-<div class="six columns">
+<div id="comments"class="">
+<div class="six ">
     <div id="submitComment">
         <textarea ng-model="body"></textarea>
 
@@ -99,7 +99,7 @@
         <p>{{comment.body}}</p>
     </div>
 </div>
-<div class="six columns">
+<div class="six ">
     <div ng-repeat="viewer in viewers">
         <p>{{viewer.username}}</p>
     </div>

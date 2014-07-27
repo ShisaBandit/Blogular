@@ -1,6 +1,6 @@
 <div ng-controller="AnniCtrl">
-    <div class="row ">
-        <div id="contentHeader" class="small-12 columns">
+    <div class="">
+        <div id="contentHeader" class="">
             <h2 class="contentHeaderTitle">Group Events</h2>
         </div>
     </div>
@@ -18,21 +18,21 @@
             <a ng-click="submitEvent()" class="button">Submit Group Event</a>
         </div>
     </div>
-    <div class="small-12 columns ">
-        <div class="row">
+    <div class=" ">
+        <div class="">
             <h1>Group Events</h1>
 
-            <div class="my-repeat-animation" ng-repeat="ani in anis" class="row " style="background: #CDDFEF;margin-bottom: 20px;">
-                <div class="row">
-                    <div class="small-10 columns">
+            <div class="my-repeat-animation" ng-repeat="ani in anis" class="" style="background: #CDDFEF;margin-bottom: 20px;">
+                <div class="">
+                    <div class="">
                         <h4>{{ ani.event }}</h4>
                         <p>{{ ani.date }}</p>
                         <p>{{ ani.text }}</p>
                         <br />
                         <!-- <a href="" class="button">Send Well Wishes</a>-->
                         <!--
-                        <input class="addNewPost small-10 columns ng-pristine ng-valid" type="text" placeholder="Begin a new conversation here" ng-model="postText"></input>
-                        <div class="small-2 columns"> <button class="button postfix" ng-click="submit()"> … </button> </div>
+                        <input class="addNewPost  ng-pristine ng-valid" type="text" placeholder="Begin a new conversation here" ng-model="postText"></input>
+                        <div class="small-2 "> <button class="button postfix" ng-click="submit()"> … </button> </div>
                         -->
                         <!--
                             This only needs to work on the Anniversaries page for a personal memorial
@@ -49,17 +49,17 @@
 
 
 <div ng-controller="groupEvntCtrl">
-    <div class="small-12 columns ">
-        <div class="row">
+    <div class=" ">
+        <div class="">
             <h1>TEST</h1>
-            <div ng-repeat="grpEvnt in grpEvnt" class="row ">
-                <div class="row">
+            <div ng-repeat="grpEvnt in grpEvnt" class="">
+                <div class="">
 
-                    <div class="small-2 columns ">
+                    <div class="small-2  ">
                         <h2>{{grpEvnt.event}}</h2>
 
                     </div>
-                    <div class="small-10 columns">
+                    <div class="">
                         <h4>{{ grpEvnt.date }}</h4>
                         <p>{{ grpEvnt.text }}</p>
                     </div>

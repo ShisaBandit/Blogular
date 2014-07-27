@@ -1,7 +1,7 @@
 <div ng-controller="GrpLatestCtrl">
-    <div class="small-12 columns row2 contentContainer" ng-repeat="post in posts">
+    <div class="  contentContainer" ng-repeat="post in posts">
         <div class="row postBoxes">
-            <div class="small-12 columns postcontainer postBoxes">
+            <div class=" postcontainer postBoxes">
                 <div><img src="http://www.gravatar.com/avatar/{{post.gravatar}}" /> </div>
                 <h6>Posted by <a href="#/profile/{{post.username}}">{{post.username}} </a> on {{post.date}}.</h6>
                 <div ng-bind-html-unsafe="post.embedYouTube"></div>
@@ -9,8 +9,8 @@
                     {{post.text}}
                 </div>
             </div>
-            <div class="row">
-                <div class="columns postComment postBoxes">
+            <div class="">
+                <div class=" postComment postBoxes">
                     <a ng-click="showcommentbox({{$index}})" class="button tiny">Join the conversation</a>
                     <div ng-show="commentbox[{{$index}}]">
                         <input type="text" on-keyup="submitComment($index)" keys="[27,13]" ng-model="newcomment[$index]" placeholder="Add your thoughts here! (Click enter to submit)" />
@@ -18,11 +18,11 @@
                 </div>
             </div>
             <div ng-repeat="comment in post.comments" class="row replycontainer">
-                    <div class="small-1 columns avatarcontainer">
+                    <div class="small-1  avatarcontainer">
                         <img src="http://www.gravatar.com/avatar/{{comment.gravatar}}"/>
                     </div>
 
-                    <div class="small-11 columns">
+                    <div class="small-11 ">
                         <a href="#/profile/{{comment.username}}"><b>{{comment.username}}</b></a>
                         <p>{{comment.text}}</p>
 
@@ -35,11 +35,11 @@
 <!--
 <h3><b>{{entry.title}}</b></h3>
 <h6>Posted by <a href="#">{{entry.author}}</a> on {{entry.date}}.</h6>
-<div class="row">
-    <div class="ten columns">
+<div class="">
+    <div class="ten ">
         <div ng-bind-html-unsafe="text"></div>
     </div>
-    <div class="two columns">
+    <div class="two ">
 
     </div>
 </div>
@@ -66,8 +66,8 @@
     </table>
 </div>
 </div>
-<div id="comments" class="row">
-<div class="six columns">
+<div id="comments"class="">
+<div class="six ">
     <div id="submitComment">
         <textarea ng-model="body"></textarea>
 
@@ -82,7 +82,7 @@
         <p>{{comment.body}}</p>
     </div>
 </div>
-<div class="six columns">
+<div class="six ">
     <div ng-repeat="viewer in viewers">
         <p>{{viewer.username}}</p>
     </div>

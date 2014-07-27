@@ -1,13 +1,13 @@
 <div ng-controller="PetitionEntryCtrl">
 
-   <div class="small-12 small-centered columns offsetHeight">
+   <div class="class=""   ">
 
-       <div class="row" ng-model="petition">
-            <div class="small-12 columns">
+       <div class="" ng-model="petition">
+            <div class="">
                 <h3 style="color: #2164AA;">Petion Name: {{petition[0].title}}</h3>
                 <h3 style="color: #2164AA;">Petition Details: {{petition[0].text}}</h3>
-                <div class="row" ng-repeat="signature in petition[0].signatures">
-                    <div class="small-12 columns">
+                <div class="" ng-repeat="signature in petition[0].signatures">
+                    <div class="">
                         <p>{{signature.initals}}</p>
                         <p>{{signature.cityState}}</p>
                         <p>{{signature.email}}</p>
@@ -17,7 +17,7 @@
             </div>
 
        </div>
-       <div class="row">
+       <div class="">
            <div>Total Signatures On This Petition <b class="petitionFont">{{signaturelength}}</b></div>
            <div ng-class="{spinner:spinner}"></div>
            <div ng-class="{error:error}">{{resultMessage}}</div>

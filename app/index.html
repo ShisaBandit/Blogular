@@ -16,19 +16,21 @@
     <!--<link href="css/animate.min.css" rel="stylesheet"> -->
     
     <!-- build:css({.tmp,app}) css/main.css -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
     <!--<link rel="stylesheet" href="css/foundation.min.css">-->
     <!--<link rel="stylesheet" href="bower_components/foundation/css/foundation.min.css">-->
-    <link rel="stylesheet" href="scss/test.css" />
+    <!--<link rel="stylesheet" href="scss/test.css" />-->
     <link rel="stylesheet" href="css/app.css" />
     <link href="css/animate.css" rel="stylesheet">
+    <!--
     <link rel="stylesheet" type="text/css" href="css/normalize.css" media="all"/>
     <link rel="stylesheet" href="stylesheets/general_foundicons.css">
     <link rel="stylesheet" href="css/foundation-icons.css">
     <link rel="stylesheet" href="css/basic.css"/>
     <link rel="stylesheet" href="css/dropzone.css"/>
+    -->
     <link rel="stylesheet" href="scripts/vendor/shadowbox-3.0.3/shadowbox.css"/>
-    <link rel="stylesheet" href="scripts/vendor/intro.js-0.7.0/introjs.css"/>
+    <!-- <link rel="stylesheet" href="scripts/vendor/intro.js-0.7.0/introjs.css"/> -->
     <!-- endbuild -->
     <script type="text/javascript" src="https://apis.google.com/js/platform.js"></script>
     <div id="fb-root"></div>
@@ -196,6 +198,7 @@
         </nav>
 
         <!-- Off Canvas Menu -->
+        <!--
         <aside class="left-off-canvas-menu">
             <ul class="off-canvas-list">
                 <li><label>Site Nav</label></li>
@@ -227,7 +230,7 @@
             </ul>
             <a href="#/help-resources" class="helpResc">Help Resources</a>
         </aside>
-
+        -->
 
         <!-- main content goes here -->
         <section class="main-section">
@@ -251,8 +254,8 @@
             </div>
             <!-- End  Main Content -->
             <!-- Begin  Footer -->
-            <footer class="row border-footer">
-                <div class="small-12 large-12 columns right-separator footer-child">
+            <footer class=" border-footer">
+                <div class="footer-child">
                     <p>The Circle of Life by Angels of Eureka. © 2013 Angels of Eureka</p>
                     <p class="toiawase">
                         <a href="#/contact">Contact Us</a> - <a href="#/advertise">Advertise With Us</a> - <a href="#/help-resources">Help Resources</a> -
@@ -266,6 +269,7 @@
             </footer>
             <!-- End Footer -->
         </section>
+        <!--
         <div id="toc" ng-controller="MusicPlayerCtrl">
             <h2 ng-hide="iosshow" id="tocToggle" class="toc navTab status-off" ><a click>Music On/Off</a></h2>
             <aside class="base-class" ng-class="{'my-class':boolChangeClass}">
@@ -285,16 +289,17 @@
                 </figure>
             </aside>
         </div>
+        -->
         <div id="slideout" if-authed="show" ng-controller="OnlineContacts">
             <img src="/img/mail_2.png" alt="Open Message Center" />
             <div id="slideout_inner">
                 <h4>People in your network</h4>
-                <div class="row my-repeat-animation" ng-repeat="contact in contacts">
-                    <div class="small-30 columns" style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000">
+                <div class="my-repeat-animation" ng-repeat="contact in contacts">
+                    <div class="" style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000">
                         <!--Link around user names needs to link to their user public user profile -->
                         <i>
                             <a ng-href="#/pubpro/{{contact.username}}">{{contact.username}}</a>
-                            <div class="small-9 columns onlineStatus {{contact.online}}" style="font: x-small serif; color: steelblue;float: right">
+                            <div class="onlineStatus {{contact.online}}" style="font: x-small serif; color: steelblue;float: right">
                                 <i title="Offline">
                                     <!--({{contact.online}} Offline) -->
                                 </i>
@@ -424,7 +429,7 @@
     $(document).ready(function () {
         $(document).foundation();
         Shadowbox.init({
-            skipSetup: true
+            skipSetup: false
         });
     })
 </script>

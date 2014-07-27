@@ -1,5 +1,5 @@
 <div ng-controller="PicsCtrl">
-    <div id="contentHeader" class="small-12 columns">
+    <div id="contentHeader" class="">
         <h2 class="contentHeaderTitle">Upload Photos</h2>
     </div>
     <p>
@@ -14,13 +14,13 @@
     </div>
     <a ng-click="flipEntry()" class="button small">{{state}}</a>
 
-    <div class="small-12 columns contentContainer">
-        <div class="row">
+    <div class=" contentContainer">
+        <div class="">
             <div ng-show="selected">Selection from a modal: {{ selected }}</div>
             <br />Here you can view pictures that are in your photo library, organize them into albums and share with your network members!<br /><br />
         </div>
-        <div class="row">
-            <div class="row">
+        <div class="">
+            <div class="">
                 <h2>{{ entry.firstName }}'s Life in Pictures</h2>
                 <a class="button small" ng-click="showallpics(); updatingAlbum = false; addingNewAlbum = false">View Master Photo Library</a>
                 <a ng-click="addingNewAlbum = true; updatingAlbum = false" class="button small">Create a new album</a>
@@ -85,11 +85,11 @@
 <!--
 <h3><b>{{entry.title}}</b></h3>
 <h6>Posted by <a href="#">{{entry.author}}</a> on {{entry.date}}.</h6>
-<div class="row">
-    <div class="ten columns">
+<div class="">
+    <div class="ten ">
         <div ng-bind-html-unsafe="text"></div>
     </div>
-    <div class="two columns">
+    <div class="two ">
 
     </div>
 </div>
@@ -116,8 +116,8 @@
     </table>
 </div>
 </div>
-<div id="comments" class="row">
-<div class="six columns">
+<div id="comments"class="">
+<div class="six ">
     <div id="submitComment">
         <textarea ng-model="body"></textarea>
 
@@ -132,7 +132,7 @@
         <p>{{comment.body}}</p>
     </div>
 </div>
-<div class="six columns">
+<div class="six ">
     <div ng-repeat="viewer in viewers">
         <p>{{viewer.username}}</p>
     </div>

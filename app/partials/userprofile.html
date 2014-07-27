@@ -1,13 +1,13 @@
 <div ng-controller="UserProfileCtrl">
-<div class="row offsetHeight">
-<div class="small-12 columns">
+<div class="row ">
+<div class="">
 
 <tabset>
     <tab heading="Instructions"><section>
         <div class="content" data-section-content>
             <div class="automargins row ">
 
-                <div class="contentHeader" class="small-12 columns">
+                <div class="contentHeader" class="">
                     <h2 class="contentHeaderTitle">Instructions on how to manage your account</h2>
                 </div>
 
@@ -58,8 +58,8 @@
     <tab active="tab.userprofile" heading="Basic Profile">
         <section>
             <div class="content automargins" data-section-content>
-                <div class="row ">
-                    <div class="contentHeader" class="small-12 columns">
+                <div class="">
+                    <div class="contentHeader" class="">
                         <h2 class="contentHeaderTitle">Basic Profile</h2>
                     </div>
                     <ul class="profile">
@@ -78,9 +78,9 @@
     <tab heading="My Memorial Walls">
         <section>
             <div class="automargins content " data-section-content>
-                <div class="row ">
-                    <div class="row ">
-                        <div class="contentHeader" class="small-12 columns">
+                <div class="">
+                    <div class="">
+                        <div class="contentHeader" class="">
                             <h2 class="contentHeaderTitle">My Memorial Walls</h2>
                         </div>
                     </div>
@@ -109,9 +109,9 @@
     <tab heading="Friend’s Memorials">
         <section>
             <div class="content automargins" data-section-content>
-                <div class="row ">
-                    <div class="row ">
-                        <div class="contentHeader" class="small-12 columns">
+                <div class="">
+                    <div class="">
+                        <div class="contentHeader" class="">
                             <h2 class="contentHeaderTitle">Memorial Walls of My Friends and Acquaintances </h2>
                         </div>
                     </div>
@@ -134,15 +134,15 @@
     <tab heading="My Groups">
         <section>
             <div class="content automargins" data-section-content>
-                <div class="row ">
-                    <div class="contentHeader" class="small-12 columns">
+                <div class="">
+                    <div class="contentHeader" class="">
                         <h2 class="contentHeaderTitle">My Group's</h2>
                     </div>
                     <p>Welcome to the My Groups dashboard. From here you can create, manage and view groups that you own, or view
                         groups that you have joined, or been invited to.</p>
                     <a href="#/StartGroup" class="small button">Create a new group here!</a><br/><br/>
 
-                    <div class="small-6 columns rghtDvd">
+                    <div class="small-6  rghtDvd">
                         <b>Groups I Own</b>
                         <br/> <br/>
                         <section ng-repeat="group in groups">
@@ -160,7 +160,7 @@
                             <a href="#/deletewall/{{ group.author }}" class="small button">Delete this group</a>
                         </section>
                     </div>
-                    <div class="small-6 columns">
+                    <div class="small-6 ">
                         <b>Groups I Joined / Group Invites</b>
                         <br/> <br/>
                         <section ng-repeat="group in invitedGroups">
@@ -189,8 +189,8 @@
 
         <section>
             <div class="content automargins" data-section-content>
-                <div class="row ">
-                    <div class="contentHeader" class="small-12 columns">
+                <div class="">
+                    <div class="contentHeader" class="">
                         <h2 class="contentHeaderTitle">My Petitions</h2>
                     </div>
                     <p>
@@ -209,8 +209,8 @@
     <tab heading="Messages">
         <section>
             <div class="content automargins" data-section-content id="userProfilePage">
-                <div class="row ">
-                    <div class="contentHeader" class="small-12 columns">
+                <div class="">
+                    <div class="contentHeader" class="">
                         <h2 class="contentHeaderTitle">Message Center</h2>
                     </div>
                     <p>Welcome to the Message Center. From here you can create, manage and view messages from your network members, administrators and other registered users..</p>
@@ -242,24 +242,24 @@
 
                     </div>
 
-                    <div class="small-4 columns rghtDvd">
+                    <div class="small-4  rghtDvd">
                         <b>Conversation With:</b>
                         <br /><br />
                         <section>
                             <div class="row my-repeat-animation panel"  ng-repeat="messagedUser in messagedUsers">
                                 <a href="" ng-click="getMessages(messagedUser)">
-                                    <span class="small-10 columns">{{messagedUser.user}} <!--<a class="button buttonSmall" title="Archive This Conversation"><img src="img/trash.png"></a>--></span>
+                                    <span class="">{{messagedUser.user}} <!--<a class="button buttonSmall" title="Archive This Conversation"><img src="img/trash.png"></a>--></span>
                                 </a>
                             </div>
                         </section>
                     </div>
-                    <div class="small-8 columns rghtDvd">
+                    <div class="small-8  rghtDvd">
                         <b>Conversation History</b>
                         <br /> <br />
                         <section>
-                            <div class="row">
+                            <div class="">
                                 <!--
-                                <span class="small-2 columns"><b>Date:</b></span>
+                                <span class=""><b>Date:</b></span>
                                 -->
                             </div>
                             <div ng-controller="directMessageController" ng-show="userSelected">
@@ -287,12 +287,12 @@
                             </div>
                             <br />
                             <div class="row my-repeat-animation" ng-repeat="message in messages" >
-                                <div class="small-30 columns conv"
+                                <div class="small-30  conv"
                                       style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>{{message.from}}</b>
                                     <i
                                         style="font: x-small serif; color: steelblue;float: right">{{message.date}}</i>
                                     <br/>
-                                    <div class="small-9 columns" ng-bind-html="message.message"></div>
+                                    <div class=" " ng-bind-html="message.message"></div>
                                     <br/>
                                 </div>
                             </div>
