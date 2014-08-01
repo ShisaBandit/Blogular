@@ -171,13 +171,16 @@ userSchema.pre('save', function (next) {
     next();
 });
 
-var messageSchema = mongoose.Schema({
+var messageSchema = mongoose.Schema
+(
+    {
     to:{type:String,required:true},
     from:{type:String,required:true},
     message:String,
     hideflag:Number,//undefined show both, 1 = hide, from 2 = hide to,3=hide both
     date:{type:Date,default:Date.now()}
-});
+    }
+);
 
 /*
  * Creating workshop blog post
