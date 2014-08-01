@@ -50,286 +50,128 @@
     <!-- Angels of Eureka Proudly Presents:-->
     <div ng-class="[constyle,constyle2]" >
         <nav ng-class="[topstyle,topstyle2]"  data-topbar data-options="is_hover: false">
-            <ul class="title-area">
-                <li class="name">
-                    <div id="step1" ng-controller="TitleCtrl">
-                        <a href="#/" ng-bind="title" class="logo"></a>
+            <a href="#/" ng-bind="title" class="logo"></a>
+            <a  href="#/profile/{{username}}" if-authed="show"><b style="color:#8a9948;">View Your Dashboard</b></a>
+            <a href="#/about" id="groupsbutton" class="small">About Us</a>
+            <a href="http://angelsofeureka.com/shop/index.php/" id="webstorebutton" class="small">Web Store</a>
+            <a href="#/help-resources" class="helpResc">Help Resources</a>
+            <a href="#" ng-click="logout()" if-authed="show">logout</a>
+            <div id="events" ng-controller="EventListController">
+                <img src="/img/eventsIcon.png" title="What's Happening" alt="Upcoming Events" />
+                <div class="event-list">
+                    <div  class="event-list-header">
+                        <h3>
+                            Upcoming Events<span role="presentation" class="sub-nav-header-arrow">></span>
+                        </h3>
                     </div>
-                </li>
-                <li class="toggle-topbar menu-icon active"><a><span>Menu</span></a></li>
-            </ul>
-            <section  class="top-bar-section">
-                <!-- Right Nav Section -->
-                <!-- Left Nav Section -->
-                <ul class="mainNav" ng-controller="SearchBarCtrl">
-                    <li class="has-dropdown">
-                        <a href="#/"  style="color:#8a9948;">Memorials</a>
-                        <ul class="dropdown" id="workpets">
-                            <li class="memNavTitle">Memorial Walls:
-                                <li if-authed="show"><a href="#/AddBlogEntry" class="small"> - Create New Memorial Walls Here</a></li>
-                                <li if-authed="show"><a href="#/myMemorials" class="small"> - Manage Memorial Walls</a></li>
-                                <li>
-                                    <a href="/" id="homebutton" class="small"> - View All Angel Memorials</a>
-                                </li>
-                                <li>
-                                    <a href="#/pets" id="petbutton" class="small"> - View All Pets Memorials</a>
-                                </li>
-                            </li>
-                            <li class="memNavTitle">Private Groups:
-                                <li if-authed="show"><a href="#/StartGroup" class="small"> - Start Support Group</a></li>
-                                <li><a href="#/groups" id="groupsbutton" class="small"> - Private Support Groups</a></li>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#/about" id="groupsbutton" class="small">About Us</a>
-                    </li>
-                    <li>
-                        <a href="#/workshops" id="workshopbutton" class="small">Workshops</a>
-                    </li>
-                    <li>
-                        <a href="#/petitions" id="pettionbutton" class="small">Petitions</a>
-                    </li>
-                    <li>
-                        <a href="http://angelsofeureka.com/shop/index.php/" id="webstorebutton" class="small">Web Store</a>
-                    </li>
-                    <li  class="has-dropdown loggedOut">
-                        <a style="color:#8a9948;">My Account</a>
-                        <ul  class="dropdown">
+                    <div class="event-list-body">
+                        <ol ng-repeat="event in events" class="event-list-content">
                             <li>
-                                <div  ng-controller="UserInfoCtrl" class="loginBlock">
-                                    <div  id="username">
-
-                                        <a href="#/profile/{{username}}" if-authed="show" class="small button">My Account</a>
-                                        <a href="#/rules" class="small button">Rules</a>
-                                        <a href="#" ng-click="logout()" if-authed="show" class="small button">logout</a>
-                                        <a href="#/registration" if-authed="hide" class="small button">Register</a>
-                                        <a href="#/login" if-authed="hide" class="small button">Login</a>
-                                        <!-- <a if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>-->
+                                <span class="event-list-date">{{event.date}}</span>
+                                <span class="event-list-date">{{event.message}}</span>
+                                <span class="event-list-photo">Photo Here</span>
+                                <span class="event-list-type">
+                                    <span class="event-list-name">{{event.name}}</span>
+                                    <strong>{{event.event}}</strong><br />
+                                    {{event.text}}
+                                    <div class="event-list-reach-out">
+                                       <!-- <a href="#" class="event-list-view-event" title="View Event Details">View Event</a>-->
                                     </div>
-                                </div>
+                                </span>
                             </li>
-                        </ul>
-                    </li>
-                    <li if-authed="show" class="has-dropdown">
-                        <a id="step2" href="#/profile/{{username}}">
-                            <img width="20" src="http://www.gravatar.com/avatar/{{post.gravatar}}" />
-                            <b style="color:#8a9948;">{{username}}</b>
-                        </a>
-                        <ul ng-controller="UserInfoCtrl" class="dropdown">
-                            <li>
-                                <a  href="#/profile/{{username}}" if-authed="show">My Account</a>
-                            </li>
-                            <li>
-                                <a href="#/rules">Rules</a>
-                            </li>
-                            <li>
-                                <a href="#" ng-click="logout()" if-authed="show">logout</a>
-                            </li>
-                            <li>
-                                <a href="#/registration" if-authed="hide">Register</a>
-                            </li>
-                            <li>
-                                <a if-authed="hide" data-reveal-id="loginModal">Login</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <a href="#/help-resources" class="helpResc">Help Resources</a>
-<!--
-                    <li ng-controller="UserInfoCtrl" class="loggedBlock" id="username2">
-                        <img width="34" src="http://www.gravatar.com/avatar/{{post.gravatar}}" />
-                        <b>{{username}}</b>
-                        <a href="#/profile/{{username}}" if-authed="show" class="small button">My Account</a>
-                        <a href="#/rules" class="small button">Rules</a>
-                        <a href="#" ng-click="logout()" if-authed="show" class="small button">logout</a>
-                        <a href="#/registration" if-authed="hide" class="small button">Register</a>
-                        <a if-authed="hide" class="small button" data-reveal-id="loginModal">Login</a>
-                    </li>
-    -->
-                </ul>
-                <div id="events" ng-controller="EventListController">
-                    <img src="/img/eventsIcon.png" title="What's Happening" alt="Upcoming Events" />
-                    <div class="event-list">
-                        <div  class="event-list-header">
-                            <h3>
-                                Upcoming Events<span role="presentation" class="sub-nav-header-arrow">></span>
-                            </h3>
-                        </div>
-                        <div class="event-list-body">
-                            <ol ng-repeat="event in events" class="event-list-content">
-                                <li>
-                                    <span class="event-list-date">{{event.date}}</span>
-                                    <span class="event-list-date">{{event.message}}</span>
-                                    <span class="event-list-photo">Photo Here</span>
-                                    <span class="event-list-type">
-                                        <span class="event-list-name">{{event.name}}</span>
-                                        <strong>{{event.event}}</strong><br />
-                                        {{event.text}}
-
-                                        <div class="event-list-reach-out">
-                                           <!-- <a href="#" class="event-list-view-event" title="View Event Details">View Event</a>-->
-                                        </div>
-                                    </span>
-                                </li>
-                            </ol>
-                        </div>
+                        </ol>
                     </div>
-
                 </div>
-            </section>
+            </div>
         </nav>
     </div>
 </div>
-<div class="off-canvas-wrap">
-    <div class="inner-wrap">
-
-        <nav  class="tab-bar show-for-small-only" >
-            <section class="left-small">
-                <a class="left-off-canvas-toggle menu-icon"><span></span></a>
-            </section>
-            <section class="middle tab-bar-section">
-                <h2 class="title">The Circle of Life</h2>
-            </section>
-            <!--
-            <section class="right-small">
-                <a class="right-off-canvas-toggle menu-icon" ><span></span></a>
-            </section>
-            -->
-        </nav>
-
-        <!-- Off Canvas Menu -->
-        <!--
-        <aside class="left-off-canvas-menu">
-            <ul class="off-canvas-list">
-                <li><label>Site Nav</label></li>
-                <li><a href="#">My Account</a></li>
-            </ul>
-        </aside>
-        <aside ng-controller="UserInfoCtrl" class="left-off-canvas-menu">
-            <ul class="off-canvas-list">
-                <li><label>Memorials</label></li>
-                <li if-authed="show"><a href="#/AddBlogEntry" class="small"> - Create New Memorial Walls Here</a></li>
-                <li if-authed="show"><a href="#/myMemorials" class="small"> - Manage Memorial Walls</a></li>
-                <li><a href="/"  >View Angel Memorials</a></li>
-                <li><a href="#/pets" >View Pets Memorials</a></li>
-                <li><label>Private Groups</label></li>
-                <li if-authed="show"><a href="#/StartGroup" class="small"> - Start Support Group</a></li>
-                <li><a href="#/groups" id="groupsbutton" class="small"> - Private Support Groups</a></li>
-                <li><a href="#/groups" >View All Groups</a></li>
-                <li><label>Other Offerings</label></li>
-                <li><a href="#/workshops" >Workshops</a></li>
-                <li><a href="#/petitions" >Petitions</a></li>
-                <li><a href="#/about" id="groupsbutton" class="small">About Us</a></li>
-                <li><a href="angelsofeureka.com/shop/index.php/" >Web Store</a></li>
-                <li><label>{{username}} Account</label></li>
-                <li><a href="#/profile/{{username}}" if-authed="show" >My Account</a></li>
-                <li><a href="#/rules">Rules</a></li>
-                <li><a href="#" ng-click="logout()" if-authed="show" >logout</a></li>
-                <li><a href="#/registration" if-authed="hide">Register</a></li>
-                <li><a href="#/login" if-authed="hide">Login</a></li>
-            </ul>
-            <a href="#/help-resources" class="helpResc">Help Resources</a>
-        </aside>
-        -->
-
-        <!-- main content goes here -->
-        <section class="main-section">
-        <!-- Add your site or application content here -->
-
-
-    <section class="primaryContent">
-        <section class="shelf" id="shelf">
-            <div ng-controller="NotificationsCtrl">
-                <div class="my-repeat-animation" ng-repeat="noti in notifications" id="notifications">
-
-                    {{ noti.text }}
-                    <div>{{noti.count}}</div>
-                    <a class="closeButton" ng-click="notiviewed( noti._id )" closeparent
-                       title="Hide this box by clicking here">X</a>
-                </div>
+<!-- main content goes here -->
+<!-- Add your site or application content here -->
+ <section class="primaryContent">
+        <div ng-controller="NotificationsCtrl">
+            <div class="my-repeat-animation" ng-repeat="noti in notifications" id="notifications">
+                {{ noti.text }}
+                <div>{{noti.count}}</div>
+                <a class="closeButton" ng-click="notiviewed( noti._id )" closeparent title="Hide this box by clicking here">X</a>
             </div>
-            <!-- Main  Content -->
-            <div ng-view class="mainBG my-page-animation">
+        </div>
+        <!-- Main  Content -->
+        <div ng-view class="mainBG my-page-animation">
 
+        </div>
+        <!-- End  Main Content -->
+        <!-- Begin  Footer -->
+        <footer class=" border-footer">
+            <div class="footer-child">
+                <p>The Circle of Life by Angels of Eureka. © 2013 Angels of Eureka</p>
+                <p class="toiawase">
+                    <a href="#/contact">Contact Us</a> - <a href="#/advertise">Advertise With Us</a> - <a href="#/help-resources">Help Resources</a> - <a href="#/rules" class="small button">Terms & Policies</a>
+
+                    <div class="g-follow" data-annotation="none" data-height="15" data-href="https://plus.google.com/101511461747859957015" data-rel="publisher"></div>
+                    <div class="fb-share-button" data-href="https://www.facebook.com/pages/Angels-Of-Eureka/526557840709907" data-width="100" data-type="button_count"></div>
+                <a href="https://twitter.com/share" class="twitter-share-button" data-related="angelsofeureka">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                </p>
             </div>
-            <!-- End  Main Content -->
-            <!-- Begin  Footer -->
-            <footer class=" border-footer">
-                <div class="footer-child">
-                    <p>The Circle of Life by Angels of Eureka. © 2013 Angels of Eureka</p>
-                    <p class="toiawase">
-                        <a href="#/contact">Contact Us</a> - <a href="#/advertise">Advertise With Us</a> - <a href="#/help-resources">Help Resources</a> -
-
-                        <div class="g-follow" data-annotation="none" data-height="15" data-href="https://plus.google.com/101511461747859957015" data-rel="publisher"></div>
-                        <div class="fb-share-button" data-href="https://www.facebook.com/pages/Angels-Of-Eureka/526557840709907" data-width="100" data-type="button_count"></div>
-                    <a href="https://twitter.com/share" class="twitter-share-button" data-related="angelsofeureka">Tweet</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-                    </p>
-                </div>
-            </footer>
-            <!-- End Footer -->
-        </section>
-        <!--
-        <div id="toc" ng-controller="MusicPlayerCtrl">
-            <h2 ng-hide="iosshow" id="tocToggle" class="toc navTab status-off" ><a click>Music On/Off</a></h2>
-            <aside class="base-class" ng-class="{'my-class':boolChangeClass}">
-                <figure id="tableOfContents">
-                    <object width="250" height="250" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="gsPlaylist9229298428" name="gsPlaylist9229298428" >
-                        <param name="movie" value="http://grooveshark.com/widget.swf" />
+        </footer>
+        <!-- End Footer -->
+    </section>
+    <!--
+    <div id="toc" ng-controller="MusicPlayerCtrl">
+        <h2 ng-hide="iosshow" id="tocToggle" class="toc navTab status-off" ><a click>Music On/Off</a></h2>
+        <aside class="base-class" ng-class="{'my-class':boolChangeClass}">
+            <figure id="tableOfContents">
+                <object width="250" height="250" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="gsPlaylist9229298428" name="gsPlaylist9229298428" >
+                    <param name="movie" value="http://grooveshark.com/widget.swf" />
+                    <param name="wmode" value="window" />
+                    <param name="allowScriptAccess" value="always" />
+                    <param name="flashvars" value="hostname=grooveshark.com&playlistID=92292984&p=1&bbg=F18B7D&bth=000000&pfg=000000&lfg=000000&bt=FFFFFF&pbg=FFFFFF&pfgh=FFFFFF&si=FFFFFF&lbg=FFFFFF&lfgh=FFFFFF&sb=FFFFFF&bfg=F18B7D&pbgh=F18B7D&lbgh=F18B7D&sbh=F18B7D" />
+                    <object type="application/x-shockwave-flash" data="http://grooveshark.com/widget.swf" width="250" height="250">
                         <param name="wmode" value="window" />
                         <param name="allowScriptAccess" value="always" />
                         <param name="flashvars" value="hostname=grooveshark.com&playlistID=92292984&p=1&bbg=F18B7D&bth=000000&pfg=000000&lfg=000000&bt=FFFFFF&pbg=FFFFFF&pfgh=FFFFFF&si=FFFFFF&lbg=FFFFFF&lfgh=FFFFFF&sb=FFFFFF&bfg=F18B7D&pbgh=F18B7D&lbgh=F18B7D&sbh=F18B7D" />
-                        <object type="application/x-shockwave-flash" data="http://grooveshark.com/widget.swf" width="250" height="250">
-                            <param name="wmode" value="window" />
-                            <param name="allowScriptAccess" value="always" />
-                            <param name="flashvars" value="hostname=grooveshark.com&playlistID=92292984&p=1&bbg=F18B7D&bth=000000&pfg=000000&lfg=000000&bt=FFFFFF&pbg=FFFFFF&pfgh=FFFFFF&si=FFFFFF&lbg=FFFFFF&lfgh=FFFFFF&sb=FFFFFF&bfg=F18B7D&pbgh=F18B7D&lbgh=F18B7D&sbh=F18B7D" />
-                            Sorry, the flash player for this service is not supported by your device.
-                        </object>
+                        Sorry, the flash player for this service is not supported by your device.
                     </object>
-                </figure>
-            </aside>
-        </div>
-        -->
-        <div id="slideout" if-authed="show" ng-controller="OnlineContacts">
-            <img src="/img/mail_2.png" alt="Open Message Center" />
-            <div id="slideout_inner">
-                <h4>People in your network</h4>
-                <div class="my-repeat-animation" ng-repeat="contact in contacts">
-                    <div class="" style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000">
-                        <!--Link around user names needs to link to their user public user profile -->
-                        <i>
-                            <a ng-href="#/pubpro/{{contact.username}}">{{contact.username}}</a>
-                            <div class="onlineStatus {{contact.online}}" style="font: x-small serif; color: steelblue;float: right">
-                                <i title="Offline">
-                                    <!--({{contact.online}} Offline) -->
-                                </i>
-                                <span title="Online"></span>
-                            </div>
-                            <span ng-show="(contact in contacts).length == 0">No results</span>
-                        </i>
+                </object>
+            </figure>
+        </aside>
+    </div>
+    -->
+    <div id="slideout" if-authed="show" ng-controller="OnlineContacts">
+        <img src="/img/mail_2.png" alt="Open Message Center" />
+        <div id="slideout_inner">
+            <h4>People in your network</h4>
+            <div class="my-repeat-animation" ng-repeat="contact in contacts">
+                <div class="" style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000">
+                    <!--Link around user names needs to link to their user public user profile -->
+                    <i>
+                        <a ng-href="#/pubpro/{{contact.username}}">{{contact.username}}</a>
+                        <div class="onlineStatus {{contact.online}}" style="font: x-small serif; color: steelblue;float: right">
+                            <i title="Offline">
+                                <!--({{contact.online}} Offline) -->
+                            </i>
+                            <span title="Online"></span>
+                        </div>
+                        <span ng-show="(contact in contacts).length == 0">No results</span>
+                    </i>
 
-                        <br/>
-                    </div>
+                    <br/>
+                </div>
 
 
-                    <!--
-                    <div class="small-30 columns" style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>{{message.from}}</b>
-                        <i><a href="">User Name 2</a></i>
-                        <div class="small-9 columns" style="font: x-small serif; color: steelblue;float: right">(OnLineStatus)</div>
-                        <br/>
-                    </div>
+                <!--
+                <div class="small-30 columns" style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>{{message.from}}</b>
+                    <i><a href="">User Name 2</a></i>
+                    <div class="small-9 columns" style="font: x-small serif; color: steelblue;float: right">(OnLineStatus)</div>
+                    <br/>
+                </div>
 -->
 
-                </div>
             </div>
         </div>
-
-    </section>
-    </section>
-        <!-- close the off-canvas menu -->
-        <a class="exit-off-canvas"></a>
     </div>
-</div>
+</section>
 <!-- Sitewide Modals -->
 <div id="login-inner" ng-controller="LoginController">
     <div reveal-modal="login" id="loginModal" class="reveal-modal medium" data-reveal>

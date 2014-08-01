@@ -13,8 +13,9 @@
    Shared Styles
 ----------------------------------------- */
 body {
-    background: url("/img/background/baloons.png")no-repeat top center;
-    background-size: cover;
+    background: url('/img/background/baloons.png') no-repeat scroll center top / cover transparent;
+    padding: 0;
+    margin: 0;
 }
 
  .error{
@@ -130,52 +131,22 @@ body {
 }
 
 body .contain-to-grid {
-    display:block;
-    width: 100%;
-    height: 226px !important;
-    min-height: 226px;
-    background: #9eafff url("/img/background/headerFooterBG.png")repeat-x center -140px;
-    -webkit-box-shadow: 0px 2px 5px 2px #A3A1A1;
-    -moz-box-shadow: 0px 2px 5px 2px #A3A1A1;
+    display: block;
+    background: url('/img/background/headerFooterBG.png') repeat-x scroll center -140px #9EAFFF;
     box-shadow: 0px 2px 5px 2px #A3A1A1;
-}
- body .contain-to-grid-logged-in {
-    display:block;
     width: 100%;
-    height: 55px !important;
-    min-height: 55px;
-    background: #9eafff url("/img/background/headerFooterBG.png")repeat-x center -140px;
-    -webkit-box-shadow: 0px 2px 5px 2px #A3A1A1;
-    -moz-box-shadow: 0px 2px 5px 2px #A3A1A1;
-    box-shadow: 0px 2px 5px 2px #A3A1A1;
+    margin: 0px;
+    padding-top: 120px;
+    height: 100px;
 }
 
- body .contain-to-grid nav.top-bar .loggedBlock, #username2 {
-     display: none;
- }
-
-body .contain-to-grid-logged-in nav.top-bar-logged-in .loggedBlock {
-    display: block !important;
-}
-
- body .contain-to-grid nav.top-bar .loggedBlock {
-     display: none;
- }
-
- body .contain-to-grid .loggedOut {
-     display:block;
- }
-
- body .contain-to-grid-logged-in .loggedOut {
-     display:none;
- }
 
  nav.top-bar {
-    top:130px;
-    background:#bdcb80 ;
-     -webkit-border-radius: 7px;
-     -moz-border-radius: 7px;
+     background: none repeat scroll 0% 0% #BDCB80;
      border-radius: 7px;
+     height: 50px;
+     width: 80%;
+     margin: auto;
 
  }
 
@@ -458,17 +429,13 @@ body .contain-to-grid-logged-in #username2 {
 
 
 .logo {
-    position:relative;
-    top:-100px;
-    left: 20px;
-    display: block;
     width: 343px;
     height: 125px;
-    margin: 0px;
+    margin: -90px 20px 0px;
     padding-top: 0px;
     text-indent: -9000px;
-    background: url("/img/logo.png") left top no-repeat;
-    z-index: 20;
+    background: url('/img/logo.png') no-repeat scroll left top transparent;
+    display: inline-block;
 }
 
 
