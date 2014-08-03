@@ -12,10 +12,17 @@
 /* -----------------------------------------
    Shared Styles
 ----------------------------------------- */
-body {
+ html,body{
+     width:100%;
+     margin:0;
+     padding:0;
+ }
+
+ body {
     background: url('/img/background/baloons.png') no-repeat scroll center top / cover transparent;
     padding: 0;
     margin: 0;
+    overflow-x: hidden;
 }
 
  .error{
@@ -25,6 +32,11 @@ body {
     background-image: url("loading.gif");
     background-repeat: no-repeat;
     height: 100px;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
 }
 
 .message{
@@ -132,22 +144,22 @@ body {
 
 body .contain-to-grid {
     display: block;
-    background: url('/img/background/headerFooterBG.png') repeat-x scroll center -140px #9EAFFF;
     box-shadow: 0px 2px 5px 2px #A3A1A1;
-    width: 100%;
     margin: 0px;
-    padding-top: 120px;
-    height: 100px;
+    padding-top: 95px;
+    height: 75px;
+    width: 100%;
+    border-bottom: 1px #8A9948 dotted;
+    background: url('/img/background/headerFooterBG.png') repeat-x scroll center -140px #9EAFFF;
 }
 
 
  nav.top-bar {
      background: none repeat scroll 0% 0% #BDCB80;
-     border-radius: 7px;
+     border-radius: 0;
      height: 50px;
-     width: 80%;
+     width: 100%;
      margin: auto;
-
  }
 
 .top-bar-logged-in{
@@ -431,11 +443,12 @@ body .contain-to-grid-logged-in #username2 {
 .logo {
     width: 343px;
     height: 125px;
-    margin: -90px 20px 0px;
+    margin: -90px 0px 0px 0px;
     padding-top: 0px;
     text-indent: -9000px;
     background: url('/img/logo.png') no-repeat scroll left top transparent;
-    display: inline-block;
+    display: block;
+    float: left;
 }
 
 
@@ -1014,797 +1027,6 @@ input.addNewPost {
      display: none;
  }
 
- @media only screen and (min-width: 851px) and (max-width: 965px) {
-     nav.top-bar.top-bar-logged-in .mainNav .helpResc {
-         position: absolute !important;
-         top: 12px !important;
-         right: 160px !important;
-         display: block;
-         padding: 4px;
-         font-size: xx-small;
-         color: #FFF;
-         background: none repeat scroll 0% 0% #BC838D;
-         border-radius: 5px;
-         z-index: 9999;
-     }
-
-     nav.top-bar.top-bar-logged-in #events {
-         position: absolute !important;
-         top: 0px !important;
-         right: 250px !important;
-         display: inline-block;
-         width: 50px;
-         text-align: center;
-         background: none repeat scroll 0% 0% transparent;
-     }
-     nav.top-bar.top-bar-logged-in {
-        position: relative;
-        top: 4px;
-        width: 99%;
-    }
-
-     nav.top-bar.top-bar-logged-in ul.title-area {
-        position: relative;
-     }
-
-     nav.top-bar.top-bar-logged-in ul.title-area li.name {
-         position: relative;
-     }
-
-     nav.top-bar.top-bar-logged-in ul.title-area li.name a.logo {
-         position: relative;
-     }
-
-     nav.top-bar.top-bar-logged-in section.top-bar-section ul.mainNav {
-
-     }
-
-    .adSpace {
-        display: block;
-        min-height: 300px;
-    }
-
-     .adSpace a img {
-         width: 80% !important;
-     }
-
-     .angelPicNarrow {
-         display: none;
-     }
- }
-
- /* not logged in */
- @media only screen and (min-width: 851px) and (max-width: 965px) {
-     /*
-     .mainNav .helpResc {
-         position: absolute !important;
-         top: 12px !important;
-         right: 160px !important;
-         display: block;
-         padding: 4px;
-         font-size: xx-small;
-         color: #FFF;
-         background: none repeat scroll 0% 0% #BC838D;
-         border-radius: 5px;
-         z-index: 9999;
-     }
-
-     #events {
-         position: absolute !important;
-         top: 0px !important;
-         right: 250px !important;
-         display: inline-block;
-         width: 50px;
-         text-align: center;
-         background: none repeat scroll 0% 0% transparent;
-     }
-     */
-     nav.top-bar {
-         position: relative;
-         top: 130px;
-         width: 99%;
-     }
-
-     nav.top-bar ul.title-area {
-         position: relative;
-     }
-
-     nav.top-bar ul.title-area li.name {
-         position: relative;
-     }
-
-     nav.top-bar ul.title-area li.name a.logo {
-         position: relative;
-     }
-
-     nav.top-bar section.top-bar-section ul.mainNav {
-
-     }
-
-     .adSpace {
-         display: block;
-         min-height: 300px;
-     }
-
-     .adSpace a img {
-         width: 80% !important;
-     }
-
-     .angelPicNarrow {
-         display: none;
-     }
- }
-
- @media only screen and (min-width: 850px) and (max-width: 876px) {
-     .adSpace a img {
-         width: 70% !important;
-     }
-
-     .angelPicNarrow {
-         display: none;
-     }
- }
-
- @media only screen and (min-width: 420px) and (max-width: 810px) {
-     .adSpace a img {
-         width: 30% !important;
-     }
- }
-
- @media only screen and (min-width: 642px) and (max-width: 657px) {
-     .adSpace {
-         display: block;
-         min-height: 300px;
-         position: relative;
-         left: -15px;
-         top: -35px;
-     }
-
-     .adSpace a img {
-         width: 30% !important;
-     }
- }
-
- @media only screen and (min-width: 300px) and (max-width: 641px) {
-     .adSpace {
-         display: block;
-         min-height: 300px;
-         position: relative;
-         left: -548px;
-         top: 120px;
-     }
-
-     .adSpace a img {
-         width: 30% !important;
-     }
-
-     .angelPicWide {
-         display: none;
-     }
-
-     .angelPicNarrow {
-         display: block !important;
-     }
-
-     #portrait {
-         position: relative;margin: 10px 0px 0px !important;
-         border: 4px solid #90BFFA !important;
-         border-top-left-radius: 4px !important;
-         border-top-right-radius: 4px !important;
-         color: #FFF;
-         font-weight: bold;
-         background: none repeat scroll 0% 0% #90BFFA;
-         width: auto;
-         min-width: 120px;
-         max-width: 120px;
-         box-shadow: 2px 2px 3px #353C45;
-         clear: both;
-         float: left;
-     }
-
-     .wallGroup2 {
-         margin: 10px;
-         float: left;
-     }
-
-     .wallGroup2 ul {
-         padding: 0px;
-         margin: 0px;
-     }
-
-     .wallGroup2 ul li {
-         list-style: none outside none;
-         padding: 5px;
-         text-decoration: underline;
-         color: #8A9948;
-     }
- }
- @media only screen and (max-width: 921px) {
-
-
-    a.button, .button.small {
-        padding: 2px;
-        margin: 10px 0px;
-        font-size: 0.8em;
-        height: auto !important;
-        line-height: auto !important;
-    }
-
-    body .contain-to-grid {
-        display: block;
-        width: 100%;
-        height: 100px !important;
-        min-height: 100px;
-        background: url("/img/background/headerFooterBG.png") repeat-x scroll center -140px rgb(158, 175, 255);
-        box-shadow: 0px 2px 5px 2px rgb(163, 161, 161);
-    }
-
-    nav.top-bar {
-        position: relative;
-        top: 40px;
-        background: none repeat scroll 0% 0% rgb(189, 203, 128);
-        border-radius: 7px;
-    }
-
-    .logo {
-        position:relative;
-        left: 10px;
-        top: -30px;
-        display: block;
-        width: 180px;
-        height: 65px;
-        margin: 0px;
-        text-indent: -9000px;
-        background: url("/img/memWallLogoSmll2.png") left top no-repeat;
-
-    }
-
-     .loginBlock {
-         /*position:relative;*/
-         display: block;
-         width: 220px;
-         height: 50px;
-         margin-top: 0px;
-         margin-left: -110px;
-         padding-right: 20px;
-         text-align: right;
-         background: rgba(189, 203, 128, 0.6);
-         border-top-left-radius: 0;
-         border-top-right-radius: 0;
-         border-bottom-left-radius:2em;
-         border-bottom-right-radius:2em;
-         border-bottom: none;
-         border-right: 4px solid #8a9948;
-         border-left: 4px solid #8a9948;
-         border-bottom: 2px solid #8a9948;
-         box-shadow: -2px -2px 2px rgb(113, 112, 107);
-         z-index: 2;
-     }
-     .invisble{
-         background: transparent;
-     }
-
-     .top-bar-section ul>a{
-         background: transparent;
-     }
-
-     body .contain-to-grid-logged-in #username2 {
-         display: block;
-         width: auto;
-         height: 45px;
-         margin-top: 0px;
-         margin-bottom: 0px;
-         margin-left: 0px;
-         margin-right: 0px;
-         padding: 10px 0px 0px 5px;
-         padding-bottom: 0px;
-         /* background: #26619D; */
-         color: #47569B;
-         white-space: nowrap;
-         -webkit-border-radius: 3px;
-         border-radius: 3px;
-         background: #BDCB80;
-     }
-
-     body .contain-to-grid-logged-in #username2 a.small.button {
-         display: inline;
-         color: #47569B;
-         border: none;
-         outline: none;
-         background: none;
-     }
-
-     #username{
-         display: block;
-         width: auto;
-         height: 35px;
-         margin-top: 0px;
-         margin-bottom: 10px;
-         margin-left: 0px;
-         margin-right: 0px;
-         padding: 10px;
-         padding-bottom: 0px;
-         /* background: #26619D; */
-         color: #71706b;
-         white-space: nowrap;
-         -webkit-border-radius: 3px;
-         border-radius: 3px;
-     }
-
-     #username b {
-         font-size: small;
-         font-weight: normal;
-     }
-
-    #workpets{
-        margin-top: -15px;
-        margin-right: 0px;
-        margin-left: 10px;
-    }
-
-    #loginMessage {
-        position: relative;
-        display: block;
-        max-width: 600px;
-        height: auto;
-        background: none repeat scroll 0% 0% rgb(245, 245, 245);
-        margin: auto;
-        padding: 0px 20px;
-        color: darkslategrey;
-        border-radius: 2em;
-        box-shadow: 2px 2px 5px rgb(19, 45, 72);
-    }
-
-    .grouping {
-        position: relative;
-        top: 10px;
-        display: block;
-        width: 100%;
-        height: 60px;
-        font-size: small;
-        margin-top: -20px;
-        background-color: rgb(189, 203, 128);
-        border-top-left-radius: 2em;
-        border-top-right-radius: 2em;
-        padding: 10px 5px 5px;
-        z-index: 1;
-    }
-
-    .grouping b {
-        white-space: nowrap;
-    }
-
-    .blogContent {
-        position: relative;
-        top: 10px;
-        left: -39px;
-    }
-
-    .buttons {
-        display: block;
-        width: 32%;
-        height: 30px;
-        background: linear-gradient(to bottom, rgb(239, 242, 255) 0%, rgb(144, 191, 250) 0%, rgb(165, 180, 255) 44%, rgb(103, 118, 181) 86%) repeat scroll 0% 0% transparent;
-        color: rgb(255, 255, 255);
-        vertical-align: top;
-        margin: 0px;
-        padding: 5px;
-        font-size: small;
-        line-height: 10px;
-        text-align: center;
-        border: 1px solid rgb(113, 112, 107);
-        float: left;
-    }
-
-    .dropzone .dz-default.dz-message {
-        opacity: 1;
-        filter: none;
-        transition: opacity 0.3s ease-in-out 0s;
-        background-image: url("../img/spritemap.png");
-        background-repeat: no-repeat;
-        background-position: 20px 0px;
-        position: relative;
-        width: 450px;
-        height: 130px;
-        margin-top: -20px;
-        margin-left: -70px;
-        padding: 20px;
-        top: 30%;
-        left: 10%;
-    }
-
-    input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], textarea {
-        border-radius: 0px;
-        background-color: white;
-        font-family: inherit;
-        border: 1px solid rgb(204, 204, 204);
-        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1) inset;
-        color: rgba(0, 0, 0, 0.75);
-        display: block;
-        font-size: 0.875rem;
-        margin: 0px 0px 1rem;
-        padding: 0.5rem;
-        height: 2.3125rem;
-        width: 80%;
-        -moz-box-sizing: border-box;
-        transition: box-shadow 0.45s ease 0s, border-color 0.45s ease-in-out 0s;
-    }
-
-     #portrait {
-         margin: 10px 0px 0px;
-         border: 4px solid #90BFFA;
-         border-top-left-radius: 4px;
-         border-top-right-radius: 4px;
-         color: #FFF;
-         font-weight: bold;
-         background: none repeat scroll 0% 0% #90BFFA;
-         width: auto;
-         min-width: 120px;
-         max-width: 120px;
-         box-shadow: 2px 2px 3px #353C45;
-     }
-
-     .adSpace {
-         display: block;
-         min-height: 300px;
-     }
-     /*
-     .adSpace a img {
-         width: 50% !important;
-     }
-     */
-     .angelPicNarrow {
-         display: none;
-     }
- }
-
-
-@media only screen and (max-width: 518px) {
-    /* Makes the search bar display properly in the groupings section */
-
-    .small-7 {
-        position: relative;
-        width: 98%;
-    }
-
-    .searchBar{
-        position:relative;
-        top:-15px;
-        width: 200px;
-        height:35px;
-        background-color: #143A5F;
-        padding-top: 5px;
-        z-index: 10;
-        margin-top: 5px;
-    }
-
-    .grouping{
-        position:relative;
-        top: 0px;
-        display:block;
-        width:100%;
-        height:70px;
-        margin-top: -20px;
-        background-color: #BDCB80;
-        border-top-left-radius: 2em;
-        border-top-right-radius: 2em;
-        padding: 10px;
-        z-index: 1;
-    }
-
-    .grouping b {
-        font-size: xx-small;
-    }
-
-    .memProfilePreview {
-        color: rgb(255, 255, 255);
-        padding: 3px;
-        background: none repeat scroll 0% 0% #BDCB80;
-        border-radius: 4px 4px 4px 4px;
-        font-size: xx-small;
-    }
-    .small-block-grid-4 > li:nth-of-type(n) {
-        clear: none;
-        width: 50%;
-    }
-
-    #loginMessage {
-        position: relative;
-        display: block;
-        max-width: 400px;
-        height: auto;
-        background: none repeat scroll 0% 0% rgb(245, 245, 245);
-        margin: auto;
-        padding: 0px 20px;
-        color: darkslategrey;
-        border-radius: 2em;
-        box-shadow: 2px 2px 5px rgb(19, 45, 72);
-    }
-
-    #loginMessage h1 {
-        font-size: 1em;
-        margin: 0.67em 0px;
-    }
-
-    .row .row .stream {
-        display:block;
-        width: 400px;
-        height: 400px\9;
-        min-height: 300px;
-        margin: 0px 0px 10px 0px;
-    }
-
-    #toc {
-       display: none;
-    }
-
-    #toc.status-on {
-        display: none;
-    }
-
-    #tocToggle {
-        display: none;
-    }
-
-    .adSpace {
-        display: block;
-        min-height: 300px;
-        position: relative;
-        left: -548px;
-        top: 120px;
-    }
-
-    .adSpace a img {
-        width: 30% !important;
-    }
-
-    .socialButtons1 {
-        display: none;
-    }
-
-    .socialButtons2 {
-        vertical-align: top;
-        margin-top:-10px;
-        margin-bottom:10px;
-        white-space: nowrap;
-        display: block;
-    }
-
-    .buttons {
-        display: block;
-        width: 33%;
-        height: 20px;
-        background: #8A9948 !important;
-        color: #FFF;
-        vertical-align: top;
-        margin: 0px;
-        padding: 5px;
-        font-size: 10px !important;
-        line-height: 6px;
-        text-align: center;
-        border: 1px solid #71706B;
-        float: left;
-    }
-
-    .angelPicNarrow {
-        display: block;
-    }
-}
-
-@media only screen and (max-width: 451px) {
-    /* Makes the responsive menu fit in the navigation container and change its background to black */
-    html {
-    @font-face {
-        font-family: "Open Sans";
-            font-style: normal;
-            font-weight: 300;
-            src: local("Open Sans Light"), local("OpenSans-Light"), url("http://themes.googleusercontent.com/static/fonts/opensans/v6/DXI1ORHCpsQm3Vp6mXoaTaRDOzjiPcYnFooOUGCOsRk.woff") format("woff");
-    }
-    background: url("/img/background/Gobi-rainbow-2b.jpg") no-repeat scroll center -150px / cover rgb(39, 92, 149);
-    }
-
-    .small-7 {
-        position: relative;
-        width: 98%;
-    }
-
-    div.form-horizontal .dropdown-menu,
-    div.form-horizontal2 .dropdown-menu {
-        display: none !important;
-    }
-
-     div.form-horizontal button.btn,
-     div.form-horizontal2 .button.btn {
-         display: none !important;;
-     }
-
-
-    #loginMessage {
-        position: relative;
-        display: block;
-        max-width: 300px;
-        height: auto;
-        background: none repeat scroll 0% 0% #F5F5F5;
-        margin: 0px auto 30px auto;
-        padding: 0px 20px;
-        color: #2F4F4F;
-        border-radius: 2em;
-        box-shadow: 2px 2px 5px #132D48;
-        font-size: small;
-    }
-
-    #loginMessage  h1 {
-        font-size: 1em;
-        margin: 0.67em 0px;
-    }
-
-
-    #loginMessage  h2 {
-        font-size: 1em !important;
-        margin: 0.67em 0px;
-    }
-
-    #loginMessage h3 {
-        color: #000000;font-size: small;font-weight: normal
-    }
-
-    #loginMessage  p {
-        font-size: 0.8em;
-        margin: 0.67em 0px;
-    }
-
-    .row .row .stream {
-        display: block;
-        width: 276px;
-        min-height: 300px;
-        margin: 0px 0px 10px;
-    }
-
-    .small-7 {
-        position: relative;
-        width: auto;
-        left: 9px;
-    }
-
-    .buttons {
-        display: block;
-        width: 33%;
-        height: 23px;
-        background: linear-gradient(to bottom, rgb(239, 242, 255) 0%, rgb(144, 191, 250) 0%, rgb(165, 180, 255) 44%, rgb(103, 118, 181) 86%) repeat scroll 0% 0% transparent;
-        color: rgb(255, 255, 255);
-        vertical-align: top;
-        margin: 0px;
-        padding: 5px;
-        font-size: x-small;
-        line-height: 6px;
-        text-align: center;
-        border: 1px solid rgb(113, 112, 107);
-        float: left;
-    }
-
-    .adSpace {
-        display: block;
-        min-height: 300px;
-        position: relative;
-        left: -226px;
-        top: -100px;
-    }
-
-    .adSpace a img {
-        width: 70% !important;
-    }
-
-    .logo {
-        position:relative;
-        left: 10px;
-        top:-5px;
-        display: block;
-        width: 275px;
-        height: 65px;
-        margin: 0px;
-        padding-top: 75px;
-        text-indent: -9000px;
-        background: url("/img/memWallLogoSmll2.png") center top no-repeat;
-    }
-
-    button.small, .button.small {
-        padding: 2px;
-        margin: 10px 0px;
-        font-size: 0.8em;
-        height: auto !important;
-        line-height: auto !important;
-    }
-
-     .filter {
-         position: relative;
-         top: -8px !important;
-         right: 0px !important;;
-     }
-
-    .headerCol {
-        position:relative;
-        top:35px;
-        left:0px;
-        display: block;
-        width: auto;
-        float: left;
-    }
-
-    .loginBlock {
-        position:relative;
-        top:-75px;
-        left:-60px;
-        display: block;
-        width: 100%;
-        height: 30px;
-        margin-top: 0px;
-        text-align: right;
-        float: right;
-        background: rgba(7.8%,22.7%,37.3%, 0.6);
-        border-bottom-left-radius:2em;
-        border-bottom-right-radius:2em;
-        border-top: none;
-        border-right: 4px solid #143A5F;
-    }
-
-    #workpets{
-        margin-top: -15px;
-        margin-right: 0px;
-        margin-left: 10px;
-    }
-
-    #gallery {
-        display: none;
-        visibility: hidden;
-    }
-
-    .postEntry {
-        margin-top: 410px;
-    }
-    .border-footer{
-
-    }
-
-    .socialButtons1 {
-        display: none;
-    }
-
-    .socialButtons2 {
-        vertical-align: top;
-        margin-top:-10px;
-        margin-bottom:10px;
-        white-space: nowrap;
-        display: block;
-    }
-
-    .buttons {
-        display: block;
-        width: 33%;
-        height: 20px;
-        background: #8A9948 !important;
-        color: #FFF;
-        vertical-align: top;
-        margin: 0px;
-        padding: 5px;
-        font-size: 10px !important;
-        line-height: 6px;
-        text-align: center;
-        border: 1px solid #71706B;
-        float: left;
-    }
-
-    .form-horizontal ul.dropdown-menu {
-        display: none;
-    }
-
-    .form-horizontal2 {
-        display: block;
-    }
-
- .angelPicNarrow {
-     display: block;
- }
-}
 
 #rulesModal {
     display:block;
@@ -2188,97 +1410,6 @@ h6.petsTitle {
     margin-top: -18px;
 }
 
- /* Small screens*/
- @media only screen { } /* Define mobile styles */
-
- @media only screen and (max-width: 40em) {
-     .border-footer p{
-         font-size: 75%;
-         margin-left: 0px;
-         margin-top: 25px;
-     }
- } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
-
- /*Medium screens*/
- @media only screen and (min-width: 40.063em) { } /* min-width 641px, medium screens */
-
- @media only screen and (min-width: 40.063em) and (max-width: 64em) { } /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
-
- @media only screen and (min-width: 851px) and (max-width: 965px) {
-     div.contain-to-grid.contain-to-grid-logged-in section.top-bar-section ul.mainNav .helpResc {
-         position: absolute !important;
-         top: 12px !important;
-         right: 20px !important;
-         display: block;
-         padding: 4px;
-         font-size: xx-small;
-         color: #FFF;
-         background: none repeat scroll 0% 0% #BC838D;
-         border-radius: 5px;
-         z-index: 9999;
-     }
-
-     div.contain-to-grid.contain-to-grid-logged-in section.top-bar-section #events {
-         position: absolute !important;
-         top: 0px !important;
-         right: 120px !important;
-         display: inline-block;
-         width: 50px;
-         text-align: center;
-         background: none repeat scroll 0% 0% transparent;
-     }
-
-     .angelPicNarrow {
-         display: none;
-     }
- } /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
-
-
- @media only screen and (min-width: 966px) and (max-width: 5000px) {
-     div.contain-to-grid.contain-to-grid-logged-in section.top-bar-section ul.mainNav .helpResc {
-         position: absolute !important;
-         top: 12px !important;
-         right: 60px !important;
-         display: block;
-         padding: 4px;
-         font-size: xx-small;
-         color: #FFF;
-         background: none repeat scroll 0% 0% #BC838D;
-         border-radius: 5px;
-         z-index: 9999;
-     }
-
-     div.contain-to-grid.contain-to-grid-logged-in section.top-bar-section #events {
-         position: absolute !important;
-         top: 0px !important;
-         right: 250px !important;
-         display: inline-block;
-         width: 50px;
-         text-align: center;
-         background: none repeat scroll 0% 0% transparent;
-     }
-
-     .angelPicNarrow {
-         display: none;
-     }
- } /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
-
- /* Large screens*/
- @media only screen and (min-width: 64.063em) {
-     .angelPicNarrow {
-         display: none;
-     }
- } /* min-width 1025px, large screens */
-
- @media only screen and (min-width: 64.063em) and (max-width: 90em) { } /* min-width 1024px and max-width 1440px, use when QAing large screen-only issues */
-
- /* XLarge screens*/
- @media only screen and (min-width: 90.063em) { } /* min-width 1441px, xlarge screens */
-
- @media only screen and (min-width: 90.063em) and (max-width: 120em) { } /* min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues */
-
- /* XXLarge screens*/
- @media only screen and (min-width: 120.063em) { } /* min-width 1921px, xlarge screens */
 
  .automargins{
      margin-left: auto !important;;
@@ -2292,12 +1423,6 @@ h6.petsTitle {
      margin:auto;
  }
    */
-
- body .row .row {
-     width: auto;
-     max-width: 950px;
-     margin:auto;
- }
 
  .templatePortal {
 
@@ -2314,7 +1439,7 @@ h6.petsTitle {
      position: relative;
  }
 
- .petitionFont{
+ .petitionFont {
      font-size: 3em;
      text-shadow: 0 1px 0 white;
  }
@@ -2508,6 +1633,29 @@ body nav.top-bar.top-bar-logged-in {
      float: right !important;
  }
 
+ .primaryContent {
+     width: 980px;
+     margin: auto;
+ }
+
+ .mainNav {
+     width: 980px;
+     margin: auto;
+     padding: 0;
+ }
+
+ .mainNav li {
+     display: block;
+     margin: 0 10px;
+     height: 50px;
+     list-style: none outside none;
+     line-height: 50px;
+     color: #FFF;
+     font-weight: bold;
+     text-decoration: none;
+     float: left;
+ }
+
  .mainNav .helpResc {
      position: absolute;
      right: 106px;
@@ -2695,5 +1843,9 @@ body nav.top-bar.top-bar-logged-in {
  }
 
  .onlineStatus.false span {
+     display: none;
+ }
+
+ .hide {
      display: none;
  }

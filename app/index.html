@@ -50,39 +50,53 @@
     <!-- Angels of Eureka Proudly Presents:-->
     <div ng-class="[constyle,constyle2]" >
         <nav ng-class="[topstyle,topstyle2]"  data-topbar data-options="is_hover: false">
-            <a href="#/" ng-bind="title" class="logo"></a>
-            <a  href="#/profile/{{username}}" if-authed="show"><b style="color:#8a9948;">View Your Dashboard</b></a>
-            <a href="#/about" id="groupsbutton" class="small">About Us</a>
-            <a href="http://angelsofeureka.com/shop/index.php/" id="webstorebutton" class="small">Web Store</a>
-            <a href="#/help-resources" class="helpResc">Help Resources</a>
-            <a href="#" ng-click="logout()" if-authed="show">logout</a>
-            <div id="events" ng-controller="EventListController">
-                <img src="/img/eventsIcon.png" title="What's Happening" alt="Upcoming Events" />
-                <div class="event-list">
-                    <div  class="event-list-header">
-                        <h3>
-                            Upcoming Events<span role="presentation" class="sub-nav-header-arrow">></span>
-                        </h3>
+            <ul class="mainNav">
+                <a href="#/" ng-bind="title" class="logo"></a>
+                <li if-authed="show">
+                    <a  href="#/profile/{{username}}"><b style="color:#8a9948;">View Your Dashboard</b></a>
+                </li>
+                <li>
+                    <a href="#/about" id="groupsbutton" class="small">About Us</a>
+                </li>
+                <li>
+                    <a href="http://angelsofeureka.com/shop/index.php/" id="webstorebutton" class="small">Web Store</a>
+                </li>
+                <li>
+                    <a href="#/help-resources" class="helpResc">Help Resources</a>
+                </li>
+                <li if-authed="show">
+                    <a href="#" ng-click="logout()">logout</a>
+                </li>
+                <li>
+                    <div id="events" ng-controller="EventListController">
+                        <img src="/img/eventsIcon.png" title="What's Happening" alt="Upcoming Events" />
+                        <div class="event-list">
+                            <div  class="event-list-header">
+                                <h3>
+                                    Upcoming Events<span role="presentation" class="sub-nav-header-arrow">></span>
+                                </h3>
+                            </div>
+                            <div class="event-list-body">
+                                <ol ng-repeat="event in events" class="event-list-content">
+                                    <li>
+                                        <span class="event-list-date">{{event.date}}</span>
+                                        <span class="event-list-date">{{event.message}}</span>
+                                        <span class="event-list-photo">Photo Here</span>
+                                        <span class="event-list-type">
+                                            <span class="event-list-name">{{event.name}}</span>
+                                            <strong>{{event.event}}</strong><br />
+                                            {{event.text}}
+                                            <div class="event-list-reach-out">
+                                               <!-- <a href="#" class="event-list-view-event" title="View Event Details">View Event</a>-->
+                                            </div>
+                                        </span>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
                     </div>
-                    <div class="event-list-body">
-                        <ol ng-repeat="event in events" class="event-list-content">
-                            <li>
-                                <span class="event-list-date">{{event.date}}</span>
-                                <span class="event-list-date">{{event.message}}</span>
-                                <span class="event-list-photo">Photo Here</span>
-                                <span class="event-list-type">
-                                    <span class="event-list-name">{{event.name}}</span>
-                                    <strong>{{event.event}}</strong><br />
-                                    {{event.text}}
-                                    <div class="event-list-reach-out">
-                                       <!-- <a href="#" class="event-list-view-event" title="View Event Details">View Event</a>-->
-                                    </div>
-                                </span>
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
+                </li>
+            </ul>
         </nav>
     </div>
 </div>
@@ -117,8 +131,7 @@
         </footer>
         <!-- End Footer -->
     </section>
-    <!--
-    <div id="toc" ng-controller="MusicPlayerCtrl">
+    <div id="toc" class="hide" ng-controller="MusicPlayerCtrl">
         <h2 ng-hide="iosshow" id="tocToggle" class="toc navTab status-off" ><a click>Music On/Off</a></h2>
         <aside class="base-class" ng-class="{'my-class':boolChangeClass}">
             <figure id="tableOfContents">
@@ -137,7 +150,6 @@
             </figure>
         </aside>
     </div>
-    -->
     <div id="slideout" if-authed="show" ng-controller="OnlineContacts">
         <img src="/img/mail_2.png" alt="Open Message Center" />
         <div id="slideout_inner">
@@ -160,20 +172,18 @@
                 </div>
 
 
-                <!--
                 <div class="small-30 columns" style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>{{message.from}}</b>
                     <i><a href="">User Name 2</a></i>
                     <div class="small-9 columns" style="font: x-small serif; color: steelblue;float: right">(OnLineStatus)</div>
                     <br/>
                 </div>
--->
 
             </div>
         </div>
     </div>
 </section>
 <!-- Sitewide Modals -->
-<div id="login-inner" ng-controller="LoginController">
+<div id="login-inner" class="hide" ng-controller="LoginController">
     <div reveal-modal="login" id="loginModal" class="reveal-modal medium" data-reveal>
         <p><b>{{error}}</b></p>
 
@@ -200,7 +210,7 @@
 </div>
 
 
-<div id="pic-inner" ng-controller="DeletePicsCtrl">
+<div id="pic-inner" class="hide" ng-controller="DeletePicsCtrl">
     <div reveal-modal="deletepic" id="confirmDeletePics" class="reveal-modal small" data-reveal>
         <p><b>{{message}}</b></p>
 
