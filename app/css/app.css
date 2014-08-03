@@ -7,8 +7,22 @@
 :: Page Name 1
 :: Page Name 2
 */
+/*For the splash screen
 
 
+*/
+
+ .splash {
+     display: none;
+ }
+
+ [ng-cloak].splash {
+     background-color: #428bca;
+     width: 100%;
+     text-align: center;
+     color: white;
+     display: block !important;
+ }
 /* -----------------------------------------
    Shared Styles
 ----------------------------------------- */

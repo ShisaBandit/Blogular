@@ -180,7 +180,9 @@
 </div>
 <div class="off-canvas-wrap">
     <div class="inner-wrap">
-
+        <div class="splash" ng-cloak="">
+            <p>Loading</p>
+        </div>
         <nav  class="tab-bar show-for-small-only" >
             <section class="left-small">
                 <a class="left-off-canvas-toggle menu-icon"><span></span></a>
@@ -236,7 +238,7 @@
 
     <section class="primaryContent">
         <section class="shelf" id="shelf">
-            <div ng-controller="NotificationsCtrl">
+            <div ng-controller="NotificationsCtrl" ng-cloak>
                 <div class="my-repeat-animation" ng-repeat="noti in notifications" id="notifications">
 
                     {{ noti.text }}
@@ -246,7 +248,8 @@
                 </div>
             </div>
             <!-- Main  Content -->
-            <div ng-view class="mainBG my-page-animation">
+
+            <div ng-view ng-cloak class="mainBG my-page-animation">
 
             </div>
             <!-- End  Main Content -->

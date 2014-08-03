@@ -1,4 +1,4 @@
-<div ng-controller="ContentCtrl" xmlns="http://www.w3.org/1999/html">
+<div ng-controller="ContentCtrl" ng-cloak xmlns="http://www.w3.org/1999/html">
     <div class="small-9 columns small-centered offsetHeight" role="content" ng-class="{petMem:pets, privGroup:groups}" >
         <div ng-controller="GroupingCtrl">
             <div id="loginMessage" if-authed="hide">
@@ -44,8 +44,10 @@
                 </div>
             </div>
         </div>
+
         <!--<div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' autoscroll>-->
         <div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' ng-class="{error:pets, petsList:pets}" class="scrollerBlock">
+            <div ng-class="{spinner:spinner}"></div>
                 <img src="./img/muralPets.png" class="muralPets" ng-show="pets">
                 <span ng-hide="groups"><img src="./img/mural1.png" class="mural" ng-hide="pets"></span>
                 <img src="./img/mural2.png" class="mural" ng-class="{privGroup:groups}" ng-show="groups">
