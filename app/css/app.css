@@ -469,17 +469,12 @@ body .contain-to-grid-logged-in #username2 {
 
 .grouping{
     position:relative;
-    top: 10px;
     display:block;
     width:100%;
     height:60px;
-    margin-top: -5px;
     background-color: #bdcb80;
     border-top-left-radius: 1em;
     border-top-right-radius: 1em;
-    padding: 5px;
-    padding-top: 10px;
-    z-index: 1;
 }
 
 .border-footer{

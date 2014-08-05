@@ -1,31 +1,12 @@
 <div ng-controller="ContentCtrl" xmlns="http://www.w3.org/1999/html">
     <div class="" role="content" ng-class="{petMem:pets, privGroup:groups}" >
-        <div ng-controller="GroupingCtrl">
-            <div id="loginMessage" if-authed="hide">
-                <h3>Angels of Eureka is about Love, Hope and Life with People and Pets.</h3>
-                <p>
-                    <!--[if lte IE 8]>
-                    <b style="red; font-weight: bold;">
-                        We noticed that you are using an old version of Internet Explorer on Windows XP. This browser does not support the technology that the Circle of Life web site employs.
-                        We recommend a modern browser that will be both secure and allow you to enjoy the site to the fullest! Here are the browsers we suggest:<br />
-                        <a href="https://download.mozilla.org/?product=firefox-25.0&os=win&lang=en-US" target="_blank">Mozilla Firefox</a>
-                        <br />
-                        <a href="https://www.google.com/intl/en/chrome/browser/?platform=win" target="_blank">Google Chrome</a>
-                        <br />
-                        If you want to continue using Internet Explorer on our site, you will need to upgrade your computer to at least <a href="https://http://windows.microsoft.com/en-us/windows7/products/upgrade" target="_blank">Windows 7</a>.
-                        <br />
-                        Thank you for you understanding.
-                    </b>
-                    <![endif]-->
-                </p>
-                It looks like you are not a member yet. Sign up Here!
-                <a href="#/registration" class="small button">Register Here to Create or View Private Memorials</a><br/>
-                Already a member? Log-in to your account here!
-                <a href="#/login" class="small button"  data-hide-id="loginMessage">Login to Manage and View Your Memorials</a>
-                <a class="closeButton" closeparent title="Hide this box by clicking here">X</a>
-            </div>
+        <h1>Welcome to Angels of Eureka's Circle of Life, free online memorials and support groups <small>Celebrate their life...Cherish their Legacy</small> </h1>
+        <img src="./img/muralPets.png" class="muralPets" ng-show="pets">
+        <span ng-hide="groups"><img src="./img/mural1.png" class="mural" ng-hide="pets"></span>
+        <img src="./img/mural2.png" class="mural" ng-class="{privGroup:groups}" ng-show="groups">
+        <!--<div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' autoscroll>-->
+        <div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' ng-class="{error:pets, petsList:pets}" class="scrollerBlock">
             <div ng-switch on="type">
-                <h1>Welcome to Angels of Eureka's Circle of Life, free online memorials and support groups <small>Celebrate their life...Cherish their Legacy</small> </h1>
                 <div ng-switch-when="group"></div>
                 <div ng-switch-default ng-hide="groupingViewable" ng-animate="'fade'" class="grouping">
                     <div class="" ng-switch on="type">
@@ -39,6 +20,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div ng-controller="GroupingCtrl">
                 <select class="login-inp"
                         name="selectedFilter"
                         ng-change="changedSubGroup(false)"
@@ -48,12 +31,6 @@
                 </select>
                 <a ng-click="changedSubGroup(true)" class="button small success radius filter">Remove Filter</a>
             </div>
-        </div>
-        <!--<div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' autoscroll>-->
-        <div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' ng-class="{error:pets, petsList:pets}" class="scrollerBlock">
-                <img src="./img/muralPets.png" class="muralPets" ng-show="pets">
-                <span ng-hide="groups"><img src="./img/mural1.png" class="mural" ng-hide="pets"></span>
-                <img src="./img/mural2.png" class="mural" ng-class="{privGroup:groups}" ng-show="groups">
             <ul class="small-block-grid-4" >
                 <li ng-repeat="entry in entries | filter:search.search | bySubgroup:subgroup">
                     <div style="background-image: url({{entry.titleImage}})" ng-style="getBackImg(entry._id)" class="memProfilePreview"  ng-class="{error:pets, pets:pets}">
