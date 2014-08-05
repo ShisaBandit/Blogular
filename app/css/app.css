@@ -463,8 +463,8 @@ body .contain-to-grid-logged-in #username2 {
 
 .searchBar{
     height:20px;
-    background-color: #143A5F;
     padding-top: 5px;
+    border-radius: 5px;
 }
 
 .grouping{

@@ -25,23 +25,28 @@
                 <a class="closeButton" closeparent title="Hide this box by clicking here">X</a>
             </div>
             <div ng-switch on="type">
+                <h1>Welcome to Angels of Eureka's Circle of Life, free online memorials and support groups <small>Celebrate their life...Cherish their Legacy</small> </h1>
                 <div ng-switch-when="group"></div>
                 <div ng-switch-default ng-hide="groupingViewable" ng-animate="'fade'" class="grouping">
-                    <div class="">
-                        <div class=" ">
-                            <select class="login-inp"
-                                    name="selectedFilter"
-                                    ng-change="changedSubGroup(false)"
-                                    ng-model="parentOfSelected.selectedFilter"
-                                    ng-options="group.name for group in groups">
-                                <option value="" selected>View By Groupings Here</option>
-                            </select>
+                    <div class="" ng-switch on="type">
+                        <div class="memWallSearch" ng-switch-when="group">
+                            <input ng-model="search.search" type="text" class="searchBar"
+                                   placeholder="Search Groups">
                         </div>
-                        <div class="small-3 ">
-                            <a ng-click="changedSubGroup(true)" class="button small success radius filter">Remove Filter</a>
+                        <div class="memWallSearch" ng-switch-default ng-hide="groupingViewable">
+                            <input ng-model="search.search" type="text" class="searchBar"
+                                   placeholder="Search Memorials">
                         </div>
                     </div>
                 </div>
+                <select class="login-inp"
+                        name="selectedFilter"
+                        ng-change="changedSubGroup(false)"
+                        ng-model="parentOfSelected.selectedFilter"
+                        ng-options="group.name for group in groups">
+                    <option value="" selected>View By Groupings Here</option>
+                </select>
+                <a ng-click="changedSubGroup(true)" class="button small success radius filter">Remove Filter</a>
             </div>
         </div>
         <!--<div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' autoscroll>-->
@@ -49,19 +54,7 @@
                 <img src="./img/muralPets.png" class="muralPets" ng-show="pets">
                 <span ng-hide="groups"><img src="./img/mural1.png" class="mural" ng-hide="pets"></span>
                 <img src="./img/mural2.png" class="mural" ng-class="{privGroup:groups}" ng-show="groups">
-                <h1>Welcome to Angels of Eureka's Circle of Life </h1>
-                <h2 style="color: #000000;font-size: large;font-weight: bold">Celebrate life...Cherish Legacies</h2>
             <ul class="small-block-grid-4" >
-                <div class="" ng-switch on="type">
-                    <div class=" memWallSearch" ng-switch-when="group">
-                        <input ng-model="search.search" type="text" class="searchBar"
-                               placeholder="Search Groups">
-                    </div>
-                    <div class=" memWallSearch" ng-switch-default ng-hide="groupingViewable">
-                        <input ng-model="search.search" type="text" class="searchBar"
-                               placeholder="Search Memorials">
-                    </div>
-                </div>
                 <li ng-repeat="entry in entries | filter:search.search | bySubgroup:subgroup">
                     <div style="background-image: url({{entry.titleImage}})" ng-style="getBackImg(entry._id)" class="memProfilePreview"  ng-class="{error:pets, pets:pets}">
                         <h6 ng-class="{error:pets, petsTitle:pets}" ng-switch on="type">
