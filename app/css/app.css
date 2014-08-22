@@ -43,6 +43,24 @@ a {
     color: green;
 }
 
+.scrollerContent {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.scrollerContent li {
+    display: inline-block;
+    width: 24%;
+    list-style: none outside none;
+    text-align: center;
+    vertical-align: top;
+    min-height: 200px;
+    padding: 0px;
+    margin: 0.5%;
+}
+
 #portraitpic {
     position: absolute;
     top:20px;
@@ -156,10 +174,11 @@ body .contain-to-grid {
 
  nav.top-bar {
      background: none repeat scroll 0% 0% #BDCB80;
-     border-radius: 0;
+     border-radius: 0px;
      height: 50px;
      width: 100%;
      margin: auto;
+     box-shadow: 0px 4px 3px -2px #8A9948;
  }
 
 .top-bar-logged-in{
@@ -467,14 +486,33 @@ body .contain-to-grid-logged-in #username2 {
     border-radius: 5px;
 }
 
+.searchFeature {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    text-align: left;
+}
+
+.groupingDropdown {
+    position: relative;
+    top: -38px;
+    left: 20px;
+}
+
+.groupingDropdown select,
+.groupingDropdown a {
+    display: inline;
+}
+
 .grouping{
-    position:relative;
-    display:block;
-    width:100%;
-    height:60px;
-    background-color: #bdcb80;
-    border-top-left-radius: 1em;
-    border-top-right-radius: 1em;
+    display: block;
+    width: 100%;
+    height: 60px;
+    background-color: #BDCB80;
+    box-shadow: 0px 4px 3px -2px #8A9948;
+    position: relative;
+    padding: 0 0 0 210px;
+    line-height: 57px;
 }
 
 .border-footer{
@@ -526,15 +564,19 @@ h2 {
 }
 
 .memProfilePreview {
-    color: #fff;
-    padding: 10px;
-    background: #fff;
+    color: #FFF;
+    background: none repeat scroll 0% 0% #FFF;
     border-radius: 4px;
+    padding: 10px;
+    height: 200px;
+    overflow: hidden;
 }
 
 .memProfilePreview h6 {
     padding: 10px;
     background: #fff;
+    margin: 0;
+    font-size: medium;
 }
 
 .memProfilePreview h6 a {
@@ -545,6 +587,7 @@ h2 {
 
 .memProfilePreview img {
     margin: auto;
+    max-width: 100%;
 }
 
 h1.sectionHeader {
@@ -1361,22 +1404,32 @@ h6.groupTitle {
     background: #fff;
 }
 
-div.scrollerBlock.petsList {
+.scrollerContainer {
+    display: inline-block;
+    margin: 10px 0;
+    width: 760px;
+    vertical-align: top;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 8px;
+    overflow-x: hidden;
+    background: #fff;
+}
+
+.scrollerBlock.petsList {
     background: url("/img/background/colbg2.png")repeat #f28678;
 }
 
-div.scrollerBlock {
-    margin-top: 27px;
-    background: url("/img/background/colbg2.png")repeat;
+.scrollerBlock {
+    background: url("/img/background/colbg2.png")repeat #FFFADE;
 }
 
- div.scrollerBlock h1 {
+ .scrollerBlock h1 {
      margin: 0px;
      font-size: 1.2em;
      float: left;
  }
 
- div.scrollerBlock h2 {
+ .scrollerBlock h2 {
     margin: 7px 0px 0px 10px;
     font-size: 0.9em !important;
     float: left;
@@ -1734,7 +1787,7 @@ body nav.top-bar.top-bar-logged-in {
 
  .filter {
      position: relative;
-     top: -40px;
+     left: 200px;
  }
 
  .shortURI {
@@ -1841,6 +1894,13 @@ body nav.top-bar.top-bar-logged-in {
      display: none;
  }
 
+ .adContainer {
+     display: inline-block;
+     margin: 10px 0;
+     width: 200px;
+     vertical-align: top;
+ }
+ 
  .hide {
      display: none;
  }

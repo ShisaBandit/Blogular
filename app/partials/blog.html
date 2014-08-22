@@ -1,12 +1,12 @@
 <div ng-controller="ContentCtrl" xmlns="http://www.w3.org/1999/html">
-    <div class="" role="content" ng-class="{petMem:pets, privGroup:groups}" >
+    <div class="scrollerContainer" role="content" ng-class="{petMem:pets, privGroup:groups}" >
         <h1>Welcome to Angels of Eureka's Circle of Life, free online memorials and support groups <small>Celebrate their life...Cherish their Legacy</small> </h1>
         <img src="./img/muralPets.png" class="muralPets" ng-show="pets">
         <span ng-hide="groups"><img src="./img/mural1.png" class="mural" ng-hide="pets"></span>
         <img src="./img/mural2.png" class="mural" ng-class="{privGroup:groups}" ng-show="groups">
         <!--<div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' autoscroll>-->
         <div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' ng-class="{error:pets, petsList:pets}" class="scrollerBlock">
-            <div ng-switch on="type">
+            <div class="searchFeature" ng-switch on="type">
                 <div ng-switch-when="group"></div>
                 <div ng-switch-default ng-hide="groupingViewable" ng-animate="'fade'" class="grouping">
                     <div class="" ng-switch on="type">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            <div ng-controller="GroupingCtrl">
+            <div class="groupingDropdown" ng-controller="GroupingCtrl">
                 <select class="login-inp"
                         name="selectedFilter"
                         ng-change="changedSubGroup(false)"
@@ -31,7 +31,7 @@
                 </select>
                 <a ng-click="changedSubGroup(true)" class="button small success radius filter">Remove Filter</a>
             </div>
-            <ul class="small-block-grid-4" >
+            <ul class="scrollerContent" >
                 <li ng-repeat="entry in entries | filter:search.search | bySubgroup:subgroup">
                     <div style="background-image: url({{entry.titleImage}})" ng-style="getBackImg(entry._id)" class="memProfilePreview"  ng-class="{error:pets, pets:pets}">
                         <h6 ng-class="{error:pets, petsTitle:pets}" ng-switch on="type">
@@ -40,12 +40,12 @@
                                 <a href="#/{{type}}/{{entry.author}}" ng-switch-when="group">{{entry.title}}</a>
                         </h6>
                         <a href="#/{{type}}/{{entry.author}}">
-                            <img src="/uploads/{{ entry.profilePicPortrait }}"
-                                                                alt="Angel Photo"/>
+                            <img src="/uploads/{{ entry.profilePicPortrait }}" alt="Angel Photo"/>
                         </a>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
+    <div class="adContainer">Ads go here</div>
 </div>
