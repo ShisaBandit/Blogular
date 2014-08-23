@@ -1,8 +1,6 @@
 <div ng-controller="LatestCtrl"class="" xmlns="http://www.w3.org/1999/html">
-
   <div class="">
       <div class="" infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='0'>
-
           <div class="angelStory" ng-switch on="parentObject.type">
               <a ng-switch-when="angel" ng-click="toogleEventEntry(); loadPage('angelStory')">Read {{ entry.firstName }}'s story here.</a>
               <a ng-switch-when="pet" ng-click="toogleEventEntry(); loadPage('angelStory')">Read {{ entry.firstName }}'s story here.</a>
@@ -11,9 +9,13 @@
               <a ng-switch-when="pet" class="fb-like" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-href="http://the-circle-of-life.net/#/pet/{{ entry.author }}"></a>
               <a ng-switch-when="group" class="fb-like" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-href="http://the-circle-of-life.net/#/group/{{ entry.author }}"></a>
           </div>
-        <div id="contentHeader" class=" show-for-medium-up">
+        <div id="contentHeader" class="conversations">
             <h2 class="contentHeaderTitle">Start a New Conversation</h2>
         </div>
+      <div ng-class="{spinner:spinner}"></div>
+      <textarea ng-model="postText" class="addNewPost "
+                placeholder="Begin a new conversation here"></textarea><a ng-click="submit()" class="button postfix">Submit</a>
+      <div ng-class="{spinner:spinner}"></div>
         <br/>
         <div class=" socialButtons1">
             <div ng-click="menu.photo = true;menu.video = false;menu.event = false" class="buttons">Share a Photo</div>
@@ -96,17 +98,11 @@
             </div>
             <div ng-click="menu.event=false" class="button small">Finished</div>
         </div>
-        <div class="" ng-hide="menu.photo || menu.video || menu.event">
-            <div ng-class="{spinner:spinner}"></div>
-            <textarea ng-model="postText" class="addNewPost "
-                      placeholder="Begin a new conversation here"></textarea><a ng-click="submit()" class="small button postfix2 ">Submit</a>
-            <div ng-class="{spinner:spinner}"></div>
-        </div>
 
         <!--<div  class="  contentContainer my-repeat-animation" ng-repeat="post in posts" >-->
-      <div>
-        <div class=" contentContainer my-repeat-animation" ng-repeat="post in posts" >
-          <div class="">
+      <div class="stream">
+        <div class="contentContainer my-repeat-animation" ng-repeat="post in posts" >
+          <div>
                 <div class=" postcontainer">
                     <div ng-show="parentObject.admin">
                         <i class="fi-check" ng-show="post.inStream"></i>
@@ -150,11 +146,11 @@
                 <div ng-switch on="post.canComment">
                     <div ng-switch-when="true">
                         <div ng-repeat="comment in post.comments" class="row replycontainer my-repeat-animation">
-                                <div class="small-1  avatarcontainer">
+                                <div class=" avatarcontainer">
                                     <img src="http://www.gravatar.com/avatar/{{comment.gravatar}}"/>
                                 </div>
 
-                                <div class="">
+                                <div class="copy">
                                     <a href="#/profile/{{comment.username}}">
                                     <b>{{comment.username}}</b></a>
                                     <p>{{comment.text}}</p>
@@ -177,24 +173,9 @@
                         <div> Commenting turned off</div>
                     </div>
                     <div ng-class="{spinner:spinner}"></div>
-
                 </div>
-
             </div>
-
       </div>
     </div>
   </div>
-
-    <!--<div class="small-2 large-2 ">-->
-    <div class="  adSpace">
-        <br />
-        <a href="http://angelsofeureka.com" target="_blank"><img src="http://angelsofeureka.com/images/angelsOfeureka.jpg"></a>
-        <br /><br />
-        <a href="https://onsiteworkshops.com/" target="_blank"><img src="http://angelsofeureka.com/shop/media/wysiwyg/OriginalPossibilitiesLogowithOnsiteSmall.jpg"></a>
-        <br /><br />
-        <a href="http://www.shrinershospitalsforchildren.org/" target="_blank"> <img src="http://angelsofeureka.com/shop/media/wysiwyg/Screen_Shot_2013-06-02_at_10.47.31_AM.png"></a>
-        <br /><br />
-        <a href="http://www.phojoe.com/AOE.html" target="_blank"> <img src="/img/Phojoe_Banner.jpg"></a>
-    </div>
 </div>

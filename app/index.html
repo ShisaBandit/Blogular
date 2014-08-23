@@ -54,11 +54,21 @@
                 <li>
                     <a href="#/help-resources" class="helpResc">Help Resources</a>
                 </li>
-                <li if-authed="show">
-                    <a href="#" ng-click="logout()">logout</a>
+                <li>
+                    <a href="#" ng-click="logout()" if-authed="show">logout</a>
+                    <div id="login-inner" class="login" ng-controller="LoginController" if-authed="hide">
+                        <p>
+                            <b class="loginMsg">{{error}}</b>
+                            <b class="loginMsg">{{message}}</b>
+                            <input type="text" class="login-inp" ng-model="form.username" placeholder="User Name"/>
+                            <input type="password" class="login-inp" ng-model="form.password" placeholder="Password"/>
+                            <a class="button" ng-click="submitAuth()">Login</a>
+                            <a ng-click="forgot()" href="#/passwordrecovery">forgot password??</a>
+                        </p>
+                    </div
                 </li>
                 <li>
-                    <div id="events" ng-controller="EventListController">
+                    <div id="events" ng-controller="EventListController" if-authed="show">
                         <img src="/img/eventsIcon.png" title="What's Happening" alt="Upcoming Events" />
                         <div class="event-list">
                             <div  class="event-list-header">

@@ -19,9 +19,10 @@
  }
 
  body {
-    background: url('/img/background/baloons.png') no-repeat scroll center top / cover transparent;
     padding: 0;
     margin: 0;
+    font-family: sans-serif;
+    background: url('/img/background/baloons.png') no-repeat scroll center top / cover transparent;
     overflow-x: hidden;
 }
 
@@ -252,12 +253,12 @@ body .contain-to-grid {
     border: none;
 }
 
-.offsetHeight{
-    max-width: 980px;
+.generalPage{
+    /*max-width: 980px;
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 10px;
+    padding-top: 10px;*/
     background: #FFFADE;
     border-top-left-radius: 2em;
     border-top-right-radius: 2em;
@@ -266,31 +267,31 @@ body .contain-to-grid {
     box-shadow: 2px 2px 5px #A3A1A1;
 }
 
- .offsetHeight.petMem {
-     max-width: 980px;
+ .generalPage.petMem {
+     /*max-width: 980px;
      margin-top: 20px;
      margin-left: auto;
      margin-right: auto;
-     padding-top: 10px;
+     padding-top: 10px;*/
      background: none repeat scroll 0% 0% #F28678;
      border-top-left-radius: 2em;
      border-top-right-radius: 2em;
      box-shadow: 2px 2px 5px #A3A1A1;
  }
 
- .offsetHeight.privGroup {
-     max-width: 980px;
+ .generalPage.privGroup {
+     /*max-width: 980px;
      margin-top: 20px;
      margin-left: auto;
      margin-right: auto;
-     padding-top: 10px;
+     padding-top: 10px;*/
      background: none repeat scroll 0% 0% #90BFFA;
      border-top-left-radius: 2em;
      border-top-right-radius: 2em;
      box-shadow: 2px 2px 5px #A3A1A1;
  }
 
-.offsetHeight h1,h2,h3,h4 {
+.generalPage h1,h2,h3,h4 {
     color: #47569B;
     text-shadow: 2px 2px 5px rgb(71, 86, 155);
 }
@@ -330,6 +331,20 @@ h2.dark {
 .navstyles{
     background-color: dodgerblue;
 }
+
+ body .contain-to-grid-logged-in {
+     display: block;
+     box-shadow: 0px 2px 5px 2px #A3A1A1;
+     padding-top: 0px;
+     width: 100%;
+     border-bottom: 1px dotted #8A9948;
+     background: url('/img/background/headerFooterBG.png') repeat-x scroll center -140px #9EAFFF;
+     height: 60px;
+     text-align: center;
+     margin: 0px;
+ }
+
+
 
  body .contain-to-grid-logged-in .loginBlock {
      display: block;
@@ -703,8 +718,8 @@ body .primaryContent .shelf .mainBG .row .small-12 .section-container .active .c
     color: #ffffff;
 }
 .postcontainer{
-    margin-top: 0px;
-    padding-bottom: 10px;
+    margin: 0 0 -15px;
+    padding: 10px;
     background-color: #FFFADE;
 }
 
@@ -728,19 +743,27 @@ body .replycontainer div p {
      background: #f0f9ff url("/img/background/commentTopBg.png")no-repeat center top;
      padding: 5px;
      padding-top:15px;
-     margin: 10px;
+     margin: 0px;
      min-height: 80px;
      clear: both;
      border: #f0f9ff 1px dotted;
  }
 
 .avatarcontainer{
-    border-right: 1px solid #808080;
+    display: inline-block;
     overflow: hidden;
-    width: 11.333% !important;
+    width: 10% !important;
+    vertical-align: top;
+    border-right: 1px solid #808080;
 }
-.replycontainer.small-1{
-    width: 11.3333%;
+
+.avatarcontainer img {
+    max-width: 75%;
+}
+.replycontainer .copy {
+    width: 85%;
+    display: inline-block;
+    vertical-align: top;
 }
 .row .small-12 {
     position: relative;
@@ -919,6 +942,16 @@ datepickercss
     line-height: auto !important;
 }
 
+.postfix.button {
+    display: block;
+    width: 98%;
+    padding: 5px;
+    text-align: center;
+    line-height: 1.125rem;
+    border: 1px solid #71706B;
+    border-radius: 0;
+ }
+
  .button.small.noMrgn {
      margin-top:0px;
      margin-bottom: 0px;
@@ -1017,20 +1050,19 @@ body .button {
 .postComment input{
     height: 23px;
     padding: 2px;
-    width: 99%;
+    width: 97%;
     color: #132D48;
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1) inset;
     margin: 4px;
 }
 
-input.addNewPost {
-    height: 40px;
-    padding:10px;
-    width: 100%;
+input.addNewPost,
+textarea.addNewPost{
+    height: 20px;
+    padding: 4px;
+    width: 98%;
     color: #132D48;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px inset;
-    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px inset;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px inset;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1) inset;
 }
 
 .rghtDvd {
@@ -1221,9 +1253,9 @@ input.addNewPost {
 }
 
 .memNav {
-    width: 500px;
+    width: 100%;
     height: 30px;
-    padding-left: 20px;
+    padding-left: 0px;
     display: block;
 }
 
@@ -1436,7 +1468,23 @@ h6.groupTitle {
      font-weight: normal !important;
  }
 
-.pets {
+.feature {
+    display: block;
+    width: 760px;
+ }
+
+.featureContent {
+    display: inline-block;
+    width: 590px;
+    vertical-align: top;
+ }
+
+.stream {
+    display: block;
+    clear: both;
+}
+
+ .pets {
     background: #fff;
 }
 
@@ -1487,6 +1535,10 @@ h6.petsTitle {
      position: relative;
  }
 
+ #contentHeader.conversations {
+     margin-bottom: 0;
+ }
+
  .petitionFont {
      font-size: 3em;
      text-shadow: 0 1px 0 white;
@@ -1494,15 +1546,16 @@ h6.petsTitle {
 
  .buttons {
      display: block;
-     width: 33%;
+     width: 31.25%;
      height: 20px;
-     background: linear-gradient(to bottom, rgb(239, 242, 255) 0%, rgb(144, 191, 250) 0%, rgb(165, 180, 255) 44%, rgb(103, 118, 181) 86%) repeat scroll 0% 0% transparent;
-     color: rgb(255, 255, 255);
-     vertical-align: top;
+     background: -moz-linear-gradient(center top , #F2F2F2 0px, #F2F2F2 1px, #E4E4E4 1px, #CECECE 100%) repeat scroll 0% 0% transparent;
+     border-color: #999;
+     color: #8A9948 !important;
+     vertical-align: middle;
      margin: 0px;
      padding: 5px;
      font-size: small;
-     line-height: 6px;
+     line-height: 20px;
      text-align: center;
      border: 1px solid #71706b;
      float: left;
@@ -1514,8 +1567,12 @@ h6.petsTitle {
  }
 
 body nav.top-bar.top-bar-logged-in {
-    background: url("/img/background/headerFooterBG.png") repeat-x scroll -456px -521px rgb(158, 175, 255);
- }
+    background: url('/img/background/headerFooterBG.png') repeat-x scroll -456px -521px #9EAFFF;
+    position: relative;
+    width: 980px;
+    border-radius: 7px;
+    top: 3px;
+}
 
  body nav.top-bar.top-bar-logged-in section.top-bar-section ul.left li a, body nav.top-bar.top-bar-logged-in section.top-bar-section ul.left li a.small {
      color: #8a9948;
@@ -1553,7 +1610,7 @@ body nav.top-bar.top-bar-logged-in {
 
  #events {
      position:absolute;
-     top: -36px;
+     top: 0px;
      right: 180px;
      display: inline-block;
      width: 50px;
@@ -1699,9 +1756,28 @@ body nav.top-bar.top-bar-logged-in {
      list-style: none outside none;
      line-height: 50px;
      color: #FFF;
+     font-size: 12px;
      font-weight: bold;
      text-decoration: none;
      float: left;
+ }
+
+ .login {
+     position:relative;
+     margin: -10px 0px;
+ }
+
+ .login [ng-click="forgot()"] {
+     position: absolute;
+     top: 18px;
+     right: 113px;
+     font-weight: normal;
+     font-size: x-small;
+ }
+
+ .login .loginMsg {
+     position: absolute;
+     top: -18px;
  }
 
  .mainNav .helpResc {
@@ -1734,6 +1810,20 @@ body nav.top-bar.top-bar-logged-in {
      border: 2px solid #CCC;
  }
 
+ .angelPicWide {
+     display: inline-block;
+     width: 150px;
+     vertical-align: top;
+     overflow: hidden;
+ }
+
+ .angelPicWide img {
+     max-width: 150px;
+ }
+
+ .angelPicNarrow {
+     display: none;
+ }
 
  p.angelStoryFull {
      display: block;
@@ -1900,7 +1990,18 @@ body nav.top-bar.top-bar-logged-in {
      width: 200px;
      vertical-align: top;
  }
- 
+
+ .button {
+     padding: 7px;
+     background: #CECECE;
+     background: -moz-linear-gradient(top, #f2f2f2 0, #f2f2f2 1px, #e4e4e4 1px, #cecece 100%);
+     background: -o-linear-gradient(top, #f2f2f2 0, #f2f2f2 1px, #e4e4e4 1px, #cecece 100%);
+     background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f2f2f2), color-stop(5%, #f2f2f2), color-stop(5%, #e4e4e4), color-stop(100%, #cecece));
+     background: linear-gradient(top, #f2f2f2 0%,#f2f2f2 1px,#e4e4e4 1px,#cecece 100%);
+     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E4E4E4', endColorstr='#CECECE',GradientType=0 );
+     border-color: #999;
+     color: #8A9948 !important;
+ }
  .hide {
      display: none;
  }
