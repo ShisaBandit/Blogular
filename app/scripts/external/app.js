@@ -37,6 +37,7 @@ var app = angular.module('YoMemorialApp', [
             when("/deletewall/:wall", {templateUrl: "partials/deletewall.html"}).
             when("/rules", {templateUrl: "partials/rules.html"}).
             when("/help-resources", {templateUrl: "partials/help-resources.html"}).
+            when("/help-resource", {templateUrl: "partials/help-resource.html"}).
             when("/contact", {templateUrl: "partials/contact.html"}).
             when("/advertise", {templateUrl: "partials/advertise.html"}).
             when("/addworkshop", {templateUrl: "partials/addWorkshop.html"}).

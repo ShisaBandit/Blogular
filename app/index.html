@@ -283,7 +283,18 @@
         Shadowbox.init({
             skipSetup: false
         });
-    })
+        $('ul.tabs li').click(function(){
+
+            console.log("Clicked on li item")
+            var tab_id = $(this).attr('data-tab');
+
+            $('ul.tabs li').removeClass('current');
+            $('.tab-content').removeClass('current');
+
+            $(this).addClass('current');
+            $("#"+tab_id).addClass('current');
+        });
+    });
 </script>
 </body>
 </html>

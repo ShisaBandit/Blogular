@@ -460,16 +460,16 @@ body .contain-to-grid-logged-in #username2 {
 }
 
 .top-bar-logged-in .logo {
-    position:relative;
-    top:0px;
-    left: 20px;
+    position: relative;
+    top: 0px;
+    left: 10px;
     display: block;
-    width: 100px;
+    width: 50px;
     height: 45px;
-    margin: 0px;
+    margin: 0px 20px 0 0;
     padding-top: 0px;
     text-indent: -9000px;
-    background: url("/img/miniLogo.png") left top no-repeat;
+    background: url('/img/miniLogo.png') no-repeat scroll left 4px transparent;
     z-index: 20;
 }
 
@@ -1762,6 +1762,10 @@ body nav.top-bar.top-bar-logged-in {
      float: left;
  }
 
+.mainNav li [ng-click="logout()"] {
+     text-shadow: 0px 1px 1px #8A9948;
+ }
+
  .login {
      position:relative;
      margin: -10px 0px;
@@ -1929,6 +1933,12 @@ body nav.top-bar.top-bar-logged-in {
      -moz-border-radius: 0 0 5px 0;
      border-radius: 0 0 5px 0;
  }
+
+ #slideout_inner h4 {
+     margin: 0;
+     padding: 0;
+ }
+
  #slideout_inner textarea {
      width: 190px;
      height: 100px;
@@ -2002,6 +2012,43 @@ body nav.top-bar.top-bar-logged-in {
      border-color: #999;
      color: #8A9948 !important;
  }
+
+ /*content tabs*/
+ .container{
+     width: 800px;
+     margin: 0 auto;
+ }
+
+
+
+ ul.tabs{
+     margin: 0px;
+     padding: 0px;
+     list-style: none;
+ }
+ ul.tabs li{
+     background: none;
+     color: #222;
+     display: inline-block;
+     padding: 10px 15px;
+     cursor: pointer;
+ }
+
+ ul.tabs li.current{
+     background: #ededed;
+     color: #222;
+ }
+
+ .tab-content{
+     display: none;
+     background: #ededed;
+     padding: 15px;
+ }
+
+ .tab-content.current{
+     display: inherit;
+ }
+
  .hide {
      display: none;
  }
