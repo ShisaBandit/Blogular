@@ -2,22 +2,22 @@
     <div id="contentHeader" class="">
         <h2 class="contentHeaderTitle">Help Resources</h2>
     </div>
-    <div class="container">
-        <ul class="tabs">
-            <li class="tab-link current" data-tab="tab-1">Alcohol/Substance Abuse</li>
-            <li class="tab-link" data-tab="tab-2">Anti-bullying Resources</li>
-            <li class="tab-link" data-tab="tab-3">Anxiety Disorder</li>
-            <li class="tab-link" data-tab="tab-4">Domestic Violence</li>
-            <li class="tab-link" data-tab="tab-5">Eating Disorder</li>
-            <li class="tab-link" data-tab="tab-6">General & Mental Health</li>
-            <li class="tab-link" data-tab="tab-7">Internet Safety</li>
-            <li class="tab-link" data-tab="tab-8">Parental Resources</li>
-            <li class="tab-link" data-tab="tab-9">Suicide Prevention</li>
-            <li class="tab-link" data-tab="tab-10">Teenager Resources</li>
-            <li class="tab-link" data-tab="tab-11">Women's Health</li>
-            <li class="tab-link" data-tab="tab-12">Misc. Resources</li>
+    <section class="tab" ng-controller="TabController as panel">
+        <ul>
+            <li ng-class="{active:panel.isSelected(1) }"><a href ng-click="panel.selectTab(1)">Alcohol/Substance Abuse</a></li>
+            <li ng-class="{active:panel.isSelected(2) }"><a href ng-click="panel.selectTab(2)">Anti-bullying Resources</a></li>
+            <li ng-class="{active:panel.isSelected(3) }"><a href ng-click="panel.selectTab(3)">Anxiety Disorder</a></li>
+            <li ng-class="{active:panel.isSelected(4) }"><a href ng-click="panel.selectTab(4)">Domestic Violence</a></li>
+            <li ng-class="{active:panel.isSelected(5) }"><a href ng-click="panel.selectTab(5)">Eating Disorder</a></li>
+            <li ng-class="{active:panel.isSelected(6) }"><a href ng-click="panel.selectTab(6)">General & Mental Health</a></li>
+            <li ng-class="{active:panel.isSelected(7) }"><a href ng-click="panel.selectTab(7)">Internet Safety</a></li>
+            <li ng-class="{active:panel.isSelected(8) }"><a href ng-click="panel.selectTab(8)">Parental Resources</a></li>
+            <li ng-class="{active:panel.isSelected(9) }"><a href ng-click="panel.selectTab(9)">Suicide Prevention</a></li>
+            <li ng-class="{active:panel.isSelected(10) }"><a href ng-click="panel.selectTab(10)">Teenager Resources</a></li>
+            <li ng-class="{active:panel.isSelected(11) }"><a href ng-click="panel.selectTab(11)">Women's Health</a></li>
+            <li ng-class="{active:panel.isSelected(12) }">><a href ng-click="panel.selectTab(12)">Misc. Resources</a></li>
         </ul>
-        <div id="tab-1" class="tab-content current">
+        <div ng-show="panel.isSelected(1)">
                 <div class="content">
                     <b>Alcohol/Substance Abuse</b>
                     <p>
@@ -73,9 +73,9 @@
 
                         </li>
                         <li>
-                            <a href="http://" target="_blank">Creative Care Malibu</a>
+                            <a href="http://www.creativecareinc.com/" target="_blank">Creative Care Malibu</a>
                             (800) 832-3280
-                            www.creativecareinc.com/
+
                         </li>
                         <li>
                             <a href="http://www.newmethodwellness.com" target="_blank">New Method Wellness</a>
@@ -293,7 +293,7 @@
                     </p>
                 </div>
         </div>
-        <div id="tab-2" class="tab-content">
+        <div ng-show="panel.isSelected(2)">
                 <div class="content automargins">
                     <b>Anti-bullying Resources</b>
                     <p>
@@ -315,7 +315,7 @@
                     </p>
                 </div>
         </div>
-        <div id="tab-3" class="tab-content">
+        <div ng-show="panel.isSelected(3)">
                 <div class="content automargins">
                     <b>Anxiety Disorder</b>
                     <p>
@@ -340,7 +340,7 @@
                     </p>
                 </div>
         </div>
-        <div id="tab-4" class="tab-content">
+        <div ng-show="panel.isSelected(4)">
                 <div class="content automargins">
                     <b>Domestic Violence</b>
                     <p>
@@ -384,7 +384,7 @@
                     </p>
                 </div>
         </div>
-        <div id="tab-5" class="tab-content">
+        <div ng-show="panel.isSelected(5)">
                 <div class="content automargins">
                     <b>Eating Disorder</b>
                     <p>
@@ -419,7 +419,7 @@
                     </p>
                 </div>
         </div>
-        <div id="tab-6" class="tab-content">
+        <div ng-show="panel.isSelected(6)">
                 <div class="content automargins">
                     <b>General & Mental Health</b>
                     <p>
@@ -497,7 +497,7 @@
                     </p>
                 </div>
         </div>
-        <div id="tab-7" class="tab-content">
+        <div ng-show="panel.isSelected(7)">
                 <div class="content automargins">
                     <b>Internet Safety</b>
                     <p>
@@ -524,7 +524,7 @@
                     </p>
                 </div>
         </div>
-        <div id="tab-8" class="tab-content">
+        <div ng-show="panel.isSelected(8)">
                 <div class="content automargins">
                     <b>Parenting Resources</b>
                     <p>
@@ -610,7 +610,7 @@
                     </p>
                 </div>
         </div>
-        <div id="tab-9" class="tab-content">
+        <div ng-show="panel.isSelected(9)">
                 <div class="content automargins">
                     <b>Suicide Prevention</b>
                     <p>
@@ -627,7 +627,7 @@
                     </p>
                 </div>
         </div>
-        <div id="tab-10" class="tab-content">
+        <div ng-show="panel.isSelected(10)">
                 <div class="content automargins">
                     <b>Teen Resources</b>
                     <p>
@@ -657,7 +657,7 @@
                     </p>
                 </div>
         </div>
-        <div id="tab-11" class="tab-content">
+        <div ng-show="panel.isSelected(11)">
                 <div class="content automargins">
                     <b>Women's Health</b>
                     <p>
@@ -677,7 +677,7 @@
                     </p>
                 </div>
         </div>
-        <div id="tab-12" class="tab-content">
+        <div ng-show="panel.isSelected(12)">
                 <div class="content automargins">
                     <b>Misc Resources</b>
                     <p>
@@ -780,6 +780,6 @@
                     </p>
                 </div>
         </div>
-    </div>
+    </section>
     <p><i>If you believe you need immediate assistance, please call your local emergency number or the mental health crisis hotline listed in your local phone book's government pages. Because AngelsofEureka.com does not operate, supervise or exercise any control over any of the therapists, resources or referral sources listed, it makes no representations or warranty whatsoever, either expressed or implied, regarding any information or advice provided by these referral services. In no event shall it, Angels of Eureka be liable to you or anyone else for any decision made or action taken in reliance on information provided by these therapists, resources or referral services.</i></p>
 </div>

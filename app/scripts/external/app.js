@@ -543,7 +543,17 @@ app.controller('blogViewCtrl', function ($scope, show, categoryService, BlogsSer
     $scope.categories = BlogsService.getCategories();
     $scope.show = show;
 
+});
 
+app.controller('TabController', function (){
+    this.tab = 1;
+
+    this.selectTab = function (setTab){
+        this.tab = setTab;
+    };
+    this.isSelected = function(checkTab) {
+        return this.tab === checkTab;
+    };
 });
 
 app.controller('blogEntryPicCtrl', function ($scope) {

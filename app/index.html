@@ -242,8 +242,8 @@
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
-<!--<script src="scripts/foundation/foundation.min.js"></script>-->
-<script src="bower_components/foundation/js/foundation.min.js"></script>
+<!--<script src="scripts/foundation/foundation.min.js"></script>
+<script src="bower_components/foundation/js/foundation.min.js"></script>-->
 <script type="text/javascript" src="scripts/external/app.js"></script>
 <script type="text/javascript" src="scripts/external/ui-bootstrap-tpls-0.7.0.min.js"></script>
 <script type="text/javascript" src="scripts/external/socketmodule.js"></script>
@@ -282,17 +282,6 @@
         $(document).foundation();
         Shadowbox.init({
             skipSetup: false
-        });
-        $('ul.tabs li').click(function(){
-
-            console.log("Clicked on li item")
-            var tab_id = $(this).attr('data-tab');
-
-            $('ul.tabs li').removeClass('current');
-            $('.tab-content').removeClass('current');
-
-            $(this).addClass('current');
-            $("#"+tab_id).addClass('current');
         });
     });
 </script>
