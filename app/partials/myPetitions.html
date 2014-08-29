@@ -1,0 +1,18 @@
+<div class="generalPage">
+    <div id="contentHeader" class="">
+        <h2 class="contentHeaderTitle">About Angels of Eureka's The Circle of Life</h2>
+    </div>
+    <div class="contentHeader" class="">
+        <h2 class="contentHeaderTitle">My Petitions</h2>
+    </div>
+    <p>
+        Here are all of the petitions that you have started.
+    </p>
+    <ul>
+        <li ng-repeat="petition in petitions">
+            {{petition.title}}- <a href="#/editpetition/{{petition._id}}" class="small button">Edit</a> - <a
+                ng-click="deletePetition(petition._id)" class="small button">Delete</a>
+        </li>
+    </ul>
+</div>
+<div class="adContainer">Ads go here</div>

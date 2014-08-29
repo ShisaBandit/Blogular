@@ -1,0 +1,23 @@
+<div class="generalPage">
+    <div id="contentHeader" class="">
+        <h2 class="contentHeaderTitle">About Angels of Eureka's The Circle of Life</h2>
+    </div>
+    <div class="">
+        <div class="contentHeader" class="">
+            <h2 class="contentHeaderTitle">Memorial Walls of My Friends and Acquaintances </h2>
+        </div>
+    </div>
+    <!--
+    <ul class="profile">
+        <li ng-repeat="angelmember in angelmembers">Angel's Name : (Angel's full name)  - <a href="#/angel/{{ angelmember.author }}">View this memorial wall</a> - <a href="#/selfremove/{{ angelmember.author }}">Remove yourself from this memorial wall network</a></li>
+    </ul>
+    -->
+    <!-- This next UL is for demonstration purposes only. Delete after demo to client -->
+    <ul class="profile" ng-repeat="wall in walls">
+        <li>Angel's Name : {{wall.firstName}} {{wall.lastName}} - <a href="#/angel/{{wall.author}}">View this
+            memorial wall</a> - <a ng-click="removeself(wall.id)">Remove yourself from this memorial wall
+            network</a></li>
+    </ul>
+    <!-- Delete above UL after demo -->
+</div>
+<div class="adContainer">Ads go here</div>

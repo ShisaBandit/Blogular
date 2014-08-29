@@ -1,0 +1,31 @@
+<div class="generalPage">
+    <div id="contentHeader" class="">
+        <h2 class="contentHeaderTitle">About Angels of Eureka's The Circle of Life</h2>
+    </div>
+    <div class="contentHeader" class="">
+        <h2 class="contentHeaderTitle">My Group's</h2>
+    </div>
+    <p>Welcome to the My Groups dashboard. From here you can create, manage and view groups that you own, or view
+        groups that you have joined, or been invited to.</p>
+    <a href="#/StartGroup" class="small button">Create a new group here!</a><br/><br/>
+
+    <div class="small-6  rghtDvd">
+        <b>Groups I Own</b>
+        <br/> <br/>
+        <section ng-repeat="group in groups">
+            <b>Group Name: {{group.title}}</b>
+            <br/>
+            Group Moderator: {{group.author}}
+            <br/>
+            <ul>
+                <li><a href="#/group/{{group.author}}">View this memorial group</a></li>
+                <li><a href="#/editwall/{{ group.author }}">Edit this memorial group</a></li>
+                <li><a href="#/findenewmembers/{{ group.author }}">Find and invite new members to this wall</a></li>
+                <li><a href="#/inviteblock/{{ group.author }}">invite or block other registered members</a></li>
+
+            </ul>
+            <a href="#/deletewall/{{ group.author }}" class="small button">Delete this group</a>
+        </section>
+    </div>
+</div>
+<div class="adContainer">Ads go here</div>

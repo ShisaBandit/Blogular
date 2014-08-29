@@ -254,17 +254,17 @@ body .contain-to-grid {
 }
 
 .generalPage{
-    /*max-width: 980px;
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 10px;*/
-    background: #FFFADE;
+    display: inline-block;
+    width: 760px;
+    margin: 10px 0px;
+    vertical-align: top;
     border-top-left-radius: 2em;
     border-top-right-radius: 2em;
     -webkit-box-shadow: 2px 2px 5px #A3A1A1;
     -moz-box-shadow: 2px 2px 5px #A3A1A1;
     box-shadow: 2px 2px 5px #A3A1A1;
+    background: none repeat scroll 0% 0% #FFFADE;
+    overflow-x: hidden;
 }
 
  .generalPage.petMem {
@@ -293,7 +293,11 @@ body .contain-to-grid {
 
 .generalPage h1,h2,h3,h4 {
     color: #47569B;
-    text-shadow: 2px 2px 5px rgb(71, 86, 155);
+}
+
+.generalPage p,
+.generalPage div {
+    padding: 10px;
 }
 
 h2.dark {
@@ -535,7 +539,8 @@ body .contain-to-grid-logged-in #username2 {
     background: url("/img/background/headerFooterBG.png") repeat-x scroll center -480px rgb(158, 175, 255);
     border-bottom: 1px solid #000000;
     box-shadow: 2px 2px 5px rgb(19, 45, 72);
-    height: 121px;
+    height: auto;
+    max-height: 121px;
 }
 
 .border-footer p {
@@ -572,10 +577,18 @@ body .contain-to-grid-logged-in #username2 {
 
 h1 {
     font-size: x-large;
+    //text-shadow: 2px 2px 5px rgb(71, 86, 155);
+
 }
 
 h2 {
     font-size: large;
+    //text-shadow: 2px 2px 5px rgb(71, 86, 155);
+
+}
+
+h3 {
+    font-size: medium;
 }
 
 .memProfilePreview {
@@ -683,12 +696,13 @@ h1.sectionHeader {
 #contentHeader{
     display: block;
     width: 100%;
+    margin-bottom: 20px;
+    padding: 4px;
+    height: 26px;
     clear: both;
     background: url('/img/headerCircleBG.png') repeat-x scroll left top transparent;
-    margin-bottom: 20px;
-    height: 26px;
-    line-height: 7px;
 }
+
 .contentHeader{
     display:block;
     width: 100%;
@@ -935,11 +949,10 @@ datepickercss
 }
 
 .button.small {
-    padding: 2px;
+    padding: 5px;
     margin: 10px 0px;
     font-size: 0.8em;
-    height: auto !important;
-    line-height: auto !important;
+    border: 1px solid #71706b;
 }
 
 .postfix.button {
@@ -1118,7 +1131,8 @@ textarea.addNewPost{
 
 #contentHeader .contentHeaderTitle {
     color: #FFF;
-    line-height: 17px;
+    line-height: 6px;
+    margin-left: 4px;
 }
 
 /*----------------------ANIMATIONS---------------------*/
@@ -1469,8 +1483,9 @@ h6.groupTitle {
  }
 
 .feature {
-    display: block;
+    display: inline-block;
     width: 760px;
+    vertical-align: top;
  }
 
 .featureContent {
@@ -2047,6 +2062,68 @@ body nav.top-bar.top-bar-logged-in {
 
  .tab-content.current{
      display: inherit;
+ }
+
+ .tabNavGen {
+     padding: 0px;
+     margin: 0px auto 20px;
+     width: 100%;
+     text-align: center;
+     background: none repeat scroll 0% 0% #C9C3A9;
+     box-shadow: 1px 2px 5px #71706B;
+ }
+
+ .tabNavGen li {
+     display: inline-block;
+     padding: 6px;
+     color: #8A9948 !important;
+     background: -moz-linear-gradient(center top , #F2F2F2 0px, #F2F2F2 1px, #E4E4E4 1px, #CECECE 100%) repeat scroll 0% 0% transparent;
+     line-height: 1.125rem;
+     border: 1px solid #71706B;
+     width: 30.5%;
+     height: 15px;
+     text-align: center;
+     margin: 0 0 3px;
+     vertical-align: top;
+ }
+
+ #dashBoard section {
+     background: -moz-linear-gradient(center top , #F2F2F2 0px, #F2F2F2 1px, #E4E4E4 1px, #CECECE 100%) repeat scroll 0% 0% transparent;
+     min-height: 150px;
+     display: block;
+     margin: 0;
+     padding: 10px;
+     line-height: 1.125rem;
+     border: 1px solid #71706B;
+ }
+
+ #dashBoard .dash-notification {
+     min-height: 65px;
+ }
+
+ #dashBoard h2 {
+     display: block;
+ }
+
+ #dashBoard img {
+     display: inline-block;
+     border-radius: 7px;
+ }
+
+ #dashBoard ul {
+     display: inline-block;
+ }
+
+ #dashBoard div {
+     display: inline-block;
+     border-radius: 7px;
+     background: none repeat scroll 0% 0% #F8F8FF;
+     padding: 10px;
+     height: 80px;
+     width: 21%;
+     box-shadow: 0px 2px 5px 2px #A3A1A1;
+     margin: 0px 7px;
+     text-align: center;
  }
 
  .hide {

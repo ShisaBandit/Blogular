@@ -1,0 +1,95 @@
+<div class="generalPage">
+    <div id="contentHeader" class="">
+        <h2 class="contentHeaderTitle">About Angels of Eureka's The Circle of Life</h2>
+    </div>
+    <div class="contentHeader" class="">
+        <h2 class="contentHeaderTitle">Message Center</h2>
+    </div>
+    <p>Welcome to the Message Center. From here you can create, manage and view messages from your network members, administrators and other registered users..</p>
+    <div ng-controller="messageController">
+        <accordion class="small-block-grid-1 medium-block-grid-3">
+            <accordion-group heading="Send a new message to someone" class="small button sendMsg">
+                <p><b>{{error}}</b></p>
+                <p><b>{{message}}</b></p>
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th>Send Message to: </th>
+                        <td>
+                            {{sendTo}}
+                            <input ng-hide="pre" type="text" ng-model="form.selected" typeahead="user for user in getPossibles($viewValue) | filter:$viewValue | limitTo:8">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea class="login-inp ng-pristine ng-valid" ng-model="form.message" placeholder="Enter your message here"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><a class="button small" ng-click="sendMessage()">Send Message</a></td>
+                        <td><a class="button small">Cancel</a></td>
+                    </tr>
+                </table>
+            </accordion-group>
+        </accordion>
+
+    </div>
+
+    <div class="small-4  rghtDvd">
+        <b>Conversation With:</b>
+        <br /><br />
+        <section>
+            <div class="row my-repeat-animation panel"  ng-repeat="messagedUser in messagedUsers">
+                <a href="" ng-click="getMessages(messagedUser)">
+                    <span class="">{{messagedUser.user}} <!--<a class="button buttonSmall" title="Archive This Conversation"><img src="img/trash.png"></a>--></span>
+                </a>
+            </div>
+        </section>
+    </div>
+    <div class="small-8  rghtDvd">
+        <b>Conversation History</b>
+        <br /> <br />
+        <section>
+            <div class="">
+                <!--
+                <span class=""><b>Date:</b></span>
+                -->
+            </div>
+            <div ng-controller="directMessageController" ng-show="userSelected">
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th>Continue Conversation with  {{sendToPerson.user}} below</th>
+                        <td>
+                            {{sendTo}}
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea class="login-inp ng-pristine ng-valid" ng-model="form.message" placeholder="Enter your message here"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+
+                    </tr>
+                    <tr>
+                        <td><a class="button small" ng-click="sendMessage()">Send Message</a></td>
+                        <td><a class="button small">Cancel</a></td>
+                    </tr>
+                </table>
+            </div>
+            <br />
+            <div class="row my-repeat-animation" ng-repeat="message in messages" >
+                <div class="small-30  conv"
+                     style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>{{message.from}}</b>
+                    <i
+                            style="font: x-small serif; color: steelblue;float: right">{{message.date}}</i>
+                    <br/>
+                    <div class=" " ng-bind-html="message.message"></div>
+                    <br/>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</div>
+<div class="adContainer">Ads go here</div>

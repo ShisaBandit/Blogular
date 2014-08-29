@@ -3,7 +3,7 @@
         <h2 class="contentHeaderTitle">Help Resources</h2>
     </div>
     <section class="tab" ng-controller="TabController as panel">
-        <ul>
+        <ul class="tabNavGen">
             <li ng-class="{active:panel.isSelected(1) }"><a href ng-click="panel.selectTab(1)">Alcohol/Substance Abuse</a></li>
             <li ng-class="{active:panel.isSelected(2) }"><a href ng-click="panel.selectTab(2)">Anti-bullying Resources</a></li>
             <li ng-class="{active:panel.isSelected(3) }"><a href ng-click="panel.selectTab(3)">Anxiety Disorder</a></li>
@@ -15,7 +15,7 @@
             <li ng-class="{active:panel.isSelected(9) }"><a href ng-click="panel.selectTab(9)">Suicide Prevention</a></li>
             <li ng-class="{active:panel.isSelected(10) }"><a href ng-click="panel.selectTab(10)">Teenager Resources</a></li>
             <li ng-class="{active:panel.isSelected(11) }"><a href ng-click="panel.selectTab(11)">Women's Health</a></li>
-            <li ng-class="{active:panel.isSelected(12) }">><a href ng-click="panel.selectTab(12)">Misc. Resources</a></li>
+            <li ng-class="{active:panel.isSelected(12) }"><a href ng-click="panel.selectTab(12)">Misc. Resources</a></li>
         </ul>
         <div ng-show="panel.isSelected(1)">
                 <div class="content">
@@ -783,3 +783,4 @@
     </section>
     <p><i>If you believe you need immediate assistance, please call your local emergency number or the mental health crisis hotline listed in your local phone book's government pages. Because AngelsofEureka.com does not operate, supervise or exercise any control over any of the therapists, resources or referral sources listed, it makes no representations or warranty whatsoever, either expressed or implied, regarding any information or advice provided by these referral services. In no event shall it, Angels of Eureka be liable to you or anyone else for any decision made or action taken in reliance on information provided by these therapists, resources or referral services.</i></p>
 </div>
+<div class="adContainer">Ads go here</div>

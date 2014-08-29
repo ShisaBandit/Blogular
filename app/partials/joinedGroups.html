@@ -1,0 +1,27 @@
+<div class="contentHeader" class="">
+    <h2 class="contentHeaderTitle">My Group's</h2>
+</div>
+<p>Welcome to the My Groups dashboard. From here you can create, manage and view groups that you own, or view
+    groups that you have joined, or been invited to.</p>
+<a href="#/StartGroup" class="small button">Create a new group here!</a><br/><br/>
+<div class="small-6 ">
+    <b>Groups I Joined / Group Invites</b>
+    <br/> <br/>
+    <section ng-repeat="group in invitedGroups">
+        <b>Group Name: {{group.name}}</b>
+        <br/>
+        Group Owner: {{group.owner}}
+        <!-- Group Moderator(s): Mary Olsen, Me-->
+        <br/>
+        <ul>
+            <li><a href="#/group/{{group.author}}">View this group's page</a></li>
+            <li><a href="#/group/{{group.author}}">Edit Group Details</a></li>
+            <li><a href="#/group/{{group.author}}">View Group Members</a></li>
+            <!--  <li><a href="#/group/{{group.author}}" >Suggest new members</a></li>
+              <li><a href="#/group/{{group.author}}" >Restrict member</a></li>
+                <li><a href="#/group/{{group.author}}" >Report group member for misconduct</a></li>
+                -->
+        </ul>
+        <a ng-click="removeselfgroup(group.id)" class="small button">Leave this group</a>
+    </section>
+</div>

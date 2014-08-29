@@ -1,0 +1,28 @@
+<div class="generalPage">
+    <div id="contentHeader" class="">
+        <h2 class="contentHeaderTitle">About Angels of Eureka's The Circle of Life</h2>
+    </div>
+    <div class="">
+        <div class="contentHeader" class="">
+            <h2 class="contentHeaderTitle">My Memorial Walls</h2>
+        </div>
+    </div>
+    <a href="#/AddBlogEntry" class="small button"><b>Create a new memorial wall profile here!</b></a> <br/><br/>
+    <ul class="profile">
+        <h3>Here is a list of your memorial walls</h3>
+        <li ng-repeat="angel in angels" class="myMemWallsList">Angel's Name : {{ angel.firstName }} {{ angel.lastName }} - {{ angel.title }}
+            <br/>
+            <img id="portrait" src="/uploads/{{ angel.profilePicPortrait }}"> - <a href="#/angel/{{angel.author}}">View this memorial wall</a>
+            <br/>
+            - <a href="#/findenewmembers/{{ angel.author }}">Find and invite new members to this wall</a>
+            <br/>
+            - <a href="#/inviteblock/{{ angel.author }}">Remove members from this wall</a>
+            <br/>
+            - <a href="#/editwall/{{ angel.author }}">Edit this memorial wall</a>
+            <br/>
+            - <a href="#/deletewall/{{ angel.author }}">Delete this memorial wall</a>
+            <br/><br/>
+        </li>
+    </ul>
+</div>
+<div class="adContainer">Ads go here</div>

@@ -36,8 +36,7 @@ var app = angular.module('YoMemorialApp', [
             when("/findenewmembers/:wall",{templateUrl: "partials/findnewmembers.html"}).
             when("/deletewall/:wall", {templateUrl: "partials/deletewall.html"}).
             when("/rules", {templateUrl: "partials/rules.html"}).
-            when("/help-resources", {templateUrl: "partials/help-resources.html"}).
-            when("/help-resource", {templateUrl: "partials/help-resource.html"}).
+            when("/help-resources", {templateUrl: "partials/help-resource.html"}).
             when("/contact", {templateUrl: "partials/contact.html"}).
             when("/advertise", {templateUrl: "partials/advertise.html"}).
             when("/addworkshop", {templateUrl: "partials/addWorkshop.html"}).
@@ -55,6 +54,13 @@ var app = angular.module('YoMemorialApp', [
             when("/gifts/:user/:wall", {templateUrl: "partials/giftShop.html"}).
             when("/1/:wall",{templateUrl:"partials/sendoffsiteinvite.html"}).
             when("/myMemorials",{templateUrl:"partials/myMemorials.html"}).
+            when("/guide",{templateUrl:"partials/guide.html"}).
+            when("/account",{templateUrl:"partials/basicProfile.html"}).
+            when("/myGroups",{templateUrl:"partials/myGroups.html"}).
+            when("/joinedGroups",{templateUrl:"partials/joinedGroups.html"}).
+            when("/joinedMemorials",{templateUrl:"partials/friendMemWall.html"}).
+            when("/myPetitions",{templateUrl:"partials/myPetitions.html"}).
+            when("/messageCenter",{templateUrl:"partials/messages.html"}).
             //when("publicprofile/:username",{templateUrl:"partials/publicProfile.html"}).
             otherwise("/oops",{templateUrl:"404.html"});
 
