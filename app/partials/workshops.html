@@ -1,37 +1,40 @@
 <div ng-controller="WorkshopCtrl" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-    <div class="row ">
-        <h1 class="sectionHeader">Workshops</h1>
-    </div>
-    <div class="">
-        <div class=" workshops">
-            <h2 class="dark">Scheduled Workshops</h2>
-            <p>
-                We will occasionally sponsor workshops throughout the year. From holistic healing to counseling, there will be a workshop that is a fit for you!
-                You can submit a request using the form on this page to have your workshop listed here on our site. We will accept workshops that are hosted via
-                either <a href="http://www.google.com/+/learnmore/hangouts/" target="_blank">Google Hangouts</a> or <a href="https://www.freeconference.com/Home.aspx" target="_blank">FreeConference</a>.
-            </p>
-            <tabset>
-                <tab heading="View All Scheduled Workshops"><section>
-                    <div class="">
-                        <div class=" " role="content">
+    <div class="generalPage">
+        <div id="contentHeader">
+            <h1 class="contentHeaderTitle">Workshops</h1>
+        </div>
+        <section class="tab" ng-controller="TabController as panel">
+            <ul class="tabNavGen">
+                <li ng-class="{active:panel.isSelected(1) }"><a href ng-click="panel.selectTab(1)">Scheduled Workshops</a></li>
+                <li ng-class="{active:panel.isSelected(2) }"><a href ng-click="panel.selectTab(2)">Submit New Workshop</a></li>
+            </ul>
+            <div ng-show="panel.isSelected(1)">
+                <div class="content">
+                    <div class="workshops">
+                        <h2 class="dark">Scheduled Workshops</h2>
+                        <p>
+                            We will occasionally sponsor workshops throughout the year. From holistic healing to counseling, there will be a workshop that is a fit for you!
+                            You can submit a request using the form on this page to have your workshop listed here on our site. We will accept workshops that are hosted via
+                            either <a href="http://www.google.com/+/learnmore/hangouts/" target="_blank">Google Hangouts</a> or <a href="https://www.freeconference.com/Home.aspx" target="_blank">FreeConference</a>.
+                        </p>
+                        <div role="content">
                             <div ng-repeat="workshop in workshops">
                                 <p style="color: #2164AA;">{{ workshop._id }}</p>
                             </div>
                             <p style="color: #2164AA;" ng-show="workshops == ''">There are no workshops scheduled at this time</p>
                         </div>
                     </div>
-
-                </section></tab>
-
-                <tab  heading="Submit Your Workshop"><section>
-                    <div class="" >
-                        <h2>Submit the details for your workshop</h2>
+                </div>
+            </div>
+            <div ng-show="panel.isSelected(2)">
+                <div class="content">
+                    <div class="workshops">
+                        <h2 class="dark">Submit the details for your workshop</h2>
                         <p>
                             Please submit the details of the workshop that you would like to have listed on our Workshops page using the form below.
                             We will review it and get back to you to confirm a few details. As long as the contents of the workshop adhere to our site guidelines
                             and the spirit of The Circle of Life/Angels of Eureka, we would be more than happy to include it in our list of scheduled workshops.
                         </p>
-
                         <form name="workshopform">
                             <div class="">
                                 <div class="">
@@ -201,9 +204,7 @@
                                             One of us can click the state we want to set, save and the workshops that are published can be set to be visible
                                             on the default workshops page.
                                             What do you think? Simple, and would get the basic admin stuff for this and perhaps petitions done.
-
-
-                                        -->
+                                            -->
                                     </label>
                                 </div>
                             </div>
@@ -211,11 +212,10 @@
                             <div ng-show="sent" class="small button" ng-click="reset()">Clear Form</div>
                             {{message}}
                         </form>
-
-                       <p>support@angelsofeureka.com</p>
+                        <p>support@angelsofeureka.com</p>
                     </div>
-                </section></tab>
-            </tabset>
-        </div>
+                </div>
+            </div>
+        </section>
     </div>
 </div>

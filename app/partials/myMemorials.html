@@ -1,40 +1,27 @@
 <div ng-controller="UserProfileCtrl">
-<div class="row ">
-<div class="">
         <section>
             <div class="automargins content " data-section-content>
-                <div class="">
-                    <div class="">
-                        <div class="contentHeader" class="">
-                            <h2 class="contentHeaderTitle">My Memorial Walls</h2>
-                        </div>
+                <div class="generalPage">
+                    <div id="contentHeader">
+                        <h2 class="contentHeaderTitle">My Memorial Walls</h2>
                     </div>
-                    <a href="#/AddBlogEntry" class="button"><b>Create a new memorial wall profile here!</b></a> <br/><br/>
+                    <a href="#/AddBlogEntry" class="button createNew" title="Create a new memorial wall profile here!">+</a>
                     <ul class="profile">
                         <h3>Here is a list of your memorial walls</h3>
-                        <li ng-repeat="angel in angels" class="myMemWallsList">Angel's Name : {{ angel.firstName }} {{ angel.lastName }} - {{ angel.title }}
+                        <li ng-repeat="angel in angels" class="myMemWallsList">
+                            <h5><a href="#/angel/{{angel.author}}">{{ angel.firstName }} {{ angel.lastName }} - {{ angel.title }}</a></h5>
+                            <a href="#/angel/{{angel.author}}"><img id="portrait" src="/uploads/{{ angel.profilePicPortrait }}"></a>
+                            <a href="#/angel/{{angel.author}}" class="buttons wallList">View</a>
+                            <a href="#/editwall/{{ angel.author }}" class="buttons wallList">Edit</a>
+                            <a href="#/findenewmembers/{{ angel.author }}" class="buttons wallList">Invite Friends</a>
+                            <a href="#/inviteblock/{{ angel.author }}" class="buttons wallList">Remove Friends</a>
+                            <a href="#/deletewall/{{ angel.author }}" class="buttons wallList">Delete</a>
                             <br/>
-                            <img id="portrait" src="/uploads/{{ angel.profilePicPortrait }}"> - <a href="#/angel/{{angel.author}}">View this memorial wall</a>
-                            <br/>
-                            - <a href="#/findenewmembers/{{ angel.author }}">Find and invite new members to this wall</a>
-                            <br/>
-                            - <a href="#/inviteblock/{{ angel.author }}">Remove members from this wall</a>
-                            <br/>
-                            - <a href="#/editwall/{{ angel.author }}">Edit this memorial wall</a>
-                            <br/>
-                            - <a href="#/deletewall/{{ angel.author }}">Delete this memorial wall</a>
-                            <br/><br/>
                         </li>
                     </ul>
-
                  </div>
             </div>
         </section>
 <hr />
 
-
-</div>
-
-
-</div>
 </div>

@@ -1,22 +1,25 @@
 <div ng-controller="WorkshopCtrl" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-    <div class="row ">
-        <h1 class="sectionHeader">Workshops</h1>
-    </div>
-    <div class="">
-        <div class=" workshops">
-            <h2 class="dark">Scheduled Workshops</h2>
-            <p>
-                Here are all of the submitted workshops. Review and approve them to be displayed by selecting the publish state on each entry below.
-            </p>
-            <!--
-                Note for Ray:
-                This page will need to check if user is logged in, and if that user is you, me or patricia
-            -->
-            <tabset>
-                <tab heading="View Workshops That Await Approval"><section>
-                    <div class="">
-                        <div class=" " role="content">
-
+    <div class="generalPage">
+        <div id="contentHeader">
+            <h1 class="contentHeaderTitle">Workshops</h1>
+        </div>
+        <section class="tab" ng-controller="TabController as panel">
+            <ul class="tabNavGen">
+                <li ng-class="{active:panel.isSelected(1) }"><a href ng-click="panel.selectTab(1)">Approve Workshops</a></li>
+                <li ng-class="{active:panel.isSelected(2) }"><a href ng-click="panel.selectTab(2)">Review Approved Workshop</a></li>
+            </ul>
+            <div ng-show="panel.isSelected(1)">
+                <div class="content">
+                    <div class="workshops">
+                        <h2 class="dark">Workshops Awaiting Approval</h2>
+                        <p>
+                            Here are all of the workshops that need approval before listing. Review and approve them to be displayed by selecting the publish state on each entry below.
+                        </p>
+                        <!--
+                            Note for Ray:
+                            This page will need to check if user is logged in, and if that user is you, me or patricia
+                        -->
+                        <div role="content">
                             Submitted, but not yet approved workshops
                             <accordion>
                                 <accordion-group heading="Name of Submitted workshop here" class="small button">
@@ -50,7 +53,7 @@
                                         </ul>
                                         <form name="approveWorkShops">
                                             <input type="radio" name="publishedState" value="published" />Published (Approve for display) <br />
-                                            <input type="radio" name="publishedState" value="unpublished" checked /> Unpublished (Reject) <br />
+                                            <input type="radio" name="publishedState" value="unpublished" selected checked /> Unpublished (Reject) <br />
                                             <button name="saveWorkshopState">Save Workshop Approval State</button>
                                         </form>
                                         </p>
@@ -89,7 +92,7 @@
                                         </ul>
                                         <form name="approveWorkShops">
                                             <input type="radio" name="publishedState" value="published" />Published (Approve for display) <br />
-                                            <input type="radio" name="publishedState" value="unpublished" /> Unpublished (Reject) <br />
+                                            <input type="radio" name="publishedState" value="unpublished" selected /> Unpublished (Reject) <br />
                                             <button name="saveWorkshopState">Save Workshop Approval State</button>
                                         </form>
                                         </p>
@@ -99,12 +102,12 @@
                             <p style="color: #2164AA;" ng-show="workshops == ''">There are no workshops scheduled at this time</p>
                         </div>
                     </div>
-
-                </section></tab>
-                <tab heading="View Approved Submit Workshops"><section>
-                    <div class="">
-                        <div class=" " role="content">
-
+                </div>
+            </div>
+            <div ng-show="panel.isSelected(2)">
+                <div class="content">
+                    <div class="workshops">
+                        <div role="content">
                             Approved workshops
                             <accordion>
                                 <accordion-group heading="Name of Submitted workshop here" class="small button">
@@ -137,7 +140,7 @@
                                             </li>
                                         </ul>
                                         <form name="approveWorkShops">
-                                            <input type="radio" name="publishedState" value="published" />Published (Approve for display) <br />
+                                            <input type="radio" name="publishedState" value="published" selected />Published (Approve for display) <br />
                                             <input type="radio" name="publishedState" value="unpublished" /> Unpublished (Reject) <br />
                                             <button name="saveWorkshopState">Save Workshop Approval State</button>
                                         </form>
@@ -176,7 +179,7 @@
                                             </li>
                                         </ul>
                                         <form name="approveWorkShops">
-                                            <input type="radio" name="publishedState" value="published" />Published (Approve for display) <br />
+                                            <input type="radio" name="publishedState" value="published" selected />Published (Approve for display) <br />
                                             <input type="radio" name="publishedState" value="unpublished" /> Unpublished (Reject) <br />
                                             <button name="saveWorkshopState">Save Workshop Approval State</button>
                                         </form>
@@ -187,10 +190,8 @@
                             <p style="color: #2164AA;" ng-show="workshops == ''">There are no workshops scheduled at this time</p>
                         </div>
                     </div>
-
-                </section></tab>
-
-            </tabset>
-        </div>
+                </div>
+            </div>
+        </section>
     </div>
 </div>

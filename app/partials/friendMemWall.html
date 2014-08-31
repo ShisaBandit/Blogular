@@ -1,11 +1,6 @@
 <div class="generalPage">
-    <div id="contentHeader" class="">
-        <h2 class="contentHeaderTitle">About Angels of Eureka's The Circle of Life</h2>
-    </div>
-    <div class="">
-        <div class="contentHeader" class="">
-            <h2 class="contentHeaderTitle">Memorial Walls of My Friends and Acquaintances </h2>
-        </div>
+    <div id="contentHeader">
+        <h2 class="contentHeaderTitle">Memorial Walls of My Friends and Acquaintances </h2>
     </div>
     <!--
     <ul class="profile">
@@ -16,8 +11,10 @@
     <ul class="profile" ng-repeat="wall in walls">
         <li>Angel's Name : {{wall.firstName}} {{wall.lastName}} - <a href="#/angel/{{wall.author}}">View this
             memorial wall</a> - <a ng-click="removeself(wall.id)">Remove yourself from this memorial wall
-            network</a></li>
+            network</a>
+        </li>
     </ul>
     <!-- Delete above UL after demo -->
+    <div ng-hide="walls.length">You have not been invited to any memorial walls. Why not reach out to someone and ask to join their network?</div>
 </div>
 <div class="adContainer">Ads go here</div>

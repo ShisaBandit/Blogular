@@ -254,6 +254,7 @@ body .contain-to-grid {
 }
 
 .generalPage{
+    position: relative;
     display: inline-block;
     width: 760px;
     margin: 10px 0px;
@@ -298,6 +299,10 @@ body .contain-to-grid {
 .generalPage p,
 .generalPage div {
     padding: 10px;
+}
+
+.generalPage label {
+    color: #47569b;
 }
 
 h2.dark {
@@ -976,8 +981,16 @@ body .button {
     box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5) inset;
     transition: background-color 300ms ease-out 0s;
     border-radius: 6px;
+    cursor: pointer;
 }
 
+.buttons.guideLink {
+    width: 100%;
+    clear: both;
+    margin: 5px auto;
+    display: block;
+    text-align: center;
+}
 
 #loginMessage {
     position:relative;
@@ -1304,8 +1317,13 @@ body.ng-scope div.row div.small-12.columns div.row div.small-12.large-12.ng-bind
     line-height: 15px;
     color: #47569B;
     font-size: small;
-    text-decoration: underline;
     white-space: nowrap;
+    cursor: pointer;
+}
+
+.wallGroup ul li:hover {
+    text-shadow: 1px 2px 3px #ccc;
+    text-decoration: underline;
 }
 
 #toolbar {
@@ -1509,16 +1527,19 @@ h6.petsTitle {
 
 .mural {
     margin-top: -18px;
+    width: 100%;
 }
 
  .mural.privGroup {
      margin-top: -20px;
      border-top-left-radius: 1em;
      border-top-right-radius: 1em;
+     width: 100%;
  }
 
 .muralPets {
     margin-top: -18px;
+    width: 100%;
 }
 
 
@@ -1559,6 +1580,31 @@ h6.petsTitle {
      text-shadow: 0 1px 0 white;
  }
 
+ .petitions {
+    margin: 0;
+    padding: 0;
+ }
+
+.petitions li {
+    display: inline-block;
+    padding: 0px;
+    list-style: none outside none;
+    vertical-align: top;
+    width: 23%;
+    margin: 1%;
+    max-height: 500px;
+    overflow-y: hidden;
+}
+
+ .panel {
+     border-style: solid;
+     border-width: 1px;
+     border-color: #D9D9D9;
+     margin-bottom: 1.25rem;
+     padding: 1.25rem;
+     background: none repeat scroll 0% 0% #F2F2F2;
+ }
+
  .buttons {
      display: block;
      width: 31.25%;
@@ -1574,7 +1620,38 @@ h6.petsTitle {
      text-align: center;
      border: 1px solid #71706b;
      float: left;
+     cursor: pointer;
  }
+
+ .buttons.wallList {
+     display: block;
+     width: 74.25%;
+     height: 20px;
+     margin-top: 5px;
+     color: #8A9948 !important;
+     vertical-align: middle;
+     margin: 0px;
+     padding: 5px;
+     font-size: small;
+     line-height: 20px;
+     text-align: center;
+     border: 1px solid #71706B;
+     background: -moz-linear-gradient(center top , #F2F2F2 0px, #F2F2F2 1px, #E4E4E4 1px, #CECECE 100%) repeat scroll 0% 0% transparent;
+     float: left;
+ }
+
+ .button.createNew {
+     position: absolute;
+     top: 5px;
+     right: 15px;
+     border-radius: 24px;
+     padding: 10px;
+     height: 10px !important;
+     width: 10px;
+     line-height: 8px;
+     font-weight: bold;
+ }
+
  
  .adSpace {
      display: block;
@@ -1650,21 +1727,28 @@ body nav.top-bar.top-bar-logged-in {
  }
 
  #events .event-list .event-list-header {
-     height:30px;
-     margin-top:-2px;
-     background: #DEED91;
+     height: 30px;
+     margin-top: 0px;
+     background: none repeat scroll 0% 0% #DEED91;
+     line-height: normal;
+     padding: 5px 0 0;
  }
 
 
  #events .event-list .event-list-header h3{
-     font-size: 18px;
-     font-weight: bold;
-     color: #fff;
+     height: 30px;
+     margin-top: 0px;
+     background: none repeat scroll 0% 0% #DEED91;
+     line-height: normal;
+     padding: 5px 0 0;
  }
 
 
  #events .event-list .event-list-body {
-
+     line-height: 21px;
+     margin: 10px;
+     color: indianred;
+     text-align: justify;
  }
 
 
@@ -2069,8 +2153,8 @@ body nav.top-bar.top-bar-logged-in {
      margin: 0px auto 20px;
      width: 100%;
      text-align: center;
-     background: none repeat scroll 0% 0% #C9C3A9;
-     box-shadow: 1px 2px 5px #71706B;
+     background: none repeat scroll 0% 0% #D0DBB6;
+     box-shadow: 0px 4px 3px #71706B;
  }
 
  .tabNavGen li {
@@ -2087,6 +2171,11 @@ body nav.top-bar.top-bar-logged-in {
      vertical-align: top;
  }
 
+ .tabNavGen li a {
+     display: block;
+     width: 100%;
+     height: 100%;
+ }
  #dashBoard section {
      background: -moz-linear-gradient(center top , #F2F2F2 0px, #F2F2F2 1px, #E4E4E4 1px, #CECECE 100%) repeat scroll 0% 0% transparent;
      min-height: 150px;
@@ -2124,6 +2213,24 @@ body nav.top-bar.top-bar-logged-in {
      box-shadow: 0px 2px 5px 2px #A3A1A1;
      margin: 0px 7px;
      text-align: center;
+ }
+
+ .dashPages a {
+     display: block;
+     width: 100%;
+     height: 100%;
+     line-height: 80px;
+ }
+
+ .myMemWallsList img {
+     max-width: 70% !important;
+     display: block;
+     margin: 10px 0 10px;
+ }
+
+ .clear {
+     display: block;
+     clear: both;
  }
 
  .hide {

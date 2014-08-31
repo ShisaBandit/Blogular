@@ -1,8 +1,10 @@
 <div ng-controller="PetitionEntryCtrl">
-
-   <div class="class=""   ">
-
+    <div class="generalPage">
+        <div id="contentHeader">
+            <h2 class="contentHeaderTitle">Petition</h2>
+        </div>
        <div class="" ng-model="petition">
+           <a href="#/petitions">Petitions</a> > {{petition[0].title}}
             <div class="">
                 <h3 style="color: #2164AA;">Petion Name: {{petition[0].title}}</h3>
                 <h3 style="color: #2164AA;">Petition Details: {{petition[0].text}}</h3>
@@ -15,15 +17,13 @@
                     </div>
                 </div>
             </div>
-
        </div>
        <div class="">
-           <div>Total Signatures On This Petition <b class="petitionFont">{{signaturelength}}</b></div>
+           <div>There are <b class="petitionFont">{{signaturelength}}</b> signatures on this petition </div>
            <div ng-class="{spinner:spinner}"></div>
            <div ng-class="{error:error}">{{resultMessage}}</div>
            <br />
            <a class="button small" ng-click="signPetition()">Sign this petition</a>
-
         </div>
     </div>
 </div>

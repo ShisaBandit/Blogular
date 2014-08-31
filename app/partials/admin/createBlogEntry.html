@@ -1,5 +1,5 @@
 <div ng-controller="AddBlogCtrl">
-    <div class="">
+    <div class="generalPage">
         <div class="" role="content">
             <div id="mainform" ng-hide="hidemainform">
                 <!--<h1><span ng-bind="message"></span></h1>-->
@@ -21,12 +21,9 @@
                          </span>
                         <input type="text" ng-keypress="save()" id="title" ng-model="form.title" name="title" placeholder="This is seen as the name of your memorial wall. For example, John Doe's Memorial. Please enter a title here.">
                         <p class="validation-error">{{message.title}}</p>
-                        <br />
-                        <br />
                         <label for="author">Please specify a short address for your profile : <br /> ie: www.the-circle-of-life.net/#/<b><i class="shortURI">myangelspage</i></b></label>
                         <input type="text" ng-keypress="save()" name="author" id="author" ng-model="form.author" placeholder="(Less than 100 characters, including underscores and dashes with no spaces)">
                         <p class="validation-error">{{message.url}}</p>
-                        <br />
                         <span>
                             <label for="content">Tell your {{createType}}'s story here: </label>
                          </span>
@@ -40,8 +37,6 @@
                          -->
                         <textarea ng-keypress="save()" id="content" placeholder="Enter your Angel's legacy here..." ng-model="form.text" cols="50" rows="25"></textarea>
                         <br />
-
-
                         <span>
                             <label>What is your {{createType}}'s name?</label>
                          </span>
@@ -50,8 +45,6 @@
 
                         <input ng-keypress="save()" type="text" class="login-inp" ng-model="form.lastName" placeholder="Last Name" />
                         <p class="validation-error">{{message.lastName}}</p>
-
-                        <br />
                         <label>Date of Birth:</label>
                         <br />
                         <!--TODO:Make this a n uploadable file-->
@@ -62,8 +55,6 @@
                         <!--<input type="date" class="login-inp" ng-model="form.dob" placeholder="12-02-2012"/>
                         -->
                         <p class="validation-error">{{message.dob}}</p>
-
-                        <br />
                         <span>
                             <label>Day your {{createType}} got it's wings:</label><br class="clear"/>
                          </span>
@@ -98,8 +89,6 @@
                             <input type="text" name="categories" id="categories" ng-model="form.categories">
                             <p>Comma seperated values ONLY!! Be aware no validation here is added yet!</p>
                             -->
-                        <br />
-                        <br />
                         <p>
                             <a ng-click="submitPost()" class="button small" resetOnSubmit="true">On to the Next Step</a>  <div ng-click="reset()" class="button small">Reset</div>
 
@@ -110,7 +99,5 @@
 
             </div>
         </div>
-
     </div>
-
 </div>

@@ -49,7 +49,7 @@
                             <span ng-switch-when="pet">{{ entry.firstName }} {{ entry.lastName }}</span>
                         </div>
                         <div class="wallGroup2">
-                            <ul>
+                            <ul class="memFeatures">
                                 <div ng-switch on="parentObject.type">
                                     <li if-authed="show" ng-click="toogleEventEntry(); loadPage('angelStory')" ng-switch-when="angel">About {{ entry.firstName }}</li>
                                     <li if-authed="show" ng-click="toogleEventEntry(); loadPage('angelStory')" ng-switch-when="pet">About {{ entry.firstName }}</li>

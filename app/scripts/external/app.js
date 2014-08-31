@@ -2074,7 +2074,7 @@ app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams) {
         $http.post('updatePetition',{id:$routeParams.id, title: $scope.title , text:$scope.text}).
             success(function (data) {
                 console.log(data)
-                $scope.message = "You have successfully create a partition "+$scope.title;
+                $scope.message = "You have successfully updated a petition "+$scope.title;
                 $scope.again = false;
             }).error(function (err) {
                 console.log(err)

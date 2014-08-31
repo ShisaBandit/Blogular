@@ -1,23 +1,23 @@
 <div ng-controller="UserProfileCtrl">
-    <div class="row ">
-        <div class="">
-            <div ng-controller="InviteBlockCtrl">
-                <div id="contentHeader" class="">
-                    <h2 class="contentHeaderTitle">Invite or Block Users to Your Memorial Wall Profile: {{ wallname}} </h2>
-                </div>
-                <br />
-                <div>
-                    <input ng-model="searchText"/>
-                </div>
-                <ul class="profile">
-                    <li class="wallViewers" ng-repeat="member in members | filter:searchText">
-                        <h3><img src="http://www.gravatar.com/avatar/{{member.gravatar}}" /> {{ member.firstName }} {{ member.lastName }}</h3>
-                        <b>Username:{{ member.username }}</b>
-                        <!--<a ng-click="invite(member._id )" class="small radius button workpetsbuttons">Invite</a>-->
-                        <a ng-click="block(member._id )" class="small radius button workpetsbuttons">Block</a>
-                    </li>
-                </ul>
+    <div class="generalPage">
+        <div ng-controller="InviteBlockCtrl">
+            <div id="contentHeader" class="">
+                <h2 class="contentHeaderTitle">Remove or Block Users to Your Memorial Wall Profile: {{ wallname}} </h2>
             </div>
+            <div>
+                <input ng-model="searchText" placeholder="Search For Users Here" />
+            </div>
+            <ul class="profile">
+                <li class="wallViewers" ng-repeat="member in members | filter:searchText">
+                    <h3><img src="http://www.gravatar.com/avatar/{{member.gravatar}}" /> {{ member.firstName }} {{ member.lastName }}</h3>
+                    <b>User Name:</b> {{ user.username }}
+                    <br />
+                    <b>Real Name:</b> {{ user.firstName }}
+                    <!--<a ng-click="invite(member._id )" class="small radius button workpetsbuttons">Invite</a>-->
+                    <br />
+                    <a ng-click="block(member._id )" class="small radius button workpetsbuttons">Block</a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

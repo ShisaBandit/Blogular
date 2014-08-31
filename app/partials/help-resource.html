@@ -1,9 +1,10 @@
 <div class="generalPage">
-    <div id="contentHeader" class="">
+    <div id="contentHeader">
         <h2 class="contentHeaderTitle">Help Resources</h2>
     </div>
     <section class="tab" ng-controller="TabController as panel">
         <ul class="tabNavGen">
+            <a href="#/guide" class="buttons guideLink">Site Tutorial</a>
             <li ng-class="{active:panel.isSelected(1) }"><a href ng-click="panel.selectTab(1)">Alcohol/Substance Abuse</a></li>
             <li ng-class="{active:panel.isSelected(2) }"><a href ng-click="panel.selectTab(2)">Anti-bullying Resources</a></li>
             <li ng-class="{active:panel.isSelected(3) }"><a href ng-click="panel.selectTab(3)">Anxiety Disorder</a></li>
