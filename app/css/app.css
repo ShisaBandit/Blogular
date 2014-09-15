@@ -253,20 +253,148 @@ body .contain-to-grid {
     border: none;
 }
 
-.generalPage{
-    position: relative;
-    display: inline-block;
-    width: 760px;
-    margin: 10px 0px;
-    vertical-align: top;
-    border-top-left-radius: 2em;
-    border-top-right-radius: 2em;
-    -webkit-box-shadow: 2px 2px 5px #A3A1A1;
-    -moz-box-shadow: 2px 2px 5px #A3A1A1;
-    box-shadow: 2px 2px 5px #A3A1A1;
-    background: none repeat scroll 0% 0% #FFFADE;
-    overflow-x: hidden;
-}
+ .primaryContent, .mainNav {
+     width: 320px;
+     margin: auto;
+ }
+
+ .mainNav {
+     padding: 0;
+ }
+
+
+ .generalPage{
+     position: relative;
+     display: inline-block;
+     width: 320px;
+     margin: 10px 0px;
+     vertical-align: top;
+     border-top-left-radius: 2em;
+     border-top-right-radius: 2em;
+     -webkit-box-shadow: 2px 2px 5px #A3A1A1;
+     -moz-box-shadow: 2px 2px 5px #A3A1A1;
+     box-shadow: 2px 2px 5px #A3A1A1;
+     background: none repeat scroll 0% 0% #FFFADE;
+     overflow-x: hidden;
+ }
+
+ .feature {
+     display: inline-block;
+     width: 320px;
+     vertical-align: top;
+ }
+
+
+ .scrollerContainer {
+     display: inline-block;
+     margin: 10px 0;
+     width: 320px;
+     vertical-align: top;
+     border-top-left-radius: 9px;
+     border-top-right-radius: 8px;
+     overflow-x: hidden;
+     background: #fff;
+ }
+
+ .adContainer {
+     display: block;
+     margin: 10px 0;
+     width: 320px;
+     vertical-align: top;
+     clear: both;
+ }
+
+ @media screen and (min-device-width: 480px) and (max-device-width: 489px) {
+     .primaryContent, .mainNav {
+         width: 480px;
+     }
+     .generalPage{
+         width: 470px;
+     }
+     .adContainer {
+          display: block;
+          margin: 10px 0;
+          width: 470px;
+          vertical-align: top;
+         clear: both;
+      }
+
+ }
+ @media screen and (min-device-width: 490px)and (max-device-width: 679px) {
+     .primaryContent, .mainNav {
+         width: 490px;
+     }
+     .generalPage, .feature, .scrollerContainer {
+         width: 365px;
+     }
+     .blogContent .feature {
+         width: 490px
+     }
+     .blogContent .featureContent {
+         width: 385px;
+     }
+     .blogContent .angelPicWide {
+         width: 100px;
+     }
+    .blogContent #portrait {
+        min-width: 100px;
+        width: 100px;
+    }
+    .blogContent .angelPicWide #portrait img {
+        max-width: 100%;
+    }
+     .adContainer {
+         display: inline-block;
+         margin: 10px 0;
+         width: 90px;
+         vertical-align: top;
+     }
+ }
+ @media screen and (min-device-width: 680px) {
+     .primaryContent, .mainNav {
+         width: 680px;
+     }
+     .generalPage, .feature, .scrollerContainer {
+         width: 560px;
+     }
+     .adContainer {
+         display: inline-block;
+         margin: 10px 0;
+         width: 100px;
+         vertical-align: top;
+     }
+ }
+ @media screen and (min-device-width: 980px) {
+     .primaryContent, .mainNav {
+         width: 980px;
+     }
+     .generalPage, .feature, .scrollerContainer {
+         width: 760px;
+     }
+     .adContainer {
+         display: inline-block;
+         margin: 10px 0;
+         width: 200px;
+         vertical-align: top;
+     }
+ }
+
+ .mainNav li {
+     display: block;
+     margin: 0 10px;
+     height: 50px;
+     list-style: none outside none;
+     line-height: 50px;
+     color: #FFF;
+     font-size: 12px;
+     font-weight: bold;
+     text-decoration: none;
+     float: left;
+ }
+
+ .mainNav li [ng-click="logout()"] {
+     text-shadow: 0px 1px 1px #8A9948;
+ }
 
  .generalPage.petMem {
      /*max-width: 980px;
@@ -1468,17 +1596,6 @@ h6.groupTitle {
     background: #fff;
 }
 
-.scrollerContainer {
-    display: inline-block;
-    margin: 10px 0;
-    width: 760px;
-    vertical-align: top;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 8px;
-    overflow-x: hidden;
-    background: #fff;
-}
-
 .scrollerBlock.petsList {
     background: url("/img/background/colbg2.png")repeat #f28678;
 }
@@ -1498,12 +1615,6 @@ h6.groupTitle {
     font-size: 0.9em !important;
     float: left;
      font-weight: normal !important;
- }
-
-.feature {
-    display: inline-block;
-    width: 760px;
-    vertical-align: top;
  }
 
 .featureContent {
@@ -1837,34 +1948,6 @@ body nav.top-bar.top-bar-logged-in {
      float: right !important;
  }
 
- .primaryContent {
-     width: 980px;
-     margin: auto;
- }
-
- .mainNav {
-     width: 980px;
-     margin: auto;
-     padding: 0;
- }
-
- .mainNav li {
-     display: block;
-     margin: 0 10px;
-     height: 50px;
-     list-style: none outside none;
-     line-height: 50px;
-     color: #FFF;
-     font-size: 12px;
-     font-weight: bold;
-     text-decoration: none;
-     float: left;
- }
-
-.mainNav li [ng-click="logout()"] {
-     text-shadow: 0px 1px 1px #8A9948;
- }
-
  .login {
      position:relative;
      margin: -10px 0px;
@@ -2093,13 +2176,6 @@ body nav.top-bar.top-bar-logged-in {
      display: none;
  }
 
- .adContainer {
-     display: inline-block;
-     margin: 10px 0;
-     width: 200px;
-     vertical-align: top;
- }
-
  .button {
      padding: 7px;
      background: #CECECE;
@@ -2117,8 +2193,6 @@ body nav.top-bar.top-bar-logged-in {
      width: 800px;
      margin: 0 auto;
  }
-
-
 
  ul.tabs{
      margin: 0px;
