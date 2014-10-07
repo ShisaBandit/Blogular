@@ -647,23 +647,26 @@ body .contain-to-grid-logged-in #username2 {
 
 .groupingDropdown {
     position: relative;
-    top: -38px;
-    left: 20px;
+    top: -46px;
+    left: 175px;
+    width: 50%;
+    height: 30px;
 }
 
 .groupingDropdown select,
 .groupingDropdown a {
     display: inline;
+    height: 30px;
 }
 
 .grouping{
     display: block;
-    width: 100%;
+    width: auto;
     height: 60px;
     background-color: #BDCB80;
     box-shadow: 0px 4px 3px -2px #8A9948;
     position: relative;
-    padding: 0 0 0 210px;
+    padding: 0 0 0 10px;
     line-height: 57px;
 }
 
@@ -1672,10 +1675,8 @@ h6.petsTitle {
  }
 
  .memWallSearch {
-     margin-top: 10px;
-     margin-left: auto;
-     margin-right: auto;
-     margin-bottom: 10px;
+     margin: 10px 0;
+     width: 175px;
  }
 
  .blogContent {
@@ -2063,7 +2064,7 @@ body nav.top-bar.top-bar-logged-in {
 
  .filter {
      position: relative;
-     left: 200px;
+     left: 5px;
  }
 
  .shortURI {

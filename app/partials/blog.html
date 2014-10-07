@@ -1,4 +1,4 @@
-<div ng-controller="ContentCtrl" xmlns="http://www.w3.org/1999/html">
+<div ng-controller="ContentCtrl" xmlns="http://www.w3.org/1999/html" if-authed="show">
     <div class="scrollerContainer" role="content" ng-class="{petMem:pets, privGroup:groups}" >
         <h1>Welcome to Angels of Eureka's Circle of Life, free online memorials and support groups <small>Celebrate their life...Cherish their Legacy</small> </h1>
         <img src="./img/muralPets.png" class="muralPets" ng-show="pets">
@@ -11,12 +11,10 @@
                 <div ng-switch-default ng-hide="groupingViewable" ng-animate="'fade'" class="grouping">
                     <div class="" ng-switch on="type">
                         <div class="memWallSearch" ng-switch-when="group">
-                            <input ng-model="search.search" type="text" class="searchBar"
-                                   placeholder="Search Groups">
+                            <input ng-model="search.search" type="text" class="searchBar" placeholder="Search Groups">
                         </div>
                         <div class="memWallSearch" ng-switch-default ng-hide="groupingViewable">
-                            <input ng-model="search.search" type="text" class="searchBar"
-                                   placeholder="Search Memorials">
+                            <input ng-model="search.search" type="text" class="searchBar" placeholder="Search Memorials">
                         </div>
                     </div>
                 </div>
@@ -48,4 +46,7 @@
         </div>
     </div>
     <div class="adContainer">Ads go here</div>
+</div>
+<div>
+    Not logged in, so memwall scroller is hidden.
 </div>
