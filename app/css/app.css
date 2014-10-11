@@ -22,6 +22,7 @@
     padding: 0;
     margin: 0;
     font-family: sans-serif;
+     color: #34455A;
     background: url('/img/background/baloons.png') no-repeat scroll center top / cover transparent;
     overflow-x: hidden;
 }
@@ -68,7 +69,7 @@ a {
     left: 0px;
     width: 200px;
     height: auto;
-    background: #47569B;
+    background: #577396;
     color: #fff;
     font-weight: bold;
     font-size: large;
@@ -304,81 +305,6 @@ body .contain-to-grid {
      clear: both;
  }
 
- @media screen and (min-device-width: 480px) and (max-device-width: 489px) {
-     .primaryContent, .mainNav {
-         width: 480px;
-     }
-     .generalPage{
-         width: 470px;
-     }
-     .adContainer {
-          display: block;
-          margin: 10px 0;
-          width: 470px;
-          vertical-align: top;
-         clear: both;
-      }
-
- }
- @media screen and (min-device-width: 490px)and (max-device-width: 679px) {
-     .primaryContent, .mainNav {
-         width: 490px;
-     }
-     .generalPage, .feature, .scrollerContainer {
-         width: 365px;
-     }
-     .blogContent .feature {
-         width: 490px
-     }
-     .blogContent .featureContent {
-         width: 385px;
-     }
-     .blogContent .angelPicWide {
-         width: 100px;
-     }
-    .blogContent #portrait {
-        min-width: 100px;
-        width: 100px;
-    }
-    .blogContent .angelPicWide #portrait img {
-        max-width: 100%;
-    }
-     .adContainer {
-         display: inline-block;
-         margin: 10px 0;
-         width: 90px;
-         vertical-align: top;
-     }
- }
- @media screen and (min-device-width: 680px) {
-     .primaryContent, .mainNav {
-         width: 680px;
-     }
-     .generalPage, .feature, .scrollerContainer {
-         width: 560px;
-     }
-     .adContainer {
-         display: inline-block;
-         margin: 10px 0;
-         width: 100px;
-         vertical-align: top;
-     }
- }
- @media screen and (min-device-width: 980px) {
-     .primaryContent, .mainNav {
-         width: 980px;
-     }
-     .generalPage, .feature, .scrollerContainer {
-         width: 760px;
-     }
-     .adContainer {
-         display: inline-block;
-         margin: 10px 0;
-         width: 200px;
-         vertical-align: top;
-     }
- }
-
  .mainNav li {
      display: block;
      margin: 0 10px;
@@ -421,7 +347,7 @@ body .contain-to-grid {
  }
 
 .generalPage h1,h2,h3,h4 {
-    color: #47569B;
+    color: #577396;
 }
 
 .generalPage p,
@@ -430,7 +356,7 @@ body .contain-to-grid {
 }
 
 .generalPage label {
-    color: #47569b;
+    color: #577396;
 }
 
 h2.dark {
@@ -546,7 +472,7 @@ body .contain-to-grid-logged-in #username2 {
     padding: 10px 0px 0px 5px;
     padding-bottom: 0px;
     /* background: #26619D; */
-    color: #47569B;
+    color: #577396;
     white-space: nowrap;
     -webkit-border-radius: 3px;
     border-radius: 3px;
@@ -555,7 +481,7 @@ body .contain-to-grid-logged-in #username2 {
 
  body .contain-to-grid-logged-in #username2 a.small.button {
      display: inline;
-     color: #47569B;
+     color: #577396;
      border: none;
      outline: none;
      background: none;
@@ -663,8 +589,8 @@ body .contain-to-grid-logged-in #username2 {
     display: block;
     width: auto;
     height: 60px;
-    background-color: #BDCB80;
-    box-shadow: 0px 4px 3px -2px #8A9948;
+    background-color: #A7CCFB;
+    box-shadow: 0px 4px 3px -2px #577396;
     position: relative;
     padding: 0 0 0 10px;
     line-height: 57px;
@@ -713,13 +639,12 @@ body .contain-to-grid-logged-in #username2 {
 
 h1 {
     font-size: x-large;
-    //text-shadow: 2px 2px 5px rgb(71, 86, 155);
-
+    color: #577396;
+    text-shadow: 1px 2px 2px #FFF;
 }
 
 h2 {
     font-size: large;
-    //text-shadow: 2px 2px 5px rgb(71, 86, 155);
 
 }
 
@@ -1446,7 +1371,7 @@ body.ng-scope div.row div.small-12.columns div.row div.small-12.large-12.ng-bind
     margin: 0px;
     list-style: none outside none;
     line-height: 15px;
-    color: #47569B;
+    color: #577396;
     font-size: small;
     white-space: nowrap;
     cursor: pointer;
@@ -1721,7 +1646,14 @@ h6.petsTitle {
      display: block;
      width: 31.25%;
      height: 20px;
-     background: -moz-linear-gradient(center top , #F2F2F2 0px, #F2F2F2 1px, #E4E4E4 1px, #CECECE 100%) repeat scroll 0% 0% transparent;
+     background: #e2e2e2; /* Old browsers */
+     background: -moz-linear-gradient(top,  #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%); /* FF3.6+ */
+     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e2e2), color-stop(50%,#dbdbdb), color-stop(51%,#d1d1d1), color-stop(100%,#fefefe)); /* Chrome,Safari4+ */
+     background: -webkit-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Chrome10+,Safari5.1+ */
+     background: -o-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Opera 11.10+ */
+     background: -ms-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* IE10+ */
+     background: linear-gradient(to bottom,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C */
+     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-9 */
      border-color: #999;
      color: #8A9948 !important;
      vertical-align: middle;
@@ -1730,7 +1662,7 @@ h6.petsTitle {
      font-size: small;
      line-height: 20px;
      text-align: center;
-     border: 1px solid #71706b;
+     border: 1px solid #577396;
      float: left;
      cursor: pointer;
  }
@@ -1773,7 +1705,8 @@ h6.petsTitle {
 body nav.top-bar.top-bar-logged-in {
     background: url('/img/background/headerFooterBG.png') repeat-x scroll -456px -521px #9EAFFF;
     position: relative;
-    width: 980px;
+    width: 100%;
+    max-width: 980px;
     border-radius: 7px;
     top: 3px;
 }
@@ -2228,17 +2161,24 @@ body nav.top-bar.top-bar-logged-in {
      margin: 0px auto 20px;
      width: 100%;
      text-align: center;
-     background: none repeat scroll 0% 0% #D0DBB6;
+     background: none repeat scroll 0% 0% #A7CCFB;
      box-shadow: 0px 4px 3px #71706B;
  }
 
  .tabNavGen li {
      display: inline-block;
      padding: 6px;
-     color: #8A9948 !important;
-     background: -moz-linear-gradient(center top , #F2F2F2 0px, #F2F2F2 1px, #E4E4E4 1px, #CECECE 100%) repeat scroll 0% 0% transparent;
+     color: #577396 !important;
+     background: #e2e2e2; /* Old browsers */
+     background: -moz-linear-gradient(top,  #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%); /* FF3.6+ */
+     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e2e2), color-stop(50%,#dbdbdb), color-stop(51%,#d1d1d1), color-stop(100%,#fefefe)); /* Chrome,Safari4+ */
+     background: -webkit-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Chrome10+,Safari5.1+ */
+     background: -o-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Opera 11.10+ */
+     background: -ms-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* IE10+ */
+     background: linear-gradient(to bottom,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C */
+     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-9 */
      line-height: 1.125rem;
-     border: 1px solid #71706B;
+     border: 1px solid #577396;
      width: 30.5%;
      height: 15px;
      text-align: center;
@@ -2252,62 +2192,223 @@ body nav.top-bar.top-bar-logged-in {
      height: 100%;
  }
  #dashBoard section {
-     background: -moz-linear-gradient(center top , #F2F2F2 0px, #F2F2F2 1px, #E4E4E4 1px, #CECECE 100%) repeat scroll 0% 0% transparent;
+     background: #fffdf4; /* Old browsers */
+     background: -moz-linear-gradient(top,  #fffdf4 0%, #fff9e0 51%, #f9f4d9 52%, #ffffff 100%); /* FF3.6+ */
+     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fffdf4), color-stop(51%,#fff9e0), color-stop(52%,#f9f4d9), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+     background: -webkit-linear-gradient(top,  #fffdf4 0%,#fff9e0 51%,#f9f4d9 52%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+     background: -o-linear-gradient(top,  #fffdf4 0%,#fff9e0 51%,#f9f4d9 52%,#ffffff 100%); /* Opera 11.10+ */
+     background: -ms-linear-gradient(top,  #fffdf4 0%,#fff9e0 51%,#f9f4d9 52%,#ffffff 100%); /* IE10+ */
+     background: linear-gradient(to bottom,  #fffdf4 0%,#fff9e0 51%,#f9f4d9 52%,#ffffff 100%); /* W3C */
+     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffdf4', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+
      min-height: 150px;
      display: block;
      margin: 0;
      padding: 10px;
      line-height: 1.125rem;
-     border: 1px solid #71706B;
+     border: 1px solid #B2AF9B;
+ }
+
+ #dashBoard h1 {
+     color: #577396;
+ }
+
+ #dashBoard .signUp {
+     color: #fff;
+     background: none repeat scroll 0% 0% #A7CCFB;
  }
 
  #dashBoard .dash-notification {
-     min-height: 65px;
+    min-height: 65px;
  }
 
  #dashBoard h2 {
-     display: block;
+    display: block;
  }
 
  #dashBoard img {
-     display: inline-block;
-     border-radius: 7px;
+    display: inline-block;
+    border-radius: 7px;
  }
 
  #dashBoard ul {
-     display: inline-block;
+    display: inline-block;
  }
 
- #dashBoard div {
+ #dashBoard .dashPages {
+    display: inline-block;
+    border-radius: 7px;
+    background: none repeat scroll 0% 0% #F8F8FF;
+    padding: 10px;
+    height: 80px;
+    width: 21%;
+    box-shadow: 0px 2px 5px 2px #A3A1A1;
+    margin: 0px 7px;
+    text-align: center;
+    vertical-align: top;
+ }
+
+ #dashBoard div.signUp {
+     font-weight: bold;
+     font-size: xx-large;
+     line-height: 36px;
+     box-shadow: 0px 2px 4px 2px #577396;
+     margin: auto;
+     background: none repeat scroll 0% 0% #FFFADE;
+     color: #577396;
+     text-shadow: 1px 2px 2px #fff;
+     border:5px solid #CCC8B2;
+ }
+
+ #dashBoard .features {
      display: inline-block;
      border-radius: 7px;
      background: none repeat scroll 0% 0% #F8F8FF;
      padding: 10px;
-     height: 80px;
-     width: 21%;
+     height: auto;
+     width: 29%;
      box-shadow: 0px 2px 5px 2px #A3A1A1;
-     margin: 0px 7px;
-     text-align: center;
+     margin: 0px 9px;
+     text-align: left;
+     vertical-align: top;
+ }
+
+ .features img {
+     border: 1px solid #A9A9A9;
  }
 
  .dashPages a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 80px;
+ }
+
+ .features a {
      display: block;
      width: 100%;
      height: 100%;
-     line-height: 80px;
+     font-weight: bold;
+     color: #F08678;
+ }
+
+ .topIntroImg {
+     float: left;
+     border-radius: 5px;
+     border: 1px solid #A9A9A9;
+     margin-right: 10px;
+     margin-bottom: 10px;
  }
 
  .myMemWallsList img {
-     max-width: 70% !important;
-     display: block;
-     margin: 10px 0 10px;
+    max-width: 70% !important;
+    display: block;
+    margin: 10px 0 10px;
  }
 
  .clear {
-     display: block;
-     clear: both;
+    display: block;
+    clear: both;
  }
 
  .hide {
-     display: none;
+    display: none;
+ }
+
+ /* Top slider styles */
+ div.kinetic-slider-container {
+  position: relative;
+  width: 278px;
+  height: 85px;
+  z-index: 1;
+  overflow: hidden; }
+
+.kinetic-slider-content {
+  position: absolute;
+  z-index: 1;
+  width: 100%; }
+  .kinetic-slider-content a {
+    position: relative;
+    display: block;
+    float: left;
+    width: 85px;
+    height: 85px;
+    padding: 0 5px;
+    overflow: hidden; }
+    .kinetic-slider-content a img {
+      height: 100%; }
+
+ ////* Begin responsive styling - default styles are for mobile *////
+ @media screen and (min-device-width: 480px) and (max-device-width: 489px) {
+     .primaryContent, .mainNav {
+         width: 480px;
+     }
+     .generalPage{
+         width: 470px;
+     }
+     .adContainer {
+         display: block;
+         margin: 10px 0;
+         width: 470px;
+         vertical-align: top;
+         clear: both;
+     }
+ }
+ @media screen and (min-device-width: 490px)and (max-device-width: 679px) {
+     .primaryContent, .mainNav {
+         width: 490px;
+     }
+     .generalPage, .feature, .scrollerContainer {
+         width: 365px;
+     }
+     .blogContent .feature {
+         width: 490px
+     }
+     .blogContent .featureContent {
+         width: 385px;
+     }
+     .blogContent .angelPicWide {
+         width: 100px;
+     }
+     .blogContent #portrait {
+         min-width: 100px;
+         width: 100px;
+     }
+     .blogContent .angelPicWide #portrait img {
+         max-width: 100%;
+     }
+     .adContainer {
+         display: inline-block;
+         margin: 10px 0;
+         width: 90px;
+         vertical-align: top;
+     }
+ }
+ @media screen and (min-device-width: 680px) {
+     .primaryContent, .mainNav {
+         width: 680px;
+     }
+     .generalPage, .feature, .scrollerContainer {
+         width: 560px;
+     }
+     .adContainer {
+         display: inline-block;
+         margin: 10px 0;
+         width: 100px;
+         vertical-align: top;
+     }
+ }
+ @media screen and (min-device-width: 980px) {
+     .primaryContent, .mainNav {
+         width: 980px;
+     }
+     .generalPage, .feature, .scrollerContainer {
+         width: 760px;
+     }
+     .adContainer {
+         display: inline-block;
+         margin: 10px 0;
+         width: 200px;
+         vertical-align: top;
+     }
  }

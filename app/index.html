@@ -243,8 +243,6 @@
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
-<!--<script src="scripts/foundation/foundation.min.js"></script>
-<script src="bower_components/foundation/js/foundation.min.js"></script>-->
 <script type="text/javascript" src="scripts/external/app.js"></script>
 <script type="text/javascript" src="scripts/external/ui-bootstrap-tpls-0.7.0.min.js"></script>
 <script type="text/javascript" src="scripts/external/socketmodule.js"></script>
@@ -277,6 +275,9 @@
 <script type="text/javascript" src="scripts/external/directives/angular-intro.js"></script>
 <script type="text/javascript" src="scripts/external/fb-share.js"></script>
 <script type="text/javascript" src="scripts/external/angular-accordion.js"></script>
+<script type="text/javascript" src="scripts/vendor/hamster.js"></script>
+<script type="text/javascript" src="scripts/vendor/mousewheel.js"></script>
+<script type="text/javascript" src="scripts/external/gilbox-kinetic-slider.js"></script>
 <!-- endbuild -->
 <script>
     $(document).ready(function () {
@@ -284,6 +285,20 @@
         Shadowbox.init({
             skipSetup: false
         });
+
+        if($("#userProfiler").length) {
+            var avatar = $(".avatar").attr("src");
+            var avatarURL = encodeURI(avatar);
+            console.log("The user avatar's url is ", avatarURL);
+            $("#userProfiler").css({"background-image": "url("+ avatarURL +")"});
+            $("#userProfiler").css({"background-repeat": "no-repeat"});
+            $("#userProfiler").css({"background-position": "center center"});
+            $("#userProfiler").css({"background-attachment": "fixed"});
+            $("#userProfiler").css({"background-size": "cover"});
+            $("#userProfiler").css({"-webkit-background-size": "cover"});
+        }else{
+            console.log("There is no user profile currently visible")
+        };
     });
 </script>
 </body>

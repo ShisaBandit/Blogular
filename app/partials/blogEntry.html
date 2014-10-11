@@ -37,9 +37,9 @@
             <div class="featureContent">
                 <section class="section memNav" if-authed="show">
                     <div ng-switch on="parentObject.type">
-                        <h2 style="padding-top: 0px; color: #47569B;margin-bottom: -3px;" ng-switch-when="group"> Welcome to the {{ entry.title }} private group</h2>
-                        <h2 style="padding-top: 0px; color: #47569B;margin-bottom: -3px;" ng-switch-when="angel">Welcome to {{ entry.firstName }}'s Wall.</h2>
-                        <h2 style="padding-top: 0px; color: #47569B;margin-bottom: -3px;" ng-switch-when="pet">Welcome to {{ entry.firstName }}'s Wall.</h2>
+                        <h2 style="padding-top: 0px;margin-bottom: -3px;" ng-switch-when="group"> Welcome to the {{ entry.title }} private group</h2>
+                        <h2 style="padding-top: 0px;margin-bottom: -3px;" ng-switch-when="angel">Welcome to {{ entry.firstName }}'s Wall.</h2>
+                        <h2 style="padding-top: 0px;margin-bottom: -3px;" ng-switch-when="pet">Welcome to {{ entry.firstName }}'s Wall.</h2>
                     </div>
                     <div class=" angelPicNarrow"><!--<div id="portraitpic">-->
                         <div id="portrait" ng-switch on="parentObject.type">

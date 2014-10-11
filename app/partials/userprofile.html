@@ -1,7 +1,7 @@
 <div ng-controller="UserProfileCtrl" id="dashBoard">
-    <section>
+    <section id="userProfiler">
         <h1>Welcome to your dashboard {{user.firstName}}</h1>
-        <img src="http://www.gravatar.com/avatar/{{user.gravatar}}"/>
+        <img src="http://www.gravatar.com/avatar/{{user.gravatar}}" class="avatar" />
 
         <ul class="profile">
             <li>First Name : {{user.firstName}}</li>
@@ -76,7 +76,7 @@
             <a href="myPetitions">My Petitions</a>
         </div>
         <div class="dashPages">
-            <a href="#/petitions">Search Browse Petitions</a>
+            <a href="#/petitions">Browse Petitions</a>
         </div>
         <div class="dashPages">
             <a href="#/newPetition">Create New Petition</a>
@@ -88,7 +88,7 @@
             <a href="#/myWorkshops">My Workshops</a>
         </div>
         <div class="dashPages">
-            <a href="#/workshops">Search/Browse Workshops</a>
+            <a href="#/workshops">Browse Workshops</a>
         </div>
         <div class="dashPages">
             <a href="addWorkShop">Submit New Workshop</a>

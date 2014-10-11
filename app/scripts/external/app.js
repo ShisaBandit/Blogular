@@ -2,7 +2,7 @@ var app = angular.module('YoMemorialApp', [
         'twitterService', 'userService', 'http-auth-interceptor', 'login', 'socketio', 'updateService',
         'Scope.onReady', 'blogResource', 'loaderModule', 'Plugin.Controller.Title', 'Plugin.Controller.BlogEntries', 'Plugin.Controller.GroupEntries',
         'blogFilter', 'blogService', 'infinite-scroll', 'dropzone', 'apiResource', 'ui.bootstrap','ngAnimate','ngRoute','adaptive.detection','MusicPlayer.Controller',
-        'controller.GiftShop','Cache','ShadowboxModule','angular-intro','ngSanitize'
+        'controller.GiftShop','Cache','ShadowboxModule','angular-intro','ngSanitize','gilbox.kineticSlider'
     ]).
     config(function ($routeProvider,$sceProvider) {
        // $sceProvider.enabled(false);
