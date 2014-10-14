@@ -2497,6 +2497,82 @@ body nav.top-bar.top-bar-logged-in {
          vertical-align: top;
      }
 
+     .contain-to-grid .mainNav {
+         position: absolute;
+         top: 128px;
+         left: 0px;
+         margin: 0px;
+         padding: 0px;
+         height: 50px;
+         z-index: 20;
+     }
+
+     .contain-to-grid-logged-in .mainNav {
+         position: absolute;
+         top: 40px;
+         left: 0px;
+         margin: 0px;
+         padding: 0px;
+         height: 50px;
+         z-index: 20;
+     }
+
+     .mainNav li {
+         display: block;
+         margin: 0 10px;
+         height: 20px;
+         list-style: none outside none;
+         line-height: 20px;
+         color: #FFF;
+         font-size: 12px;
+         font-weight: bold;
+         text-decoration: none;
+         float: left;
+     }
+
+     .mainNav li [ng-click="logout()"] {
+         text-shadow: 0px 1px 1px #8A9948;
+     }
+
+     .login {
+         position: relative;
+         margin: -11px 0px;
+     }
+
+     .login input[type="text"],
+     .login input[type="password"]{
+         height: 10px;
+         width: 80px;
+     }
+
+     .login .button {
+         padding: 3px;
+         background: -moz-linear-gradient(center top , #F2F2F2 0px, #F2F2F2 1px, #E4E4E4 1px, #CECECE 100%) repeat scroll 0% 0% transparent;
+         border-color: #999;
+         color: #8A9948 !important;
+         font-size: x-small;
+     }
+
+     .login [ng-click="forgot()"] {
+         position: absolute;
+         top: 0px;
+         right: -90px;
+         font-weight: normal;
+         font-size: x-small;
+         height: 20px;
+     }
+
+     .scrollerContent li {
+         display: inline-block;
+         width: 48%;
+         list-style: none outside none;
+         text-align: center;
+         vertical-align: top;
+         min-height: 200px;
+         padding: 0px;
+         margin: 0.5%;
+     }
+
      .mainNav {
          position: static;
          height: 50px;
