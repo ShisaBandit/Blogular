@@ -231,20 +231,11 @@ body .contain-to-grid {
 .top-bar-section ul > li>a{
     background: transparent;
 }
-#workshopbutton{
+.mainNav li a {
     color: #8a9948;
     border: none;
 }
 
-#groupsbutton{
-    color: #8a9948;
-    border: none;
-}
-
-#webstorebutton {
-    color: #8a9948;
-    border: none;
-}
 #homebutton {
     color: #fff;
     border: none;
@@ -260,9 +251,12 @@ body .contain-to-grid {
  }
 
  .mainNav {
-     padding: 0;
+     top: 52px;
+     padding: 0px;
+     margin: 0px auto;
+     height: 24px;
+     position: absolute;
  }
-
 
  .generalPage{
      position: relative;
@@ -307,15 +301,15 @@ body .contain-to-grid {
 
  .mainNav li {
      display: block;
-     margin: 0 10px;
-     height: 50px;
+     margin: 0px 10px;
      list-style: none outside none;
-     line-height: 50px;
      color: #FFF;
      font-size: 12px;
      font-weight: bold;
      text-decoration: none;
      float: left;
+     height: 24px;
+     line-height: 24px;
  }
 
  .mainNav li [ng-click="logout()"] {
@@ -402,7 +396,7 @@ h2.dark {
      width: 100%;
      border-bottom: 1px dotted #8A9948;
      background: url('/img/background/headerFooterBG.png') repeat-x scroll center -140px #9EAFFF;
-     height: 60px;
+     height: 80px;
      text-align: center;
      margin: 0px;
  }
@@ -431,6 +425,13 @@ h2.dark {
      z-index: 2;
  }
 
+ .contain-to-grid-logged-in .avatar {
+     position: absolute;
+     top: 10px;
+     right: 10px;
+     width: 25px;
+     border-radius: 5px;
+ }
 
 .loginBlock {
     /*position:relative;*/
@@ -1696,7 +1697,7 @@ h6.petsTitle {
      font-weight: bold;
  }
 
- 
+
  .adSpace {
      display: block;
      min-height: 300px;
@@ -1900,6 +1901,8 @@ body nav.top-bar.top-bar-logged-in {
      top: -18px;
  }
 
+ /* help resources button styles
+
  .mainNav .helpResc {
      position: absolute;
      right: 106px;
@@ -1913,6 +1916,7 @@ body nav.top-bar.top-bar-logged-in {
      border-top-left-radius: 5px;
      border-top-right-radius: 5px;
  }
+*/
 
  ul.profile {
      list-style: none;
@@ -2014,23 +2018,24 @@ body nav.top-bar.top-bar-logged-in {
 
 
  /* new message center code */
-    #slideout {
-        position: fixed;
-        bottom: 40px;
-        left: 0;
-        width: 35px;
-        padding: 12px 0;
-        text-align: center;
-        color: #9EAFFF;
-        background: #90BFFA;
-        -webkit-transition-duration: 0.3s;
-        -moz-transition-duration: 0.3s;
-        transition-duration: 0.3s;
-        -o-transition-duration: 0.3s;
-        -webkit-border-radius: 0 5px 5px 0;
-        -moz-border-radius: 0 5px 5px 0;
-        border-radius: 0 5px 5px 0;
-    }
+#slideout {
+    position: fixed;
+    bottom: 40px;
+    left: 0;
+    width: 35px;
+    padding: 12px 0;
+    text-align: center;
+    color: #9EAFFF;
+    background: #90BFFA;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -webkit-border-radius: 0 5px 5px 0;
+    -moz-border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
+}
+
  #slideout_inner {
      position: fixed;
      bottom: 40px;
@@ -2060,10 +2065,12 @@ body nav.top-bar.top-bar-logged-in {
      height: 100px;
      margin-bottom: 6px;
  }
+
  #slideout:active,
  #slideout:hover {
      right: 250px;
  }
+
  #slideout:active #slideout_inner,
  #slideout:hover #slideout_inner {
      left: 0;
@@ -2191,6 +2198,7 @@ body nav.top-bar.top-bar-logged-in {
      width: 100%;
      height: 100%;
  }
+
  #dashBoard section {
      background: #fffdf4; /* Old browsers */
      background: -moz-linear-gradient(top,  #fffdf4 0%, #fff9e0 51%, #f9f4d9 52%, #ffffff 100%); /* FF3.6+ */
@@ -2249,9 +2257,11 @@ body nav.top-bar.top-bar-logged-in {
  }
 
  #dashBoard div.signUp {
+     display:block;
      font-weight: bold;
      font-size: xx-large;
      line-height: 36px;
+     width: 50%;
      box-shadow: 0px 2px 4px 2px #577396;
      margin: auto;
      background: none repeat scroll 0% 0% #FFFADE;
@@ -2383,6 +2393,95 @@ body nav.top-bar.top-bar-logged-in {
          width: 90px;
          vertical-align: top;
      }
+
+     .contain-to-grid .mainNav {
+         position: absolute;
+         top: 128px;
+         left: 0px;
+         margin: 0px;
+         padding: 0px;
+         height: 50px;
+         z-index: 20;
+     }
+
+     .contain-to-grid-logged-in .mainNav {
+         position: absolute;
+         top: 55px;
+         left: 0px;
+         margin: 0px;
+         padding: 0px;
+         height: 50px;
+         z-index: 20;
+     }
+
+     .mainNav li {
+         display: block;
+         margin: 0 10px;
+         height: 20px;
+         list-style: none outside none;
+         line-height: 20px;
+         color: #FFF;
+         font-size: 12px;
+         font-weight: bold;
+         text-decoration: none;
+         float: left;
+     }
+
+     .mainNav li [ng-click="logout()"] {
+         text-shadow: 0px 1px 1px #8A9948;
+     }
+
+     .login {
+         position: relative;
+         margin: -11px 0px;
+     }
+
+     .login input[type="text"],
+     .login input[type="password"]{
+         height: 10px;
+         width: 80px;
+     }
+
+     .login .button {
+         padding: 3px;
+         background: -moz-linear-gradient(center top , #F2F2F2 0px, #F2F2F2 1px, #E4E4E4 1px, #CECECE 100%) repeat scroll 0% 0% transparent;
+         border-color: #999;
+         color: #8A9948 !important;
+         font-size: x-small;
+     }
+
+     .login [ng-click="forgot()"] {
+         position: absolute;
+         top: 0px;
+         right: -90px;
+         font-weight: normal;
+         font-size: x-small;
+         height: 20px;
+     }
+
+     #dashBoard .features {
+         display: inline-block;
+         border-radius: 0;
+         background: none repeat scroll 0% 0% #F8F8FF;
+         padding: 10px;
+         height: auto;
+         width: 96%;
+         box-shadow: 0px 2px 5px 2px #A3A1A1;
+         margin: 0;
+         text-align: left;
+         vertical-align: top;
+     }
+
+     .scrollerContent li {
+         display: inline-block;
+         width: 48%;
+         list-style: none outside none;
+         text-align: center;
+         vertical-align: top;
+         min-height: 200px;
+         padding: 0px;
+         margin: 0.5%;
+     }
  }
  @media screen and (min-device-width: 680px) {
      .primaryContent, .mainNav {
@@ -2397,18 +2496,527 @@ body nav.top-bar.top-bar-logged-in {
          width: 100px;
          vertical-align: top;
      }
+
+     .mainNav {
+         position: static;
+         height: 50px;
+         padding: 0;
+         margin: 0px auto;
+     }
+
+     .mainNav li {
+         display: block;
+         margin: 0 10px;
+         height: 50px;
+         list-style: none outside none;
+         line-height: 50px;
+         color: #FFF;
+         font-size: 12px;
+         font-weight: bold;
+         text-decoration: none;
+         float: left;
+     }
+
+     .mainNav li [ng-click="logout()"] {
+         text-shadow: 0px 1px 1px #8A9948;
+     }
+
+     /*content tabs*/
+     .container{
+         width: 800px;
+         margin: 0 auto;
+     }
+
+     ul.tabs{
+         margin: 0px;
+         padding: 0px;
+         list-style: none;
+     }
+     ul.tabs li{
+         background: none;
+         color: #222;
+         display: inline-block;
+         padding: 10px 15px;
+         cursor: pointer;
+     }
+
+     ul.tabs li.current{
+         background: #ededed;
+         color: #222;
+     }
+
+     .tab-content{
+         display: none;
+         background: #ededed;
+         padding: 15px;
+     }
+
+     .tab-content.current{
+         display: inherit;
+     }
+
+     .tabNavGen {
+         padding: 0px;
+         margin: 0px auto 20px;
+         width: 100%;
+         text-align: center;
+         background: none repeat scroll 0% 0% #A7CCFB;
+         box-shadow: 0px 4px 3px #71706B;
+     }
+
+     .tabNavGen li {
+         display: inline-block;
+         padding: 6px;
+         color: #577396 !important;
+         background: #e2e2e2; /* Old browsers */
+         background: -moz-linear-gradient(top,  #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%); /* FF3.6+ */
+         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e2e2), color-stop(50%,#dbdbdb), color-stop(51%,#d1d1d1), color-stop(100%,#fefefe)); /* Chrome,Safari4+ */
+         background: -webkit-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Chrome10+,Safari5.1+ */
+         background: -o-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Opera 11.10+ */
+         background: -ms-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* IE10+ */
+         background: linear-gradient(to bottom,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C */
+         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-9 */
+         line-height: 1.125rem;
+         border: 1px solid #577396;
+         width: 30.5%;
+         height: 15px;
+         text-align: center;
+         margin: 0 0 3px;
+         vertical-align: top;
+     }
+
+     .tabNavGen li a {
+         display: block;
+         width: 100%;
+         height: 100%;
+     }
+
+     #dashBoard section {
+         background: #fffdf4; /* Old browsers */
+         background: -moz-linear-gradient(top,  #fffdf4 0%, #fff9e0 51%, #f9f4d9 52%, #ffffff 100%); /* FF3.6+ */
+         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fffdf4), color-stop(51%,#fff9e0), color-stop(52%,#f9f4d9), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+         background: -webkit-linear-gradient(top,  #fffdf4 0%,#fff9e0 51%,#f9f4d9 52%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+         background: -o-linear-gradient(top,  #fffdf4 0%,#fff9e0 51%,#f9f4d9 52%,#ffffff 100%); /* Opera 11.10+ */
+         background: -ms-linear-gradient(top,  #fffdf4 0%,#fff9e0 51%,#f9f4d9 52%,#ffffff 100%); /* IE10+ */
+         background: linear-gradient(to bottom,  #fffdf4 0%,#fff9e0 51%,#f9f4d9 52%,#ffffff 100%); /* W3C */
+         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffdf4', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+
+         min-height: 150px;
+         display: block;
+         margin: 0;
+         padding: 10px;
+         line-height: 1.125rem;
+         border: 1px solid #B2AF9B;
+     }
+
+     #dashBoard h1 {
+         color: #577396;
+     }
+
+     #dashBoard .signUp {
+         color: #fff;
+         background: none repeat scroll 0% 0% #A7CCFB;
+     }
+
+     #dashBoard .dash-notification {
+         min-height: 65px;
+     }
+
+     #dashBoard h2 {
+         display: block;
+     }
+
+     #dashBoard img {
+         display: inline-block;
+         border-radius: 7px;
+     }
+
+     #dashBoard ul {
+         display: inline-block;
+     }
+
+     #dashBoard .dashPages {
+         display: inline-block;
+         border-radius: 7px;
+         background: none repeat scroll 0% 0% #F8F8FF;
+         padding: 10px;
+         height: 80px;
+         width: 21%;
+         box-shadow: 0px 2px 5px 2px #A3A1A1;
+         margin: 0px 7px;
+         text-align: center;
+         vertical-align: top;
+     }
+
+     #dashBoard div.signUp {
+         font-weight: bold;
+         font-size: xx-large;
+         line-height: 36px;
+         box-shadow: 0px 2px 4px 2px #577396;
+         margin: auto;
+         background: none repeat scroll 0% 0% #FFFADE;
+         color: #577396;
+         text-shadow: 1px 2px 2px #fff;
+         border:5px solid #CCC8B2;
+     }
+
+     #dashBoard .features {
+         display: inline-block;
+         border-radius: 7px;
+         background: none repeat scroll 0% 0% #F8F8FF;
+         padding: 10px;
+         height: auto;
+         width: 28%;
+         box-shadow: 0px 2px 5px 2px #A3A1A1;
+         margin: 0px 5px;
+         text-align: left;
+         vertical-align: top;
+         overflow: hidden;
+     }
+
+     .features img {
+         border: 1px solid #A9A9A9;
+     }
+
+     .dashPages a {
+         display: block;
+         width: 100%;
+         height: 100%;
+         line-height: 80px;
+     }
+
+     .features a {
+         display: block;
+         width: 100%;
+         height: 100%;
+         font-weight: bold;
+         color: #F08678;
+     }
+
+     .topIntroImg {
+         float: left;
+         border-radius: 5px;
+         border: 1px solid #A9A9A9;
+         margin-right: 10px;
+         margin-bottom: 10px;
+     }
+
+     .myMemWallsList img {
+         max-width: 70% !important;
+         display: block;
+         margin: 10px 0 10px;
+     }
  }
+
  @media screen and (min-device-width: 980px) {
      .primaryContent, .mainNav {
          width: 980px;
      }
+
+     .mainNav {
+         position: static;
+         height: 50px;
+         padding: 0;
+         margin: 0px auto;
+     }
+
+     .mainNav li {
+         display: block;
+         margin: 0 10px;
+         height: 50px;
+         list-style: none outside none;
+         line-height: 50px;
+         color: #FFF;
+         font-size: 12px;
+         font-weight: bold;
+         text-decoration: none;
+         float: left;
+     }
+
+     .mainNav li [ng-click="logout()"] {
+         text-shadow: 0px 1px 1px #8A9948;
+     }
+
+     body .contain-to-grid-logged-in {
+         display: block;
+         box-shadow: 0px 2px 5px 2px #A3A1A1;
+         padding-top: 0px;
+         width: 100%;
+         border-bottom: 1px dotted #8A9948;
+         background: url('/img/background/headerFooterBG.png') repeat-x scroll center -140px #9EAFFF;
+         height: 60px;
+         text-align: center;
+         margin: 0px;
+     }
+
+     body .contain-to-grid-logged-in .loginBlock {
+         display: block;
+         width: auto;
+         height: 50px;
+         margin-top: 0px;
+         margin-left: -400px;
+         padding-right: 20px;
+         text-align: right;
+         float: right;
+         background: rgba(189, 203, 128, 0.6);
+         border-top-left-radius: 0;
+         border-top-right-radius: 0;
+         border-bottom-left-radius:2em;
+         border-bottom-right-radius:2em;
+         border-bottom: none;
+         border-right: 4px solid #8a9948;
+         border-left: 4px solid #8a9948;
+         border-bottom: 2px solid #8a9948;
+         box-shadow: -2px -2px 2px rgb(113, 112, 107);
+         z-index: 2;
+     }
+
+     .loginBlock {
+         /*position:relative;*/
+         display: block;
+         width: auto;
+         height: 50px;
+         margin-top: 0px;
+         margin-left: -210px;
+         padding-right: 20px;
+         text-align: right;
+         background: rgba(189, 203, 128, 0.6);
+         border-top-left-radius: 0;
+         border-top-right-radius: 0;
+         border-bottom-left-radius:2em;
+         border-bottom-right-radius:2em;
+         border-bottom: none;
+         border-right: 4px solid #8a9948;
+         border-left: 4px solid #8a9948;
+         border-bottom: 2px solid #8a9948;
+         box-shadow: -2px -2px 2px rgb(113, 112, 107);
+         z-index: 2;
+     }
+
+     .contain-to-grid-logged-in .avatar {
+         position: absolute;
+         top: 10px;
+         right: 80px;
+         width: 25px;
+         border-radius: 5px;
+     }
+
      .generalPage, .feature, .scrollerContainer {
          width: 760px;
      }
+
+     body nav.top-bar.top-bar-logged-in {
+         background: url('/img/background/headerFooterBG.png') repeat-x scroll -456px -521px #9EAFFF;
+         position: relative;
+         width: 100%;
+         max-width: 980px;
+         border-radius: 7px;
+         top: 3px;
+     }
+
+     body nav.top-bar.top-bar-logged-in section.top-bar-section ul.left li a, body nav.top-bar.top-bar-logged-in section.top-bar-section ul.left li a.small {
+         color: #8a9948;
+     }
+
+     nav.tab-bar {
+         background: url("/img/background/headerFooterBG.png") repeat-x scroll -456px -521px #B4C394;
+         /*background: none repeat scroll 0% 0% ;*/
+         color: white;
+         height: 2.8125rem;
+         line-height: 2.8125rem;
+         position: relative;
+     }
+
      .adContainer {
          display: inline-block;
          margin: 10px 0;
          width: 200px;
          vertical-align: top;
+     }
+
+     /*content tabs*/
+     .container{
+         width: 800px;
+         margin: 0 auto;
+     }
+
+     ul.tabs{
+         margin: 0px;
+         padding: 0px;
+         list-style: none;
+     }
+     ul.tabs li{
+         background: none;
+         color: #222;
+         display: inline-block;
+         padding: 10px 15px;
+         cursor: pointer;
+     }
+
+     ul.tabs li.current{
+         background: #ededed;
+         color: #222;
+     }
+
+     .tab-content{
+         display: none;
+         background: #ededed;
+         padding: 15px;
+     }
+
+     .tab-content.current{
+         display: inherit;
+     }
+
+     .tabNavGen {
+         padding: 0px;
+         margin: 0px auto 20px;
+         width: 100%;
+         text-align: center;
+         background: none repeat scroll 0% 0% #A7CCFB;
+         box-shadow: 0px 4px 3px #71706B;
+     }
+
+     .tabNavGen li {
+         display: inline-block;
+         padding: 6px;
+         color: #577396 !important;
+         background: #e2e2e2; /* Old browsers */
+         background: -moz-linear-gradient(top,  #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%); /* FF3.6+ */
+         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e2e2), color-stop(50%,#dbdbdb), color-stop(51%,#d1d1d1), color-stop(100%,#fefefe)); /* Chrome,Safari4+ */
+         background: -webkit-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Chrome10+,Safari5.1+ */
+         background: -o-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Opera 11.10+ */
+         background: -ms-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* IE10+ */
+         background: linear-gradient(to bottom,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C */
+         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-9 */
+         line-height: 1.125rem;
+         border: 1px solid #577396;
+         width: 30.5%;
+         height: 15px;
+         text-align: center;
+         margin: 0 0 3px;
+         vertical-align: top;
+     }
+
+     .tabNavGen li a {
+         display: block;
+         width: 100%;
+         height: 100%;
+     }
+
+     #dashBoard section {
+         background: #fffdf4; /* Old browsers */
+         background: -moz-linear-gradient(top,  #fffdf4 0%, #fff9e0 51%, #f9f4d9 52%, #ffffff 100%); /* FF3.6+ */
+         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fffdf4), color-stop(51%,#fff9e0), color-stop(52%,#f9f4d9), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+         background: -webkit-linear-gradient(top,  #fffdf4 0%,#fff9e0 51%,#f9f4d9 52%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+         background: -o-linear-gradient(top,  #fffdf4 0%,#fff9e0 51%,#f9f4d9 52%,#ffffff 100%); /* Opera 11.10+ */
+         background: -ms-linear-gradient(top,  #fffdf4 0%,#fff9e0 51%,#f9f4d9 52%,#ffffff 100%); /* IE10+ */
+         background: linear-gradient(to bottom,  #fffdf4 0%,#fff9e0 51%,#f9f4d9 52%,#ffffff 100%); /* W3C */
+         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffdf4', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+
+         min-height: 150px;
+         display: block;
+         margin: 0;
+         padding: 10px;
+         line-height: 1.125rem;
+         border: 1px solid #B2AF9B;
+     }
+
+     #dashBoard h1 {
+         color: #577396;
+     }
+
+     #dashBoard .signUp {
+         color: #fff;
+         background: none repeat scroll 0% 0% #A7CCFB;
+     }
+
+     #dashBoard .dash-notification {
+         min-height: 65px;
+     }
+
+     #dashBoard h2 {
+         display: block;
+     }
+
+     #dashBoard img {
+         display: inline-block;
+         border-radius: 7px;
+     }
+
+     #dashBoard ul {
+         display: inline-block;
+     }
+
+     #dashBoard .dashPages {
+         display: inline-block;
+         border-radius: 7px;
+         background: none repeat scroll 0% 0% #F8F8FF;
+         padding: 10px;
+         height: 80px;
+         width: 21%;
+         box-shadow: 0px 2px 5px 2px #A3A1A1;
+         margin: 0px 7px;
+         text-align: center;
+         vertical-align: top;
+     }
+
+     #dashBoard div.signUp {
+         font-weight: bold;
+         font-size: xx-large;
+         line-height: 36px;
+         box-shadow: 0px 2px 4px 2px #577396;
+         margin: auto;
+         background: none repeat scroll 0% 0% #FFFADE;
+         color: #577396;
+         text-shadow: 1px 2px 2px #fff;
+         border:5px solid #CCC8B2;
+     }
+
+     #dashBoard .features {
+         display: inline-block;
+         border-radius: 7px;
+         background: none repeat scroll 0% 0% #F8F8FF;
+         padding: 10px;
+         height: auto;
+         width: 29%;
+         box-shadow: 0px 2px 5px 2px #A3A1A1;
+         margin: 0px 9px;
+         text-align: left;
+         vertical-align: top;
+         overflow: hidden;
+     }
+
+     .features img {
+         border: 1px solid #A9A9A9;
+     }
+
+     .dashPages a {
+         display: block;
+         width: 100%;
+         height: 100%;
+         line-height: 80px;
+     }
+
+     .features a {
+         display: block;
+         width: 100%;
+         height: 100%;
+         font-weight: bold;
+         color: #F08678;
+     }
+
+     .topIntroImg {
+         float: left;
+         border-radius: 5px;
+         border: 1px solid #A9A9A9;
+         margin-right: 10px;
+         margin-bottom: 10px;
+     }
+
+     .myMemWallsList img {
+         max-width: 70% !important;
+         display: block;
+         margin: 10px 0 10px;
      }
  }
