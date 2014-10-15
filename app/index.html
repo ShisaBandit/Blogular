@@ -55,7 +55,7 @@
                     <a href="#/help-resources" class="helpResc">Help Resources</a>
                 </li>
                 <li>
-                    <a href="#" ng-click="logout()" if-authed="show">logout</a>
+                    <a href="#" ng-controller="UserInfoCtrl" ng-click="logout()" if-authed="show">logout</a>
                     <div id="login-inner" class="login" ng-controller="LoginController" if-authed="hide">
                         <p>
                             <b class="loginMsg">{{error}}</b>
