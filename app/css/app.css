@@ -1,6 +1,4 @@
- /* Artfully masterminded by ZURB  */
-
-/* -------------------------------------------------- 
+/* --------------------------------------------------
    Table of Contents
 -----------------------------------------------------
 :: Shared Styles
@@ -30,6 +28,7 @@
  .error{
     color: red;
 }
+
 .spinner {
     background-image: url("loading.gif");
     background-repeat: no-repeat;
@@ -41,27 +40,72 @@ a {
     text-decoration: inherit;
 }
 
-.message{
+.message {
     color: green;
 }
 
-.scrollerContent {
-    width: 100%;
-    padding: 0;
-    margin: 0 auto;
-    text-align: center;
+
+.top-bar-logged-in .logo {
+    position: relative;
+    top: 0px;
+    left: 10px;
+    display: block;
+    width: 50px;
+    height: 45px;
+    margin: 0px 20px 0 0;
+    padding-top: 0px;
+    text-indent: -9000px;
+    background: url('/img/miniLogo.png') no-repeat scroll left 4px transparent;
+    z-index: 20;
 }
 
-.scrollerContent li {
-    display: inline-block;
-    width: 24%;
-    list-style: none outside none;
-    text-align: center;
-    vertical-align: top;
-    min-height: 200px;
-    padding: 0px;
-    margin: 0.5%;
+.logo {
+    width: 343px;
+    height: 125px;
+    margin: -90px 0px 0px 0px;
+    padding-top: 0px;
+    text-indent: -9000px;
+    background: url('/img/logo.png') no-repeat scroll left top transparent;
+    display: block;
+    float: left;
 }
+
+ .contain-to-grid .mainNav {
+     position: absolute;
+     top: 126px;
+     left: 0px;
+     margin: 0px;
+     padding: 0px;
+     height: 50px;
+     z-index: 20;
+ }
+
+ .contain-to-grid-logged-in .mainNav {
+     position: absolute;
+     top: 55px;
+     left: 0px;
+     margin: 0px;
+     padding: 0px;
+     height: 50px;
+     z-index: 20;
+ }
+
+ .mainNav li {
+     display: block;
+     margin: 0 10px;
+     height: 20px;
+     list-style: none outside none;
+     line-height: 20px;
+     color: #FFF;
+     font-size: 12px;
+     font-weight: bold;
+     text-decoration: none;
+     float: left;
+ }
+
+ .mainNav li [ng-click="logout()"] {
+     text-shadow: 0px 1px 1px #8A9948;
+ }
 
 #portraitpic {
     position: absolute;
@@ -162,13 +206,13 @@ a {
     background: #9eafff url("/img/background/cloudBG.jpg")no-repeat center -195px;
 }
 
-body .contain-to-grid {
+ .contain-to-grid {
     display: block;
     box-shadow: 0px 2px 5px 2px #A3A1A1;
     margin: 0px;
     padding-top: 95px;
     height: 75px;
-    width: 100%;
+    width: 480px;
     border-bottom: 1px #8A9948 dotted;
     background: url('/img/background/headerFooterBG.png') repeat-x scroll center -140px #9EAFFF;
 }
@@ -240,13 +284,14 @@ body .contain-to-grid {
     color: #fff;
     border: none;
 }
+
 #pettionbutton{
     color: #8a9948;
     border: none;
 }
 
  .primaryContent, .mainNav {
-     width: 320px;
+     width: 480px;
      margin: auto;
  }
 
@@ -261,7 +306,7 @@ body .contain-to-grid {
  .generalPage{
      position: relative;
      display: inline-block;
-     width: 320px;
+     width: 480px;
      margin: 10px 0px;
      vertical-align: top;
      border-top-left-radius: 2em;
@@ -275,29 +320,58 @@ body .contain-to-grid {
 
  .feature {
      display: inline-block;
-     width: 320px;
+     width: 480px;
      vertical-align: top;
  }
 
+.scrollerContainer {
+    display: inline-block;
+    margin: 10px 0;
+    width: 480px;
+    vertical-align: top;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 8px;
+    overflow-x: hidden;
+    background: #fff;
+}
 
- .scrollerContainer {
-     display: inline-block;
-     margin: 10px 0;
-     width: 320px;
-     vertical-align: top;
-     border-top-left-radius: 9px;
-     border-top-right-radius: 8px;
-     overflow-x: hidden;
-     background: #fff;
- }
+.adContainer {
+    display: block;
+    margin: 10px 0;
+    width: 320px;
+    vertical-align: top;
+    clear: both;
+}
+.scrollerContent {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    text-align: center;
+}
 
- .adContainer {
-     display: block;
-     margin: 10px 0;
-     width: 320px;
-     vertical-align: top;
-     clear: both;
- }
+.scrollerContent li {
+    display: inline-block;
+    width: 48%;
+    list-style: none outside none;
+    text-align: center;
+    vertical-align: top;
+    min-height: 200px;
+    padding: 0px;
+    margin: 0.5%;
+}
+
+/*
+.scrollerContent li {
+   display: inline-block;
+   width: 24%;
+   list-style: none outside none;
+   text-align: center;
+   vertical-align: top;
+   min-height: 200px;
+   padding: 0px;
+   margin: 0.5%;
+}
+*/
 
  .mainNav li {
      display: block;
@@ -317,11 +391,6 @@ body .contain-to-grid {
  }
 
  .generalPage.petMem {
-     /*max-width: 980px;
-     margin-top: 20px;
-     margin-left: auto;
-     margin-right: auto;
-     padding-top: 10px;*/
      background: none repeat scroll 0% 0% #F28678;
      border-top-left-radius: 2em;
      border-top-right-radius: 2em;
@@ -329,11 +398,6 @@ body .contain-to-grid {
  }
 
  .generalPage.privGroup {
-     /*max-width: 980px;
-     margin-top: 20px;
-     margin-left: auto;
-     margin-right: auto;
-     padding-top: 10px;*/
      background: none repeat scroll 0% 0% #90BFFA;
      border-top-left-radius: 2em;
      border-top-right-radius: 2em;
@@ -376,15 +440,6 @@ h2.dark {
     box-shadow: 2px 2px 5px rgb(19, 45, 72);
 }
 
-#login{
-
-}
-#register{
-
-}
-#logout{
-
-}
 .navstyles{
     background-color: dodgerblue;
 }
@@ -393,15 +448,13 @@ h2.dark {
      display: block;
      box-shadow: 0px 2px 5px 2px #A3A1A1;
      padding-top: 0px;
-     width: 100%;
+     width: 480px;
      border-bottom: 1px dotted #8A9948;
      background: url('/img/background/headerFooterBG.png') repeat-x scroll center -140px #9EAFFF;
      height: 80px;
      text-align: center;
      margin: 0px;
  }
-
-
 
  body .contain-to-grid-logged-in .loginBlock {
      display: block;
@@ -498,7 +551,6 @@ body .contain-to-grid-logged-in #username2 {
     margin-right: 0px;
     padding: 10px;
     padding-bottom: 0px;
-    /* background: #26619D; */
     color: #71706b;
     white-space: nowrap;
     -webkit-border-radius: 3px;
@@ -522,33 +574,6 @@ body .contain-to-grid-logged-in #username2 {
     padding-left:3px;
 
 }
-
-.top-bar-logged-in .logo {
-    position: relative;
-    top: 0px;
-    left: 10px;
-    display: block;
-    width: 50px;
-    height: 45px;
-    margin: 0px 20px 0 0;
-    padding-top: 0px;
-    text-indent: -9000px;
-    background: url('/img/miniLogo.png') no-repeat scroll left 4px transparent;
-    z-index: 20;
-}
-
-
-.logo {
-    width: 343px;
-    height: 125px;
-    margin: -90px 0px 0px 0px;
-    padding-top: 0px;
-    text-indent: -9000px;
-    background: url('/img/logo.png') no-repeat scroll left top transparent;
-    display: block;
-    float: left;
-}
-
 
 .searchBarBlock {
 	height:40px;
@@ -597,11 +622,14 @@ body .contain-to-grid-logged-in #username2 {
     line-height: 57px;
 }
 
-.border-footer{
+.border-footer {
     padding: 20px;
-    background: url("/img/background/headerFooterBG.png") repeat-x scroll center -480px rgb(158, 175, 255);
-    border-bottom: 1px solid #000000;
-    box-shadow: 2px 2px 5px rgb(19, 45, 72);
+    background: url('/img/background/headerFooterBG.png') repeat-x scroll -356px -485px #9EAFFF;
+    background-clip: border-box;
+    background-origin: padding-box;
+    background-size: auto auto;
+    border-bottom: 1px solid #000;
+    box-shadow: 2px 2px 5px #132D48;
     height: auto;
     max-height: 121px;
 }
@@ -1588,18 +1616,6 @@ h6.petsTitle {
      margin-right: auto !important;
  }
 
- /*
- body.ng-scope div.off-canvas-wrap div.inner-wrap section.main-section section.primaryContent section#shelf.shelf div.mainBG.my-slide-animation.ng-scope div.ng-scope div.row.offsetHeight div.small-12.columns div.tabbable.ng-isolate-scope div.tab-content div.tab-pane.ng-scope section.ng-scope div.content.automargins div.row {
-     width: auto;
-     max-width: 950px;
-     margin:auto;
- }
-   */
-
- .templatePortal {
-
- }
-
  .memWallSearch {
      margin: 10px 0;
      width: 175px;
@@ -1797,7 +1813,6 @@ body nav.top-bar.top-bar-logged-in {
      text-align: justify;
  }
 
-
  #events .event-list .event-list-body ol.event-list-content {
      display: block;
      width: 100%;
@@ -1805,7 +1820,6 @@ body nav.top-bar.top-bar-logged-in {
      margin: 0px;
      padding: 5px;
  }
-
 
  #events .event-list .event-list-body ol.event-list-content li {
      border-bottom: 1px solid #DDDDDD;
@@ -1888,11 +1902,26 @@ body nav.top-bar.top-bar-logged-in {
      margin: -10px 0px;
  }
 
+.login input[type="text"],
+.login input[type="password"]{
+    height: 10px;
+    width: 80px;
+}
+
+.login .button {
+    padding: 3px;
+    background: -moz-linear-gradient(center top , #F2F2F2 0px, #F2F2F2 1px, #E4E4E4 1px, #CECECE 100%) repeat scroll 0% 0% transparent;
+    border-color: #999;
+    color: #8A9948 !important;
+    font-size: x-small;
+}
+
  .login [ng-click="forgot()"] {
      position: absolute;
      top: 18px;
      right: 113px;
      font-weight: normal;
+     height: 20px;
      font-size: x-small;
  }
 
@@ -1900,23 +1929,6 @@ body nav.top-bar.top-bar-logged-in {
      position: absolute;
      top: -18px;
  }
-
- /* help resources button styles
-
- .mainNav .helpResc {
-     position: absolute;
-     right: 106px;
-     display: block;
-     padding: 4px;
-     font-size: xx-small;
-     color: #FFF;
-     background: none repeat scroll 0% 0% #BC838D;
-     z-index: 9999;
-     top: -22px;
-     border-top-left-radius: 5px;
-     border-top-right-radius: 5px;
- }
-*/
 
  ul.profile {
      list-style: none;
@@ -2272,13 +2284,13 @@ body nav.top-bar.top-bar-logged-in {
 
  #dashBoard .features {
      display: inline-block;
-     border-radius: 7px;
+     border-radius: 0;
      background: none repeat scroll 0% 0% #F8F8FF;
      padding: 10px;
      height: auto;
-     width: 29%;
+     width: 96%;
      box-shadow: 0px 2px 5px 2px #A3A1A1;
-     margin: 0px 9px;
+     margin: 0;
      text-align: left;
      vertical-align: top;
  }
@@ -2316,6 +2328,35 @@ body nav.top-bar.top-bar-logged-in {
     margin: 10px 0 10px;
  }
 
+.border-footer p {
+    margin-top: 0px;
+    margin-left: 85px;
+    margin-bottom: 0px;
+    font-size: small;
+}
+
+.border-footer p.toiawase {
+    margin-top: 3px;
+    margin-left: 85px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.border-footer p.toiawase a {
+    color: #F00 !important;
+    font-size: x-small;
+}
+
+.fb_iframe_widget {
+    display: inline-block;
+    position: relative;
+    float: right;
+}
+
+#___follow_0 {
+    float: right !important;
+}
+
  .clear {
     display: block;
     clear: both;
@@ -2348,7 +2389,7 @@ body nav.top-bar.top-bar-logged-in {
     .kinetic-slider-content a img {
       height: 100%; }
 
- ////* Begin responsive styling - default styles are for mobile *////
+/* Begin responsive styling - default styles are for mobile */
  @media screen and (min-device-width: 480px) and (max-device-width: 489px) {
      .primaryContent, .mainNav {
          width: 480px;
@@ -2364,7 +2405,7 @@ body nav.top-bar.top-bar-logged-in {
          clear: both;
      }
  }
- @media screen and (min-device-width: 490px)and (max-device-width: 679px) {
+ @media screen and (min-device-width: 490px) and (max-device-width: 679px) {
      .primaryContent, .mainNav {
          width: 490px;
      }
@@ -2392,6 +2433,10 @@ body nav.top-bar.top-bar-logged-in {
          margin: 10px 0;
          width: 90px;
          vertical-align: top;
+     }
+
+     .contain-to-grid {
+         width: 100%;
      }
 
      .contain-to-grid .mainNav {
@@ -2459,30 +2504,8 @@ body nav.top-bar.top-bar-logged-in {
          height: 20px;
      }
 
-     #dashBoard .features {
-         display: inline-block;
-         border-radius: 0;
-         background: none repeat scroll 0% 0% #F8F8FF;
-         padding: 10px;
-         height: auto;
-         width: 96%;
-         box-shadow: 0px 2px 5px 2px #A3A1A1;
-         margin: 0;
-         text-align: left;
-         vertical-align: top;
-     }
-
-     .scrollerContent li {
-         display: inline-block;
-         width: 48%;
-         list-style: none outside none;
-         text-align: center;
-         vertical-align: top;
-         min-height: 200px;
-         padding: 0px;
-         margin: 0.5%;
-     }
  }
+
  @media screen and (min-device-width: 680px) {
      .primaryContent, .mainNav {
          width: 680px;
@@ -2495,6 +2518,10 @@ body nav.top-bar.top-bar-logged-in {
          margin: 10px 0;
          width: 100px;
          vertical-align: top;
+     }
+
+     .contain-to-grid {
+         width: 100%;
      }
 
      .contain-to-grid .mainNav {
@@ -2813,7 +2840,11 @@ body nav.top-bar.top-bar-logged-in {
          text-shadow: 0px 1px 1px #8A9948;
      }
 
-     body .contain-to-grid-logged-in {
+     .contain-to-grid {
+         width: 100%;
+     }
+
+     .contain-to-grid-logged-in {
          display: block;
          box-shadow: 0px 2px 5px 2px #A3A1A1;
          padding-top: 0px;
@@ -2825,7 +2856,7 @@ body nav.top-bar.top-bar-logged-in {
          margin: 0px;
      }
 
-     body .contain-to-grid-logged-in .loginBlock {
+     .contain-to-grid-logged-in .loginBlock {
          display: block;
          width: auto;
          height: 50px;
@@ -2845,6 +2876,21 @@ body nav.top-bar.top-bar-logged-in {
          border-bottom: 2px solid #8a9948;
          box-shadow: -2px -2px 2px rgb(113, 112, 107);
          z-index: 2;
+     }
+
+     .contain-to-grid-logged-in .mainNav {
+         position: static;
+         height: 50px;
+         padding: 0;
+         margin: 0px auto;
+     }
+
+     .contain-to-grid-logged-in .avatar {
+         position: absolute;
+         top: 10px;
+         right: 80px;
+         width: 25px;
+         border-radius: 5px;
      }
 
      .loginBlock {
@@ -2867,14 +2913,6 @@ body nav.top-bar.top-bar-logged-in {
          border-bottom: 2px solid #8a9948;
          box-shadow: -2px -2px 2px rgb(113, 112, 107);
          z-index: 2;
-     }
-
-     .contain-to-grid-logged-in .avatar {
-         position: absolute;
-         top: 10px;
-         right: 80px;
-         width: 25px;
-         border-radius: 5px;
      }
 
      .generalPage, .feature, .scrollerContainer {
@@ -3095,4 +3133,14 @@ body nav.top-bar.top-bar-logged-in {
          display: block;
          margin: 10px 0 10px;
      }
+
+     .border-footer{
+         padding: 20px;
+         background: url("/img/background/headerFooterBG.png") repeat-x scroll center -480px rgb(158, 175, 255);
+         border-bottom: 1px solid #000000;
+         box-shadow: 2px 2px 5px rgb(19, 45, 72);
+         height: auto;
+         max-height: 121px;
+     }
+
  }
