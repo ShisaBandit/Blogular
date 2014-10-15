@@ -19,15 +19,16 @@
                     </div>
                 </div>
             </div>
-            <div class="groupingDropdown" ng-controller="GroupingCtrl">
+            <div class="groupingDropdown" ng-controller="GroupingCtrl" ng-switch on="type">
+                <div ng-switch-when="group"></div>
                 <select class="login-inp"
                         name="selectedFilter"
                         ng-change="changedSubGroup(false)"
                         ng-model="parentOfSelected.selectedFilter"
-                        ng-options="group.name for group in groups">
+                        ng-options="group.name for group in groups" ng-switch-default ng-hide="groupingViewable">
                     <option value="" selected>View By Groupings Here</option>
                 </select>
-                <a ng-click="changedSubGroup(true)" class="button small success radius filter">Remove Filter</a>
+                <a ng-click="changedSubGroup(true)" class="button small success radius filter" ng-switch-default ng-hide="groupingViewable">Remove Filter</a>
             </div>
             <ul class="scrollerContent" >
                 <li ng-repeat="entry in entries | filter:search.search | bySubgroup:subgroup">

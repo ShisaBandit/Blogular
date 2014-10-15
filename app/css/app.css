@@ -444,7 +444,7 @@ h2.dark {
     background-color: dodgerblue;
 }
 
- body .contain-to-grid-logged-in {
+ .contain-to-grid-logged-in {
      display: block;
      box-shadow: 0px 2px 5px 2px #A3A1A1;
      padding-top: 0px;
