@@ -25,10 +25,10 @@
                         name="selectedFilter"
                         ng-change="changedSubGroup(false)"
                         ng-model="parentOfSelected.selectedFilter"
-                        ng-options="group.name for group in groups" ng-switch-default ng-hide="groupingViewable">
-                    <option value="" selected>View By Groupings Here</option>
+                        ng-options="group.name for group in groups" ng-switch-default ng-hide="groupingViewable" title="View By Grouping of Type of Lost Loved One Here">
+                    <option value="" selected>View by type of lost loved one:</option>
                 </select>
-                <a ng-click="changedSubGroup(true)" class="button small success radius filter" ng-switch-default ng-hide="groupingViewable">Remove Filter</a>
+                <a ng-click="changedSubGroup(true)" class="button small success radius filter" ng-switch-default ng-hide="groupingViewable" title="Reset Filter to Reveal All Memorials">View All</a>
             </div>
             <ul class="scrollerContent" >
                 <li ng-repeat="entry in entries | filter:search.search | bySubgroup:subgroup">

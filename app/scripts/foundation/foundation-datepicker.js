@@ -974,7 +974,7 @@
                 }
                 return date.join('');
             },
-            headTemplate: '<thead>' + '<tr>' + '<th class="prev"><i class="icon-chevron-left"/></th>' + '<th colspan="5" class="date-switch"></th>' + '<th class="next"><i class="icon-chevron-right"/></th>' + '</tr>' + '</thead>',
+            headTemplate: '<thead>' + '<tr>' + '<th class="prev"><i class="icon-chevron-left"><<</i></th>' + '<th colspan="5" class="date-switch"></th>' + '<th class="next"><i class="icon-chevron-right">>></i></th>' + '</tr>' + '</thead>',
             contTemplate: '<tbody><tr><td colspan="7"></td></tr></tbody>',
             footTemplate: '<tfoot><tr><th colspan="7" class="today"></th></tr></tfoot>'
         };

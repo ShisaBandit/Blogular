@@ -12,13 +12,13 @@
             <input type="text" name="eventdesc" ng-model="eventdesc" id="" placeholder="Tell us more about why this day is special"/>
             <h5>Date</h5>
             <div class="form-horizontal">
-                <input type="text" name="eventdate" datepicker-popup="yyyy/MMMM/dd" ng-model="eventdate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" placeholder="Pick a Date FOR YOUR Anniversary or Event" />
-                <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
+                <input type="text" name="eventdate" datepicker-popup="yyyy/MMMM/dd" ng-model="eventdate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" placeholder="Pick a Date For Your Anniversary or Event" />
+                <a class="btn" ng-click="open(2)"><img src="/img/eventsIcon.png" title="What's Happening" alt="Add an Angel Anniversary or Special Event"></a>
             </div>
             <a ng-click="submitEvent()" class="small button">Submit Angel Anniversary</a>
         </div>
     </div>
-    <a ng-click="toogleEventEntry()" class="small button">{{state}}</a>
+    <a ng-click="toogleEventEntry()" class="small button showRevealCal">{{state}}</a>
 
     <div class=" ">
         <div class="">
