@@ -13,6 +13,7 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
         $scope.pets = false;
         $scope.groups = false;
         $scope.filtersubgroup = $scope.subgroup;
+        $scope.spinner = true;
         if("/pets" == $location.path()){
             $scope.type = "pet";
             $scope.pets = true;
@@ -34,7 +35,7 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
                     //get all the blogs from server:ie this is first init
                     BlogsService.getBlogs(function (blogs) {
                         $scope.entries = blogs;
-
+                        $scope.spinner = false;
                         //**********how to encapsulate in angular??************//
                         $scope.fiterTag = $routeParams.name;
                         //$scope.entries = BlogsService.getAllBlogs();
@@ -49,6 +50,7 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
                         $scope.entries = blogs;
                         $scope.fiterTag = $routeParams.name;
                         $scope.$onReady("filter");
+                        $scope.spinner = false;
                         chopBlogText();
                     });
                     //**********how to encapsulate in angular??************//
@@ -64,6 +66,7 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
                         $scope.categories = BlogsService.getCategories();
                         $scope.$onReady("success");
                         chopBlogText();
+                        $scope.spinner = false;
                     });
                 }
 
@@ -97,7 +100,9 @@ angular.module('Plugin.Controller.BlogEntries', ['updateService', 'blogService',
         $scope.getSomeEntries = function () {
             if($scope.busy)return;
             $scope.busy = true;
+            $scope.spinner = true;
             BlogsService.paginatedBlogs($scope.skip,$scope.limit,function(blogs){
+                $scope.spinner = false;
                 for(var i = 0;i<blogs.length;i++){
                     console.log("getting groups and looping")
 

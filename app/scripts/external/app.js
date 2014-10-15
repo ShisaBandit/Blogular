@@ -2199,7 +2199,8 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, gr
     $scope.currentMessagedUser = {};
     $scope.userSelected = false;
     $scope.getFriendsMemorials();
-    $scope.getMessages = function (mUser) {
+    $scope.getMessages = function (mUser)
+    {
         $scope.userSelected = true;
         curerntlyMessagingUser.setUser(mUser);
         console.log(curerntlyMessagingUser.getUser());
@@ -2209,7 +2210,9 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, gr
                 $scope.messages = data;
             })
     }
-    $rootScope.$on('directMessageSent',function(){
+
+    $rootScope.$on('directMessageSent',function()
+    {
         $scope.getMessages(curerntlyMessagingUser.getUser());
 
     })
