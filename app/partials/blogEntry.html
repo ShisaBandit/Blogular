@@ -1,7 +1,7 @@
-<div ng-controller="blogEntryCtrl" >
+<div ng-controller="blogEntryCtrl">
     <div class="blogContent">
         <div class="feature" role="content">
-            <div class=" angelPicWide">
+            <div class="angelPicWide">
                 <div ng-switch on="parentObject.type" id="portrait">
                     <img id="" src="/uploads/{{ entry.profilePicPortrait }}"><br/>
                     <span ng-switch-when="group">Moderator: {{ entry.firstName }}</span>

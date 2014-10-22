@@ -744,9 +744,14 @@ h1.sectionHeader {
 }
 
 .wallViewers {
-    border-bottom: 1px solid #000000;
+    display: inline-block;
+    width: 43%;
+    margin: 5px;
+    vertical-align: top;
+    border: 1px solid #000;
     box-shadow: 0px 3px 3px -3px #000;
     margin-bottom: 10px;
+    padding: 5px;
 }
 /* -----------------------------------------
    Page Name 1
@@ -805,10 +810,10 @@ h1.sectionHeader {
 #contentHeader{
     display: block;
     width: 100%;
-    margin-bottom: 20px;
     padding: 4px;
     height: 26px;
     clear: both;
+    text-shadow: 1px 1px 1px #577396;
     background: url('/img/headerCircleBG.png') repeat-x scroll left top transparent;
 }
 
@@ -930,7 +935,7 @@ label {
 .small-6 input[type=text],.small-6 input[type=password],.small-6 input[type=email] {
     width: 250px;
     height: auto;
-    min-height: 35px;
+    min-height: 20px;
     border-radius: 4px;
 }
 
@@ -1962,6 +1967,8 @@ body nav.top-bar.top-bar-logged-in {
 
  ul.profile {
      list-style: none;
+     padding: 0;
+     margin: 0;
  }
 
  p.angelStory {
@@ -3297,6 +3304,17 @@ body nav.top-bar.top-bar-logged-in {
          max-width: 70% !important;
          display: block;
          margin: 10px 0 10px;
+     }
+
+     .scrollerContent li {
+         display: inline-block;
+         width: 24%;
+         list-style: none outside none;
+         text-align: center;
+         vertical-align: top;
+         min-height: 200px;
+         padding: 0px;
+         margin: 0.5%;
      }
 
      .border-footer{

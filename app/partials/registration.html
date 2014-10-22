@@ -1,14 +1,9 @@
     <div ng-controller="RegisterCtrl">
     <div class="generalPage">
+        <div id="contentHeader" class="">
+            <h2 class="contentHeaderTitle">Please enter the details for your personal user profile below</h2>
+        </div>
         <div role="content">
-
-            <table border="0" cellpadding="0" cellspacing="0">
-                <tr>
-                    <h1>Welcome to Angels of Eureka's The Circle of Life Memorial Walls.</h1>
-                    <h4>Please enter the details for your personal user profile below </h4>
-
-                </tr>
-            </table>
             <div class="">
                 <!-- <p style="color:#ee162d" ng-repeat="message in messages"><b>{{message}}</b></p>-->
                   <div class="">
@@ -17,19 +12,19 @@
                          <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.betacode"/>
                          <p class="validation-error">{{message.betacode}}</p>-->
                     <label>Username:</label>
-                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.username"/>
+                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.username" placeholder="Enter your user name"/>
                     <p class="validation-error">{{message.username}}</p>
 
                     <label>Password:</label>
-                    <input type="password" ng-keypress="save()" class="login-inp" ng-model="form.password"/>
+                    <input type="password" ng-keypress="save()" class="login-inp" ng-model="form.password" placeholder="Enter your password"/>
                         <p class="validation-error">{{message.password}}</p>
 
                     <label>First Name:</label>
-                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.firstName"/>
+                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.firstName" placeholder="Enter your first name"/>
                         <p class="validation-error">{{message.firstName}}</p>
 
                     <label>Last Name:</label>
-                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.lastName"/>
+                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.lastName" placeholder="Enter your last name"/>
                         <p class="validation-error">{{message.lastName}}</p>
 
 
@@ -49,23 +44,23 @@
                     <br />
                         <br />
                     <label>Email:</label>
-                    <input type="email" ng-keypress="save()" class="login-inp" ng-model="form.email"/>
+                    <input type="email" ng-keypress="save()" class="login-inp" ng-model="form.email" placeholder="Enter a valid email address"/>
                         <p class="validation-error">{{message.email}}</p>
 
                     <label>Address:</label>
-                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.address"/>
+                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.address" placeholder="Enter your addesss"/>
                         <p class="validation-error">{{message.address}}</p>
 
                     <label>City:</label>
-                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.city"/>
+                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.city" placeholder="Enter your city"/>
                         <p class="validation-error">{{message.city}}</p>
 
                     <label>State/Province:</label>
-                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.state"/>
+                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.state" placeholder="Enter your state/provice"/>
                         <p class="validation-error">{{message.state}}</p>
 
                     <label>Postal Address:</label>
-                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.zip"/>
+                    <input type="text" ng-keypress="save()" class="login-inp" ng-model="form.zip" placeholder="Enter your postal number"/>
                         <p class="validation-error">{{message.zip}}</p>
                         <label>Personal Bio Here:</label>
                     <textarea class="login-inp" ng-model="form.about"></textarea>

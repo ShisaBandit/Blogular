@@ -1,156 +1,151 @@
 <div ng-controller="ContactFormController">
-<div class="row ">
-        <div class="">
-            <div id="rulesModal">
-                <div class="">
-                    <div id="contentHeader" class="">
-                        <h2 class="contentHeaderTitle">Get in Touch With Us</h2>
-                    </div>
-                </div>
-                <div class=" " reflow data-section>
-                <section class="section">
-                        <p class="title" data-section-title><a >Contact Us</a></p>
-                        <div class="content" data-section-content>
-                            <p>Angels of Eureka is more than happy to hear what you have to say about our services, contact
-                                <a href="mailto:admin@angelsofeureka.org">Site Administration</a>.</p>
-                            <h2>{{message}}</h2>
-                            <form name="form" ng-show="show">
+<div class="generalPage">
+    <div id="contentHeader" class="">
+        <h2 class="contentHeaderTitle">Get in Touch With Us</h2>
+    </div>
+        <div id="rulesModal">
+            <div class="" reflow data-section>
+            <section class="section">
+                    <div class="content" data-section-content>
+                        <p>Angels of Eureka is more than happy to hear what you have to say about our services, contact
+                            <a href="mailto:admin@angelsofeureka.org">Site Administration</a>.</p>
+                        <h2>{{message}}</h2>
+                        <form name="form" ng-show="show">
+                            <div class="">
                                 <div class="">
-                                    <div class="">
-                                        <label>First Name
-                                            <input ng-model="form.name" type="text" placeholder="First Name" />
-                                        </label>
-                                    </div>
-                                    <div class="">
-                                        <label>Last Name
-                                            <input ng-model="form.lastname" type="text" placeholder="Last Name" />
-                                        </label>
-                                    </div>
-                                    <div class="">
-                                        <div class="">
-                                            <label>Email Address
-                                                <input ng-model="form.email" type="text" placeholder="Email Address" />
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="">
-                                        <div class="">
-                                            <label>Phone Number
-                                                <input ng-model="form.pnumber" type="text" placeholder="Phone Number" />
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="">
-                                        <div class="">
-                                            <label>Street Address
-                                                <input ng-model="form.address" type="text" placeholder="Street Address" />
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="">
-                                        <div class="">
-                                            <label>City
-                                                <input ng-model="form.city" type="text" placeholder="City" />
-                                            </label>
-                                        </div>
-                                    </div>
+                                    <label>First Name
+                                        <input ng-model="form.name" type="text" placeholder="First Name" />
+                                    </label>
+                                </div>
+                                <div class="">
+                                    <label>Last Name
+                                        <input ng-model="form.lastname" type="text" placeholder="Last Name" />
+                                    </label>
                                 </div>
                                 <div class="">
                                     <div class="">
-                                        <label>State
-                                            <select ng-model="form.state">
-                                                <option value="AL">Alabama</option>
-                                                <option value="AK">Alaska</option>
-                                                <option value="AZ">Arizona</option>
-                                                <option value="AR">Arkansas</option>
-                                                <option value="CA">California</option>
-                                                <option value="CO">Colorado</option>
-                                                <option value="CT">Connecticut</option>
-                                                <option value="DE">Delaware</option>
-                                                <option value="DC">District of Columbia</option>
-                                                <option value="FL">Florida</option>
-                                                <option value="GA">Georgia</option>
-                                                <option value="HI">Hawaii</option>
-                                                <option value="ID">Idaho</option>
-                                                <option value="IL">Illinois</option>
-                                                <option value="IN">Indiana</option>
-                                                <option value="IA">Iowa</option>
-                                                <option value="KS">Kansas</option>
-                                                <option value="KY">Kentucky</option>
-                                                <option value="LA">Louisiana</option>
-                                                <option value="ME">Maine</option>
-                                                <option value="MD">Maryland</option>
-                                                <option value="MA">Massachusetts</option>
-                                                <option value="MI">Michigan</option>
-                                                <option value="MN">Minnesota</option>
-                                                <option value="MS">Mississippi</option>
-                                                <option value="MO">Missouri</option>
-                                                <option value="MT">Montana</option>
-                                                <option value="NE">Nebraska</option>
-                                                <option value="NV">Nevada</option>
-                                                <option value="NH">New Hampshire</option>
-                                                <option value="NJ">New Jersey</option>
-                                                <option value="NM">New Mexico</option>
-                                                <option value="NY">New York</option>
-                                                <option value="NC">North Carolina</option>
-                                                <option value="ND">North Dakota</option>
-                                                <option value="OH">Ohio</option>
-                                                <option value="OK">Oklahoma</option>
-                                                <option value="OR">Oregon</option>
-                                                <option value="PA">Pennsylvania</option>
-                                                <option value="RI">Rhode Island</option>
-                                                <option value="SC">South Carolina</option>
-                                                <option value="SD">South Dakota</option>
-                                                <option value="TN">Tennessee</option>
-                                                <option value="TX">Texas</option>
-                                                <option value="UT">Utah</option>
-                                                <option value="VT">Vermont</option>
-                                                <option value="VA">Virginia</option>
-                                                <option value="WA">Washington</option>
-                                                <option value="WV">West Virginia</option>
-                                                <option value="WI">Wisconsin</option>
-                                                <option value="WY">Wyoming</option>
-                                            </select>
+                                        <label>Email Address
+                                            <input ng-model="form.email" type="text" placeholder="Email Address" />
                                         </label>
                                     </div>
                                 </div>
                                 <div class="">
                                     <div class="">
-                                        <label>Zip Code
-                                            <input ng-model="form.zcode" type="text" placeholder="Zip Code" />
+                                        <label>Phone Number
+                                            <input ng-model="form.pnumber" type="text" placeholder="Phone Number" />
                                         </label>
                                     </div>
                                 </div>
                                 <div class="">
                                     <div class="">
-                                        <label>What can we help you with?
-                                            <textarea ng-model="form.message" placeholder="Please enter your comments or request here...."></textarea>
+                                        <label>Street Address
+                                            <input ng-model="form.address" type="text" placeholder="Street Address" />
                                         </label>
                                     </div>
                                 </div>
-                                <div class="medium button" ng-click="sendMessage()">Submit</div>
-                            </form>
-                            <div ng-class="{spinner:spinner}"></div>
-                            <h2>{{message}}</h2>
+                                <div class="">
+                                    <div class="">
+                                        <label>City
+                                            <input ng-model="form.city" type="text" placeholder="City" />
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="">
+                                    <label>State
+                                        <select ng-model="form.state">
+                                            <option value="AL">Alabama</option>
+                                            <option value="AK">Alaska</option>
+                                            <option value="AZ">Arizona</option>
+                                            <option value="AR">Arkansas</option>
+                                            <option value="CA">California</option>
+                                            <option value="CO">Colorado</option>
+                                            <option value="CT">Connecticut</option>
+                                            <option value="DE">Delaware</option>
+                                            <option value="DC">District of Columbia</option>
+                                            <option value="FL">Florida</option>
+                                            <option value="GA">Georgia</option>
+                                            <option value="HI">Hawaii</option>
+                                            <option value="ID">Idaho</option>
+                                            <option value="IL">Illinois</option>
+                                            <option value="IN">Indiana</option>
+                                            <option value="IA">Iowa</option>
+                                            <option value="KS">Kansas</option>
+                                            <option value="KY">Kentucky</option>
+                                            <option value="LA">Louisiana</option>
+                                            <option value="ME">Maine</option>
+                                            <option value="MD">Maryland</option>
+                                            <option value="MA">Massachusetts</option>
+                                            <option value="MI">Michigan</option>
+                                            <option value="MN">Minnesota</option>
+                                            <option value="MS">Mississippi</option>
+                                            <option value="MO">Missouri</option>
+                                            <option value="MT">Montana</option>
+                                            <option value="NE">Nebraska</option>
+                                            <option value="NV">Nevada</option>
+                                            <option value="NH">New Hampshire</option>
+                                            <option value="NJ">New Jersey</option>
+                                            <option value="NM">New Mexico</option>
+                                            <option value="NY">New York</option>
+                                            <option value="NC">North Carolina</option>
+                                            <option value="ND">North Dakota</option>
+                                            <option value="OH">Ohio</option>
+                                            <option value="OK">Oklahoma</option>
+                                            <option value="OR">Oregon</option>
+                                            <option value="PA">Pennsylvania</option>
+                                            <option value="RI">Rhode Island</option>
+                                            <option value="SC">South Carolina</option>
+                                            <option value="SD">South Dakota</option>
+                                            <option value="TN">Tennessee</option>
+                                            <option value="TX">Texas</option>
+                                            <option value="UT">Utah</option>
+                                            <option value="VT">Vermont</option>
+                                            <option value="VA">Virginia</option>
+                                            <option value="WA">Washington</option>
+                                            <option value="WV">West Virginia</option>
+                                            <option value="WI">Wisconsin</option>
+                                            <option value="WY">Wyoming</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="">
+                                    <label>Zip Code
+                                        <input ng-model="form.zcode" type="text" placeholder="Zip Code" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="">
+                                    <label>What can we help you with?
+                                        <textarea ng-model="form.message" placeholder="Please enter your comments or request here...."></textarea>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="medium button" ng-click="sendMessage()">Submit</div>
+                        </form>
+                        <div ng-class="{spinner:spinner}"></div>
+                        <h2>{{message}}</h2>
+                        <br />
+
+                        <p>
+                            Thank you for contacting Angels of Eureka! We will get back to you soon!
+
+                        </p>
+                        <p>
+                            Be Blessed,
+
+                        </p>
+                        <p>
+                            Dana Novak, Patricia Wilson, Greg Wilson and Staff!
                             <br />
+                            Copyright 2013 Angels of Eureka. 9 North Main Street Eureka Springs, AR 72632 - 479-253-2767
 
-                            <p>
-                                Thank you for contacting Angels of Eureka! We will get back to you soon!
-
-                            </p>
-                            <p>
-                                Be Blessed,
-
-                            </p>
-                            <p>
-                                Dana Novak, Patricia Wilson, Greg Wilson and Staff!
-                                <br />
-                                Copyright 2013 Angels of Eureka. 9 North Main Street Eureka Springs, AR 72632 - 479-253-2767
-
-                            </p>
-                        </div>
-                </section>
-                </div>
+                        </p>
+                    </div>
+            </section>
             </div>
         </div>
     </div>
