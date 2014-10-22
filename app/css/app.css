@@ -23,10 +23,22 @@
      display: block !important;
      width: 100%;
      text-align: center;
-     color: white;
+     font-size: xx-large;
+     color: #13395E;
      background-color: #A7CCFB;
      z-index: 999999;
  }
+
+[ng-cloak].splash img {
+    display: block;
+    clear: both;
+    margin: auto;
+    padding: 2%;
+}
+
+[ng-cloak].splash p {
+    vertical-align: middle;
+}
 /* -----------------------------------------
    Shared Styles
 ----------------------------------------- */
