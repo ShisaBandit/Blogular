@@ -1,6 +1,6 @@
 <div class="generalPage" ng-controller="UserProfileCtrl">
     <div id="contentHeader">
-        <h2 class="contentHeaderTitle">Memorial Walls of My Friends and Acquaintances </h2>
+        <h2 class="contentHeaderTitle">Pet Memorials of My Friends and Acquaintances</h2>
     </div>
     <!--
     <ul class="profile">
@@ -8,7 +8,7 @@
     </ul>
     -->
     <!-- This next UL is for demonstration purposes only. Delete after demo to client -->
-    <ul class="profile" ng-repeat="wall in walls | filter:{pet:false} | filter:{group:false}">
+    <ul class="profile" ng-repeat="wall in walls | filter:{pet:true} | filter:{group:false}">
         <li>Angel's Name : {{wall.firstName}} {{wall.lastName}} - <a href="#/angel/{{wall.author}}">View this
             memorial wall</a> - <a ng-click="removeself(wall.id)">Remove yourself from this memorial wall
             network</a>
