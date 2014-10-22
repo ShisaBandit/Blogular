@@ -1,12 +1,22 @@
 <div ng-controller="FriendsFamilyCtrl">
-    <div id="contentHeader" class="">
-        <h2 class="contentHeaderTitle">This Angel's Story</h2>
+    <div id="contentHeader" ng-switch on="parentObject.type">
+        <h2 ng-switch-when="group" class="contentHeaderTitle">This Group's Story</h2>
+        <h2 ng-switch-when="angel" class="contentHeaderTitle">This Angel's Story</h2>
+        <h2 ng-switch-when="pet" class="contentHeaderTitle">This Pet's Story</h2>
     </div>
     <div class=" ">
-        <div class="">
+        <div ng-switch on="parentObject.type">
             <p class="angelStoryFull">{{ entry.text }}</p>
             <br />
-            <div class="fb-like" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-href="http://the-circle-of-life.net/#/angel/{{ entry.author }}"></div>
+            <div class="fb-like" ng-switch-when="group" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-href="http://the-circle-of-life.net/#/group/{{ entry.author }}"></div>
+            <div class="fb-like" ng-switch-when="angel" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-href="http://the-circle-of-life.net/#/angel/{{ entry.author }}"></div>
+            <div class="fb-like" ng-switch-when="pet" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-href="http://the-circle-of-life.net/#/pet/{{ entry.author }}"></div>
         </div>
     </div>
+</div>
+
+
+<div id="portrait">
+    <img src="/uploads/{{ entry.profilePicPortrait }}"><br/>
+
 </div>

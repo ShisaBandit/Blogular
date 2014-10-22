@@ -386,6 +386,8 @@ exports.blogdataforuser = function (req, res) {
             data.lastName = blogs[blog].lastName;
             data.title = blogs[blog].title;
             data.profilePicPortrait = blogs[blog].profilePicPortrait;
+            data.pet = blogs[blog].pet;
+            data.group = blogs[blog].group;
             buffer.push(data);
         }
         res.send(JSON.stringify(buffer));

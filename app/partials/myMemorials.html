@@ -8,7 +8,11 @@
                     <a href="#/AddBlogEntry" class="button createNew" title="Create a new memorial wall profile here!">+</a>
                     <ul class="profile">
                         <h3>Here is a list of your memorial walls</h3>
-                        <li ng-repeat="angel in angels" class="myMemWallsList">
+                        <li ng-repeat="angel in angels | filter:{pet:false} | filter:{group:false}" class="myMemWallsList">
+                            <!--
+                            pet status: {{angel.pet}}<br />
+                            group status: {{angel.group}}
+                            -->
                             <h5><a href="#/angel/{{angel.author}}">{{ angel.firstName }} {{ angel.lastName }} - {{ angel.title }}</a></h5>
                             <a href="#/angel/{{angel.author}}"><img id="portrait" src="/uploads/{{ angel.profilePicPortrait }}"></a>
                             <a href="#/angel/{{angel.author}}" class="buttons wallList">View</a>

@@ -9,8 +9,7 @@
                     <ul class="profile" ng-class="{petMem:pets}">
                         <h3>Here is a list of your pet memorial walls</h3>
 
-                        <li ng-repeat="angel in angels" class="myMemWallsList">
-                            Type: {{ angel.type }}
+                        <li ng-repeat="angel in angels | filter:{pet:true} | filter:{group:false}" class="myMemWallsList">
                             <h5><a href="#/pet/{{angel.author}}">{{ angel.firstName }} {{ angel.lastName }} - {{ angel.title }}</a></h5>
                             <a href="#/pet/{{angel.author}}"><img id="portrait" src="/uploads/{{ angel.profilePicPortrait }}"></a>
                             <a href="#/pet/{{angel.author}}" class="buttons wallList">View</a>
