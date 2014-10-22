@@ -15,11 +15,17 @@
  }
 
  [ng-cloak].splash {
-     background-color: #428bca;
+     position: absolute;
+     top: 0px;
+     right: 0px;
+     bottom: 0px;
+     left: 0px;
+     display: block !important;
      width: 100%;
      text-align: center;
      color: white;
-     display: block !important;
+     background-color: #A7CCFB;
+     z-index: 999999;
  }
 /* -----------------------------------------
    Shared Styles
@@ -2045,7 +2051,7 @@ body nav.top-bar.top-bar-logged-in {
      display: block;
      margin: 10px 5px;
      float: left;
-     min-height: 300px;
+     min-height: 230px;
  }
 
  .filter {

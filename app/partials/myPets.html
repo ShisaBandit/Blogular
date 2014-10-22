@@ -1,0 +1,27 @@
+<div ng-controller="UserProfileCtrl">
+        <section>
+            <div class="automargins content " data-section-content>
+                <div class="generalPage">
+                    <div id="contentHeader">
+                        <h2 class="contentHeaderTitle">My Pet Memorial Walls</h2>
+                    </div>
+                    <a href="#/AddBlogEntry" class="button createNew" title="Create a new memorial wall profile here!">+</a>
+                    <ul class="profile">
+                        <h3>Here is a list of your memorial walls</h3>
+                        <li ng-repeat="pet in pets" class="myMemWallsList">
+                            <h5><a href="#/angel/{{pet.author}}">{{ pet.firstName }} {{ pet.lastName }} - {{ pet.title }}</a></h5>
+                            <a href="#/angel/{{pet.author}}"><img id="portrait" src="/uploads/{{ pet.profilePicPortrait }}"></a>
+                            <a href="#/angel/{{pet.author}}" class="buttons wallList">View</a>
+                            <a href="#/editwall/{{ pet.author }}" class="buttons wallList">Edit</a>
+                            <a href="#/findenewmembers/{{ pet.author }}" class="buttons wallList">Invite Friends</a>
+                            <a href="#/inviteblock/{{ pet.author }}" class="buttons wallList">Remove Friends</a>
+                            <a href="#/deletewall/{{ pet.author }}" class="buttons wallList">Delete</a>
+                            <br/>
+                        </li>
+                    </ul>
+                 </div>
+            </div>
+        </section>
+<hr />
+
+</div>

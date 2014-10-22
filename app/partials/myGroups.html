@@ -1,28 +1,25 @@
-<div class="generalPage">
+<div class="generalPage" ng-controller="UserProfileCtrl">
     <div id="contentHeader">
         <h2 class="contentHeaderTitle">My Group's</h2>
     </div>
-    <p>Welcome to the My Groups dashboard. From here you can create, manage and view groups that you own, or view
-        groups that you have joined, or been invited to.</p>
-    <a href="#/StartGroup" class="small button">Create a new group here!</a><br/><br/>
-
-    <div class="small-6 rghtDvd">
+    <a href="#/StartGroup" class="button createNew" title="Create a new group here!">+</a>
+    <p>Welcome to the My Groups dashboard. From here you can create, manage and view groups that you own.</p>
+    <div class="">
         <b>Groups I Own</b>
-        <br/> <br/>
-        <section ng-repeat="group in groups">
-            <b>Group Name: {{group.title}}</b>
-            <br/>
-            Group Moderator: {{group.author}}
-            <br/>
-            <ul>
-                <li><a href="#/group/{{group.author}}">View this memorial group</a></li>
-                <li><a href="#/editwall/{{ group.author }}">Edit this memorial group</a></li>
-                <li><a href="#/findenewmembers/{{ group.author }}">Find and invite new members to this wall</a></li>
-                <li><a href="#/inviteblock/{{ group.author }}">invite or block other registered members</a></li>
-
-            </ul>
-            <a href="#/deletewall/{{ group.author }}" class="small button">Delete this group</a>
-        </section>
+        <br/>
+        <ul class="profile" ng-repeat="group in groups">
+            <li class="myMemWallsList ng-scope">
+                <b>Group Name: {{group.title}}</b>
+                <br/>
+                Group Moderator: {{group.author}}
+                <br/>
+                <a class="buttons wallList" href="#/group/{{group.author}}">View this group</a>
+                <a class="buttons wallList" href="#/editwall/{{ group.author }}">Edit this group</a>
+                <a class="buttons wallList" href="#/findenewmembers/{{ group.author }}">Find and invite new members to this wall</a>
+                <a class="buttons wallList" href="#/inviteblock/{{ group.author }}">invite or block other registered members</a>
+                <a class="buttons wallList" href="#/deletewall/{{ group.author }}" class="small button">Delete this group</a>
+            </li>
+        </ul>
     </div>
 </div>
 <div class="adContainer">Ads go here</div>

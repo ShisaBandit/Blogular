@@ -1,30 +1,24 @@
-<div class="generalPage">
+<div class="generalPage" ng-controller="UserProfileCtrl">
     <div id="contentHeader">
         <h2 class="contentHeaderTitle">Group I Joined</h2>
     </div>
-    <p>Welcome to the My Groups dashboard. From here you can create, manage and view groups that you own, or view
-        groups that you have joined, or been invited to.</p>
-    <a href="#/StartGroup" class="small button">Create a new group here!</a><br/><br/>
+    <a href="#/StartGroup" class="button createNew" title="Create a new group here!">+</a>
+    <p>Welcome to the Groups Joined dashboard. From here you can view groups that you you have joined, or been invited to, and connect with group members</p>
     <div class="small-6 ">
         <b>Groups I Joined / Group Invites</b>
-        <br/> <br/>
-        <section ng-repeat="group in invitedGroups">
-            <b>Group Name: {{group.name}}</b>
-            <br/>
-            Group Owner: {{group.owner}}
-            <!-- Group Moderator(s): Mary Olsen, Me-->
-            <br/>
-            <ul>
-                <li><a href="#/group/{{group.author}}">View this group's page</a></li>
-                <li><a href="#/group/{{group.author}}">Edit Group Details</a></li>
-                <li><a href="#/group/{{group.author}}">View Group Members</a></li>
-                <!--  <li><a href="#/group/{{group.author}}" >Suggest new members</a></li>
-                  <li><a href="#/group/{{group.author}}" >Restrict member</a></li>
-                    <li><a href="#/group/{{group.author}}" >Report group member for misconduct</a></li>
-                    -->
-            </ul>
-            <a ng-click="removeselfgroup(group.id)" class="small button">Leave this group</a>
-        </section>
+        <br/>
+        <ul class="profile" ng-repeat="group in invitedGroups">
+            <li class="myMemWallsList ng-scope">
+                <b>Group Name: {{group.name}}</b>
+                <br/>
+                Group Moderator: {{group.owner}}
+                <br/>
+                <a class="buttons wallList" href="#/group/{{group.author}}">View this group's page</a>
+                <a class="buttons wallList" href="#/findenewmembers/{{ group.author }}">View Group Members</a>
+                <a class="buttons wallList" ng-click="removeselfgroup(group.id)" class="small button">Leave this group</a>
+            </li>
+        </ul>
+
         <div ng-hide="invitedGroups.length">You have not been invited to any groups yet. Why not reach out to someone and ask to join their network?</div>
 
     </div>

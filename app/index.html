@@ -103,13 +103,16 @@
 <!-- main content goes here -->
 <!-- Add your site or application content here -->
  <section class="primaryContent">
-        <div ng-controller="NotificationsCtrl">
-            <div class="my-repeat-animation" ng-repeat="noti in notifications" id="notifications">
-                {{ noti.text }}
-                <div>{{noti.count}}</div>
-                <a class="closeButton" ng-click="notiviewed( noti._id )" closeparent title="Hide this box by clicking here">X</a>
-            </div>
+     <div class="splash" ng-cloak="">
+         <p>Loading</p>
+     </div>
+     <div ng-controller="NotificationsCtrl" ng-cloak>
+        <div class="my-repeat-animation" ng-repeat="noti in notifications" id="notifications">
+            {{ noti.text }}
+            <div>{{noti.count}}</div>
+            <a class="closeButton" ng-click="notiviewed( noti._id )" closeparent title="Hide this box by clicking here">X</a>
         </div>
+     </div>
         <!-- Main  Content -->
         <div ng-view class="mainBG my-page-animation">
 
