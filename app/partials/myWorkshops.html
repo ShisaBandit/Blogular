@@ -1,14 +1,14 @@
 <div class="generalPage" ng-controller="PetitionCtrl">
     <div id="contentHeader" class="contentHeader">
-        <h2 class="contentHeaderTitle">My Petitions</h2>
+        <h2 class="contentHeaderTitle">My Workshops</h2>
     </div>
     <p>
-        Here are all of the petitions that you have started.
+        Here are all of the workshops that you have started.
     </p>
     <ul class="petitions">
-        <li ng-repeat="petition in petitions | filter:{petition.owner}">
-            {{petition.title}}- <a href="#/editpetition/{{petition._id}}" class="small button">Edit</a> - <a
-                ng-click="deletePetition(petition._id)" class="small button">Delete</a>
+        <li ng-repeat="workshop in workshops | filter:{workshop.owner}">
+            {{workshop.title}}- <a href="#/editpetition/{{workshop._id}}" class="small button">Edit</a> - <a
+                ng-click="deletePetition(workshop._id)" class="small button">Delete</a>
         </li>
     </ul>
 
@@ -24,6 +24,6 @@
             </div>
         </li>
     </ul> -->
-    <div ng-hide="petitions.length">There are currently no active petitions. Why not start your own now?</div>
+    <div ng-hide="petitions.length">There are currently no active workshops. Why not start your own now?</div>
 </div>
 <div class="adContainer">Ads go here</div>

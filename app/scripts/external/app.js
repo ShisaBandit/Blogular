@@ -62,6 +62,7 @@ var app = angular.module('YoMemorialApp', [
             when("/friendsPets",{templateUrl:"partials/friendPetWall.html"}).
             when("/myPets",{templateUrl:"partials/myPets.html"}).
             when("/myPetitions",{templateUrl:"partials/myPetitions.html"}).
+            when("/myWorkshops",{templateUrl:"partials/myWorkshops.html"}).
             when("/messageCenter",{templateUrl:"partials/messages.html"}).
             //when("publicprofile/:username",{templateUrl:"partials/publicProfile.html"}).
             otherwise("/oops",{templateUrl:"404.html"});
