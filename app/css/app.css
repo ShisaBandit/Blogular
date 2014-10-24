@@ -2919,9 +2919,9 @@ body nav.top-bar.top-bar-logged-in {
          background: none repeat scroll 0% 0% #F8F8FF;
          padding: 10px;
          height: 80px;
-         width: 21%;
+         width: 44%;
          box-shadow: 0px 2px 5px 2px #A3A1A1;
-         margin: 0px 7px;
+         margin: 5px 7px;
          text-align: center;
          vertical-align: top;
      }
