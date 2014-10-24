@@ -22,9 +22,9 @@
         <div class="">
             <div class="">
                 <h2>{{ entry.firstName }}'s Life in Pictures</h2>
-                <a class="button small" ng-click="showallpics(); updatingAlbum = false; addingNewAlbum = false">View Master Photo Library</a>
-                <a ng-click="addingNewAlbum = true; updatingAlbum = false" class="button small">Create a new album</a>
-                <a ng-click="updatingAlbum = true; addingNewAlbum = false; getAlbums();"  class="button small">Add photo to existing album</a>
+                <a class="button small mediaControl" ng-click="showallpics(); updatingAlbum = false; addingNewAlbum = false">View Master Photo Library</a>
+                <a ng-click="addingNewAlbum = true; updatingAlbum = false" class="button small mediaControl">Create a new album</a>
+                <a ng-click="updatingAlbum = true; addingNewAlbum = false; getAlbums();"  class="button small mediaControl">Add photo to existing album</a>
                 <ul class="small-block-grid-6">
                     <b>View Photos By Album</b><br />
                     <li class="my-repeat-animation" ng-repeat="album in albums">
