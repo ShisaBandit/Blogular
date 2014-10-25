@@ -11,7 +11,7 @@
                 </div>
                 <ul class="profile">
                     <li class="wallViewers" ng-repeat="member in members | filter:searchText">
-                        <h3><img src="http://www.gravatar.com/avatar/{{member.gravatar}}" /> {{ member.firstName }} {{ member.lastName }}</h3>
+                        <h3><img src="http://www.gravatar.com/avatar/{{member.gravatar}}?d=http%3A%2F%2Fwww.angelsofeureka.com%2Fimages%2FloadingLogoIcon.png" /> {{ member.firstName }} {{ member.lastName }}</h3>
                         <b>Username:{{ member.username }}</b>
                         <!--<a ng-click="invite(member._id )" class="small radius button workpetsbuttons">Invite</a>-->
                         <a ng-click="block(member._id )" class="small radius button workpetsbuttons">Block</a>
