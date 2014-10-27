@@ -375,6 +375,11 @@ a {
     vertical-align: top;
     clear: both;
 }
+
+.adContainer img {
+    max-width: 100%;
+}
+
 .scrollerContent {
     width: 100%;
     padding: 0;

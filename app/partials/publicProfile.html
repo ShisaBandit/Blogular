@@ -3,7 +3,7 @@
         <div class="generalPage">
             <section>
                 <div class="content automargins" data-section-content>
-                    <div class="publicProfileMessages" ng-controller="messageController">
+                    <div class="publicProfileMessages" ng-controller="UserProfileCtrl">
                         <div class="contentHeader">
                             <h2 class="contentHeaderTitle">Basic Profile</h2>
                         </div>
@@ -19,13 +19,14 @@
                             <div>
                                 <!--<a class="button small" ng-click="open(user.username)"><img src="img/mail_2.png"> Send a New Message</a> -->
                                 <br />
-                                <div ng-controller="UserProfileCtrl">
-                                    <div ng-controller="directMessageController" if-authed="show">
+                                <div>
+                                    <div ng-controller="messageController" if-authed="show">
                                         <table border="0" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <th>- Conversation with {{user.firstName}} below</th>
                                                 <td>
                                                     {{sendTo}}
+                                                    <input ng-hide="pre" type="hidden" ng-model="form.selected" value="{{user.firstName}}" name="{{user.firstName}}">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -42,7 +43,7 @@
                                             </tr>
                                         </table>
                                     </div>
-                                    <div class="row my-repeat-animation" if-authed="show" ng-controller="messageController">
+                                    <div class="row my-repeat-animation" if-authed="show" ng-controller="directMessageController" ng-show="{{user.firstName}}">
                                         Real block below
                                         <div class="conv" style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000" ng-repeat="message in messages">
                                             <b>{{message.from}}</b>
