@@ -42,47 +42,9 @@
                                             </tr>
                                         </table>
                                     </div>
-                                    <!--
-                                    <div class="row my-repeat-animation" if-authed="show">
-                                        <! -- messages visible here would only be between the user who is viewing and the person whose page it is -- >
-                                        <! -- messages here would also appear in the message center in the my account section of both users -- >
-                                        <div class="small-30 "
-                                             style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>Message from "So - in -so"</b>
-                                            <i
-                                                    style="font: x-small serif; color: steelblue;float: right">Message Date here</i>
-                                            <br/>
-                                            <div  ng-bind-html="message.message">Message goes here</div>
-                                            <br/>
-                                        </div>
-                                        <div class="small-30 "
-                                             style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>Message from "So - in -so"</b>
-                                            <i
-                                                    style="font: x-small serif; color: steelblue;float: right">Message Date here</i>
-                                            <br/>
-                                            <div  ng-bind-html="message.message">Message goes here</div>
-                                            <br/>
-                                        </div>
-                                        <div class="small-30 "
-                                             style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>Message from "So - in -so"</b>
-                                            <i
-                                                    style="font: x-small serif; color: steelblue;float: right">Message Date here</i>
-                                            <br/>
-                                            <div  ng-bind-html="message.message">Message goes here</div>
-                                            <br/>
-                                        </div>
-                                        <div class="small-30 "
-                                             style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>Message from "So - in -so"</b>
-                                            <i
-                                                    style="font: x-small serif; color: steelblue;float: right">Message Date here</i>
-                                            <br/>
-                                            <div  ng-bind-html="message.message">Message goes here</div>
-                                            <br/>
-                                        </div>
-                                    </div>
-                                    -->
-                                    <div class="row my-repeat-animation"if-authed="show" ng-repeat="message in messages" >
+                                    <div class="row my-repeat-animation" if-authed="show" ng-controller="messageController">
                                         Real block below
-                                        <div class="conv" style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000">
+                                        <div class="conv" style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000" ng-repeat="message in messages">
                                             <b>{{message.from}}</b>
                                             <i style="font: x-small serif; color: steelblue;float: right">
                                                 {{message.date}}
