@@ -2,8 +2,16 @@
     <div id="contentHeader" >
         <h2 class="contentHeaderTitle">{{title}}</h2>
     </div>
-    <div >
-        <div >
+    <div>
+        <div>
+            <div ng-switch on="parentObject.type" id="portrait">
+                <span ng-switch-when="group">Moderator: {{ entry.firstName }}</span>
+                <span ng-switch-when="angel">Moderator: {{ entry.firstName }} {{ entry.lastName }}</span>
+                <span ng-switch-when="pet">Moderator: {{ entry.firstName }} {{ entry.lastName }}</span>
+            </div>
+            <br />
+            <i>{{entry.owner_id}}</i>
+            <br />
             <ul>
                 <li ng-repeat="subscriber in subscribers">
                     <p><a ng-href="#/pubpro/{{ subscriber.username }}" title="User Name: {{ subscriber.username }}">{{ subscriber.firstName }} {{ subscriber.lastName }}</a></p>

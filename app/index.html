@@ -162,14 +162,16 @@
                 <div style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000">
                     <!--Link around user names needs to link to their user public user profile -->
                     <i>
-                        <a ng-href="#/pubpro/{{contact.username}}">{{contact.username}}</a>
+                        <a ng-href="#/pubpro/{{contact.username}}">{{contact.username}}: <br />{{contact.firstName}} {{contact.lastName}}</a>
                         <div class="onlineStatus {{contact.online}}" style="font: x-small serif; color: steelblue;float: right">
                             <i title="Offline">
-                                <!--({{contact.online}} Offline) -->
+                                <!--({{contact.online}} is Offline) -->
                             </i>
                             <span title="Online"></span>
                         </div>
+                        <!-- I don't think this is working as intended.
                         <span ng-show="(contact in contacts).length == 0">Offline</span>
+                        -->
                     </i>
 
                     <br/>
