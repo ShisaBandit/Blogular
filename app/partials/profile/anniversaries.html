@@ -1,6 +1,6 @@
 <div ng-controller="AnniCtrl">
-    <div class="">
-        <div id="contentHeader" class="">
+    <div>
+        <div id="contentHeader">
             <h2 class="contentHeaderTitle">Add Angel Anniversary</h2>
         </div>
     </div>
@@ -8,8 +8,8 @@
         <div>
             <h4 class="dark">Add a New Angel Anniversary</h4>
             <h5>Details</h5>
-            <input type="text" name="eventheader" ng-model="event" id="" placeholder="Give your event a name"/>
-            <input type="text" name="eventdesc" ng-model="eventdesc" id="" placeholder="Tell us more about why this day is special"/>
+            <input type="text" name="eventheader" ng-model="event"  placeholder="Give your event a name"/>
+            <input type="text" name="eventdesc" ng-model="eventdesc"  placeholder="Tell us more about why this day is special"/>
             <h5>Date</h5>
             <div class="form-horizontal">
                 <input type="text" name="eventdate" datepicker-popup="yyyy/MMMM/dd" ng-model="eventdate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" placeholder="Pick a Date For Your Anniversary or Event" />
@@ -19,22 +19,18 @@
         </div>
     </div>
     <a ng-click="toogleEventEntry()" class="small button showRevealCal">{{state}}</a>
-
-    <div class=" ">
-        <div class="">
+    <div>
+        <div>
             <h1>Angel Anniversaries</h1>
-
-            <div class="my-repeat-animation" ng-repeat="ani in anis" class="" style="background: #CDDFEF;margin-bottom: 20px;">
-                <div class="">
-                    <div class="">
+            <div class="my-repeat-animation" ng-repeat="ani in anis"  style="background: #CDDFEF;margin-bottom: 20px;">
+                <div>
+                    <div>
                         <h4>{{ ani.event }}</h4>
                         <p>{{ ani.date }}</p>
                         <p>{{ ani.text }}</p>
-
                         <br />
-                        <div class="my-repeat-animation" ng-repeat="gift in ani.gifts"class="" style="background: #CDDFEF;margin-bottom: 20px;">
+                        <div class="my-repeat-animation" ng-repeat="gift in ani.gifts" style="background: #CDDFEF;margin-bottom: 20px;">
                             <p>{{gift.from}} has gifted {{gift.postText}}</p>
-
                         </div>
                        <!-- <a href="" class="button">Send Well Wishes</a>-->
                         <!--
@@ -52,7 +48,7 @@
 <!--
 <h3><b>{{entry.title}}</b></h3>
 <h6>Posted by <a href="#">{{entry.author}}</a> on {{entry.date}}.</h6>
-<div class="">
+<div >
     <div class="ten ">
         <div ng-bind-html-unsafe="text"></div>
     </div>
@@ -83,7 +79,7 @@
     </table>
 </div>
 </div>
-<div id="comments"class="">
+<div id="comments">
 <div class="six ">
     <div id="submitComment">
         <textarea ng-model="body"></textarea>

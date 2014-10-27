@@ -1,6 +1,6 @@
 <div ng-controller="UserProfileCtrl">
     <div class="generalPage">
-        <div id="contentHeader" class="" ng-switch on="parentObject.type" ng-controller="blogEntryCtrl">
+        <div id="contentHeader"  ng-switch on="parentObject.type" ng-controller="blogEntryCtrl">
             <span ng-switch-when="group"><h2 class="contentHeaderTitle">Invite friends to your group: {{entry.title}} </h2></span>
             <span ng-switch-when="angel"><h2 class="contentHeaderTitle">Invite friends to your Memorial Wall: {{entry.firstName}} </h2></span>
             <span ng-switch-when="pet"><h2 class="contentHeaderTitle">Invite friends to your Memorial Wall: {{entry.firstName}} </h2></span>

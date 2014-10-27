@@ -52,7 +52,7 @@
       var self = this,
           $list = $('<ol class="' + self.settings.bullets_container_class + '"></ol>');
       $slides.each(function(idx, slide) {
-        var $item = $('<li data-orbit-slide-number="' + (idx+1) + '" class=""></li>');
+        var $item = $('<li data-orbit-slide-number="' + (idx+1) + '" ></li>');
         if (idx === 0) {
           $item.addClass(self.settings.bullets_active_class);
         }

@@ -1,14 +1,11 @@
-<div  ng-controller="ContentCtrl" >
-
+<div ng-controller="ContentCtrl" >
     <div class="nine " role="content" loader="getEntries()">
-
-        <article   ng-repeat="entry in entries">
+        <article ng-repeat="entry in entries">
             <div style="background-image: url({{entry.titleImage}})" ng-style="getBackImg(entry._id)">
                 <h3><a href="#/edit/{{entry._id}}">{{entry.title}}</a></h3>
                 <h6>Written by <a href="#/edit/{{entry._id}}">{{entry.author}}</a> on {{entry.date}}.</h6>
-
-                <div class="">
-                    <div class="six ">
+                <div>
+                    <div class="six">
                         <div ng-bind-html-unsafe="entry.text"></div>
                     </div>
                 </div>
@@ -16,6 +13,5 @@
                 <br />
             </div>
         </article>
-
     </div>
 </div>

@@ -2,7 +2,7 @@
     <!--
     <div class="memNav" if-authed="show">
 
-        <div class="" offset-height="90" ng-show="profileMenuViewable" ng-animate="fade" id="profile-menu">
+        <div  offset-height="90" ng-show="profileMenuViewable" ng-animate="fade" id="profile-menu">
             <div class="small-8 small-offset-4">
                 <nav class="top-bar">
                     <section class="top-bar-section">
@@ -25,21 +25,19 @@
     </div>
      -->
     <div class="generalPage">
-        <div class=""  role="content">
+        <div class="profileContentPlaceHolder"  role="content">
             <div id="picheader" class="publicWall ">
-                <div class="">
-                    <div class="small-3 " offset-height="-10">
-                            Objecttype:{{parentObject.type}}
+                <div class="profilePicPlaceholder">
+                    <div class="pubProfileInfo" offset-height="-10">
                         <div ng-switch on="parentObject.type" id="portraitpic">
-
-                            <img  id="portrait" src="/uploads/{{ entry.profilePicPortrait }}"><br/>
+                            <img id="portrait" src="/uploads/{{ entry.profilePicPortrait }}"><br/>
                             <div ng-switch-when="group">{{ entry.title }} Group<br />Moderator: {{ entry.firstName }} {{ entry.lastName }}</div>
                             <div ng-switch-when="angel">{{ entry.firstName }} {{ entry.lastName }}</div>
                             <div ng-switch-when="pet">{{ entry.firstName }} {{ entry.lastName }}</div>
                         </div>
                     </div>
-                    <div class="small-8 ">
-                        <div id="contentHeader" class="" ng-switch on="parentObject.type">
+                    <div>
+                        <div id="contentHeader" ng-switch on="parentObject.type">
                             <div class="contentHeaderTitle" ng-switch-when="angel">{{entry.firstName}}'s Public Memorial</div>
                             <div class="contentHeaderTitle" ng-switch-when="pet">{{entry.firstName}}'s Public Memorial</div>
                             <div class="contentHeaderTitle" ng-switch-when="group">{{entry.firstName}}'s {{ entry.title }} Group</div>
@@ -53,13 +51,13 @@
                         </div>
                         -->
 
-                        <ul class="">
+                        <ul>
                             <li>First Name : {{entry.firstName}}</li>
                             <li>Last Name: {{entry.lastName}} </li>
                             <li>Memorial Date: {{entry.memorialDate}}</li>
                         </ul>
                         <p class="angelStoryFull">{{ entry.text }}</p>
-                        <div id="" class="" ng-switch on="parentObject.type">
+                        <div ng-switch on="parentObject.type">
                             <div class="pubMemwallMessage" ng-switch-when="angel">
                                 <p ng-hide="showJoinRequst" if-authed="show">You are viewing {{entry.firstName}} {{entry.lastName}}'s public memorial wall. If you are a member of this angel's network, <a href="#/login" class="button small radius">log-in</a> to view the full memorial details.</p>
                                 <p ng-hide="showJoinRequst" if-authed="show">Not a member of  {{entry.firstName}} {{entry.lastName}}'s network? Send a request to <a ng-click="join()" class="button small radius">Join here</a>. </p>

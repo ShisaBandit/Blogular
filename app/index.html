@@ -159,7 +159,7 @@
         <div id="slideout_inner">
             <h4>People in your network</h4>
             <div class="my-repeat-animation" ng-repeat="contact in contacts">
-                <div class="" style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000">
+                <div style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000">
                     <!--Link around user names needs to link to their user public user profile -->
                     <i>
                         <a ng-href="#/pubpro/{{contact.username}}">{{contact.username}}</a>
@@ -169,20 +169,13 @@
                             </i>
                             <span title="Online"></span>
                         </div>
-                        <span ng-show="(contact in contacts).length == 0">No results</span>
+                        <span ng-show="(contact in contacts).length == 0">Offline</span>
                     </i>
 
                     <br/>
                 </div>
-
-
-                <div class="small-30 columns" style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000"><b>{{message.from}}</b>
-                    <i><a href="">User Name 2</a></i>
-                    <div class="small-9 columns" style="font: x-small serif; color: steelblue;float: right">(OnLineStatus)</div>
-                    <br/>
-                </div>
-
             </div>
+            <div ng-hide="contacts.length" style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000">There are currently no members of your network online</div>
         </div>
     </div>
 </section>

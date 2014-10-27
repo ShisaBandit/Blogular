@@ -9,7 +9,7 @@
                     {{post.text}}
                 </div>
             </div>
-            <div class="">
+            <div >
                 <div class=" postComment postBoxes">
                     <a ng-click="showcommentbox({{$index}})" class="button tiny">Join the conversation</a>
                     <div ng-show="commentbox[{{$index}}]">
@@ -35,7 +35,7 @@
 <!--
 <h3><b>{{entry.title}}</b></h3>
 <h6>Posted by <a href="#">{{entry.author}}</a> on {{entry.date}}.</h6>
-<div class="">
+<div >
     <div class="ten ">
         <div ng-bind-html-unsafe="text"></div>
     </div>
@@ -66,7 +66,7 @@
     </table>
 </div>
 </div>
-<div id="comments"class="">
+<div id="comments">
 <div class="six ">
     <div id="submitComment">
         <textarea ng-model="body"></textarea>

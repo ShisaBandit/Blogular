@@ -3,8 +3,8 @@
     <div class="row ">
         <h1 class="sectionHeader">Petitions</h1>
     </div>
-    <div class="">
-        <div class="class=""  workshops">
+    <div >
+        <div class="  workshops">
             <tabset>
                 <tab heading="View All Petitions"><section>
                     <div class="content" data-section-content>
@@ -15,13 +15,13 @@
                         <ul class="small-block-grid-4">
                             <li ng-repeat="petition in petitions">
                                 <div class="panel">
-                                <div class="">
+                                <div >
                                     <div class="title ">
                                         <a rel="nofollow" href="#/petition/{{petition.title}}">{{petition.title}}</a>
                                     </div>
                                 </div>
-                                <div class="">
-                                    <div class="">
+                                <div >
+                                    <div >
                                          <span class="subheader"><span class="petitionFont"> {{petition.signaturecount}}</span> Signatures</span>
                                     </div>
                                 </div>
@@ -33,7 +33,7 @@
                 </section></tab>
                 <tab heading="Create a Petition"><section>
                     <div ng-class="{spinner:spinner}"></div>
-                    <div class="">
+                    <div >
                         <div ng-show="again">
                             <h2 style="color: #2164AA;">Create a petition</h2>
                             Give your petition a name. <input type="text" ng-hide="textorphoto" ng-model="title"/>

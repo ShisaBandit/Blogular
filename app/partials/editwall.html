@@ -1,12 +1,12 @@
 <div ng-controller="EditWallCtrl">
     <div class="generalPage">
-        <div id="contentHeader" class="">
+        <div id="contentHeader" >
             <h2 class="contentHeaderTitle">Edit Your {{titleText}}'s Memorial Profile:</h2>
         </div>
-        <div ng-hide="hidemainform" class="">
+        <div ng-hide="hidemainform" >
             <div id="log"></div>
                 <form class="editMemWall">
-                    <label for="title">Title: </label><br class=""clear" />
+                    <label for="title">Title: </label><br clear" />
                     <input type="text" id="title" ng-model="form.title" name="title" />
                     <p class="validation-error">{{message.title}}</p>
                     <br /><label for="author">Please specify a short address for your profile : <br /> ie: www.the-circle-of-life.net/#/<b><i class="shortURI">myangelspage</i></b></label><label for="author">Short Address: </label>
@@ -66,7 +66,7 @@
                 </form>
             </div>
         </div>
-        <div class="" ng-include src="template.url">
+        <div  ng-include src="template.url">
 
         </div>
     </div>

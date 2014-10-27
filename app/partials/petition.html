@@ -3,13 +3,13 @@
         <div id="contentHeader">
             <h2 class="contentHeaderTitle">Petition</h2>
         </div>
-       <div class="" ng-model="petition">
+       <div  ng-model="petition">
            <a href="#/petitions">Petitions</a> > {{petition[0].title}}
-            <div class="">
+            <div >
                 <h3 style="color: #2164AA;">Petion Name: {{petition[0].title}}</h3>
                 <h3 style="color: #2164AA;">Petition Details: {{petition[0].text}}</h3>
-                <div class="" ng-repeat="signature in petition[0].signatures">
-                    <div class="">
+                <div  ng-repeat="signature in petition[0].signatures">
+                    <div >
                         <p>{{signature.initals}}</p>
                         <p>{{signature.cityState}}</p>
                         <p>{{signature.email}}</p>
@@ -18,7 +18,7 @@
                 </div>
             </div>
        </div>
-       <div class="">
+       <div >
            <div>There are <b class="petitionFont">{{signaturelength}}</b> signatures on this petition </div>
            <div ng-class="{spinner:spinner}"></div>
            <div ng-class="{error:error}">{{resultMessage}}</div>

@@ -1,9 +1,9 @@
 <div ng-controller="FriendsFamilyCtrl">
-    <div id="contentHeader" class="">
+    <div id="contentHeader" >
         <h2 class="contentHeaderTitle">{{title}}</h2>
     </div>
-    <div class=" ">
-        <div class="">
+    <div >
+        <div >
             <ul>
                 <li ng-repeat="subscriber in subscribers">
                     <p><a ng-href="#/pubpro/{{ subscriber.username }}" title="User Name: {{ subscriber.username }}">{{ subscriber.firstName }} {{ subscriber.lastName }}</a></p>

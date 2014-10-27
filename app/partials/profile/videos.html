@@ -1,6 +1,6 @@
 <div ng-controller="VideoCtrl">
-    <div class="">
-        <div id="contentHeader" class="">
+    <div >
+        <div id="contentHeader" >
             <h2 class="contentHeaderTitle">Upload Videos</h2>
         </div>
     </div>
@@ -39,9 +39,9 @@
     <a ng-click="toogleVideoEntry()" class="button small">{{state}}</a>
     <a ng-click="modStream = true" class="button small">Add or Remove videos from your stream</a>
     <a ng-show="modStream" class="button small" ng-click="refreshVideoList(); modStream = false">Done editing</a>
-    <div class="">
+    <div >
         <div class=" contentContainer">
-            <div class="">
+            <div >
                 <ul class="small-block-grid-2">
                     <li>
                         <!--<iframe ng-repeat="video in videos"
@@ -99,7 +99,7 @@
 <!--
 <h3><b>{{entry.title}}</b></h3>
 <h6>Posted by <a href="#">{{entry.author}}</a> on {{entry.date}}.</h6>
-<div class="">
+<div >
     <div class="ten ">
         <div ng-bind-html-unsafe="text"></div>
     </div>
@@ -130,7 +130,7 @@
     </table>
 </div>
 </div>
-<div id="comments"class="">
+<div id="comments">
 <div class="six ">
     <div id="submitComment">
         <textarea ng-model="body"></textarea>

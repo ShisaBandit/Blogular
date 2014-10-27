@@ -3,11 +3,11 @@
         <h2 class="contentHeaderTitle">Create Private Support Group</h2>
     </div>
     <div ng-controller="AddGroupCtrl">
-        <div class="" role="content">
+        <div  role="content">
             <div id="mainform" ng-hide="hidemainform">
                 <h4><span ng-bind="header"></span></h4>
                 <div id="log"></div>
-                <div class="">
+                <div >
                     <br />
                     <label for="title">Group Name: </label>
                     <input ng-keypress="save()"  type="text" id="title" ng-model="form.title" name="title" placeholder="This is seen as the name of your private group. Please enter a title here.">
@@ -52,7 +52,7 @@
                     </p>
                 </div>
             </div>
-            <div class="" ng-include src="template.url">
+            <div  ng-include src="template.url">
 
             </div>
         </div>

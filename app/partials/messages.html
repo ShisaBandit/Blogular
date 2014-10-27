@@ -1,6 +1,6 @@
 <div ng-controller="UserProfileCtrl">
     <div class="generalPage" ng-controller="messageController">
-        <div id="contentHeader" class="">
+        <div id="contentHeader" >
             <h2 class="contentHeaderTitle">Message Center</h2>
         </div>
         <div id="messageCenter">
@@ -22,7 +22,7 @@
             <section>
                 <div class="row my-repeat-animation panel"  ng-repeat="messagedUser in messagedUsers">
                     <a href="" ng-click="getMessages(messagedUser)">
-                        <span class="">{{messagedUser.user}} <!--<a class="button buttonSmall" title="Archive This Conversation"><img src="img/trash.png"></a>--></span>
+                        <span >{{messagedUser.user}} <!--<a class="button buttonSmall" title="Archive This Conversation"><img src="img/trash.png"></a>--></span>
                     </a>
                 </div>
             </section>
@@ -31,9 +31,9 @@
             <b>Conversation History</b>
             <br /> <br />
             <section>
-                <div class="">
+                <div >
                     <!--
-                    <span class=""><b>Date:</b></span>
+                    <span ><b>Date:</b></span>
                     -->
                     what goes here?
                 </div>

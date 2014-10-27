@@ -1,6 +1,6 @@
-<div ng-controller="LatestCtrl"class="" xmlns="http://www.w3.org/1999/html">
-  <div class="">
-      <div class="" infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='0'>
+<div ng-controller="LatestCtrl" xmlns="http://www.w3.org/1999/html">
+  <div >
+      <div  infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='0'>
           <div class="angelStory" ng-switch on="parentObject.type">
               <a ng-switch-when="angel" ng-click="toogleEventEntry(); loadPage('angelStory')" class="readStory">Read {{ entry.firstName }}'s story here.</a>
               <a ng-switch-when="pet" ng-click="toogleEventEntry(); loadPage('angelStory')" class="readStory">Read {{ entry.firstName }}'s story here.</a>
@@ -156,7 +156,7 @@
                                     <p>{{comment.text}}</p>
                                 </div>
                         </div>
-                        <div class="">
+                        <div >
                             <div class=" postComment">
                                 <!-- <a ng-click="showcommentbox($index)" class="button tiny">Join the conversation</a>
                                <div ng-show="commentbox[$index]">-->

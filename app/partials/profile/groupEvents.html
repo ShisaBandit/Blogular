@@ -1,6 +1,6 @@
 <div ng-controller="AnniCtrl">
-    <div class="">
-        <div id="contentHeader" class="">
+    <div >
+        <div id="contentHeader" >
             <h2 class="contentHeaderTitle">Group Events</h2>
         </div>
     </div>
@@ -8,8 +8,8 @@
         <div>
             <h4 class="dark">Add a New Group Event</h4>
             <h5>Details</h5>
-            <input type="text" name="eventheader" ng-model="event" id="" placeholder="Give your event a name"/>
-            <input type="text" name="eventdesc" ng-model="eventdesc" id="" placeholder="Tell us more about this special event here"/>
+            <input type="text" name="eventheader" ng-model="event"  placeholder="Give your event a name"/>
+            <input type="text" name="eventdesc" ng-model="eventdesc"  placeholder="Tell us more about this special event here"/>
             <h5>Date</h5>
             <div class="form-horizontal">
                 <input type="text" name="eventdate" datepicker-popup="yyyy/MMMM/dd" ng-model="eventdate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" placeholder="Pick a Date For Your  Event" />
@@ -18,13 +18,13 @@
             <a ng-click="submitEvent()" class="button">Submit Group Event</a>
         </div>
     </div>
-    <div class=" ">
-        <div class="">
+    <div >
+        <div >
             <h1>Group Events</h1>
 
-            <div class="my-repeat-animation" ng-repeat="ani in anis" class="" style="background: #CDDFEF;margin-bottom: 20px;">
-                <div class="">
-                    <div class="">
+            <div class="my-repeat-animation" ng-repeat="ani in anis"  style="background: #CDDFEF;margin-bottom: 20px;">
+                <div >
+                    <div >
                         <h4>{{ ani.event }}</h4>
                         <p>{{ ani.date }}</p>
                         <p>{{ ani.text }}</p>
@@ -49,17 +49,17 @@
 
 
 <div ng-controller="groupEvntCtrl">
-    <div class=" ">
-        <div class="">
+    <div >
+        <div >
             <h1>TEST</h1>
-            <div ng-repeat="grpEvnt in grpEvnt" class="">
-                <div class="">
+            <div ng-repeat="grpEvnt in grpEvnt" >
+                <div >
 
                     <div class="small-2  ">
                         <h2>{{grpEvnt.event}}</h2>
 
                     </div>
-                    <div class="">
+                    <div >
                         <h4>{{ grpEvnt.date }}</h4>
                         <p>{{ grpEvnt.text }}</p>
                     </div>
