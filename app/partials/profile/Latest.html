@@ -53,7 +53,7 @@
         </div>
         <div ng-show="menu.video" id="videobox">
             <div>
-                <h3 style="color:#3F77BC;">Select which type of video you would like to show.</h3>
+                <h3>Select which type of video you would like to show.</h3>
                 <a class="button small" ng-click="menu.youtube = true;menu.animoto = false;">YouTube</a>
                 <a class="button small" ng-click="menu.youtube = false;menu.animoto = true;">Animoto</a>
                 <div class="my-show-hide-animation" ng-show="menu.youtube">
@@ -92,7 +92,7 @@
                 <h5>Date</h5>
                 <div class="form-horizontal">
                     <input type="text" name="eventdate" datepicker-popup="yyyy/MMMM/dd" ng-model="eventData.eventdate" is-open="opened2" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" placeholder="Pick a Date FOR YOUR Anniversary or Event" />
-                    <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
+                    <button class="btn" ng-click="open(2)"><img src="/img/eventsIcon.png" title="What's Happening" alt="Upcoming Events"></button>
                 </div>
                 <a ng-click="submitEvent()" class="button small">Submit Angel Anniversary</a>
             </div>

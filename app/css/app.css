@@ -463,6 +463,13 @@ h2.dark {
     color: #577396;
 }
 
+#UploadBox,
+#videobox,
+#eventbox {
+    display: block;
+    clear: both;
+}
+
 .closeButton {
     position: absolute;
     top: -2px;
@@ -953,6 +960,9 @@ label {
  }
 
 input[type=text], input[type=password], input[type=email] {
+    display: block;
+    clear: both;
+    margin-bottom: 10px;
     width: 250px;
     height: auto;
     min-height: 20px;
@@ -960,6 +970,7 @@ input[type=text], input[type=password], input[type=email] {
 }
 
 textarea {
+    width: 85%;
     height: 300px;
     margin-bottom: 20px;
 }
@@ -1961,6 +1972,7 @@ body nav.top-bar.top-bar-logged-in {
 
 .login input[type="text"],
 .login input[type="password"]{
+    display: inline;
     height: 10px;
     width: 80px;
 }
@@ -3129,6 +3141,11 @@ body nav.top-bar.top-bar-logged-in {
          cursor: pointer;
      }
 
+     .photoSummary {
+         background: #fff;
+         padding: 10px;
+     }
+
      body nav.top-bar.top-bar-logged-in {
          background: url('/img/background/headerFooterBG.png') repeat-x scroll -456px -521px #9EAFFF;
          position: relative;
@@ -3361,7 +3378,7 @@ body nav.top-bar.top-bar-logged-in {
 
      .buttons {
          display: block;
-         width: 31.25%;
+         width: 31%;
          height: 20px;
          background: #e2e2e2; /* Old browsers */
          background: -moz-linear-gradient(top,  #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%); /* FF3.6+ */
@@ -3382,6 +3399,10 @@ body nav.top-bar.top-bar-logged-in {
          border: 1px solid #577396;
          float: left;
          cursor: pointer;
+     }
+
+     .form-horizontal {
+        margin-bottom: 20px;
      }
 
      .border-footer{

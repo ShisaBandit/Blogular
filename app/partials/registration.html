@@ -1,7 +1,7 @@
     <div ng-controller="RegisterCtrl">
     <div class="generalPage">
         <div id="contentHeader" >
-            <h2 class="contentHeaderTitle">Please enter the details for your personal user profile below</h2>
+            <h2 class="contentHeaderTitle">Enter the details for your personal user profile below</h2>
         </div>
         <div role="content">
             <div >
@@ -68,7 +68,7 @@
                     <label>Date of Birth:</label>
                         <div class="form-horizontal">
                             <input type="text"  datepicker-popup="yyyy/MMMM/dd" ng-model="form.dob" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
-                            <button class="btn" ng-click="open(2)"><i class="general foundicon-calendar"></i></button>
+                            <button class="btn" ng-click="open(2)"><img src="/img/eventsIcon.png" title="What's Happening" alt="Upcoming Events"></button>
                         </div>
                         <p class="validation-error">{{message.dob}}</p>
 
