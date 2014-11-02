@@ -2168,7 +2168,9 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, gr
     $scope.tab = {
         userprofile:true
     }
-    api.getResourceByField('User', {field: "username", query: $routeParams.username}, function (user) {
+    api.getResourceByField('User', {field: "username", query: $routeParams.username}, function (user)
+    {
+        if(!user[0] )return;
         user[0].lost = groupsListing[user[0].lost].name;
         $scope.user = user[0];
         //get all angel profiles(blogs) that this user has in his profile id
@@ -2192,7 +2194,7 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, gr
     $scope.getFriendsMemorials = function () {
         $http.get('getFriendsMemorials').
             success(function (data) {
-                $scope.walls = data;
+                //$scope.walls = data;
                 console.log(data)
             }).
             error(function (err) {
@@ -2209,7 +2211,8 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, gr
         console.log(curerntlyMessagingUser.getUser());
         $rootScope.$broadcast('selectedUserMessages');
         $http.get('/getMessages/' + mUser.user).
-            success(function (data) {
+            success(function (data)
+            {
                 $scope.messages = data;
             })
     }
@@ -2236,7 +2239,15 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, gr
         $http.get('/usersinnetworkAll').
             success(function (data) {
                 console.log(data);
-            }).error(function (err) {
+                for(var d = 0;d<data.length;d++)
+                {
+                    if(!data[d].pet)data[d].pet = true;
+                    if(!data[d].group)data[d].group = true;
+                }
+                $scope.walls  = data;
+
+            }).error(function (err)
+            {
                 console.log(err);
             })
     }
@@ -3205,13 +3216,17 @@ app.controller('OnlineContacts',function($scope,$http,socket){
 
         for(var c = 0;c < $scope.contacts.length;c++)
         {
-            console.log(data.user);
+            console.log(data.user+" "+$scope.contacts[c].username);
             console.log($scope.contacts[c].userid+" "+data.user);
             if($scope.contacts[c].userid == data.user)
             {
                 console.log(data.state);
 
                 $scope.contacts[c].online = data.state;
+            }
+            else
+            {
+                //$scope.contacts[c].online = false;
             }
         }
     })
