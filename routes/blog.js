@@ -307,51 +307,63 @@ exports.getPaginatedStreamPosts = function (req, res) {
     });
 };
 
-exports.getABlog = function (req, res) {
+exports.getABlog = function (req, res)
+{
     var id = req.params.id;
 
-    User.findOne({_id: req.session.passport.user}, function (err, user) {
+    User.findOne({_id: req.session.passport.user}, function (err, user)
+    {
         var matchfound = false;
         if (err)console.log(err);
 
-        Blog.find({'author': id}).lean().exec(function (err, post) {
+        Blog.find({'author': id}).populate('user').exec(function (err, post)
+        {
             if (post[0] === undefined)return res.send(404);
-            if (user != null) {
-                if (post[0].owner_id == req.session.passport.user) {
-                    matchfound = true
-                } else {
-                    for (var x = 0; x < user.profiles.length; x++) {
+            if (user != null)
+            {
+                if (post[0].owner_id == req.session.passport.user)
+                {
+                    matchfound = true;
+                }
+                else
+                {
+                    for (var x = 0; x < user.profiles.length; x++)
+                    {
                         console.log(user.profiles[x].profile);
-
-                        if (user.profiles[x].profile == null) {
-
-                        } else {
+                        if (user.profiles[x].profile == null)
+                        {
+                        }
+                        else
+                        {
                             console.log(user.profiles[x].profile);
-                            if (post[0]._id == user.profiles[x].profile) {
+                            if (post[0]._id == user.profiles[x].profile)
+                            {
                                 matchfound = true;
                             }
                         }
                     }
-
-
                 }
             }
-            if (process.env.NODE_ENV == "production") {
+            if (process.env.NODE_ENV == "production")
+            {
                 console.log("WE are in production so setting privacy on mem walls");
-            } else {
-                console.log("not production so all walls are public for convinience");
-                // matchfound = true;
             }
-
-            if (post == undefined) {
+            else
+            {
+                console.log("not production so all walls are public for convinience");
+            }
+            if (post == undefined)
+            {
                 return res.send(200);
             }
-
-            if (matchfound == true) {
+            if (matchfound == true)
+            {
                 post.limited = false;
                 return res.end(JSON.stringify(post));
 
-            } else {
+            }
+            else
+            {
                 var modifiedpost = [];
                 var modifiedpostentry = {};
                 modifiedpostentry.text = post[0].text;
@@ -410,7 +422,7 @@ exports.getGroups = function (req, res) {
         return res.send(JSON.stringify(docs));
     })
 }
-
+//should store a reference to the blogs you own in the user data but am not at the moment
 exports.createBlog = function (req, res) {
     BlogGroupValidation(req).
         then(function (walls) {//if NO errors
@@ -986,7 +998,33 @@ exports.getNetwork = function (req, res) {
                     }
 
                 }
-                return res.end(JSON.stringify(returndata));
+                User.findOne({_id:req.session.passport.user},function(err,user)
+                {
+                    User.find(function(err,users)
+                    {
+                        for(userl in users)
+                        {
+                            if(user.lost == users[userl].lost)
+                            {
+                                var tempObj =
+                                {
+                                    id: "abc",
+                                    author: "abc",
+                                    firstName: users[userl].firstName,
+                                    lastName: users[userl].lastName,
+                                    title: "na",
+                                      userid:users[userl]._id,
+                                    username:users[userl].username,
+                                    online:false
+                                };
+                                returndata.push(tempObj);
+                            }
+                        }
+                        return res.end(JSON.stringify(returndata));
+
+                    });
+
+                });
             }
         })
 
@@ -1128,22 +1166,26 @@ exports.usersInNetworkAll = function (req, res) {
         var returnData = [];
         Blog.populate(user[0].memwalls, {path: 'user'}, function (err, walls) {
 
-            for (var x = 0; x < walls.length; x++) {
-                if (!walls[x].user) {
+            for (var x = 0; x < walls.length; x++)
+            {
+                if (!walls[x].user)
+                {
 
-                } else {
+                } else
+                {
                     returnData.push(walls[x].user);
                 }
             }
             //invitations we sent
-            console.log(search)
+            //console.log(search)
             User.find({_id: req.session.passport.user}).
                 populate({path: 'invitessent'
                     //match:{$or:[{firstName:new RegExp(search,"i")},{username:new RegExp(search,"i")},{lastName:new RegExp(search,"i")}]}
                 }).exec(function (err, invited) {
                     console.log("Invited")
                     //console.log(invited[0].invitessent.username)
-                    for (var y = 0; y < invited[0].invitessent.length; y++) {
+                    for (var y = 0; y < invited[0].invitessent.length; y++)
+                    {
                         console.log(invited[0].invitessent[y].username)
                         returnData.push(invited[0].invitessent[y])
                     }

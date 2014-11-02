@@ -287,7 +287,7 @@ app.get('/getFriendsMemorials',passport.ensureAuthenticated,blogRoutes.getFriend
 app.get('/getNetwork',passport.ensureAuthenticated,blogRoutes.getNetwork);
 app.get('/removeself/:wall',passport.ensureAuthenticated,blogRoutes.selfRemove);
 app.get('/usersinnetwork/:search',passport.ensureAuthenticated,blogRoutes.usersInNetwork);
-//app.get('/usersinnetworkAll',blogRoutes.usersInNetworkAll);
+app.get('/usersinnetworkAll',blogRoutes.usersInNetworkAll);
 
 app.get('/subscribed/:id',passport.ensureAuthenticated,blogRoutes.subscribed);///TODO:THE NAMES HERE ARE WRONG"!!!! FIX THESE
 app.get('/selfremove/:id',passport.ensureAuthenticated,blogRoutes.selfremove);
@@ -416,7 +416,18 @@ io.sockets.on('connection', function (socket) {
         console.log("trying to subscribe to notifications")
         notificationSubscribers.push({ id: socket.handshake.user[0]._id, username: socket.handshake.user[0].username,socket:socket});
         GetUsersInNetwork(socket.handshake.user[0]._id,socket,true);
+        GetUsersWithSameLost(socket.handshake.user[0]._id,socket,true);
+        socket.emit('online',{user:socket.handshake.user[0]._id,state:true});
+
+        //io.sockets.emit('online',{user:socket.handshake.user[0]._id,state:true});
         var dup = false;
+        for(var sub in notificationSubscribers)
+        {
+            for(var s in notificationSubscribers)
+            {
+                notificationSubscribers[sub].socket.emit('online',{user:notificationSubscribers[s].id,state:true});
+            }
+        }
         for(var i = 0; i < connectedUsersData.length;i++)
         {
             console.log(connectedUsersData[i]._id.valueOf());
@@ -476,6 +487,8 @@ io.sockets.on('connection', function (socket) {
         console.log('unsubscribe');
         console.log(notificationSubscribers)
         GetUsersInNetwork(socket.handshake.user[0]._id,socket,false);
+        GetUsersWithSameLost(socket.handshake.user[0]._id,socket,false);
+        io.sockets.emit('online',{user:socket.handshake.user[0],state:false});
         socket.leave(data.room);
         //var usersForThisRoom = [];
         var buffer = connectedusers;
@@ -507,7 +520,8 @@ io.sockets.on('connection', function (socket) {
         console.log('disconnect');
         console.log(socket.handshake.user[0]._id);
         io.sockets.emit('online',{user:socket.handshake.user[0]._id,state:false});
-        //GetUsersInNetwork(socket.handshake.user[0]._id,socket,false);
+        GetUsersInNetwork(socket.handshake.user[0]._id,socket,false);
+        GetUsersWithSameLost(socket.handshake.user[0]._id,socket,false);
         var buffer = connectedusers;
         for (var i = 0; i < connectedusers.length; i++)
         {
@@ -562,7 +576,7 @@ apiv2.messageEmitter.on('notification_messagereceived',function(userid,message,n
             conUsers[i].socket.emit('newnotification',{text:message,viewed:false,_id:notiid});
         }
     }
-})
+});
 //event for when a gift is received
 apiv2.messageEmitter.on('shoptowall_giftreceived',function(wall)
 {
@@ -587,11 +601,64 @@ apiv2.messageEmitter.on('shoptowall_giftreceived',function(wall)
 
     })
 
+
+GetUsersWithSameLost = function(id,socket,state)
+{
+    User.findOne({_id:id},function(err,user)
+    {
+        var returndata = [];
+        User.find(function(err,users)
+        {
+            for(var userl in users)
+            {
+                if(user.lost == users[userl].lost)
+                {
+                    var tempObj =
+                    {
+                        id: "abc",
+                        author: "abc",
+                        firstName: users[userl].firstName,
+                        lastName: users[userl].lastName,
+                        title: "na",
+                        userid:users[userl]._id,
+                        username:users[userl].username,
+                        online:state
+                    };
+                    returndata.push(tempObj);
+                }
+            }
+            for(var un = 0; un < returndata.length;un++)
+            {
+                for(var c = 0;c<notificationSubscribers.length;c++)
+                {
+                    console.log(notificationSubscribers[c].id+" "+ returndata[un].userid);
+                    if(notificationSubscribers[c].id.toString() == returndata[un].userid.toString())
+                    {
+                        console.log("writing to socket ");
+                        notificationSubscribers[c].socket.emit('online',{user:id,state:state});
+                    }
+                }
+                console.log("Emitting");
+                //socket.emit('online',{user:returndata[un].userid,state:state});
+            }
+
+        });
+
+    });
+}
+
+GetUsersInNetworkOwner = function(id,socket,state)
+{
+
+}
+
 GetUsersInNetwork = function (id,socket,state)
 {
     console.log(id);
+    //get all the  memwalls you belong to query
     User.find({_id: id}).populate('memwalls').exec(function (err, user)
     {
+        //populate the refs with actual data
         // Blog.populate(user[0].memwalls, {path: 'user', match: {username: new RegExp(search, "i")}}, function (err, walls) {
         User.populate(user[0].memwalls,{path:'user'},function(err,walls)
         {
@@ -604,7 +671,7 @@ GetUsersInNetwork = function (id,socket,state)
             {
                 var returndata = [];
                 var memwalls = user[0].memwalls;
-
+                //looping through all walls you belong to
                 for (var x = 0; x < memwalls.length; x++)
                 {
                     var memwall = memwalls[x];
@@ -619,7 +686,9 @@ GetUsersInNetwork = function (id,socket,state)
                     }
                     if(!dup)
                     {
-                        var tempObj = {
+                        //this gives you the owner of the wall that you belong too
+                        var tempObj =
+                        {
                             id: memwall._id,
                             author: memwall.author,
                             firstName: memwall.firstName,
@@ -628,34 +697,56 @@ GetUsersInNetwork = function (id,socket,state)
                             userid:memwall.user._id,
                             username:memwall.user.username,
                             online:state
-                        }
+                        };
                         returndata.push(tempObj);
-
                     }
-
                 }
-
-                console.log(returndata);
-
-                    for(var un = 0; un < returndata.length;un++)
-                    {
-                        for(var c = 0;c<notificationSubscribers.length;c++)
+                //invitations we sent
+                //console.log(search)
+                User.find({_id: id}).
+                    populate({path: 'invitessent'
+                        //match:{$or:[{firstName:new RegExp(search,"i")},{username:new RegExp(search,"i")},{lastName:new RegExp(search,"i")}]}
+                    }).exec(function (err, invited) {
+                        console.log("Invited")
+                        for (var y = 0; y < invited[0].invitessent.length; y++)
                         {
-                            console.log(notificationSubscribers[c].id+" "+ returndata[un].userid);
-                            if(notificationSubscribers[c].id.toString() == returndata[un].userid.toString())
+                            var tempObj =
                             {
-                                console.log("writing to socket ");
-                                notificationSubscribers[c].socket.emit('online',{user:id,state:state});
-                            }
+                                id: "",
+                                author: "",
+                                firstName: invited[0].invitessent[y].firstName,
+                                lastName: invited[0].invitessent[y].firstName,
+                                title: "",
+                                userid:invited[0].invitessent[y]._id,
+                                username:invited[0].invitessent[y].username,
+                                online:state
+                            };
+                            console.log(invited[0].invitessent[y].username);
+                            returndata.push(tempObj);
+
+
+
                         }
-                        console.log("Emitting");
-                        socket.emit('online',{user:returndata[un].userid,state:state});
+                        console.log(returndata);
 
-                    }
-
-
-
-                return returndata;
+                        for(var un = 0; un < returndata.length;un++)
+                        {
+                            for(var c = 0;c<notificationSubscribers.length;c++)
+                            {
+                                console.log(notificationSubscribers[c].id+" "+ returndata[un].userid);
+                                if(!notificationSubscribers[c])return;
+                                if(!returndata[un])return;
+                                if(notificationSubscribers[c].id.toString() == returndata[un].userid.toString())
+                                {
+                                    console.log("writing to socket ");
+                                    notificationSubscribers[c].socket.emit('online',{user:id,state:state});
+                                }
+                            }
+                            console.log("Emitting");
+                            //socket.emit('online',{user:returndata[un].userid,state:state});
+                        }
+                        return returndata;
+                    })
             }
         })
     })
