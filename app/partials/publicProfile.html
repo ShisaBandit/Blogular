@@ -14,10 +14,10 @@
                             <li>Email: {{user.email}}</li>
                             <li>Date of Birth: {{user.dob}}</li>
                             <li>City: {{user.city}}</li>
-                            <li>About you : {{user.about}}</li>
-                            <li>You have lost a {{user.lost}}</li>
+                            <li>About {{user.firstName}} : {{user.about}}</li>
+                            <li>{{user.firstName}} has lost a {{user.lost}}</li>
                         </ul>
-                        <div ng-controller="directMessageController" ng-show="userSelected" if-authed="show">
+                        <div ng-controller="directMessageController" if-authed="show">
                             <div class="my-repeat-animation">
                                 Real block below
                                 <table border="0" cellpadding="0" cellspacing="0">
