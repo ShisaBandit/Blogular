@@ -3200,13 +3200,24 @@ app.controller('PublicProfileCtrl', function ($scope,api,$routeParams,groupsList
 });
 
 
-app.controller('OnlineContacts',function($scope,$http,socket){
+app.controller('OnlineContacts',function($scope,$http,socket,userInfoService){
     $scope.contacts = {};
 
     console.log("Getting online contacts");
     $http.get('getNetwork').
         success(function(data)
         {
+            for(var i = 0; i < data.length; i++ )
+            {
+                console.log("Display contacts that have online status" + data);
+                console.log("Datas user name " + data[i].username);
+                console.log("Session user name " + userInfoService.getUsername());
+                if(data[i].username.toString() == userInfoService.getUsername()){
+                    data.splice(i,1);
+                    console.log("We have removed the logged in user " + userInfoService.getUsername() + " from the array object.");
+                    break;
+                }
+            }
             $scope.contacts = data;
         });
 
