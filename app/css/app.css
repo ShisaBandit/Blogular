@@ -911,7 +911,7 @@ body .replycontainer div p {
      padding: 5px;
      padding-top:15px;
      margin: 0px;
-     min-height: 80px;
+     min-height: 40px;
      clear: both;
      border: #f0f9ff 1px dotted;
  }
