@@ -2070,7 +2070,7 @@ app.controller('DeletePicsCtrl', function ($rootScope,$scope,$http, DeletePicsFa
             })
     }
 })
-app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams) {
+app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams,userInfoService) {
    // $scope.petitions = [];
     $scope.spinner = false;
     $scope.message = "";
@@ -2113,6 +2113,7 @@ app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams) {
 
         });
     }
+    $scope.myPetitions = [];
     if($routeParams.id){
         $scope.getPetition();
     }else{
@@ -2121,9 +2122,15 @@ app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams) {
             for(var petition in petitions){
                 if(petitions[petition].signatures)
                     petitions[petition].signaturecount = petitions[petition].signatures.length;
+
+
+                if(petitions[petition].owner.toString() == userInfoService.getId().toString())
+                {
+                    $scope.myPetitions.push(petitions[petition]);
+                }
             }
             $scope.petitions = petitions;
-
+            
             $scope.spinner = false;
         });
     }
