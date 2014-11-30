@@ -2075,6 +2075,11 @@ app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams,userInfo
     $scope.spinner = false;
     $scope.message = "";
     $scope.again = true;
+    $scope.petitionForm = {
+
+        text:"",
+        title:""
+    }
     $scope.submitedit = function () {
         $scope.spinner = true;
         $http.post('updatePetition',{id:$routeParams.id, title: $scope.title , text:$scope.text}).
@@ -2088,8 +2093,8 @@ app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams,userInfo
     }
 
     $scope.submit = function () {
-        var text = $scope.text;
-        var title = $scope.title;
+        var text = $scope.petitionForm.text;
+        var title = $scope.petitionForm.title;
         $scope.spinner = true;
         api.createResource('Petition', {text: text, title: title}, function () {
             api.getResourceById('Petition', 'all', function (petitions) {
@@ -2099,8 +2104,8 @@ app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams,userInfo
                 $scope.again = false ;
             });
         });
-        $scope.title = "";
-        $scope.text = "";
+        $scope.petitionForm.text = "";
+        $scope.petitionForm.title = "";
     }
     console.log($routeParams.id);
     $scope.getPetition = function () {
@@ -2130,7 +2135,7 @@ app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams,userInfo
                 }
             }
             $scope.petitions = petitions;
-            
+
             $scope.spinner = false;
         });
     }
