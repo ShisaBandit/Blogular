@@ -3061,7 +3061,8 @@ app.controller('NotificationsCtrl', function ($scope, $http, api,socket) {
 });
 app.controller('WorkshopCtrl', function ($scope, $http, api) {
     $scope.workshops = [];
-    $scope.form;
+
+    $scope.form = {form:{}};
 
     api.getResourceById('Workshop', 'all', function (workshops)
     {

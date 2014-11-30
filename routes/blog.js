@@ -32,10 +32,10 @@ exports.workshopinfo = function(req,res)
 {
     //TODO:Get theworkshop datafrom client format and send to pat rod and me
     var message = 'You have a new workshop submission:'+req.body.address;
-    SendEmail('raygarner13@gmail.com','raygarner13@gmail.com',message,'Circle of Life Workshop Submission! View and approve this submission here: <a href="http://' +
-        'the-circle-of-life.net/#/workshops/'+blog.author+'/'+requester._id+'">Click to review and approve</a>');
-    SendEmail('Rodney','rodney@blackjackproductions.com',message,'Circle of Life Workshop Submission! View and approve this submission here: <a href="http://' +
-        'the-circle-of-life.net/#/workshops/'+blog.author+'/'+requester._id+'">Click to review and approve</a>');
+    SendEmail('raygarner13@gmail.com','raygarner13@gmail.com',message,'Circle of Life Workshop Submission! View and approve this submission here: <a href="http://');// +
+        //'the-circle-of-life.net/#/workshops/'+blog.author+'/'+requester._id+'">Click to review and approve</a>');
+    SendEmail('Rodney','rodney@blackjackproductions.com',message,'Circle of Life Workshop Submission! View and approve this submission here: <a href="http://' );//+
+        //'the-circle-of-life.net/#/workshops/'+blog.author+'/'+requester._id+'">Click to review and approve</a>');
     //SendEmail('raygarner13@gmail.com','AngelsofEureka@aol.com',message,'Wall request!');
     return res.send(200,'success');
 
@@ -109,7 +109,7 @@ var SendMessage = function (from,to,message,req,res,callback) {//data from to
             }
             todoc.notifications.push({text:"You have a new message from "+from});
             if(!added){
-                todoc.messagedUsers.push({user:from});
+                todoc.messagedUsers.push({user:from,firstName:fromdoc.firstName,lastName:fromdoc.lastName});
             }
             var messagedUsersFrom = fromdoc.messagedUsers;
             var added = false;
@@ -118,17 +118,27 @@ var SendMessage = function (from,to,message,req,res,callback) {//data from to
             for(var user in messagedUsersFrom){
                 if(messagedUsersFrom[user].user == from){
                     added = true;
+                  if(  messagedUsersFrom[user].firstName == undefined)
+                  {
+                      fromdoc.messagedUsers.lastName = todoc.lastName;
+                      fromdoc.messagedUsers.firstName = todoc.firstName;
+                  }
                 }
                 if(messagedUsersFrom[user].user == to){
                     addedTo = true;
+                    if(  messagedUsersFrom[user].firstName == undefined)
+                    {
+                        todoc.messagedUsers.lastName = fromdoc.lastName;
+                        todoc.messagedUsers.firstName = fromdoc.firstName;
+                    }
                 }
             }
 
             if(!added){
-                fromdoc.messagedUsers.push({user:from});
+                fromdoc.messagedUsers.push({user:from,firstName:todoc.firstName,lastName:todoc.lastName});
             }
             if(!addedTo){
-                fromdoc.messagedUsers.push({user:to});
+                fromdoc.messagedUsers.push({user:to,firstName:fromdoc.firstName,lastName:fromdoc.lastName});
             }
             fromdoc.save(function(err){
                 if(err)console.log(err)

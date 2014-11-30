@@ -6,6 +6,7 @@ exports.getMessagedUsers = function(req,res){
     User.findOne({_id:req.session.passport.user},function(err,doc){
         if(doc === undefined || doc === null)
             return res.send("none",200);
+
         return res.send(JSON.stringify(doc.messagedUsers),200);
     })
 }
