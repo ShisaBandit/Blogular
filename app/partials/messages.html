@@ -5,16 +5,13 @@
         </div>
         <div id="messageCenter">
             Welcome to the Message Center. From here you can create, manage and view messages from your network members, administrators and other registered users.
-                <span><b>{{error}}</b></span>
-                <span><b>{{message}}</b></span>
-                <br />
-                {{sendTo}}
-                To: <input ng-hide="pre" type="text" placeholder="Recipient's name here" ng-model="form.selected" typeahead="user for user in getPossibles($viewValue) | filter:$viewValue | limitTo:8">
-                <br />
-                <textarea class="login-inp ng-pristine ng-valid" ng-model="form.message" placeholder="Enter your message here"></textarea>
-                <br />
-                <a class="button small" ng-click="sendMessage()">Send Message</a></td>
-                <a class="button small">Cancel</a>
+            <span><b>{{error}}</b></span>
+            <span><b>{{message}}</b></span>
+            <br />
+            <div ng-controller="messageController">
+                <a class="button sendMsg" ng-click="open(messagedUser.user)"><img src="img/mail_2.png"> Send a New Message</a>
+            </div>
+            <br />
         </div>
         <div class="rghtDvd">
             <b>Conversation With:</b>
