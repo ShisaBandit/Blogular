@@ -36,8 +36,8 @@
                     <div ng-class="{spinner:spinner}"></div>
                     <div ng-show="again">
                         <h2 style="color: #2164AA;">Create a petition</h2>
-                        Give your petition a name. <input type="text" ng-hide="textorphoto" ng-model="title"/>
-                        What is your petition for? <input type="text" ng-hide="textorphoto" ng-model="text"/>
+                        Give your petition a name. <input type="text" ng-hide="textorphoto" ng-model="petitionForm.title"/>
+                        What is your petition for? <input type="text" ng-hide="textorphoto" ng-model="petitionForm.text"/>
                         <div ng-class="{spinner:spinner}"></div>
                         <br />
                         <div ng-bind="message"></div>
