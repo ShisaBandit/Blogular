@@ -1293,10 +1293,18 @@ textarea.addNewPost{
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1) inset;
 }
 
-.rghtDvd {
+.chatWith {
     display: inline-block;
     height: auto;
     border-right: solid 1px #808080;
+}
+
+.chatHist {
+    display: inline-block;
+    width: auto;
+    max-width: 560px;
+    height: auto;
+    vertical-align: top;
 }
 
 .postBoxes {
