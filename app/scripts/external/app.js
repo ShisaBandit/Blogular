@@ -2087,6 +2087,7 @@ app.controller('PetitionCtrl', function ($http,$scope, api,$routeParams,userInfo
                 console.log(data)
                 $scope.message = "You have successfully updated a petition "+$scope.title;
                 $scope.again = false;
+
             }).error(function (err) {
                 console.log(err)
             })

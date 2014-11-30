@@ -17,6 +17,7 @@ exports.updatePetition = function (req,res) {
     Petition.findOneAndUpdate({_id:req.body.id},req.body, function (err,updateddoc) {
         if(err)console.log(err)
         console.log(updateddoc)
+        return res.send(200,'allokd');
     })
 }
 
