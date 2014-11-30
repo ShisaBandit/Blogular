@@ -2195,10 +2195,28 @@ app.controller('UserProfileCtrl', function ($scope,$location, api, $routeParams,
         success(function (data) {
             $scope.groups = data;
     })
+    $scope.friendswalls = [];
+    $scope.friendspetwalls = [];
+    $scope.friendsgroupwalls = [];
     $scope.getFriendsMemorials = function () {
         $http.get('getFriendsMemorials').
             success(function (data) {
-                //$scope.walls = data;
+                for(var i = 0 ; i<data.length;i++)
+                {
+                    if(data[i].pet)
+                    {
+                        $scope.friendspetwalls.push(data[i]);
+                    }
+                    else if (data[i].group)
+                    {
+                        $scope.friendsgroupwalls.push(data[i]);
+                    }else
+                    {
+                        $scope.friendswalls.push(data[i]);
+                    }
+
+                }
+                //$scope.friendswalls = data;
                 console.log(data)
             }).
             error(function (err) {

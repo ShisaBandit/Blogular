@@ -941,7 +941,9 @@ exports.getFriendsMemorials = function (req, res) {
                         firstName: memwall.firstName,
                         lastName: memwall.lastName,
                         title: memwall.title,
-                        username:memwall.user.username
+                        username:memwall.user.username,
+                        pet:memwall.pet,
+                        group:memwall.group
                     }
                     returndata.push(tempObj);
 
