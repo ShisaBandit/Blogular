@@ -6,11 +6,10 @@
         <div>
             <div ng-switch on="parentObject.type" id="portrait">
                 <span ng-switch-when="group">Moderator: {{ entry.firstName }}</span>
-                <span ng-switch-when="angel">Moderator: {{ entry.firstName }} {{ entry.lastName }}</span>
-                <span ng-switch-when="pet">Moderator: {{ entry.firstName }} {{ entry.lastName }}</span>
+                <span ng-switch-when="angel">Moderator: {{ entry.user.firstName }} {{ entry.user.lastName }}</span>
+                <span ng-switch-when="pet">Moderator: {{ entry.user.firstName }} {{ entry.user.lastName }}</span>
             </div>
             <br />
-            <i>{{entry.owner_id}}</i>
             <br />
             <ul>
                 <li ng-repeat="subscriber in subscribers">

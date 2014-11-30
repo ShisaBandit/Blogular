@@ -7,7 +7,8 @@
     </p>
     <ul class="petitions">
         <li ng-repeat="petition in myPetitions ">
-            {{petition.title}}- <a href="#/editpetition/{{petition._id}}" class="small button">Edit</a> - <a
+            {{petition.title}} <br /><br />
+            <a href="#/editpetition/{{petition._id}}" class="small button">Edit</a> - <a
                 ng-click="deletePetition(petition._id)" class="small button">Delete</a>
         </li>
     </ul>
