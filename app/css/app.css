@@ -2577,15 +2577,16 @@ body nav.top-bar.top-bar-logged-in {
 .kinetic-slider-content {
   position: absolute;
   z-index: 1;
-  width: 100%; }
+  width: 100%;
+  white-space: nowrap; }
   .kinetic-slider-content a {
-    position: relative;
-    display: block;
-    float: left;
-    width: 85px;
-    height: 85px;
-    padding: 0 5px;
-    overflow: hidden; }
+      position: relative;
+      height: 85px;
+      padding: 0px 5px;
+      overflow: hidden;
+      width: 85px !important;
+      display: inline-block !important;
+      vertical-align: top; }
     .kinetic-slider-content a img {
       height: 100%; }
 
