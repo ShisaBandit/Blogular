@@ -224,6 +224,12 @@ a {
     border-top: 1px solid #000000;
 }
 
+.event-list {
+    display: block;
+    max-height: 100px;
+    overflow: scroll;
+}
+
 .backgroundTitleImage{
     width: 300px;
     height: 300px;
@@ -995,6 +1001,8 @@ textarea {
     float: left;
     border: 1px #f5f5f5 dashed;
 }
+
+
   /*
 .nav-container{ background: url('images/nav_bg.jpg') repeat-x 0 0;}
 .f-nav{ z-index: 9999; position: fixed; left: 0; top: 0; width: 100%;}
