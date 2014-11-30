@@ -224,6 +224,18 @@ a {
     border-top: 1px solid #000000;
 }
 
+#onlineContacts {
+    display: block;
+    max-height: 300px;
+    overflow: scroll;
+}
+
+.event-list {
+    display: block;
+    max-height: 100px;
+    overflow: scroll;
+}
+
 .backgroundTitleImage{
     width: 300px;
     height: 300px;
@@ -911,7 +923,7 @@ body .replycontainer div p {
      padding: 5px;
      padding-top:15px;
      margin: 0px;
-     min-height: 80px;
+     min-height: 40px;
      clear: both;
      border: #f0f9ff 1px dotted;
  }
@@ -995,6 +1007,8 @@ textarea {
     float: left;
     border: 1px #f5f5f5 dashed;
 }
+
+
   /*
 .nav-container{ background: url('images/nav_bg.jpg') repeat-x 0 0;}
 .f-nav{ z-index: 9999; position: fixed; left: 0; top: 0; width: 100%;}
@@ -2275,13 +2289,13 @@ body nav.top-bar.top-bar-logged-in {
      display: block;
      float: right;
      height: 10px;
-     margin-top: -12px;
+     margin-top: 0px;
      width: 10px;
  }
 
  .onlineStatus.false i {
      display: block;
-     margin-top: -12px;
+     margin-top: 0px;
      width: 10px;
      height: 10px;
      float: right;

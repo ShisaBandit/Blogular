@@ -130,7 +130,7 @@
 
 
                     <div ng-if="post.photos">
-                        <b>Pics posted</b>
+                        <!--<b>The follwing photo has been posted</b>-->
 
                     </div>
                     <div ng-bind-html="post.embedYouTube | unsafe"></div>
@@ -138,7 +138,7 @@
                     <br />
 
                     <div ng-repeat="photo in post.photos">
-                        <a shadowbox name="image" url="uploads/{{photo.filename}}" href="uploads/{{photo.filename}}">
+                        <a shadowbox name="image" url="uploads/{{photo.filename}}" href="uploads/{{photo.filename}}" rel="shadowbox">
                         </a>
                     </div>
                 </div>
