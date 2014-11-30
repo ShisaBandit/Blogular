@@ -55,14 +55,13 @@
                 </div>
                 <br />
                 <div class="msgHist my-repeat-animation" ng-repeat="message in messages" >
-                    <div class="conv" style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000">
-                        <b>{{message.from}}</b>
-                        <i style="font: x-small serif; color: steelblue;float: right">
-                            {{message.date}}
-                        </i>
+                    <div class="conv" style="background: #fff; margin-bottom: 0px; padding: 5px; border-bottom: 1px dashed #000000">
+                        <b>Sender: {{message.from}}</b>
                         <br/>
                         <div class="messageHistory" ng-bind-html="message.message"></div>
-                        <br/>
+                        <i style="font: x-small serif; color: steelblue; text-align: right; display: block;">
+                            {{message.date}}
+                        </i>
                     </div>
                 </div>
             </section>

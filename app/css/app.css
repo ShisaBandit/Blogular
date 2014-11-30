@@ -53,6 +53,7 @@
     padding: 0;
     margin: 0;
     font-family: sans-serif;
+    font-size: 12px;
     color: #34455A;
     background: url('/img/background/baloons.png') no-repeat scroll center top / cover transparent;
     overflow-x: hidden;
@@ -1319,6 +1320,7 @@ textarea.addNewPost{
 
 .msgHist {
     width: auto;
+    padding: 0 !important;
 }
 
 .messageHistory {
