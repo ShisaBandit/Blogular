@@ -161,7 +161,7 @@
             <div class="my-repeat-animation" ng-repeat="contact in contacts">
                 <div style="background: #F4F4F4; margin-bottom: 10px; padding: 5px; border-bottom: 1px dashed #000000" ng-controller="messageController">
                     <i>
-                        <a ng-href="#/pubpro/{{contact.username}}" ng-click="getMessages(username)">{{contact.username}}: <br />{{contact.firstName}} {{contact.lastName}}</a>
+                        <a ng-href="#/pubpro/{{contact.username}}" ng-click="getMessages(username)">{{contact.firstName}} "{{contact.username}}" {{contact.lastName}}</a>
                         <div class="onlineStatus {{contact.online}}" style="font: x-small serif; color: steelblue;float: right">
                             <i title="Offline">
                                 <!--({{contact.online}} is Offline) -->

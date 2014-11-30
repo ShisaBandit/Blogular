@@ -970,8 +970,8 @@ input[type=text], input[type=password], input[type=email] {
 }
 
 textarea {
-    width: 85%;
-    height: 300px;
+    width: 95%;
+    height: 30px;
     margin-bottom: 20px;
 }
 
@@ -1296,15 +1296,33 @@ textarea.addNewPost{
 .chatWith {
     display: inline-block;
     height: auto;
-    border-right: solid 1px #808080;
+    border-right: 1px solid #808080;
+    width: 160px;
+}
+
+.contacts {
+    font-size: 12px;
+    width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0px !important;
+    margin: 10px 0px !important;
 }
 
 .chatHist {
     display: inline-block;
     width: auto;
-    max-width: 560px;
     height: auto;
     vertical-align: top;
+    max-width: 200px;
+}
+
+.msgHist {
+    width: auto;
+}
+
+.messageHistory {
+    width: auto;
 }
 
 .postBoxes {
@@ -2611,6 +2629,14 @@ body nav.top-bar.top-bar-logged-in {
          color: #577396 !important;
          line-height: 1.125rem;
      }
+
+     .chatHist {
+         display: inline-block;
+         width: auto;
+         height: auto;
+         vertical-align: top;
+         max-width: 260px;
+     }
  }
  @media screen and (min-device-width: 490px) and (max-device-width: 679px) {
      .primaryContent, .mainNav {
@@ -2734,6 +2760,21 @@ body nav.top-bar.top-bar-logged-in {
          font-size: x-small;
          white-space: nowrap;
          cursor: pointer;
+     }
+
+     .chatWith {
+         display: inline-block;
+         height: auto;
+         border-right: 1px solid #808080;
+         width: 117px;
+     }
+
+     .chatHist {
+         display: inline-block;
+         width: auto;
+         height: auto;
+         vertical-align: top;
+         max-width: 200px;
      }
  }
 
@@ -3076,6 +3117,14 @@ body nav.top-bar.top-bar-logged-in {
 
      .mediaControl {
          display: inline;
+     }
+
+     .chatHist {
+         display: inline-block;
+         width: auto;
+         height: auto;
+         vertical-align: top;
+         max-width: 350px;
      }
  }
 
@@ -3486,5 +3535,13 @@ body nav.top-bar.top-bar-logged-in {
 
      .mediaControl {
          display: inline;
+     }
+
+     .chatHist {
+         display: inline-block;
+         width: auto;
+         height: auto;
+         vertical-align: top;
+         max-width: 550px;
      }
  }
