@@ -2158,6 +2158,7 @@ body nav.top-bar.top-bar-logged-in {
      text-align: center;
      height: 30px !important;
      padding: 10px !important;
+     color: #fff !important;
  }
 
  #portraitDropzone {
