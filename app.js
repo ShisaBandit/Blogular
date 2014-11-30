@@ -723,9 +723,6 @@ GetUsersInNetwork = function (id,socket,state)
                             };
                             console.log(invited[0].invitessent[y].username);
                             returndata.push(tempObj);
-
-
-
                         }
                         console.log(returndata);
 

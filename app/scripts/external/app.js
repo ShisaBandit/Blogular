@@ -68,6 +68,7 @@ var app = angular.module('YoMemorialApp', [
             otherwise("/oops",{templateUrl:"404.html"});
 
     });
+
 app.controller('JoinCtrl',function($scope,$http,$routeParams){
         $http.get('invite/' + $routeParams.wallid + '/' + $routeParams.user).
             success(function (data)
@@ -1397,7 +1398,8 @@ app.controller('directMessageController', function ($scope, api, $http, authServ
     {
         curerntlyMessagingUser.setUser($scope.user.username);
     }
-    $rootScope.$on('selectedUserMessages',function(){
+    $rootScope.$on('selectedUserMessages',function()
+    {
         $scope.sendToPerson = curerntlyMessagingUser.getUser();
     })
     $scope.open = function (messagePerson)
@@ -1446,7 +1448,8 @@ app.controller('directMessageController', function ($scope, api, $http, authServ
         $scope.loginAttempt = true;
         $scope.error = "";
         $http.post('/login', $scope.form)
-            .success(function (data, status) {
+            .success(function (data, status)
+            {
                 userInfoService.setUsername($scope.form.username);
                 $scope.form.username = "";
                 $scope.form.password = "";
@@ -1472,7 +1475,7 @@ app.controller('directMessageController', function ($scope, api, $http, authServ
     $scope.sendMessage = function ()
     {
         console.log($scope.sendToPerson);
-        api.createResource('Message', {to: curerntlyMessagingUser.getUser().user, from: $scope.form.from, message: $scope.form.message}, function (data, status) {
+        api.createResource('Message', {to: $scope.sendToPerson, from: $scope.form.from, message: $scope.form.message}, function (data, status) {
             console.log(status);
             if (status == 400) {
                 $scope.message = data;
@@ -2159,7 +2162,8 @@ app.controller('PetitionEntryCtrl', function ($scope, api, $routeParams,$http) {
     }
 });
 
-app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, groupsListing,curerntlyMessagingUser,$rootScope)
+
+app.controller('UserProfileCtrl', function ($scope,$location, api, $routeParams, $http, groupsListing,curerntlyMessagingUser,$rootScope)
 {
     $scope.messagedUsers = [];
     $scope.messages = [];
@@ -2204,19 +2208,37 @@ app.controller('UserProfileCtrl', function ($scope, api, $routeParams, $http, gr
     $scope.currentMessagedUser = {};
     $scope.userSelected = false;
     $scope.getFriendsMemorials();
+
     $scope.getMessages = function (mUser)
     {
         $scope.userSelected = true;
         curerntlyMessagingUser.setUser(mUser);
+
         console.log(curerntlyMessagingUser.getUser());
         $rootScope.$broadcast('selectedUserMessages');
-        $http.get('/getMessages/' + mUser.user).
+        $http.get('/getMessages/' + curerntlyMessagingUser.getUser()).
             success(function (data)
             {
+                console.log("WTF");
                 $scope.messages = data;
             })
     }
+    console.log("HAHAHAHAHA")
+    console.log($location.path())
+    console.log($location.path().split("/")[1]);
+    if($location.path().split("/")[1] == "pubpro")
+    {
+        console.log("GETTING MESSAGES FOR BETWEEN THESE TWO USERS");
+        $scope.getMessages($location.path().split("/")[2]);
+    }
+    $scope.getMessagesForProfile = function()
+    {
+        console.log("HAHAHAHAHA")
+        console.log($location.path())
+        console.log($location.path().split("/")[1]);
 
+    }
+    //$scope.getMessages();
     $rootScope.$on('directMessageSent',function()
     {
         $scope.getMessages(curerntlyMessagingUser.getUser());
@@ -3216,7 +3238,7 @@ app.controller('OnlineContacts',function($scope,$http,socket){
 
         for(var c = 0;c < $scope.contacts.length;c++)
         {
-            console.log(data.user+" "+$scope.contacts[c].username);
+            console.log(data.user+"  "+$scope.contacts[c].username);
             console.log($scope.contacts[c].userid+" "+data.user);
             if($scope.contacts[c].userid == data.user)
             {
