@@ -21,9 +21,8 @@
                         -->
                         <div role="content">
                             Submitted, but not yet approved workshops
-                            <accordion>
-                                <accordion-group heading="Name of Submitted workshop here" class="small button">
-                                    <p style="color: #2164AA;">{{ workshop._id }}</p>
+                            <div>
+                                    <p style="color: #2164AA;">Workshop ID {{ workshop._id }}</p>
                                     <div>
                                         <ul>
                                             <li>
@@ -58,11 +57,9 @@
                                         </form>
                                         </p>
                                     </div>
-                                </accordion-group>
-                            </accordion>
-                            <accordion>
-                                <accordion-group heading="Name of Submitted workshop here" class="small button">
-                                    <p style="color: #2164AA;">{{ workshop._id }}</p>
+                            </div>
+                            <div>
+                                    <p style="color: #2164AA;">Workshop ID {{ workshop._id }}</p>
                                     <div>
                                         <ul>
                                             <li>
@@ -97,8 +94,7 @@
                                         </form>
                                         </p>
                                     </div>
-                                </accordion-group>
-                            </accordion>
+                            </div>
                             <p style="color: #2164AA;" ng-show="workshops == ''">There are no workshops scheduled at this time</p>
                         </div>
                     </div>

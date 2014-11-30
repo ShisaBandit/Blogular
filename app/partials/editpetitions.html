@@ -1,13 +1,19 @@
-<div ng-controller="PetitionCtrl">
-    <div class="row ">
-        <h1 class="sectionHeader">Petitions</h1>
-        <div >
-            <h2>Create a petition</h2>
-            Give your petition a name. <input type="text" ng-hide="textorphoto" ng-model="title"/>
-            What is your petition for? <input type="text" ng-hide="textorphoto" ng-model="text"/>
-            <div>Signature count <b>{{signaturecount}}</b></div>
-            <div>{{message}}</div>
-            <button ng-click="submitedit()" class="button postfix small">Submit</button>
-        </div>
+<div class="generalPage"  ng-controller="PetitionCtrl">
+    <div id="contentHeader" class="contentHeader">
+        <h2 class="contentHeaderTitle">My Petitions</h2>
     </div>
+        <div class="row ">
+            <h2>Edit Petition</h2>
+            <div >
+                Give your petition a name. <input type="text" ng-hide="textorphoto" ng-model="title"/>
+                What is your petition for? <input type="text" ng-hide="textorphoto" ng-model="text"/>
+                <div>Signature count <b>{{signaturecount}}</b></div>
+                <button ng-click="submitedit()" class="button postfix small">Submit</button>
+            </div>
+        </div>
+</div>
+<div class="adContainer">
+    Our Sponsors
+    <a href="http://angelsofeureka.com/shop/index.php/" target="_blank" title="Angels of Eureka Gift Shop"><img src="img/angelsofeurekalogo-bw.jpg" alt="Angels of Eureka Shop" /></a>
+    <a href="http://www.phojoe.com/AOE.html" target="_blank" title="Photo Joe Photo Restorations"><img src="img/Phojoe_Banner.jpg" alt="Photo Joe Image Restoration" /></a>
 </div>
