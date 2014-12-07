@@ -320,9 +320,6 @@ app.get('/join/:blog',blogRoutes.join);
 //app.post('/sendAbout',blogRoutes.sendAboutMail);
 app.get('/setpublishstate/:id/:state',blogRoutes.setPublishState);
 
-app.get('/getpublishedworkshops',blotRountes.getPublishedWorkshops);
-
-
 var server = http.createServer(app).listen(app.get('port'), app.get('ip'), function () {
 
 
