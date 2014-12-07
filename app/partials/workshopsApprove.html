@@ -21,173 +21,60 @@
                         -->
                         <div role="content">
                             Submitted, but not yet approved workshops
+                        <div ng-repeat="workshop in workshops">
+
+
                             <div>
                                     <p style="color: #2164AA;">Workshop ID {{ workshop._id }}</p>
                                     <div>
                                         <ul>
                                             <li>
-                                                Name of Submitter here
+                                                {{ workshop.name }}{{ workshop.lastName }}
                                             </li>
                                             <li>
-                                                Submitter's email address here
+                                                {{ workshop.email }}
                                             </li>
                                             <li>
-                                                Submitter's phone number here
+                                                {{ workshop.pnumber }}
                                             </li>
                                             <li>
-                                                Submitter street addess here
+                                                {{ workshop.address }}
                                             </li>
                                             <li>
-                                                Workshop name here
+                                                {{ workshop.workshopname }}
                                             </li>
                                             <li>
-                                                Workshop date, time and location here
+                                                {{ workshop.workshopdate }}, {{ workshop.workshoptime }}
+                                                {{ workshop.workshopPlace }}
                                             </li>
                                             <li>
-                                                Workshop speaker/host information here
+                                                {{ workshop.workshopSpeaker }}
                                             </li>
                                             <li>
-                                                Workshop detail information here
+                                                {{workshop.message}}
                                             </li>
                                         </ul>
-                                        <form name="approveWorkShops">
-                                            <input type="radio" name="publishedState" value="published" />Published (Approve for display) <br />
-                                            <input type="radio" name="publishedState" value="unpublished" selected checked /> Unpublished (Reject) <br />
-                                            <button name="saveWorkshopState">Save Workshop Approval State</button>
-                                        </form>
-                                        </p>
-                                    </div>
-                            </div>
-                            <div>
-                                    <p style="color: #2164AA;">Workshop ID {{ workshop._id }}</p>
-                                    <div>
-                                        <ul>
-                                            <li>
-                                                Name of Submitter here
-                                            </li>
-                                            <li>
-                                                Submitter's email address here
-                                            </li>
-                                            <li>
-                                                Submitter's phone number here
-                                            </li>
-                                            <li>
-                                                Submitter street addess here
-                                            </li>
-                                            <li>
-                                                Workshop name here
-                                            </li>
-                                            <li>
-                                                Workshop date, time and location here
-                                            </li>
-                                            <li>
-                                                Workshop speaker/host information here
-                                            </li>
-                                            <li>
-                                                Workshop detail information here
-                                            </li>
-                                        </ul>
+                                        <div class="btn-group">
+                                            <label class="btn btn-primary" ng-model="workshop.radioModel" ng-click="setPublishState(true, workshop._id )" btn-radio="'sub'">Publish</label>
+                                            <label class="btn btn-primary" ng-model="workshop.radioModel" ng-click="setPublishState(false,workshop._id )" btn-radio="'unsub'">Unpublish</label>
+                                        </div>
+                                       <!--
                                         <form name="approveWorkShops">
                                             <input type="radio" name="publishedState" value="published" />Published (Approve for display) <br />
                                             <input type="radio" name="publishedState" value="unpublished" selected /> Unpublished (Reject) <br />
                                             <button name="saveWorkshopState">Save Workshop Approval State</button>
                                         </form>
+                                        -->
                                         </p>
                                     </div>
                             </div>
+                         </div>
                             <p style="color: #2164AA;" ng-show="workshops == ''">There are no workshops scheduled at this time</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div ng-show="panel.isSelected(2)">
-                <div class="content">
-                    <div class="workshops">
-                        <div role="content">
-                            Approved workshops
-                            <accordion>
-                                <accordion-group heading="Name of Submitted workshop here" class="small button">
-                                    <p style="color: #2164AA;">{{ workshop._id }}</p>
-                                    <div>
-                                        <ul>
-                                            <li>
-                                                Name of Submitter here
-                                            </li>
-                                            <li>
-                                                Submitter's email address here
-                                            </li>
-                                            <li>
-                                                Submitter's phone number here
-                                            </li>
-                                            <li>
-                                                Submitter street addess here
-                                            </li>
-                                            <li>
-                                                Workshop name here
-                                            </li>
-                                            <li>
-                                                Workshop date, time and location here
-                                            </li>
-                                            <li>
-                                                Workshop speaker/host information here
-                                            </li>
-                                            <li>
-                                                Workshop detail information here
-                                            </li>
-                                        </ul>
-                                        <form name="approveWorkShops">
-                                            <input type="radio" name="publishedState" value="published" selected />Published (Approve for display) <br />
-                                            <input type="radio" name="publishedState" value="unpublished" /> Unpublished (Reject) <br />
-                                            <button name="saveWorkshopState">Save Workshop Approval State</button>
-                                        </form>
-                                        </p>
-                                    </div>
-                                </accordion-group>
-                            </accordion>
-                            <accordion>
-                                <accordion-group heading="Name of Submitted workshop here" class="small button">
-                                    <p style="color: #2164AA;">{{ workshop._id }}</p>
-                                    <div>
-                                        <ul>
-                                            <li>
-                                                Name of Submitter here
-                                            </li>
-                                            <li>
-                                                Submitter's email address here
-                                            </li>
-                                            <li>
-                                                Submitter's phone number here
-                                            </li>
-                                            <li>
-                                                Submitter street addess here
-                                            </li>
-                                            <li>
-                                                Workshop name here
-                                            </li>
-                                            <li>
-                                                Workshop date, time and location here
-                                            </li>
-                                            <li>
-                                                Workshop speaker/host information here
-                                            </li>
-                                            <li>
-                                                Workshop detail information here
-                                            </li>
-                                        </ul>
-                                        <form name="approveWorkShops">
-                                            <input type="radio" name="publishedState" value="published" selected />Published (Approve for display) <br />
-                                            <input type="radio" name="publishedState" value="unpublished" /> Unpublished (Reject) <br />
-                                            <button name="saveWorkshopState">Save Workshop Approval State</button>
-                                        </form>
-                                        </p>
-                                    </div>
-                                </accordion-group>
-                            </accordion>
-                            <p style="color: #2164AA;" ng-show="workshops == ''">There are no workshops scheduled at this time</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </section>
     </div>
 </div>

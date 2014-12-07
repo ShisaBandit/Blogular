@@ -1,3 +1,4 @@
+
 Object.clone = function (obj) {
     return Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyNames(obj).reduce(function (memo, name) {
         return (memo[name] = Object.getOwnPropertyDescriptor(obj, name)) && memo;
@@ -318,19 +319,10 @@ app.get('/shoptowall/:user/:wall/:iname/:iqty/:i2name/:i2qty/:i3name/:i3qty/:mor
 app.get('/upcomingdates',blogRoutes.upcomingDates);
 app.get('/join/:blog',blogRoutes.join);
 //app.post('/sendAbout',blogRoutes.sendAboutMail);
-app.get('/setpublishstate/:id/:state',blogRoutes.setPublishState);
-
-app.get('/getpublishedworkshops',blotRountes.getPublishedWorkshops);
-
 
 var server = http.createServer(app).listen(app.get('port'), app.get('ip'), function () {
-
-
     console.log("server listening " + app.get('ip') + ':' + app.get('port'));
 });
-
-
-
 var io = require('socket.io').listen(server);
 
 //************SOCKET.IO**************************//

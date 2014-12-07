@@ -23,10 +23,36 @@ var smtpTransport = nodemailer.createTransport("SMTP", {
         pass: "regEmail2013"
     }
 });
+
+
 var EventEmitter = require('events').EventEmitter;
 //var emailTemplates = require('swig-email-templates');
 var path = require('path');
 exports.messageEmitter = messageEmitter = new EventEmitter();
+
+
+exports.getPublishedWorkshops = function(req,res)
+{
+    Workshop.find({subscribed:req.params.subscribed},function(err,workshops)
+    {
+        if(err)return res.send(500,"OH SNAP!");
+        return res.send(200,JSON.stringify(workshops));
+    })
+}
+
+exports.setPublishState = function(req,res)
+{
+    console.log(req.params.id)
+    console.log(req.params.state)
+    Workshop.findOne({_id:req.params.id},function(err,workshop)
+    {
+        workshop.published = req.params.state;
+        workshop.save(function(err){
+            if(err)return res.send(500,"On snap!");
+            return res.send(200,'success');
+        });
+    })
+}
 
 exports.workshopinfo = function(req,res)
 {
@@ -37,7 +63,20 @@ exports.workshopinfo = function(req,res)
     SendEmail('Rodney','rodney@blackjackproductions.com',message,'Circle of Life Workshop Submission! View and approve this submission here: <a href="http://' );//+
         //'the-circle-of-life.net/#/workshops/'+blog.author+'/'+requester._id+'">Click to review and approve</a>');
     //SendEmail('raygarner13@gmail.com','AngelsofEureka@aol.com',message,'Wall request!');
+
+
+    var newWSEntry = new Workshop(req.body);
+    newWSEntry.save(function (err)
+    {
+        if (err)console.log(err);
+    });
+
+
+
+
     return res.send(200,'success');
+
+
 
 }
 
