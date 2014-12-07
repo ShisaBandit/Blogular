@@ -1,7 +1,7 @@
 angular.module('ShadowboxModule',[]).
     directive('shadowbox', function () {
         return{
-            template:'<img width="200" src="{{imageUrl}}"/><a ng-click="openShadowBox()"></a>',
+            template:'<img width="200" src="{{imageUrl}}" ng-click="openShadowBox()" />',
             scope:{
                 imageName:'@name',
                 imageUrl:'@url'

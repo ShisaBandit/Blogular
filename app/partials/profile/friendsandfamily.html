@@ -16,6 +16,11 @@
                     <p><a ng-href="#/pubpro/{{ subscriber.username }}" title="User Name: {{ subscriber.username }}">{{ subscriber.firstName }} {{ subscriber.lastName }}</a></p>
                 </li>
             </ul>
+            <br />
+            <div ng-controller="UserProfileCtrl">
+                <a href="#/findenewmembers/{{ angel.user.author }}" class="buttons wallList" ng-show="parentObject.admin">Invite Friends</a>
+                <a href="#/inviteblock/{{ angel.user.author }}" class="buttons wallList" ng-show="parentObject.admin">Remove Friends</a>
+            </div>
         </div>
     </div>
 </div>

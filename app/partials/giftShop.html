@@ -1,22 +1,25 @@
-<div ng-controller="GiftShopCtrl">
-    <div>
+<div class="generalPage" ng-controller="UserProfileCtrl">
+    <div id="contentHeader">
+        <h2 class="contentHeaderTitle">Purchase a gift for your Angel's Memorial Wall From Our Gift Shop!</h2>
+    </div>
+    <div ng-controller="GiftShopCtrl">
         <div>
-            <div id="rulesModal">
-                <div>
-                    <div id="contentHeader">
-                        <img src="img/angelsofeurekalogo-bw.jpg" alt="Angel's of Eureka Logo" />
-                        <h2 class="contentHeaderTitle">Purchase a gift for your Angel's Memorial Wall From Our Gift Shop!</h2>
+            <div>
+                <div id="rulesModal">
+                   <img src="img/angelsofeurekalogo-bw.jpg" alt="Angel's of Eureka Logo" />
+
+                    <br />
+                    <br />
+                    <div reflow data-section>
+                        <section class="section">
+                                <p class="title" data-section-title><a >Gift Shop Items</a></p>
+                                <div class="content" data-section-content>
+                                    <ul>
+                                        <li ng-repeat="category in categories"><a href="{{category.url}}?user={{user}}&wall={{wall}}" target="_blank">{{category.name}}</a></li>
+                                    </ul>
+                                </div>
+                        </section>
                     </div>
-                </div>
-                <div reflow data-section>
-                    <section class="section">
-                            <p class="title" data-section-title><a >Gift Shop Items</a></p>
-                            <div class="content" data-section-content>
-                                <ul>
-                                    <li ng-repeat="category in categories"><a href="{{category.url}}?user={{user}}&wall={{wall}}" target="_blank">{{category.name}}</a></li>
-                                </ul>
-                            </div>
-                    </section>
                 </div>
             </div>
         </div>
