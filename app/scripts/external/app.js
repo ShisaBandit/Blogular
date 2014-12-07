@@ -3059,16 +3059,45 @@ app.controller('NotificationsCtrl', function ($scope, $http, api,socket) {
     });
 
 });
+
+
+
+app.controller('WorkshopPublishedCtrl',function($scope,$http)
+{
+    $scope.workshops;
+    $http.get('/getpublishedworkshops').
+        success(function(data){
+           console.log(data);
+            $scope.workshops = data;
+        }).error(function(data){
+            console.log(data);
+        });
+});
+
 app.controller('WorkshopCtrl', function ($scope, $http, api) {
     $scope.workshops = [];
-
+    $scope.workshopPublished =[];
     $scope.form = {form:{}};
 
     api.getResourceById('Workshop', 'all', function (workshops)
     {
         console.log(workshops);
         console.log("TESTING !#");
+        for(var i = 0;i<workshops.length;i++)
+        {
+            if(workshops[i].published == true)
+            {
+                workshops[i].radioModel = "sub";
+                $scope.workshopPublished.push(workshops[i]);
+            }
+            else
+            {
+                workshops[i].radioModel ="unsub";
+            }
+        }
         $scope.workshops = workshops;
+
+
     });
 
     $scope.submit = function ()
@@ -3085,6 +3114,18 @@ app.controller('WorkshopCtrl', function ($scope, $http, api) {
             error(function (data)
             {
             })
+    }
+    $scope.setPublishState = function(state,id)
+    {
+        console.log(state+" "+id)
+        $http.get("/setpublishstate/"+id+"/"+state).
+            success(function(data){
+                    console.log("published was updated with "+data)
+            }).error(function(data){
+                console.log("error was published state update with "+data)
+            });
+
+
     }
     $scope.sent = false;
     $scope.message = "";
