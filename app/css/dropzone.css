@@ -33,6 +33,10 @@
   border-color: rgba(0,0,0,0.15);
   background: rgba(0,0,0,0.04);
 }
+.dropzone.dz-started {
+    background: none !important;
+    border: none !important;
+}
 .dropzone.dz-started .dz-message {
   display: none;
 }
@@ -175,7 +179,7 @@
   background-position: 20px 0;
   position: relative;
   width: 500px;
-  height: 130px;
+  height: 120px;
   margin-top: -20px;
   margin-left: -50px;
   padding: 20px;
@@ -183,6 +187,27 @@
   left: 10%;
   border: 2px #37699E dotted;
 }
+
+@media screen and (min-device-width: 490px) and (max-device-width: 679px) {
+    .dropzone .dz-default.dz-message {
+        opacity: 1;
+        filter: none;
+        transition: opacity 0.3s ease-in-out 0s;
+        background-image: url("../img/spritemap.png");
+        background-repeat: no-repeat;
+        background-position: 0px -289px;
+        position: relative;
+        width: 367px;
+        height: 105px;
+        margin-top: -20px;
+        margin-left: -36px;
+        padding: 20px;
+        top: 30%;
+        left: 10%;
+        border: 2px dotted #37699E;
+    }
+}
+
 @media all and (-webkit-min-device-pixel-ratio: 1.5) {
   .dropzone .dz-default.dz-message {
     background-image: url("../img/spritemap@2x.png");
@@ -207,10 +232,11 @@
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=15)";
 }
 .dropzone.dz-started .dz-message {
-  display: block;
-  opacity: 0;
-  filter: alpha(opacity=0);
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    display: block;
+    opacity: 0;
+    height: 30px;
+    padding: 0;
+    margin: 0;
 }
 .dropzone .dz-preview,
 .dropzone-previews .dz-preview {
