@@ -44,7 +44,7 @@
 ----------------------------------------- */
  html,body{
      width:100%;
-     min-width: 480px;
+     min-width: 320px;
      margin:0;
      padding:0;
  }
@@ -258,7 +258,7 @@ a {
     margin: 0px;
     padding-top: 95px;
     height: 75px;
-    width: 480px;
+    width: 320px;
     border-bottom: 1px #8A9948 dotted;
     background: url('/img/background/headerFooterBG.png') repeat-x scroll center -140px #9EAFFF;
 }
@@ -337,7 +337,7 @@ a {
 }
 
  .primaryContent, .mainNav {
-     width: 480px;
+     width: 320px;
      margin: auto;
  }
 
@@ -352,7 +352,7 @@ a {
  .generalPage{
      position: relative;
      display: inline-block;
-     width: 480px;
+     width: 320px;
      margin: 10px 0px;
      vertical-align: top;
      border-top-left-radius: 2em;
@@ -366,14 +366,14 @@ a {
 
  .feature {
      display: inline-block;
-     width: 480px;
+     width: 320px;
      vertical-align: top;
  }
 
 .scrollerContainer {
     display: inline-block;
     margin: 10px 0;
-    width: 480px;
+    width: 320px;
     vertical-align: top;
     border-top-left-radius: 9px;
     border-top-right-radius: 8px;
@@ -456,7 +456,7 @@ a {
  }
 
 .generalPage h1,h2,h3,h4 {
-    color: #577396;
+    color: #577396 !important;
 }
 
 .generalPage p,
@@ -507,7 +507,7 @@ h2.dark {
      display: block;
      box-shadow: 0px 2px 5px 2px #A3A1A1;
      padding-top: 0px;
-     width: 480px;
+     width: 320px;
      border-bottom: 1px dotted #8A9948;
      background: url('/img/background/headerFooterBG.png') repeat-x scroll center -140px #9EAFFF;
      height: 80px;
@@ -731,10 +731,21 @@ body .contain-to-grid-logged-in #username2 {
 }
 
 .mainBG h1 {
+    padding: 0 10px;
     font-size: x-large;
     color: #577396;
     text-shadow: 1px 2px 2px #FFF;
+    line-height: 24px;
+    margin-bottom: 26px;
 }
+
+.mainBG h1 small {
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1;
+    color: #999;
+}
+
 
 .mainBG h2 {
     font-size: large;
@@ -978,7 +989,7 @@ input[type=text], input[type=password], input[type=email] {
     margin-bottom: 10px;
     width: 250px;
     height: auto;
-    min-height: 20px;
+    min-height: 14px;
     border-radius: 4px;
 }
 
@@ -1387,7 +1398,7 @@ textarea.addNewPost{
 }
 
 #contentHeader .contentHeaderTitle {
-    color: #FFF;
+    color: #FFF !important;
     line-height: 6px;
     margin-left: 4px;
 }
@@ -1563,10 +1574,10 @@ body.ng-scope .columns .ng-binding nav.wallGroup {
     padding: 5px;
     margin: 1px;
     list-style: outside none none;
-    font-size: small;
+    font-size: x-small;
     white-space: nowrap;
     cursor: pointer;
-    width: 45%;
+    width: 34%;
     display: block;
     float: left;
     background: linear-gradient(to bottom, #E2E2E2 0%, #DBDBDB 50%, #D1D1D1 51%, #FEFEFE 100%) repeat scroll 0% 0% transparent;
@@ -1655,7 +1666,7 @@ h6.groupTitle {
 
 .featureContent {
     display: inline-block;
-    width: 470px;
+    width: 310px;
     vertical-align: top;
  }
 
@@ -1979,14 +1990,13 @@ body nav.top-bar.top-bar-logged-in {
      float: right !important;
  }
 
- .login {
-     position:relative;
-     margin: -15px 0px;
- }
+.login {
+    position: relative;
+    margin: 1px 0px;
+}
 
 .login input[type="text"],
 .login input[type="password"]{
-    display: inline;
     height: 10px;
     width: 80px;
 }
@@ -2332,6 +2342,7 @@ body nav.top-bar.top-bar-logged-in {
  #dashBoard img {
     display: inline-block;
     border-radius: 7px;
+    vertical-align: top !important;
  }
 
  #dashBoard ul {
@@ -2530,6 +2541,101 @@ body nav.top-bar.top-bar-logged-in {
     display: block;
 }
 /* Begin responsive styling - default styles are for mobile */
+@media screen and (min-width: 321px) {
+    html,body{
+        width:100%;
+        min-width: 450px;
+        margin:0;
+        padding:0;
+    }
+
+    .contain-to-grid {
+        display: block;
+        box-shadow: 0px 2px 5px 2px #A3A1A1;
+        margin: 0px;
+        padding-top: 95px;
+        height: 75px;
+        width: 480px;
+        border-bottom: 1px #8A9948 dotted;
+        background: url('/img/background/headerFooterBG.png') repeat-x scroll center -140px #9EAFFF;
+    }
+
+    .contain-to-grid-logged-in {
+        position: relative;
+        display: block;
+        box-shadow: 0px 2px 5px 2px #A3A1A1;
+        padding-top: 0px;
+        width: 480px;
+        border-bottom: 1px dotted #8A9948;
+        background: url('/img/background/headerFooterBG.png') repeat-x scroll center -140px #9EAFFF;
+        height: 80px;
+        text-align: center;
+        margin: 0px;
+    }
+
+    .primaryContent, .mainNav {
+        width: 480px;
+        margin: auto;
+    }
+
+    .generalPage{
+        position: relative;
+        display: inline-block;
+        width: 480px;
+        margin: 10px 0px;
+        vertical-align: top;
+        border-top-left-radius: 2em;
+        border-top-right-radius: 2em;
+        -webkit-box-shadow: 2px 2px 5px #A3A1A1;
+        -moz-box-shadow: 2px 2px 5px #A3A1A1;
+        box-shadow: 2px 2px 5px #A3A1A1;
+        background: none repeat scroll 0% 0% #FFFADE;
+        overflow-x: hidden;
+    }
+
+    .feature {
+        display: inline-block;
+        width: 480px;
+        vertical-align: top;
+    }
+
+    .featureContent {
+        display: inline-block;
+        width: 470px;
+        vertical-align: top;
+    }
+
+    .scrollerContainer {
+        display: inline-block;
+        margin: 10px 0;
+        width: 480px;
+        vertical-align: top;
+        border-top-left-radius: 9px;
+        border-top-right-radius: 8px;
+        overflow-x: hidden;
+        background: #fff;
+    }
+
+    .wallGroup ul li {
+        font-weight: bold;
+        height: 20px;
+        padding: 5px;
+        margin: 1px;
+        list-style: outside none none;
+        font-size: small;
+        white-space: nowrap;
+        cursor: pointer;
+        width: 45%;
+        display: block;
+        float: left;
+        background: linear-gradient(to bottom, #E2E2E2 0%, #DBDBDB 50%, #D1D1D1 51%, #FEFEFE 100%) repeat scroll 0% 0% transparent;
+        border: 1px solid #577396;
+        color: #577396 !important;
+        line-height: 1.125rem;
+    }
+
+}
+
  @media screen and (min-device-width: 480px) and (max-device-width: 489px) {
      .primaryContent, .mainNav {
          width: 480px;
@@ -2655,7 +2761,7 @@ body nav.top-bar.top-bar-logged-in {
 
      .login {
          position: relative;
-         margin: -11px 0px;
+         margin: 1px 0px;
      }
 
      .login input[type="text"],
@@ -2778,7 +2884,7 @@ body nav.top-bar.top-bar-logged-in {
 
      .login {
          position: relative;
-         margin: -11px 0px;
+         margin: 0px 0px;
      }
 
      .login input[type="text"],
@@ -2975,6 +3081,7 @@ body nav.top-bar.top-bar-logged-in {
      #dashBoard img {
          display: inline-block;
          border-radius: 7px;
+         vertical-align: top !important;
      }
 
      #dashBoard ul {
@@ -3345,6 +3452,7 @@ body nav.top-bar.top-bar-logged-in {
      #dashBoard img {
          display: inline-block;
          border-radius: 7px;
+         vertical-align: top !important;
      }
 
      #dashBoard ul {
