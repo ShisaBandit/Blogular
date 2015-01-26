@@ -3616,8 +3616,8 @@ body nav.top-bar.top-bar-logged-in {
          background: #D65B4A;
          opacity: 0.75;
          padding-top: 0px;
-         padding-left: 5px;
-         padding-right: 5px;
+         padding-left: 2px;
+         padding-right: 2px;
          padding-bottom: 0px;
          box-shadow: 2px 2px 5px rgb(19, 45, 72);
          font-size: small;
@@ -3676,16 +3676,17 @@ body nav.top-bar.top-bar-logged-in {
          outline: none;
          color: #ffffff;
          text-shadow: 1px 1px 3px rgb(19, 45, 72);
+         line-height: 19px;
          /* text-indent: -50000px; */
      }
 
      #tableOfContents {
          position: absolute;
          top:18%;
-         left: 25%;
+         left: -88%;
          background: #EEE;
          border: 1px solid #fff;
-         height: 300px;
+         height: 249px;
          width: 250px;
          border-radius: 7px;
          overflow: hidden;
