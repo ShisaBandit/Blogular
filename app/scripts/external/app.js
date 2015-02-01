@@ -9,7 +9,7 @@ var app = angular.module('YoMemorialApp', [
         $routeProvider.
             when("/", {templateUrl: "partials/blog.html"}).
             when("/about", {templateUrl: "partials/about.html"}).
-            when("/pubpro/:username", {templateUrl: "partials/publicprofile.html"}).
+            when("/pubpro/:username", {templateUrl: "partials/publicProfile.html"}).
             when("/projects", {templateUrl: "partials/projects.html"}).
             when("/shoutouts", {templateUrl: "partials/shoutouts.html"}).
             when("/AddBlogEntry", {templateUrl: "partials/admin/createBlogEntry.html"}).
