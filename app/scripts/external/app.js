@@ -1136,6 +1136,7 @@ app.controller('SearchBarCtrl', function ($scope, $filter, $rootScope) {
     $rootScope.search = {
         search: ""
     }
+
 /*
     $scope.$on('$routeChangeSuccess', function (next, current) {
         console.log(current);
@@ -1162,6 +1163,10 @@ app.controller('GroupingCtrl', function ($scope, $rootScope, groupsListing,$loca
     {
         $scope.groups = groupsListing;
 
+    }
+    $rootScope.search =
+    {
+        search: ""
     }
 
     $rootScope.parentOfSelected =
