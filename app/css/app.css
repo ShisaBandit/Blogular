@@ -91,7 +91,7 @@ a {
 }
 
 .logo {
-    width: 343px;
+    width: 320px;
     height: 125px;
     margin: -99px 0px 0px 5px;
     padding-top: 0px;
@@ -2010,10 +2010,10 @@ body nav.top-bar.top-bar-logged-in {
  .login [ng-click="forgot()"] {
      position: absolute;
      top: 0px;
-     right: -90px;
+     right: -78px;
      font-weight: normal;
      height: 20px;
-     font-size: x-small;
+     font-size: 8px;
  }
 
  .login .loginMsg {
@@ -2395,7 +2395,7 @@ body nav.top-bar.top-bar-logged-in {
     display: block;
     width: 100%;
     height: 100%;
-    line-height: 80px;
+    line-height: 30px;
  }
 
  .features a {
