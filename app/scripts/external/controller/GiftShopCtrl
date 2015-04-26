@@ -4,13 +4,15 @@ angular.module('controller.GiftShop',[]).
 
         $scope.wall = $routeParams.wall;
         $scope.user = $routeParams.user;
-    $http.get('http://angelsofeureka.com/shop/memwallconn/index/categories?user='+$scope.user+'&wall='+$scope.wall,{ withCredentials: true}).
+    $http.get('http://the-circle-of-life.net/shop/memwallconn/index/categories?user='+$scope.user+'&wall='+$scope.wall,{ withCredentials: true}).
     //  $http.get('http://localhost/magento/memwallconn/index/categories?user='+$scope.user+'&wall='+$scope.wall,{ withCredentials: true}).
-            success(function (data) {
+            success(function (data)
+            {
                 console.log("got categories")
                 $scope.categories = data;
             }).
-            error(function () {
+            error(function ()
+            {
                 console.log("failed to get shope categories");
-            })
+            });
     });
