@@ -16,7 +16,9 @@
             <li ng-class="{active:panel.isSelected(9) }"><a href ng-click="panel.selectTab(9)">Suicide Prevention</a></li>
             <li ng-class="{active:panel.isSelected(10) }"><a href ng-click="panel.selectTab(10)">Teenager Resources</a></li>
             <li ng-class="{active:panel.isSelected(11) }"><a href ng-click="panel.selectTab(11)">Women's Health</a></li>
-            <li ng-class="{active:panel.isSelected(12) }"><a href ng-click="panel.selectTab(12)">Misc. Resources</a></li>
+            <li ng-class="{active:panel.isSelected(12) }"><a href ng-click="panel.selectTab(12)">Retreats (w. scholarhip)</a></li>
+            <li ng-class="{active:panel.isSelected(13) }"><a href ng-click="panel.selectTab(13)">Rehab (w. scholarhip)</a></li>
+            <li ng-class="{active:panel.isSelected(14) }"><a href ng-click="panel.selectTab(14)">Misc. Resources</a></li>
         </ul>
         <div ng-show="panel.isSelected(1)">
                 <div class="content">
@@ -679,115 +681,142 @@
                 </div>
         </div>
         <div ng-show="panel.isSelected(12)">
-                <div class="content automargins">
-                    <b>Misc Resources</b>
-                    <p>
-                        <ul>
-                            <li><a href="http://www.motherinlawhell.com/" target="_blank">The DIL Sisterhood</a>   </li>
-                            <li><a href="http://www.senate.gov/general/contact_information/senators_cfm.cfm" target="_blank">U.S. Senate</a>   </li>
-                            <li><a href="http://writerep.house.gov/writerep/welcome.shtml" target="_blank">U.S. House of Representatives</a> </li>
-                            <li><a href="http://wwww.redcross.org/" target="_blank">American Red Cross</a> (800) HELP-NO  </li>
-                            <li><a href="http://www.feedingamerica.org/" target="_blank">Feeding America</a> (877) 817-2307  </li>
-                            <li><a href="http://www.habitat.org/" target="_blank">Habitat for Humanity</a> (800) 422-4828  </li>
-                            <li><a href="http://www.mercycorps.org/" target="_blank">Mercy Corps</a> (888) 256-1900  </li>
-                            <li><a href="http://www.liveunited.org/" target="_blank">United Way</a> (800) 272-4630  </li>
-                            <li><a href="http://www.salvationarmyusa.org/" target="_blank">Salvation Army</a> (800) 725-2769  </li>
-                            <li><a href="http://www.usaonwatch.org/" target="_blank">USAonWatch.org</a> (703) 836-7827  </li>
-                            <li><a href="http://www.toysfortots.org/" target="_blank">Toys for Tots Foundation</a>   </li>
-                            <li><a href="http://www.abcpolygraph.com/" target="_blank">ABC Polygraph</a> (269) 679-3678  </li>
-                            <li><a href="http://www.bestfriends.org/index.htm" target="_blank">Best Friends Animal Society</a> (435) 644-2001  </li>
-                            <li><a href="http://www.aarf-us.com/" target="_blank">Animals Anonymous Relief Fund Network</a>   </li>
-                            <li><a href="http://www.aoa.gov/" target="_blank">Administration on Aging</a> (202) 619-0724  </li>
-                            <li><a href="http://www.thejosephproject.net/" target="_blank">The Joseph Project</a> (937) 427-1912 ex 114  </li>
-                            <li><a href="http://www.fbbc.org/" target="_blank">Florida Boulevard Baptist Church</a> (225) 272-3740  </li>
-                            <li><a href="http://www.perkins.org/" target="_blank">Perkins School for the Blind</a> (617) 924-3434  </li>
-                            <li><a href="http://www.keylaserinstitute.com/" target="_blank">The Key Laser Institute for Aesthetic Medicine</a> (800) 459-6677  </li>
-                            <li><a href="http://www.tattoomdla.com/" target="_blank">Tattoo MD Laser Clinic and Medi-Spa</a> (877) 822-6352  </li>
-                            <li><a href="http://www.stalkingalert.com/" target="_blank">Stalking Alert</a>   </li>
-                            <li><a href="http://www.ncvc.org/src/main.aspx?dbID=dash_home" target="_blank">National Center for Victims of Crime</a>  – Stalking Resource Center(202) 467-8700  </li>
-                            <li><a href="http://www.ncvc.org/ncvc/main.aspx" target="_blank">National Center for Victims of Crime</a> (202) 467-8700  </li>
-                            <li><a href="http://www.kgriff.com/" target="_blank">K. Griff Investigations & Civil Processing, Inc.</a> (800) 4-K-GRIFF  </li>
-                            <li><a href="http://www.worksoflife.org/" target="_blank">Works of Life Ministries</a> (888) 228-7320  </li>
-                            <li><a href="http://www.oprah.com/omagazine.html" target="_blank">O, The Oprah Magazine</a>   </li>
-                            <li><a href="http://www.queenofclean.com/" target="_blank">Linda Cobb, Queen of Clean</a>   </li>
-                            <li><a href="http://www.napo.net/" target="_blank">National Association of Professional Organizers</a> (856) 380-6828  </li>
-                            <li><a href="http://www.centerfororganization.com/" target="_blank">Delphi Center for Organization</a> (888) 229-5346  </li>
-                            <li><a href="http://www.clutterworkshop.com/" target="_blank">Beth Johnson’s Clutter Workshop</a>   </li>
-                            <li><a href="http://www.1800gotjunk.com/" target="_blank">1-800-Got-Junk</a> (800) 468-5865 </li>
-                            <li><a href="http://www.nena.org/" target="_blank">National Emergency Number Association</a> (202) 466-4911  </li>
-                            <li><a href="http://www.flyersrights.org/" target="_blank">FlyersRights.org</a> (877) 359-3776  </li>
-                            <li><a href="http://www.donatelife.net/" target="_blank">Donate Life America</a> (804) 377-3580  </li>
-                            <li><a href="http://www.hangupsavealife.com/" target="_blank">Hang Up – Save a Life</a> (801) 859-3553  </li>
-                            <li><a href="http://www.olganon.org/" target="_blank">On-Line Gamers Anonymous</a> (612) 245-1115  </li>
-                            <li><a href="http://www.law.northwestern.edu/wrongfulconvictions/" target="_blank">Northwestern University Center on Wrongful Convictions</a> (312) 503-2391  </li>
-                            <li><a href="http://www.masteringlife.org/" target="_blank">Mastering Life Ministries</a>   </li>
-                            <li><a href="http://www.myfamily.com" target="_blank">MyFamily.com</a> (800) 262-3787  </li>
-                            <li><a href="http://www.sa.org" target="_blank">Sexaholics Anonymous</a>   </li>
-                            <li><a href="http://www.saa-recovery.org/" target="_blank">Sex Addicts Anonymous</a> (800) 477-8191  </li>
-                            <li><a href="http://www.smiles-for-diversity.org" target="_blank">The Diversity Foundation</a> (801) 216-2122  /</li>
-                            <li><a href="http://www.fisherhouse.org/" target="_blank">Fisher House Foundation</a> (888) 294-8560  </li>
-                            <li><a href="http://www.childrensdefense.org/index-1.html" target="_blank">Children's Defense Fund</a> (800) CDF-1200  </li>
-                            <li><a href="http://www.sleeptracker.com/" target="_blank">Sleep Tracker</a> (800) 617-4509  </li>
-                            <li><a href="http://www.sleepfoundation.org/" target="_blank">National Sleep Foundation</a> (703) 243-1697  </li>
-                            <li><a href="http://www.adamconboymemorialfund.org/" target="_blank">Operation Bedding</a>   </li>
-                            <li><a href="http://www.reputation.com/" target="_blank">Reputation Defender</a> (877) 720-6488  </li>
-                            <li><a href="http://www.understand.com/Intro.aspx" target="_blank">Understand.com</a> (800) 747-9002  </li>
-                            <li><a href="http://www.ftc.gov/" target="_blank">Federal Trade Commission</a> (877) FTC-HELP  </li>
-                            <li><a href="http://www.navigenics.com/" target="_blank">Navigenics</a> (866) 522-1585  </li>
-                            <li><a href="http://www.advocacyoutreach.org/" target="_blank">Advocacy Outreach</a> (512) 281-4180  </li>
-                            <li><a href="http://www.cultureoffuture.com/" target="_blank">Culture of Future</a> (310) 584-1021  </li>
-                            <li><a href="http://www.urbanent.org/" target="_blank">Urban Entertainment Institute</a> (323) 565-4004  </li>
-                            <li><a href="http://www.brainmattersinc.com/" target="_blank">CereScan</a> (720) 242-9081  </li>
-                            <li><a href="http://www.tapproject.org/" target="_blank">Tap Project</a> (877) PROJ-TAP  </li>
-                            <li><a href="http://www.unicef.org/" target="_blank">Unicef</a> (212) 686-5522  </li>
-                            <li><a href="http://www.standwithhaiti.org/page/outreach/view/haitiearthquake/jennydubin" target="_blank">Partners in Health</a> (617) 998-8922  </li>
-                            <li><a href="http://www.luc.edu/law/lifeafterinnocence/" target="_blank">Life after Innocence Project</a> (312) 915-7120  </li>
-                            <li><a href="http://www.cei-edu.com/" target="_blank">Computer Education Institute</a> (219) 926-5740  </li>
-                            <li><a href="http://www.lbth.org/ncma/index.php" target="_blank">Let's Bring Them Home</a> (800) 690-FIND  </li>
-                            <li><a href="http://www.homelessvoice.org/" target="_blank">The Homeless Voice</a> (954) 92-HELP-1  </li>
-                            <li><a href="http://www.midnightmission.org/" target="_blank">The Midnight Mission</a> (213) 624-9258  </li>
-                            <li><a href="http://www.fchonline.org/" target="_blank">Florida Coalition for the Homeless</a> (877) 205-0021  </li>
-                            <li><a href="http://www.nationalhomeless.org/" target="_blank">National Coalition for the Homeless</a> (202) 462-4822  </li>
-                            <li><a href="http://www.fatalvision.com/" target="_blank">Innocorp, ltd.</a> (800) 272-5023  </li>
-                            <li><a href="http://www.norred.com/index.html" target="_blank">Norred & Associates, Inc.</a> (800) 962-6363  </li>
-                            <li><a href="http://www.snowballexpress.org/" target="_blank">Snowball Express</a>   </li>
-                            <li><a href="http://www.iava.org/" target="_blank">Iraq and Afghanistan Veterans of America</a> (212) 982-9699  </li>
-                            <li><a href="http://www.iraqstar.org/" target="_blank">Iraq Star Foundation</a> (760) 568-4039  </li>
-                            <li><a href="http://www2.illinois.gov/veterans/Pages/default.aspx" target="_blank">Illinois Department of Veterans’ Affairs</a> (217) 782-6641  </li>
-                            <li><a href="http://www.woundedwarriorproject.org/" target="_blank">Wounded Warrior Project</a>   </li>
-                            <li><a href="http://www.impactpersonalsafety.com/" target="_blank">Impact Personal Safety</a> (323) IMPACT-8  </li>
-                            <li><a href="http://line2.msf-usa.org/msf/Default.aspx" target="_blank">Motorcycle Safety Foundationon</a> </li>
-                            <li><a href="http://www.aaatoday.com/" target="_blank">AAA Service</a> (303) 313-3333  </li>
-                            <li><a href="http://www.restoration-logistics.com/" target="_blank">Restoration Logistics Property Repair</a> (303) 657-1400  </li>
-                            <li><a href="http://www.dnacenter.com/" target="_blank">DNA Diagnostics Center</a> (800) 613-5768  </li>
-                            <li><a href="http://www.polycom.com/" target="_blank">Polycom</a> (800) POLY-COM  </li>
-                            <li><a href="http://www.pcipro.com/" target="_blank">Padgett Communications</a> (888) 233-4724  </li>
-                            <li><a href="http://www.caymanmarinelab.com/" target="_blank">Cayman Marine Lab</a> (345) 916-0849  </li>
-                            <li><a href="http://www.bluesurfsanctuary.com/" target="_blank">Blue Surf Sanctuary</a> (855) 2-SURF-CR  </li>
-                            <li><a href="http://www.pdmstables.com/" target="_blank">PDM Stables</a> (661) 366-4034  </li>
-                            <li><a href="http://www.1800skyride.com/" target="_blank">1800SkyRide</a> (800) 759-7433  </li>
-                            <li><a href="http://www.fulcrumadventures.com/" target="_blank">Fulcrum Adventures</a> (310) 452-7992  </li>
-                            <li><a href="http://www.hiltonhawaiianvillage.com/" target="_blank">Hilton Hawaiin Village Waikiki Beach Resort</a> (808) 949-4321  </li>
-                            <li><a href="http://www.miramonteresort.com/" target="_blank">Miramonte Resort and Spa</a> (800) 237-2926  </li>
-                            <li><a href="http://www.lacosta.com/" target="_blank">La Cosa Resort and Spa</a> (800) 854-5000  </li>
-                            <li><a href="http://www.ranchovalencia.com/" target="_blank">Rancho Valencia Resort and Spa</a> (800) 548-3664  </li>
-                            <li><a href="http://www.haciendacabosanlucas.com/" target="_blank">Hacienda Beach Club and Residences</a>  </li>
-                            <li><a href="http://www.unforgettablehoneymoon.com/" target="_blank">Unforgettable Honeymoons</a> (888) 343-6413  </li>
-                            <li><a href="http://www.bluerivercanyon.com/" target="_blank">Blue River Canyon Day Spa</a> (615) 377-3336  </li>
-                            <li><a href="http://www.divamoms.com/" target="_blank">Divalysscious Moms</a>   </li>
-                            <li><a href="http://www.heroicimagination.org/" target="_blank">Heroic Imagination Project</a>   </li>
-                            <li><a href="http://www.josephsoninstitute.org/" target="_blank">Josephson Institute</a> (800) 711-2670   </li>
-                        </ul>
-                    </p>
-                </div>
+            <div class="content automargins">
+                <b>Retreats with Scholarships</b>
+                <p>
+                    <ul>
+
+                        <li><a href="http://www.wingsofhopelivingforward.org/" target="_blank" title="Wings of Hope Living Forward">Wings of Hope Living Forward</a> # not listed   </li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+        <div ng-show="panel.isSelected(13)">
+          <div class="content automargins">
+            <b>Rehab with Scholarships</b>
+            <p>
+            <ul>
+
+              <li><a href="#" target="_blank">Coming Soon</a> <!--(800) 711-2670  --> </li>
+            </ul>
+            </p>
+          </div>
+        </div>
+        <div ng-show="panel.isSelected(14)">
+          <div class="content automargins">
+            <b>Misc Resources</b>
+            <p>
+            <ul>
+              <li><a href="http://www.motherinlawhell.com/" target="_blank">The DIL Sisterhood</a>   </li>
+              <li><a href="http://www.senate.gov/general/contact_information/senators_cfm.cfm" target="_blank">U.S. Senate</a>   </li>
+              <li><a href="http://writerep.house.gov/writerep/welcome.shtml" target="_blank">U.S. House of Representatives</a> </li>
+              <li><a href="http://wwww.redcross.org/" target="_blank">American Red Cross</a> (800) HELP-NO  </li>
+              <li><a href="http://www.feedingamerica.org/" target="_blank">Feeding America</a> (877) 817-2307  </li>
+              <li><a href="http://www.habitat.org/" target="_blank">Habitat for Humanity</a> (800) 422-4828  </li>
+              <li><a href="http://www.mercycorps.org/" target="_blank">Mercy Corps</a> (888) 256-1900  </li>
+              <li><a href="http://www.liveunited.org/" target="_blank">United Way</a> (800) 272-4630  </li>
+              <li><a href="http://www.salvationarmyusa.org/" target="_blank">Salvation Army</a> (800) 725-2769  </li>
+              <li><a href="http://www.usaonwatch.org/" target="_blank">USAonWatch.org</a> (703) 836-7827  </li>
+              <li><a href="http://www.toysfortots.org/" target="_blank">Toys for Tots Foundation</a>   </li>
+              <li><a href="http://www.abcpolygraph.com/" target="_blank">ABC Polygraph</a> (269) 679-3678  </li>
+              <li><a href="http://www.bestfriends.org/index.htm" target="_blank">Best Friends Animal Society</a> (435) 644-2001  </li>
+              <li><a href="http://www.aarf-us.com/" target="_blank">Animals Anonymous Relief Fund Network</a>   </li>
+              <li><a href="http://www.aoa.gov/" target="_blank">Administration on Aging</a> (202) 619-0724  </li>
+              <li><a href="http://www.thejosephproject.net/" target="_blank">The Joseph Project</a> (937) 427-1912 ex 114  </li>
+              <li><a href="http://www.fbbc.org/" target="_blank">Florida Boulevard Baptist Church</a> (225) 272-3740  </li>
+              <li><a href="http://www.perkins.org/" target="_blank">Perkins School for the Blind</a> (617) 924-3434  </li>
+              <li><a href="http://www.keylaserinstitute.com/" target="_blank">The Key Laser Institute for Aesthetic Medicine</a> (800) 459-6677  </li>
+              <li><a href="http://www.tattoomdla.com/" target="_blank">Tattoo MD Laser Clinic and Medi-Spa</a> (877) 822-6352  </li>
+              <li><a href="http://www.stalkingalert.com/" target="_blank">Stalking Alert</a>   </li>
+              <li><a href="http://www.ncvc.org/src/main.aspx?dbID=dash_home" target="_blank">National Center for Victims of Crime</a>  – Stalking Resource Center(202) 467-8700  </li>
+              <li><a href="http://www.ncvc.org/ncvc/main.aspx" target="_blank">National Center for Victims of Crime</a> (202) 467-8700  </li>
+              <li><a href="http://www.kgriff.com/" target="_blank">K. Griff Investigations & Civil Processing, Inc.</a> (800) 4-K-GRIFF  </li>
+              <li><a href="http://www.worksoflife.org/" target="_blank">Works of Life Ministries</a> (888) 228-7320  </li>
+              <li><a href="http://www.oprah.com/omagazine.html" target="_blank">O, The Oprah Magazine</a>   </li>
+              <li><a href="http://www.queenofclean.com/" target="_blank">Linda Cobb, Queen of Clean</a>   </li>
+              <li><a href="http://www.napo.net/" target="_blank">National Association of Professional Organizers</a> (856) 380-6828  </li>
+              <li><a href="http://www.centerfororganization.com/" target="_blank">Delphi Center for Organization</a> (888) 229-5346  </li>
+              <li><a href="http://www.clutterworkshop.com/" target="_blank">Beth Johnson’s Clutter Workshop</a>   </li>
+              <li><a href="http://www.1800gotjunk.com/" target="_blank">1-800-Got-Junk</a> (800) 468-5865 </li>
+              <li><a href="http://www.nena.org/" target="_blank">National Emergency Number Association</a> (202) 466-4911  </li>
+              <li><a href="http://www.flyersrights.org/" target="_blank">FlyersRights.org</a> (877) 359-3776  </li>
+              <li><a href="http://www.donatelife.net/" target="_blank">Donate Life America</a> (804) 377-3580  </li>
+              <li><a href="http://www.hangupsavealife.com/" target="_blank">Hang Up – Save a Life</a> (801) 859-3553  </li>
+              <li><a href="http://www.olganon.org/" target="_blank">On-Line Gamers Anonymous</a> (612) 245-1115  </li>
+              <li><a href="http://www.law.northwestern.edu/wrongfulconvictions/" target="_blank">Northwestern University Center on Wrongful Convictions</a> (312) 503-2391  </li>
+              <li><a href="http://www.masteringlife.org/" target="_blank">Mastering Life Ministries</a>   </li>
+              <li><a href="http://www.myfamily.com" target="_blank">MyFamily.com</a> (800) 262-3787  </li>
+              <li><a href="http://www.sa.org" target="_blank">Sexaholics Anonymous</a>   </li>
+              <li><a href="http://www.saa-recovery.org/" target="_blank">Sex Addicts Anonymous</a> (800) 477-8191  </li>
+              <li><a href="http://www.smiles-for-diversity.org" target="_blank">The Diversity Foundation</a> (801) 216-2122  /</li>
+              <li><a href="http://www.fisherhouse.org/" target="_blank">Fisher House Foundation</a> (888) 294-8560  </li>
+              <li><a href="http://www.childrensdefense.org/index-1.html" target="_blank">Children's Defense Fund</a> (800) CDF-1200  </li>
+              <li><a href="http://www.sleeptracker.com/" target="_blank">Sleep Tracker</a> (800) 617-4509  </li>
+              <li><a href="http://www.sleepfoundation.org/" target="_blank">National Sleep Foundation</a> (703) 243-1697  </li>
+              <li><a href="http://www.adamconboymemorialfund.org/" target="_blank">Operation Bedding</a>   </li>
+              <li><a href="http://www.reputation.com/" target="_blank">Reputation Defender</a> (877) 720-6488  </li>
+              <li><a href="http://www.understand.com/Intro.aspx" target="_blank">Understand.com</a> (800) 747-9002  </li>
+              <li><a href="http://www.ftc.gov/" target="_blank">Federal Trade Commission</a> (877) FTC-HELP  </li>
+              <li><a href="http://www.navigenics.com/" target="_blank">Navigenics</a> (866) 522-1585  </li>
+              <li><a href="http://www.advocacyoutreach.org/" target="_blank">Advocacy Outreach</a> (512) 281-4180  </li>
+              <li><a href="http://www.cultureoffuture.com/" target="_blank">Culture of Future</a> (310) 584-1021  </li>
+              <li><a href="http://www.urbanent.org/" target="_blank">Urban Entertainment Institute</a> (323) 565-4004  </li>
+              <li><a href="http://www.brainmattersinc.com/" target="_blank">CereScan</a> (720) 242-9081  </li>
+              <li><a href="http://www.tapproject.org/" target="_blank">Tap Project</a> (877) PROJ-TAP  </li>
+              <li><a href="http://www.unicef.org/" target="_blank">Unicef</a> (212) 686-5522  </li>
+              <li><a href="http://www.standwithhaiti.org/page/outreach/view/haitiearthquake/jennydubin" target="_blank">Partners in Health</a> (617) 998-8922  </li>
+              <li><a href="http://www.luc.edu/law/lifeafterinnocence/" target="_blank">Life after Innocence Project</a> (312) 915-7120  </li>
+              <li><a href="http://www.cei-edu.com/" target="_blank">Computer Education Institute</a> (219) 926-5740  </li>
+              <li><a href="http://www.lbth.org/ncma/index.php" target="_blank">Let's Bring Them Home</a> (800) 690-FIND  </li>
+              <li><a href="http://www.homelessvoice.org/" target="_blank">The Homeless Voice</a> (954) 92-HELP-1  </li>
+              <li><a href="http://www.midnightmission.org/" target="_blank">The Midnight Mission</a> (213) 624-9258  </li>
+              <li><a href="http://www.fchonline.org/" target="_blank">Florida Coalition for the Homeless</a> (877) 205-0021  </li>
+              <li><a href="http://www.nationalhomeless.org/" target="_blank">National Coalition for the Homeless</a> (202) 462-4822  </li>
+              <li><a href="http://www.fatalvision.com/" target="_blank">Innocorp, ltd.</a> (800) 272-5023  </li>
+              <li><a href="http://www.norred.com/index.html" target="_blank">Norred & Associates, Inc.</a> (800) 962-6363  </li>
+              <li><a href="http://www.snowballexpress.org/" target="_blank">Snowball Express</a>   </li>
+              <li><a href="http://www.iava.org/" target="_blank">Iraq and Afghanistan Veterans of America</a> (212) 982-9699  </li>
+              <li><a href="http://www.iraqstar.org/" target="_blank">Iraq Star Foundation</a> (760) 568-4039  </li>
+              <li><a href="http://www2.illinois.gov/veterans/Pages/default.aspx" target="_blank">Illinois Department of Veterans’ Affairs</a> (217) 782-6641  </li>
+              <li><a href="http://www.woundedwarriorproject.org/" target="_blank">Wounded Warrior Project</a>   </li>
+              <li><a href="http://www.impactpersonalsafety.com/" target="_blank">Impact Personal Safety</a> (323) IMPACT-8  </li>
+              <li><a href="http://line2.msf-usa.org/msf/Default.aspx" target="_blank">Motorcycle Safety Foundationon</a> </li>
+              <li><a href="http://www.aaatoday.com/" target="_blank">AAA Service</a> (303) 313-3333  </li>
+              <li><a href="http://www.restoration-logistics.com/" target="_blank">Restoration Logistics Property Repair</a> (303) 657-1400  </li>
+              <li><a href="http://www.dnacenter.com/" target="_blank">DNA Diagnostics Center</a> (800) 613-5768  </li>
+              <li><a href="http://www.polycom.com/" target="_blank">Polycom</a> (800) POLY-COM  </li>
+              <li><a href="http://www.pcipro.com/" target="_blank">Padgett Communications</a> (888) 233-4724  </li>
+              <li><a href="http://www.caymanmarinelab.com/" target="_blank">Cayman Marine Lab</a> (345) 916-0849  </li>
+              <li><a href="http://www.bluesurfsanctuary.com/" target="_blank">Blue Surf Sanctuary</a> (855) 2-SURF-CR  </li>
+              <li><a href="http://www.pdmstables.com/" target="_blank">PDM Stables</a> (661) 366-4034  </li>
+              <li><a href="http://www.1800skyride.com/" target="_blank">1800SkyRide</a> (800) 759-7433  </li>
+              <li><a href="http://www.fulcrumadventures.com/" target="_blank">Fulcrum Adventures</a> (310) 452-7992  </li>
+              <li><a href="http://www.hiltonhawaiianvillage.com/" target="_blank">Hilton Hawaiin Village Waikiki Beach Resort</a> (808) 949-4321  </li>
+              <li><a href="http://www.miramonteresort.com/" target="_blank">Miramonte Resort and Spa</a> (800) 237-2926  </li>
+              <li><a href="http://www.lacosta.com/" target="_blank">La Cosa Resort and Spa</a> (800) 854-5000  </li>
+              <li><a href="http://www.ranchovalencia.com/" target="_blank">Rancho Valencia Resort and Spa</a> (800) 548-3664  </li>
+              <li><a href="http://www.haciendacabosanlucas.com/" target="_blank">Hacienda Beach Club and Residences</a>  </li>
+              <li><a href="http://www.unforgettablehoneymoon.com/" target="_blank">Unforgettable Honeymoons</a> (888) 343-6413  </li>
+              <li><a href="http://www.bluerivercanyon.com/" target="_blank">Blue River Canyon Day Spa</a> (615) 377-3336  </li>
+              <li><a href="http://www.divamoms.com/" target="_blank">Divalysscious Moms</a>   </li>
+              <li><a href="http://www.heroicimagination.org/" target="_blank">Heroic Imagination Project</a>   </li>
+              <li><a href="http://www.josephsoninstitute.org/" target="_blank">Josephson Institute</a> (800) 711-2670   </li>
+            </ul>
+            </p>
+          </div>
         </div>
     </section>
     <p><i>If you believe you need immediate assistance, please call your local emergency number or the mental health crisis hotline listed in your local phone book's government pages. Because AngelsofEureka.com does not operate, supervise or exercise any control over any of the therapists, resources or referral sources listed, it makes no representations or warranty whatsoever, either expressed or implied, regarding any information or advice provided by these referral services. In no event shall it, Angels of Eureka be liable to you or anyone else for any decision made or action taken in reliance on information provided by these therapists, resources or referral services.</i></p>
 </div>
 <div class="adContainer">
-    Our Sponsors
-    <a href="http://angelsofeureka.com/shop/index.php/" target="_blank" title="Angels of Eureka Gift Shop"><img src="img/angelsofeurekalogo-bw.jpg" alt="Angels of Eureka Shop" /></a>
-    <a href="http://www.phojoe.com/AOE.html" target="_blank" title="Photo Joe Photo Restorations"><img src="img/Phojoe_Banner.jpg" alt="Photo Joe Image Restoration" /></a>
-    <a href="http://www.wingsofhopelivingforward.org/" target="_blank" title="Wings of Hope Living Forward"><img src="img/wingshope.png" alt="Wings of Hope Living Forward" /></a>
-    <a href='http://www.party.myevent.com/?affID=48559' title='Create Any Event Website'><img src='http://www.myevent.com/images/sites/banners/Party/120x60_event.jpg' border='0' alt='Any Event Website'></a>
+  Our Sponsors
+  <a href="http://angelsofeureka.com/shop/index.php/" target="_blank" title="Angels of Eureka Gift Shop"><img src="img/angelsofeurekalogo-bw.jpg" alt="Angels of Eureka Shop" /></a>
+  <br />
+  <br />
+  Companies we partner with<br />
+  <a href="http://www.phojoe.com/AOE.html" target="_blank" title="PhoJoe Photo Restorations"><img src="img/Phojoe_Banner.jpg" alt="PhoJoe Image Restoration" /></a>
+  <a href='http://www.party.myevent.com/?affID=48559' title='Create Any Event Website'><img src='http://www.myevent.com/images/sites/banners/Party/120x60_event.jpg' border='0' alt='Any Event Website'></a>
+  <br /><br />
+  Organizations we support
+  <a href="https://evanssupport.com/" target="_blank" title="Evan's Support: Support for the family in need"><img src="img/evansupport.png" alt="Evan's Support" /></a>
 </div>
