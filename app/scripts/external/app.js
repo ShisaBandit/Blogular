@@ -1558,7 +1558,7 @@ app.controller('RegisterCtrl', function ($scope, $http, $rootScope, socket, grou
                 }
                 // $scope.message = "Registration failed please check connection";
             });
-
+          $rootScope.$broadcast('uploadit', {file: $scope.addedFile});
     }
 
     $scope.open = function (no) {
@@ -2730,9 +2730,19 @@ app.controller('AnniCtrl', function ($scope, api, $http,userInfoService) {
             $scope.eventdate ="";
             $scope.eventdesc ="";
         })
-
     }
-
+    $scope.deleteEvent = function () {
+      //TODO:Properly imlement this function
+      //$scope.anis.$remove();
+      console.log("blog/" + $scope.blogId.anis.postText._id);
+      $http.delete('/blog/' + $scope.blogId.anis.postText._id).
+        success(function () {
+          console.log("event deleted");
+        }).
+        error(function () {
+          console.log("event not deleted error");
+        })
+    };
 });
 
 app.controller('groupEvntCtrl', function ($scope, api, $http) {
@@ -2947,6 +2957,7 @@ app.controller('EditWallCtrl', function ($rootScope, $http, $scope, api, $routeP
                 console.log("wall not deleted error");
             })
     };
+
     $scope.submitPost = function () {
 
         BlogsService.updateBlog($scope.form, function (err, res) {
