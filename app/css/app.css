@@ -508,7 +508,7 @@ h2.dark {
      width: 320px;
      border-bottom: 1px dotted #8A9948;
      background: url('/img/background/headerFooterBG.png') repeat-x scroll center -140px #9EAFFF;
-     height: 80px;
+     height: 110px;
      text-align: center;
      margin: 0px;
  }
@@ -645,7 +645,7 @@ body .contain-to-grid-logged-in #username2 {
     height: 20px;
     padding-top: 5px;
     border-radius: 5px;
-    width: 96px !important;
+    width: 200px !important;
 }
 
 .searchFeature {
@@ -656,11 +656,9 @@ body .contain-to-grid-logged-in #username2 {
 }
 
 .groupingDropdown {
-    position: relative;
-    top: -46px;
-    left: 114px;
+    margin: 10px;
     height: 30px;
-    width: 244px;
+    width: 269px;
 }
 
 .groupingDropdown select,
@@ -874,7 +872,8 @@ h1.sectionHeader {
 
 .contentHeader{
     display:block;
-    width: 100%;
+    width: 97%;
+    height: 20px;
     clear: both;
     background-color: #9eafff;
     margin-bottom: 20px;
@@ -884,6 +883,7 @@ h1.sectionHeader {
     width: 100%;
     clear: both;
     color: #ffffff;
+    line-height: 1px;
 }
 
 body .primaryContent .shelf .mainBG .section-container .active .content .contentHeaderTitle {
@@ -1122,6 +1122,7 @@ datepickercss
     margin: 10px 0px;
     font-size: 0.8em;
     border: 1px solid #71706b;
+    white-space: nowrap;
 }
 
 .postfix.button {

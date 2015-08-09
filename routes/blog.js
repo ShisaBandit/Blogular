@@ -95,15 +95,14 @@ exports.join = function (req,res) {
             if(!blog)return res.send(410,'error');
             console.log(user);
             requester  = user;
-             var message = 'Hello '+ requestee.username+', '+ requester.username+' wants to join your memorial wall or private group, <b>'+blog.title+'</b>. <a href="http://' +
-             'the-circle-of-life.net/#/join/'+blog.author+'/'+requester._id+'">Click to give them access</a>';
+             var message = 'Hello '+ requestee.username+', '+ requester.username+' wants to join your memorial wall or private group, <b>'+blog.title+'</b>. <a href="#/join/'+blog.author+'/'+requester._id+'">Click to give them access</a>';
              /*var message = 'Hey someone wants to join your wall <b>'+blog.title+'</b> info click here to let them in <a href="http://' +
              'localhost:3000/#/join/'+blog.author+'/'+requester._id+'">click to allow</a>';*/
              //send message to allow invitation by clicking on link.
             SendMessage('administrator',requestee.username,message,req,res, function () {
                 //send email to allow invitation
                 message = 'Hello '+ requestee.username+', '+ requester.username+' wants to join your memorial wall or private group, <b>'+blog.title+
-                    '</b> Go to your <b>Message Center</b> in your <b>User profile</b> on <a href="http://the-circle-of-life.net">The Circle of Life</a>, to give them access';
+                    '</b> Go to your <b>Message Center</b> in your <b>User profile</b> on <a href="http://thecircleof.life/#/messageCenter">The Circle of Life</a>, to give them access';
 
                 SendEmail(requestee.email,requester.email,message,'Circle of Life Memorial Wall/Group request!');
                 return res.send(200,'success');
@@ -1414,7 +1413,7 @@ exports.shopToWall = function (req, res) {
              */
             User.findOne({_id: theblog.owner_id}, function (err, receivingUser) {
                 receivingUser.notifications.push({text: "Your angel " + theblog.firstName + " " + theblog.lastName + "has received a gift."});
-                SendEmail(receivingUser.email, receivingUser.firstName + " " + receivingUser.lastName, "<p>" + theuser.username + " has bought you a gift.  Go to your memorial wall or group page on The Circle of Life at <a href='http://the-circle-of-life.net/#/'" + theblog.author + " to find out what it was.</p>");
+                SendEmail(receivingUser.email, receivingUser.firstName + " " + receivingUser.lastName, "<p>" + theuser.username + " has bought you a gift.  Go to your memorial wall or group page on The Circle of Life at <a href='http://thecircleof.life/#/'" + theblog.author + " to find out what it was.</p>");
 
                 //add entry in anniversary area and latestpost
 
