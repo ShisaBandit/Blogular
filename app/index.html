@@ -111,7 +111,7 @@
         <div class="my-repeat-animation" ng-repeat="noti in notifications" id="notifications">
             {{ noti.text }}
             <div>{{noti.count}}</div>
-            <i>You can view this message in <a ng-href="#/messageCenter">your message center</a></i>
+            <i ng-click="notiviewed( noti._id )" closeparent>You can view this message in <a ng-href="#/messageCenter">your message center</a></i>
             <a class="closeButton" ng-click="notiviewed( noti._id )" closeparent title="Hide this box by clicking here">X</a>
         </div>
      </div>
