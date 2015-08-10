@@ -97,7 +97,7 @@ exports.upload = function (req, res) {
     });
 };
 
-exports.upload = function (req, res) {
+exports.rupload = function (req, res) {
     //var name = req.files.file.name;
     //read the file in
     var filetype = "";
