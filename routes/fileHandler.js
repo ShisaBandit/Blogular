@@ -96,6 +96,74 @@ exports.upload = function (req, res) {
 
     });
 };
+
+exports.upload = function (req, res) {
+    //var name = req.files.file.name;
+    //read the file in
+    var filetype = "";
+    console.log(req.params.type)
+    if(req.params.type)filetype = req.params.type;
+    console.log(filetype)
+
+    var fileExt;
+    var allowableExtensions = [
+        {type:"image/jpeg",ext:"jpg"},
+        {type:"image/png",ext:"png"},
+        {type:"image/gif",ext:"gif"}
+    ];
+    var maxFileSize = 3000000;//bytes 1mb
+    var allowed = false;
+    for(var x =0;x < allowableExtensions.length;x++){
+        if(allowableExtensions[x].type == req.files.file.type){
+            allowed = true;
+            fileExt = allowableExtensions[x].ext;
+        }
+
+    }
+    if(!allowed){
+        res.send(500,"Only png jpg and gif file types are allowed.");
+        return;
+    }
+    if(req.files.file.size > maxFileSize){
+        allowed = false;
+    }
+    if(!allowed){
+        res.send(500,"Your file is over the allowed size.");
+        return;
+    }
+    fs.readFile(req.files.file.path, function (err, data) {
+        //get the total pic count
+        SingleCount.find({}, function (err,singlecount) {
+            //add one to it
+            singlecount[0].totalPicCount++;
+            singlecount[0].save(function (err,sc) {
+                if(err)console.log(err)
+                console.log(sc)
+                //add the new total pic ass the pic name
+                var newPath = global.__approot + "/"+global.__uploads+"/uploads/" + sc.totalPicCount+"."+fileExt;
+                console.log(req.body);
+                //write to mongo
+                fs.writeFile(newPath, data, function (err) {
+                    if (err){
+                        console.log(err);
+                        res.send(401, 'error');
+                        return;
+                    }
+                    //res.send(200,{'success': 'true'});
+                    var picCount = 0;
+                    var memwall = "";
+                    if(req.body.memwall){
+                        memwall = req.body.memwall;
+                    }else{
+                        memwall = req.body.blogId;
+                    }
+                });
+            });
+        });
+    });
+};
+
+
 exports.uploadportrait = function (req, res) {
     var name = req.files.file.name;
     fs.readFile(req.files.file.path, function (err, data) {

@@ -71,7 +71,7 @@ app.configure('production', function () {
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(app.router);
-    app.use(require('less-middleware')({ src: __dirname + '/app' }));
+    app.use(require('less-middleware')(__dirname + '/public'));//{ src: __dirname + '/app' }));
     app.use(express.static(path.join(__dirname, 'app'), { maxAge: 86400000 /* 1d */ }));
 });
 
@@ -99,7 +99,8 @@ app.configure('development', function () {
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(app.router);
-    app.use(require('less-middleware')({ src: __dirname + '/app' }));
+    //app.use(require('less-middleware')({ src: __dirname + '/app' }));
+    app.use(require('less-middleware')(__dirname + '/public'));//{ src: __dirname + '/app' }));
     app.use(express.static(path.join(__dirname, 'app')));
     app.use(express.errorHandler());
 
@@ -262,6 +263,10 @@ app.post('/subcomment', passport.ensureAuthenticated, commentRoutes.subcomment);
 
 app.post('/upload', passport.ensureAuthenticated, fileHandlerRoutes.upload);
 app.post('/upload/:type', passport.ensureAuthenticated, fileHandlerRoutes.upload);
+app.post('/rupload', passport.ensureAuthenticated, fileHandlerRoutes.upload);
+app.post('/rupload/:type', passport.ensureAuthenticated, fileHandlerRoutes.upload);
+
+
 app.post('/uploadspread', passport.ensureAuthenticated, fileHandlerRoutes.uploadspread);
 app.post('/uploadportrait', passport.ensureAuthenticated, fileHandlerRoutes.uploadportrait);
 app.post('/submitphotodata', passport.ensureAuthenticated, fileHandlerRoutes.submitphotodata);
