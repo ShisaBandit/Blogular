@@ -2710,7 +2710,22 @@ app.controller('AnniCtrl', function ($scope, api, $http,userInfoService) {
             }
             $scope.anis = data;
         })
-
+    $scope.deleteEvent = function(anniId)
+    {
+            $http.get('deleteAnniversary/' + $scope.blogId+'/'+anniId).
+                success(function (data)
+                {
+                    console.log("deleteSuccess");
+                    //TODO(RAY):remove the anniversary from client
+                    for(var ani = 0;ani < $scope.anis.length;++ani)
+                    {
+                        if($scope.anis[ani]._id == anniId)
+                        {
+                            $scope.anis.splice(ani,1);
+                        }
+                    }
+                })
+    }
     $scope.submitEvent = function () {
         api.createSubDocResource('Blog', $scope.blogId, 'postText', {
             event: $scope.event,

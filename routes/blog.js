@@ -80,6 +80,7 @@ exports.workshopinfo = function(req,res)
 
 }
 
+
 exports.GetConnectedUsers = function(req, res)
 {
     return res.send(JSON.stringify(notificationSubscribers));
@@ -628,7 +629,32 @@ exports.deleteBlog = function (req, res) {
 
     });
 }
+exports.deleteAnniversary = function(req , res)
+{
+    var BlogID = req.params.blogId;
+    var PostTextID = req.params.anniId;
 
+    console.log("trying to remove " + BlogID);
+    Blog.findOne({_id:BlogID},function(err,blog)
+    {
+        if(err)console.log(err);
+        for(var ptext = 0;ptext < blog.postText.length;ptext++)
+        {
+            console.log(blog.postText[ptext]+" "+PostTextID);
+            if(blog.postText[ptext]._id == PostTextID)
+            {
+                blog.postText.splice(ptext,1);
+                break;
+            }
+        }
+        blog.save(function(err,doc)
+        {
+            if(err)console.log(err);
+            return res.end(JSON.stringify({200:"success"}));
+        });
+    });
+
+}
 exports.addBlogEntry = function (req, res) {
     var newBlogEntry = new Blog(req.body);
     newBlogEntry.save(function (err) {
