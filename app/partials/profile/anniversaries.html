@@ -25,7 +25,8 @@
             <div class="my-repeat-animation" ng-repeat="ani in anis"  style="background: #CDDFEF;margin-bottom: 20px;">
                 <div>
                     <div>
-                        <h4>{{ ani.event }}</h4>
+                      <button ng-click="deleteEvent(ani._id)">DELETE</button>
+                      <h4>{{ ani.event }}</h4>
                         <p>{{ ani.date }}</p>
                         <p>{{ ani.text }}</p>
                         <br />

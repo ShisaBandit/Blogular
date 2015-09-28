@@ -34,7 +34,22 @@
                         <p class="validation-error">{{message.male}}</p>
 
                     <br />
-                        We use <a href="http://en.gravatar.com/" target="_blank">Gravatar</a> to power Avatar images for your account.
+                      <div>
+                        <h3>Upload Image for your profile pic/avatar <br class="clear" /> (max file size: 3mb)</h3>
+                        <dropzone
+                          url="/rupload"
+                          class="dropzone"
+                          id="avatarDropzone"
+                          autoupload="false"
+                          maximages="1"
+                          addRemoveLinks="true"
+                          >
+                        </dropzone>
+                      </div>
+
+                      <br />
+                      We also can use <a href="http://en.gravatar.com/" target="_blank">Gravatar</a> to power Avatar images for your account.
+
                         Your Gravatar is an image that follows you from site to site appearing beside your name when you do things
                         like comment or post on a blog. Avatars help identify your posts on blogs and web forums on any site.
                         <br />If you already have a Gravatar, then simply using the same email for your registered account email below, will

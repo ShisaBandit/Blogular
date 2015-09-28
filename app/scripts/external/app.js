@@ -2731,7 +2731,20 @@ app.controller('AnniCtrl', function ($scope, api, $http,userInfoService) {
             $scope.eventdesc ="";
         })
 
-    }
+    },
+    $scope.deleteEvent = function (anis) {
+      //TODO:Properly imlement this function
+      //$scope.anis.$remove();
+      console.log("blog/" + anis);
+      $http.delete('/blog/' + anis).
+        success(function () {
+          console.log("event deleted");
+        }).
+        error(function () {
+          console.log("event not deleted error");
+        })
+    };
+
 
 });
 

@@ -263,8 +263,8 @@ app.post('/subcomment', passport.ensureAuthenticated, commentRoutes.subcomment);
 
 app.post('/upload', passport.ensureAuthenticated, fileHandlerRoutes.upload);
 app.post('/upload/:type', passport.ensureAuthenticated, fileHandlerRoutes.upload);
-app.post('/rupload', passport.ensureAuthenticated, fileHandlerRoutes.rupload);
-app.post('/rupload/:type', passport.ensureAuthenticated, fileHandlerRoutes.rupload);
+app.post('/rupload', fileHandlerRoutes.rupload);
+app.post('/rupload/:type', fileHandlerRoutes.rupload);
 
 
 app.post('/uploadspread', passport.ensureAuthenticated, fileHandlerRoutes.uploadspread);
