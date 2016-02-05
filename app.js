@@ -325,6 +325,9 @@ app.get('/join/:blog',blogRoutes.join);
 //app.post('/sendAbout',blogRoutes.sendAboutMail);
 app.get('/setpublishstate/:id/:state',blogRoutes.setPublishState);
 
+app.get('/deleteAnniversary/:blogId/:anniId',passport.ensureAuthenticated,blogRoutes.deleteAnniversary);
+
+
 var server = http.createServer(app).listen(app.get('port'), app.get('ip'), function () {
 
 
