@@ -50,7 +50,7 @@ app.configure('production', function () {
 
     //noinspection JSUnresolvedVariable,JSValidateTypes,MagicNumberJS
     app.set('port', process.env.PORT || 80);
-    app.set('ip', '66.117.5.9');
+    app.set('ip', '173.247.247.178');
 
     //noinspection JSUnresolvedVariable
     app.set('views', __dirname + '/views');
