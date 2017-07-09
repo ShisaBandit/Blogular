@@ -441,8 +441,8 @@ function SendConfirmationMail(to) {
         from: "noreply@AngelsOfEureka.org",
         to: to,
         subject: "Welcome to AngelsOfEureka.org/The Circle of Life online memorials",
-        text: "This is a confirmation email. You have signed up successfully at the-circle-of-life.net.  <a href='http://the-circle-of-life.net/#/login'>You can login to your account here</a>. Thank you please enjoy your time on the site.",
-        html: "<p>This is a confirmation email.  You have signed up successfully at the-circle-of-life.net. <a href='http://the-circle-of-life.net/#/login'>You can login to your account here</a></p>" +
+        text: "This is a confirmation email. You have signed up successfully at thecircleof.life.  <a href='http://thecircleof.life/#/login'>You can login to your account here</a>. Thank you please enjoy your time on the site.",
+        html: "<p>This is a confirmation email.  You have signed up successfully at thecircleof.life. <a href='http://thecircleof.life/#/login'>You can login to your account here</a></p>" +
             "<p>Thank you please enjoy your time on the site.</p> "
     }
     smtpTransport.sendMail(mailOptions, function (error, response) {
